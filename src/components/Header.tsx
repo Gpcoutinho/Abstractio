@@ -14,7 +14,7 @@ const Header: React.FC = () => {
 						aria-hidden="true"
 						style={{ background: 'linear-gradient(90deg, var(--accent), var(--accent-2))' }}
 					/>
-					<span className="text-2xl md:text-3xl font-extrabold tracking-tight text-secondary">Abstractio</span>
+					<span className="text-2xl md:text-3xl font-extrabold tracking-tight text-textPrimary">Abstractio</span>
 				</div>
 
 				<nav className="hidden md:flex space-x-8">

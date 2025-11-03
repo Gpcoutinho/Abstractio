@@ -4,7 +4,7 @@ import { ShieldCheckIcon, CheckCircleIcon, ChartBarIcon, UsersIcon } from '@hero
 const PorQue: React.FC = () => (
   <section className="py-16 px-5 bg-bgSecondary border-t border-b border-borderDark">
     <div className="max-w-6xl mx-auto">
-      <h2 className="text-4xl font-bold text-center mb-12 text-textPrimary">Por Que Escolher Abstractio?</h2>
+      <h2 className="text-4xl font-bold text-center mb-12 text-textPrimary">Por que escolher Abstractio?</h2>
       <div className="grid md:grid-cols-4 gap-8">
         
         {/* Benefício 1 */}

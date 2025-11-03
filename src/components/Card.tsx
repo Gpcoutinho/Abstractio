@@ -11,7 +11,7 @@ const Card: React.FC<CardProps> = ({ title, description, buttonLabel = 'Explorar
   return (
     <div className={`card flex flex-col justify-between h-full ${className}`}>
       <div>
-        <h3 className="text-2xl font-semibold mb-4 text-secondary">{title}</h3>
+        <h3 className="text-2xl font-semibold mb-4 text-textPrimary">{title}</h3>
         <p className="text-textSecondary mb-6 min-h-16">{description}</p>
       </div>
       <div className="mt-4">

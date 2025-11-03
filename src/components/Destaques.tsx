@@ -19,7 +19,7 @@ const cards = [
 const Destaques: React.FC = () => (
   <section className="py-16 px-5 bg-bgPrimary">
     <div className="max-w-6xl mx-auto">
-      <h2 className="text-4xl font-bold text-center mb-12 text-secondary">Tópicos em Destaque</h2>
+      <h2 className="text-4xl font-bold text-center mb-12 text-textPrimary">Destaques</h2>
       <div className="grid md:grid-cols-3 gap-8">
         {cards.map((c) => (
           <Card key={c.title} title={c.title} description={c.description} />
