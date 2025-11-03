@@ -128,7 +128,17 @@
 /* 4. SEUS ESTILOS @layer utilities                           */
 /* ========================================================== */
 @layer utilities {
-    /* COPIE TODO O CONTEÚDO DESTE BLOCO DO SEU ARQUIVO tailwind.css */
+    /* Animação leve para o mascote */
+    @keyframes float {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+        100% { transform: translateY(0); }
+    }
+
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+
     @media (min-width: 640px) { /* ... */ }
     @media (max-width: 640px) { /* ... */ }
 }
