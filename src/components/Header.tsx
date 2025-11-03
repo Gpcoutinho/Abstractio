@@ -7,29 +7,29 @@ const Header: React.FC = () => {
 
 	return (
 		<header className="site-header fixed top-0 w-full bg-bgSecondary text-textPrimary z-50 shadow-lg border-b border-borderDark">
-			<div className="app-wrapper flex items-center justify-between h-20">
-				<div className="flex items-center gap-3">
+				<div className="app-wrapper flex items-center h-20">
+				<div className="flex items-center gap-3 flex-1">
 					<div
 						className="w-9 h-9 rounded-md flex-shrink-0"
 						aria-hidden="true"
 						style={{ background: 'linear-gradient(90deg, var(--accent), var(--accent-2))' }}
 					/>
-					<span className="text-2xl md:text-3xl font-extrabold tracking-tight text-textPrimary">Abstractio</span>
+					<span className="text-2xl md:text-3xl font-bold tracking-tight text-textPrimary">Abstractio</span>
 				</div>
 
-				<nav className="hidden md:flex space-x-8">
+				<nav className="hidden md:flex space-x-8 justify-center flex-1">
 					<a href="#" className="text-textPrimary hover:text-accent font-medium transition-colors">Home</a>
-					<a href="#" className="text-textPrimary hover:text-accent font-medium transition-colors">Tópicos</a>
+					<a href="#" className="text-textPrimary hover:text-accent font-medium transition-colors">Trilhas</a>
 					<a href="#" className="text-textPrimary hover:text-accent font-medium transition-colors">Progresso</a>
 				</nav>
 
-				<div className="flex items-center gap-3">
-					<label htmlFor="search" className="sr-only">Buscar tópicos</label>
+				<div className="flex items-center gap-3 justify-end flex-1">
+					<label htmlFor="search" className="sr-only">Buscar</label>
 					<input
 						id="search"
 						type="search"
-						placeholder="Buscar tópicos..."
-						aria-label="Buscar tópicos"
+						placeholder="Buscar..."
+						aria-label="Buscar"
 						className="search px-3 py-2 border border-borderDark rounded-md bg-bgPrimary text-textPrimary placeholder-textSecondary focus:outline-none focus:ring-2 focus:ring-accent/30 w-40 md:w-56"
 					/>
 
