@@ -1,13 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 type CardProps = {
   title: string;
   description: string;
   buttonLabel?: string;
   className?: string;
+  rota?: string;
 };
 
-const Card: React.FC<CardProps> = ({ title, description, buttonLabel = 'Explorar', className = '' }) => {
+const Card: React.FC<CardProps> = ({ title, description, buttonLabel = 'Explorar', className = '', rota }) => {
   return (
     <div className={`card flex flex-col justify-between h-full ${className}`}>
       <div>
@@ -15,9 +17,9 @@ const Card: React.FC<CardProps> = ({ title, description, buttonLabel = 'Explorar
         <p className="text-textSecondary mb-6 min-h-16">{description}</p>
       </div>
       <div className="mt-4 flex justify-center">
-        <button type="button" className="bg-purpleAccent text-textPrimary px-6 py-3 rounded-md font-medium hover:bg-purpleAccent/80 transition-colors">
+        <Link to={`${rota}`} className="bg-purpleAccent text-textPrimary px-6 py-3 rounded-md font-medium hover:bg-purpleAccent/80 transition-colors">
           {buttonLabel}
-        </button>
+        </Link>
       </div>
     </div>
   );

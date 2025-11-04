@@ -1,6 +1,5 @@
-
-
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
 	const [open, setOpen] = useState(false);
@@ -8,19 +7,19 @@ const Header: React.FC = () => {
 	return (
 		<header className="site-header fixed top-0 w-full bg-bgSecondary text-textPrimary z-50 shadow-lg border-b border-borderDark">
 				<div className="app-wrapper flex items-center h-20">
-				<div className="flex items-center gap-3 flex-1">
+				<Link to="/" className="flex items-center gap-3 flex-1">
 					<div
 						className="w-9 h-9 rounded-md flex-shrink-0"
 						aria-hidden="true"
 						style={{ background: 'linear-gradient(90deg, var(--accent), var(--accent-2))' }}
 					/>
 					<span className="text-2xl md:text-3xl font-bold tracking-tight text-textPrimary">Abstractio</span>
-				</div>
+				</Link>
 
 				<nav className="hidden md:flex space-x-8 justify-center flex-1">
-					<a href="#" className="text-textPrimary hover:text-accent font-medium transition-colors">Home</a>
-					<a href="#" className="text-textPrimary hover:text-accent font-medium transition-colors">Trilhas</a>
-					<a href="#" className="text-textPrimary hover:text-accent font-medium transition-colors">Progresso</a>
+					<Link to="/" className="text-textPrimary hover:text-accent font-medium transition-colors">Home</Link>
+					<Link to="/tasks" className="text-textPrimary hover:text-accent font-medium transition-colors">Trilhas</Link>
+					<Link to="/profile" className="text-textPrimary hover:text-accent font-medium transition-colors">Perfil</Link>
 				</nav>
 
 				<div className="flex items-center gap-3 justify-end flex-1">
@@ -33,9 +32,12 @@ const Header: React.FC = () => {
 						className="search px-3 py-2 border border-borderDark rounded-md bg-bgPrimary text-textPrimary placeholder-textSecondary focus:outline-none focus:ring-2 focus:ring-accent/30 w-40 md:w-56"
 					/>
 
-					<button type="button" className="hero-cta hidden md:inline-flex items-center justify-center">
+					<Link 
+						to="/login"
+						className="hero-cta hidden md:inline-flex items-center justify-center"
+					>
 						Login
-					</button>
+					</Link>
 
 					{/* Mobile menu toggle */}
 					<button
@@ -74,7 +76,12 @@ const Header: React.FC = () => {
 							className="search w-full px-3 py-2 rounded-md bg-bgPrimary text-textPrimary placeholder-textSecondary focus:outline-none focus:ring-2 focus:ring-accent/30"
 						/>
 						<div className="mt-3">
-							<button type="button" className="hero-cta w-full text-center">Login</button>
+							<Link 
+								to="/login"
+								className="hero-cta w-full text-center"
+							>
+								Login
+							</Link>
 						</div>
 					</div>
 				</div>
