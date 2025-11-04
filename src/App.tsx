@@ -1,24 +1,36 @@
-// src/App.tsx
 import React from 'react';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import Destaques from './components/Destaques';
-import PorQue from './components/PorQue';
-import Footer from './components/Footer';
-// Importa o componente do mascote (se você optar por usá-lo na Hero Section)
-// import Mascote from './components/Mascote'; 
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Profile from './pages/Profile';
+import Tasks from './pages/Tasks';
+import Algorithms from './pages/Algorithms';
+import { Routes, Route } from 'react-router-dom';
 
 
 const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-Primary">
+
       <Header />
-      <div>
-        <Hero />
-        <Destaques />
-        <PorQue />
-        <Footer />
-      </div>
+
+      <main>
+        <Routes>
+          
+          <Route path="/" element={<Home />} />
+
+          <Route path="/login" element={<Login />} />
+
+          <Route path="/profile" element={<Profile />} />
+
+          <Route path="/tasks" element={<Tasks />} />
+
+          <Route path="/algorithms" element={<Algorithms />} />
+          
+
+        </Routes>
+      </main>
+
     </div>
   );
 }

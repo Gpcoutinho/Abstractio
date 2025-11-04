@@ -5,6 +5,7 @@ const cards = [
   {
     title: 'Algoritmos Básicos',
     description: 'Domine busca, ordenação e eficiência computacional com exemplos reais.',
+    rota: '/algorithms'
   },
   {
     title: 'Estruturas de Dados',
@@ -22,7 +23,7 @@ const Destaques: React.FC = () => (
       <h2 className="text-4xl font-bold text-center mb-12 text-textPrimary">Destaques</h2>
       <div className="grid md:grid-cols-3 gap-8">
         {cards.map((c) => (
-          <Card key={c.title} title={c.title} description={c.description} />
+          <Card key={c.title} title={c.title} description={c.description} rota={c.rota}/>
         ))}
       </div>
     </div>
