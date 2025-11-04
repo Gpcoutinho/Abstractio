@@ -1,5 +1,5 @@
-// Login.js
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Login() {
   // Estados para armazenar os inputs
@@ -63,12 +63,12 @@ function Login() {
         </div>
         
         {/* Botão de Entrar */}
-        <button 
-          type="submit" 
+        <Link
+          to="/"
           className="w-full bg-blue-600 text-white font-bold py-3 rounded-md hover:bg-blue-700 transition-colors duration-200"
         >
           Entrar
-        </button>
+        </Link>
       </form>
     </div>
   );
