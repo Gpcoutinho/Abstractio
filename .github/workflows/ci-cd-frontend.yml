@@ -1,27 +1,27 @@
-name: CI/CD Frontend (Abstractio)
+# name: CI/CD Frontend (Abstractio)
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+# on:
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
 
-jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
+# jobs:
+#   build-and-test:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: 1. Checkout do Repositório
-        uses: actions/checkout@v4
+#     steps:
+#       - name: 1. Checkout do Repositório
+#         uses: actions/checkout@v4
 
-      - name: 2. Configurar Node.js (v22)
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22.x'
-          cache: 'npm'
+#       - name: 2. Configurar Node.js (v22)
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: '22.x'
+#           cache: 'npm'
       
-      - name: 3. Instalar Dependências
-        run: npm ci
+#       - name: 3. Instalar Dependências
+#         run: npm ci
       
-      - name: 4. Rodar Build
-        run: npm run build
+#       - name: 4. Rodar Build
+#         run: npm run build
