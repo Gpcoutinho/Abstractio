@@ -14,6 +14,7 @@ const cards = [
   {
     title: 'Programação OO',
     description: 'Classes, herança e polimorfismo para codar como um pro.',
+    rota: '/poo'
   },
 ];
 
