@@ -3,7 +3,7 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
-import Tasks from './pages/Tasks';
+import Exercicios from './pages/Exercicios';
 import Ponteiros from './pages/Ponteiros';
 import POO from './pages/POO';
 import { Routes, Route } from 'react-router-dom';
