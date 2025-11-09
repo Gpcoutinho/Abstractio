@@ -24,14 +24,7 @@ const Header: React.FC = () => {
 
 				<div className="flex items-center gap-3 justify-end flex-1">
 					<label htmlFor="search" className="sr-only">Buscar</label>
-					<input
-						id="search"
-						type="search"
-						placeholder="Buscar..."
-						aria-label="Buscar"
-						className="search px-3 py-2 border border-borderDark rounded-md bg-bgPrimary text-textPrimary placeholder-textSecondary focus:outline-none focus:ring-2 focus:ring-accent/30 w-40 md:w-56"
-					/>
-
+					
 					<Link 
 						to="/login"
 						className="hero-cta hidden md:inline-flex items-center justify-center"
@@ -64,20 +57,15 @@ const Header: React.FC = () => {
 			{/* Mobile menu panel */}
 			<div id="mobile-menu" className={`${open ? 'block' : 'hidden'} md:hidden border-t border-borderDark bg-bgSecondary`}>
 				<div className="px-4 py-3 space-y-2">
-					<a href="#" className="block text-textPrimary hover:text-accent font-medium">Home</a>
-					<a href="#" className="block text-textPrimary hover:text-accent font-medium">Tópicos</a>
-					<a href="#" className="block text-textPrimary hover:text-accent font-medium">Progresso</a>
+					<Link to="/" onClick={() => setOpen(false)} className="block text-textPrimary hover:text-accent font-medium">Home</Link>
+					<Link to="/exercicios" onClick={() => setOpen(false)} className="block text-textPrimary hover:text-accent font-medium">Trilhas</Link>
+					<Link to="/profile" onClick={() => setOpen(false)} className="block text-textPrimary hover:text-accent font-medium">Perfil</Link>
 					<div className="pt-2 border-t border-borderDark mt-2">
-						<input
-							id="search-mobile"
-							type="search"
-							placeholder="Buscar tópicos..."
-							aria-label="Buscar tópicos"
-							className="search w-full px-3 py-2 rounded-md bg-bgPrimary text-textPrimary placeholder-textSecondary focus:outline-none focus:ring-2 focus:ring-accent/30"
-						/>
+						
 						<div className="mt-3">
 							<Link 
 								to="/login"
+								onClick={() => setOpen(false)}
 								className="hero-cta w-full text-center"
 							>
 								Login
