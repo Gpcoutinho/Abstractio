@@ -3,9 +3,9 @@ import Card from './Card';
 
 const cards = [
   {
-    title: 'Algoritmos Básicos',
+    title: 'Ponteiros',
     description: 'Domine busca, ordenação e eficiência computacional com exemplos reais.',
-    rota: '/algorithms'
+    rota: '/ponteiros'
   },
   {
     title: 'Estruturas de Dados',
