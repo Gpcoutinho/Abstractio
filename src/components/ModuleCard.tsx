@@ -27,6 +27,7 @@ const ModuleCard: React.FC<ModuleCardProps> = ({ id, title, lessons, onToggleLes
           <LessonItem
             key={lesson.id}
             id={lesson.id}
+            moduleId={id}
             title={lesson.title}
             completed={!!lesson.completed}
             onToggle={(lessonId) => onToggleLesson && onToggleLesson(id, lessonId)}

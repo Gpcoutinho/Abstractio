@@ -1,19 +1,27 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { BookOpenIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
 
 type LessonItemProps = {
   id: string | number;
+  moduleId?: string | number;
   title: string;
   completed?: boolean;
   onToggle?: (id: string | number) => void;
 };
 
-const LessonItem: React.FC<LessonItemProps> = ({ id, title, completed = false, onToggle }) => {
+const LessonItem: React.FC<LessonItemProps> = ({ id, moduleId, title, completed = false, onToggle }) => {
   return (
     <li className="flex items-center justify-between py-3">
       <div className="flex items-center gap-3">
         <BookOpenIcon className="w-6 h-6 text-accent" aria-hidden="true" />
-        <span className="text-textPrimary">{title}</span>
+        {moduleId ? (
+          <Link to={`/modules/${moduleId}/lessons/${id}`} className="text-textPrimary hover:underline">
+            {title}
+          </Link>
+        ) : (
+          <span className="text-textPrimary">{title}</span>
+        )}
       </div>
 
       <button
