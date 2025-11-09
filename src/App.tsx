@@ -4,7 +4,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Tasks from './pages/Tasks';
-import Algorithms from './pages/Algorithms';
+import Ponteiros from './pages/Ponteiros';
+import POO from './pages/POO';
 import { Routes, Route } from 'react-router-dom';
 
 
@@ -25,8 +26,9 @@ const App: React.FC = () => {
 
           <Route path="/tasks" element={<Tasks />} />
 
-          <Route path="/algorithms" element={<Algorithms />} />
+          <Route path="/ponteiros" element={<Ponteiros />} />
           
+          <Route path="/poo" element={<POO />} />
 
         </Routes>
       </main>

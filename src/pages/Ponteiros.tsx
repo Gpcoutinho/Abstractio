@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Algorithms: React.FC = () => {
+const Ponteiros: React.FC = () => {
   return (
     // Usando Fragment (<>) pois o div principal está no App.tsx
     <>
@@ -9,4 +9,4 @@ const Algorithms: React.FC = () => {
   );
 }
 
-export default Algorithms;
+export default Ponteiros;
