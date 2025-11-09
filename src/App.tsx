@@ -24,7 +24,7 @@ const App: React.FC = () => {
 
           <Route path="/profile" element={<Profile />} />
 
-          <Route path="/tasks" element={<Tasks />} />
+          <Route path="/exercicios" element={<Exercicios />} />
 
           <Route path="/ponteiros" element={<Ponteiros />} />
           
