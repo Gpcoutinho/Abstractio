@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Tasks: React.FC = () => {
+const Exercicios: React.FC = () => {
   return (
     // Usando Fragment (<>) pois o div principal está no App.tsx
     <>
@@ -9,4 +9,4 @@ const Tasks: React.FC = () => {
   );
 }
 
-export default Tasks;
+export default Exercicios;

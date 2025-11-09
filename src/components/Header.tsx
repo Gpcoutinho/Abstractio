@@ -18,7 +18,7 @@ const Header: React.FC = () => {
 
 				<nav className="hidden md:flex space-x-8 justify-center flex-1">
 					<Link to="/" className="text-textPrimary hover:text-accent font-medium transition-colors">Home</Link>
-					<Link to="/tasks" className="text-textPrimary hover:text-accent font-medium transition-colors">Trilhas</Link>
+					<Link to="/exercicios" className="text-textPrimary hover:text-accent font-medium transition-colors">Trilhas</Link>
 					<Link to="/profile" className="text-textPrimary hover:text-accent font-medium transition-colors">Perfil</Link>
 				</nav>
 
