@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { HomeIcon, Squares2X2Icon, UserIcon, ArrowRightOnRectangleIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const Header: React.FC = () => {
 	const [open, setOpen] = useState(false);
@@ -54,26 +55,61 @@ const Header: React.FC = () => {
 				</div>
 			</div>
 
-			{/* Mobile menu panel */}
-			<div id="mobile-menu" className={`${open ? 'block' : 'hidden'} md:hidden border-t border-borderDark bg-bgSecondary`}>
-				<div className="px-4 py-3 space-y-2">
-					<Link to="/" onClick={() => setOpen(false)} className="block text-textPrimary hover:text-accent font-medium">Home</Link>
-					<Link to="/exercicios" onClick={() => setOpen(false)} className="block text-textPrimary hover:text-accent font-medium">Trilhas</Link>
-					<Link to="/profile" onClick={() => setOpen(false)} className="block text-textPrimary hover:text-accent font-medium">Perfil</Link>
-					<div className="pt-2 border-t border-borderDark mt-2">
-						
-						<div className="mt-3">
-							<Link 
-								to="/login"
-								onClick={() => setOpen(false)}
-								className="hero-cta w-full text-center"
-							>
-								Login
+			{/* Mobile menu overlay (improved) */}
+			{open && (
+				<div className="md:hidden fixed inset-0 z-50 flex">
+					{/* backdrop */}
+					<button aria-hidden="true" onClick={() => setOpen(false)} className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+					{/* sliding panel */}
+					<nav className="relative ml-auto w-80 max-w-full h-full bg-bgSecondary border-l border-borderDark shadow-xl p-6">
+						<div className="flex items-center justify-between mb-6">
+							<Link to="/" onClick={() => setOpen(false)} className="flex items-center gap-3">
+								<div
+									className="w-8 h-8 rounded-md flex-shrink-0"
+									aria-hidden="true"
+									style={{ background: 'linear-gradient(90deg, var(--accent), var(--accent-2))' }}
+								/>
+								<span className="font-bold text-lg">Abstractio</span>
 							</Link>
+							<button onClick={() => setOpen(false)} className="p-2 rounded-md hover:bg-bgPrimary/30">
+								<XMarkIcon className="w-6 h-6 text-textPrimary" />
+							</button>
 						</div>
-					</div>
+						<ul className="space-y-4">
+							<li>
+								<Link to="/" onClick={() => setOpen(false)} className="flex items-center gap-3 text-textPrimary hover:text-accent">
+									<HomeIcon className="w-5 h-5 text-accent" />
+									<span>Home</span>
+								</Link>
+							</li>
+							<li>
+								<Link to="/exercicios" onClick={() => setOpen(false)} className="flex items-center gap-3 text-textPrimary hover:text-accent">
+									<Squares2X2Icon className="w-5 h-5 text-accent" />
+									<span>Trilhas</span>
+								</Link>
+							</li>
+							<li>
+								<Link to="/profile" onClick={() => setOpen(false)} className="flex items-center gap-3 text-textPrimary hover:text-accent">
+									<UserIcon className="w-5 h-5 text-accent" />
+									<span>Perfil</span>
+								</Link>
+							</li>
+						</ul>
+						<div className="mt-6 pt-4 border-t border-borderDark">
+							<div className="mt-3">
+								<Link 
+									to="/login"
+									onClick={() => setOpen(false)}
+									className="hero-cta w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md"
+								>
+									<ArrowRightOnRectangleIcon className="w-5 h-5" />
+									<span>Login</span>
+								</Link>
+							</div>
+						</div>
+					</nav>
 				</div>
-			</div>
+			)}
 		</header>
 	);
 };
