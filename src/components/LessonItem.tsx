@@ -16,9 +16,16 @@ const LessonItem: React.FC<LessonItemProps> = ({ id, moduleId, title, completed 
       <div className="flex items-center gap-3">
         <BookOpenIcon className="w-6 h-6 text-accent" aria-hidden="true" />
         {moduleId ? (
-          <Link to={`/modules/${moduleId}/lessons/${id}`} className="text-textPrimary hover:underline">
-            {title}
-          </Link>
+          // Special-case: route "Classes" lesson to a dedicated test page
+          title === 'Classes' ? (
+            <Link to="/lesson-classes" className="text-textPrimary hover:underline">
+              {title}
+            </Link>
+          ) : (
+            <Link to={`/modules/${moduleId}/lessons/${id}`} className="text-textPrimary hover:underline">
+              {title}
+            </Link>
+          )
         ) : (
           <span className="text-textPrimary">{title}</span>
         )}

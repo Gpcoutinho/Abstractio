@@ -1,0 +1,28 @@
+Trilha: POO
+
+Módulo 1: Fundamentos da Orientação a Objetos
+
+Tópico 1: O que é OO
+Tópico 2 Classe
+Tópico 3: Objeto
+Tópico 4: Métodos
+Tópico 5: Instanciação e Construtores
+
+Módulo 2: Pilares do Paradigma 
+
+- abstração
+- encapsulamento
+- herança
+- polimorfismo
+
+Módulo 3: Tópicos Avançados
+
+- associação, agregação e composição
+- classes e metodos abstratos
+- interfaces
+- exceções
+- padrões de projeto
+
+sobrescrita
+herança
+

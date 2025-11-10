@@ -7,6 +7,7 @@ import Exercicios from './pages/Exercicios';
 import Ponteiros from './pages/Ponteiros';
 import POO from './pages/POO';
 import LessonPage from './pages/LessonPage';
+import LessonClasses from './pages/LessonClasses';
 import modules from './data/modules';
 import { ProgressProvider } from './contexts/ProgressContext';
 import { Routes, Route } from 'react-router-dom';
@@ -37,6 +38,14 @@ const App: React.FC = () => {
             element={
               <ProgressProvider courseId="poo-1" initialModules={modules}>
                 <LessonPage />
+              </ProgressProvider>
+            }
+          />
+          <Route
+            path="/lesson-classes"
+            element={
+              <ProgressProvider courseId="poo-1" initialModules={modules}>
+                <LessonClasses />
               </ProgressProvider>
             }
           />
