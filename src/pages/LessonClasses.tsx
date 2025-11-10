@@ -27,8 +27,10 @@ const LessonClasses: React.FC = () => {
           representa uma entidade concreta criada a partir da definição da classe.
         </p>
 
+  <img src="/assets/classe.png" alt="Classes Diagram" className="my-4 w-full max-w-md object-contain" loading="lazy" />
+
         <ul className="list-disc pl-5 text-textPrimary">
-          <li>Classe = molde/plantilla que descreve propriedades e comportamentos.</li>
+          <li>Classe = molde que descreve propriedades e comportamentos.</li>
           <li>Objeto = instância concreta da classe, com valores específicos.</li>
           <li>Membros comuns: campos (propriedades), métodos (funções), construtor.</li>
         </ul>
