@@ -3,6 +3,11 @@ import { Link, NavLink } from 'react-router-dom';
 import { HomeIcon, MapIcon, TrophyIcon, XMarkIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import { Link as RouterLink } from 'react-router-dom';
 import { useProgress } from '../hooks/useProgress';
+import imgPolvinho from '../assets/avatares/polvinho.png';
+import imgExplorador from '../assets/avatares/explorador.png';
+import imgMestreDosMaras from '../assets/avatares/mestredosmares.png';
+
+const AVATAR_SRCS: (string | null)[] = [imgPolvinho, imgExplorador, imgMestreDosMaras, null];
 
 const NAV_ITEMS = [
   { to: '/', label: 'Home', Icon: HomeIcon, exact: true },
@@ -15,12 +20,12 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 
 const Header: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const { pontuacao, nivelDisplay, nome, nomeDisplay } = useProgress();
-  const iniciais = nome.trim() ? nome.trim().slice(0, 2).toUpperCase() : null;
+  const { pontuacao, nivelDisplay, nomeDisplay, avatarIdx } = useProgress();
+  const avatarSrc = AVATAR_SRCS[avatarIdx] ?? AVATAR_SRCS[0];
 
   return (
     <header className="site-header fixed top-0 w-full bg-bgSecondary text-textPrimary z-50 shadow-lg border-b border-borderDark">
-      <div className="app-wrapper flex items-center h-20">
+      <div className="flex items-center h-20 px-8">
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 flex-1">
@@ -42,20 +47,22 @@ const Header: React.FC = () => {
         </nav>
 
         {/* User info + avatar */}
-        <div className="hidden md:flex items-center gap-3 justify-end flex-1">
-          <span className="text-sm text-accent font-semibold">{pontuacao} pts</span>
+        <div className="hidden md:flex items-center gap-3 justify-end self-stretch flex-1">
           <div className="text-right">
             <p className="text-xs text-textSecondary leading-tight">{nivelDisplay}</p>
             <p className="text-sm text-textPrimary font-medium leading-tight">{nomeDisplay}</p>
+            <span className="text-sm text-accent font-semibold">{pontuacao} pts</span>
           </div>
           <RouterLink
             to="/perfil"
-            className="w-9 h-9 rounded-full bg-bgPrimary border border-borderDark flex items-center justify-center hover:border-accent transition-colors flex-shrink-0"
+            className="w-32 h-32 rounded-full border-2 border-borderDark overflow-hidden hover:border-accent transition-all flex-shrink-0 self-start mt-2 ring-4 ring-bgSecondary shadow-2xl z-10"
             title="Perfil"
           >
-            {iniciais
-              ? <span className="text-xs font-bold text-accent">{iniciais}</span>
-              : <UserCircleIcon className="w-6 h-6 text-textSecondary" />
+            {avatarSrc
+              ? <img src={avatarSrc} alt="Avatar" className="w-full h-full object-cover" />
+              : <div className="w-full h-full bg-bgPrimary flex items-center justify-center">
+                  <UserCircleIcon className="w-6 h-6 text-textSecondary" />
+                </div>
             }
           </RouterLink>
         </div>
