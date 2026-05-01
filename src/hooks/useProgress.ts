@@ -14,7 +14,7 @@ export function useProgress() {
   const ctx = useContext(ProgressContext);
   if (!ctx) throw new Error('useProgress deve ser usado dentro de ProgressProvider');
 
-  const { completed, niveis_concluidos, pontuacao, nome, genero, completarMissao, setNome, setGenero } = ctx;
+  const { completed, niveis_concluidos, pontuacao, nome, genero, avatarIdx, completarMissao, setNome, setGenero, setAvatarIdx } = ctx;
 
   const isMissaoConcluida = (missaoId: string) => completed.includes(missaoId);
   const isNivelConcluido = (nivelId: number) => niveis_concluidos.includes(nivelId);
@@ -36,9 +36,11 @@ export function useProgress() {
     nome,
     nomeDisplay,
     genero,
+    avatarIdx,
     completarMissao,
     setNome,
     setGenero,
+    setAvatarIdx,
     isMissaoConcluida,
     isNivelConcluido,
     nivelNome,

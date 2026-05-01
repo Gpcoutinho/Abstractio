@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { TrophyIcon } from '@heroicons/react/24/outline';
+import { TrophyIcon, LockClosedIcon } from '@heroicons/react/24/outline';
 import curriculum from '../data/curriculum.json';
 import type { Nivel } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
 import type { Genero } from '../contexts/ProgressContext';
 import Footer from '../components/Footer';
+import imgPolvinho from '../assets/avatares/polvinho.png';
+import imgExplorador from '../assets/avatares/explorador.png';
+import imgMestreDosMaras from '../assets/avatares/mestredosmares.png';
+
+const AVATARES = [
+  { src: imgPolvinho,      label: 'Polvinho',         nivelMin: 0 },
+  { src: imgExplorador,    label: 'Explorador',        nivelMin: 1 },
+  { src: imgMestreDosMaras, label: 'Mestre dos Mares', nivelMin: 2 },
+  { src: null,             label: 'Kraken',            nivelMin: 3 },
+];
 
 const niveis = curriculum as Nivel[];
 const totalMissoes = niveis.reduce((acc, n) => acc + n.missoes.length, 0);
@@ -18,7 +28,7 @@ const GENERO_OPTIONS: { value: Genero; label: string }[] = [
 ];
 
 const Perfil: React.FC = () => {
-  const { nome, genero, pontuacao, completed, nivelDisplay, setNome, setGenero } = useProgress();
+  const { nome, genero, pontuacao, completed, nivelDisplay, avatarIdx, setNome, setGenero, setAvatarIdx, niveis_concluidos } = useProgress();
   const [nomeInput, setNomeInput] = useState(nome);
   const [salvo, setSalvo] = useState(false);
 
@@ -83,6 +93,45 @@ const Perfil: React.FC = () => {
               </div>
             </div>
           </div>
+        </section>
+
+        {/* Avatares */}
+        <section className="bg-bgSecondary border border-borderDark rounded-xl p-6 mb-6">
+          <h2 className="text-sm font-semibold text-textSecondary uppercase tracking-widest mb-4">
+            Avatar
+          </h2>
+          <div className="flex gap-4 flex-wrap">
+            {AVATARES.map((avatar, i) => {
+              const desbloqueado = niveis_concluidos.length >= avatar.nivelMin;
+              const selecionado = avatarIdx === i;
+              return (
+                <button
+                  key={i}
+                  onClick={() => desbloqueado && setAvatarIdx(i)}
+                  disabled={!desbloqueado}
+                  title={desbloqueado ? avatar.label : `Conclua o Nível ${avatar.nivelMin} para desbloquear`}
+                  className={`relative w-32 h-32 rounded-full border-2 overflow-hidden transition-all focus:outline-none
+                    ${selecionado ? 'border-accent scale-105' : 'border-borderDark'}
+                    ${desbloqueado ? 'hover:border-accent cursor-pointer' : 'opacity-40 cursor-not-allowed grayscale'}
+                  `}
+                >
+                  {avatar.src ? (
+                    <img src={avatar.src} alt={avatar.label} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full bg-bgPrimary flex items-center justify-center">
+                      <LockClosedIcon className="w-6 h-6 text-textSecondary" />
+                    </div>
+                  )}
+                  {selecionado && (
+                    <div className="absolute inset-0 ring-2 ring-accent ring-inset rounded-full" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+          <p className="text-xs text-textSecondary mt-3">
+            Novos avatares são desbloqueados ao concluir cada nível.
+          </p>
         </section>
 
         {/* Dados do usuário */}

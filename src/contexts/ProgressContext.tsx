@@ -12,6 +12,7 @@ interface ProgressState {
   pontuacao: number;
   nome: string;
   genero: Genero;
+  avatarIdx: number;
 }
 
 const DEFAULT_STATE: ProgressState = {
@@ -20,6 +21,7 @@ const DEFAULT_STATE: ProgressState = {
   pontuacao: 0,
   nome: '',
   genero: '',
+  avatarIdx: 0,
 };
 
 function loadFromStorage(): ProgressState {
@@ -44,9 +46,11 @@ export interface ProgressContextValue {
   pontuacao: number;
   nome: string;
   genero: Genero;
+  avatarIdx: number;
   completarMissao: (missaoId: string) => void;
   setNome: (nome: string) => void;
   setGenero: (genero: Genero) => void;
+  setAvatarIdx: (idx: number) => void;
 }
 
 export const ProgressContext = createContext<ProgressContextValue | undefined>(undefined);
@@ -83,8 +87,12 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setState(prev => ({ ...prev, genero }));
   }, []);
 
+  const setAvatarIdx = useCallback((avatarIdx: number) => {
+    setState(prev => ({ ...prev, avatarIdx }));
+  }, []);
+
   return (
-    <ProgressContext.Provider value={{ ...state, completarMissao, setNome, setGenero }}>
+    <ProgressContext.Provider value={{ ...state, completarMissao, setNome, setGenero, setAvatarIdx }}>
       {children}
     </ProgressContext.Provider>
   );
