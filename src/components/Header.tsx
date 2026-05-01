@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { HomeIcon, MapIcon, TrophyIcon, XMarkIcon, UserCircleIcon } from '@heroicons/react/24/outline';
+import { Link as RouterLink } from 'react-router-dom';
 import { useProgress } from '../hooks/useProgress';
 
 const NAV_ITEMS = [
@@ -14,7 +15,8 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 
 const Header: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const { pontuacao, nivelDisplay } = useProgress();
+  const { pontuacao, nivelDisplay, nome, nomeDisplay } = useProgress();
+  const iniciais = nome.trim() ? nome.trim().slice(0, 2).toUpperCase() : null;
 
   return (
     <header className="site-header fixed top-0 w-full bg-bgSecondary text-textPrimary z-50 shadow-lg border-b border-borderDark">
@@ -40,15 +42,22 @@ const Header: React.FC = () => {
         </nav>
 
         {/* User info + avatar */}
-        <div className="hidden md:flex items-center gap-4 justify-end flex-1">
+        <div className="hidden md:flex items-center gap-3 justify-end flex-1">
           <span className="text-sm text-accent font-semibold">{pontuacao} pts</span>
-          <span className="text-sm text-textSecondary">{nivelDisplay}</span>
-          <div
-            className="w-9 h-9 rounded-full bg-bgPrimary border border-borderDark flex items-center justify-center cursor-pointer hover:border-accent transition-colors"
+          <div className="text-right">
+            <p className="text-xs text-textSecondary leading-tight">{nivelDisplay}</p>
+            <p className="text-sm text-textPrimary font-medium leading-tight">{nomeDisplay}</p>
+          </div>
+          <RouterLink
+            to="/perfil"
+            className="w-9 h-9 rounded-full bg-bgPrimary border border-borderDark flex items-center justify-center hover:border-accent transition-colors flex-shrink-0"
             title="Perfil"
           >
-            <UserCircleIcon className="w-6 h-6 text-textSecondary" />
-          </div>
+            {iniciais
+              ? <span className="text-xs font-bold text-accent">{iniciais}</span>
+              : <UserCircleIcon className="w-6 h-6 text-textSecondary" />
+            }
+          </RouterLink>
         </div>
 
         {/* Mobile menu toggle */}

@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Trilha from './pages/Trilha';
 import Missao from './pages/Missao';
 import Conquistas from './pages/Conquistas';
+import Perfil from './pages/Perfil';
 
 const App: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const App: React.FC = () => {
             <Route path="/trilha" element={<Trilha />} />
             <Route path="/missao/:nivelIdx/:missaoIdx" element={<Missao />} />
             <Route path="/conquistas" element={<Conquistas />} />
+            <Route path="/perfil" element={<Perfil />} />
           </Routes>
         </main>
       </div>

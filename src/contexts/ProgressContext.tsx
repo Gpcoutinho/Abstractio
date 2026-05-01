@@ -4,16 +4,22 @@ import type { Nivel } from '../data/curriculum';
 
 const STORAGE_KEY = 'abstractio:progress';
 
+export type Genero = 'masculino' | 'feminino' | 'outro' | '';
+
 interface ProgressState {
   completed: string[];
   niveis_concluidos: number[];
   pontuacao: number;
+  nome: string;
+  genero: Genero;
 }
 
 const DEFAULT_STATE: ProgressState = {
   completed: [],
   niveis_concluidos: [],
   pontuacao: 0,
+  nome: '',
+  genero: '',
 };
 
 function loadFromStorage(): ProgressState {
@@ -36,7 +42,11 @@ export interface ProgressContextValue {
   completed: string[];
   niveis_concluidos: number[];
   pontuacao: number;
+  nome: string;
+  genero: Genero;
   completarMissao: (missaoId: string) => void;
+  setNome: (nome: string) => void;
+  setGenero: (genero: Genero) => void;
 }
 
 export const ProgressContext = createContext<ProgressContextValue | undefined>(undefined);
@@ -57,6 +67,7 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       if (prev.completed.includes(missaoId)) return prev;
       const completed = [...prev.completed, missaoId];
       return {
+        ...prev,
         completed,
         niveis_concluidos: calcNiveisConcluidos(completed),
         pontuacao: prev.pontuacao + 15,
@@ -64,8 +75,16 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     });
   }, []);
 
+  const setNome = useCallback((nome: string) => {
+    setState(prev => ({ ...prev, nome }));
+  }, []);
+
+  const setGenero = useCallback((genero: Genero) => {
+    setState(prev => ({ ...prev, genero }));
+  }, []);
+
   return (
-    <ProgressContext.Provider value={{ ...state, completarMissao }}>
+    <ProgressContext.Provider value={{ ...state, completarMissao, setNome, setGenero }}>
       {children}
     </ProgressContext.Provider>
   );
