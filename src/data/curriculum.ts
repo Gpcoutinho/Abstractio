@@ -1,0 +1,23 @@
+export interface Exercise {
+  question: string;
+  options: string[];
+  correct: number;
+  explanation: string;
+}
+
+export interface Missao {
+  id: string;
+  title: string;
+  icon: string;
+  theory: string;
+  exercise: Exercise;
+  has_interativo: boolean;
+  interativo_html?: string;
+}
+
+export interface Nivel {
+  id: number;
+  title: string;
+  short: string;
+  missoes: Missao[];
+}

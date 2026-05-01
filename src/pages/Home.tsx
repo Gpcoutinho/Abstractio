@@ -1,20 +1,90 @@
 import React from 'react';
-import Hero from '../components/Hero';
-import Destaques from '../components/Destaques';
-import PorQue from '../components/PorQue';
+import { Link } from 'react-router-dom';
+import { MapIcon, TrophyIcon, LockClosedIcon } from '@heroicons/react/24/outline';
+import HeroCarousel from '../components/HeroCarousel';
 import Footer from '../components/Footer';
+import { useProgress } from '../hooks/useProgress';
 
+const FEATURE_CARDS = [
+  {
+    title: 'Trilha POO',
+    description: 'Programação Orientada a Objetos em Python — do básico à arquitetura.',
+    to: '/trilha',
+    Icon: MapIcon,
+    locked: false,
+  },
+  {
+    title: 'Conquistas',
+    description: 'Veja os troféus que você conquistou ao longo da trilha.',
+    to: '/conquistas',
+    Icon: TrophyIcon,
+    locked: false,
+  },
+  {
+    title: 'Estruturas de Dados',
+    description: 'Em breve — arrays, listas ligadas, árvores e grafos.',
+    to: null,
+    Icon: LockClosedIcon,
+    locked: true,
+  },
+  {
+    title: 'Algoritmos',
+    description: 'Em breve — ordenação, busca e complexidade computacional.',
+    to: null,
+    Icon: LockClosedIcon,
+    locked: true,
+  },
+];
 
 const Home: React.FC = () => {
+  const { progressoGeral, pontuacao } = useProgress();
+
   return (
-    // Usando Fragment (<>) pois o div principal está no App.tsx
     <>
-        <Hero />
-        <Destaques />
-        <PorQue />
-        <Footer />
+      <HeroCarousel />
+
+      {/* Feature cards */}
+      <section className="py-16 px-5 bg-bgPrimary">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-textPrimary mb-2">Minha trilha</h2>
+          <p className="text-textSecondary mb-10">
+            {progressoGeral > 0
+              ? `${progressoGeral}% concluído · ${pontuacao} pts acumulados`
+              : 'Escolha por onde começar.'}
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {FEATURE_CARDS.map(card => (
+              <div
+                key={card.title}
+                className={`border border-borderDark rounded-xl p-6 bg-bgSecondary flex flex-col gap-3 transition-colors ${
+                  card.locked
+                    ? 'opacity-45 pointer-events-none'
+                    : 'hover:border-accent cursor-pointer'
+                }`}
+              >
+                <card.Icon className={`w-8 h-8 ${card.locked ? 'text-textSecondary' : 'text-accent'}`} />
+                <h3 className="text-textPrimary font-semibold text-lg">{card.title}</h3>
+                <p className="text-textSecondary text-sm flex-1">{card.description}</p>
+                {!card.locked && card.to && (
+                  <Link
+                    to={card.to}
+                    className="mt-2 text-sm text-accent font-medium hover:underline"
+                  >
+                    Acessar →
+                  </Link>
+                )}
+                {card.locked && (
+                  <span className="mt-2 text-xs text-textSecondary">Em breve</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
     </>
   );
-}
+};
 
 export default Home;

@@ -1,60 +1,28 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { ProgressProvider } from './contexts/ProgressContext';
 import Header from './components/Header';
 import Home from './pages/Home';
-import Login from './pages/Login';
-import Profile from './pages/Profile';
-import Exercicios from './pages/Exercicios';
-import Ponteiros from './pages/Ponteiros';
-import POO from './pages/POO';
-import LessonPage from './pages/LessonPage';
-import LessonClasses from './pages/LessonClasses';
-import modules from './data/modules';
-import { ProgressProvider } from './contexts/ProgressContext';
-import { Routes, Route } from 'react-router-dom';
-
+import Trilha from './pages/Trilha';
+import Missao from './pages/Missao';
+import Conquistas from './pages/Conquistas';
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-Primary">
-
-      <Header />
-
-      <main>
-        <Routes>
-          
-          <Route path="/" element={<Home />} />
-
-          <Route path="/login" element={<Login />} />
-
-          <Route path="/profile" element={<Profile />} />
-
-          <Route path="/exercicios" element={<Exercicios />} />
-
-          <Route path="/ponteiros" element={<Ponteiros />} />
-          
-          <Route path="/poo" element={<POO />} />
-          <Route
-            path="/modules/:moduleId/lessons/:lessonId"
-            element={
-              <ProgressProvider courseId="poo-1" initialModules={modules}>
-                <LessonPage />
-              </ProgressProvider>
-            }
-          />
-          <Route
-            path="/lesson-classes"
-            element={
-              <ProgressProvider courseId="poo-1" initialModules={modules}>
-                <LessonClasses />
-              </ProgressProvider>
-            }
-          />
-
-        </Routes>
-      </main>
-
-    </div>
+    <ProgressProvider>
+      <div className="min-h-screen bg-bgPrimary">
+        <Header />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/trilha" element={<Trilha />} />
+            <Route path="/missao/:nivelIdx/:missaoIdx" element={<Missao />} />
+            <Route path="/conquistas" element={<Conquistas />} />
+          </Routes>
+        </main>
+      </div>
+    </ProgressProvider>
   );
-}
+};
 
 export default App;

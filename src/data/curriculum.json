@@ -1,0 +1,571 @@
+[
+  {
+    "id": 0,
+    "title": "Nível 1 — Fundamentos: O despertar do Polvinho",
+    "short": "Fundamentos",
+    "missoes": [
+      {
+        "id": "0-0",
+        "title": "O que é a Programação Orientada a Objetos?",
+        "icon": "🧩",
+        "theory": "\nA **Programação Orientada a Objetos (POO)** é um paradigma que organiza o software em torno de **objetos** — entidades que combinam dados (atributos) e comportamentos (métodos).\n\nEm vez de uma sequência linear de instruções, você pensa em um conjunto de objetos que colaboram entre si.\n",
+        "exercise": {
+          "question": "Qual das alternativas melhor define a Programação Orientada a Objetos?",
+          "options": [
+            "Uma sequência linear de instruções que o computador executa.",
+            "Um paradigma que organiza o software em torno de objetos com atributos e métodos.",
+            "Uma linguagem de programação específica como Python ou Java.",
+            "Um método exclusivo para criar interfaces gráficas."
+          ],
+          "correct": 1,
+          "explanation": "Correto! POO é um paradigma que organiza o código em objetos com atributos (dados) e métodos (comportamentos)."
+        },
+        "has_interativo": true,
+        "interativo_html": "interativos/nivel_1_missao_1.html"
+      },
+      {
+        "id": "0-1",
+        "title": "Classe",
+        "icon": "📐",
+        "theory": "\n## Classes\n\nUma **classe** é uma estrutura que define um tipo de dado composto. Ela descreve atributos (estado) e métodos (comportamentos) que os objetos dessa classe terão.\n\n> **Analogia:** A classe é o molde/planta; o objeto é o produto construído a partir dela.\n\n- **Classe** = molde que descreve propriedades e comportamentos\n- **Objeto** = instância concreta da classe, com valores específicos\n- **Membros comuns:** atributos, métodos, construtor (`__init__`)\n\n```python\nclass Pessoa:\n    def __init__(self, nome, idade):\n        self.nome = nome\n        self.idade = idade\n\n    def apresentar(self):\n        return f\"Olá, sou {self.nome}, {self.idade} anos.\"\n\np1 = Pessoa(\"Ana\", 25)\np2 = Pessoa(\"Carlos\", 30)\n\nprint(p1.apresentar())  # Olá, sou Ana, 25 anos.\nprint(p2.apresentar())  # Olá, sou Carlos, 30 anos.\n```\n",
+        "exercise": {
+          "question": "Escolha a alternativa que melhor define o que é uma **classe**:",
+          "options": [
+            "Um objeto específico criado em tempo de execução.",
+            "Um molde que descreve as propriedades e comportamentos de um tipo de objeto.",
+            "Uma biblioteca externa usada para executar a linguagem.",
+            "Um erro de sintaxe comum em Python."
+          ],
+          "correct": 1,
+          "explanation": "Exato! Uma classe é um molde. A partir dela criamos quantos objetos (instâncias) quisermos."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "0-2",
+        "title": "Objeto",
+        "icon": "🔵",
+        "theory": "\n## Objetos\n\nUm **objeto** é uma instância concreta de uma classe. Se a classe é o molde, o objeto é o produto criado a partir desse molde.\n\nCada objeto tem seu próprio conjunto de valores para os atributos, mas compartilha os métodos da classe.\n\n```python\nclass Carro:\n    def __init__(self, marca, modelo):\n        self.marca = marca\n        self.modelo = modelo\n        self.ligado = False\n\n    def ligar(self):\n        self.ligado = True\n        return f\"{self.modelo} ligado!\"\n\n    def desligar(self):\n        self.ligado = False\n        return f\"{self.modelo} desligado.\"\n\nfusca = Carro(\"Volkswagen\", \"Fusca\")\ngol   = Carro(\"Volkswagen\", \"Gol\")\n\nprint(fusca.ligar())  # Fusca ligado!\nprint(gol.ligar())    # Gol ligado!\n```\n\n### Três características de todo objeto\n\n| Característica | Significado |\n|---|---|\n| **Identidade** | O que diferencia um objeto do outro (referência em memória) |\n| **Estado** | Valores atuais dos atributos (`fusca.ligado = True`) |\n| **Comportamento** | O que o objeto pode fazer (seus métodos) |\n",
+        "exercise": {
+          "question": "Dado `class Gato`, qual opção cria corretamente **dois objetos distintos**?",
+          "options": [
+            "`gato1 = Gato` e `gato2 = Gato`",
+            "`gato1 = Gato()` e `gato2 = Gato()`",
+            "`gato1 = new Gato()` e `gato2 = new Gato()`",
+            "`Gato.gato1()` e `Gato.gato2()`"
+          ],
+          "correct": 1,
+          "explanation": "Correto! Em Python, instanciamos objetos chamando a classe como função: `Gato()`. Cada chamada cria uma instância independente."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "0-3",
+        "title": "Método",
+        "icon": "⚙️",
+        "theory": "\n## Métodos\n\n**Métodos** são funções definidas dentro de uma classe que descrevem os comportamentos dos objetos. Eles sempre recebem `self` como primeiro parâmetro — uma referência ao objeto que os chamou.\n\n```python\nclass ContaBancaria:\n    def __init__(self, titular, saldo=0):\n        self.titular = titular\n        self.saldo = saldo\n\n    def depositar(self, valor):\n        self.saldo += valor\n        return f\"Depósito de R${valor:.2f} realizado.\"\n\n    def sacar(self, valor):\n        if valor > self.saldo:\n            return \"Saldo insuficiente.\"\n        self.saldo -= valor\n        return f\"Saque de R${valor:.2f} realizado.\"\n\nconta = ContaBancaria(\"Maria\", 100.0)\nprint(conta.depositar(50))  # Depósito de R$50.00 realizado.\nprint(conta.sacar(30))      # Saque de R$30.00 realizado.\nprint(conta.saldo)          # 120.0\n```\n\n### Por que `self`?\n\n- `self` é a referência ao objeto atual\n- Permite acessar e modificar atributos da instância específica\n- O Python injeta `self` automaticamente — você não o informa ao chamar o método\n",
+        "exercise": {
+          "question": "Por que todo método de instância em Python deve ter `self` como primeiro parâmetro?",
+          "options": [
+            "É uma convenção opcional que melhora apenas a legibilidade.",
+            "Para que o método acesse e modifique os atributos do objeto específico que o chamou.",
+            "Porque o Python exige que toda função tenha ao menos um parâmetro.",
+            "Para indicar que o método é público e acessível externamente."
+          ],
+          "correct": 1,
+          "explanation": "Correto! `self` é uma referência à instância. Sem ele, o método não saberia qual objeto está manipulando."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "0-4",
+        "title": "Construtor",
+        "icon": "🏗️",
+        "theory": "\n## Construtor\n\nO **construtor** é um método especial chamado automaticamente no momento em que um objeto é criado. Em Python, ele se chama `__init__`.\n\nSua responsabilidade é **inicializar o estado do objeto** — definir os valores iniciais dos atributos.\n\n```python\nclass Produto:\n    def __init__(self, nome, preco, estoque=0):\n        self.nome    = nome\n        self.preco   = preco\n        self.estoque = estoque\n\n    def __str__(self):\n        return f\"{self.nome} — R${self.preco:.2f} ({self.estoque} em estoque)\"\n\np1 = Produto(\"Caneta\", 2.50, 100)\np2 = Produto(\"Caderno\", 15.00)   # estoque usa valor padrão: 0\n\nprint(p1)  # Caneta — R$2.50 (100 em estoque)\nprint(p2)  # Caderno — R$15.00 (0 em estoque)\n```\n\n### Recursos do construtor\n\n| Recurso | Descrição |\n|---|---|\n| Parâmetros obrigatórios | `def __init__(self, nome)` |\n| Parâmetros com padrão | `def __init__(self, estoque=0)` |\n| `__str__` | Define como o objeto é exibido ao ser impresso |\n\n### Destrutor\n\nPython também possui `__del__`, chamado quando o objeto é destruído — mas raramente é necessário usá-lo.\n\n```python\ndef __del__(self):\n    print(f\"{self.nome} foi removido da memória.\")\n```\n",
+        "exercise": {
+          "question": "O que acontece quando você executa `p = Produto('Caneta', 2.50)`?",
+          "options": [
+            "Nada — é preciso chamar `p.init()` manualmente depois.",
+            "O Python chama `__init__` automaticamente, inicializando os atributos do objeto.",
+            "Um erro é lançado porque `__init__` não foi chamado explicitamente.",
+            "O objeto é criado, mas seus atributos ficam como `None` até serem definidos."
+          ],
+          "correct": 1,
+          "explanation": "Correto! `__init__` é chamado automaticamente pelo Python no momento da criação do objeto. Você não precisa invocá-lo."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "0-5",
+        "title": "Resumo",
+        "icon": "📋",
+        "theory": "\n## Resumo — Fundamentos\n\nVocê concluiu o primeiro nível! Veja os conceitos que domina agora:\n\n### O que você aprendeu\n\n| Conceito | Em uma linha |\n|---|---|\n| **POO** | Paradigma que organiza código em objetos com dados e comportamentos |\n| **Classe** | Molde que define atributos e métodos de um tipo de objeto |\n| **Objeto** | Instância concreta de uma classe, com estado próprio |\n| **Método** | Função definida dentro de uma classe; recebe `self` |\n| **Construtor** | `__init__` — inicializa o estado do objeto na criação |\n\n### Tudo junto\n\n```python\nclass Livro:\n    def __init__(self, titulo, autor, paginas):  # construtor\n        self.titulo  = titulo                    # atributos\n        self.autor   = autor\n        self.paginas = paginas\n        self.lido    = False\n\n    def marcar_lido(self):                       # método\n        self.lido = True\n        return f'\"{self.titulo}\" marcado como lido!'\n\n    def __str__(self):\n        status = \"✓ lido\" if self.lido else \"pendente\"\n        return f\"{self.titulo} ({self.autor}) — {status}\"\n\n# Criando objetos\nlivro1 = Livro(\"Clean Code\", \"Robert Martin\", 431)\nlivro2 = Livro(\"O Poder do Hábito\", \"Charles Duhigg\", 288)\n\nprint(livro1.marcar_lido())  # \"Clean Code\" marcado como lido!\nprint(livro1)                # Clean Code (Robert Martin) — ✓ lido\nprint(livro2)                # O Poder do Hábito (Charles Duhigg) — pendente\n```\n\n> Próximo nível: os **4 pilares da POO** — os princípios que tornam o código orientado a objetos poderoso.\n",
+        "exercise": {
+          "question": "Qual sequência representa corretamente a relação entre classe, construtor e objeto?",
+          "options": [
+            "O objeto é criado → o construtor define a classe → a classe armazena atributos.",
+            "A classe é o molde → o construtor inicializa o estado → o objeto é a instância resultante.",
+            "O construtor cria a classe → a classe instancia objetos → os objetos chamam métodos.",
+            "A classe herda do objeto → o construtor é opcional → os métodos definem os atributos."
+          ],
+          "correct": 1,
+          "explanation": "Exato! A classe define o molde, o construtor (`__init__`) prepara o estado inicial, e o objeto é a instância concreta criada a partir disso."
+        },
+        "has_interativo": false
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "title": "Nível 2 — Pilares: As leis do oceano",
+    "short": "Pilares",
+    "missoes": [
+      {
+        "id": "1-0",
+        "title": "Introdução ao nível",
+        "icon": "🌍",
+        "theory": "\n## As leis do mundo — Os 4 Pilares da POO\n\nSe o Nível 1 te ensinou a **criar** objetos, este nível te ensina as **leis** que governam como bons objetos se comportam.\n\nOs 4 pilares não são recursos isolados — são princípios que trabalham juntos para tornar o código:\n\n- **Organizado** — cada coisa no seu lugar\n- **Reutilizável** — escreva uma vez, use muitas vezes\n- **Seguro** — proteja dados sensíveis\n- **Flexível** — troque partes sem quebrar o todo\n\n### Os 4 Pilares\n\n| Pilar | Palavra-chave | Pergunta que responde |\n|---|---|---|\n| **Abstração** | Simplificar | O que este objeto *precisa* expor? |\n| **Encapsulamento** | Proteger | Quem pode acessar os dados internos? |\n| **Herança** | Reutilizar | Como reaproveitar comportamentos existentes? |\n| **Polimorfismo** | Uniformizar | Como tratar objetos diferentes da mesma forma? |\n\n> Cada missão a seguir explora um pilar com exemplos práticos. Ao final, você verá como eles se complementam.\n",
+        "exercise": {
+          "question": "Qual é o principal objetivo dos 4 pilares da POO?",
+          "options": [
+            "Aumentar o número de linhas de código para tornar o sistema mais robusto.",
+            "Tornar o código organizado, reutilizável, seguro e flexível.",
+            "Substituir completamente a programação procedural em todos os casos.",
+            "Garantir que todas as classes herdem de uma única superclasse."
+          ],
+          "correct": 1,
+          "explanation": "Correto! Os pilares são princípios que, juntos, produzem código de qualidade: organizado, reutilizável, seguro e flexível."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "1-1",
+        "title": "Abstração",
+        "icon": "🌀",
+        "theory": "\n## Abstração\n\n**Abstração** é o processo de focar nos aspectos essenciais, ignorando detalhes irrelevantes. Em Python, implementamos via **classes abstratas** com o módulo `abc`.\n\nUma classe abstrata define um **contrato**: todas as subclasses *devem* implementar certos métodos.\n\n```python\nfrom abc import ABC, abstractmethod\n\nclass Forma(ABC):\n    @abstractmethod\n    def area(self):\n        pass\n\n    @abstractmethod\n    def perimetro(self):\n        pass\n\n    def descrever(self):  # método concreto compartilhado\n        return f\"Área: {self.area():.2f} | Perímetro: {self.perimetro():.2f}\"\n\nclass Circulo(Forma):\n    def __init__(self, raio):\n        self.raio = raio\n\n    def area(self):\n        return 3.14159 * self.raio ** 2\n\n    def perimetro(self):\n        return 2 * 3.14159 * self.raio\n\nclass Retangulo(Forma):\n    def __init__(self, w, h):\n        self.w, self.h = w, h\n\n    def area(self):\n        return self.w * self.h\n\n    def perimetro(self):\n        return 2 * (self.w + self.h)\n\nformas = [Circulo(5), Retangulo(4, 6)]\nfor f in formas:\n    print(f.descrever())\n```\n\n### Vantagens\n- Força um contrato entre classes\n- Habilita **polimorfismo**: tratar `Circulo` e `Retangulo` uniformemente como `Forma`\n- Separa *o quê* fazer do *como* fazer\n",
+        "exercise": {
+          "question": "O que caracteriza uma **classe abstrata** em Python?",
+          "options": [
+            "Uma classe que não pode ter nenhum método implementado.",
+            "Uma classe que herda de `ABC` e define métodos abstratos que as subclasses são obrigadas a implementar.",
+            "Uma classe que só pode ser instanciada uma única vez.",
+            "Uma classe privada que não pode ser importada por outros módulos."
+          ],
+          "correct": 1,
+          "explanation": "Perfeito! Classes abstratas (ABC) definem contratos. Métodos com @abstractmethod obrigam as subclasses a implementá-los."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "1-2",
+        "title": "Encapsulamento",
+        "icon": "🔒",
+        "theory": "\n## Encapsulamento\n\n**Encapsulamento** é o princípio de esconder os detalhes internos de um objeto e expor apenas o necessário através de uma interface controlada.\n\nEm Python, convenções de nomenclatura indicam visibilidade:\n\n| Prefixo | Visibilidade | Exemplo |\n|---|---|---|\n| `atributo` | Público | `self.nome` |\n| `_atributo` | Protegido (convenção) | `self._agencia` |\n| `__atributo` | Privado (name mangling) | `self.__saldo` |\n\n```python\nclass ContaCorrente:\n    def __init__(self, titular, saldo):\n        self.titular = titular     # público\n        self._agencia = \"0001\"     # protegido\n        self.__saldo = saldo       # privado\n\n    def get_saldo(self):\n        return self.__saldo\n\n    def depositar(self, valor):\n        if valor > 0:\n            self.__saldo += valor\n\nconta = ContaCorrente(\"João\", 500)\nprint(conta.titular)      # João — OK\nprint(conta.get_saldo())  # 500 — OK via getter\n# conta.__saldo           # AttributeError!\n```\n\n### `@property` — getters e setters elegantes\n\n```python\n@property\ndef saldo(self):\n    return self.__saldo\n\n@saldo.setter\ndef saldo(self, valor):\n    if valor >= 0:\n        self.__saldo = valor\n```\n",
+        "exercise": {
+          "question": "Qual é o principal objetivo do encapsulamento em POO?",
+          "options": [
+            "Permitir que qualquer parte do código acesse e modifique os dados livremente.",
+            "Esconder os detalhes internos do objeto e controlar o acesso aos seus dados.",
+            "Fazer com que uma classe herde comportamentos de outra.",
+            "Substituir funções globais por métodos de classe."
+          ],
+          "correct": 1,
+          "explanation": "Correto! Encapsulamento protege os dados internos e expõe apenas uma interface controlada e segura."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "1-3",
+        "title": "Herança",
+        "icon": "🧬",
+        "theory": "\n## Herança\n\n**Herança** permite que uma classe filha (subclasse) herde atributos e métodos de uma classe pai (superclasse), promovendo reuso e especialização.\n\n```python\nclass Animal:\n    def __init__(self, nome):\n        self.nome = nome\n\n    def respirar(self):\n        return f\"{self.nome} está respirando.\"\n\n    def fazer_som(self):\n        return \"...\"\n\nclass Cachorro(Animal):    # herda de Animal\n    def fazer_som(self):   # sobrescreve (override)\n        return f\"{self.nome} diz: Au au!\"\n\nclass Gato(Animal):\n    def fazer_som(self):\n        return f\"{self.nome} diz: Miau!\"\n\nrex = Cachorro(\"Rex\")\nprint(rex.respirar())   # Rex está respirando. ← herdado\nprint(rex.fazer_som())  # Rex diz: Au au!     ← sobrescrito\n```\n\n### `super()` — acessando a classe pai\n\n```python\nclass AnimalDomestico(Animal):\n    def __init__(self, nome, dono):\n        super().__init__(nome)  # chama Animal.__init__\n        self.dono = dono\n```\n\nPython também suporta **herança múltipla**: `class Anfibio(Terrestre, Aquatico): pass`\n",
+        "exercise": {
+          "question": "O que acontece quando uma subclasse define um método com o mesmo nome que a superclasse?",
+          "options": [
+            "Ocorre um erro de execução.",
+            "O método da subclasse sobrescreve (override) o da superclasse para aquela instância.",
+            "Ambos os métodos são executados simultaneamente.",
+            "O método da superclasse sempre tem prioridade."
+          ],
+          "correct": 1,
+          "explanation": "Correto! Isso se chama override (sobrescrita). A subclasse redefine o comportamento para suas próprias instâncias."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "1-4",
+        "title": "Polimorfismo",
+        "icon": "🎭",
+        "theory": "\n## Polimorfismo\n\n**Polimorfismo** significa \"muitas formas\". É a capacidade de tratar objetos de tipos diferentes de forma uniforme, desde que compartilhem uma interface comum.\n\n```python\nclass Animal:\n    def __init__(self, nome):\n        self.nome = nome\n\n    def fazer_som(self):\n        raise NotImplementedError\n\nclass Cachorro(Animal):\n    def fazer_som(self):\n        return f\"{self.nome}: Au au!\"\n\nclass Gato(Animal):\n    def fazer_som(self):\n        return f\"{self.nome}: Miau!\"\n\nclass Pato(Animal):\n    def fazer_som(self):\n        return f\"{self.nome}: Quack!\"\n\n# Polimorfismo em ação — mesmo código, comportamentos diferentes\nanimais = [Cachorro(\"Rex\"), Gato(\"Mia\"), Pato(\"Donald\")]\n\nfor animal in animais:\n    print(animal.fazer_som())\n# Rex: Au au!\n# Mia: Miau!\n# Donald: Quack!\n```\n\n### Duck Typing — polimorfismo sem herança\n\nPython é flexível: se o objeto tem o método esperado, funciona — independente da hierarquia.\n\n```python\nclass Robo:\n    def fazer_som(self):\n        return \"Robo: Bip bip!\"\n\n# Robo não herda de Animal, mas funciona na mesma lista\ntodos = [Cachorro(\"Rex\"), Robo()]\nfor x in todos:\n    print(x.fazer_som())\n```\n\n> \"Se anda como pato e grasna como pato, é um pato.\" — Duck Typing\n\n### Por que polimorfismo importa?\n\n- Código genérico que funciona com tipos futuros sem modificação\n- Reduz condicionais (`if isinstance(...)`)\n- Facilita extensão do sistema\n",
+        "exercise": {
+          "question": "O que é Duck Typing em Python?",
+          "options": [
+            "Uma forma de herança múltipla exclusiva do Python.",
+            "A capacidade de usar um objeto em qualquer contexto desde que ele possua os métodos esperados, independente de sua hierarquia de classes.",
+            "Um padrão de projeto para criar objetos do tipo 'pato'.",
+            "Uma verificação estrita de tipos feita em tempo de compilação."
+          ],
+          "correct": 1,
+          "explanation": "Correto! Duck Typing permite que qualquer objeto seja usado polimorficamente desde que implemente a interface esperada, sem precisar herdar de uma classe específica."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "1-5",
+        "title": "Resumo",
+        "icon": "📋",
+        "theory": "\n## Resumo — Os 4 Pilares\n\nVocê dominou as leis que governam objetos bem projetados. Veja o quadro completo:\n\n| Pilar | Mecanismo em Python | Para que serve |\n|---|---|---|\n| **Abstração** | `ABC`, `@abstractmethod` | Define contratos, esconde complexidade |\n| **Encapsulamento** | `__attr`, `@property` | Protege dados, controla acesso |\n| **Herança** | `class Filho(Pai)`, `super()` | Reusa e especializa comportamentos |\n| **Polimorfismo** | Override, Duck Typing | Trata objetos distintos uniformemente |\n\n### Os 4 pilares juntos\n\n```python\nfrom abc import ABC, abstractmethod\n\nclass Veiculo(ABC):            # Abstração\n    def __init__(self, marca):\n        self.__marca = marca   # Encapsulamento\n\n    @property\n    def marca(self):\n        return self.__marca\n\n    @abstractmethod\n    def mover(self):           # contrato\n        pass\n\nclass Carro(Veiculo):          # Herança\n    def mover(self):\n        return f\"{self.marca} rodando na estrada.\"\n\nclass Barco(Veiculo):          # Herança\n    def mover(self):\n        return f\"{self.marca} navegando no mar.\"\n\nfrota = [Carro(\"Toyota\"), Barco(\"Yamaha\")]\nfor v in frota:\n    print(v.mover())           # Polimorfismo\n```\n\n> Próximo nível: como objetos se **relacionam** entre si — sobrescrita, contratos e associações.\n",
+        "exercise": {
+          "question": "Qual pilar garante que código genérico possa operar sobre diferentes tipos de objeto sem precisar conhecê-los individualmente?",
+          "options": [
+            "Encapsulamento, porque protege os dados de cada objeto.",
+            "Herança, porque todos os objetos descendem de uma mesma classe.",
+            "Polimorfismo, porque permite tratar objetos distintos de forma uniforme.",
+            "Abstração, porque define quais métodos cada classe deve ter."
+          ],
+          "correct": 2,
+          "explanation": "Correto! O polimorfismo é o pilar que permite escrever código genérico que funciona com diferentes tipos — sem precisar de condicionais para cada um."
+        },
+        "has_interativo": false
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Nível 3 — Relações: A sociedade dos objetos",
+    "short": "Relações",
+    "missoes": [
+      {
+        "id": "2-0",
+        "title": "Introdução ao nível",
+        "icon": "🏙️",
+        "theory": "\n## A sociedade dos objetos — Mecânica e Relações\n\nNos níveis anteriores você aprendeu a criar objetos e a aplicar os 4 pilares. Agora vamos explorar como objetos **interagem entre si**.\n\nEm sistemas reais, objetos raramente vivem isolados. Eles se comunicam, dependem uns dos outros e formam estruturas complexas — como uma sociedade.\n\n### O que você vai aprender\n\n| Conceito | O que é |\n|---|---|\n| **Sobrescrita** | Redefinir o comportamento de um método herdado |\n| **Sobrecarga** | Adaptar um método para diferentes formas de chamada |\n| **Contratos** | Interfaces e classes abstratas como acordos entre objetos |\n| **Associação** | Um objeto *usa* outro |\n| **Agregação** | Um objeto *tem* outro (relação fraca) |\n| **Composição** | Um objeto *é composto de* outro (relação forte) |\n\n### A analogia da sociedade\n\nPense em objetos como pessoas em uma cidade:\n- Uma pessoa pode **sobrescrever** um hábito herdado da família\n- Assinar um **contrato** a obriga a cumprir certas responsabilidades\n- Ela pode **usar** um táxi (associação), **ter** um carro (agregação) ou **ter** um coração (composição)\n\n> Entender relações é o que separa código amador de código profissional.\n",
+        "exercise": {
+          "question": "Por que é importante entender como objetos se relacionam em POO?",
+          "options": [
+            "Porque objetos isolados são mais eficientes computacionalmente.",
+            "Porque sistemas reais são formados por objetos que colaboram — entender relações é essencial para modelar o mundo real.",
+            "Porque o Python exige que todos os objetos estejam conectados entre si.",
+            "Porque relações entre objetos substituem a necessidade de herança."
+          ],
+          "correct": 1,
+          "explanation": "Exato! Sistemas reais são redes de objetos colaborando. Modelar essas relações corretamente é o que torna um design robusto e manutenível."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "2-1",
+        "title": "Sobrescrita",
+        "icon": "✏️",
+        "theory": "\n## Sobrescrita (Override)\n\n**Sobrescrita** ocorre quando uma subclasse redefine um método da superclasse com a mesma assinatura, substituindo o comportamento original.\n\n```python\nclass Notificacao:\n    def enviar(self, mensagem):\n        return f\"Enviando: {mensagem}\"\n\nclass NotificacaoEmail(Notificacao):\n    def enviar(self, mensagem):          # sobrescreve\n        return f\"📧 Email: {mensagem}\"\n\nclass NotificacaoSMS(Notificacao):\n    def enviar(self, mensagem):          # sobrescreve\n        return f\"📱 SMS: {mensagem}\"\n\nclass NotificacaoPush(Notificacao):\n    def enviar(self, mensagem):          # sobrescreve\n        return f\"🔔 Push: {mensagem}\"\n\ncanais = [NotificacaoEmail(), NotificacaoSMS(), NotificacaoPush()]\nfor canal in canais:\n    print(canal.enviar(\"Sua compra foi aprovada!\"))\n```\n\n### Estendendo com `super()`\n\nVocê pode sobrescrever **e ainda aproveitar** o comportamento original:\n\n```python\nclass NotificacaoAuditada(Notificacao):\n    def enviar(self, mensagem):\n        resultado = super().enviar(mensagem)  # chama o original\n        print(f\"[LOG] Notificação registrada.\")\n        return resultado\n```\n\n### Regras da sobrescrita\n\n| Regra | Descrição |\n|---|---|\n| Mesmo nome | O método na subclasse deve ter o mesmo nome |\n| `super()` opcional | Use para aproveitar o comportamento pai |\n| Polimorfismo | Objetos distintos se comportam diferente pelo mesmo método |\n",
+        "exercise": {
+          "question": "Qual é a diferença entre sobrescrita e herança simples?",
+          "options": [
+            "Não há diferença — sobrescrita é apenas outro nome para herança.",
+            "Herança passa atributos e métodos para a subclasse; sobrescrita redefine um método herdado com novo comportamento.",
+            "Sobrescrita elimina todos os métodos herdados da superclasse.",
+            "Herança só funciona com `super()`, enquanto sobrescrita não precisa."
+          ],
+          "correct": 1,
+          "explanation": "Correto! Herança é o mecanismo de transmissão. Sobrescrita é a decisão da subclasse de redefinir um comportamento específico que herdou."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "2-2",
+        "title": "Sobrecarga",
+        "icon": "🔀",
+        "theory": "\n## Sobrecarga (Overload)\n\n**Sobrecarga** é a capacidade de um método aceitar diferentes conjuntos de argumentos. Em linguagens como Java e C++, isso é feito criando múltiplos métodos com o mesmo nome mas assinaturas diferentes.\n\nPython não suporta sobrecarga tradicional — mas oferece mecanismos equivalentes e mais flexíveis.\n\n### Abordagem 1 — Parâmetros com valor padrão\n\n```python\nclass Calculadora:\n    def somar(self, a, b, c=0):\n        return a + b + c\n\ncalc = Calculadora()\nprint(calc.somar(2, 3))     # 5\nprint(calc.somar(2, 3, 4))  # 9\n```\n\n### Abordagem 2 — `*args` e `**kwargs`\n\n```python\nclass Relatorio:\n    def gerar(self, *titulos, formato=\"txt\"):\n        conteudo = \" | \".join(titulos)\n        return f\"[{formato.upper()}] {conteudo}\"\n\nr = Relatorio()\nprint(r.gerar(\"Vendas\"))                        # [TXT] Vendas\nprint(r.gerar(\"Vendas\", \"Estoque\", formato=\"pdf\"))  # [PDF] Vendas | Estoque\n```\n\n### Abordagem 3 — `@singledispatch` (sobrecarga por tipo)\n\n```python\nfrom functools import singledispatch\n\n@singledispatch\ndef processar(dado):\n    return f\"Tipo desconhecido: {dado}\"\n\n@processar.register(int)\ndef _(dado):\n    return f\"Inteiro: {dado * 2}\"\n\n@processar.register(str)\ndef _(dado):\n    return f\"Texto: {dado.upper()}\"\n\nprint(processar(5))       # Inteiro: 10\nprint(processar(\"ola\"))   # Texto: OLA\n```\n",
+        "exercise": {
+          "question": "Como Python simula sobrecarga de métodos de forma nativa?",
+          "options": [
+            "Criando múltiplos métodos com o mesmo nome e assinaturas diferentes, como em Java.",
+            "Usando parâmetros com valor padrão, `*args`, `**kwargs` ou `@singledispatch`.",
+            "Python não suporta nenhuma forma de sobrecarga ou alternativa equivalente.",
+            "Usando herança múltipla para definir variações do mesmo método."
+          ],
+          "correct": 1,
+          "explanation": "Correto! Python usa parâmetros opcionais e empacotamento de argumentos como alternativa flexível à sobrecarga tradicional."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "2-3",
+        "title": "Os Contratos",
+        "icon": "📜",
+        "theory": "\n## Os Contratos\n\nEm POO, um **contrato** é um acordo formal que define o que uma classe *deve* fazer — sem ditar *como* ela faz.\n\nQuando uma classe assina um contrato, ela se compromete a implementar um conjunto de métodos. Isso garante que qualquer objeto que respeite o contrato possa ser usado de forma intercambiável.\n\n### Por que contratos existem?\n\nImagine que você está construindo um sistema de pagamentos. Você quer aceitar Pix, cartão de crédito e boleto. Sem um contrato:\n\n```python\n# Sem contrato — caótico\nclass PagamentoPix:\n    def pagar_pix(self, valor): ...\n\nclass PagamentoCartao:\n    def processar_cartao(self, valor): ...\n\nclass PagamentoBoleto:\n    def emitir_boleto(self, valor): ...\n```\n\nCada classe tem um método diferente — impossível tratá-las uniformemente.\n\n### Com um contrato\n\n```python\nfrom abc import ABC, abstractmethod\n\nclass MetodoPagamento(ABC):  # o contrato\n    @abstractmethod\n    def pagar(self, valor: float) -> str:\n        pass\n\nclass Pix(MetodoPagamento):\n    def pagar(self, valor):\n        return f\"✅ Pix de R${valor:.2f} enviado.\"\n\nclass Cartao(MetodoPagamento):\n    def pagar(self, valor):\n        return f\"💳 Cartão cobrado: R${valor:.2f}.\"\n\nclass Boleto(MetodoPagamento):\n    def pagar(self, valor):\n        return f\"📄 Boleto de R${valor:.2f} gerado.\"\n\ndef processar_pedido(metodo: MetodoPagamento, valor: float):\n    return metodo.pagar(valor)  # funciona com qualquer método\n\nprint(processar_pedido(Pix(), 150.00))\nprint(processar_pedido(Cartao(), 89.90))\n```\n\nEm Python, contratos são implementados com **interfaces** (via ABC sem implementação) e **classes abstratas** (via ABC com implementação parcial).\n",
+        "exercise": {
+          "question": "Qual é o principal benefício de usar contratos (interfaces/classes abstratas) em um sistema?",
+          "options": [
+            "Aumentar o desempenho do código em tempo de execução.",
+            "Garantir que diferentes classes implementem um conjunto comum de métodos, permitindo intercambialidade.",
+            "Impedir que subclasses adicionem novos métodos além dos definidos no contrato.",
+            "Substituir completamente a necessidade de herança no sistema."
+          ],
+          "correct": 1,
+          "explanation": "Correto! Contratos garantem que qualquer classe que os implemente possa ser usada de forma intercambiável, tornando o sistema extensível e previsível."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "2-4",
+        "title": "Contratos — Interfaces",
+        "icon": "🔌",
+        "theory": "\n## Interfaces\n\nUma **interface** é um contrato puro — define *o quê* deve ser feito, sem implementar *como*. Em Python, simulamos interfaces com classes que herdam de `ABC` e possuem apenas métodos abstratos.\n\n```python\nfrom abc import ABC, abstractmethod\n\nclass Serializavel(ABC):\n    @abstractmethod\n    def para_dict(self) -> dict:\n        pass\n\n    @abstractmethod\n    def para_json(self) -> str:\n        pass\n\nclass Autenticavel(ABC):\n    @abstractmethod\n    def autenticar(self, senha: str) -> bool:\n        pass\n```\n\n### Implementando múltiplas interfaces\n\nPython suporta herança múltipla — uma classe pode assinar vários contratos:\n\n```python\nimport json\n\nclass Usuario(Serializavel, Autenticavel):\n    def __init__(self, nome, senha_hash):\n        self.nome = nome\n        self._senha_hash = senha_hash\n\n    def para_dict(self):\n        return {\"nome\": self.nome}\n\n    def para_json(self):\n        return json.dumps(self.para_dict())\n\n    def autenticar(self, senha):\n        return hash(senha) == self._senha_hash\n\nu = Usuario(\"Ana\", hash(\"1234\"))\nprint(u.para_json())           # {\"nome\": \"Ana\"}\nprint(u.autenticar(\"1234\"))    # True\nprint(u.autenticar(\"errada\"))  # False\n```\n\n### Interface vs Classe Abstrata\n\n| | Interface (pura) | Classe Abstrata |\n|---|---|---|\n| Implementação | Nenhuma | Pode ter parcial |\n| Propósito | Definir capacidades | Definir base comum |\n| Herança | Múltipla (recomendada) | Geralmente única |\n",
+        "exercise": {
+          "question": "O que caracteriza uma interface pura em Python?",
+          "options": [
+            "Uma classe com pelo menos um método implementado e um abstrato.",
+            "Uma classe que herda de `ABC` e contém apenas métodos abstratos, sem nenhuma implementação.",
+            "Uma classe que não pode ser herdada por outras classes.",
+            "Um módulo Python separado que define funções globais."
+          ],
+          "correct": 1,
+          "explanation": "Correto! Uma interface pura em Python é uma classe ABC com apenas @abstractmethod — ela define o contrato sem implementar nada."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "2-5",
+        "title": "Contratos — Classes Abstratas",
+        "icon": "🏛️",
+        "theory": "\n## Classes Abstratas\n\nDiferente de uma interface pura, uma **classe abstrata** pode combinar métodos abstratos (sem implementação) com métodos concretos (com implementação compartilhada).\n\nEla define uma base comum para uma família de classes.\n\n```python\nfrom abc import ABC, abstractmethod\n\nclass Relatorio(ABC):\n    def __init__(self, titulo):\n        self.titulo = titulo\n\n    # Métodos abstratos — cada subclasse implementa do seu jeito\n    @abstractmethod\n    def gerar_cabecalho(self) -> str:\n        pass\n\n    @abstractmethod\n    def gerar_corpo(self, dados: list) -> str:\n        pass\n\n    # Método concreto — comportamento compartilhado por todas\n    def exportar(self, dados: list) -> str:\n        cab  = self.gerar_cabecalho()\n        corp = self.gerar_corpo(dados)\n        return f\"{cab}\\n{corp}\\n--- fim do relatório ---\"\n\n\nclass RelatorioPDF(Relatorio):\n    def gerar_cabecalho(self):\n        return f\"[PDF] === {self.titulo} ===\"\n\n    def gerar_corpo(self, dados):\n        return \"\\n\".join(f\"• {item}\" for item in dados)\n\n\nclass RelatorioCSV(Relatorio):\n    def gerar_cabecalho(self):\n        return self.titulo\n\n    def gerar_corpo(self, dados):\n        return \",\".join(str(d) for d in dados)\n\n\nvendas = [\"Janeiro: R$10k\", \"Fevereiro: R$12k\"]\n\npdf = RelatorioPDF(\"Relatório de Vendas\")\ncsv = RelatorioCSV(\"Vendas\")\n\nprint(pdf.exportar(vendas))\nprint(csv.exportar(vendas))\n```\n\n### Quando usar cada um?\n\n| Situação | Use |\n|---|---|\n| Só precisa definir o que deve existir | Interface pura |\n| Precisa de comportamento compartilhado + contrato | Classe abstrata |\n| Quer combinar múltiplos contratos | Múltiplas interfaces |\n",
+        "exercise": {
+          "question": "Qual a principal diferença entre uma interface pura e uma classe abstrata?",
+          "options": [
+            "Interfaces só existem em Java; Python só tem classes abstratas.",
+            "Interfaces definem apenas o contrato; classes abstratas podem ter métodos concretos compartilhados além dos abstratos.",
+            "Classes abstratas não podem ser herdadas, apenas instanciadas.",
+            "Interfaces permitem instanciação direta; classes abstratas não."
+          ],
+          "correct": 1,
+          "explanation": "Correto! Classes abstratas combinam contrato com implementação parcial compartilhada — ideal quando há comportamento comum entre as subclasses."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "2-6",
+        "title": "Relacionamentos",
+        "icon": "🔗",
+        "theory": "\n## Relacionamentos entre objetos\n\nObjetos raramente existem sozinhos. Em sistemas reais, eles se conectam de formas diferentes — e cada tipo de conexão tem um nome e implicações diferentes.\n\n### Os 3 tipos principais\n\n| Tipo | Símbolo | Força | Analogia |\n|---|---|---|---|\n| **Associação** | → | Fraca | Motorista usa um carro |\n| **Agregação** | ◇→ | Média | Time tem jogadores |\n| **Composição** | ◆→ | Forte | Casa tem cômodos |\n\n### A pergunta-chave: o que acontece quando o \"todo\" é destruído?\n\n- **Associação** — a parte continua existindo (o carro não some se o motorista sair)\n- **Agregação** — a parte continua existindo (jogadores continuam existindo sem o time)\n- **Composição** — a parte é destruída junto (cômodos não existem sem a casa)\n\n### Por que isso importa?\n\nModelar relações corretamente impacta:\n- **Ciclo de vida** dos objetos (quem cria, quem destrói)\n- **Responsabilidade** por memória e recursos\n- **Flexibilidade** do design (o que pode ser trocado ou reutilizado)\n\n> As próximas missões detalham cada tipo com exemplos práticos.\n",
+        "exercise": {
+          "question": "Qual pergunta central diferencia os 3 tipos de relacionamento entre objetos?",
+          "options": [
+            "Quantos métodos cada objeto possui?",
+            "O que acontece com a parte quando o objeto 'todo' é destruído?",
+            "Qual objeto foi criado primeiro na memória?",
+            "Quantas classes participam do relacionamento?"
+          ],
+          "correct": 1,
+          "explanation": "Correto! A sobrevivência da parte quando o todo é destruído é o critério que define se a relação é associação, agregação ou composição."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "2-7",
+        "title": "Relacionamentos — Associação",
+        "icon": "↔️",
+        "theory": "\n## Associação\n\n**Associação** é a relação mais fraca — um objeto *usa* outro, mas nenhum depende do ciclo de vida do outro.\n\nOs objetos existem de forma independente e a relação é temporária ou opcional.\n\n```python\nclass Motorista:\n    def __init__(self, nome):\n        self.nome = nome\n\n    def dirigir(self, carro):  # recebe o carro — não é dono dele\n        return f\"{self.nome} está dirigindo {carro.modelo}.\"\n\nclass Carro:\n    def __init__(self, modelo):\n        self.modelo = modelo\n\nfusca  = Carro(\"Fusca\")\ngol    = Carro(\"Gol\")\nana    = Motorista(\"Ana\")\n\nprint(ana.dirigir(fusca))  # Ana está dirigindo Fusca.\nprint(ana.dirigir(gol))    # Ana está dirigindo Gol.\n# fusca e gol continuam existindo independente de ana\n```\n\n### Associação bidirecional\n\n```python\nclass Professor:\n    def __init__(self, nome):\n        self.nome = nome\n        self.alunos = []\n\n    def adicionar_aluno(self, aluno):\n        self.alunos.append(aluno)\n        aluno.professor = self  # bidirecional\n\nclass Aluno:\n    def __init__(self, nome):\n        self.nome = nome\n        self.professor = None\n\nprof  = Professor(\"Dr. Silva\")\naluno = Aluno(\"Bia\")\nprof.adicionar_aluno(aluno)\n\nprint(aluno.professor.nome)     # Dr. Silva\nprint(prof.alunos[0].nome)      # Bia\n```\n\n### Características da Associação\n\n- Objetos **independentes** — um pode existir sem o outro\n- Relação **temporária** ou **opcional**\n- Implementada passando objetos como **parâmetros** ou referências\n",
+        "exercise": {
+          "question": "Qual característica define uma relação de **Associação** entre objetos?",
+          "options": [
+            "Um objeto cria e destrói o outro durante seu ciclo de vida.",
+            "Os objetos se conhecem e interagem, mas existem de forma independente.",
+            "Um objeto é parte estrutural do outro e não pode existir sozinho.",
+            "Um objeto herda atributos e métodos do outro."
+          ],
+          "correct": 1,
+          "explanation": "Correto! Na associação, os objetos interagem mas são independentes — nenhum controla o ciclo de vida do outro."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "2-8",
+        "title": "Relacionamentos — Agregação",
+        "icon": "🧺",
+        "theory": "\n## Agregação\n\n**Agregação** é uma relação \"tem um\" — o objeto todo **contém** partes, mas as partes **podem existir independentemente** do todo.\n\nÉ uma associação com maior grau de pertencimento, mas sem controle total do ciclo de vida.\n\n```python\nclass Jogador:\n    def __init__(self, nome, posicao):\n        self.nome    = nome\n        self.posicao = posicao\n\n    def __str__(self):\n        return f\"{self.nome} ({self.posicao})\"\n\nclass Time:\n    def __init__(self, nome):\n        self.nome    = nome\n        self.jogadores = []  # agrega jogadores\n\n    def adicionar(self, jogador):\n        self.jogadores.append(jogador)\n\n    def listar(self):\n        for j in self.jogadores:\n            print(f\"  {j}\")\n\n# Jogadores existem antes e independente do time\nana    = Jogador(\"Ana\", \"Atacante\")\ncarlos = Jogador(\"Carlos\", \"Goleiro\")\n\nflamengo = Time(\"Flamengo\")\nflamengo.adicionar(ana)\nflamengo.adicionar(carlos)\n\n# Se o time for dissolvido, os jogadores continuam existindo\ndel flamengo\nprint(ana)  # Ana (Atacante) — ainda existe!\n```\n\n### Características da Agregação\n\n| Característica | Valor |\n|---|---|\n| Relação | \"tem um\" |\n| Ciclo de vida | Partes independentes do todo |\n| Criação das partes | Fora do objeto todo |\n| Destruição | Todo destruído ≠ partes destruídas |\n\n> **Dica:** se os objetos \"parte\" são criados fora do \"todo\" e passados para ele, provavelmente é agregação.\n",
+        "exercise": {
+          "question": "O que diferencia Agregação de Composição?",
+          "options": [
+            "Na agregação, as partes são criadas dentro do todo e destruídas junto com ele.",
+            "Na agregação, as partes existem independentemente do todo e podem ser reutilizadas por outros objetos.",
+            "Agregação usa herança, enquanto composição usa interfaces.",
+            "Não há diferença prática — são apenas nomes diferentes para o mesmo conceito."
+          ],
+          "correct": 1,
+          "explanation": "Correto! Na agregação, as partes têm vida própria — podem existir sem o todo e até pertencer a outros objetos ao mesmo tempo."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "2-9",
+        "title": "Relacionamentos — Composição",
+        "icon": "🧱",
+        "theory": "\n## Composição\n\n**Composição** é a relação mais forte — o objeto todo **cria suas partes** e elas **não existem sem ele**. Quando o todo é destruído, as partes vão junto.\n\n```python\nclass Comodo:\n    def __init__(self, nome, area_m2):\n        self.nome    = nome\n        self.area_m2 = area_m2\n\n    def __str__(self):\n        return f\"{self.nome} ({self.area_m2}m²)\"\n\nclass Casa:\n    def __init__(self, endereco):\n        self.endereco = endereco\n        # Cômodos criados DENTRO da Casa — composição\n        self.comodos = [\n            Comodo(\"Sala\",    30),\n            Comodo(\"Quarto\",  20),\n            Comodo(\"Cozinha\", 15),\n        ]\n\n    def area_total(self):\n        return sum(c.area_m2 for c in self.comodos)\n\n    def __str__(self):\n        lista = \"\\n  \".join(str(c) for c in self.comodos)\n        return f\"Casa em {self.endereco}:\\n  {lista}\\n  Total: {self.area_total()}m²\"\n\nminha_casa = Casa(\"Rua das Flores, 42\")\nprint(minha_casa)\n```\n\n### Composição com lógica de negócio\n\n```python\nclass Motor:\n    def __init__(self, cilindradas):\n        self.cilindradas = cilindradas\n        self.ligado = False\n\n    def ligar(self):\n        self.ligado = True\n\nclass Carro:\n    def __init__(self, modelo, cilindradas):\n        self.modelo = modelo\n        self.motor  = Motor(cilindradas)  # Motor criado dentro do Carro\n\n    def ligar(self):\n        self.motor.ligar()\n        return f\"{self.modelo} ligado com motor de {self.motor.cilindradas}cc.\"\n```\n\n### Resumo dos relacionamentos\n\n| | Associação | Agregação | Composição |\n|---|---|---|---|\n| Força | Fraca | Média | Forte |\n| \"Parte\" independente? | ✓ | ✓ | ✗ |\n| Quem cria a \"parte\"? | Externo | Externo | O próprio todo |\n| Destruição | Independente | Independente | Junto com o todo |\n",
+        "exercise": {
+          "question": "Em qual situação a Composição é o relacionamento mais adequado?",
+          "options": [
+            "Quando dois objetos se referenciam mas existem de forma totalmente independente.",
+            "Quando as partes de um objeto não fazem sentido fora dele e são criadas e destruídas junto com o todo.",
+            "Quando um objeto pode pertencer a múltiplos objetos 'todo' simultaneamente.",
+            "Quando a relação entre objetos é temporária e baseada em parâmetros de método."
+          ],
+          "correct": 1,
+          "explanation": "Correto! Composição é para partes que só existem no contexto do todo — como cômodos de uma casa ou órgãos de um corpo."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "2-10",
+        "title": "Resumo",
+        "icon": "📋",
+        "theory": "\n## Resumo — A sociedade dos objetos\n\nVocê dominou como objetos se comportam e se relacionam em sistemas reais.\n\n### Quadro geral\n\n| Conceito | Em uma linha |\n|---|---|\n| **Sobrescrita** | Subclasse redefine método da superclasse |\n| **Sobrecarga** | Método aceita diferentes formas de chamada |\n| **Interface** | Contrato puro — define o quê, não o como |\n| **Classe abstrata** | Contrato com implementação parcial compartilhada |\n| **Associação** | Objetos se usam, mas vivem de forma independente |\n| **Agregação** | \"Tem um\" — partes independentes do todo |\n| **Composição** | \"É composto de\" — partes não existem sem o todo |\n\n### Tudo junto em um sistema de e-commerce\n\n```python\nfrom abc import ABC, abstractmethod\n\nclass Pagamento(ABC):         # interface/contrato\n    @abstractmethod\n    def processar(self, valor): pass\n\nclass CartaoCredito(Pagamento):\n    def processar(self, valor):\n        return f\"💳 Cartão: R${valor:.2f} aprovado.\"\n\nclass Endereco:               # composição com Pedido\n    def __init__(self, rua, cidade):\n        self.rua    = rua\n        self.cidade = cidade\n\nclass Produto:                # agregação com Pedido\n    def __init__(self, nome, preco):\n        self.nome  = nome\n        self.preco = preco\n\nclass Pedido:\n    def __init__(self, rua, cidade):\n        self.endereco = Endereco(rua, cidade)  # composição\n        self.itens    = []                     # agregação\n\n    def adicionar(self, produto):\n        self.itens.append(produto)\n\n    def total(self):\n        return sum(p.preco for p in self.itens)\n\n    def finalizar(self, pagamento: Pagamento):  # associação\n        return pagamento.processar(self.total())\n\ncaneta  = Produto(\"Caneta\", 2.50)\ncaderno = Produto(\"Caderno\", 15.00)\n\npedido = Pedido(\"Rua A\", \"SP\")\npedido.adicionar(caneta)\npedido.adicionar(caderno)\n\nprint(pedido.finalizar(CartaoCredito()))\n```\n\n> Próximo nível: **engenharia e qualidade** — como escrever código que dura.\n",
+        "exercise": {
+          "question": "Em um sistema de biblioteca, livros existem antes e independente de uma coleção, e podem pertencer a várias coleções. Qual relacionamento modela isso?",
+          "options": [
+            "Composição, porque os livros fazem parte da coleção.",
+            "Associação, porque livros e coleções não têm nenhuma relação.",
+            "Agregação, porque os livros existem independentemente e podem pertencer a mais de uma coleção.",
+            "Herança, porque Livro herda comportamentos de Coleção."
+          ],
+          "correct": 2,
+          "explanation": "Correto! Livros existem independentemente e podem ser parte de múltiplas coleções — isso é agregação: relação 'tem um' sem controle do ciclo de vida."
+        },
+        "has_interativo": false
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Nível 4 — Arquitetura: a engenharia submarina",
+    "short": "Arquitetura",
+    "missoes": [
+      {
+        "id": "3-0",
+        "title": "Introdução ao nível",
+        "icon": "🏛️",
+        "theory": "\n## O arquiteto mestre — Engenharia e Qualidade\n\nVocê sabe criar objetos, aplicar os pilares e modelar relações. Agora é hora de pensar como um **arquiteto de software** — alguém que projeta sistemas que resistem ao tempo.\n\nCódigo que funciona hoje, mas que ninguém consegue manter amanhã, não é bom código. Este nível trata de princípios e ferramentas que tornam sistemas **sustentáveis**.\n\n### O que você vai aprender\n\n| Conceito | O que resolve |\n|---|---|\n| **Coesão** | Cada classe faz uma coisa só — e bem |\n| **Acoplamento** | Reduzir dependências entre partes do sistema |\n| **SOLID** | 5 princípios para design orientado a objetos de qualidade |\n| **Generics** | Código que funciona com qualquer tipo com segurança |\n| **Design Patterns** | Soluções consagradas para problemas recorrentes |\n\n### A metáfora do arquiteto\n\nUm bom arquiteto não apenas empilha tijolos — ele projeta estruturas que:\n- São fáceis de **modificar** sem derrubar tudo\n- Podem **crescer** sem se tornarem caóticas\n- São **compreensíveis** por qualquer pessoa da equipe\n\n> Esses princípios são o que diferencia desenvolvedores juniores de sêniores.\n",
+        "exercise": {
+          "question": "O que caracteriza um sistema com boa qualidade de design em POO?",
+          "options": [
+            "Ter o maior número possível de classes e métodos.",
+            "Ser fácil de modificar, crescer e entender sem quebrar partes não relacionadas.",
+            "Usar sempre todos os 4 pilares da POO em cada classe.",
+            "Evitar o uso de herança e composição para reduzir complexidade."
+          ],
+          "correct": 1,
+          "explanation": "Correto! Um bom design é aquele que permite evolução sem colapso — modificável, extensível e compreensível."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "3-1",
+        "title": "Coesão",
+        "icon": "🎯",
+        "theory": "\n## Coesão\n\n**Coesão** mede o quanto os elementos de uma classe estão relacionados entre si. Alta coesão significa que a classe tem **um único propósito bem definido**.\n\n### Baixa coesão — o problema\n\n```python\n# Classe faz demais — baixa coesão\nclass Usuario:\n    def __init__(self, nome, email):\n        self.nome  = nome\n        self.email = email\n\n    def salvar_no_banco(self): ...       # responsabilidade de banco\n    def enviar_email_boas_vindas(self): ...  # responsabilidade de email\n    def gerar_relatorio_pdf(self): ...   # responsabilidade de relatório\n    def validar_cpf(self): ...           # responsabilidade de validação\n```\n\nQuando qualquer coisa mudar (banco, email, PDF), você mexe em `Usuario` — arriscando quebrar as outras funcionalidades.\n\n### Alta coesão — a solução\n\n```python\nclass Usuario:\n    def __init__(self, nome, email):\n        self.nome  = nome\n        self.email = email\n\nclass RepositorioUsuario:\n    def salvar(self, usuario: Usuario): ...\n\nclass ServicoEmail:\n    def boas_vindas(self, usuario: Usuario): ...\n\nclass ValidadorCPF:\n    def validar(self, cpf: str) -> bool: ...\n```\n\nAgora cada classe tem **uma razão para mudar**. Isso é o princípio SRP (Single Responsibility) do SOLID.\n\n### Como medir coesão?\n\nFaça a pergunta: **\"O que esta classe faz?\"**\n- Se a resposta tem muitos \"e também...\" → baixa coesão\n- Se a resposta é uma frase curta e precisa → alta coesão\n\n| Sinal | Coesão |\n|---|---|\n| Métodos usam os mesmos atributos | Alta |\n| Métodos ignoram atributos da classe | Baixa |\n| Classe difícil de nomear | Baixa |\n",
+        "exercise": {
+          "question": "Como identificar que uma classe tem **baixa coesão**?",
+          "options": [
+            "A classe tem poucos métodos e atributos.",
+            "A classe é difícil de nomear e seus métodos têm responsabilidades não relacionadas entre si.",
+            "A classe herda de mais de uma superclasse.",
+            "A classe usa muitas outras classes do sistema."
+          ],
+          "correct": 1,
+          "explanation": "Correto! Baixa coesão se manifesta quando a classe acumula responsabilidades diferentes — o que a torna difícil de nomear, testar e manter."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "3-2",
+        "title": "Acoplamento",
+        "icon": "🔓",
+        "theory": "\n## Acoplamento\n\n**Acoplamento** mede o grau de dependência entre classes. **Alto acoplamento** significa que mudanças em uma classe forçam mudanças em outras — o sistema vira uma \"bola de neve\".\n\n### Alto acoplamento — o problema\n\n```python\nclass Pedido:\n    def finalizar(self):\n        db = MySQLConexao(\"localhost\", \"root\", \"senha\")  # dependência direta\n        db.salvar(self)\n        smtp = SMTPEmailSender(\"smtp.gmail.com\", 587)    # dependência direta\n        smtp.enviar(\"Pedido confirmado!\")\n```\n\n`Pedido` conhece detalhes de banco e email. Trocar MySQL por PostgreSQL exige mexer em `Pedido`.\n\n### Baixo acoplamento — a solução (Injeção de Dependência)\n\n```python\nfrom abc import ABC, abstractmethod\n\nclass Repositorio(ABC):\n    @abstractmethod\n    def salvar(self, pedido): pass\n\nclass Notificador(ABC):\n    @abstractmethod\n    def enviar(self, msg: str): pass\n\nclass Pedido:\n    def __init__(self, repo: Repositorio, notif: Notificador):\n        self.repo  = repo   # recebe dependência de fora\n        self.notif = notif\n\n    def finalizar(self):\n        self.repo.salvar(self)\n        self.notif.enviar(\"Pedido confirmado!\")\n\n# Trocar implementações sem tocar em Pedido:\nclass MySQLRepositorio(Repositorio):\n    def salvar(self, pedido): ...\n\nclass EmailNotificador(Notificador):\n    def enviar(self, msg): ...\n\npedido = Pedido(MySQLRepositorio(), EmailNotificador())\npedido.finalizar()\n```\n\n### Coesão x Acoplamento\n\n| | Alta Coesão | Baixo Acoplamento |\n|---|---|---|\n| Foco | Dentro da classe | Entre classes |\n| Meta | Classe com propósito único | Classes com poucas dependências |\n| Benefício | Fácil de manter | Fácil de trocar partes |\n\n> O objetivo é sempre: **alta coesão + baixo acoplamento**.\n",
+        "exercise": {
+          "question": "O que é Injeção de Dependência e como ela reduz o acoplamento?",
+          "options": [
+            "É uma técnica de herança que injeta métodos de uma classe em outra automaticamente.",
+            "É passar as dependências de uma classe de fora para dentro (via construtor ou método), em vez de criá-las internamente.",
+            "É um padrão que aumenta o acoplamento para garantir mais controle sobre as dependências.",
+            "É injetar código diretamente no banco de dados para reduzir chamadas externas."
+          ],
+          "correct": 1,
+          "explanation": "Correto! Injeção de dependência desacopla a classe de suas implementações concretas — ela recebe o que precisa de fora, facilitando troca e testes."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "3-3",
+        "title": "SOLID",
+        "icon": "🪨",
+        "theory": "\n## SOLID\n\n**SOLID** é um acrônimo com 5 princípios de design orientado a objetos, definidos por Robert C. Martin. São guias para código limpo, manutenível e extensível.\n\n| Letra | Princípio | Em uma linha |\n|---|---|---|\n| **S** | Single Responsibility | Uma classe, uma razão para mudar |\n| **O** | Open/Closed | Aberta para extensão, fechada para modificação |\n| **L** | Liskov Substitution | Subclasses devem poder substituir a superclasse |\n| **I** | Interface Segregation | Interfaces específicas > uma interface genérica |\n| **D** | Dependency Inversion | Dependa de abstrações, não de implementações |\n\n### S — Single Responsibility\n\n```python\n# Ruim: duas responsabilidades\nclass Relatorio:\n    def calcular(self): ...\n    def salvar_pdf(self): ...\n\n# Bom: separadas\nclass CalculadoraRelatorio:\n    def calcular(self): ...\n\nclass ExportadorPDF:\n    def salvar(self, relatorio): ...\n```\n\n### O — Open/Closed\n\n```python\n# Extensível sem modificar o código existente\nclass Desconto(ABC):\n    @abstractmethod\n    def aplicar(self, preco): pass\n\nclass DescontoVIP(Desconto):\n    def aplicar(self, preco): return preco * 0.8\n\nclass DescontoEstudante(Desconto):\n    def aplicar(self, preco): return preco * 0.9\n```\n\n### L — Liskov Substitution\n\n```python\n# Subclasse deve funcionar onde a superclasse é esperada\ndef calcular_area(forma: Forma) -> float:\n    return forma.area()  # funciona com Circulo, Retangulo, etc.\n```\n\n### I — Interface Segregation\n\n```python\n# Ruim: interface geral demais\nclass Trabalhador(ABC):\n    @abstractmethod\n    def trabalhar(self): pass\n    @abstractmethod\n    def comer(self): pass  # robôs não comem!\n\n# Bom: interfaces específicas\nclass Trabalhavel(ABC):\n    @abstractmethod\n    def trabalhar(self): pass\n\nclass Alimentavel(ABC):\n    @abstractmethod\n    def comer(self): pass\n```\n\n### D — Dependency Inversion\n\n```python\n# Dependa da abstração (Repositorio), não da implementação (MySQL)\nclass Servico:\n    def __init__(self, repo: Repositorio):  # abstração\n        self.repo = repo\n```\n",
+        "exercise": {
+          "question": "O princípio **Open/Closed** diz que classes devem ser:",
+          "options": [
+            "Abertas para modificação e fechadas para extensão.",
+            "Abertas para extensão (novos comportamentos via subclasses) e fechadas para modificação do código existente.",
+            "Abertas apenas para herança múltipla e fechadas para composição.",
+            "Fechadas para qualquer tipo de mudança após a primeira versão."
+          ],
+          "correct": 1,
+          "explanation": "Correto! Open/Closed significa que você adiciona funcionalidade criando novas classes (extensão), sem modificar as existentes — protegendo o que já funciona."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "3-4",
+        "title": "Generics",
+        "icon": "🧪",
+        "theory": "\n## Generics\n\n**Generics** (ou tipos genéricos) permitem criar classes e funções que funcionam com **qualquer tipo**, mantendo segurança de tipos verificável por ferramentas como `mypy`.\n\nEm Python, usamos o módulo `typing`.\n\n### O problema sem generics\n\n```python\nclass Pilha:\n    def __init__(self):\n        self._itens = []\n\n    def empilhar(self, item):\n        self._itens.append(item)\n\n    def desempilhar(self):\n        return self._itens.pop()\n\np = Pilha()\np.empilhar(42)\np.empilhar(\"oops\")  # mistura de tipos — sem aviso!\n```\n\n### Com Generics\n\n```python\nfrom typing import Generic, TypeVar\n\nT = TypeVar(\"T\")  # T representa qualquer tipo\n\nclass Pilha(Generic[T]):\n    def __init__(self):\n        self._itens: list[T] = []\n\n    def empilhar(self, item: T) -> None:\n        self._itens.append(item)\n\n    def desempilhar(self) -> T:\n        return self._itens.pop()\n\n    def topo(self) -> T:\n        return self._itens[-1]\n\n# Pilha de inteiros\np_int: Pilha[int] = Pilha()\np_int.empilhar(1)\np_int.empilhar(2)\nprint(p_int.desempilhar())  # 2\n\n# Pilha de strings\np_str: Pilha[str] = Pilha()\np_str.empilhar(\"ola\")\np_str.empilhar(\"mundo\")\nprint(p_str.topo())  # mundo\n```\n\n### Funções genéricas\n\n```python\nfrom typing import TypeVar, Sequence\n\nT = TypeVar(\"T\")\n\ndef primeiro(sequencia: Sequence[T]) -> T:\n    return sequencia[0]\n\nprint(primeiro([1, 2, 3]))       # 1\nprint(primeiro([\"a\", \"b\", \"c\"])) # a\n```\n\n### Benefícios dos Generics\n\n| Benefício | Descrição |\n|---|---|\n| Reuso | Uma implementação para qualquer tipo |\n| Segurança | Erros de tipo detectados antes de rodar |\n| Documentação | O tipo comunica a intenção da classe |\n",
+        "exercise": {
+          "question": "Qual o principal benefício de usar Generics em vez de usar o tipo `object` (ou nenhum tipo)?",
+          "options": [
+            "Generics fazem o código rodar mais rápido em tempo de execução.",
+            "Generics permitem reutilizar a implementação para qualquer tipo com segurança — ferramentas detectam inconsistências antes de rodar o código.",
+            "Generics eliminam a necessidade de testes unitários.",
+            "Generics só funcionam com tipos primitivos como int e str."
+          ],
+          "correct": 1,
+          "explanation": "Correto! Generics combinam reuso (mesma implementação para qualquer tipo) com segurança (erros detectados estaticamente pelo type checker)."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "3-5",
+        "title": "Design Patterns",
+        "icon": "🗺️",
+        "theory": "\n## Design Patterns\n\n**Design Patterns** (Padrões de Projeto) são soluções consagradas para problemas recorrentes em design de software. Foram catalogados por Erich Gamma et al. no livro \"Design Patterns\" (Gang of Four).\n\nNão são código pronto — são **modelos de solução** adaptáveis ao contexto.\n\n### As 3 categorias\n\n| Categoria | Foco | Exemplos |\n|---|---|---|\n| **Criacionais** | Como objetos são criados | Factory, Singleton, Builder |\n| **Estruturais** | Como classes se organizam | Adapter, Decorator, Facade |\n| **Comportamentais** | Como objetos se comunicam | Strategy, Observer, Command |\n\n---\n\n### Strategy — comportamento intercambiável\n\n```python\nfrom abc import ABC, abstractmethod\n\nclass EstrategiaOrdenacao(ABC):\n    @abstractmethod\n    def ordenar(self, dados: list) -> list: pass\n\nclass BubbleSort(EstrategiaOrdenacao):\n    def ordenar(self, dados):\n        d = dados[:]\n        for i in range(len(d)):\n            for j in range(len(d) - i - 1):\n                if d[j] > d[j+1]:\n                    d[j], d[j+1] = d[j+1], d[j]\n        return d\n\nclass PythonSort(EstrategiaOrdenacao):\n    def ordenar(self, dados):\n        return sorted(dados)\n\nclass Processador:\n    def __init__(self, estrategia: EstrategiaOrdenacao):\n        self._estrategia = estrategia\n\n    def processar(self, dados):\n        return self._estrategia.ordenar(dados)\n\np = Processador(PythonSort())\nprint(p.processar([3, 1, 4, 1, 5]))  # [1, 1, 3, 4, 5]\n```\n\n---\n\n### Observer — notificação de eventos\n\n```python\nclass EventoEstoque:\n    def __init__(self):\n        self._observadores = []\n\n    def assinar(self, obs):\n        self._observadores.append(obs)\n\n    def notificar(self, produto, quantidade):\n        for obs in self._observadores:\n            obs.atualizar(produto, quantidade)\n\nclass AlertaEmail:\n    def atualizar(self, produto, qtd):\n        print(f\"📧 Email: {produto} — restam {qtd} unidades.\")\n\nclass AlertaSMS:\n    def atualizar(self, produto, qtd):\n        print(f\"📱 SMS: Estoque baixo de {produto}!\")\n\nevento = EventoEstoque()\nevento.assinar(AlertaEmail())\nevento.assinar(AlertaSMS())\nevento.notificar(\"Caneta\", 3)\n```\n\n---\n\n### Factory — criação centralizada\n\n```python\nclass ConexaoBanco(ABC):\n    @abstractmethod\n    def conectar(self): pass\n\nclass MySQL(ConexaoBanco):\n    def conectar(self): return \"Conectado ao MySQL\"\n\nclass PostgreSQL(ConexaoBanco):\n    def conectar(self): return \"Conectado ao PostgreSQL\"\n\ndef fabrica_banco(tipo: str) -> ConexaoBanco:\n    bancos = {\"mysql\": MySQL, \"postgres\": PostgreSQL}\n    return bancos[tipo]()\n\ndb = fabrica_banco(\"postgres\")\nprint(db.conectar())\n```\n",
+        "exercise": {
+          "question": "O padrão **Strategy** é mais adequado quando:",
+          "options": [
+            "Você precisa garantir que uma classe tenha apenas uma instância no sistema.",
+            "Você quer poder trocar o algoritmo ou comportamento de um objeto em tempo de execução sem alterar o código que o usa.",
+            "Você precisa notificar múltiplos objetos quando o estado de outro muda.",
+            "Você quer criar objetos complexos passo a passo."
+          ],
+          "correct": 1,
+          "explanation": "Correto! Strategy encapsula algoritmos intercambiáveis — o objeto que os usa não precisa saber qual estratégia está ativa, apenas chamá-la."
+        },
+        "has_interativo": false
+      },
+      {
+        "id": "3-6",
+        "title": "Resumo",
+        "icon": "📋",
+        "theory": "\n## Resumo — O arquiteto mestre\n\nParabéns! Você concluiu a trilha completa de Orientação a Objetos.\n\n### O que você domina agora\n\n| Nível | Conquista |\n|---|---|\n| **Fundamentos** | Criar classes, objetos, métodos e construtores |\n| **Pilares** | Aplicar abstração, encapsulamento, herança e polimorfismo |\n| **Relações** | Modelar sistemas com sobrescrita, contratos e relacionamentos |\n| **Arquitetura** | Projetar com coesão, baixo acoplamento, SOLID, generics e patterns |\n\n### O checklist do arquiteto\n\nAo projetar uma classe, pergunte-se:\n\n- [ ] **Coesão** — esta classe tem um propósito único?\n- [ ] **Acoplamento** — ela depende de abstrações, não de implementações?\n- [ ] **SRP** — há apenas uma razão para ela mudar?\n- [ ] **OCP** — posso estendê-la sem modificar o código existente?\n- [ ] **LSP** — as subclasses respeitam o contrato da superclasse?\n- [ ] **ISP** — as interfaces são específicas o suficiente?\n- [ ] **DIP** — as dependências são injetadas, não criadas internamente?\n\n### O caminho não para aqui\n\nDesign de software é uma habilidade que se aprofunda com prática. Os próximos passos naturais são:\n\n- **Clean Architecture** — organização de sistemas em camadas\n- **Domain-Driven Design** — modelagem centrada no domínio do negócio\n- **Test-Driven Development** — design guiado por testes\n\n> *\"Qualquer tolo pode escrever código que um computador entende. Bons programadores escrevem código que humanos entendem.\"* — Martin Fowler\n",
+        "exercise": {
+          "question": "Qual combinação representa o objetivo central do nível de arquitetura?",
+          "options": [
+            "Máximo de classes possível + mínimo de métodos por classe.",
+            "Alta coesão + baixo acoplamento + princípios SOLID.",
+            "Usar todos os design patterns disponíveis em cada projeto.",
+            "Evitar generics e abstrações para manter o código simples."
+          ],
+          "correct": 1,
+          "explanation": "Exato! Alta coesão (propósito único por classe) + baixo acoplamento (dependências via abstração) + SOLID é a fórmula do design orientado a objetos de qualidade."
+        },
+        "has_interativo": false
+      }
+    ]
+  }
+]

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: transparent; font-family: 'Segoe UI', sans-serif; color: #e2e8f0; }
+
+.container { height: 468px; position: relative; overflow: hidden; }
+
+/* ── Stage shell ── */
+.stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 16px 12px;
+  transition: opacity .35s, transform .35s;
+}
+.stage.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-24px);
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.stage.enter { animation: slideIn .35s forwards; }
+
+/* ── Header ── */
+.hd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.hd-title {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 700;
+  color: #64748b;
+}
+.dots { display: flex; gap: 6px; }
+.dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #2d2d44;
+  transition: background .3s;
+}
+.dot.on { background: #7c3aed; }
+
+/* ════════════════════════════════
+   STAGE 1 — Compare
+   ════════════════════════════════ */
+.compare {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+}
+
+.panel {
+  flex: 1;
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.panel.proc {
+  background: #180e1f;
+  border: 1px solid #4a1c42;
+}
+.panel.oop {
+  background: #0b1628;
+  border: 1px solid #1c3561;
+}
+
+.panel-lbl {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.proc .panel-lbl { color: #f87171; }
+.oop  .panel-lbl { color: #60a5fa; }
+
+/* procedural lines */
+.code-lines { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.cl {
+  background: #2a1530;
+  border: 1px solid #5b2155;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: #fda4af;
+  opacity: 0;
+  animation: lineIn .4s forwards;
+}
+@keyframes lineIn {
+  from { opacity:0; transform:translateX(-8px); }
+  to   { opacity:1; transform:translateX(0); }
+}
+.cl .kw { color: #f472b6; }
+.cl .fn { color: #fbbf24; }
+.cl .p  { color: #94a3b8; }
+
+.panel-note {
+  font-size: 10px;
+  line-height: 1.5;
+  margin-top: 10px;
+  text-align: center;
+}
+.proc .panel-note { color: #5c2e4e; }
+.proc .panel-note strong { color: #f87171; }
+.oop  .panel-note { color: #1a3560; }
+.oop  .panel-note strong { color: #60a5fa; }
+
+/* OOP object card */
+.obj-card {
+  background: #08111f;
+  border: 1px solid #2d3a8c;
+  border-radius: 8px;
+  padding: 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 11.5px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.obj-head { color: #c4b5fd; font-weight: bold; margin-bottom: 7px; }
+.obj-head .cls { color: #7c3aed; }
+.oa {
+  padding-left: 10px;
+  color: #7dd3fc;
+  line-height: 1.9;
+  opacity: 0;
+  animation: fadeUp .4s forwards;
+}
+.oa .v { color: #34d399; }
+.obj-sep { border: none; border-top: 1px solid #1e2d55; margin: 6px 0; }
+.om {
+  padding-left: 10px;
+  color: #a78bfa;
+  line-height: 1.9;
+  opacity: 0;
+  animation: fadeUp .4s forwards;
+}
+.om::before { content: "def "; color: #818cf8; }
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(5px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* VS */
+.vs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  flex-shrink: 0;
+}
+.vs span {
+  font-size: 10px;
+  font-weight: 800;
+  color: #2d2d44;
+  writing-mode: vertical-rl;
+  letter-spacing: .15em;
+}
+
+/* ════════════════════════════════
+   STAGE 2 — Drag & Drop
+   ════════════════════════════════ */
+.pool {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  justify-content: center;
+  margin-bottom: 10px;
+  min-height: 70px;
+  align-content: flex-start;
+}
+
+.card {
+  background: #1e1e35;
+  border: 1px solid #3d3d5e;
+  border-radius: 7px;
+  padding: 5px 11px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: #e2e8f0;
+  cursor: grab;
+  user-select: none;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+.card:hover:not(.correct) {
+  border-color: #7c3aed;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(124,58,237,.3);
+}
+.card.dragging { opacity: .35; }
+.card.correct {
+  border-color: #10b981;
+  background: #052e16;
+  color: #6ee7b7;
+  cursor: default;
+  animation: pop .3s;
+}
+.card.wrong { animation: shake .35s; }
+@keyframes pop   { 0%,100%{transform:scale(1)} 50%{transform:scale(1.09)} }
+@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+
+.card .kw  { color: #818cf8; }
+.card .str { color: #34d399; }
+.card .fn  { color: #7dd3fc; }
+.card .obj { color: #c4b5fd; }
+.card .cls { color: #7c3aed; }
+
+.zones {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+}
+.zone {
+  flex: 1;
+  border-radius: 10px;
+  border: 2px dashed #2d2d44;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color .2s, background .2s;
+  min-height: 100px;
+}
+.zone.over {
+  border-color: #7c3aed;
+  background: rgba(124,58,237,.05);
+}
+.zone-lbl {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 2px;
+}
+.zone.proc .zone-lbl { color: #f87171; }
+.zone.oop  .zone-lbl { color: #60a5fa; }
+.zone-hint {
+  font-size: 10px;
+  color: #2d2d44;
+  text-align: center;
+  margin: auto;
+}
+
+/* score + success */
+.score-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+.pip {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: #1e1e35;
+  border: 1px solid #2d2d44;
+  transition: all .3s;
+}
+.pip.on { background: #10b981; border-color: #059669; box-shadow: 0 0 6px rgba(16,185,129,.4); }
+
+.success {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #34d399;
+  opacity: 0;
+  transition: opacity .5s;
+  margin-top: 4px;
+  height: 18px;
+}
+.success.show { opacity: 1; }
+
+/* shared button */
+.btn {
+  align-self: flex-end;
+  margin-top: 8px;
+  background: linear-gradient(135deg,#7c3aed,#5b21b6);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: .03em;
+  transition: all .2s;
+}
+.btn:hover {
+  background: linear-gradient(135deg,#8b5cf6,#7c3aed);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(124,58,237,.45);
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- ══ Stage 1 ══ -->
+<div class="stage" id="s1">
+  <div class="hd">
+    <span class="hd-title">Observe a diferença</span>
+    <div class="dots"><div class="dot on"></div><div class="dot"></div></div>
+  </div>
+
+  <div class="compare" style="flex:1">
+
+    <!-- Procedural -->
+    <div class="panel proc">
+      <div class="panel-lbl">Pensamento Procedural</div>
+      <div class="code-lines">
+        <div class="cl" style="animation-delay:.15s">
+          <span class="kw">def </span><span class="fn">mover_tentáculo</span>(<span class="p">polvo, dir</span>):
+        </div>
+        <div class="cl" style="animation-delay:.5s">
+          <span class="kw">def </span><span class="fn">verificar_prof</span>(<span class="p">dados</span>):
+        </div>
+        <div class="cl" style="animation-delay:.85s">
+          <span class="kw">def </span><span class="fn">soltar_tinta</span>(<span class="p">polvo, qtd</span>):
+        </div>
+        <div class="cl" style="animation-delay:1.2s">
+          <span class="kw">def </span><span class="fn">mudar_cor</span>(<span class="p">polvo, cor</span>):
+        </div>
+      </div>
+      <div class="panel-note">Funções soltas operando sobre <strong>dados externos</strong></div>
+    </div>
+
+    <div class="vs"><span>VS</span></div>
+
+    <!-- OOP -->
+    <div class="panel oop">
+      <div class="panel-lbl">Pensamento em Objetos</div>
+      <div class="obj-card">
+        <div class="obj-head">🐙 polvo = <span class="cls">Polvo</span>()</div>
+        <div class="oa" style="animation-delay:.35s">nome = <span class="v">"Olly"</span></div>
+        <div class="oa" style="animation-delay:.6s">cor&nbsp; = <span class="v">"roxo"</span></div>
+        <hr class="obj-sep">
+        <div class="om" style="animation-delay:.85s">nadar(dir)</div>
+        <div class="om" style="animation-delay:1.05s">soltar_tinta(qtd)</div>
+        <div class="om" style="animation-delay:1.25s">mudar_cor(cor)</div>
+      </div>
+      <div class="panel-note">Dados e comportamentos <strong>encapsulados</strong> no objeto</div>
+    </div>
+
+  </div>
+
+  <button class="btn" onclick="go2()">Próxima etapa →</button>
+</div>
+
+<!-- ══ Stage 2 ══ -->
+<div class="stage hidden" id="s2">
+  <div class="hd">
+    <span class="hd-title">Classifique os trechos</span>
+    <div class="dots"><div class="dot"></div><div class="dot on"></div></div>
+  </div>
+
+  <div class="pool" id="pool"></div>
+
+  <div class="zones" style="flex:1">
+    <div class="zone proc" id="zp"
+         ondragover="ov(event,'zp')" ondragleave="ol('zp')" ondrop="od(event,'proc')">
+      <div class="zone-lbl">🔢 Procedural</div>
+      <div class="zone-hint">arraste aqui</div>
+    </div>
+    <div class="zone oop" id="zo"
+         ondragover="ov(event,'zo')" ondragleave="ol('zo')" ondrop="od(event,'oop')">
+      <div class="zone-lbl">🐙 Objeto</div>
+      <div class="zone-hint">arraste aqui</div>
+    </div>
+  </div>
+
+  <div class="score-row" id="pips"></div>
+  <div class="success" id="win">Perfeito! Você entende a diferença! 🎉</div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+/* Stage transition */
+function go2() {
+  const s1 = document.getElementById('s1');
+  const s2 = document.getElementById('s2');
+  s1.classList.add('hidden');
+  s2.classList.remove('hidden');
+  s2.classList.add('enter');
+  setTimeout(() => s2.classList.remove('enter'), 400);
+}
+
+/* Cards */
+const DATA = [
+  { id:'p1', html:'<span class="kw">def </span><span class="fn">mover</span>(polvo, dir)',    type:'proc' },
+  { id:'p2', html:'nome_polvo = <span class="str">"Olly"</span>',                            type:'proc' },
+  { id:'p3', html:'<span class="fn">soltar_tinta</span>(dados, 10)',                         type:'proc' },
+  { id:'p4', html:'passo1(); passo2(); passo3()',                                            type:'proc' },
+  { id:'o1', html:'<span class="obj">polvo</span>.nadar(dir)',                               type:'oop'  },
+  { id:'o2', html:'<span class="obj">polvo</span>.cor = <span class="str">"azul"</span>',    type:'oop'  },
+  { id:'o3', html:'<span class="obj">polvo</span>.soltar_tinta(10)',                         type:'oop'  },
+  { id:'o4', html:'polvo = <span class="cls">Polvo</span>(<span class="str">"Olly"</span>)', type:'oop'  },
+];
+
+function shuffle(a) { return a.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(v=>v[1]); }
+
+let dragging = null, correct = 0;
+const total = DATA.length;
+
+/* build pool */
+const pool = document.getElementById('pool');
+shuffle(DATA).forEach(c => {
+  const el = document.createElement('div');
+  el.className = 'card';
+  el.id = c.id;
+  el.dataset.type = c.type;
+  el.innerHTML = c.html;
+  el.draggable = true;
+  el.ondragstart = () => { dragging = c.id; setTimeout(()=>el.classList.add('dragging'),0); };
+  el.ondragend   = () => el.classList.remove('dragging');
+  pool.appendChild(el);
+});
+
+/* score pips */
+const pips = document.getElementById('pips');
+for (let i = 0; i < total; i++) {
+  const p = document.createElement('div');
+  p.className = 'pip'; p.id = 'pip'+i;
+  pips.appendChild(p);
+}
+
+/* drop handlers */
+function ov(e, zid) { e.preventDefault(); document.getElementById(zid).classList.add('over'); }
+function ol(zid)    { document.getElementById(zid).classList.remove('over'); }
+
+function od(e, zone) {
+  e.preventDefault();
+  ol(zone === 'proc' ? 'zp' : 'zo');
+  if (!dragging) return;
+  const el = document.getElementById(dragging);
+  dragging = null;
+  if (!el || el.classList.contains('correct')) return;
+
+  if (el.dataset.type === zone) {
+    el.classList.add('correct');
+    el.draggable = false;
+    const zEl = document.getElementById(zone === 'proc' ? 'zp' : 'zo');
+    const hint = zEl.querySelector('.zone-hint');
+    if (hint) hint.remove();
+    zEl.appendChild(el);
+    document.getElementById('pip' + correct).classList.add('on');
+    correct++;
+    if (correct === total) document.getElementById('win').classList.add('show');
+  } else {
+    el.classList.add('wrong');
+    setTimeout(() => el.classList.remove('wrong'), 400);
+  }
+}
+</script>
+</body>
+</html>
