@@ -1,7 +1,204 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
+import ReactMarkdown from 'react-markdown';
+import curriculum from '../data/curriculum.json';
+import type { Nivel } from '../data/curriculum';
+import { useProgress } from '../hooks/useProgress';
+import interativoHtml from '../assets/interativos/nivel_1_missao_1.html?raw';
+
+const niveis = curriculum as Nivel[];
+
+const interativos: Record<string, string> = {
+  'interativos/nivel_1_missao_1.html': interativoHtml,
+};
 
 const Missao: React.FC = () => {
-  return <div>Missão — em construção</div>;
+  const { nivelIdx, missaoIdx } = useParams<{ nivelIdx: string; missaoIdx: string }>();
+  const navigate = useNavigate();
+  const { completarMissao, isMissaoConcluida } = useProgress();
+
+  const [selecionada, setSelecionada] = useState<number | null>(null);
+  const [respondida, setRespondida] = useState(false);
+
+  const nivel = niveis.find(n => n.id === Number(nivelIdx));
+  const missao = nivel?.missoes[Number(missaoIdx)];
+
+  if (!nivel || !missao) {
+    return (
+      <div className="app-wrapper max-w-3xl mx-auto pt-28 pb-12 px-5">
+        <p className="text-textSecondary">Missão não encontrada.</p>
+        <Link to="/trilha" className="text-accent hover:underline mt-4 inline-block">
+          ← Voltar à trilha
+        </Link>
+      </div>
+    );
+  }
+
+  const missaoIdxNum = Number(missaoIdx);
+  const proximaMissao = (() => {
+    if (missaoIdxNum < nivel.missoes.length - 1) {
+      return `/missao/${nivel.id}/${missaoIdxNum + 1}`;
+    }
+    const proximoNivel = niveis.find(n => n.id === nivel.id + 1);
+    if (proximoNivel) return `/missao/${proximoNivel.id}/0`;
+    return null;
+  })();
+
+  const jaConcluida = isMissaoConcluida(missao.id);
+  const acertou = selecionada === missao.exercise.correct;
+
+  const handleSubmit = () => {
+    if (selecionada === null) return;
+    setRespondida(true);
+    if (acertou) completarMissao(missao.id);
+  };
+
+  return (
+    <div className="app-wrapper max-w-3xl mx-auto pt-28 pb-16 px-5">
+
+      {/* Navegação */}
+      <div className="flex items-center justify-between mb-8">
+        <Link
+          to="/trilha"
+          className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+        >
+          <ArrowLeftIcon className="w-4 h-4" />
+          Voltar à trilha
+        </Link>
+        {jaConcluida && (
+          <span className="text-xs text-accent font-medium">✓ Missão concluída</span>
+        )}
+      </div>
+
+      {/* Título */}
+      <header className="mb-8">
+        <p className="text-textSecondary text-sm mb-1">{nivel.title}</p>
+        <h1 className="text-2xl font-bold text-textPrimary">
+          {missao.icon} {missao.title}
+        </h1>
+      </header>
+
+      {/* Teoria */}
+      <section className="mb-8 prose prose-invert max-w-none
+        prose-headings:text-textPrimary prose-headings:font-bold
+        prose-p:text-textSecondary prose-p:leading-relaxed
+        prose-strong:text-textPrimary
+        prose-code:text-accent prose-code:bg-bgSecondary prose-code:px-1 prose-code:rounded
+        prose-pre:bg-bgSecondary prose-pre:border prose-pre:border-borderDark prose-pre:rounded-lg
+        prose-blockquote:border-l-accent prose-blockquote:text-textSecondary
+        prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary
+        prose-li:text-textSecondary">
+        <ReactMarkdown>{missao.theory}</ReactMarkdown>
+      </section>
+
+      {/* Mini-jogo */}
+      {missao.has_interativo && missao.interativo_html && interativos[missao.interativo_html] && (
+        <section className="mb-8">
+          <h2 className="text-lg font-semibold text-textPrimary mb-3">Mini-jogo interativo</h2>
+          <div className="rounded-lg overflow-hidden border border-borderDark">
+            <iframe
+              srcDoc={interativos[missao.interativo_html]}
+              title="Mini-jogo interativo"
+              className="w-full"
+              style={{ height: '400px', border: 'none' }}
+              sandbox="allow-scripts"
+            />
+          </div>
+        </section>
+      )}
+
+      {/* Exercício */}
+      <section className="bg-bgSecondary border border-borderDark rounded-xl p-6">
+        <h2 className="text-lg font-semibold text-textPrimary mb-4">Exercício</h2>
+        <p className="text-textPrimary mb-5">{missao.exercise.question}</p>
+
+        <fieldset className="space-y-3">
+          <legend className="sr-only">Opções de resposta</legend>
+          {missao.exercise.options.map((opcao, i) => {
+            let estilo = 'border-borderDark';
+            if (respondida) {
+              if (i === missao.exercise.correct) estilo = 'border-green-500 bg-green-500/10';
+              else if (i === selecionada) estilo = 'border-red-500 bg-red-500/10';
+            } else if (i === selecionada) {
+              estilo = 'border-accent bg-accent/10';
+            }
+
+            return (
+              <label
+                key={i}
+                className={`flex items-start gap-3 p-4 rounded-lg border cursor-pointer transition-colors ${estilo} ${respondida ? 'cursor-default' : 'hover:border-accent/50'}`}
+              >
+                <input
+                  type="radio"
+                  name="exercicio"
+                  value={i}
+                  checked={selecionada === i}
+                  disabled={respondida}
+                  onChange={() => setSelecionada(i)}
+                  className="mt-0.5 accent-accent"
+                />
+                <span className="text-textPrimary text-sm">{opcao}</span>
+              </label>
+            );
+          })}
+        </fieldset>
+
+        {/* Feedback */}
+        {respondida && (
+          <div className={`mt-5 p-4 rounded-lg border ${acertou ? 'bg-green-500/10 border-green-500' : 'bg-red-500/10 border-red-500'}`}>
+            <p className={`font-semibold mb-1 ${acertou ? 'text-green-400' : 'text-red-400'}`}>
+              {acertou ? '✓ Correto!' : '✗ Não foi dessa vez.'}
+            </p>
+            <p className="text-textSecondary text-sm">{missao.exercise.explanation}</p>
+          </div>
+        )}
+
+        {/* Botões */}
+        <div className="mt-5 flex items-center gap-3">
+          {!respondida ? (
+            <button
+              onClick={handleSubmit}
+              disabled={selecionada === null}
+              className="hero-cta px-5 py-2 rounded-lg font-semibold disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              Responder
+            </button>
+          ) : proximaMissao ? (
+            <button
+              onClick={() => {
+                setSelecionada(null);
+                setRespondida(false);
+                navigate(proximaMissao);
+              }}
+              className="hero-cta inline-flex items-center gap-2 px-5 py-2 rounded-lg font-semibold"
+            >
+              Próxima missão
+              <ArrowRightIcon className="w-4 h-4" />
+            </button>
+          ) : (
+            <Link
+              to="/conquistas"
+              className="hero-cta inline-flex items-center gap-2 px-5 py-2 rounded-lg font-semibold"
+            >
+              Ver conquistas
+              <ArrowRightIcon className="w-4 h-4" />
+            </Link>
+          )}
+
+          {respondida && !acertou && (
+            <button
+              onClick={() => { setSelecionada(null); setRespondida(false); }}
+              className="px-5 py-2 rounded-lg border border-borderDark text-textSecondary hover:border-accent hover:text-textPrimary transition-colors text-sm"
+            >
+              Tentar novamente
+            </button>
+          )}
+        </div>
+      </section>
+
+    </div>
+  );
 };
 
 export default Missao;

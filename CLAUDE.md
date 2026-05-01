@@ -52,6 +52,10 @@ src/
 
 Não existe rota `/trilhas` — há apenas uma trilha (POO) por enquanto.
 
+## Acesso às Missões
+
+Todas as missões estão disponíveis desde o início — sem desbloqueio sequencial. O usuário pode acessar qualquer missão para revisão, independente do progresso.
+
 ## Navegação (Header)
 
 Ordem dos itens: **Home → Trilha → Conquistas**
