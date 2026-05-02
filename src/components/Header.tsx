@@ -27,15 +27,27 @@ const Header: React.FC = () => {
     <header className="site-header fixed top-0 w-full bg-bgSecondary text-textPrimary z-50 shadow-lg border-b border-borderDark">
       <div className="flex items-center h-20 px-8">
 
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 flex-1">
-          <div
-            className="w-9 h-9 rounded-md flex-shrink-0"
-            aria-hidden="true"
-            style={{ background: 'linear-gradient(90deg, var(--accent), var(--accent-2))' }}
-          />
-          <span className="text-2xl md:text-3xl font-bold tracking-tight text-textPrimary">Abstractio</span>
-        </Link>
+        {/* User info + avatar */}
+        <div className="hidden md:flex items-center gap-3 justify-start self-stretch flex-1">
+          <RouterLink
+            to="/perfil"
+            className="flex w-32 h-32 rounded-full ring-2 ring-accent/40 overflow-hidden hover:ring-accent transition-all flex-shrink-0 self-start mt-2 shadow-2xl z-10"
+            title="Perfil"
+          >
+            {avatarSrc
+              ? <img src={avatarSrc} alt="Avatar" className="w-full h-full object-cover block" />
+              : <div className="w-full h-full bg-bgPrimary flex items-center justify-center">
+                  <UserCircleIcon className="w-6 h-6 text-textSecondary" />
+                </div>
+            }
+          </RouterLink>
+          <div className="text-left">
+            <p className="text-xs text-textSecondary leading-tight">{nivelDisplay}</p>
+            <p className="text-sm text-textPrimary font-medium leading-tight">{nomeDisplay}</p>
+            <span className="text-sm text-accent font-semibold">{pontuacao} pts</span>
+          </div>
+          
+        </div>
 
         {/* Nav desktop */}
         <nav className="hidden md:flex space-x-8 justify-center flex-1">
@@ -46,26 +58,17 @@ const Header: React.FC = () => {
           ))}
         </nav>
 
-        {/* User info + avatar */}
-        <div className="hidden md:flex items-center gap-3 justify-end self-stretch flex-1">
-          <div className="text-right">
-            <p className="text-xs text-textSecondary leading-tight">{nivelDisplay}</p>
-            <p className="text-sm text-textPrimary font-medium leading-tight">{nomeDisplay}</p>
-            <span className="text-sm text-accent font-semibold">{pontuacao} pts</span>
-          </div>
-          <RouterLink
-            to="/perfil"
-            className="w-32 h-32 rounded-full border-2 border-borderDark overflow-hidden hover:border-accent transition-all flex-shrink-0 self-start mt-2 ring-4 ring-bgSecondary shadow-2xl z-10"
-            title="Perfil"
-          >
-            {avatarSrc
-              ? <img src={avatarSrc} alt="Avatar" className="w-full h-full object-cover" />
-              : <div className="w-full h-full bg-bgPrimary flex items-center justify-center">
-                  <UserCircleIcon className="w-6 h-6 text-textSecondary" />
-                </div>
-            }
-          </RouterLink>
-        </div>
+        
+
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-3 flex-1 justify-end">
+          <div
+            className="w-9 h-9 rounded-md flex-shrink-0"
+            aria-hidden="true"
+            style={{ background: 'linear-gradient(90deg, var(--accent), var(--accent-2))' }}
+          />
+          <span className="text-2xl md:text-3xl font-bold tracking-tight text-textPrimary">Abstractio</span>
+        </Link>
 
         {/* Mobile menu toggle */}
         <button
