@@ -1,11 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import curriculum from '../data/curriculum.json';
-import type { Nivel } from '../data/curriculum';
+import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
 import Footer from '../components/Footer';
-
-const niveis = curriculum as Nivel[];
 
 const Conquistas: React.FC = () => {
   const { completed, pontuacao } = useProgress();

@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import ReactMarkdown from 'react-markdown';
-import curriculum from '../data/curriculum.json';
-import type { Nivel } from '../data/curriculum';
+import remarkGfm from 'remark-gfm';
+import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
 import interativoHtml from '../assets/interativos/nivel_1_missao_1.html?raw';
-
-const niveis = curriculum as Nivel[];
 
 const interativos: Record<string, string> = {
   'interativos/nivel_1_missao_1.html': interativoHtml,
@@ -89,7 +87,7 @@ const Missao: React.FC = () => {
         prose-blockquote:border-l-accent prose-blockquote:text-textSecondary
         prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary
         prose-li:text-textSecondary">
-        <ReactMarkdown>{missao.theory}</ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{missao.theory}</ReactMarkdown>
       </section>
 
       {/* Mini-jogo */}

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TrophyIcon, LockClosedIcon } from '@heroicons/react/24/outline';
-import curriculum from '../data/curriculum.json';
-import type { Nivel } from '../data/curriculum';
+import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
 import type { Genero } from '../contexts/ProgressContext';
 import Footer from '../components/Footer';
@@ -17,7 +16,6 @@ const AVATARES = [
   { src: null,             label: 'Kraken',            nivelMin: 3 },
 ];
 
-const niveis = curriculum as Nivel[];
 const totalMissoes = niveis.reduce((acc, n) => acc + n.missoes.length, 0);
 
 const GENERO_OPTIONS: { value: Genero; label: string }[] = [

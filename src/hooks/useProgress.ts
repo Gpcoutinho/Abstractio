@@ -1,11 +1,10 @@
 import { useContext } from 'react';
 import { ProgressContext } from '../contexts/ProgressContext';
-import curriculum from '../data/curriculum.json';
-import type { Nivel } from '../data/curriculum';
+import { niveis } from '../data/curriculum';
 
 const NIVEL_NOMES = ['Polvinho', 'Explorador', 'Mestre dos Mares', 'Kraken'];
 
-const totalMissoes = (curriculum as Nivel[]).reduce(
+const totalMissoes = niveis.reduce(
   (acc, nivel) => acc + nivel.missoes.length,
   0,
 );

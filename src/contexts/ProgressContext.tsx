@@ -1,6 +1,5 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
-import curriculum from '../data/curriculum.json';
-import type { Nivel } from '../data/curriculum';
+import { niveis } from '../data/curriculum';
 
 const STORAGE_KEY = 'abstractio:progress';
 
@@ -35,7 +34,7 @@ function loadFromStorage(): ProgressState {
 }
 
 function calcNiveisConcluidos(completed: string[]): number[] {
-  return (curriculum as Nivel[])
+  return niveis
     .filter(nivel => nivel.missoes.every(m => completed.includes(m.id)))
     .map(nivel => nivel.id);
 }

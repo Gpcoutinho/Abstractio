@@ -2,12 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { PlayCircleIcon } from '@heroicons/react/24/outline';
 import { CheckCircleIcon as CheckCircleSolid } from '@heroicons/react/24/solid';
-import curriculum from '../data/curriculum.json';
-import type { Nivel, Missao } from '../data/curriculum';
+import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
 import Footer from '../components/Footer';
-
-const niveis = curriculum as Nivel[];
 const totalMissoes = niveis.reduce((acc, n) => acc + n.missoes.length, 0);
 
 const Trilha: React.FC = () => {
