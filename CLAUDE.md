@@ -72,7 +72,7 @@ Canto direito: **[pontuação] [rank] [avatar circle]**
 ## Nomenclatura (Importante — manter consistência)
 
 - **Nível** = o que em outras plataformas é "módulo" (4 no Abstractio)
-- **Missão** = o que em outras plataformas é "aula/seção" (30 no Abstractio)
+- **Missão** = o que em outras plataformas é "aula/seção" (28 no Abstractio)
 - `nivelIdx`, `missaoIdx` = índices 1-based (Nível 1, Missão 1 em diante)
 - `missoes` = array de missões dentro de um nível
 

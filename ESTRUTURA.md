@@ -18,7 +18,7 @@ Documento de especificação do produto. Define escopo, progressão, regras de c
 ## Escopo Atual
 
 - **1 trilha:** POO em Python (única trilha por enquanto)
-- **4 níveis**, **30 missões** no total
+- **4 níveis**, **28 missões** no total
 - App 100% client-side — sem backend, sem autenticação
 - Progresso salvo em localStorage
 
@@ -27,16 +27,17 @@ Documento de especificação do produto. Define escopo, progressão, regras de c
 ## Níveis e Missões
 
 ### Nível 1 — Fundamentos: O despertar do Polvinho
-> Introdução à POO: o que são objetos, classes, atributos e métodos
+> Introdução à POO: o que são objetos, classes, atributos, métodos e construtores
 
 | # | Missão |
 |---|--------|
-| 1 | Introdução ao nível |
-| 2 | O que é um objeto? |
-| 3 | Classes: a planta do objeto |
-| 4 | Atributos: o que o objeto sabe |
-| 5 | Métodos: o que o objeto faz |
-| 6 | Resumo: Criando o primeiro objeto |
+| 1 | O que é POO? |
+| 2 | Objeto |
+| 3 | Classe |
+| 4 | Atributos |
+| 5 | Métodos |
+| 6 | Construtor |
+| 7 | Resumo |
 
 ### Nível 2 — Pilares: As leis do oceano
 > Os 4 pilares da POO: Abstração, Encapsulamento, Herança e Polimorfismo
@@ -48,37 +49,34 @@ Documento de especificação do produto. Define escopo, progressão, regras de c
 | 3 | Encapsulamento |
 | 4 | Herança |
 | 5 | Polimorfismo |
-| 6 | Resumo: Os 4 pilares juntos |
+| 6 | Resumo |
 
 ### Nível 3 — Relações: A sociedade dos objetos
-> Como objetos se relacionam: composição, associação, interfaces e mais
+> Sobrescrita, sobrecarga, contratos e relacionamentos entre objetos
 
 | # | Missão |
 |---|--------|
 | 1 | Introdução ao nível |
-| 2 | Associação |
-| 3 | Agregação |
-| 4 | Composição |
-| 5 | Dependência |
-| 6 | Interfaces e contratos |
-| 7 | Mixins |
-| 8 | Métodos especiais (dunder) |
-| 9 | Iteradores e geradores |
-| 10 | Decoradores |
-| 11 | Resumo: Projeto integrador |
+| 2 | Sobrescrita |
+| 3 | Sobrecarga |
+| 4 | Classes Abstratas |
+| 5 | Interfaces |
+| 6 | Associação |
+| 7 | Agregação e Composição |
+| 8 | Resumo |
 
 ### Nível 4 — Arquitetura: A engenharia submarina
-> Padrões de projeto, boas práticas e design de sistemas orientados a objetos
+> Coesão, acoplamento, SOLID, Generics e Design Patterns
 
 | # | Missão |
 |---|--------|
 | 1 | Introdução ao nível |
-| 2 | SOLID — Princípios de design |
-| 3 | Padrões criacionais |
-| 4 | Padrões estruturais |
-| 5 | Padrões comportamentais |
-| 6 | Testando objetos |
-| 7 | Resumo: Projeto final |
+| 2 | Coesão |
+| 3 | Acoplamento |
+| 4 | SOLID |
+| 5 | Generics |
+| 6 | Design Patterns |
+| 7 | Resumo |
 
 ---
 
