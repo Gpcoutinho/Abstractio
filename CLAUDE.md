@@ -34,8 +34,13 @@ src/
   hooks/
     useProgress.ts        ← Hook único para consumir o contexto
   data/
-    curriculum.json       ← 4 níveis, 30 missões (importado via TypeScript)
-    curriculum.ts         ← Tipos TypeScript: Nivel, Missao, Exercise
+    curriculum/
+      types.ts            ← Tipos TypeScript: Nivel, Missao, Exercise
+      index.ts            ← Exporta array `niveis` com os 4 níveis
+      nivel_1/            ← Missões do Nível 1 (missao_1.ts … missao_6.ts + index.ts)
+      nivel_2/            ← Missões do Nível 2
+      nivel_3/            ← Missões do Nível 3
+      nivel_4/            ← Missões do Nível 4
   assets/
     interativos/
       nivel_1_missao_1.html  ← Mini-jogo drag & drop (HTML autossuficiente)
@@ -68,7 +73,7 @@ Canto direito: **[pontuação] [rank] [avatar circle]**
 
 - **Nível** = o que em outras plataformas é "módulo" (4 no Abstractio)
 - **Missão** = o que em outras plataformas é "aula/seção" (30 no Abstractio)
-- `nivelIdx`, `missaoIdx` = índices 0-based
+- `nivelIdx`, `missaoIdx` = índices 1-based (Nível 1, Missão 1 em diante)
 - `missoes` = array de missões dentro de um nível
 
 Usar esses termos em variáveis, componentes, rotas e comentários. Nunca usar "módulo", "aula" ou "lição".
@@ -79,8 +84,8 @@ Persistido em **localStorage**. Sem sync com backend.
 
 ```typescript
 {
-  completed: string[],         // IDs das missões concluídas ex: ["0-0", "0-1"]
-  niveis_concluidos: number[], // índices dos níveis 100% completos
+  completed: string[],         // IDs das missões concluídas ex: ["1-1", "1-2"]
+  niveis_concluidos: number[], // IDs dos níveis 100% completos (1-based)
   pontuacao: number,           // +15 por missão concluída
 }
 ```
@@ -93,38 +98,30 @@ Persistido em **localStorage**. Sem sync com backend.
 
 O título exibido no Header vem sempre do cálculo acima, nunca de um campo separado.
 
-**Troféus:** 1 por missão concluída — exibidos na tela `/conquistas`. Derivados do `curriculum.json`, sem registro separado.
+**Troféus:** 1 por missão concluída — exibidos na tela `/conquistas`. Derivados do currículo em TypeScript, sem registro separado.
 
 **Premiação por pontuação:** ainda não definida — não implementar por enquanto.
 
 ## Conteúdo das Missões
 
-Fonte: `src/data/curriculum.json` — importado diretamente (não via fetch).
+Fonte: módulos TypeScript em `src/data/curriculum/nivel_N/missao_N.ts` — importados estaticamente, sem fetch.
 
-```json
-[
-  {
-    "id": 0,
-    "title": "Nível 1 — Fundamentos: O despertar do Polvinho",
-    "short": "Fundamentos",
-    "missoes": [
-      {
-        "id": "0-0",
-        "title": "...",
-        "icon": "🧩",
-        "theory": "...",
-        "exercise": {
-          "question": "...",
-          "options": ["...", "..."],
-          "correct": 1,
-          "explanation": "..."
-        },
-        "has_interativo": true,
-        "interativo_html": "interativos/nivel_1_missao_1.html"
-      }
-    ]
-  }
-]
+```typescript
+// Exemplo: src/data/curriculum/nivel_1/missao_1.ts
+const missao: Missao = {
+  id: "1-1",
+  title: "...",
+  icon: "🧩",
+  theory: `...`,
+  exercise: {
+    question: "...",
+    options: ["...", "..."],
+    correct: 1,
+    explanation: "..."
+  },
+  has_interativo: true,
+  interativo_html: "interativos/nivel_1_missao_1.html"
+};
 ```
 
 ## Mini-Jogos (Interativos)

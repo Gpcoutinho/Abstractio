@@ -2,79 +2,65 @@ import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "3-2",
-  title: "Acoplamento",
-  icon: "🔓",
+  title: "Sobrescrita",
+  icon: "✏️",
   theory: `
-## Acoplamento
+## Sobrescrita (Override)
 
-**Acoplamento** mede o grau de dependência entre classes. **Alto acoplamento** significa que mudanças em uma classe forçam mudanças em outras — o sistema vira uma "bola de neve".
-
-### Alto acoplamento — o problema
+**Sobrescrita** ocorre quando uma subclasse redefine um método da superclasse com a mesma assinatura, substituindo o comportamento original.
 
 \`\`\`python
-class Pedido:
-    def finalizar(self):
-        db   = MySQLConexao("localhost", "root", "senha")  # dependência direta
-        db.salvar(self)
-        smtp = SMTPEmailSender("smtp.gmail.com", 587)      # dependência direta
-        smtp.enviar("Pedido confirmado!")
+class Notificacao:
+    def enviar(self, mensagem):
+        return f"Enviando: {mensagem}"
+
+class NotificacaoEmail(Notificacao):
+    def enviar(self, mensagem):          # sobrescreve
+        return f"📧 Email: {mensagem}"
+
+class NotificacaoSMS(Notificacao):
+    def enviar(self, mensagem):          # sobrescreve
+        return f"📱 SMS: {mensagem}"
+
+class NotificacaoPush(Notificacao):
+    def enviar(self, mensagem):          # sobrescreve
+        return f"🔔 Push: {mensagem}"
+
+canais = [NotificacaoEmail(), NotificacaoSMS(), NotificacaoPush()]
+for canal in canais:
+    print(canal.enviar("Sua compra foi aprovada!"))
 \`\`\`
 
-\`Pedido\` conhece detalhes de banco e email. Trocar MySQL por PostgreSQL exige mexer em \`Pedido\`.
+### Estendendo com \`super()\`
 
-### Baixo acoplamento — a solução (Injeção de Dependência)
+Você pode sobrescrever **e ainda aproveitar** o comportamento original:
 
 \`\`\`python
-from abc import ABC, abstractmethod
-
-class Repositorio(ABC):
-    @abstractmethod
-    def salvar(self, pedido): pass
-
-class Notificador(ABC):
-    @abstractmethod
-    def enviar(self, msg: str): pass
-
-class Pedido:
-    def __init__(self, repo: Repositorio, notif: Notificador):
-        self.repo  = repo   # recebe dependência de fora
-        self.notif = notif
-
-    def finalizar(self):
-        self.repo.salvar(self)
-        self.notif.enviar("Pedido confirmado!")
-
-# Trocar implementações sem tocar em Pedido:
-class MySQLRepositorio(Repositorio):
-    def salvar(self, pedido): ...
-
-class EmailNotificador(Notificador):
-    def enviar(self, msg): ...
-
-pedido = Pedido(MySQLRepositorio(), EmailNotificador())
-pedido.finalizar()
+class NotificacaoAuditada(Notificacao):
+    def enviar(self, mensagem):
+        resultado = super().enviar(mensagem)  # chama o original
+        print(f"[LOG] Notificação registrada.")
+        return resultado
 \`\`\`
 
-### Coesão x Acoplamento
+### Regras da sobrescrita
 
-| | Alta Coesão | Baixo Acoplamento |
-|---|---|---|
-| Foco | Dentro da classe | Entre classes |
-| Meta | Classe com propósito único | Classes com poucas dependências |
-| Benefício | Fácil de manter | Fácil de trocar partes |
-
-> O objetivo é sempre: **alta coesão + baixo acoplamento**.
+| Regra | Descrição |
+|---|---|
+| Mesmo nome | O método na subclasse deve ter o mesmo nome |
+| \`super()\` opcional | Use para aproveitar o comportamento pai |
+| Polimorfismo | Objetos distintos se comportam diferente pelo mesmo método |
 `,
   exercise: {
-    question: "O que é Injeção de Dependência e como ela reduz o acoplamento?",
+    question: "Qual é a diferença entre sobrescrita e herança simples?",
     options: [
-      "É uma técnica de herança que injeta métodos de uma classe em outra automaticamente.",
-      "É passar as dependências de uma classe de fora para dentro (via construtor ou método), em vez de criá-las internamente.",
-      "É um padrão que aumenta o acoplamento para garantir mais controle sobre as dependências.",
-      "É injetar código diretamente no banco de dados para reduzir chamadas externas."
+      "Não há diferença — sobrescrita é apenas outro nome para herança.",
+      "Herança passa atributos e métodos para a subclasse; sobrescrita redefine um método herdado com novo comportamento.",
+      "Sobrescrita elimina todos os métodos herdados da superclasse.",
+      "Herança só funciona com `super()`, enquanto sobrescrita não precisa."
     ],
     correct: 1,
-    explanation: "Correto! Injeção de dependência desacopla a classe de suas implementações concretas — ela recebe o que precisa de fora, facilitando troca e testes."
+    explanation: "Correto! Herança é o mecanismo de transmissão. Sobrescrita é a decisão da subclasse de redefinir um comportamento específico que herdou."
   },
   has_interativo: false
 };

@@ -2,72 +2,45 @@ import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "3-1",
-  title: "Coesão",
-  icon: "🎯",
+  title: "Introdução ao nível",
+  icon: "🏙️",
   theory: `
-## Coesão
+## A sociedade dos objetos — Mecânica e Relações
 
-**Coesão** mede o quanto os elementos de uma classe estão relacionados entre si. Alta coesão significa que a classe tem **um único propósito bem definido**.
+Nos níveis anteriores você aprendeu a criar objetos e a aplicar os 4 pilares. Agora vamos explorar como objetos **interagem entre si**.
 
-### Baixa coesão — o problema
+Em sistemas reais, objetos raramente vivem isolados. Eles se comunicam, dependem uns dos outros e formam estruturas complexas — como uma sociedade.
 
-\`\`\`python
-# Classe faz demais — baixa coesão
-class Usuario:
-    def __init__(self, nome, email):
-        self.nome  = nome
-        self.email = email
+### O que você vai aprender
 
-    def salvar_no_banco(self): ...           # responsabilidade de banco
-    def enviar_email_boas_vindas(self): ...  # responsabilidade de email
-    def gerar_relatorio_pdf(self): ...       # responsabilidade de relatório
-    def validar_cpf(self): ...              # responsabilidade de validação
-\`\`\`
-
-Quando qualquer coisa mudar (banco, email, PDF), você mexe em \`Usuario\` — arriscando quebrar as outras funcionalidades.
-
-### Alta coesão — a solução
-
-\`\`\`python
-class Usuario:
-    def __init__(self, nome, email):
-        self.nome  = nome
-        self.email = email
-
-class RepositorioUsuario:
-    def salvar(self, usuario: Usuario): ...
-
-class ServicoEmail:
-    def boas_vindas(self, usuario: Usuario): ...
-
-class ValidadorCPF:
-    def validar(self, cpf: str) -> bool: ...
-\`\`\`
-
-Agora cada classe tem **uma razão para mudar**. Isso é o princípio SRP (Single Responsibility) do SOLID.
-
-### Como medir coesão?
-
-Faça a pergunta: **"O que esta classe faz?"**
-- Se a resposta tem muitos "e também..." → baixa coesão
-- Se a resposta é uma frase curta e precisa → alta coesão
-
-| Sinal | Coesão |
+| Conceito | O que é |
 |---|---|
-| Métodos usam os mesmos atributos | Alta |
-| Métodos ignoram atributos da classe | Baixa |
-| Classe difícil de nomear | Baixa |
+| **Sobrescrita** | Redefinir o comportamento de um método herdado |
+| **Sobrecarga** | Adaptar um método para diferentes formas de chamada |
+| **Contratos** | Interfaces e classes abstratas como acordos entre objetos |
+| **Associação** | Um objeto *usa* outro |
+| **Agregação** | Um objeto *tem* outro (relação fraca) |
+| **Composição** | Um objeto *é composto de* outro (relação forte) |
+
+### A analogia da sociedade
+
+Pense em objetos como pessoas em uma cidade:
+- Uma pessoa pode **sobrescrever** um hábito herdado da família
+- Assinar um **contrato** a obriga a cumprir certas responsabilidades
+- Ela pode **usar** um táxi (associação), **ter** um carro (agregação) ou **ter** um coração (composição)
+
+> Entender relações é o que separa código amador de código profissional.
 `,
   exercise: {
-    question: "Como identificar que uma classe tem **baixa coesão**?",
+    question: "Por que é importante entender como objetos se relacionam em POO?",
     options: [
-      "A classe tem poucos métodos e atributos.",
-      "A classe é difícil de nomear e seus métodos têm responsabilidades não relacionadas entre si.",
-      "A classe herda de mais de uma superclasse.",
-      "A classe usa muitas outras classes do sistema."
+      "Porque objetos isolados são mais eficientes computacionalmente.",
+      "Porque sistemas reais são formados por objetos que colaboram — entender relações é essencial para modelar o mundo real.",
+      "Porque o Python exige que todos os objetos estejam conectados entre si.",
+      "Porque relações entre objetos substituem a necessidade de herança."
     ],
     correct: 1,
-    explanation: "Correto! Baixa coesão se manifesta quando a classe acumula responsabilidades diferentes — o que a torna difícil de nomear, testar e manter."
+    explanation: "Exato! Sistemas reais são redes de objetos colaborando. Modelar essas relações corretamente é o que torna um design robusto e manutenível."
   },
   has_interativo: false
 };

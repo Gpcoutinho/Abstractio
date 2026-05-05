@@ -2,74 +2,64 @@ import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "2-3",
-  title: "Os Contratos",
-  icon: "📜",
+  title: "Encapsulamento",
+  icon: "🔒",
   theory: `
-## Os Contratos
+## Encapsulamento
 
-Em POO, um **contrato** é um acordo formal que define o que uma classe *deve* fazer — sem ditar *como* ela faz.
+**Encapsulamento** é o princípio de esconder os detalhes internos de um objeto e expor apenas o necessário através de uma interface controlada.
 
-Quando uma classe assina um contrato, ela se compromete a implementar um conjunto de métodos. Isso garante que qualquer objeto que respeite o contrato possa ser usado de forma intercambiável.
+Em Python, convenções de nomenclatura indicam visibilidade:
 
-### Por que contratos existem?
-
-Imagine que você está construindo um sistema de pagamentos. Você quer aceitar Pix, cartão de crédito e boleto. Sem um contrato:
-
-\`\`\`python
-# Sem contrato — caótico
-class PagamentoPix:
-    def pagar_pix(self, valor): ...
-
-class PagamentoCartao:
-    def processar_cartao(self, valor): ...
-
-class PagamentoBoleto:
-    def emitir_boleto(self, valor): ...
-\`\`\`
-
-Cada classe tem um método diferente — impossível tratá-las uniformemente.
-
-### Com um contrato
+| Prefixo | Visibilidade | Exemplo |
+|---|---|---|
+| \`atributo\` | Público | \`self.nome\` |
+| \`_atributo\` | Protegido (convenção) | \`self._agencia\` |
+| \`__atributo\` | Privado (name mangling) | \`self.__saldo\` |
 
 \`\`\`python
-from abc import ABC, abstractmethod
+class ContaCorrente:
+    def __init__(self, titular, saldo):
+        self.titular = titular     # público
+        self._agencia = "0001"     # protegido
+        self.__saldo = saldo       # privado
 
-class MetodoPagamento(ABC):  # o contrato
-    @abstractmethod
-    def pagar(self, valor: float) -> str:
-        pass
+    def get_saldo(self):
+        return self.__saldo
 
-class Pix(MetodoPagamento):
-    def pagar(self, valor):
-        return f"✅ Pix de R\${valor:.2f} enviado."
+    def depositar(self, valor):
+        if valor > 0:
+            self.__saldo += valor
 
-class Cartao(MetodoPagamento):
-    def pagar(self, valor):
-        return f"💳 Cartão cobrado: R\${valor:.2f}."
-
-class Boleto(MetodoPagamento):
-    def pagar(self, valor):
-        return f"📄 Boleto de R\${valor:.2f} gerado."
-
-def processar_pedido(metodo: MetodoPagamento, valor: float):
-    return metodo.pagar(valor)  # funciona com qualquer método
-
-print(processar_pedido(Pix(), 150.00))
-print(processar_pedido(Cartao(), 89.90))
+conta = ContaCorrente("João", 500)
+print(conta.titular)      # João — OK
+print(conta.get_saldo())  # 500 — OK via getter
+# conta.__saldo           # AttributeError!
 \`\`\`
 
-Em Python, contratos são implementados com **interfaces** (via ABC sem implementação) e **classes abstratas** (via ABC com implementação parcial).
+### \`@property\` — getters e setters elegantes
+
+\`\`\`python
+@property
+def saldo(self):
+    return self.__saldo
+
+@saldo.setter
+def saldo(self, valor):
+    if valor >= 0:
+        self.__saldo = valor
+\`\`\`
 `,
   exercise: {
-    question: "Qual é o principal benefício de usar contratos (interfaces/classes abstratas) em um sistema?",
+    question: "Qual é o principal objetivo do encapsulamento em POO?",
     options: [
-      "Aumentar o desempenho do código em tempo de execução.",
-      "Garantir que diferentes classes implementem um conjunto comum de métodos, permitindo intercambialidade.",
-      "Impedir que subclasses adicionem novos métodos além dos definidos no contrato.",
-      "Substituir completamente a necessidade de herança no sistema."
+      "Permitir que qualquer parte do código acesse e modifique os dados livremente.",
+      "Esconder os detalhes internos do objeto e controlar o acesso aos seus dados.",
+      "Fazer com que uma classe herde comportamentos de outra.",
+      "Substituir funções globais por métodos de classe."
     ],
     correct: 1,
-    explanation: "Correto! Contratos garantem que qualquer classe que os implemente possa ser usada de forma intercambiável, tornando o sistema extensível e previsível."
+    explanation: "Correto! Encapsulamento protege os dados internos e expõe apenas uma interface controlada e segura."
   },
   has_interativo: false
 };

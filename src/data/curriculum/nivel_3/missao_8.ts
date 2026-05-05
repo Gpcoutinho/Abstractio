@@ -1,7 +1,7 @@
 import type { Missao } from '../types';
 
 const missao: Missao = {
-  id: "2-7",
+  id: "3-8",
   title: "Relacionamentos — Associação",
   icon: "↔️",
   theory: `

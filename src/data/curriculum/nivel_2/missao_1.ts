@@ -2,65 +2,60 @@ import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "2-1",
-  title: "Sobrescrita",
-  icon: "✏️",
+  title: "Introdução ao nível",
+  icon: "🌍",
   theory: `
-## Sobrescrita (Override)
+## Por que objetos precisam de regras?
 
-**Sobrescrita** ocorre quando uma subclasse redefine um método da superclasse com a mesma assinatura, substituindo o comportamento original.
+Imagine que você acabou de construir uma cidade de LEGO. Você tem casas, carros, pessoas, árvores — tudo feito de blocos.
 
-\`\`\`python
-class Notificacao:
-    def enviar(self, mensagem):
-        return f"Enviando: {mensagem}"
+Agora imagine que alguém embaralha tudo: rodas de carros dentro das casas, pessoas onde deveriam estar as árvores, ninguém consegue mais entender nada.
 
-class NotificacaoEmail(Notificacao):
-    def enviar(self, mensagem):          # sobrescreve
-        return f"📧 Email: {mensagem}"
+Isso acontece em programas grandes quando os objetos não seguem regras. Você pode ter 500 classes e nenhuma delas conversar direito com as outras.
 
-class NotificacaoSMS(Notificacao):
-    def enviar(self, mensagem):          # sobrescreve
-        return f"📱 SMS: {mensagem}"
+---
 
-class NotificacaoPush(Notificacao):
-    def enviar(self, mensagem):          # sobrescreve
-        return f"🔔 Push: {mensagem}"
+## As 4 leis dos objetos bem-comportados
 
-canais = [NotificacaoEmail(), NotificacaoSMS(), NotificacaoPush()]
-for canal in canais:
-    print(canal.enviar("Sua compra foi aprovada!"))
-\`\`\`
+No Nível 1, você aprendeu a **criar** objetos. Agora você aprende as **4 leis** que fazem objetos trabalharem bem juntos — são os chamados **Pilares da POO**.
 
-### Estendendo com \`super()\`
+| Pilar | Em uma frase | Analogia |
+|---|---|---|
+| **Abstração** | Mostre só o que importa | Controle remoto: você aperta o botão, não sabe o circuito |
+| **Encapsulamento** | Proteja o que é interno | Caixa-forte: só quem tem a senha pode abrir |
+| **Herança** | Reaproveite o que já existe | Receita de família: a base é a mesma, cada um adiciona seu tempero |
+| **Polimorfismo** | Trate diferentes iguais | Tomada elétrica: funciona com qualquer aparelho que encaixe |
 
-Você pode sobrescrever **e ainda aproveitar** o comportamento original:
+---
 
-\`\`\`python
-class NotificacaoAuditada(Notificacao):
-    def enviar(self, mensagem):
-        resultado = super().enviar(mensagem)  # chama o original
-        print(f"[LOG] Notificação registrada.")
-        return resultado
-\`\`\`
+## Por que esses 4 e não outros?
 
-### Regras da sobrescrita
+Esses pilares não foram inventados do nada — foram destilados de **décadas** de programadores aprendendo da forma difícil o que causa problemas em sistemas grandes.
 
-| Regra | Descrição |
-|---|---|
-| Mesmo nome | O método na subclasse deve ter o mesmo nome |
-| \`super()\` opcional | Use para aproveitar o comportamento pai |
-| Polimorfismo | Objetos distintos se comportam diferente pelo mesmo método |
+**Sem abstração:** você teria que entender o código interno de cada classe para usá-la.
+**Sem encapsulamento:** qualquer parte do código poderia corromper os dados de qualquer objeto.
+**Sem herança:** você copiaria e colaria o mesmo código em dezenas de lugares.
+**Sem polimorfismo:** você teria intermináveis \`if\`/\`elif\` para tratar cada tipo de objeto.
+
+Juntos, os 4 pilares produzem código que é:
+
+- **Organizado** — cada coisa no seu lugar
+- **Seguro** — dados protegidos de acidentes
+- **Reutilizável** — escreva uma vez, use sempre
+- **Extensível** — adicione novos tipos sem quebrar o que já funciona
+
+> As próximas 4 missões exploram cada pilar em detalhe. Ao final, você vai ver tudo se encaixar em um único exemplo poderoso.
 `,
   exercise: {
-    question: "Qual é a diferença entre sobrescrita e herança simples?",
+    question: "Qual é o principal objetivo dos 4 pilares da POO?",
     options: [
-      "Não há diferença — sobrescrita é apenas outro nome para herança.",
-      "Herança passa atributos e métodos para a subclasse; sobrescrita redefine um método herdado com novo comportamento.",
-      "Sobrescrita elimina todos os métodos herdados da superclasse.",
-      "Herança só funciona com `super()`, enquanto sobrescrita não precisa."
+      "Aumentar o número de linhas de código para tornar o sistema mais robusto.",
+      "Tornar o código organizado, reutilizável, seguro e extensível.",
+      "Substituir completamente a programação procedural em todos os casos.",
+      "Garantir que todas as classes herdem de uma única superclasse."
     ],
     correct: 1,
-    explanation: "Correto! Herança é o mecanismo de transmissão. Sobrescrita é a decisão da subclasse de redefinir um comportamento específico que herdou."
+    explanation: "Correto! Os pilares são princípios que, juntos, produzem código de qualidade: organizado, reutilizável, seguro e extensível — sem precisar duplicar lógica ou quebrar tudo ao mudar uma coisa."
   },
   has_interativo: false
 };

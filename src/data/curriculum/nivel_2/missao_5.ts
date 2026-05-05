@@ -2,81 +2,76 @@ import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "2-5",
-  title: "Contratos — Classes Abstratas",
-  icon: "🏛️",
+  title: "Polimorfismo",
+  icon: "🎭",
   theory: `
-## Classes Abstratas
+## Polimorfismo
 
-Diferente de uma interface pura, uma **classe abstrata** pode combinar métodos abstratos (sem implementação) com métodos concretos (com implementação compartilhada).
-
-Ela define uma base comum para uma família de classes.
+**Polimorfismo** significa "muitas formas". É a capacidade de tratar objetos de tipos diferentes de forma uniforme, desde que compartilhem uma interface comum.
 
 \`\`\`python
-from abc import ABC, abstractmethod
+class Animal:
+    def __init__(self, nome):
+        self.nome = nome
 
-class Relatorio(ABC):
-    def __init__(self, titulo):
-        self.titulo = titulo
+    def fazer_som(self):
+        raise NotImplementedError
 
-    # Métodos abstratos — cada subclasse implementa do seu jeito
-    @abstractmethod
-    def gerar_cabecalho(self) -> str:
-        pass
+class Cachorro(Animal):
+    def fazer_som(self):
+        return f"{self.nome}: Au au!"
 
-    @abstractmethod
-    def gerar_corpo(self, dados: list) -> str:
-        pass
+class Gato(Animal):
+    def fazer_som(self):
+        return f"{self.nome}: Miau!"
 
-    # Método concreto — comportamento compartilhado por todas
-    def exportar(self, dados: list) -> str:
-        cab  = self.gerar_cabecalho()
-        corp = self.gerar_corpo(dados)
-        return f"{cab}\\n{corp}\\n--- fim do relatório ---"
+class Pato(Animal):
+    def fazer_som(self):
+        return f"{self.nome}: Quack!"
 
+# Polimorfismo em ação — mesmo código, comportamentos diferentes
+animais = [Cachorro("Rex"), Gato("Mia"), Pato("Donald")]
 
-class RelatorioPDF(Relatorio):
-    def gerar_cabecalho(self):
-        return f"[PDF] === {self.titulo} ==="
-
-    def gerar_corpo(self, dados):
-        return "\\n".join(f"• {item}" for item in dados)
-
-
-class RelatorioCSV(Relatorio):
-    def gerar_cabecalho(self):
-        return self.titulo
-
-    def gerar_corpo(self, dados):
-        return ",".join(str(d) for d in dados)
-
-
-vendas = ["Janeiro: R$10k", "Fevereiro: R$12k"]
-
-pdf = RelatorioPDF("Relatório de Vendas")
-csv = RelatorioCSV("Vendas")
-
-print(pdf.exportar(vendas))
-print(csv.exportar(vendas))
+for animal in animais:
+    print(animal.fazer_som())
+# Rex: Au au!
+# Mia: Miau!
+# Donald: Quack!
 \`\`\`
 
-### Quando usar cada um?
+### Duck Typing — polimorfismo sem herança
 
-| Situação | Use |
-|---|---|
-| Só precisa definir o que deve existir | Interface pura |
-| Precisa de comportamento compartilhado + contrato | Classe abstrata |
-| Quer combinar múltiplos contratos | Múltiplas interfaces |
+Python é flexível: se o objeto tem o método esperado, funciona — independente da hierarquia.
+
+\`\`\`python
+class Robo:
+    def fazer_som(self):
+        return "Robo: Bip bip!"
+
+# Robo não herda de Animal, mas funciona na mesma lista
+todos = [Cachorro("Rex"), Robo()]
+for x in todos:
+    print(x.fazer_som())
+\`\`\`
+
+> "Se anda como pato e grasna como pato, é um pato." — Duck Typing
+
+### Por que polimorfismo importa?
+
+- Código genérico que funciona com tipos futuros sem modificação
+- Reduz condicionais (\`if isinstance(...)\`)
+- Facilita extensão do sistema
 `,
   exercise: {
-    question: "Qual a principal diferença entre uma interface pura e uma classe abstrata?",
+    question: "O que é Duck Typing em Python?",
     options: [
-      "Interfaces só existem em Java; Python só tem classes abstratas.",
-      "Interfaces definem apenas o contrato; classes abstratas podem ter métodos concretos compartilhados além dos abstratos.",
-      "Classes abstratas não podem ser herdadas, apenas instanciadas.",
-      "Interfaces permitem instanciação direta; classes abstratas não."
+      "Uma forma de herança múltipla exclusiva do Python.",
+      "A capacidade de usar um objeto em qualquer contexto desde que ele possua os métodos esperados, independente de sua hierarquia de classes.",
+      "Um padrão de projeto para criar objetos do tipo 'pato'.",
+      "Uma verificação estrita de tipos feita em tempo de compilação."
     ],
     correct: 1,
-    explanation: "Correto! Classes abstratas combinam contrato com implementação parcial compartilhada — ideal quando há comportamento comum entre as subclasses."
+    explanation: "Correto! Duck Typing permite que qualquer objeto seja usado polimorficamente desde que implemente a interface esperada, sem precisar herdar de uma classe específica."
   },
   has_interativo: false
 };

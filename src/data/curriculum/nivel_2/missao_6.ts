@@ -2,46 +2,62 @@ import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "2-6",
-  title: "Relacionamentos",
-  icon: "🔗",
+  title: "Resumo",
+  icon: "📋",
   theory: `
-## Relacionamentos entre objetos
+## Resumo — Os 4 Pilares
 
-Objetos raramente existem sozinhos. Em sistemas reais, eles se conectam de formas diferentes — e cada tipo de conexão tem um nome e implicações diferentes.
+Você dominou as leis que governam objetos bem projetados. Veja o quadro completo:
 
-### Os 3 tipos principais
+| Pilar | Mecanismo em Python | Para que serve |
+|---|---|---|
+| **Abstração** | \`ABC\`, \`@abstractmethod\` | Define contratos, esconde complexidade |
+| **Encapsulamento** | \`__attr\`, \`@property\` | Protege dados, controla acesso |
+| **Herança** | \`class Filho(Pai)\`, \`super()\` | Reusa e especializa comportamentos |
+| **Polimorfismo** | Override, Duck Typing | Trata objetos distintos uniformemente |
 
-| Tipo | Símbolo | Força | Analogia |
-|---|---|---|---|
-| **Associação** | → | Fraca | Motorista usa um carro |
-| **Agregação** | ◇→ | Média | Time tem jogadores |
-| **Composição** | ◆→ | Forte | Casa tem cômodos |
+### Os 4 pilares juntos
 
-### A pergunta-chave: o que acontece quando o "todo" é destruído?
+\`\`\`python
+from abc import ABC, abstractmethod
 
-- **Associação** — a parte continua existindo (o carro não some se o motorista sair)
-- **Agregação** — a parte continua existindo (jogadores continuam existindo sem o time)
-- **Composição** — a parte é destruída junto (cômodos não existem sem a casa)
+class Veiculo(ABC):            # Abstração
+    def __init__(self, marca):
+        self.__marca = marca   # Encapsulamento
 
-### Por que isso importa?
+    @property
+    def marca(self):
+        return self.__marca
 
-Modelar relações corretamente impacta:
-- **Ciclo de vida** dos objetos (quem cria, quem destrói)
-- **Responsabilidade** por memória e recursos
-- **Flexibilidade** do design (o que pode ser trocado ou reutilizado)
+    @abstractmethod
+    def mover(self):           # contrato
+        pass
 
-> As próximas missões detalham cada tipo com exemplos práticos.
+class Carro(Veiculo):          # Herança
+    def mover(self):
+        return f"{self.marca} rodando na estrada."
+
+class Barco(Veiculo):          # Herança
+    def mover(self):
+        return f"{self.marca} navegando no mar."
+
+frota = [Carro("Toyota"), Barco("Yamaha")]
+for v in frota:
+    print(v.mover())           # Polimorfismo
+\`\`\`
+
+> Próximo nível: como objetos se **relacionam** entre si — sobrescrita, contratos e associações.
 `,
   exercise: {
-    question: "Qual pergunta central diferencia os 3 tipos de relacionamento entre objetos?",
+    question: "Qual pilar garante que código genérico possa operar sobre diferentes tipos de objeto sem precisar conhecê-los individualmente?",
     options: [
-      "Quantos métodos cada objeto possui?",
-      "O que acontece com a parte quando o objeto 'todo' é destruído?",
-      "Qual objeto foi criado primeiro na memória?",
-      "Quantas classes participam do relacionamento?"
+      "Encapsulamento, porque protege os dados de cada objeto.",
+      "Herança, porque todos os objetos descendem de uma mesma classe.",
+      "Polimorfismo, porque permite tratar objetos distintos de forma uniforme.",
+      "Abstração, porque define quais métodos cada classe deve ter."
     ],
-    correct: 1,
-    explanation: "Correto! A sobrevivência da parte quando o todo é destruído é o critério que define se a relação é associação, agregação ou composição."
+    correct: 2,
+    explanation: "Correto! O polimorfismo é o pilar que permite escrever código genérico que funciona com diferentes tipos — sem precisar de condicionais para cada um."
   },
   has_interativo: false
 };

@@ -64,7 +64,7 @@ const Trilha: React.FC = () => {
                     return (
                       <li key={missao.id}>
                         <Link
-                          to={`/missao/${nivel.id}/${missaoIdx}`}
+                          to={`/missao/${nivel.id}/${missaoIdx + 1}`}
                           className="flex items-center gap-4 p-4 rounded-lg border border-borderDark bg-bgSecondary hover:border-accent transition-colors group"
                         >
                           {concluida ? (

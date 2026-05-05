@@ -20,7 +20,7 @@ const Missao: React.FC = () => {
   const [respondida, setRespondida] = useState(false);
 
   const nivel = niveis.find(n => n.id === Number(nivelIdx));
-  const missao = nivel?.missoes[Number(missaoIdx)];
+  const missao = nivel?.missoes[Number(missaoIdx) - 1];
 
   if (!nivel || !missao) {
     return (
@@ -35,11 +35,11 @@ const Missao: React.FC = () => {
 
   const missaoIdxNum = Number(missaoIdx);
   const proximaMissao = (() => {
-    if (missaoIdxNum < nivel.missoes.length - 1) {
+    if (missaoIdxNum < nivel.missoes.length) {
       return `/missao/${nivel.id}/${missaoIdxNum + 1}`;
     }
     const proximoNivel = niveis.find(n => n.id === nivel.id + 1);
-    if (proximoNivel) return `/missao/${proximoNivel.id}/0`;
+    if (proximoNivel) return `/missao/${proximoNivel.id}/1`;
     return null;
   })();
 

@@ -2,98 +2,74 @@ import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "3-4",
-  title: "Generics",
-  icon: "🧪",
+  title: "Os Contratos",
+  icon: "📜",
   theory: `
-## Generics
+## Os Contratos
 
-**Generics** (ou tipos genéricos) permitem criar classes e funções que funcionam com **qualquer tipo**, mantendo segurança de tipos verificável por ferramentas como \`mypy\`.
+Em POO, um **contrato** é um acordo formal que define o que uma classe *deve* fazer — sem ditar *como* ela faz.
 
-Em Python, usamos o módulo \`typing\`.
+Quando uma classe assina um contrato, ela se compromete a implementar um conjunto de métodos. Isso garante que qualquer objeto que respeite o contrato possa ser usado de forma intercambiável.
 
-### O problema sem generics
+### Por que contratos existem?
 
-\`\`\`python
-class Pilha:
-    def __init__(self):
-        self._itens = []
-
-    def empilhar(self, item):
-        self._itens.append(item)
-
-    def desempilhar(self):
-        return self._itens.pop()
-
-p = Pilha()
-p.empilhar(42)
-p.empilhar("oops")  # mistura de tipos — sem aviso!
-\`\`\`
-
-### Com Generics
+Imagine que você está construindo um sistema de pagamentos. Você quer aceitar Pix, cartão de crédito e boleto. Sem um contrato:
 
 \`\`\`python
-from typing import Generic, TypeVar
+# Sem contrato — caótico
+class PagamentoPix:
+    def pagar_pix(self, valor): ...
 
-T = TypeVar("T")  # T representa qualquer tipo
+class PagamentoCartao:
+    def processar_cartao(self, valor): ...
 
-class Pilha(Generic[T]):
-    def __init__(self):
-        self._itens: list[T] = []
-
-    def empilhar(self, item: T) -> None:
-        self._itens.append(item)
-
-    def desempilhar(self) -> T:
-        return self._itens.pop()
-
-    def topo(self) -> T:
-        return self._itens[-1]
-
-# Pilha de inteiros
-p_int: Pilha[int] = Pilha()
-p_int.empilhar(1)
-p_int.empilhar(2)
-print(p_int.desempilhar())  # 2
-
-# Pilha de strings
-p_str: Pilha[str] = Pilha()
-p_str.empilhar("ola")
-p_str.empilhar("mundo")
-print(p_str.topo())  # mundo
+class PagamentoBoleto:
+    def emitir_boleto(self, valor): ...
 \`\`\`
 
-### Funções genéricas
+Cada classe tem um método diferente — impossível tratá-las uniformemente.
+
+### Com um contrato
 
 \`\`\`python
-from typing import TypeVar, Sequence
+from abc import ABC, abstractmethod
 
-T = TypeVar("T")
+class MetodoPagamento(ABC):  # o contrato
+    @abstractmethod
+    def pagar(self, valor: float) -> str:
+        pass
 
-def primeiro(sequencia: Sequence[T]) -> T:
-    return sequencia[0]
+class Pix(MetodoPagamento):
+    def pagar(self, valor):
+        return f"✅ Pix de R\${valor:.2f} enviado."
 
-print(primeiro([1, 2, 3]))        # 1
-print(primeiro(["a", "b", "c"]))  # a
+class Cartao(MetodoPagamento):
+    def pagar(self, valor):
+        return f"💳 Cartão cobrado: R\${valor:.2f}."
+
+class Boleto(MetodoPagamento):
+    def pagar(self, valor):
+        return f"📄 Boleto de R\${valor:.2f} gerado."
+
+def processar_pedido(metodo: MetodoPagamento, valor: float):
+    return metodo.pagar(valor)  # funciona com qualquer método
+
+print(processar_pedido(Pix(), 150.00))
+print(processar_pedido(Cartao(), 89.90))
 \`\`\`
 
-### Benefícios dos Generics
-
-| Benefício | Descrição |
-|---|---|
-| Reuso | Uma implementação para qualquer tipo |
-| Segurança | Erros de tipo detectados antes de rodar |
-| Documentação | O tipo comunica a intenção da classe |
+Em Python, contratos são implementados com **interfaces** (via ABC sem implementação) e **classes abstratas** (via ABC com implementação parcial).
 `,
   exercise: {
-    question: "Qual o principal benefício de usar Generics em vez de usar o tipo `object` (ou nenhum tipo)?",
+    question: "Qual é o principal benefício de usar contratos (interfaces/classes abstratas) em um sistema?",
     options: [
-      "Generics fazem o código rodar mais rápido em tempo de execução.",
-      "Generics permitem reutilizar a implementação para qualquer tipo com segurança — ferramentas detectam inconsistências antes de rodar o código.",
-      "Generics eliminam a necessidade de testes unitários.",
-      "Generics só funcionam com tipos primitivos como int e str."
+      "Aumentar o desempenho do código em tempo de execução.",
+      "Garantir que diferentes classes implementem um conjunto comum de métodos, permitindo intercambialidade.",
+      "Impedir que subclasses adicionem novos métodos além dos definidos no contrato.",
+      "Substituir completamente a necessidade de herança no sistema."
     ],
     correct: 1,
-    explanation: "Correto! Generics combinam reuso (mesma implementação para qualquer tipo) com segurança (erros detectados estaticamente pelo type checker)."
+    explanation: "Correto! Contratos garantem que qualquer classe que os implemente possa ser usada de forma intercambiável, tornando o sistema extensível e previsível."
   },
   has_interativo: false
 };

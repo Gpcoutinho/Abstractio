@@ -2,99 +2,71 @@ import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "3-3",
-  title: "SOLID",
-  icon: "🪨",
+  title: "Sobrecarga",
+  icon: "🔀",
   theory: `
-## SOLID
+## Sobrecarga (Overload)
 
-**SOLID** é um acrônimo com 5 princípios de design orientado a objetos, definidos por Robert C. Martin. São guias para código limpo, manutenível e extensível.
+**Sobrecarga** é a capacidade de um método aceitar diferentes conjuntos de argumentos. Em linguagens como Java e C++, isso é feito criando múltiplos métodos com o mesmo nome mas assinaturas diferentes.
 
-| Letra | Princípio | Em uma linha |
-|---|---|---|
-| **S** | Single Responsibility | Uma classe, uma razão para mudar |
-| **O** | Open/Closed | Aberta para extensão, fechada para modificação |
-| **L** | Liskov Substitution | Subclasses devem poder substituir a superclasse |
-| **I** | Interface Segregation | Interfaces específicas > uma interface genérica |
-| **D** | Dependency Inversion | Dependa de abstrações, não de implementações |
+Python não suporta sobrecarga tradicional — mas oferece mecanismos equivalentes e mais flexíveis.
 
-### S — Single Responsibility
+### Abordagem 1 — Parâmetros com valor padrão
 
 \`\`\`python
-# Ruim: duas responsabilidades
+class Calculadora:
+    def somar(self, a, b, c=0):
+        return a + b + c
+
+calc = Calculadora()
+print(calc.somar(2, 3))     # 5
+print(calc.somar(2, 3, 4))  # 9
+\`\`\`
+
+### Abordagem 2 — \`*args\` e \`**kwargs\`
+
+\`\`\`python
 class Relatorio:
-    def calcular(self): ...
-    def salvar_pdf(self): ...
+    def gerar(self, *titulos, formato="txt"):
+        conteudo = " | ".join(titulos)
+        return f"[{formato.upper()}] {conteudo}"
 
-# Bom: separadas
-class CalculadoraRelatorio:
-    def calcular(self): ...
-
-class ExportadorPDF:
-    def salvar(self, relatorio): ...
+r = Relatorio()
+print(r.gerar("Vendas"))                           # [TXT] Vendas
+print(r.gerar("Vendas", "Estoque", formato="pdf")) # [PDF] Vendas | Estoque
 \`\`\`
 
-### O — Open/Closed
+### Abordagem 3 — \`@singledispatch\` (sobrecarga por tipo)
 
 \`\`\`python
-# Extensível sem modificar o código existente
-class Desconto(ABC):
-    @abstractmethod
-    def aplicar(self, preco): pass
+from functools import singledispatch
 
-class DescontoVIP(Desconto):
-    def aplicar(self, preco): return preco * 0.8
+@singledispatch
+def processar(dado):
+    return f"Tipo desconhecido: {dado}"
 
-class DescontoEstudante(Desconto):
-    def aplicar(self, preco): return preco * 0.9
-\`\`\`
+@processar.register(int)
+def _(dado):
+    return f"Inteiro: {dado * 2}"
 
-### L — Liskov Substitution
+@processar.register(str)
+def _(dado):
+    return f"Texto: {dado.upper()}"
 
-\`\`\`python
-# Subclasse deve funcionar onde a superclasse é esperada
-def calcular_area(forma: Forma) -> float:
-    return forma.area()  # funciona com Circulo, Retangulo, etc.
-\`\`\`
-
-### I — Interface Segregation
-
-\`\`\`python
-# Ruim: interface geral demais
-class Trabalhador(ABC):
-    @abstractmethod
-    def trabalhar(self): pass
-    @abstractmethod
-    def comer(self): pass  # robôs não comem!
-
-# Bom: interfaces específicas
-class Trabalhavel(ABC):
-    @abstractmethod
-    def trabalhar(self): pass
-
-class Alimentavel(ABC):
-    @abstractmethod
-    def comer(self): pass
-\`\`\`
-
-### D — Dependency Inversion
-
-\`\`\`python
-# Dependa da abstração (Repositorio), não da implementação (MySQL)
-class Servico:
-    def __init__(self, repo: Repositorio):  # abstração
-        self.repo = repo
+print(processar(5))       # Inteiro: 10
+print(processar("ola"))   # Texto: OLA
 \`\`\`
 `,
   exercise: {
-    question: "O princípio **Open/Closed** diz que classes devem ser:",
+    question: "Como Python simula sobrecarga de métodos de forma nativa?",
     options: [
-      "Abertas para modificação e fechadas para extensão.",
-      "Abertas para extensão (novos comportamentos via subclasses) e fechadas para modificação do código existente.",
-      "Abertas apenas para herança múltipla e fechadas para composição.",
-      "Fechadas para qualquer tipo de mudança após a primeira versão."
+      "Criando múltiplos métodos com o mesmo nome e assinaturas diferentes, como em Java.",
+      "Usando parâmetros com valor padrão, `*args`, `**kwargs` ou `@singledispatch`.",
+      "Python não suporta nenhuma forma de sobrecarga ou alternativa equivalente.",
+      "Usando herança múltipla para definir variações do mesmo método."
     ],
     correct: 1,
-    explanation: "Correto! Open/Closed significa que você adiciona funcionalidade criando novas classes (extensão), sem modificar as existentes — protegendo o que já funciona."
+    explanation: "Correto! Python usa parâmetros opcionais e empacotamento de argumentos como alternativa flexível à sobrecarga tradicional."
   },
   has_interativo: false
 };

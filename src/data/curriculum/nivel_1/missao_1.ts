@@ -2,72 +2,89 @@ import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "1-1",
-  title: "Abstração",
-  icon: "🌀",
+  title: "O que é a Programação Orientada a Objetos?",
+  icon: "🧩",
   theory: `
-## Abstração
+## Olhe ao seu redor
 
-**Abstração** é o processo de focar nos aspectos essenciais, ignorando detalhes irrelevantes. Em Python, implementamos via **classes abstratas** com o módulo \`abc\`.
+Cadeira. Celular. Cachorro. Caneta.
 
-Uma classe abstrata define um **contrato**: todas as subclasses *devem* implementar certos métodos.
+Todo objeto do mundo real tem duas coisas:
+
+1. **Características** — como ele *é* (cor, nome, tamanho, peso...)
+2. **Comportamentos** — o que ele *faz* (latir, carregar, rolar, escrever...)
+
+A **Programação Orientada a Objetos (POO)** usa exatamente essa lógica para organizar programas: em vez de uma lista enorme de instruções soltas, você cria **objetos** que imitam coisas do mundo real — cada um com suas próprias características e comportamentos.
+
+---
+
+## O problema que a POO resolve
+
+Antes da POO, programar um sistema com vários animais ficava assim:
 
 \`\`\`python
-from abc import ABC, abstractmethod
+# Sem POO — tudo solto, impossível de organizar
+nome_cachorro1 = "Rex"
+idade_cachorro1 = 3
+nome_cachorro2 = "Bolt"
+idade_cachorro2 = 5
 
-class Forma(ABC):
-    @abstractmethod
-    def area(self):
-        pass
-
-    @abstractmethod
-    def perimetro(self):
-        pass
-
-    def descrever(self):  # método concreto compartilhado
-        return f"Área: {self.area():.2f} | Perímetro: {self.perimetro():.2f}"
-
-class Circulo(Forma):
-    def __init__(self, raio):
-        self.raio = raio
-
-    def area(self):
-        return 3.14159 * self.raio ** 2
-
-    def perimetro(self):
-        return 2 * 3.14159 * self.raio
-
-class Retangulo(Forma):
-    def __init__(self, w, h):
-        self.w, self.h = w, h
-
-    def area(self):
-        return self.w * self.h
-
-    def perimetro(self):
-        return 2 * (self.w + self.h)
-
-formas = [Circulo(5), Retangulo(4, 6)]
-for f in formas:
-    print(f.descrever())
+# Para 2 cachorros já confunde. Para 100? Um pesadelo.
+print(nome_cachorro1 + " tem " + str(idade_cachorro1) + " anos")
+print(nome_cachorro2 + " tem " + str(idade_cachorro2) + " anos")
 \`\`\`
 
-### Vantagens
-- Força um contrato entre classes
-- Habilita **polimorfismo**: tratar \`Circulo\` e \`Retangulo\` uniformemente como \`Forma\`
-- Separa *o quê* fazer do *como* fazer
+Com POO, tudo que pertence a um cachorro fica junto dentro de um **objeto Cachorro**:
+
+\`\`\`python
+# Com POO — organizado como uma gaveta com etiqueta
+cachorro1 = Cachorro("Rex", 3)
+cachorro2 = Cachorro("Bolt", 5)
+
+cachorro1.apresentar()  # Rex tem 3 anos
+cachorro2.apresentar()  # Bolt tem 5 anos
+# 100 cachorros? Só mais linhas iguais a essas.
+\`\`\`
+
+Você ainda não sabe escrever esse código — mas vai aprender em cada missão deste nível!
+
+---
+
+## Os três ingredientes da POO
+
+Toda a POO é construída sobre três ideias. Pense em biscoitos:
+
+| Ingrediente | O que é | Analogia do biscoito |
+|---|---|---|
+| **Classe** | O molde, a receita | A forma de cortar a massa |
+| **Objeto** | O produto criado | O biscoito em si |
+| **Método** | O que o objeto faz | Comer, decorar, guardar o biscoito |
+
+Cada missão deste nível explora um desses ingredientes em detalhe.
+
+---
+
+## POO está em todo lugar
+
+- Em **jogos**: cada personagem, inimigo e item é um objeto
+- Em **apps de banco**: cada conta e transação é um objeto
+- Em **redes sociais**: cada post, comentário e perfil é um objeto
+
+> **Resumindo:** POO é uma forma de programar que organiza o código em objetos com características e comportamentos — igualzinho ao mundo real.
 `,
   exercise: {
-    question: "O que caracteriza uma **classe abstrata** em Python?",
+    question: "Qual das alternativas melhor define a Programação Orientada a Objetos?",
     options: [
-      "Uma classe que não pode ter nenhum método implementado.",
-      "Uma classe que herda de `ABC` e define métodos abstratos que as subclasses são obrigadas a implementar.",
-      "Uma classe que só pode ser instanciada uma única vez.",
-      "Uma classe privada que não pode ser importada por outros módulos."
+      "Uma sequência linear de instruções que o computador executa.",
+      "Um paradigma que organiza o software em torno de objetos com atributos e métodos.",
+      "Uma linguagem de programação específica como Python ou Java.",
+      "Um método exclusivo para criar interfaces gráficas."
     ],
     correct: 1,
-    explanation: "Perfeito! Classes abstratas (ABC) definem contratos. Métodos com @abstractmethod obrigam as subclasses a implementá-los."
+    explanation: "Correto! POO é um paradigma que organiza o código em objetos com atributos (dados) e métodos (comportamentos)."
   },
-  has_interativo: false
+  has_interativo: true,
+  interativo_html: "interativos/nivel_1_missao_1.html"
 };
 
 export default missao;

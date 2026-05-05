@@ -36,7 +36,7 @@ Documento de especificação do produto. Define escopo, progressão, regras de c
 | 3 | Classes: a planta do objeto |
 | 4 | Atributos: o que o objeto sabe |
 | 5 | Métodos: o que o objeto faz |
-| 6 | Criando o primeiro objeto |
+| 6 | Resumo: Criando o primeiro objeto |
 
 ### Nível 2 — Pilares: As leis do oceano
 > Os 4 pilares da POO: Abstração, Encapsulamento, Herança e Polimorfismo
@@ -48,7 +48,7 @@ Documento de especificação do produto. Define escopo, progressão, regras de c
 | 3 | Encapsulamento |
 | 4 | Herança |
 | 5 | Polimorfismo |
-| 6 | Os 4 pilares juntos |
+| 6 | Resumo: Os 4 pilares juntos |
 
 ### Nível 3 — Relações: A sociedade dos objetos
 > Como objetos se relacionam: composição, associação, interfaces e mais
@@ -65,7 +65,7 @@ Documento de especificação do produto. Define escopo, progressão, regras de c
 | 8 | Métodos especiais (dunder) |
 | 9 | Iteradores e geradores |
 | 10 | Decoradores |
-| 11 | Projeto integrador |
+| 11 | Resumo: Projeto integrador |
 
 ### Nível 4 — Arquitetura: A engenharia submarina
 > Padrões de projeto, boas práticas e design de sistemas orientados a objetos
@@ -78,7 +78,7 @@ Documento de especificação do produto. Define escopo, progressão, regras de c
 | 4 | Padrões estruturais |
 | 5 | Padrões comportamentais |
 | 6 | Testando objetos |
-| 7 | Projeto final |
+| 7 | Resumo: Projeto final |
 
 ---
 
@@ -110,7 +110,7 @@ O visual não é decorativo — deve **reforçar ou demonstrar** o conceito expl
 
 ### Modelo de teoria aprovado
 
-Baseado na estrutura da Missão 0 do Nível 2:
+Baseado na estrutura da Missão 1 do Nível 2:
 
 1. **Abertura com analogia do mundo real** — antes de qualquer código ou jargão, situar o conceito em algo familiar (ex: cidade de LEGO, controle remoto)
 2. **Problema concreto** — mostrar o que acontece quando o conceito é ignorado
@@ -131,7 +131,7 @@ Princípios de escrita:
 
 - Arquivo HTML autossuficiente em `src/assets/interativos/`
 - Renderizado via `<iframe srcDoc>` no componente `InterativoFrame.tsx`
-- Nomenclatura: `nivel_{n}_missao_{n}.html` (índices 0-based)
+- Nomenclatura: `nivel_{n}_missao_{n}.html` (índices 1-based — ex: `nivel_1_missao_1.html`)
 - Tipos existentes ou planejados:
   - Drag & drop (ex: associar objeto → classe)
   - Simulação clicável (ex: instanciar um objeto e ver atributos)

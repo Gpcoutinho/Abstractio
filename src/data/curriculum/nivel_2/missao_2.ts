@@ -2,71 +2,70 @@ import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "2-2",
-  title: "Sobrecarga",
-  icon: "🔀",
+  title: "Abstração",
+  icon: "🌀",
   theory: `
-## Sobrecarga (Overload)
+## Abstração
 
-**Sobrecarga** é a capacidade de um método aceitar diferentes conjuntos de argumentos. Em linguagens como Java e C++, isso é feito criando múltiplos métodos com o mesmo nome mas assinaturas diferentes.
+**Abstração** é o processo de focar nos aspectos essenciais, ignorando detalhes irrelevantes. Em Python, implementamos via **classes abstratas** com o módulo \`abc\`.
 
-Python não suporta sobrecarga tradicional — mas oferece mecanismos equivalentes e mais flexíveis.
-
-### Abordagem 1 — Parâmetros com valor padrão
+Uma classe abstrata define um **contrato**: todas as subclasses *devem* implementar certos métodos.
 
 \`\`\`python
-class Calculadora:
-    def somar(self, a, b, c=0):
-        return a + b + c
+from abc import ABC, abstractmethod
 
-calc = Calculadora()
-print(calc.somar(2, 3))     # 5
-print(calc.somar(2, 3, 4))  # 9
+class Forma(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+    @abstractmethod
+    def perimetro(self):
+        pass
+
+    def descrever(self):  # método concreto compartilhado
+        return f"Área: {self.area():.2f} | Perímetro: {self.perimetro():.2f}"
+
+class Circulo(Forma):
+    def __init__(self, raio):
+        self.raio = raio
+
+    def area(self):
+        return 3.14159 * self.raio ** 2
+
+    def perimetro(self):
+        return 2 * 3.14159 * self.raio
+
+class Retangulo(Forma):
+    def __init__(self, w, h):
+        self.w, self.h = w, h
+
+    def area(self):
+        return self.w * self.h
+
+    def perimetro(self):
+        return 2 * (self.w + self.h)
+
+formas = [Circulo(5), Retangulo(4, 6)]
+for f in formas:
+    print(f.descrever())
 \`\`\`
 
-### Abordagem 2 — \`*args\` e \`**kwargs\`
-
-\`\`\`python
-class Relatorio:
-    def gerar(self, *titulos, formato="txt"):
-        conteudo = " | ".join(titulos)
-        return f"[{formato.upper()}] {conteudo}"
-
-r = Relatorio()
-print(r.gerar("Vendas"))                           # [TXT] Vendas
-print(r.gerar("Vendas", "Estoque", formato="pdf")) # [PDF] Vendas | Estoque
-\`\`\`
-
-### Abordagem 3 — \`@singledispatch\` (sobrecarga por tipo)
-
-\`\`\`python
-from functools import singledispatch
-
-@singledispatch
-def processar(dado):
-    return f"Tipo desconhecido: {dado}"
-
-@processar.register(int)
-def _(dado):
-    return f"Inteiro: {dado * 2}"
-
-@processar.register(str)
-def _(dado):
-    return f"Texto: {dado.upper()}"
-
-print(processar(5))       # Inteiro: 10
-print(processar("ola"))   # Texto: OLA
-\`\`\`
+### Vantagens
+- Força um contrato entre classes
+- Habilita **polimorfismo**: tratar \`Circulo\` e \`Retangulo\` uniformemente como \`Forma\`
+- Separa *o quê* fazer do *como* fazer
 `,
   exercise: {
-    question: "Como Python simula sobrecarga de métodos de forma nativa?",
+    question: "O que caracteriza uma **classe abstrata** em Python?",
     options: [
-      "Criando múltiplos métodos com o mesmo nome e assinaturas diferentes, como em Java.",
-      "Usando parâmetros com valor padrão, `*args`, `**kwargs` ou `@singledispatch`.",
-      "Python não suporta nenhuma forma de sobrecarga ou alternativa equivalente.",
-      "Usando herança múltipla para definir variações do mesmo método."
+      "Uma classe que não pode ter nenhum método implementado.",
+      "Uma classe que herda de `ABC` e define métodos abstratos que as subclasses são obrigadas a implementar.",
+      "Uma classe que só pode ser instanciada uma única vez.",
+      "Uma classe privada que não pode ser importada por outros módulos."
     ],
     correct: 1,
-    explanation: "Correto! Python usa parâmetros opcionais e empacotamento de argumentos como alternativa flexível à sobrecarga tradicional."
+    explanation: "Perfeito! Classes abstratas (ABC) definem contratos. Métodos com @abstractmethod obrigam as subclasses a implementá-los."
   },
   has_interativo: false
 };

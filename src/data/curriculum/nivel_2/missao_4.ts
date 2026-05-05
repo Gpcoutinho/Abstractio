@@ -2,76 +2,58 @@ import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "2-4",
-  title: "Contratos — Interfaces",
-  icon: "🔌",
+  title: "Herança",
+  icon: "🧬",
   theory: `
-## Interfaces
+## Herança
 
-Uma **interface** é um contrato puro — define *o quê* deve ser feito, sem implementar *como*. Em Python, simulamos interfaces com classes que herdam de \`ABC\` e possuem apenas métodos abstratos.
-
-\`\`\`python
-from abc import ABC, abstractmethod
-
-class Serializavel(ABC):
-    @abstractmethod
-    def para_dict(self) -> dict:
-        pass
-
-    @abstractmethod
-    def para_json(self) -> str:
-        pass
-
-class Autenticavel(ABC):
-    @abstractmethod
-    def autenticar(self, senha: str) -> bool:
-        pass
-\`\`\`
-
-### Implementando múltiplas interfaces
-
-Python suporta herança múltipla — uma classe pode assinar vários contratos:
+**Herança** permite que uma classe filha (subclasse) herde atributos e métodos de uma classe pai (superclasse), promovendo reuso e especialização.
 
 \`\`\`python
-import json
-
-class Usuario(Serializavel, Autenticavel):
-    def __init__(self, nome, senha_hash):
+class Animal:
+    def __init__(self, nome):
         self.nome = nome
-        self._senha_hash = senha_hash
 
-    def para_dict(self):
-        return {"nome": self.nome}
+    def respirar(self):
+        return f"{self.nome} está respirando."
 
-    def para_json(self):
-        return json.dumps(self.para_dict())
+    def fazer_som(self):
+        return "..."
 
-    def autenticar(self, senha):
-        return hash(senha) == self._senha_hash
+class Cachorro(Animal):    # herda de Animal
+    def fazer_som(self):   # sobrescreve (override)
+        return f"{self.nome} diz: Au au!"
 
-u = Usuario("Ana", hash("1234"))
-print(u.para_json())           # {"nome": "Ana"}
-print(u.autenticar("1234"))    # True
-print(u.autenticar("errada"))  # False
+class Gato(Animal):
+    def fazer_som(self):
+        return f"{self.nome} diz: Miau!"
+
+rex = Cachorro("Rex")
+print(rex.respirar())   # Rex está respirando. ← herdado
+print(rex.fazer_som())  # Rex diz: Au au!     ← sobrescrito
 \`\`\`
 
-### Interface vs Classe Abstrata
+### \`super()\` — acessando a classe pai
 
-| | Interface (pura) | Classe Abstrata |
-|---|---|---|
-| Implementação | Nenhuma | Pode ter parcial |
-| Propósito | Definir capacidades | Definir base comum |
-| Herança | Múltipla (recomendada) | Geralmente única |
+\`\`\`python
+class AnimalDomestico(Animal):
+    def __init__(self, nome, dono):
+        super().__init__(nome)  # chama Animal.__init__
+        self.dono = dono
+\`\`\`
+
+Python também suporta **herança múltipla**: \`class Anfibio(Terrestre, Aquatico): pass\`
 `,
   exercise: {
-    question: "O que caracteriza uma interface pura em Python?",
+    question: "O que acontece quando uma subclasse define um método com o mesmo nome que a superclasse?",
     options: [
-      "Uma classe com pelo menos um método implementado e um abstrato.",
-      "Uma classe que herda de `ABC` e contém apenas métodos abstratos, sem nenhuma implementação.",
-      "Uma classe que não pode ser herdada por outras classes.",
-      "Um módulo Python separado que define funções globais."
+      "Ocorre um erro de execução.",
+      "O método da subclasse sobrescreve (override) o da superclasse para aquela instância.",
+      "Ambos os métodos são executados simultaneamente.",
+      "O método da superclasse sempre tem prioridade."
     ],
     correct: 1,
-    explanation: "Correto! Uma interface pura em Python é uma classe ABC com apenas @abstractmethod — ela define o contrato sem implementar nada."
+    explanation: "Correto! Isso se chama override (sobrescrita). A subclasse redefine o comportamento para suas próprias instâncias."
   },
   has_interativo: false
 };

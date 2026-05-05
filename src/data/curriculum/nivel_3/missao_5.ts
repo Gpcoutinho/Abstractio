@@ -2,121 +2,76 @@ import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "3-5",
-  title: "Design Patterns",
-  icon: "🗺️",
+  title: "Contratos — Interfaces",
+  icon: "🔌",
   theory: `
-## Design Patterns
+## Interfaces
 
-**Design Patterns** (Padrões de Projeto) são soluções consagradas para problemas recorrentes em design de software. Foram catalogados por Erich Gamma et al. no livro "Design Patterns" (Gang of Four).
-
-Não são código pronto — são **modelos de solução** adaptáveis ao contexto.
-
-### As 3 categorias
-
-| Categoria | Foco | Exemplos |
-|---|---|---|
-| **Criacionais** | Como objetos são criados | Factory, Singleton, Builder |
-| **Estruturais** | Como classes se organizam | Adapter, Decorator, Facade |
-| **Comportamentais** | Como objetos se comunicam | Strategy, Observer, Command |
-
----
-
-### Strategy — comportamento intercambiável
+Uma **interface** é um contrato puro — define *o quê* deve ser feito, sem implementar *como*. Em Python, simulamos interfaces com classes que herdam de \`ABC\` e possuem apenas métodos abstratos.
 
 \`\`\`python
 from abc import ABC, abstractmethod
 
-class EstrategiaOrdenacao(ABC):
+class Serializavel(ABC):
     @abstractmethod
-    def ordenar(self, dados: list) -> list: pass
+    def para_dict(self) -> dict:
+        pass
 
-class BubbleSort(EstrategiaOrdenacao):
-    def ordenar(self, dados):
-        d = dados[:]
-        for i in range(len(d)):
-            for j in range(len(d) - i - 1):
-                if d[j] > d[j+1]:
-                    d[j], d[j+1] = d[j+1], d[j]
-        return d
+    @abstractmethod
+    def para_json(self) -> str:
+        pass
 
-class PythonSort(EstrategiaOrdenacao):
-    def ordenar(self, dados):
-        return sorted(dados)
-
-class Processador:
-    def __init__(self, estrategia: EstrategiaOrdenacao):
-        self._estrategia = estrategia
-
-    def processar(self, dados):
-        return self._estrategia.ordenar(dados)
-
-p = Processador(PythonSort())
-print(p.processar([3, 1, 4, 1, 5]))  # [1, 1, 3, 4, 5]
+class Autenticavel(ABC):
+    @abstractmethod
+    def autenticar(self, senha: str) -> bool:
+        pass
 \`\`\`
 
----
+### Implementando múltiplas interfaces
 
-### Observer — notificação de eventos
+Python suporta herança múltipla — uma classe pode assinar vários contratos:
 
 \`\`\`python
-class EventoEstoque:
-    def __init__(self):
-        self._observadores = []
+import json
 
-    def assinar(self, obs):
-        self._observadores.append(obs)
+class Usuario(Serializavel, Autenticavel):
+    def __init__(self, nome, senha_hash):
+        self.nome = nome
+        self._senha_hash = senha_hash
 
-    def notificar(self, produto, quantidade):
-        for obs in self._observadores:
-            obs.atualizar(produto, quantidade)
+    def para_dict(self):
+        return {"nome": self.nome}
 
-class AlertaEmail:
-    def atualizar(self, produto, qtd):
-        print(f"📧 Email: {produto} — restam {qtd} unidades.")
+    def para_json(self):
+        return json.dumps(self.para_dict())
 
-class AlertaSMS:
-    def atualizar(self, produto, qtd):
-        print(f"📱 SMS: Estoque baixo de {produto}!")
+    def autenticar(self, senha):
+        return hash(senha) == self._senha_hash
 
-evento = EventoEstoque()
-evento.assinar(AlertaEmail())
-evento.assinar(AlertaSMS())
-evento.notificar("Caneta", 3)
+u = Usuario("Ana", hash("1234"))
+print(u.para_json())           # {"nome": "Ana"}
+print(u.autenticar("1234"))    # True
+print(u.autenticar("errada"))  # False
 \`\`\`
 
----
+### Interface vs Classe Abstrata
 
-### Factory — criação centralizada
-
-\`\`\`python
-class ConexaoBanco(ABC):
-    @abstractmethod
-    def conectar(self): pass
-
-class MySQL(ConexaoBanco):
-    def conectar(self): return "Conectado ao MySQL"
-
-class PostgreSQL(ConexaoBanco):
-    def conectar(self): return "Conectado ao PostgreSQL"
-
-def fabrica_banco(tipo: str) -> ConexaoBanco:
-    bancos = {"mysql": MySQL, "postgres": PostgreSQL}
-    return bancos[tipo]()
-
-db = fabrica_banco("postgres")
-print(db.conectar())
-\`\`\`
+| | Interface (pura) | Classe Abstrata |
+|---|---|---|
+| Implementação | Nenhuma | Pode ter parcial |
+| Propósito | Definir capacidades | Definir base comum |
+| Herança | Múltipla (recomendada) | Geralmente única |
 `,
   exercise: {
-    question: "O padrão **Strategy** é mais adequado quando:",
+    question: "O que caracteriza uma interface pura em Python?",
     options: [
-      "Você precisa garantir que uma classe tenha apenas uma instância no sistema.",
-      "Você quer poder trocar o algoritmo ou comportamento de um objeto em tempo de execução sem alterar o código que o usa.",
-      "Você precisa notificar múltiplos objetos quando o estado de outro muda.",
-      "Você quer criar objetos complexos passo a passo."
+      "Uma classe com pelo menos um método implementado e um abstrato.",
+      "Uma classe que herda de `ABC` e contém apenas métodos abstratos, sem nenhuma implementação.",
+      "Uma classe que não pode ser herdada por outras classes.",
+      "Um módulo Python separado que define funções globais."
     ],
     correct: 1,
-    explanation: "Correto! Strategy encapsula algoritmos intercambiáveis — o objeto que os usa não precisa saber qual estratégia está ativa, apenas chamá-la."
+    explanation: "Correto! Uma interface pura em Python é uma classe ABC com apenas @abstractmethod — ela define o contrato sem implementar nada."
   },
   has_interativo: false
 };

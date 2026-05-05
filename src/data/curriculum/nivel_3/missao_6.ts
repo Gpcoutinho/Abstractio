@@ -2,54 +2,81 @@ import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "3-6",
-  title: "Resumo",
-  icon: "📋",
+  title: "Contratos — Classes Abstratas",
+  icon: "🏛️",
   theory: `
-## Resumo — O arquiteto mestre
+## Classes Abstratas
 
-Parabéns! Você concluiu a trilha completa de Orientação a Objetos.
+Diferente de uma interface pura, uma **classe abstrata** pode combinar métodos abstratos (sem implementação) com métodos concretos (com implementação compartilhada).
 
-### O que você domina agora
+Ela define uma base comum para uma família de classes.
 
-| Nível | Conquista |
+\`\`\`python
+from abc import ABC, abstractmethod
+
+class Relatorio(ABC):
+    def __init__(self, titulo):
+        self.titulo = titulo
+
+    # Métodos abstratos — cada subclasse implementa do seu jeito
+    @abstractmethod
+    def gerar_cabecalho(self) -> str:
+        pass
+
+    @abstractmethod
+    def gerar_corpo(self, dados: list) -> str:
+        pass
+
+    # Método concreto — comportamento compartilhado por todas
+    def exportar(self, dados: list) -> str:
+        cab  = self.gerar_cabecalho()
+        corp = self.gerar_corpo(dados)
+        return f"{cab}\\n{corp}\\n--- fim do relatório ---"
+
+
+class RelatorioPDF(Relatorio):
+    def gerar_cabecalho(self):
+        return f"[PDF] === {self.titulo} ==="
+
+    def gerar_corpo(self, dados):
+        return "\\n".join(f"• {item}" for item in dados)
+
+
+class RelatorioCSV(Relatorio):
+    def gerar_cabecalho(self):
+        return self.titulo
+
+    def gerar_corpo(self, dados):
+        return ",".join(str(d) for d in dados)
+
+
+vendas = ["Janeiro: R$10k", "Fevereiro: R$12k"]
+
+pdf = RelatorioPDF("Relatório de Vendas")
+csv = RelatorioCSV("Vendas")
+
+print(pdf.exportar(vendas))
+print(csv.exportar(vendas))
+\`\`\`
+
+### Quando usar cada um?
+
+| Situação | Use |
 |---|---|
-| **Fundamentos** | Criar classes, objetos, métodos e construtores |
-| **Pilares** | Aplicar abstração, encapsulamento, herança e polimorfismo |
-| **Relações** | Modelar sistemas com sobrescrita, contratos e relacionamentos |
-| **Arquitetura** | Projetar com coesão, baixo acoplamento, SOLID, generics e patterns |
-
-### O checklist do arquiteto
-
-Ao projetar uma classe, pergunte-se:
-
-- [ ] **Coesão** — esta classe tem um propósito único?
-- [ ] **Acoplamento** — ela depende de abstrações, não de implementações?
-- [ ] **SRP** — há apenas uma razão para ela mudar?
-- [ ] **OCP** — posso estendê-la sem modificar o código existente?
-- [ ] **LSP** — as subclasses respeitam o contrato da superclasse?
-- [ ] **ISP** — as interfaces são específicas o suficiente?
-- [ ] **DIP** — as dependências são injetadas, não criadas internamente?
-
-### O caminho não para aqui
-
-Design de software é uma habilidade que se aprofunda com prática. Os próximos passos naturais são:
-
-- **Clean Architecture** — organização de sistemas em camadas
-- **Domain-Driven Design** — modelagem centrada no domínio do negócio
-- **Test-Driven Development** — design guiado por testes
-
-> *"Qualquer tolo pode escrever código que um computador entende. Bons programadores escrevem código que humanos entendem."* — Martin Fowler
+| Só precisa definir o que deve existir | Interface pura |
+| Precisa de comportamento compartilhado + contrato | Classe abstrata |
+| Quer combinar múltiplos contratos | Múltiplas interfaces |
 `,
   exercise: {
-    question: "Qual combinação representa o objetivo central do nível de arquitetura?",
+    question: "Qual a principal diferença entre uma interface pura e uma classe abstrata?",
     options: [
-      "Máximo de classes possível + mínimo de métodos por classe.",
-      "Alta coesão + baixo acoplamento + princípios SOLID.",
-      "Usar todos os design patterns disponíveis em cada projeto.",
-      "Evitar generics e abstrações para manter o código simples."
+      "Interfaces só existem em Java; Python só tem classes abstratas.",
+      "Interfaces definem apenas o contrato; classes abstratas podem ter métodos concretos compartilhados além dos abstratos.",
+      "Classes abstratas não podem ser herdadas, apenas instanciadas.",
+      "Interfaces permitem instanciação direta; classes abstratas não."
     ],
     correct: 1,
-    explanation: "Exato! Alta coesão (propósito único por classe) + baixo acoplamento (dependências via abstração) + SOLID é a fórmula do design orientado a objetos de qualidade."
+    explanation: "Correto! Classes abstratas combinam contrato com implementação parcial compartilhada — ideal quando há comportamento comum entre as subclasses."
   },
   has_interativo: false
 };
