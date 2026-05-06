@@ -99,19 +99,6 @@ Com POO, tudo que pertence a um cachorro fica junto dentro de um **objeto Cachor
 
 ---
 
-## Os três ingredientes da POO
-
-Toda a POO é construída sobre três ideias. Pense em biscoitos:
-
-| Ingrediente | O que é | Analogia do biscoito |
-|---|---|---|
-| **Classe** | O molde, a receita | A forma de cortar a massa |
-| **Objeto** | O produto criado | O biscoito em si |
-| **Método** | O que o objeto faz | Comer, decorar, guardar |
-
-Cada missão deste nível explora um desses ingredientes em detalhe.
-
----
 
 ## No oceano do Polvinho
 
