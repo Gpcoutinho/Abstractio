@@ -57,9 +57,17 @@ Cada missão deste nível explora um desses ingredientes em detalhe.
 
 ## No oceano do Polvinho
 
-> [svg: cena submarina escura com o Polvinho roxo à esquerda (corpo oval, 6 tentáculos com animação de ondulação individual, olhos brancos com pupilas escuras), bolhas subindo animadas, e à direita um bloco de código mostrando `polvo = CriaturaMarina("Polvinho", tentaculos=8)` e `polvo.explorar()`. Fundo com gradiente do azul marinho para azul mais escuro.]
+> [svg: ilustração submarina centralizada (max-width 400px). Fundo escuro com gradiente azul marinho. Bolhas subindo animadas em várias posições. Polvinho roxo centralizado — corpo oval arroxeado, 6 tentáculos com animação de ondulação individual, olhos brancos com pupilas escuras e brilho. Sem texto dentro do SVG — é puramente ilustrativo. Legenda abaixo: "Polvinho e o início da jornada POO".]
 
 Polvinho vive num oceano repleto de criaturas — polvos, baleias, peixes, corais. Cada ser tem características únicas e comportamentos próprios. Para explorar e entender tudo isso sem se perder, ele criou um **sistema de registro**: um jeito de organizar cada criatura com seus dados e ações.
+
+Cada criatura é um objeto com dados e ações:
+
+```python
+polvo  = CriaturaMarina("Polvinho", tentaculos=8)
+baleia = CriaturaMarina("Baleia",   barbatanas=2)
+polvo.explorar()  # Polvinho mergulha!
+```
 
 Esse sistema é exatamente a **Programação Orientada a Objetos** — e ao longo desta trilha, você vai construí-lo do zero junto com Polvinho.
 

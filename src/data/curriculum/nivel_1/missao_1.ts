@@ -113,10 +113,10 @@ Cada missão deste nível explora um desses ingredientes em detalhe.
 
 ---
 
-## 🌊 No oceano do Polvinho
+## No oceano do Polvinho
 
 <figure style="margin:1.5rem 0">
-<svg viewBox="0 0 680 270" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:12px">
+<svg viewBox="0 0 300 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px;display:block;margin:0 auto;border-radius:12px">
   <defs>
     <linearGradient id="gocean" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#07111e"/>
@@ -127,33 +127,33 @@ Cada missão deste nível explora um desses ingredientes em detalhe.
       <stop offset="100%" stop-color="#4F33A9" stop-opacity="0"/>
     </radialGradient>
   </defs>
-  <rect width="680" height="270" fill="url(#gocean)" rx="12"/>
-  <rect x="5" y="5" width="670" height="260" fill="url(#glow)" rx="10"/>
+  <rect width="300" height="230" fill="url(#gocean)" rx="12"/>
+  <rect x="5" y="5" width="290" height="220" fill="url(#glow)" rx="10"/>
 
   <!-- Bubbles -->
-  <circle cx="48" cy="48" r="4" fill="#0a3a5a" opacity="0.7">
-    <animate attributeName="cy" values="48;15;48" dur="3.2s" repeatCount="indefinite"/>
+  <circle cx="40" cy="50" r="4" fill="#0a3a5a" opacity="0.7">
+    <animate attributeName="cy" values="50;15;50" dur="3.2s" repeatCount="indefinite"/>
     <animate attributeName="opacity" values="0.7;0;0.7" dur="3.2s" repeatCount="indefinite"/>
   </circle>
-  <circle cx="110" cy="100" r="3" fill="#0a3a5a" opacity="0.5">
+  <circle cx="90" cy="100" r="3" fill="#0a3a5a" opacity="0.5">
     <animate attributeName="cy" values="100;55;100" dur="2.6s" repeatCount="indefinite"/>
     <animate attributeName="opacity" values="0.5;0;0.5" dur="2.6s" repeatCount="indefinite"/>
   </circle>
-  <circle cx="30" cy="160" r="5" fill="#0a3a5a" opacity="0.4">
+  <circle cx="25" cy="160" r="5" fill="#0a3a5a" opacity="0.4">
     <animate attributeName="cy" values="160;90;160" dur="4s" repeatCount="indefinite"/>
     <animate attributeName="opacity" values="0.4;0;0.4" dur="4s" repeatCount="indefinite"/>
   </circle>
-  <circle cx="650" cy="60" r="4" fill="#0a3a5a" opacity="0.5">
+  <circle cx="260" cy="60" r="4" fill="#0a3a5a" opacity="0.5">
     <animate attributeName="cy" values="60;20;60" dur="3.8s" repeatCount="indefinite"/>
     <animate attributeName="opacity" values="0.5;0;0.5" dur="3.8s" repeatCount="indefinite"/>
   </circle>
-  <circle cx="630" cy="130" r="3" fill="#0a3a5a" opacity="0.4">
+  <circle cx="240" cy="130" r="3" fill="#0a3a5a" opacity="0.4">
     <animate attributeName="cy" values="130;75;130" dur="2.9s" repeatCount="indefinite"/>
     <animate attributeName="opacity" values="0.4;0;0.4" dur="2.9s" repeatCount="indefinite"/>
   </circle>
 
   <!-- Polvinho -->
-  <g transform="translate(90,148)">
+  <g transform="translate(150,148)">
     <ellipse cx="0" cy="-10" rx="42" ry="42" fill="#4F33A9" opacity="0.12"/>
     <ellipse cx="0" cy="-48" rx="28" ry="24" fill="#7c5cbf"/>
     <ellipse cx="0" cy="-20" rx="32" ry="30" fill="#6b4aaa"/>
@@ -184,25 +184,19 @@ Cada missão deste nível explora um desses ingredientes em detalhe.
       <animateTransform attributeName="transform" type="rotate" values="6,26,4;-6,26,4;6,26,4" dur="2.4s" repeatCount="indefinite"/>
     </path>
   </g>
-
-  <!-- Text -->
-  <text x="180" y="48" fill="#6EEB83" font-size="18" font-family="monospace" font-weight="bold">🌊 No oceano do Polvinho</text>
-  <text x="180" y="76" fill="#8898c8" font-size="14" font-family="sans-serif">Polvinho vive num oceano cheio de criaturas. Cada uma</text>
-  <text x="180" y="98" fill="#8898c8" font-size="14" font-family="sans-serif">tem características únicas e comportamentos próprios.</text>
-  <text x="180" y="120" fill="#8898c8" font-size="14" font-family="sans-serif">Para explorar tudo sem se perder, ele criou um sistema</text>
-  <text x="180" y="142" fill="#8898c8" font-size="14" font-family="sans-serif">de registro — e esse sistema é a POO.</text>
-
-  <!-- Code block -->
-  <rect x="180" y="162" width="482" height="96" rx="8" fill="#080e18" stroke="#0f2035" stroke-width="1.5"/>
-  <text x="198" y="184" fill="#6090b0" font-size="12" font-family="monospace"># cada criatura é um objeto com dados e ações</text>
-  <text x="198" y="204" fill="#6080c0" font-size="12" font-family="monospace">polvo  = CriaturaMarina("Polvinho", tentaculos=8)</text>
-  <text x="198" y="224" fill="#6080c0" font-size="12" font-family="monospace">baleia = CriaturaMarina("Baleia",   barbatanas=2)</text>
-  <text x="198" y="244" fill="#6080c0" font-size="12" font-family="monospace">polvo.explorar()  <tspan fill="#5aaa70"># Polvinho mergulha!</tspan></text>
 </svg>
 <figcaption style="text-align:center;font-size:12px;color:#7878a0;margin-top:6px;font-family:monospace">Polvinho e o início da jornada POO</figcaption>
 </figure>
 
 Polvinho vive num oceano repleto de criaturas — polvos, baleias, peixes, corais. Cada ser tem características únicas e comportamentos próprios. Para explorar e entender tudo isso sem se perder, ele criou um **sistema de registro**: um jeito de organizar cada criatura com seus dados e ações.
+
+Cada criatura é um objeto com dados e ações:
+
+\`\`\`python
+polvo  = CriaturaMarina("Polvinho", tentaculos=8)
+baleia = CriaturaMarina("Baleia",   barbatanas=2)
+polvo.explorar()  # Polvinho mergulha!
+\`\`\`
 
 Esse sistema é exatamente a **Programação Orientada a Objetos** — e ao longo desta trilha, você vai construí-lo do zero junto com Polvinho.
 `,
