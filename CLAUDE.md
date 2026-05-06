@@ -239,9 +239,10 @@ Essas linhas descrevem o visual existente (ou desejado) naquele ponto da teoria.
 
 ## Fluxo de Desenvolvimento
 
-1. Propor a implementação e aguardar aprovação antes de executar
+1. Antes de executar qualquer comando de escrita, alteração de arquivo ou build, **explicar detalhadamente** o que pretende fazer e **aguardar um "ok" explícito** da Rebecca
 2. Implementar + testar localmente
 3. Perguntar à Rebecca se deseja commitar antes de qualquer commit
+4. Ao final de mudanças maiores, informar quantas linhas foram adicionadas/excluídas
 
 ## Commits
 
