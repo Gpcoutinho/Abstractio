@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import ReactMarkdown from 'react-markdown';
@@ -19,6 +19,11 @@ const Missao: React.FC = () => {
 
   const [selecionada, setSelecionada] = useState<number | null>(null);
   const [respondida, setRespondida] = useState(false);
+
+  useEffect(() => {
+    setSelecionada(null);
+    setRespondida(false);
+  }, [nivelIdx, missaoIdx]);
 
   const nivel = niveis.find(n => n.id === Number(nivelIdx));
   const missao = nivel?.missoes[Number(missaoIdx) - 1];
@@ -65,8 +70,22 @@ const Missao: React.FC = () => {
           <ArrowLeftIcon className="w-4 h-4" />
           Voltar à trilha
         </Link>
-        {jaConcluida && (
-          <span className="text-xs text-accent font-medium">✓ Missão concluída</span>
+        {proximaMissao ? (
+          <Link
+            to={proximaMissao}
+            className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+          >
+            Próxima missão
+            <ArrowRightIcon className="w-4 h-4" />
+          </Link>
+        ) : (
+          <Link
+            to="/conquistas"
+            className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+          >
+            Ver conquistas
+            <ArrowRightIcon className="w-4 h-4" />
+          </Link>
         )}
       </div>
 
@@ -156,7 +175,7 @@ const Missao: React.FC = () => {
 
         {/* Botões */}
         <div className="mt-5 flex items-center gap-3">
-          {!respondida ? (
+          {!respondida && (
             <button
               onClick={handleSubmit}
               disabled={selecionada === null}
@@ -164,26 +183,6 @@ const Missao: React.FC = () => {
             >
               Responder
             </button>
-          ) : proximaMissao ? (
-            <button
-              onClick={() => {
-                setSelecionada(null);
-                setRespondida(false);
-                navigate(proximaMissao);
-              }}
-              className="hero-cta inline-flex items-center gap-2 px-5 py-2 rounded-lg font-semibold"
-            >
-              Próxima missão
-              <ArrowRightIcon className="w-4 h-4" />
-            </button>
-          ) : (
-            <Link
-              to="/conquistas"
-              className="hero-cta inline-flex items-center gap-2 px-5 py-2 rounded-lg font-semibold"
-            >
-              Ver conquistas
-              <ArrowRightIcon className="w-4 h-4" />
-            </Link>
           )}
 
           {respondida && !acertou && (
@@ -196,6 +195,31 @@ const Missao: React.FC = () => {
           )}
         </div>
       </section>
+
+      {/* Navegação para próxima missão */}
+      <div className="mt-10 flex justify-center">
+        {proximaMissao ? (
+          <button
+            onClick={() => {
+              setSelecionada(null);
+              setRespondida(false);
+              navigate(proximaMissao);
+            }}
+            className="hero-cta inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold"
+          >
+            Próxima missão
+            <ArrowRightIcon className="w-4 h-4" />
+          </button>
+        ) : (
+          <Link
+            to="/conquistas"
+            className="hero-cta inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold"
+          >
+            Ver conquistas
+            <ArrowRightIcon className="w-4 h-4" />
+          </Link>
+        )}
+      </div>
 
     </div>
   );
