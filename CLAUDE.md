@@ -104,6 +104,31 @@ O título exibido no Header vem sempre do cálculo acima, nunca de um campo sepa
 
 ## Conteúdo das Missões
 
+**Fonte de verdade criativa:** `docs/missoes/nivel_N/missao_N.md` — arquivos markdown editáveis usados para redigir e revisar o conteúdo de cada missão.
+
+**Fonte de verdade do app:** `src/data/curriculum/nivel_N/missao_N.ts` — importados estaticamente, sem fetch.
+
+### Fluxo de edição de conteúdo
+
+1. Rebecca edita o `.md` correspondente
+2. Pede para "repassar" para o `.ts`
+3. Ler o `.md`, extrair teoria/exercício/metadados e sobrescrever o `.ts` mantendo a estrutura TypeScript intacta
+4. Nunca editar o `.ts` diretamente para conteúdo — sempre partir do `.md`
+
+### Mapeamento de campos `.md` → `.ts`
+
+| Campo no `.md` | Campo no `.ts` |
+|---|---|
+| `# Missão N-N — Título` | `title` |
+| `**Ícone:**` | `icon` |
+| Seção `## Teoria` | `theory` (template literal) |
+| `[x] Tem interativo` | `has_interativo: true` |
+| `**Arquivo:**` | `interativo_html` |
+| `**Pergunta:**` | `exercise.question` |
+| Opção com `[x]` | `exercise.correct` (índice 0-based) |
+| Textos das opções | `exercise.options` |
+| `**Explicação:**` | `exercise.explanation` |
+
 Fonte: módulos TypeScript em `src/data/curriculum/nivel_N/missao_N.ts` — importados estaticamente, sem fetch.
 
 ```typescript
