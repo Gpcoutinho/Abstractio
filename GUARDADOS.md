@@ -20,3 +20,10 @@ Ideias boas que ficaram de fora de algum lugar por timing, complexidade ou simpl
 > | **Método** | O que o objeto faz | Comer, decorar, guardar |
 >
 > Cada missão deste nível explora um desses ingredientes em detalhe.
+
+---
+
+## Mascote animado na seção "Conheça o Sr. Polvonilson" (Missão 1-0)
+
+**Origem:** Missão 1-0 — "Antes de começar"
+**Motivo guardado:** Ideia adiada por prioridade. Adicionar o SVG animado do Polvonilson (tentáculos ondulando + bolhas) logo abaixo do título `## Conheça o Sr. Polvonilson`, antes do texto, para o usuário ver o personagem antes de ler sobre ele. O SVG já existe na missão 1-1 e pode ser reutilizado.
