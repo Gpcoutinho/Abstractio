@@ -39,20 +39,21 @@ Até aqui, tudo bem, certo? Mas e se precisarmos de 100 polvos no nosso oceano? 
 
 A mágica da POO acontece porque o código te permite materializar o seu modelo mental. Olha como fica fácil definir a estrutura do nosso mascote:
 
-<figure style="margin:1.5rem 0">
-<svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:500px;display:block;margin:0 auto;border-radius:12px">
+<div style="display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;margin:1.5rem 0">
+<figure style="flex:0 0 auto;margin:0">
+<svg viewBox="0 0 170 210" xmlns="http://www.w3.org/2000/svg" style="width:170px;display:block;border-radius:12px">
   <defs>
     <linearGradient id="gbg-m1" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#07111e"/>
       <stop offset="100%" stop-color="#040c16"/>
     </linearGradient>
   </defs>
-  <rect width="400" height="210" fill="url(#gbg-m1)" rx="12"/>
+  <rect width="170" height="210" fill="url(#gbg-m1)" rx="12"/>
   <circle cx="35" cy="45" r="3" fill="#0a3a5a" opacity="0.6">
     <animate attributeName="cy" values="45;12;45" dur="3.1s" repeatCount="indefinite"/>
     <animate attributeName="opacity" values="0.6;0;0.6" dur="3.1s" repeatCount="indefinite"/>
   </circle>
-  <circle cx="155" cy="90" r="2" fill="#0a3a5a" opacity="0.35">
+  <circle cx="140" cy="90" r="2" fill="#0a3a5a" opacity="0.35">
     <animate attributeName="cy" values="90;55;90" dur="2.4s" repeatCount="indefinite"/>
     <animate attributeName="opacity" values="0.35;0;0.35" dur="2.4s" repeatCount="indefinite"/>
   </circle>
@@ -91,27 +92,33 @@ A mágica da POO acontece porque o código te permite materializar o seu modelo 
   </path>
   <rect x="56" y="168" width="66" height="18" rx="4" fill="#1a0a30" opacity="0.9"/>
   <text x="89" y="181" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" font-weight="700" fill="#8A4FFF">meu_polvo</text>
-  <text x="178" y="100" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#4F33A9" opacity="0.8">→</text>
-  <rect x="198" y="52" width="182" height="98" rx="8" fill="#08111f" stroke="#2d3a8c" stroke-width="1.2"/>
-  <rect x="198" y="52" width="182" height="28" rx="8" fill="#130d2a"/>
-  <rect x="198" y="68" width="182" height="12" fill="#130d2a"/>
-  <text x="289" y="71" text-anchor="middle" font-family="'Courier New', monospace" font-size="12" font-weight="700" fill="#c4b5fd">meu_polvo</text>
-  <line x1="207" y1="80" x2="371" y2="80" stroke="#2d3a8c" stroke-width="1"/>
-  <rect x="198" y="80" width="3" height="70" rx="1" fill="#4F33A9" opacity="0.5"/>
-  <text x="212" y="100" font-family="'Courier New', monospace" font-size="11.5"><tspan fill="#7dd3fc">nome</tspan><tspan fill="#94a3b8"> = </tspan><tspan fill="#34d399">"Polvonilson"</tspan></text>
-  <text x="212" y="122" font-family="'Courier New', monospace" font-size="11.5"><tspan fill="#7dd3fc">cor</tspan><tspan fill="#94a3b8">  = </tspan><tspan fill="#34d399">"Roxo"</tspan></text>
 </svg>
-<figcaption style="text-align:center;font-size:12px;color:#7878a0;margin-top:6px;font-family:monospace">meu_polvo — um pacote com dados organizados</figcaption>
+
 </figure>
-
-\`\`\`python
-# Em python:
-
-meu_polvo = {
+<span style="font-size:22px;color:#4F33A9;opacity:0.8;flex-shrink:0">→</span>
+<div style="display:flex;flex-direction:row;gap:1rem;align-items:center">
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+<span style="font-family:sans-serif;font-size:11px;font-weight:700;color:#8A4FFF;letter-spacing:0.05em">Entidade</span>
+<svg viewBox="0 0 10 26" style="width:10px;height:26px"><line x1="5" y1="0" x2="5" y2="18" stroke="#4F33A9" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.7"/><polygon points="1,16 5,22 9,16" fill="#4F33A9" opacity="0.7"/></svg>
+<div style="background:#08111f;border:1px solid #2d3a8c;border-radius:8px;overflow:hidden;min-width:190px">
+<div style="background:#130d2a;padding:6px 12px;border-bottom:1px solid #2d3a8c;font-family:'Courier New',monospace;font-size:12px;font-weight:700;color:#c4b5fd;text-align:center">meu_polvo</div>
+<div style="padding:10px 12px 10px 15px;display:flex;flex-direction:column;gap:8px;border-left:3px solid rgba(79,51,169,0.5)">
+<span style="font-family:'Courier New',monospace;font-size:12px"><span style="color:#7dd3fc">nome</span><span style="color:#94a3b8"> = </span><span style="color:#34d399">"Polvonilson"</span></span>
+<span style="font-family:'Courier New',monospace;font-size:12px"><span style="color:#7dd3fc">cor</span><span style="color:#94a3b8">  = </span><span style="color:#34d399">"Roxo"</span></span>
+</div>
+</div>
+</div>
+<span style="font-size:22px;color:#4F33A9;opacity:0.8;flex-shrink:0">→</span>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+<span style="font-family:sans-serif;font-size:11px;font-weight:700;color:#8A4FFF;letter-spacing:0.05em">Código Python</span>
+<svg viewBox="0 0 10 26" style="width:10px;height:26px"><line x1="5" y1="0" x2="5" y2="18" stroke="#4F33A9" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.7"/><polygon points="1,16 5,22 9,16" fill="#4F33A9" opacity="0.7"/></svg>
+<pre style="margin:0;background:#1e1e35;border:1px solid #3d3d5e;border-radius:8px;padding:1rem 1.25rem;font-family:'Courier New',monospace;font-size:13px;color:#e2e8f0;overflow-x:auto;min-width:190px"><code style="color:inherit;background:transparent">meu_polvo = {
     "nome": "Polvonilson",
     "cor": "Roxo"
-}
-\`\`\`
+}</code></pre>
+</div>
+</div>
+</div>
 
 Olha que limpo! Todas as características estão unidas nesse pacote.
 
