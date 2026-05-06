@@ -1,0 +1,58 @@
+### Missão 1-1: O que é POO?
+
+**Ícone:** 🧩
+**Pontos:** 15
+
+## Teoria
+
+E aí, vamos dar o primeiro passo na nossa trilha?
+
+Se você já pagou a cadeira de Introdução à Programação (provavelmente em C ou Python), você aprendeu a programar no paradigma **Procedural**. Pense na programação procedural como uma **receita de bolo**: o código é um algoritmo linear, um passo a passo. Você cria variáveis soltas e depois cria funções separadas para mexer nelas.
+
+##Mas afinal, o que é a Orientação a Objetos (POO)?
+
+De forma bem direta: é simplesmente **uma maneira diferente de organizar o seu código**, pensando em **entidades vivas** em vez de listas de comandos.
+
+Em vez de focar apenas no passo a passo (o algoritmo), a POO foca nos **atores** que fazem o programa funcionar. A gente para de pensar em variáveis scattered (espalhadas) e passa a pensar em pacotes chamados **Objetos**.
+
+## O problema que a POO resolve
+
+**"Mas como assim? Por que eu deveria trocar a procedural pela POO?"**
+Vamos entender isso no contexto da nossa própria trilha. Imagine que precisamos colocar o nosso mascote, o Polvo, flutuando aqui na sua tela.
+
+Na abordagem Procedural, nós criaríamos variáveis e funções totalmente separadas:
+```python
+# Abordagem Procedural
+polvo1_nome = "Polvonilson"
+polvo1_cor = "Roxo"
+
+polvo2_nome = "Azulão"
+polvo2_cor = "Azul"
+
+# E assim por diante para cada polvo... São muitas variáveis soltas!
+```
+Até aqui, tudo bem, certo? Mas e se precisarmos de 100 polvos no nosso oceano? Na programação procedural, isso viraria um caos de gerenciamento. Você teria que criar listas gigantescas e garantir que os dados não se misturassem.
+
+É exatamente aqui que a POO entra para salvar o dia. Na POO, nós paramos de lidar com variáveis soltas. Nós criamos um pacote auto-suficiente chamado **Objeto** que guarda toda a informação necessária sobre aquela entidade.
+
+A mágica da POO acontece porque o código te permite materializar o seu modelo mental. Olha como fica fácil definir a estrutura do nosso mascote no código:
+
+```python
+# [Prompt para ClaudeCode]: Gere um card visual mostrando um polvo cartoon estilizado rotulado como "meu_polvo". Ao lado, mostre uma tabela listando sua estrutura ativa: 'nome: "Tinta"' e 'cor: "Roxo"'. Use a paleta de cores aquáticas da plataforma.
+
+# Abordagem OO - Focando apenas no Objeto
+meu_polvo = {
+    "nome": "Polvonilson",
+    "cor": "Roxo"
+}
+
+# Olha que limpo! Todas as características estão unidas nesse pacote.
+```
+
+Percebe como, nesse caso, a POO ajuda muito mais? Se quisermos 100 polvos agora, é só usar essa mesma estrutura 100 vezes. O código fica limpo, organizado e faz sentido para a mente humana.
+
+Por esses motivos, te incentivamos a continuar a trilha! Cada missão vai reforçar cada vez mais o seu entendimento e construir a sua base como Cientista. Vamos para a próxima etapa?
+
+## Mini-jogo
+
+## Exercício
