@@ -49,6 +49,15 @@ const Missao: React.FC = () => {
     return null;
   })();
 
+  const missaoAnterior = (() => {
+    if (missaoIdxNum > 1) {
+      return `/missao/${nivel.id}/${missaoIdxNum - 1}`;
+    }
+    const nivelAnterior = niveis.find(n => n.id === nivel.id - 1);
+    if (nivelAnterior) return `/missao/${nivelAnterior.id}/${nivelAnterior.missoes.length}`;
+    return null;
+  })();
+
   const jaConcluida = isMissaoConcluida(missao.id);
   const acertou = selecionada === missao.exercise.correct;
 
@@ -63,13 +72,24 @@ const Missao: React.FC = () => {
 
       {/* Navegação */}
       <div className="flex items-center justify-between mb-8">
-        <Link
-          to="/trilha"
-          className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
-        >
-          <ArrowLeftIcon className="w-4 h-4" />
-          Voltar à trilha
-        </Link>
+        <div className="flex flex-col gap-2">
+          <Link
+            to="/trilha"
+            className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+          >
+            <ArrowLeftIcon className="w-4 h-4" />
+            Voltar à trilha
+          </Link>
+          {missaoAnterior && (
+            <Link
+              to={missaoAnterior}
+              className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+            >
+              <ArrowLeftIcon className="w-4 h-4" />
+              Missão anterior
+            </Link>
+          )}
+        </div>
         {proximaMissao ? (
           <Link
             to={proximaMissao}
@@ -196,15 +216,20 @@ const Missao: React.FC = () => {
         </div>
       </section>
 
-      {/* Navegação para próxima missão */}
-      <div className="mt-10 flex justify-center">
+      {/* Navegação inferior */}
+      <div className="mt-10 flex justify-center items-center gap-4">
+        {missaoAnterior && (
+          <button
+            onClick={() => navigate(missaoAnterior)}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-borderDark text-textSecondary hover:border-accent hover:text-textPrimary transition-colors font-semibold"
+          >
+            <ArrowLeftIcon className="w-4 h-4" />
+            Missão anterior
+          </button>
+        )}
         {proximaMissao ? (
           <button
-            onClick={() => {
-              setSelecionada(null);
-              setRespondida(false);
-              navigate(proximaMissao);
-            }}
+            onClick={() => navigate(proximaMissao)}
             className="hero-cta inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold"
           >
             Próxima missão
