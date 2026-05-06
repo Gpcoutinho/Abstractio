@@ -2,21 +2,14 @@ import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "3-4",
-  title: "Os Contratos",
-  icon: "📜",
+  title: "Classes Abstratas",
+  icon: "🏛️",
   theory: `
-## Os Contratos
+## O problema sem contratos
 
-Em POO, um **contrato** é um acordo formal que define o que uma classe *deve* fazer — sem ditar *como* ela faz.
-
-Quando uma classe assina um contrato, ela se compromete a implementar um conjunto de métodos. Isso garante que qualquer objeto que respeite o contrato possa ser usado de forma intercambiável.
-
-### Por que contratos existem?
-
-Imagine que você está construindo um sistema de pagamentos. Você quer aceitar Pix, cartão de crédito e boleto. Sem um contrato:
+Imagine um sistema de pagamentos com Pix, cartão e boleto. Sem um acordo comum:
 
 \`\`\`python
-# Sem contrato — caótico
 class PagamentoPix:
     def pagar_pix(self, valor): ...
 
@@ -27,49 +20,84 @@ class PagamentoBoleto:
     def emitir_boleto(self, valor): ...
 \`\`\`
 
-Cada classe tem um método diferente — impossível tratá-las uniformemente.
+Cada classe tem um método diferente — impossível tratá-las de forma uniforme. Em POO, a solução é um **contrato**: um acordo formal que define o que toda classe *deve* fazer, sem ditar *como*.
 
-### Com um contrato
+---
+
+## Classe abstrata: contrato com base comum
+
+Uma **classe abstrata** combina duas coisas:
+- **Métodos abstratos** — que as subclasses são obrigadas a implementar
+- **Métodos concretos** — comportamento compartilhado por todas
 
 \`\`\`python
 from abc import ABC, abstractmethod
 
-class MetodoPagamento(ABC):  # o contrato
+class Relatorio(ABC):
+    def __init__(self, titulo):
+        self.titulo = titulo
+
+    # Abstratos — cada subclasse implementa do seu jeito
     @abstractmethod
-    def pagar(self, valor: float) -> str:
+    def gerar_cabecalho(self) -> str:
         pass
 
-class Pix(MetodoPagamento):
-    def pagar(self, valor):
-        return f"✅ Pix de R\${valor:.2f} enviado."
+    @abstractmethod
+    def gerar_corpo(self, dados: list) -> str:
+        pass
 
-class Cartao(MetodoPagamento):
-    def pagar(self, valor):
-        return f"💳 Cartão cobrado: R\${valor:.2f}."
+    # Concreto — compartilhado por todas as subclasses
+    def exportar(self, dados: list) -> str:
+        cab  = self.gerar_cabecalho()
+        corp = self.gerar_corpo(dados)
+        return f"{cab}\\n{corp}\\n--- fim do relatório ---"
 
-class Boleto(MetodoPagamento):
-    def pagar(self, valor):
-        return f"📄 Boleto de R\${valor:.2f} gerado."
 
-def processar_pedido(metodo: MetodoPagamento, valor: float):
-    return metodo.pagar(valor)  # funciona com qualquer método
+class RelatorioPDF(Relatorio):
+    def gerar_cabecalho(self):
+        return f"[PDF] === {self.titulo} ==="
 
-print(processar_pedido(Pix(), 150.00))
-print(processar_pedido(Cartao(), 89.90))
+    def gerar_corpo(self, dados):
+        return "\\n".join(f"• {item}" for item in dados)
+
+
+class RelatorioCSV(Relatorio):
+    def gerar_cabecalho(self):
+        return self.titulo
+
+    def gerar_corpo(self, dados):
+        return ",".join(str(d) for d in dados)
+
+
+vendas = ["Janeiro: R$10k", "Fevereiro: R$12k"]
+pdf = RelatorioPDF("Vendas")
+csv = RelatorioCSV("Vendas")
+
+print(pdf.exportar(vendas))
+print(csv.exportar(vendas))
 \`\`\`
 
-Em Python, contratos são implementados com **interfaces** (via ABC sem implementação) e **classes abstratas** (via ABC com implementação parcial).
+---
+
+## Por que usar classe abstrata?
+
+| Situação | Use |
+|---|---|
+| Há comportamento **compartilhado** entre as subclasses | Classe abstrata |
+| Só precisa definir **o que** deve existir, sem implementar nada | Interface (próxima missão) |
+
+> **Resumindo:** Uma classe abstrata define um contrato parcial — impõe métodos que as subclasses devem implementar, mas também pode oferecer comportamentos prontos e compartilhados.
 `,
   exercise: {
-    question: "Qual é o principal benefício de usar contratos (interfaces/classes abstratas) em um sistema?",
+    question: "Qual a principal diferença entre uma interface pura e uma classe abstrata?",
     options: [
-      "Aumentar o desempenho do código em tempo de execução.",
-      "Garantir que diferentes classes implementem um conjunto comum de métodos, permitindo intercambialidade.",
-      "Impedir que subclasses adicionem novos métodos além dos definidos no contrato.",
-      "Substituir completamente a necessidade de herança no sistema."
+      "Interfaces só existem em Java; Python só tem classes abstratas.",
+      "Interfaces definem apenas o contrato; classes abstratas podem ter métodos concretos compartilhados além dos abstratos.",
+      "Classes abstratas não podem ser herdadas, apenas instanciadas.",
+      "Interfaces permitem instanciação direta; classes abstratas não."
     ],
     correct: 1,
-    explanation: "Correto! Contratos garantem que qualquer classe que os implemente possa ser usada de forma intercambiável, tornando o sistema extensível e previsível."
+    explanation: "Correto! Classes abstratas combinam contrato com implementação parcial compartilhada — ideal quando há comportamento comum entre as subclasses."
   },
   has_interativo: false
 };

@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
 import interativoHtml from '../assets/interativos/nivel_1_missao_1.html?raw';
@@ -87,7 +88,7 @@ const Missao: React.FC = () => {
         prose-blockquote:border-l-accent prose-blockquote:text-textSecondary
         prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary
         prose-li:text-textSecondary">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{missao.theory}</ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{missao.theory}</ReactMarkdown>
       </section>
 
       {/* Mini-jogo */}

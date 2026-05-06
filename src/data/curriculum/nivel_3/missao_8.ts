@@ -2,77 +2,85 @@ import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "3-8",
-  title: "Relacionamentos — Associação",
-  icon: "↔️",
+  title: "Resumo",
+  icon: "📋",
   theory: `
-## Associação
+## Resumo — A sociedade dos objetos
 
-**Associação** é a relação mais fraca — um objeto *usa* outro, mas nenhum depende do ciclo de vida do outro.
+Você dominou como objetos se comportam e se relacionam em sistemas reais.
 
-Os objetos existem de forma independente e a relação é temporária ou opcional.
+### Quadro geral
 
-\`\`\`python
-class Motorista:
-    def __init__(self, nome):
-        self.nome = nome
+| Conceito | Em uma linha |
+|---|---|
+| **Sobrescrita** | Subclasse redefine método da superclasse |
+| **Sobrecarga** | Método aceita diferentes formas de chamada |
+| **Classe Abstrata** | Contrato com implementação parcial compartilhada |
+| **Interface** | Contrato puro — define o quê, não o como |
+| **Associação** | Objetos se usam, mas vivem de forma independente |
+| **Agregação** | "Tem um" — partes independentes do todo |
+| **Composição** | "É composto de" — partes não existem sem o todo |
 
-    def dirigir(self, carro):  # recebe o carro — não é dono dele
-        return f"{self.nome} está dirigindo {carro.modelo}."
-
-class Carro:
-    def __init__(self, modelo):
-        self.modelo = modelo
-
-fusca = Carro("Fusca")
-gol   = Carro("Gol")
-ana   = Motorista("Ana")
-
-print(ana.dirigir(fusca))  # Ana está dirigindo Fusca.
-print(ana.dirigir(gol))    # Ana está dirigindo Gol.
-# fusca e gol continuam existindo independente de ana
-\`\`\`
-
-### Associação bidirecional
+### Tudo junto em um sistema de e-commerce
 
 \`\`\`python
-class Professor:
-    def __init__(self, nome):
-        self.nome   = nome
-        self.alunos = []
+from abc import ABC, abstractmethod
 
-    def adicionar_aluno(self, aluno):
-        self.alunos.append(aluno)
-        aluno.professor = self  # bidirecional
+class Pagamento(ABC):         # interface/contrato
+    @abstractmethod
+    def processar(self, valor): pass
 
-class Aluno:
-    def __init__(self, nome):
-        self.nome      = nome
-        self.professor = None
+class CartaoCredito(Pagamento):
+    def processar(self, valor):
+        return f"💳 Cartão: R\${valor:.2f} aprovado."
 
-prof  = Professor("Dr. Silva")
-aluno = Aluno("Bia")
-prof.adicionar_aluno(aluno)
+class Endereco:               # composição com Pedido
+    def __init__(self, rua, cidade):
+        self.rua    = rua
+        self.cidade = cidade
 
-print(aluno.professor.nome)   # Dr. Silva
-print(prof.alunos[0].nome)    # Bia
+class Produto:                # agregação com Pedido
+    def __init__(self, nome, preco):
+        self.nome  = nome
+        self.preco = preco
+
+class Pedido:
+    def __init__(self, rua, cidade):
+        self.endereco = Endereco(rua, cidade)  # composição
+        self.itens    = []                     # agregação
+
+    def adicionar(self, produto):
+        self.itens.append(produto)
+
+    def total(self):
+        return sum(p.preco for p in self.itens)
+
+    def finalizar(self, pagamento: Pagamento):  # associação
+        return pagamento.processar(self.total())
+
+caneta  = Produto("Caneta",  2.50)
+caderno = Produto("Caderno", 15.00)
+
+pedido = Pedido("Rua A", "SP")
+pedido.adicionar(caneta)
+pedido.adicionar(caderno)
+
+print(pedido.finalizar(CartaoCredito()))
+# 💳 Cartão: R$17.50 aprovado.
 \`\`\`
 
-### Características da Associação
-
-- Objetos **independentes** — um pode existir sem o outro
-- Relação **temporária** ou **opcional**
-- Implementada passando objetos como **parâmetros** ou referências
+> Próximo nível: **engenharia e qualidade** — como escrever código que dura.
 `,
   exercise: {
-    question: "Qual característica define uma relação de **Associação** entre objetos?",
+    question: "Qual é o principal benefício de usar contratos (interfaces/classes abstratas) em um sistema?",
     options: [
-      "Um objeto cria e destrói o outro durante seu ciclo de vida.",
-      "Os objetos se conhecem e interagem, mas existem de forma independente.",
-      "Um objeto é parte estrutural do outro e não pode existir sozinho.",
-      "Um objeto herda atributos e métodos do outro."
+      "Aumentar o desempenho do código em tempo de execução.",
+      "Garantir que diferentes classes implementem um conjunto comum de métodos, permitindo intercambialidade.",
+      "Impedir que subclasses adicionem novos métodos além dos definidos no contrato.",
+      "Substituir completamente a necessidade de herança no sistema."
     ],
     correct: 1,
-    explanation: "Correto! Na associação, os objetos interagem mas são independentes — nenhum controla o ciclo de vida do outro."
+    explanation: "Correto! Contratos garantem que qualquer classe que os implemente possa ser usada de forma intercambiável, tornando o sistema extensível e previsível."
   },
   has_interativo: false
 };

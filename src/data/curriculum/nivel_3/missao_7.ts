@@ -2,46 +2,116 @@ import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "3-7",
-  title: "Relacionamentos",
-  icon: "🔗",
+  title: "Agregação e Composição",
+  icon: "🧱",
   theory: `
-## Relacionamentos entre objetos
+## Dois tipos de "tem um"
 
-Objetos raramente existem sozinhos. Em sistemas reais, eles se conectam de formas diferentes — e cada tipo de conexão tem um nome e implicações diferentes.
+Na missão anterior você viu a **associação**: objetos que se usam mas vivem independentes.
 
-### Os 3 tipos principais
+Agora veja dois relacionamentos mais fortes, onde um objeto **contém** o outro:
 
-| Tipo | Símbolo | Força | Analogia |
-|---|---|---|---|
-| **Associação** | → | Fraca | Motorista usa um carro |
-| **Agregação** | ◇→ | Média | Time tem jogadores |
-| **Composição** | ◆→ | Forte | Casa tem cômodos |
+| | Agregação | Composição |
+|---|---|---|
+| Relação | "tem um" (fraco) | "é composto de" (forte) |
+| As partes existem sem o todo? | ✓ Sim | ✗ Não |
+| Quem cria as partes? | Externo | O próprio todo |
+| Destruição do todo | Partes continuam | Partes são destruídas |
 
-### A pergunta-chave: o que acontece quando o "todo" é destruído?
+---
 
-- **Associação** — a parte continua existindo (o carro não some se o motorista sair)
-- **Agregação** — a parte continua existindo (jogadores continuam existindo sem o time)
-- **Composição** — a parte é destruída junto (cômodos não existem sem a casa)
+## Agregação — partes independentes
 
-### Por que isso importa?
+\`\`\`python
+class Jogador:
+    def __init__(self, nome, posicao):
+        self.nome    = nome
+        self.posicao = posicao
 
-Modelar relações corretamente impacta:
-- **Ciclo de vida** dos objetos (quem cria, quem destrói)
-- **Responsabilidade** por memória e recursos
-- **Flexibilidade** do design (o que pode ser trocado ou reutilizado)
+    def __str__(self):
+        return f"{self.nome} ({self.posicao})"
 
-> As próximas missões detalham cada tipo com exemplos práticos.
+class Time:
+    def __init__(self, nome):
+        self.nome      = nome
+        self.jogadores = []
+
+    def adicionar(self, jogador):
+        self.jogadores.append(jogador)
+
+# Jogadores existem ANTES e FORA do time
+ana    = Jogador("Ana",    "Atacante")
+carlos = Jogador("Carlos", "Goleiro")
+
+flamengo = Time("Flamengo")
+flamengo.adicionar(ana)
+flamengo.adicionar(carlos)
+
+# Se o time acabar, os jogadores continuam existindo
+del flamengo
+print(ana)  # Ana (Atacante) — ainda existe!
+\`\`\`
+
+**Dica:** se as partes são criadas fora do todo e passadas para ele, é agregação.
+
+---
+
+## Composição — partes inseparáveis
+
+\`\`\`python
+class Comodo:
+    def __init__(self, nome, area_m2):
+        self.nome    = nome
+        self.area_m2 = area_m2
+
+    def __str__(self):
+        return f"{self.nome} ({self.area_m2}m²)"
+
+class Casa:
+    def __init__(self, endereco):
+        self.endereco = endereco
+        # Cômodos criados DENTRO da Casa — composição
+        self.comodos = [
+            Comodo("Sala",    30),
+            Comodo("Quarto",  20),
+            Comodo("Cozinha", 15),
+        ]
+
+    def area_total(self):
+        return sum(c.area_m2 for c in self.comodos)
+
+    def __str__(self):
+        lista = ", ".join(str(c) for c in self.comodos)
+        return f"Casa em {self.endereco}: {lista} — Total: {self.area_total()}m²"
+
+minha_casa = Casa("Rua das Flores, 42")
+print(minha_casa)
+# Casa em Rua das Flores, 42: Sala (30m²), Quarto (20m²), Cozinha (15m²) — Total: 65m²
+\`\`\`
+
+Cômodos não fazem sentido fora de uma casa — quando a casa vai, eles vão junto.
+
+---
+
+## Como escolher?
+
+Faça a pergunta: **"a parte faz sentido existir sem o todo?"**
+
+- **Sim** → Agregação (jogadores sem time, livros sem biblioteca)
+- **Não** → Composição (cômodos sem casa, órgãos sem corpo)
+
+> **Resumindo:** Agregação e composição são graus de pertencimento. Na agregação, as partes são independentes. Na composição, as partes só existem dentro do todo.
 `,
   exercise: {
-    question: "Qual pergunta central diferencia os 3 tipos de relacionamento entre objetos?",
+    question: "Em um sistema de biblioteca, livros existem antes e independente de uma coleção, e podem pertencer a várias coleções. Qual relacionamento modela isso?",
     options: [
-      "Quantos métodos cada objeto possui?",
-      "O que acontece com a parte quando o objeto 'todo' é destruído?",
-      "Qual objeto foi criado primeiro na memória?",
-      "Quantas classes participam do relacionamento?"
+      "Composição, porque os livros fazem parte da coleção.",
+      "Associação, porque livros e coleções não têm nenhuma relação.",
+      "Agregação, porque os livros existem independentemente e podem pertencer a mais de uma coleção.",
+      "Herança, porque Livro herda comportamentos de Coleção."
     ],
-    correct: 1,
-    explanation: "Correto! A sobrevivência da parte quando o todo é destruído é o critério que define se a relação é associação, agregação ou composição."
+    correct: 2,
+    explanation: "Correto! Livros existem independentemente e podem ser parte de múltiplas coleções — isso é agregação: relação 'tem um' sem controle do ciclo de vida."
   },
   has_interativo: false
 };

@@ -2,12 +2,16 @@ import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "3-5",
-  title: "Contratos — Interfaces",
+  title: "Interfaces",
   icon: "🔌",
   theory: `
-## Interfaces
+## Interface: contrato puro
 
-Uma **interface** é um contrato puro — define *o quê* deve ser feito, sem implementar *como*. Em Python, simulamos interfaces com classes que herdam de \`ABC\` e possuem apenas métodos abstratos.
+Na missão anterior você viu a **classe abstrata** — contrato com implementação parcial.
+
+A **interface** vai além: define *o quê* deve ser feito, sem implementar absolutamente nada. É um contrato puro.
+
+Em Python, simulamos interfaces com classes que herdam de \`ABC\` e possuem apenas métodos abstratos:
 
 \`\`\`python
 from abc import ABC, abstractmethod
@@ -27,9 +31,11 @@ class Autenticavel(ABC):
         pass
 \`\`\`
 
-### Implementando múltiplas interfaces
+---
 
-Python suporta herança múltipla — uma classe pode assinar vários contratos:
+## Implementando múltiplas interfaces
+
+Python suporta herança múltipla — uma classe pode assinar vários contratos ao mesmo tempo:
 
 \`\`\`python
 import json
@@ -49,18 +55,23 @@ class Usuario(Serializavel, Autenticavel):
         return hash(senha) == self._senha_hash
 
 u = Usuario("Ana", hash("1234"))
-print(u.para_json())           # {"nome": "Ana"}
-print(u.autenticar("1234"))    # True
-print(u.autenticar("errada"))  # False
+print(u.para_json())         # {"nome": "Ana"}
+print(u.autenticar("1234"))  # True
 \`\`\`
 
-### Interface vs Classe Abstrata
+Se \`Usuario\` não implementar algum dos métodos abstratos, o Python lança um erro ao tentar instanciar — o contrato é obrigatório.
+
+---
+
+## Interface vs. Classe Abstrata
 
 | | Interface (pura) | Classe Abstrata |
 |---|---|---|
 | Implementação | Nenhuma | Pode ter parcial |
 | Propósito | Definir capacidades | Definir base comum |
 | Herança | Múltipla (recomendada) | Geralmente única |
+
+> **Resumindo:** Uma interface é um contrato puro — define apenas o que deve existir, sem implementar nada. Qualquer classe que a implemente pode ser usada de forma intercambiável.
 `,
   exercise: {
     question: "O que caracteriza uma interface pura em Python?",

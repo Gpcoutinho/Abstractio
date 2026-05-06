@@ -2,105 +2,95 @@ import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "1-2",
-  title: "Classe",
-  icon: "📐",
+  title: "Objeto",
+  icon: "🔵",
   theory: `
-## A forma de fazer biscoito
+## O biscoito, não a forma
 
-Imagine que você tem uma **forma de cortar biscoitos** em formato de estrela. Com ela, você pode fazer quantas estrelas quiser — todas no mesmo formato, mas cada uma com sua própria cobertura, seu próprio tamanho, sua própria decoração.
+Imagine uma **forma de cortar biscoitos** em formato de estrela. Com ela você faz quantas estrelas quiser — cada uma com sua própria cobertura e decoração.
 
-A **forma** não é o biscoito. Ela é o **molde** que ensina como criar biscoitos.
+A forma é o molde. O biscoito é o **produto real**.
 
-Em programação, a **classe** é esse molde.
+Em POO, o **objeto** é esse produto — algo concreto que existe na memória do computador, com seus próprios dados.
 
-> **Classe** = o molde que descreve como os objetos serão criados.
+> **Objeto** = uma coisa concreta criada a partir de um molde (a classe). Cada objeto tem seus próprios dados e existe de forma independente.
 
----
-
-## Criando sua primeira classe
-
-Vamos criar uma classe \`Cachorro\` passo a passo:
-
-\`\`\`python
-# A palavra "class" avisa o Python: "estou criando um molde!"
-class Cachorro:
-    pass  # por enquanto vazio — só para ver a estrutura
-\`\`\`
-
-Mas um molde vazio não serve para muito. Vamos adicionar **características** (atributos) e **comportamentos** (métodos):
-
-\`\`\`python
-class Cachorro:
-    # O "def __init__" é executado quando um cachorro é criado
-    # (você vai aprender mais sobre ele na missão "Construtor"!)
-    def __init__(self, nome, raca):
-        self.nome = nome   # guarda o nome deste cachorro específico
-        self.raca = raca   # guarda a raça deste cachorro específico
-
-    # Um comportamento: o cachorro pode se apresentar
-    def apresentar(self):
-        return f"Au! Sou {self.nome}, um {self.raca}!"
-\`\`\`
-
-Agora temos um **molde completo** que descreve como qualquer cachorro deve ser.
+"Criar um objeto" também é chamado de **instanciar**. O objeto é uma **instância** da classe.
 
 ---
 
-## Usando o molde para criar cachorros
+## Cada objeto tem seu próprio estado
+
+Esse é o ponto mais importante: **mexer em um objeto não afeta os outros**.
 
 \`\`\`python
-# Criando cachorros a partir do molde
-rex  = Cachorro("Rex",  "Labrador")
-bolt = Cachorro("Bolt", "Husky")
-mia  = Cachorro("Mia",  "Poodle")
+class Carro:
+    def __init__(self, modelo):
+        self.modelo     = modelo
+        self.ligado     = False   # começa desligado
+        self.velocidade = 0       # começa parado
 
-# Cada um tem seus próprios dados
-print(rex.apresentar())   # Au! Sou Rex, um Labrador!
-print(bolt.apresentar())  # Au! Sou Bolt, um Husky!
-print(mia.apresentar())   # Au! Sou Mia, um Poodle!
+    def ligar(self):
+        self.ligado = True
+        return f"{self.modelo} ligado!"
 
-# Acessando atributos diretamente
-print(rex.nome)   # Rex
-print(bolt.raca)  # Husky
+    def acelerar(self, km):
+        if self.ligado:
+            self.velocidade += km
+            return f"{self.modelo} a {self.velocidade} km/h"
+        return f"{self.modelo} está desligado!"
+
+# Dois objetos criados do mesmo molde
+fusca = Carro("Fusca")
+gol   = Carro("Gol")
+
+print(fusca.ligar())       # Fusca ligado!
+print(fusca.acelerar(60))  # Fusca a 60 km/h
+
+print(gol.ligado)          # False — Gol continua desligado
+print(fusca.velocidade)    # 60
+print(gol.velocidade)      # 0
 \`\`\`
-
-Perceba: **uma classe, três cachorros diferentes**. O molde é o mesmo, mas cada produto é único.
 
 ---
 
-## O que uma classe pode ter?
+## As três propriedades de todo objeto
 
-| Parte | O que é | Exemplo |
+| Propriedade | O que é | No exemplo |
 |---|---|---|
-| **Atributo** | Uma característica | \`self.nome\`, \`self.raca\` |
-| **Método** | Um comportamento | \`def apresentar(self)\` |
-| **Construtor** | O "setup" inicial | \`def __init__(self, ...)\` |
+| **Identidade** | O que diferencia um do outro | \`fusca\` ≠ \`gol\` |
+| **Estado** | Os valores atuais dos dados | \`fusca.ligado = True\`, \`gol.ligado = False\` |
+| **Comportamento** | O que o objeto sabe fazer | \`.ligar()\`, \`.acelerar()\` |
 
 ---
 
-## Uma regra importante: nomes de classes
+## Você pode criar quantos objetos quiser
 
-Por convenção, nomes de classes em Python começam com **letra maiúscula** e usam **PascalCase** (cada palavra começa com maiúscula):
+A classe é um molde reutilizável infinitamente:
 
 \`\`\`python
-class Cachorro:       # correto
-class ContaBancaria:  # correto
-class cachorro:       # evitar
-class conta_bancaria: # evitar
+frota = [Carro("Fusca"), Carro("Gol"), Carro("Uno"), Carro("Palio")]
+
+for carro in frota:
+    print(carro.ligar())
+# Fusca ligado!
+# Gol ligado!
+# Uno ligado!
+# Palio ligado!
 \`\`\`
 
-> **Resumindo:** Uma classe é o molde que descreve como um tipo de objeto deve ser — com suas características e comportamentos. A partir de uma classe, você pode criar quantos objetos quiser.
+> **Resumindo:** Um objeto é a instância concreta criada a partir de uma classe. Cada objeto tem seu próprio estado independente — mexer em um não afeta os outros.
 `,
   exercise: {
-    question: "Escolha a alternativa que melhor define o que é uma **classe**:",
+    question: "Dado `class Gato`, qual opção cria corretamente **dois objetos distintos**?",
     options: [
-      "Um objeto específico criado em tempo de execução.",
-      "Um molde que descreve as propriedades e comportamentos de um tipo de objeto.",
-      "Uma biblioteca externa usada para executar a linguagem.",
-      "Um erro de sintaxe comum em Python."
+      "`gato1 = Gato` e `gato2 = Gato`",
+      "`gato1 = Gato()` e `gato2 = Gato()`",
+      "`gato1 = new Gato()` e `gato2 = new Gato()`",
+      "`Gato.gato1()` e `Gato.gato2()`"
     ],
     correct: 1,
-    explanation: "Exato! Uma classe é um molde. A partir dela criamos quantos objetos (instâncias) quisermos."
+    explanation: "Correto! Em Python, instanciamos objetos chamando a classe como função: `Gato()`. Cada chamada cria uma instância independente."
   },
   has_interativo: false
 };

@@ -2,81 +2,85 @@ import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "3-6",
-  title: "Contratos — Classes Abstratas",
-  icon: "🏛️",
+  title: "Associação",
+  icon: "↔️",
   theory: `
-## Classes Abstratas
+## Objetos que se conhecem
 
-Diferente de uma interface pura, uma **classe abstrata** pode combinar métodos abstratos (sem implementação) com métodos concretos (com implementação compartilhada).
+Em sistemas reais, objetos raramente existem sozinhos — eles se relacionam. Uma das formas mais simples de relacionamento é a **associação**: um objeto *usa* outro, mas nenhum depende da existência do outro.
 
-Ela define uma base comum para uma família de classes.
+> **Associação** = objetos que interagem mas existem de forma completamente independente.
 
 \`\`\`python
-from abc import ABC, abstractmethod
+class Motorista:
+    def __init__(self, nome):
+        self.nome = nome
 
-class Relatorio(ABC):
-    def __init__(self, titulo):
-        self.titulo = titulo
+    def dirigir(self, carro):  # recebe o carro — não é dono dele
+        return f"{self.nome} está dirigindo {carro.modelo}."
 
-    # Métodos abstratos — cada subclasse implementa do seu jeito
-    @abstractmethod
-    def gerar_cabecalho(self) -> str:
-        pass
+class Carro:
+    def __init__(self, modelo):
+        self.modelo = modelo
 
-    @abstractmethod
-    def gerar_corpo(self, dados: list) -> str:
-        pass
+fusca = Carro("Fusca")
+gol   = Carro("Gol")
+ana   = Motorista("Ana")
 
-    # Método concreto — comportamento compartilhado por todas
-    def exportar(self, dados: list) -> str:
-        cab  = self.gerar_cabecalho()
-        corp = self.gerar_corpo(dados)
-        return f"{cab}\\n{corp}\\n--- fim do relatório ---"
-
-
-class RelatorioPDF(Relatorio):
-    def gerar_cabecalho(self):
-        return f"[PDF] === {self.titulo} ==="
-
-    def gerar_corpo(self, dados):
-        return "\\n".join(f"• {item}" for item in dados)
-
-
-class RelatorioCSV(Relatorio):
-    def gerar_cabecalho(self):
-        return self.titulo
-
-    def gerar_corpo(self, dados):
-        return ",".join(str(d) for d in dados)
-
-
-vendas = ["Janeiro: R$10k", "Fevereiro: R$12k"]
-
-pdf = RelatorioPDF("Relatório de Vendas")
-csv = RelatorioCSV("Vendas")
-
-print(pdf.exportar(vendas))
-print(csv.exportar(vendas))
+print(ana.dirigir(fusca))  # Ana está dirigindo Fusca.
+print(ana.dirigir(gol))    # Ana está dirigindo Gol.
+# fusca e gol continuam existindo independente de ana
 \`\`\`
 
-### Quando usar cada um?
+---
 
-| Situação | Use |
-|---|---|
-| Só precisa definir o que deve existir | Interface pura |
-| Precisa de comportamento compartilhado + contrato | Classe abstrata |
-| Quer combinar múltiplos contratos | Múltiplas interfaces |
+## Associação bidirecional
+
+A relação pode funcionar nos dois sentidos:
+
+\`\`\`python
+class Professor:
+    def __init__(self, nome):
+        self.nome   = nome
+        self.alunos = []
+
+    def adicionar_aluno(self, aluno):
+        self.alunos.append(aluno)
+        aluno.professor = self  # bidirecional
+
+class Aluno:
+    def __init__(self, nome):
+        self.nome      = nome
+        self.professor = None
+
+prof  = Professor("Dr. Silva")
+aluno = Aluno("Bia")
+prof.adicionar_aluno(aluno)
+
+print(aluno.professor.nome)  # Dr. Silva
+print(prof.alunos[0].nome)   # Bia
+\`\`\`
+
+---
+
+## Características da Associação
+
+- Objetos **independentes** — um pode existir sem o outro
+- Relação **temporária** ou **opcional**
+- Implementada passando objetos como **parâmetros** ou referências
+
+> **Resumindo:** Na associação, os objetos interagem mas são independentes — nenhum controla o ciclo de vida do outro. É o relacionamento mais fraco e mais comum.
 `,
   exercise: {
-    question: "Qual a principal diferença entre uma interface pura e uma classe abstrata?",
+    question: "Qual característica define uma relação de **Associação** entre objetos?",
     options: [
-      "Interfaces só existem em Java; Python só tem classes abstratas.",
-      "Interfaces definem apenas o contrato; classes abstratas podem ter métodos concretos compartilhados além dos abstratos.",
-      "Classes abstratas não podem ser herdadas, apenas instanciadas.",
-      "Interfaces permitem instanciação direta; classes abstratas não."
+      "Um objeto cria e destrói o outro durante seu ciclo de vida.",
+      "Os objetos se conhecem e interagem, mas existem de forma independente.",
+      "Um objeto é parte estrutural do outro e não pode existir sozinho.",
+      "Um objeto herda atributos e métodos do outro."
     ],
     correct: 1,
-    explanation: "Correto! Classes abstratas combinam contrato com implementação parcial compartilhada — ideal quando há comportamento comum entre as subclasses."
+    explanation: "Correto! Na associação, os objetos interagem mas são independentes — nenhum controla o ciclo de vida do outro."
   },
   has_interativo: false
 };
