@@ -100,7 +100,7 @@ const Missao: React.FC = () => {
               srcDoc={interativos[missao.interativo_html]}
               title="Mini-jogo interativo"
               className="w-full"
-              style={{ height: '400px', border: 'none' }}
+              style={{ height: '480px', border: 'none' }}
               sandbox="allow-scripts"
             />
           </div>
