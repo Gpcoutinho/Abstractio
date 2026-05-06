@@ -45,8 +45,6 @@ Com POO, tudo que pertence a um cachorro fica junto dentro de um **objeto Cachor
 
 Toda a POO é construída sobre três ideias. Pense em biscoitos:
 
-> [svg: três painéis conectados por setas — "class Cachorro" (ícone 📐, borda roxa, legenda "O Molde") → seta "Cria" → "Objetos Criados" com dois cards (rex e bolt, borda azul) → seta "Chama" → "Método" (ícone 💬, borda verde, exemplo "rex.latir()" retornando "Rex: Au au au!"). Animação de fade em sequência.]
-
 | Ingrediente | O que é | Analogia do biscoito |
 |---|---|---|
 | **Classe** | O molde, a receita | A forma de cortar a massa |

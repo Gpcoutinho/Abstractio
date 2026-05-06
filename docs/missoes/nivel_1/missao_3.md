@@ -42,6 +42,8 @@ print(mia.apresentar())   # Au! Sou Mia, um Poodle!
 
 **Uma classe, três objetos diferentes** — o molde é o mesmo, cada produto é único.
 
+> [svg: dois painéis conectados por seta — "class Cachorro" (ícone 📐, borda roxa, legenda "O Molde") → seta "Cria" → "Objetos Criados" com cards rex e bolt (borda azul). Animação de fade em sequência. Legenda: "A classe é o molde — os objetos são os produtos criados a partir dela".]
+
 ---
 
 ## O que uma classe pode ter

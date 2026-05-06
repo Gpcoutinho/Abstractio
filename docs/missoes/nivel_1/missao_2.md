@@ -62,6 +62,8 @@ print(gol.velocidade)      # 0
 | **Estado** | Os valores atuais dos dados | `fusca.ligado = True`, `gol.ligado = False` |
 | **Comportamento** | O que o objeto sabe fazer | `.ligar()`, `.acelerar()` |
 
+> [svg: painel único centralizado "Objetos Criados" (borda azul). Dois cards internos — "rex" (nome: Rex, raça: Lab) e "bolt" (nome: Bolt, raça: Husky) — em azul escuro com borda azul. Legenda: "Cada objeto existe de forma independente na memória". Animação de fade+slide para cima.]
+
 ---
 
 ## Você pode criar quantos objetos quiser

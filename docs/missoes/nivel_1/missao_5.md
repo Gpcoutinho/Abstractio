@@ -89,6 +89,8 @@ print(conta.sacar(30))      # Saldo: R$120.00
 | Acessa dados do objeto? | Não | Sim (via `self`) |
 | Como chamar | `latir(cachorro)` | `cachorro.latir()` |
 
+> [svg: três painéis completos — "class Cachorro" (roxo) → seta "Cria" → "Objetos Criados" com rex e bolt (azul) → seta "Chama" → "Método" com rex.latir() retornando "Rex: Au au au!" (verde). Animação de fade em sequência. Legenda: "Classe → objetos → método em ação". SVG idêntico ao da missão 1, agora com o quadro completo após o aluno ter aprendido os três conceitos.]
+
 > **Resumindo:** Métodos são as ações que um objeto sabe executar. Sempre têm `self` para saber em qual objeto estão operando — mas você não precisa passá-lo na chamada.
 
 ## Mini-jogo

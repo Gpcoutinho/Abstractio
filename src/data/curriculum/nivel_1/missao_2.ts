@@ -62,6 +62,35 @@ print(gol.velocidade)      # 0
 | **Estado** | Os valores atuais dos dados | \`fusca.ligado = True\`, \`gol.ligado = False\` |
 | **Comportamento** | O que o objeto sabe fazer | \`.ligar()\`, \`.acelerar()\` |
 
+<figure style="margin:1.5rem 0">
+<svg viewBox="0 0 280 258" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px;display:block;margin:0 auto;border-radius:12px">
+  <style>
+    .ii2{animation:oFadeUp .45s .1s ease both}
+    @keyframes oFadeUp{
+      from{opacity:0;transform:translateY(12px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+  </style>
+  <rect width="280" height="258" fill="#0e0e1a" rx="12"/>
+  <g class="ii2">
+    <rect x="46" y="18" width="188" height="222" rx="10" fill="#111a20" stroke="#1a5a8a" stroke-width="1.5"/>
+    <rect x="46" y="18" width="188" height="46" rx="10" fill="#152030"/>
+    <rect x="46" y="38" width="188" height="26" fill="#152030"/>
+    <text x="140" y="50" text-anchor="middle" fill="#5090c0" font-size="16" font-family="monospace" font-weight="bold">Objetos Criados</text>
+    <rect x="60" y="74" width="78" height="118" rx="7" fill="#0e1a25" stroke="#1a4a6a" stroke-width="1"/>
+    <text x="99" y="97" text-anchor="middle" fill="#60a8d0" font-size="14" font-family="monospace" font-weight="bold">rex</text>
+    <text x="99" y="115" text-anchor="middle" fill="#6090b8" font-size="13" font-family="monospace">nome: Rex</text>
+    <text x="99" y="132" text-anchor="middle" fill="#6090b8" font-size="13" font-family="monospace">raça: Lab</text>
+    <rect x="148" y="74" width="78" height="118" rx="7" fill="#0e1a25" stroke="#1a4a6a" stroke-width="1"/>
+    <text x="187" y="97" text-anchor="middle" fill="#60a8d0" font-size="14" font-family="monospace" font-weight="bold">bolt</text>
+    <text x="187" y="115" text-anchor="middle" fill="#6090b8" font-size="13" font-family="monospace">nome: Bolt</text>
+    <text x="187" y="132" text-anchor="middle" fill="#6090b8" font-size="13" font-family="monospace">raça: Husky</text>
+    <text x="140" y="218" text-anchor="middle" fill="#6090b0" font-size="13" font-family="monospace">Instâncias independentes</text>
+  </g>
+</svg>
+<figcaption style="text-align:center;font-size:12px;color:#7878a0;margin-top:6px;font-family:monospace">Cada objeto existe de forma independente na memória</figcaption>
+</figure>
+
 ---
 
 ## Você pode criar quantos objetos quiser
