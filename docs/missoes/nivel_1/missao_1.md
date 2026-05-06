@@ -37,8 +37,8 @@ Polvinho vive num oceano repleto de criaturas — polvos, baleias, peixes, corai
 Cada criatura é um objeto com dados e ações:
 
 ```python
-polvo  = CriaturaMarina("Polvinho", tentaculos=8)
-baleia = CriaturaMarina("Baleia",   barbatanas=2)
+polvo  = CriaturaMarinha("Polvinho", tentaculos=8)
+baleia = CriaturaMarinha("Baleia",   barbatanas=2)
 polvo.explorar()  # Polvinho mergulha!
 ```
 
@@ -46,10 +46,7 @@ Esse sistema é exatamente a **Programação Orientada a Objetos** — e ao long
 
 ## Mini-jogo
 
-- [x] Tem interativo
-
-**Arquivo:** `interativos/nivel_1_missao_1.html`
-**Descrição:** Drag & drop — associar objetos do mundo real às suas características e comportamentos.
+- [ ] Tem interativo
 
 ## Exercício
 

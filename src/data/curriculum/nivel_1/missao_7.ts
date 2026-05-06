@@ -85,7 +85,8 @@ No próximo nível, você vai descobrir os **4 Pilares da POO**:
     correct: 1,
     explanation: "Exato! A classe define o molde, o construtor (`__init__`) prepara o estado inicial, e o objeto é a instância concreta criada a partir disso."
   },
-  has_interativo: false
+  has_interativo: true,
+  interativo_html: "interativos/nivel_1_missao_7.html"
 };
 
 export default missao;

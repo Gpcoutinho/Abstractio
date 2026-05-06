@@ -76,7 +76,10 @@ No próximo nível, você vai descobrir os **4 Pilares da POO**:
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [x] Tem interativo
+
+**Arquivo:** `interativos/nivel_1_missao_7.html`
+**Descrição:** Drag & drop — associar objetos do mundo real às suas características e comportamentos.
 
 ## Exercício
 

@@ -124,8 +124,7 @@ Esse sistema é exatamente a **Programação Orientada a Objetos** — e ao long
     correct: 1,
     explanation: "Correto! POO é um paradigma que organiza o código em objetos com atributos (dados) e métodos (comportamentos)."
   },
-  has_interativo: true,
-  interativo_html: "interativos/nivel_1_missao_1.html"
+  has_interativo: false
 };
 
 export default missao;

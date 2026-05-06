@@ -6,10 +6,10 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
-import interativoHtml from '../assets/interativos/nivel_1_missao_1.html?raw';
+import interativoHtml from '../assets/interativos/nivel_1_missao_7.html?raw';
 
 const interativos: Record<string, string> = {
-  'interativos/nivel_1_missao_1.html': interativoHtml,
+  'interativos/nivel_1_missao_7.html': interativoHtml,
 };
 
 const Missao: React.FC = () => {
