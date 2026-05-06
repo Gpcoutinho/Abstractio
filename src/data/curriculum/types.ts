@@ -10,7 +10,7 @@ export interface Missao {
   title: string;
   icon: string;
   theory: string;
-  exercise: Exercise;
+  exercise?: Exercise;
   has_interativo: boolean;
   interativo_html?: string;
 }

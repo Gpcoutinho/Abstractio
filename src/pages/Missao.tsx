@@ -59,7 +59,7 @@ const Missao: React.FC = () => {
   })();
 
   const jaConcluida = isMissaoConcluida(missao.id);
-  const acertou = selecionada === missao.exercise.correct;
+  const acertou = missao.exercise ? selecionada === missao.exercise.correct : false;
 
   const handleSubmit = () => {
     if (selecionada === null) return;
@@ -147,74 +147,78 @@ const Missao: React.FC = () => {
       )}
 
       {/* Exercício */}
-      <hr className="border-borderDark my-10" />
-      <section className="bg-bgSecondary border border-borderDark rounded-xl p-6">
-        <h2 className="text-2xl font-bold text-textPrimary mb-4">Exercício</h2>
-        <p className="text-textPrimary mb-5">{missao.exercise.question}</p>
+      {missao.exercise && (
+        <>
+          <hr className="border-borderDark my-10" />
+          <section className="bg-bgSecondary border border-borderDark rounded-xl p-6">
+            <h2 className="text-2xl font-bold text-textPrimary mb-4">Exercício</h2>
+            <p className="text-textPrimary mb-5">{missao.exercise.question}</p>
 
-        <fieldset className="space-y-3">
-          <legend className="sr-only">Opções de resposta</legend>
-          {missao.exercise.options.map((opcao, i) => {
-            let estilo = 'border-borderDark';
-            if (respondida) {
-              if (i === missao.exercise.correct) estilo = 'border-green-500 bg-green-500/10';
-              else if (i === selecionada) estilo = 'border-red-500 bg-red-500/10';
-            } else if (i === selecionada) {
-              estilo = 'border-accent bg-accent/10';
-            }
+            <fieldset className="space-y-3">
+              <legend className="sr-only">Opções de resposta</legend>
+              {missao.exercise.options.map((opcao, i) => {
+                let estilo = 'border-borderDark';
+                if (respondida) {
+                  if (i === missao.exercise!.correct) estilo = 'border-green-500 bg-green-500/10';
+                  else if (i === selecionada) estilo = 'border-red-500 bg-red-500/10';
+                } else if (i === selecionada) {
+                  estilo = 'border-accent bg-accent/10';
+                }
 
-            return (
-              <label
-                key={i}
-                className={`flex items-start gap-3 p-4 rounded-lg border cursor-pointer transition-colors ${estilo} ${respondida ? 'cursor-default' : 'hover:border-accent/50'}`}
-              >
-                <input
-                  type="radio"
-                  name="exercicio"
-                  value={i}
-                  checked={selecionada === i}
-                  disabled={respondida}
-                  onChange={() => setSelecionada(i)}
-                  className="mt-0.5 accent-accent"
-                />
-                <span className="text-textPrimary text-sm">{opcao}</span>
-              </label>
-            );
-          })}
-        </fieldset>
+                return (
+                  <label
+                    key={i}
+                    className={`flex items-start gap-3 p-4 rounded-lg border cursor-pointer transition-colors ${estilo} ${respondida ? 'cursor-default' : 'hover:border-accent/50'}`}
+                  >
+                    <input
+                      type="radio"
+                      name="exercicio"
+                      value={i}
+                      checked={selecionada === i}
+                      disabled={respondida}
+                      onChange={() => setSelecionada(i)}
+                      className="mt-0.5 accent-accent"
+                    />
+                    <span className="text-textPrimary text-sm">{opcao}</span>
+                  </label>
+                );
+              })}
+            </fieldset>
 
-        {/* Feedback */}
-        {respondida && (
-          <div className={`mt-5 p-4 rounded-lg border ${acertou ? 'bg-green-500/10 border-green-500' : 'bg-red-500/10 border-red-500'}`}>
-            <p className={`font-semibold mb-1 ${acertou ? 'text-green-400' : 'text-red-400'}`}>
-              {acertou ? '✓ Correto!' : '✗ Não foi dessa vez.'}
-            </p>
-            <p className="text-textSecondary text-sm">{missao.exercise.explanation}</p>
-          </div>
-        )}
+            {/* Feedback */}
+            {respondida && (
+              <div className={`mt-5 p-4 rounded-lg border ${acertou ? 'bg-green-500/10 border-green-500' : 'bg-red-500/10 border-red-500'}`}>
+                <p className={`font-semibold mb-1 ${acertou ? 'text-green-400' : 'text-red-400'}`}>
+                  {acertou ? '✓ Correto!' : '✗ Não foi dessa vez.'}
+                </p>
+                <p className="text-textSecondary text-sm">{missao.exercise.explanation}</p>
+              </div>
+            )}
 
-        {/* Botões */}
-        <div className="mt-5 flex items-center gap-3">
-          {!respondida && (
-            <button
-              onClick={handleSubmit}
-              disabled={selecionada === null}
-              className="hero-cta px-5 py-2 rounded-lg font-semibold disabled:opacity-40 disabled:cursor-not-allowed"
-            >
-              Responder
-            </button>
-          )}
+            {/* Botões */}
+            <div className="mt-5 flex items-center gap-3">
+              {!respondida && (
+                <button
+                  onClick={handleSubmit}
+                  disabled={selecionada === null}
+                  className="hero-cta px-5 py-2 rounded-lg font-semibold disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  Responder
+                </button>
+              )}
 
-          {respondida && !acertou && (
-            <button
-              onClick={() => { setSelecionada(null); setRespondida(false); }}
-              className="px-5 py-2 rounded-lg border border-borderDark text-textSecondary hover:border-accent hover:text-textPrimary transition-colors text-sm"
-            >
-              Tentar novamente
-            </button>
-          )}
-        </div>
-      </section>
+              {respondida && !acertou && (
+                <button
+                  onClick={() => { setSelecionada(null); setRespondida(false); }}
+                  className="px-5 py-2 rounded-lg border border-borderDark text-textSecondary hover:border-accent hover:text-textPrimary transition-colors text-sm"
+                >
+                  Tentar novamente
+                </button>
+              )}
+            </div>
+          </section>
+        </>
+      )}
 
       {/* Navegação inferior */}
       <div className="mt-10 flex justify-center items-center gap-4">
