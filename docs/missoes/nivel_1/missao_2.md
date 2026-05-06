@@ -5,6 +5,21 @@
 
 ## Teoria
 
+## Olhe ao seu redor
+
+Cadeira. Celular. Cachorro. Caneta.
+
+Todo objeto do mundo real tem duas coisas em comum:
+
+- **Características** — como ele *é* (cor, nome, tamanho, peso...)
+- **Comportamentos** — o que ele *faz* (latir, carregar, rolar, escrever...)
+
+> [svg: três cards lado a lado — Cachorro, Celular e Carro — cada um com fundo escuro e borda roxa. Cada card tem o nome em roxo claro no topo, um emoji no centro, uma linha separadora, atributos listados em cinza abaixo (ex: nome, raça, idade) e métodos em verde (ex: latir(), buscar()). Os cards aparecem com animação de fade+slide para cima em sequência. Legenda: "Características em roxo · comportamentos em verde".]
+
+A **Programação Orientada a Objetos (POO)** usa exatamente essa lógica para organizar programas: em vez de uma lista enorme de instruções soltas, você cria **objetos** que imitam coisas do mundo real — cada um com seus próprios dados e ações.
+
+---
+
 ## O biscoito, não a forma
 
 Imagine uma **forma de cortar biscoitos** em formato de estrela. Com ela você faz quantas estrelas quiser — cada uma com sua própria cobertura e decoração.
