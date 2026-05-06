@@ -108,8 +108,9 @@ const Missao: React.FC = () => {
       )}
 
       {/* Exercício */}
+      <hr className="border-borderDark my-10" />
       <section className="bg-bgSecondary border border-borderDark rounded-xl p-6">
-        <h2 className="text-lg font-semibold text-textPrimary mb-4">Exercício</h2>
+        <h2 className="text-2xl font-bold text-textPrimary mb-4">Exercício</h2>
         <p className="text-textPrimary mb-5">{missao.exercise.question}</p>
 
         <fieldset className="space-y-3">
