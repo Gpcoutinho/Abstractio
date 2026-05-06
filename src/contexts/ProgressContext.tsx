@@ -47,6 +47,7 @@ export interface ProgressContextValue {
   genero: Genero;
   avatarIdx: number;
   completarMissao: (missaoId: string) => void;
+  desmarcarMissao: (missaoId: string) => void;
   setNome: (nome: string) => void;
   setGenero: (genero: Genero) => void;
   setAvatarIdx: (idx: number) => void;
@@ -78,6 +79,19 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     });
   }, []);
 
+  const desmarcarMissao = useCallback((missaoId: string) => {
+    setState(prev => {
+      if (!prev.completed.includes(missaoId)) return prev;
+      const completed = prev.completed.filter(id => id !== missaoId);
+      return {
+        ...prev,
+        completed,
+        niveis_concluidos: calcNiveisConcluidos(completed),
+        pontuacao: Math.max(0, prev.pontuacao - 15),
+      };
+    });
+  }, []);
+
   const setNome = useCallback((nome: string) => {
     setState(prev => ({ ...prev, nome }));
   }, []);
@@ -91,7 +105,7 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, []);
 
   return (
-    <ProgressContext.Provider value={{ ...state, completarMissao, setNome, setGenero, setAvatarIdx }}>
+    <ProgressContext.Provider value={{ ...state, completarMissao, desmarcarMissao, setNome, setGenero, setAvatarIdx }}>
       {children}
     </ProgressContext.Provider>
   );

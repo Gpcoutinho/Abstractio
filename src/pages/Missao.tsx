@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
+import { useParams, Link } from 'react-router-dom';
+import { ArrowLeftIcon, ArrowRightIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
@@ -14,8 +14,7 @@ const interativos: Record<string, string> = {
 
 const Missao: React.FC = () => {
   const { nivelIdx, missaoIdx } = useParams<{ nivelIdx: string; missaoIdx: string }>();
-  const navigate = useNavigate();
-  const { completarMissao, isMissaoConcluida } = useProgress();
+  const { completarMissao, desmarcarMissao, isMissaoConcluida } = useProgress();
 
   const [selecionada, setSelecionada] = useState<number | null>(null);
   const [respondida, setRespondida] = useState(false);
@@ -64,50 +63,53 @@ const Missao: React.FC = () => {
   const handleSubmit = () => {
     if (selecionada === null) return;
     setRespondida(true);
-    if (acertou) completarMissao(missao.id);
   };
 
   return (
-    <div className="app-wrapper max-w-3xl mx-auto pt-28 pb-16 px-5">
+    <div className="pt-20">
 
-      {/* Navegação */}
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex flex-col gap-2">
-          <Link
-            to="/trilha"
-            className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
-          >
-            <ArrowLeftIcon className="w-4 h-4" />
-            Voltar à trilha
-          </Link>
-          {missaoAnterior && (
+      {/* Navegação fixa */}
+      <nav className="sticky top-20 z-40 bg-bgPrimary border-b border-accent/20">
+        <div className="max-w-3xl mx-auto px-5 h-11 flex items-center justify-between">
+          <div className="flex items-center gap-5">
             <Link
-              to={missaoAnterior}
+              to="/trilha"
               className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
             >
               <ArrowLeftIcon className="w-4 h-4" />
-              Missão anterior
+              Voltar à trilha
+            </Link>
+            {missaoAnterior && (
+              <Link
+                to={missaoAnterior}
+                className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+              >
+                <ArrowLeftIcon className="w-4 h-4" />
+                Missão anterior
+              </Link>
+            )}
+          </div>
+          {proximaMissao ? (
+            <Link
+              to={proximaMissao}
+              className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+            >
+              Próxima missão
+              <ArrowRightIcon className="w-4 h-4" />
+            </Link>
+          ) : (
+            <Link
+              to="/conquistas"
+              className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+            >
+              Ver conquistas
+              <ArrowRightIcon className="w-4 h-4" />
             </Link>
           )}
         </div>
-        {proximaMissao ? (
-          <Link
-            to={proximaMissao}
-            className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
-          >
-            Próxima missão
-            <ArrowRightIcon className="w-4 h-4" />
-          </Link>
-        ) : (
-          <Link
-            to="/conquistas"
-            className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
-          >
-            Ver conquistas
-            <ArrowRightIcon className="w-4 h-4" />
-          </Link>
-        )}
-      </div>
+      </nav>
+
+      <div className="max-w-3xl mx-auto pt-8 pb-16 px-5">
 
       {/* Título */}
       <header className="mb-8">
@@ -220,36 +222,30 @@ const Missao: React.FC = () => {
         </>
       )}
 
-      {/* Navegação inferior */}
-      <div className="mt-10 flex justify-center items-center gap-4">
-        {missaoAnterior && (
-          <button
-            onClick={() => navigate(missaoAnterior)}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-borderDark text-textSecondary hover:border-accent hover:text-textPrimary transition-colors font-semibold"
-          >
-            <ArrowLeftIcon className="w-4 h-4" />
-            Missão anterior
-          </button>
-        )}
-        {proximaMissao ? (
-          <button
-            onClick={() => navigate(proximaMissao)}
-            className="hero-cta inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold"
-          >
-            Próxima missão
-            <ArrowRightIcon className="w-4 h-4" />
-          </button>
-        ) : (
-          <Link
-            to="/conquistas"
-            className="hero-cta inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold"
-          >
-            Ver conquistas
-            <ArrowRightIcon className="w-4 h-4" />
-          </Link>
-        )}
+      {/* Marcar como concluída */}
+      <div className="mt-10 flex justify-center">
+        <button
+          onClick={() => jaConcluida ? desmarcarMissao(missao.id) : completarMissao(missao.id)}
+          className={`group inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-colors ${
+            jaConcluida
+              ? 'bg-green-500/15 border border-green-500 text-green-400 hover:bg-red-500/10 hover:border-red-500/60 hover:text-red-400'
+              : 'hero-cta'
+          }`}
+        >
+          {jaConcluida ? (
+            <>
+              <span className="inline-flex items-center gap-2 group-hover:hidden">
+                <CheckCircleIcon className="w-5 h-5" /> Concluída
+              </span>
+              <span className="hidden group-hover:inline-flex">
+                Desmarcar
+              </span>
+            </>
+          ) : 'Marcar como concluída'}
+        </button>
       </div>
 
+      </div>
     </div>
   );
 };
