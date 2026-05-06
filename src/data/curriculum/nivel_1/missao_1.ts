@@ -26,7 +26,7 @@ Todo objeto do mundo real tem duas coisas em comum:
     }
   </style>
   <rect width="680" height="300" fill="#0e0e1a" rx="12"/>
-  <text x="340" y="26" text-anchor="middle" fill="#35355a" font-size="13" font-family="monospace">Objetos do mundo real têm características e comportamentos</text>
+  <text x="340" y="26" text-anchor="middle" fill="#7878a0" font-size="13" font-family="monospace">Objetos do mundo real têm características e comportamentos</text>
 
   <!-- Card 1 - Cachorro -->
   <g class="oc1">
@@ -36,9 +36,9 @@ Todo objeto do mundo real tem duas coisas em comum:
     <text x="117" y="72" text-anchor="middle" fill="#8A4FFF" font-size="18" font-family="monospace" font-weight="bold">Cachorro</text>
     <text x="117" y="118" text-anchor="middle" font-size="28">🐕</text>
     <line x1="36" y1="134" x2="198" y2="134" stroke="#25253d" stroke-width="1"/>
-    <text x="36" y="154" fill="#6060a0" font-size="15" font-family="monospace">nome: "Rex"</text>
-    <text x="36" y="174" fill="#6060a0" font-size="15" font-family="monospace">raça: "Labrador"</text>
-    <text x="36" y="194" fill="#6060a0" font-size="15" font-family="monospace">idade: 3</text>
+    <text x="36" y="154" fill="#9090c0" font-size="15" font-family="monospace">nome: "Rex"</text>
+    <text x="36" y="174" fill="#9090c0" font-size="15" font-family="monospace">raça: "Labrador"</text>
+    <text x="36" y="194" fill="#9090c0" font-size="15" font-family="monospace">idade: 3</text>
     <line x1="36" y1="208" x2="198" y2="208" stroke="#25253d" stroke-width="1"/>
     <text x="36" y="234" fill="#6EEB83" font-size="15" font-family="monospace">latir()  buscar()</text>
   </g>
@@ -51,9 +51,9 @@ Todo objeto do mundo real tem duas coisas em comum:
     <text x="340" y="72" text-anchor="middle" fill="#8A4FFF" font-size="18" font-family="monospace" font-weight="bold">Celular</text>
     <text x="340" y="118" text-anchor="middle" font-size="28">📱</text>
     <line x1="259" y1="134" x2="421" y2="134" stroke="#25253d" stroke-width="1"/>
-    <text x="259" y="154" fill="#6060a0" font-size="15" font-family="monospace">marca: "Apple"</text>
-    <text x="259" y="174" fill="#6060a0" font-size="15" font-family="monospace">bateria: 85</text>
-    <text x="259" y="194" fill="#6060a0" font-size="15" font-family="monospace">ligado: True</text>
+    <text x="259" y="154" fill="#9090c0" font-size="15" font-family="monospace">marca: "Apple"</text>
+    <text x="259" y="174" fill="#9090c0" font-size="15" font-family="monospace">bateria: 85</text>
+    <text x="259" y="194" fill="#9090c0" font-size="15" font-family="monospace">ligado: True</text>
     <line x1="259" y1="208" x2="421" y2="208" stroke="#25253d" stroke-width="1"/>
     <text x="259" y="234" fill="#6EEB83" font-size="15" font-family="monospace">ligar()  tirarFoto()</text>
   </g>
@@ -66,14 +66,14 @@ Todo objeto do mundo real tem duas coisas em comum:
     <text x="563" y="72" text-anchor="middle" fill="#8A4FFF" font-size="18" font-family="monospace" font-weight="bold">Carro</text>
     <text x="563" y="118" text-anchor="middle" font-size="28">🚗</text>
     <line x1="482" y1="134" x2="644" y2="134" stroke="#25253d" stroke-width="1"/>
-    <text x="482" y="154" fill="#6060a0" font-size="15" font-family="monospace">modelo: "Fusca"</text>
-    <text x="482" y="174" fill="#6060a0" font-size="15" font-family="monospace">cor: "azul"</text>
-    <text x="482" y="194" fill="#6060a0" font-size="15" font-family="monospace">velocidade: 0</text>
+    <text x="482" y="154" fill="#9090c0" font-size="15" font-family="monospace">modelo: "Fusca"</text>
+    <text x="482" y="174" fill="#9090c0" font-size="15" font-family="monospace">cor: "azul"</text>
+    <text x="482" y="194" fill="#9090c0" font-size="15" font-family="monospace">velocidade: 0</text>
     <line x1="482" y1="208" x2="644" y2="208" stroke="#25253d" stroke-width="1"/>
     <text x="482" y="234" fill="#6EEB83" font-size="15" font-family="monospace">ligar()  acelerar()</text>
   </g>
 </svg>
-<figcaption style="text-align:center;font-size:12px;color:#35355a;margin-top:6px;font-family:monospace">Características em roxo · comportamentos em verde</figcaption>
+<figcaption style="text-align:center;font-size:12px;color:#7878a0;margin-top:6px;font-family:monospace">Características em roxo · comportamentos em verde</figcaption>
 </figure>
 
 A **Programação Orientada a Objetos (POO)** usa exatamente essa lógica para organizar programas: em vez de uma lista enorme de instruções soltas, você cria **objetos** que imitam coisas do mundo real — cada um com seus próprios dados e ações.
@@ -90,56 +90,10 @@ nome_cachorro1 = "Rex"
 idade_cachorro1 = 3
 nome_cachorro2 = "Bolt"
 idade_cachorro2 = 5
-# Para 2 cachorros já confunde. Para 100? Um pesadelo.
+nome_cachorro3 = "Mia"
+idade_cachorro3 = 2
+# Para 3 cachorros já confunde. Para 100? Um pesadelo.
 \`\`\`
-
-<figure style="margin:1.5rem 0">
-<svg viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:12px">
-  <defs>
-    <linearGradient id="gbad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#200e0e"/>
-      <stop offset="100%" stop-color="#180a0a"/>
-    </linearGradient>
-    <linearGradient id="ggood" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#0a200e"/>
-      <stop offset="100%" stop-color="#081808"/>
-    </linearGradient>
-  </defs>
-  <rect width="680" height="240" fill="#0e0e1a" rx="12"/>
-
-  <!-- Left: chaos -->
-  <rect x="10" y="10" width="308" height="220" rx="8" fill="url(#gbad)" stroke="#5a1a1a" stroke-width="1.5"/>
-  <text x="164" y="38" text-anchor="middle" fill="#c04040" font-size="16" font-family="monospace" font-weight="bold">❌ Sem POO</text>
-  <text x="28" y="64" fill="#804040" font-size="14" font-family="monospace">nome_cachorro1 = "Rex"</text>
-  <text x="28" y="84" fill="#804040" font-size="14" font-family="monospace">idade_cachorro1 = 3</text>
-  <text x="28" y="104" fill="#804040" font-size="14" font-family="monospace">nome_cachorro2 = "Bolt"</text>
-  <text x="28" y="124" fill="#804040" font-size="14" font-family="monospace">idade_cachorro2 = 5</text>
-  <text x="28" y="144" fill="#804040" font-size="14" font-family="monospace">nome_cachorro3 = "Mia"</text>
-  <text x="28" y="164" fill="#804040" font-size="14" font-family="monospace">idade_cachorro3 = 1</text>
-  <text x="28" y="202" fill="#503030" font-size="13" font-family="monospace">... (100 cachorros = 200 variáveis)</text>
-
-  <!-- Arrow -->
-  <text x="340" y="128" text-anchor="middle" fill="#4F33A9" font-size="32" font-weight="bold">→</text>
-
-  <!-- Right: organized -->
-  <rect x="362" y="10" width="308" height="220" rx="8" fill="url(#ggood)" stroke="#1a5a1a" stroke-width="1.5"/>
-  <text x="516" y="38" text-anchor="middle" fill="#50c070" font-size="16" font-family="monospace" font-weight="bold">✓ Com POO</text>
-  <rect x="378" y="54" width="130" height="140" rx="7" fill="#0a1a0a" stroke="#2a5a2a" stroke-width="1.5"/>
-  <text x="443" y="80" text-anchor="middle" fill="#6EEB83" font-size="14" font-family="monospace" font-weight="bold">Cachorro</text>
-  <line x1="390" y1="90" x2="500" y2="90" stroke="#1a3a1a" stroke-width="1"/>
-  <text x="392" y="112" fill="#40804a" font-size="14" font-family="monospace">rex</text>
-  <text x="392" y="130" fill="#30603a" font-size="13" font-family="monospace">nome: Rex</text>
-  <text x="392" y="148" fill="#30603a" font-size="13" font-family="monospace">idade: 3</text>
-  <rect x="520" y="54" width="130" height="140" rx="7" fill="#0a1a0a" stroke="#2a5a2a" stroke-width="1.5"/>
-  <text x="585" y="80" text-anchor="middle" fill="#6EEB83" font-size="14" font-family="monospace" font-weight="bold">Cachorro</text>
-  <line x1="532" y1="90" x2="642" y2="90" stroke="#1a3a1a" stroke-width="1"/>
-  <text x="534" y="112" fill="#40804a" font-size="14" font-family="monospace">bolt</text>
-  <text x="534" y="130" fill="#30603a" font-size="13" font-family="monospace">nome: Bolt</text>
-  <text x="534" y="148" fill="#30603a" font-size="13" font-family="monospace">idade: 5</text>
-  <text x="516" y="218" text-anchor="middle" fill="#1a4a1a" font-size="13" font-family="monospace">100 cachorros = 100 objetos organizados</text>
-</svg>
-<figcaption style="text-align:center;font-size:12px;color:#35355a;margin-top:6px;font-family:monospace">Variáveis soltas vs. objetos organizados</figcaption>
-</figure>
 
 Com POO, tudo que pertence a um cachorro fica junto dentro de um **objeto Cachorro**. A estrutura é sempre a mesma — só os dados mudam.
 
@@ -168,16 +122,16 @@ Toda a POO é construída sobre três ideias. Pense em biscoitos:
     <rect x="15" y="42" width="188" height="28" fill="#1e1845"/>
     <text x="109" y="52" text-anchor="middle" fill="#8A4FFF" font-size="16" font-family="monospace" font-weight="bold">class Cachorro</text>
     <text x="109" y="108" text-anchor="middle" font-size="28">📐</text>
-    <text x="109" y="142" text-anchor="middle" fill="#9080c0" font-size="16" font-family="monospace">O Molde</text>
-    <text x="109" y="164" text-anchor="middle" fill="#504870" font-size="14" font-family="monospace">Define a estrutura</text>
-    <text x="109" y="184" text-anchor="middle" fill="#504870" font-size="14" font-family="monospace">de qualquer cachorro</text>
+    <text x="109" y="142" text-anchor="middle" fill="#b0a0d8" font-size="16" font-family="monospace">O Molde</text>
+    <text x="109" y="164" text-anchor="middle" fill="#8878a8" font-size="14" font-family="monospace">Define a estrutura</text>
+    <text x="109" y="184" text-anchor="middle" fill="#8878a8" font-size="14" font-family="monospace">de qualquer cachorro</text>
   </g>
 
   <!-- Arrow 1 -->
   <g class="iarr1">
     <line x1="208" y1="129" x2="234" y2="129" stroke="#4F33A9" stroke-width="2.5"/>
     <polygon points="234,124 245,129 234,134" fill="#4F33A9"/>
-    <text x="226" y="118" text-anchor="middle" fill="#4F33A9" font-size="13" font-family="monospace">Cria</text>
+    <text x="226" y="118" text-anchor="middle" fill="#8A5FFF" font-size="13" font-family="monospace">Cria</text>
   </g>
 
   <!-- Objects panel -->
@@ -187,21 +141,21 @@ Toda a POO é construída sobre três ideias. Pense em biscoitos:
     <rect x="248" y="38" width="188" height="26" fill="#152030"/>
     <text x="342" y="50" text-anchor="middle" fill="#5090c0" font-size="16" font-family="monospace" font-weight="bold">Objetos Criados</text>
     <rect x="262" y="74" width="78" height="118" rx="7" fill="#0e1a25" stroke="#1a4a6a" stroke-width="1"/>
-    <text x="301" y="97" text-anchor="middle" fill="#4080a0" font-size="14" font-family="monospace" font-weight="bold">rex</text>
-    <text x="301" y="115" text-anchor="middle" fill="#305060" font-size="13" font-family="monospace">nome: Rex</text>
-    <text x="301" y="132" text-anchor="middle" fill="#305060" font-size="13" font-family="monospace">raça: Lab</text>
+    <text x="301" y="97" text-anchor="middle" fill="#60a8d0" font-size="14" font-family="monospace" font-weight="bold">rex</text>
+    <text x="301" y="115" text-anchor="middle" fill="#6090b8" font-size="13" font-family="monospace">nome: Rex</text>
+    <text x="301" y="132" text-anchor="middle" fill="#6090b8" font-size="13" font-family="monospace">raça: Lab</text>
     <rect x="350" y="74" width="78" height="118" rx="7" fill="#0e1a25" stroke="#1a4a6a" stroke-width="1"/>
-    <text x="389" y="97" text-anchor="middle" fill="#4080a0" font-size="14" font-family="monospace" font-weight="bold">bolt</text>
-    <text x="389" y="115" text-anchor="middle" fill="#305060" font-size="13" font-family="monospace">nome: Bolt</text>
-    <text x="389" y="132" text-anchor="middle" fill="#305060" font-size="13" font-family="monospace">raça: Husky</text>
-    <text x="342" y="218" text-anchor="middle" fill="#1a3a50" font-size="13" font-family="monospace">Instâncias independentes</text>
+    <text x="389" y="97" text-anchor="middle" fill="#60a8d0" font-size="14" font-family="monospace" font-weight="bold">bolt</text>
+    <text x="389" y="115" text-anchor="middle" fill="#6090b8" font-size="13" font-family="monospace">nome: Bolt</text>
+    <text x="389" y="132" text-anchor="middle" fill="#6090b8" font-size="13" font-family="monospace">raça: Husky</text>
+    <text x="342" y="218" text-anchor="middle" fill="#6090b0" font-size="13" font-family="monospace">Instâncias independentes</text>
   </g>
 
   <!-- Arrow 2 -->
   <g class="iarr2">
     <line x1="441" y1="129" x2="467" y2="129" stroke="#2a6a3a" stroke-width="2.5"/>
     <polygon points="467,124 478,129 467,134" fill="#2a6a3a"/>
-    <text x="459" y="118" text-anchor="middle" fill="#2a6a3a" font-size="13" font-family="monospace">Chama</text>
+    <text x="459" y="118" text-anchor="middle" fill="#4aaa60" font-size="13" font-family="monospace">Chama</text>
   </g>
 
   <!-- Method panel -->
@@ -212,11 +166,11 @@ Toda a POO é construída sobre três ideias. Pense em biscoitos:
     <text x="573" y="50" text-anchor="middle" fill="#6EEB83" font-size="16" font-family="monospace" font-weight="bold">Método</text>
     <text x="573" y="106" text-anchor="middle" font-size="28">💬</text>
     <text x="573" y="144" text-anchor="middle" fill="#6EEB83" font-size="16" font-family="monospace">rex.latir()</text>
-    <text x="573" y="168" text-anchor="middle" fill="#409050" font-size="14" font-family="monospace">"Rex: Au au au!"</text>
-    <text x="573" y="200" text-anchor="middle" fill="#245030" font-size="14" font-family="monospace">O que o objeto faz</text>
+    <text x="573" y="168" text-anchor="middle" fill="#60b878" font-size="14" font-family="monospace">"Rex: Au au au!"</text>
+    <text x="573" y="200" text-anchor="middle" fill="#5aaa70" font-size="14" font-family="monospace">O que o objeto faz</text>
   </g>
 </svg>
-<figcaption style="text-align:center;font-size:12px;color:#35355a;margin-top:6px;font-family:monospace">Classe → objetos → método em ação</figcaption>
+<figcaption style="text-align:center;font-size:12px;color:#7878a0;margin-top:6px;font-family:monospace">Classe → objetos → método em ação</figcaption>
 </figure>
 
 | Ingrediente | O que é | Analogia do biscoito |
@@ -303,19 +257,19 @@ Cada missão deste nível explora um desses ingredientes em detalhe.
 
   <!-- Text -->
   <text x="180" y="48" fill="#6EEB83" font-size="18" font-family="monospace" font-weight="bold">🌊 No oceano do Polvinho</text>
-  <text x="180" y="76" fill="#5060a0" font-size="14" font-family="sans-serif">Polvinho vive num oceano cheio de criaturas. Cada uma</text>
-  <text x="180" y="98" fill="#5060a0" font-size="14" font-family="sans-serif">tem características únicas e comportamentos próprios.</text>
-  <text x="180" y="120" fill="#5060a0" font-size="14" font-family="sans-serif">Para explorar tudo sem se perder, ele criou um sistema</text>
-  <text x="180" y="142" fill="#5060a0" font-size="14" font-family="sans-serif">de registro — e esse sistema é a POO.</text>
+  <text x="180" y="76" fill="#8898c8" font-size="14" font-family="sans-serif">Polvinho vive num oceano cheio de criaturas. Cada uma</text>
+  <text x="180" y="98" fill="#8898c8" font-size="14" font-family="sans-serif">tem características únicas e comportamentos próprios.</text>
+  <text x="180" y="120" fill="#8898c8" font-size="14" font-family="sans-serif">Para explorar tudo sem se perder, ele criou um sistema</text>
+  <text x="180" y="142" fill="#8898c8" font-size="14" font-family="sans-serif">de registro — e esse sistema é a POO.</text>
 
   <!-- Code block -->
   <rect x="180" y="162" width="482" height="96" rx="8" fill="#080e18" stroke="#0f2035" stroke-width="1.5"/>
-  <text x="198" y="184" fill="#2a4a6a" font-size="12" font-family="monospace"># cada criatura é um objeto com dados e ações</text>
+  <text x="198" y="184" fill="#6090b0" font-size="12" font-family="monospace"># cada criatura é um objeto com dados e ações</text>
   <text x="198" y="204" fill="#6080c0" font-size="12" font-family="monospace">polvo  = CriaturaMarina("Polvinho", tentaculos=8)</text>
   <text x="198" y="224" fill="#6080c0" font-size="12" font-family="monospace">baleia = CriaturaMarina("Baleia",   barbatanas=2)</text>
-  <text x="198" y="244" fill="#6080c0" font-size="12" font-family="monospace">polvo.explorar()  <tspan fill="#2a5a3a"># Polvinho mergulha!</tspan></text>
+  <text x="198" y="244" fill="#6080c0" font-size="12" font-family="monospace">polvo.explorar()  <tspan fill="#5aaa70"># Polvinho mergulha!</tspan></text>
 </svg>
-<figcaption style="text-align:center;font-size:12px;color:#35355a;margin-top:6px;font-family:monospace">Polvinho e o início da jornada POO</figcaption>
+<figcaption style="text-align:center;font-size:12px;color:#7878a0;margin-top:6px;font-family:monospace">Polvinho e o início da jornada POO</figcaption>
 </figure>
 
 Polvinho vive num oceano repleto de criaturas — polvos, baleias, peixes, corais. Cada ser tem características únicas e comportamentos próprios. Para explorar e entender tudo isso sem se perder, ele criou um **sistema de registro**: um jeito de organizar cada criatura com seus dados e ações.

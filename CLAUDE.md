@@ -195,6 +195,48 @@ Os seguintes arquivos existem mas devem ser removidos:
 - `src/data/modules.tsx`
 - `src/services/progress.ts`
 
+## Comentários e Pedidos nos Arquivos de Conteúdo
+
+Linhas que começam com `[nota]` são instruções ou comentários da Rebecca — **não são conteúdo a ser escrito na tela**. Ignorar ao renderizar; processar como pedido/diretriz ao editar.
+
+## Convenção de Exemplos de Código
+
+Comentários explicativos **nunca ficam dentro do bloco de código**. A explicação vai antes (como título ou frase introdutória) ou depois (como legenda), fora do bloco:
+
+```markdown
+<!-- correto -->
+Sem POO — variáveis soltas, impossível de organizar:
+
+\`\`\`python
+nome_cachorro1 = "Rex"
+idade_cachorro1 = 3
+\`\`\`
+
+Para 3 cachorros já confunde. Para 100? Um pesadelo.
+
+<!-- evitar -->
+\`\`\`python
+# Sem POO — variáveis soltas, impossível de organizar
+nome_cachorro1 = "Rex"
+idade_cachorro1 = 3
+# Para 3 cachorros já confunde. Para 100? Um pesadelo.
+\`\`\`
+```
+
+Comentários técnicos de código (ex: `# chama Animal.__init__`) podem permanecer dentro do bloco quando explicam a linha específica, não a seção.
+
+## Convenção de Visuais nos `.md`
+
+SVGs, animações, imagens e mini-jogos são documentados nos `.md` com blockquotes prefixados:
+
+```
+> [svg: descrição do que aparece — layout, cores, animações, legenda]
+> [img: descrição da imagem]
+> [animação: descrição]
+```
+
+Essas linhas descrevem o visual existente (ou desejado) naquele ponto da teoria. Não são conteúdo textual da missão — são referências de implementação para alinhar o `.md` com o `.ts`.
+
 ## Fluxo de Desenvolvimento
 
 1. Propor a implementação e aguardar aprovação antes de executar
