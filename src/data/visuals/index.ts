@@ -15,7 +15,7 @@ function annotated(label: string, content: string): string {
 }
 
 export function diagramRow(items: string[]): string {
-  return `<div style="display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;margin:1.5rem 0">${items.join(ARROW)}</div>`;
+  return `<div style="margin:1.5rem -2rem;overflow-x:auto"><div style="display:flex;justify-content:center;gap:1.5rem;align-items:center;flex-wrap:nowrap;padding:0 2rem">${items.join(ARROW)}</div></div>`;
 }
 
 export function oceanPolvo(tag: string): string {
