@@ -15,6 +15,19 @@ A forma de cortar biscoitos não é um biscoito. Ela é a instrução de como cr
 
 ---
 
+**Cuidado para não confundir os bolos**
+
+Se você já aprendeu que "um algoritmo é como uma receita de bolo", prepare-se — na POO usamos a mesma analogia com um papel diferente, e isso costuma dar um nó. A diferença está no foco:
+
+- **Receita (Procedural):** foca em **verbos** — *quebre* os ovos, *misture* a farinha, *asse* por 40 minutos. A receita *é* o programa: executa de cima a baixo uma vez e produz um resultado.
+- **Classe (POO):** foca em **substantivos** — não importa como você fez a massa; importa a *estrutura*: "todo bolo que sair daqui seguirá este molde". A classe não executa sozinha — ela existe para criar objetos.
+
+Resumindo: a receita é uma **lista de tarefas**. A classe é uma **fábrica**.
+
+> [animação: dois painéis lado a lado. Esquerdo — "Receita (Procedural)": lista de 3 passos com seta e um único 🎂, legenda "executa uma vez". Direito — "Classe (POO)": bloco "class Bolo:" com botão "Produzir Bolo" que a cada clique adiciona um 🎂 abaixo. Legenda: "Mesma palavra, papéis opostos."]
+
+---
+
 ## Criando uma classe
 
 ```python

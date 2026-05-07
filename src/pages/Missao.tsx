@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import BoloFactory from '../components/BoloFactory';
 import { ArrowLeftIcon, ArrowRightIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -129,7 +130,13 @@ const Missao: React.FC = () => {
         prose-blockquote:border-l-accent prose-blockquote:text-textSecondary
         prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary
         prose-li:text-textSecondary">
-        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{missao.theory}</ReactMarkdown>
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}
+          components={{ 'bolo-factory': () => <BoloFactory /> }}
+        >
+          {missao.theory}
+        </ReactMarkdown>
       </section>
 
       {/* Mini-jogo */}
