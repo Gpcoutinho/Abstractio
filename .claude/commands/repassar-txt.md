@@ -1,14 +1,14 @@
-# /criar-md — Criar .md de missão a partir de um .txt
+# /repassar-txt — Formatar .txt de missão → .md
 
 Formata um arquivo `.txt` com rascunho de missão no formato canônico `.md` do projeto.
 
 ## Uso
 
 ```
-/criar-md <caminho-do-txt>
+/repassar-txt <caminho-do-txt>
 ```
 
-Exemplo: `/criar-md docs/rascunhos/nivel_2_missao_3.txt`
+Exemplo: `/repassar-txt docs/rascunhos/nivel_2_missao_3.txt`
 
 O identificador da missão (nível e número) deve estar no nome do arquivo ou será perguntado.
 
@@ -42,7 +42,7 @@ Antes de criar o arquivo, apresentar um resumo:
 
 **Passo 3 — Escrever o `.md` (somente após ok)**
 
-Gerar o arquivo em `docs/missoes/nivel_<N>/missao_<M>.md` com a estrutura abaixo:
+Se o `.md` já existir, mesclar o conteúdo do `.txt` com o que já estava — nunca apagar seções existentes, apenas adicionar ou atualizar o que mudou. Se o `.md` não existir, criá-lo com a estrutura abaixo:
 
 ```markdown
 # Missão N-M — Título

@@ -1,14 +1,14 @@
-# /repassar — Sincronizar .md → .ts de uma missão
+# /repassar-md — Sincronizar .md → .ts de uma missão
 
 Sincroniza o conteúdo de um arquivo `.md` de missão para o `.ts` correspondente.
 
 ## Uso
 
 ```
-/repassar <nivel>-<missao>
+/repassar-md <nivel>-<missao>
 ```
 
-Exemplos: `/repassar 1-2`, `/repassar 2-5`
+Exemplos: `/repassar-md 1-2`, `/repassar-md 2-5`
 
 ## Fluxo obrigatório
 
@@ -33,7 +33,7 @@ Apresentar esse resumo e **aguardar um "ok" explícito** da Rebecca antes de pro
 
 **Passo 3 — Repassar para o `.ts` (somente após ok)**
 
-Aplicar o mapeamento abaixo sobrescrevendo o `.ts`. Preservar imports e variáveis de visuais já existentes no `.ts` (ex: `diagrama`, `oceanPolvo`, etc.).
+Atualizar o `.ts` mesclando as mudanças do `.md` — nunca apagar o que já estava. Preservar imports, variáveis de visuais e qualquer código já existente no `.ts` (ex: `diagrama`, `oceanPolvo`, etc.). Apenas os campos que mudaram no `.md` devem ser atualizados; o restante permanece intacto.
 
 | Campo no `.md` | Campo no `.ts` |
 |---|---|
