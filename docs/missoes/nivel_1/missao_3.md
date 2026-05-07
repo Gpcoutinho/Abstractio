@@ -5,11 +5,11 @@
 
 ## Teoria
 
-## A forma de fazer biscoito
+## A forma de assar bolo
 
-Na missão anterior, você conheceu o **objeto** — o biscoito. Agora é hora de conhecer o **molde**: a **classe**.
+Na missão anterior, você conheceu o **objeto** — o bolo. Agora é hora de conhecer o **molde**: a **classe**.
 
-A forma de cortar biscoitos não é um biscoito. Ela é a instrução de como criar biscoitos. Uma classe funciona exatamente assim: define como os objetos daquele tipo devem ser.
+A forma de assar bolos não é um bolo. Ela é a instrução de como criar bolos. Uma classe funciona exatamente assim: define como os objetos daquele tipo devem ser.
 
 > **Classe** = o molde que descreve como os objetos serão criados — quais dados eles têm e o que sabem fazer.
 
@@ -19,8 +19,8 @@ A forma de cortar biscoitos não é um biscoito. Ela é a instrução de como cr
 
 Se você já aprendeu que "um algoritmo é como uma receita de bolo", prepare-se — na POO usamos a mesma analogia com um papel diferente, e isso costuma dar um nó. A diferença está no foco:
 
-- **Receita (Procedural):** foca em **verbos** — *quebre* os ovos, *misture* a farinha, *asse* por 40 minutos. A receita *é* o programa: executa de cima a baixo uma vez e produz um resultado.
-- **Classe (POO):** foca em **substantivos** — não importa como você fez a massa; importa a *estrutura*: "todo bolo que sair daqui seguirá este molde". A classe não executa sozinha — ela existe para criar objetos.
+- **Procedural (Algoritmo = Receita = Ações):** foca em **verbos** — *quebre* os ovos, *misture* a farinha, *asse* por 40 minutos. A receita *é* o programa: executa de cima a baixo uma vez e produz um resultado.
+- **POO (Classe = Receita/Forma = Ingredientes):** foca em **substantivos** — não importa como você fez a massa; importa a *estrutura*: "todo bolo que sair daqui seguirá este molde". A classe não executa sozinha — ela existe para criar objetos.
 
 Resumindo: a receita é uma **lista de tarefas**. A classe é uma **fábrica**.
 
