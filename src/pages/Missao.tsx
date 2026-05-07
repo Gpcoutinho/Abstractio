@@ -233,14 +233,14 @@ const Missao: React.FC = () => {
           }`}
         >
           {jaConcluida ? (
-            <>
-              <span className="inline-flex items-center gap-2 group-hover:hidden">
+            <span className="relative inline-flex items-center justify-center">
+              <span className="inline-flex items-center gap-2 transition-opacity group-hover:opacity-0">
                 <CheckCircleIcon className="w-5 h-5" /> Concluída
               </span>
-              <span className="hidden group-hover:inline-flex">
+              <span className="absolute inset-0 inline-flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
                 Desmarcar
               </span>
-            </>
+            </span>
           ) : 'Marcar como concluída'}
         </button>
       </div>
