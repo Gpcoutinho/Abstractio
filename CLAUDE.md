@@ -57,10 +57,6 @@ src/
 
 Não existe rota `/trilhas` — há apenas uma trilha (POO) por enquanto.
 
-## Acesso às Missões
-
-Todas as missões estão disponíveis desde o início — sem desbloqueio sequencial. O usuário pode acessar qualquer missão para revisão, independente do progresso.
-
 ## Navegação (Header)
 
 Ordem dos itens: **Home → Trilha → Conquistas**
@@ -90,15 +86,7 @@ Persistido em **localStorage**. Sem sync com backend.
 }
 ```
 
-**Nível do usuário** — derivado de `niveis_concluidos.length`, não armazenado:
-- 0 níveis completos → "Nível 1 — Polvinho"
-- 1 nível completo  → "Nível 2 — Explorador"
-- 2 níveis completos → "Nível 3 — Mestre dos Mares"
-- 3 níveis completos → "Nível 4 — Kraken"
-
-O título exibido no Header vem sempre do cálculo acima, nunca de um campo separado.
-
-**Troféus:** 1 por missão concluída — exibidos na tela `/conquistas`. Derivados do currículo em TypeScript, sem registro separado.
+**Nível do usuário** — derivado de `niveis_concluidos.length`, nunca de um campo separado. Títulos em `ESTRUTURA.md`.
 
 **Premiação por pontuação:** ainda não definida — não implementar por enquanto.
 
@@ -163,24 +151,9 @@ Dois slides no Dashboard:
 - **Slide 1 (roxo):** mascote (Mascote.tsx) + texto de boas-vindas + botão "Continuar trilha"
 - **Slide 2 (verde menta):** "Como funciona" com 3 passos
 
-## Ícones de Status de Missão
-
-Usar **Heroicons** (já instalado). Não usar emojis para status.
-
 ## Cores e Design
 
-Tailwind com paleta customizada definida em `tailwind.config.cjs`:
-
-```
-bgPrimary:    #1A1A1A   fundo global
-bgSecondary:  #2A2A2A   superfície
-primary:      #4F33A9   roxo base
-secondary:    #8A4FFF   roxo claro
-accent:       #6EEB83   verde neon
-```
-
-Hero roxo: `linear-gradient(135deg, #4c1d95, #6d28d9, #7c3aed)`
-Hero verde: `linear-gradient(135deg, #065f46, #059669, #10b981)`
+Paleta e gradientes em `ESTRUTURA.md`. Tailwind config em `tailwind.config.cjs`.
 
 ## Arquivos a Deletar (refatoração em andamento)
 
