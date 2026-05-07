@@ -1,4 +1,8 @@
 import type { Missao } from '../types';
+import { moldeBoloAnimation } from '../../visuals';
+
+// prettier-ignore
+const moldeBolo = moldeBoloAnimation();
 
 const missao: Missao = {
   id: "1-3",
@@ -13,6 +17,8 @@ A forma de assar bolos não é um bolo. Ela é a instrução de como criar bolos
 
 > **Classe** = o molde que descreve como os objetos serão criados — quais dados eles têm e o que sabem fazer.
 
+${moldeBolo}
+
 ---
 
 **Cuidado para não confundir os bolos**
@@ -20,7 +26,7 @@ A forma de assar bolos não é um bolo. Ela é a instrução de como criar bolos
 Se você já aprendeu que "um algoritmo é como uma receita de bolo", prepare-se — na POO usamos a mesma analogia com um papel diferente, e isso costuma dar um nó. A diferença está no foco:
 
 - **Procedural (Algoritmo = Receita = Ações):** foca em **verbos** — *quebre* os ovos, *misture* a farinha, *asse* por 40 minutos. A receita *é* o programa: executa de cima a baixo uma vez e produz um resultado.
-- **POO (Classe = Receita/Forma = Ingredientes):** foca em **substantivos** — não importa como você fez a massa; importa a *estrutura*: "todo bolo que sair daqui seguirá este molde". A classe não executa sozinha — ela existe para criar objetos.
+- **POO (Classe = Receita/Forma = Ingredientes):** foca em **substantivos** — não importa *como* (passos) você fez a massa; importa a *estrutura* (ingredientes): "todo bolo que sair daqui seguirá este molde". A classe não executa sozinha — ela existe para criar objetos.
 
 Resumindo: a receita é uma **lista de tarefas**. A classe é uma **fábrica**.
 

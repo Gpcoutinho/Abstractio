@@ -88,3 +88,68 @@ export function codeCard(label: string, code: string): string {
   const pre = `<pre style="margin:0;background:#1e1e35;border:1px solid #3d3d5e;border-radius:8px;padding:1rem 1.25rem;font-family:'Courier New',monospace;font-size:13px;color:#e2e8f0;overflow-x:auto;min-width:190px"><code style="color:inherit;background:transparent">${escapeHtml(code)}</code></pre>`;
   return annotated(label, pre);
 }
+
+export function moldeBoloAnimation(): string {
+  return `<figure style="margin:1.5rem auto;display:flex;justify-content:center">
+<svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" style="width:200px;display:block;border-radius:12px">
+  <defs>
+    <radialGradient id="mbag" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8A4FFF" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#8A4FFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <style>
+    .mb-cake{animation:mbRise 4s ease infinite}
+    .mb-sp1{animation:mbSpark 4s ease infinite}
+    .mb-sp2{animation:mbSpark 4s .18s ease infinite}
+    .mb-sp3{animation:mbSpark 4s .32s ease infinite}
+    .mb-glow{animation:mbGlow 4s ease infinite}
+    @keyframes mbRise{
+      0%,100%{transform:translateY(310px)}
+      18%{transform:translateY(118px)}
+      25%,62%{transform:translateY(126px)}
+      78%{transform:translateY(310px)}
+    }
+    @keyframes mbSpark{
+      0%,22%,72%,100%{opacity:0;transform:scale(0)}
+      34%,60%{opacity:1;transform:scale(1)}
+    }
+    @keyframes mbGlow{
+      0%,22%,72%,100%{opacity:0}
+      34%,60%{opacity:1}
+    }
+  </style>
+  <rect width="200" height="280" fill="#0e0e1a" rx="12"/>
+  <ellipse class="mb-glow" cx="100" cy="194" rx="48" ry="10" fill="url(#mbag)"/>
+  <!-- Bolo desenhado antes do corpo da forma — o corpo o cobre quando está dentro -->
+  <g class="mb-cake">
+    <rect x="57" y="24" width="86" height="22" rx="3" fill="#e8c870"/>
+    <rect x="57" y="4" width="86" height="22" rx="3" fill="#f5dc80"/>
+    <rect x="55" y="-8" width="90" height="16" rx="8" fill="#f9c8d8"/>
+    <ellipse cx="75" cy="4" rx="6" ry="5" fill="#f9c8d8"/>
+    <ellipse cx="100" cy="6" rx="6" ry="5" fill="#f9c8d8"/>
+    <ellipse cx="125" cy="4" rx="6" ry="5" fill="#f9c8d8"/>
+    <path d="M100,-8 Q106,-18 102,-24" stroke="#6aaa50" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <circle cx="102" cy="-24" r="6" fill="#e04060"/>
+    <circle cx="100" cy="-26" r="2" fill="#f07090" opacity="0.7"/>
+  </g>
+  <!-- Corpo da forma desenhado depois do bolo — mascara o bolo quando dentro -->
+  <rect x="42" y="210" width="116" height="70" rx="8" fill="#110c26" stroke="#4F33A9" stroke-width="1.5"/>
+  <!-- Rim desenhado por último — mascara o bolo na saída -->
+  <rect x="30" y="196" width="140" height="14" rx="5" fill="#1e1845" stroke="#8A4FFF" stroke-width="1.5"/>
+  <rect x="11" y="200" width="20" height="9" rx="3" fill="#1e1845" stroke="#8A4FFF" stroke-width="1.5"/>
+  <rect x="169" y="200" width="20" height="9" rx="3" fill="#1e1845" stroke="#8A4FFF" stroke-width="1.5"/>
+  <text x="100" y="240" text-anchor="middle" fill="#5535a8" font-size="10" font-family="monospace" font-weight="700">class Bolo</text>
+  <g class="mb-sp1" transform="translate(152,130)">
+    <path d="M0,-7 L1.5,-1.5 L7,0 L1.5,1.5 L0,7 L-1.5,1.5 L-7,0 L-1.5,-1.5 Z" fill="#c0a0ff"/>
+  </g>
+  <g class="mb-sp2" transform="translate(44,142)">
+    <path d="M0,-5 L1,-1 L5,0 L1,1 L0,5 L-1,1 L-5,0 L-1,-1 Z" fill="#d0b0ff"/>
+  </g>
+  <g class="mb-sp3" transform="translate(158,155)">
+    <path d="M0,-4 L1,-1 L4,0 L1,1 L0,4 L-1,1 L-4,0 L-1,-1 Z" fill="#a888e8"/>
+  </g>
+  <text x="100" y="275" text-anchor="middle" fill="#4a2d98" font-size="11" font-family="monospace">a forma cria o bolo</text>
+</svg>
+</figure>`;
+}
