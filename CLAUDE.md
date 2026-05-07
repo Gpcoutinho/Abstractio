@@ -205,11 +205,6 @@ Essas linhas descrevem o visual existente (ou desejado) naquele ponto da teoria.
 3. Perguntar à Rebecca se deseja commitar antes de qualquer commit
 4. Ao final de mudanças maiores, informar quantas linhas foram adicionadas/excluídas
 
-## Commits
-
-Conventional Commits em **pt-BR**: `tipo: descrição curta`
-
-Tipos: `feat`, `fix`, `refactor`, `style`, `docs`, `chore`
 
 ## Deploy
 
