@@ -22,7 +22,6 @@ const Missao: React.FC = () => {
   useEffect(() => {
     setSelecionada(null);
     setRespondida(false);
-    window.scrollTo(0, 0);
   }, [nivelIdx, missaoIdx]);
 
   const nivel = niveis.find(n => n.id === Number(nivelIdx));
