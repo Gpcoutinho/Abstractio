@@ -1,6 +1,14 @@
 # Abstractio — Frontend React
 
-App educacional gamificado para ensinar **Programação Orientada a Objetos (POO)** em Python, migrado de Streamlit para React + TypeScript.
+App educacional gamificado para ensinar **Programação Orientada a Objetos (POO)** em Python.
+
+## Skills Disponíveis
+
+| Skill | O que faz |
+|---|---|
+| `/repassar <N-M>` | Lê o `.md` da missão, resume as mudanças e aguarda ok antes de sobrescrever o `.ts` |
+| `/criar-md <arquivo.txt>` | Formata um rascunho `.txt` no padrão `.md` de missão, resumindo o resultado antes de salvar |
+| `/commit` | Propõe mensagem de commit em pt-BR, lista arquivos e aguarda ok antes de executar |
 
 ## Stack
 
@@ -18,9 +26,9 @@ App educacional gamificado para ensinar **Programação Orientada a Objetos (POO
 src/
   pages/                   ← Telas principais (4)
     Home.tsx              ← Dashboard: hero carousel + mascote + features
-    Trilha.tsx            ← Mapa de níveis e missões (refatorado de POO.tsx)
-    Missao.tsx            ← Conteúdo: teoria + mini-jogo + exercício (refatorado de LessonPage.tsx)
-    Conquistas.tsx        ← Estante de troféus (novo)
+    Trilha.tsx            ← Mapa de níveis e missões
+    Missao.tsx            ← Conteúdo: teoria + mini-jogo + exercício
+    Conquistas.tsx        ← Estante de troféus
   components/
     Header.tsx            ← Logo + nav + pontuação + rank + avatar circle
     HeroCarousel.tsx      ← 2 slides (roxo e verde menta)
@@ -144,29 +152,9 @@ Arquivo: `src/assets/interativos/nivel_1_missao_1.html`
 HTML/CSS/JS autossuficiente. Renderizar via `<iframe srcDoc={html}>`.
 Hoje existe apenas 1 mini-jogo (drag & drop, missão 1).
 
-## Hero Carousel
-
-Dois slides no Dashboard:
-
-- **Slide 1 (roxo):** mascote (Mascote.tsx) + texto de boas-vindas + botão "Continuar trilha"
-- **Slide 2 (verde menta):** "Como funciona" com 3 passos
-
 ## Cores e Design
 
 Paleta e gradientes em `ESTRUTURA.md`. Tailwind config em `tailwind.config.cjs`.
-
-## Arquivos a Deletar (refatoração em andamento)
-
-Os seguintes arquivos existem mas devem ser removidos:
-- `src/pages/Login.tsx`
-- `src/pages/Profile.tsx`
-- `src/pages/Exercicios.tsx`
-- `src/pages/Ponteiros.tsx`
-- `src/pages/LessonClasses.tsx`
-- `src/contexts/progressStore.tsx`
-- `src/contexts/useProgress.tsx`
-- `src/data/modules.tsx`
-- `src/services/progress.ts`
 
 ## Comentários e Pedidos nos Arquivos de Conteúdo
 
