@@ -6,6 +6,7 @@ import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
 import Footer from '../components/Footer';
 import PageWrapper from '../components/PageWrapper';
+import ProgressBar from '../components/ProgressBar';
 const totalMissoes = niveis.reduce((acc, n) => acc + n.missoes.length, 0);
 
 const Trilha: React.FC = () => {
@@ -21,20 +22,8 @@ const Trilha: React.FC = () => {
           <p className="text-textSecondary">
             Programação Orientada a Objetos em Python — {totalMissoes} missões
           </p>
-          <div className="mt-4">
-            <div className="flex justify-between text-sm text-textSecondary mb-1">
-              <span>{completed.length} de {totalMissoes} missões concluídas</span>
-              <span>{progressoGeral}%</span>
-            </div>
-            <div className="w-full h-2 bg-bgSecondary rounded-full overflow-hidden">
-              <div
-                className="h-full rounded-full transition-all duration-500"
-                style={{
-                  width: `${progressoGeral}%`,
-                  background: 'linear-gradient(90deg, #4F33A9, #8A4FFF)',
-                }}
-              />
-            </div>
+          <div className="mt-6">
+            <ProgressBar curriculum={niveis} completedMissions={completed} />
           </div>
         </div>
 
