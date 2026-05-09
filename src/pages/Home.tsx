@@ -53,31 +53,36 @@ const Home: React.FC = () => {
               : 'Escolha por onde começar.'}
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {FEATURE_CARDS.map(card => (
-              <div
-                key={card.title}
-                className={`border border-borderDark rounded-xl p-6 bg-bgSecondary flex flex-col gap-3 transition-colors ${
-                  card.locked
-                    ? 'opacity-45 pointer-events-none'
-                    : 'hover:border-accent cursor-pointer'
-                }`}
-              >
-                <card.Icon className={`w-8 h-8 ${card.locked ? 'text-textSecondary' : 'text-accent'}`} />
-                <h3 className="text-textPrimary font-semibold text-lg">{card.title}</h3>
-                <p className="text-textSecondary text-sm flex-1">{card.description}</p>
-                {!card.locked && card.to && (
-                  <Link
-                    to={card.to}
-                    className="mt-2 text-sm text-accent font-medium hover:underline"
-                  >
-                    Acessar →
-                  </Link>
-                )}
-                {card.locked && (
-                  <span className="mt-2 text-xs text-textSecondary">Em breve</span>
-                )}
-              </div>
-            ))}
+            {FEATURE_CARDS.map(card => {
+              const sharedClasses = `border border-borderDark rounded-xl p-6 bg-bgSecondary flex flex-col gap-3 transition-colors ${
+                card.locked
+                  ? 'opacity-45 pointer-events-none'
+                  : 'hover:border-accent cursor-pointer'
+              }`;
+
+              const cardContent = (
+                <>
+                  <card.Icon className={`w-8 h-8 ${card.locked ? 'text-textSecondary' : 'text-accent'}`} />
+                  <h3 className="text-textPrimary font-semibold text-lg">{card.title}</h3>
+                  <p className="text-textSecondary text-sm flex-1">{card.description}</p>
+                  {!card.locked && card.to ? (
+                    <span className="mt-2 text-sm text-accent font-medium">Acessar →</span>
+                  ) : (
+                    <span className="mt-2 text-xs text-textSecondary">Em breve</span>
+                  )}
+                </>
+              );
+
+              return card.to && !card.locked ? (
+                <Link key={card.title} to={card.to} className={sharedClasses}>
+                  {cardContent}
+                </Link>
+              ) : (
+                <div key={card.title} className={sharedClasses}>
+                  {cardContent}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
