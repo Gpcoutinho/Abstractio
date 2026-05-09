@@ -7,6 +7,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans:   ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        outfit: ['Outfit', 'sans-serif'],
+        mono:   ['Fira Code', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+      },
       colors: {
         'bgPrimary':     '#0F172A',
         'bgSecondary':   '#1E293B',
