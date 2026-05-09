@@ -73,55 +73,57 @@ const Missao: React.FC = () => {
     <div className="pt-20">
 
       {/* Navegação fixa */}
-      <nav className="sticky top-20 z-40 bg-bgPrimary border-b border-accent/20">
-        <div className="max-w-3xl mx-auto px-5 h-11 flex items-center justify-between">
-          <div className="flex items-center gap-5">
-            <Link
-              to="/trilha"
-              className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
-            >
-              <ArrowLeftIcon className="w-4 h-4" />
-              Voltar à trilha
-            </Link>
-            {missaoAnterior && (
+      <div className="sticky top-20 z-40 bg-bgPrimary">
+        <nav className="border-b border-accent/20">
+          <div className="max-w-3xl mx-auto px-5 h-11 flex items-center justify-between">
+            <div className="flex items-center gap-5">
               <Link
-                to={missaoAnterior}
+                to="/trilha"
                 className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
               >
                 <ArrowLeftIcon className="w-4 h-4" />
-                Missão anterior
+                Voltar à trilha
+              </Link>
+              {missaoAnterior && (
+                <Link
+                  to={missaoAnterior}
+                  className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+                >
+                  <ArrowLeftIcon className="w-4 h-4" />
+                  Missão anterior
+                </Link>
+              )}
+            </div>
+            {proximaMissao ? (
+              <Link
+                to={proximaMissao}
+                className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+              >
+                Próxima missão
+                <ArrowRightIcon className="w-4 h-4" />
+              </Link>
+            ) : (
+              <Link
+                to="/conquistas"
+                className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+              >
+                Ver conquistas
+                <ArrowRightIcon className="w-4 h-4" />
               </Link>
             )}
           </div>
-          {proximaMissao ? (
-            <Link
-              to={proximaMissao}
-              className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
-            >
-              Próxima missão
-              <ArrowRightIcon className="w-4 h-4" />
-            </Link>
-          ) : (
-            <Link
-              to="/conquistas"
-              className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
-            >
-              Ver conquistas
-              <ArrowRightIcon className="w-4 h-4" />
-            </Link>
-          )}
-        </div>
-      </nav>
+        </nav>
+        <header className="border-b border-accent/10">
+          <div className="max-w-3xl mx-auto px-5 py-4">
+            <p className="text-textSecondary text-sm mb-1">{nivel.title}</p>
+            <h1 className="text-2xl font-bold text-textPrimary">
+              {missao.icon} {missao.title}
+            </h1>
+          </div>
+        </header>
+      </div>
 
       <div className="max-w-3xl mx-auto pt-8 pb-16 px-5">
-
-      {/* Título */}
-      <header className="mb-8">
-        <p className="text-textSecondary text-sm mb-1">{nivel.title}</p>
-        <h1 className="text-2xl font-bold text-textPrimary">
-          {missao.icon} {missao.title}
-        </h1>
-      </header>
 
       {/* Teoria */}
       <section className="mb-8 prose prose-invert max-w-none
