@@ -18,6 +18,7 @@ module.exports = {
         'borderDark':    '#334155',
         'textPrimary':   '#F8FAFC',
         'textSecondary': '#94A3B8',
+        'textBody':      '#CBD5E1',
         'primary':       '#7C3AED',
         'secondary':     '#A78BFA',
         'accent':        '#06B6D4',

@@ -125,13 +125,13 @@ const Missao: React.FC = () => {
       {/* Teoria */}
       <section className="mb-8 prose prose-invert max-w-none
         prose-headings:text-textPrimary prose-headings:font-bold
-        prose-p:text-textSecondary prose-p:leading-relaxed
+        prose-p:text-textBody prose-p:leading-relaxed
         prose-strong:text-textPrimary
         prose-code:text-accent prose-code:bg-bgSecondary prose-code:px-1 prose-code:rounded
         prose-pre:bg-bgSecondary prose-pre:border prose-pre:border-borderDark prose-pre:rounded-lg
         prose-blockquote:border-l-accent prose-blockquote:text-textSecondary
         prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary
-        prose-li:text-textSecondary">
+        prose-li:text-textBody">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}
