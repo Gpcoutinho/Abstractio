@@ -170,8 +170,8 @@ const Missao: React.FC = () => {
               {missao.exercise.options.map((opcao, i) => {
                 let estilo = 'border-borderDark';
                 if (respondida) {
-                  if (i === missao.exercise!.correct) estilo = 'border-green-500 bg-green-500/10';
-                  else if (i === selecionada) estilo = 'border-red-500 bg-red-500/10';
+                  if (i === missao.exercise!.correct) estilo = 'border-success bg-success/10';
+                  else if (i === selecionada) estilo = 'border-danger bg-danger/10';
                 } else if (i === selecionada) {
                   estilo = 'border-accent bg-accent/10';
                 }
@@ -198,8 +198,8 @@ const Missao: React.FC = () => {
 
             {/* Feedback */}
             {respondida && (
-              <div className={`mt-5 p-4 rounded-lg border ${acertou ? 'bg-green-500/10 border-green-500' : 'bg-red-500/10 border-red-500'}`}>
-                <p className={`font-semibold mb-1 ${acertou ? 'text-green-400' : 'text-red-400'}`}>
+              <div className={`mt-5 p-4 rounded-lg border ${acertou ? 'bg-success/10 border-success' : 'bg-danger/10 border-danger'}`}>
+                <p className={`font-semibold mb-1 ${acertou ? 'text-success' : 'text-danger'}`}>
                   {acertou ? '✓ Correto!' : '✗ Não foi dessa vez.'}
                 </p>
                 <p className="text-textSecondary text-sm">{missao.exercise.explanation}</p>
@@ -238,7 +238,7 @@ const Missao: React.FC = () => {
           onClick={() => jaConcluida ? desmarcarMissao(missao.id) : completarMissao(missao.id)}
           className={`group inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-colors ${
             jaConcluida
-              ? 'bg-green-500/15 border border-green-500 text-green-400 hover:bg-red-500/10 hover:border-red-500/60 hover:text-red-400'
+              ? 'bg-success/15 border border-success text-success hover:bg-danger/10 hover:border-danger/60 hover:text-danger'
               : 'text-white bg-gradient-to-r from-primary to-accent shadow-[0_6px_18px_rgba(76,29,149,0.12)] hover:-translate-y-[3px]'
           }`}
         >

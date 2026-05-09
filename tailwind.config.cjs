@@ -24,6 +24,7 @@ module.exports = {
         'accent':        '#06B6D4',
         'purpleAccent':  '#9F7AEA',
         'success':       '#10B981',
+        'danger':        '#FB7185',
       },
       keyframes: {
         float: {
