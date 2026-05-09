@@ -254,6 +254,45 @@ const Missao: React.FC = () => {
         </button>
       </div>
 
+      {/* Navegação de rodapé */}
+      <div className="mt-8 pt-6 border-t border-borderDark flex items-center justify-between">
+        <div className="flex items-center gap-5">
+          <Link
+            to="/trilha"
+            className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+          >
+            <ArrowLeftIcon className="w-4 h-4" />
+            Voltar à trilha
+          </Link>
+          {missaoAnterior && (
+            <Link
+              to={missaoAnterior}
+              className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+            >
+              <ArrowLeftIcon className="w-4 h-4" />
+              Missão anterior
+            </Link>
+          )}
+        </div>
+        {proximaMissao ? (
+          <Link
+            to={proximaMissao}
+            className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+          >
+            Próxima missão
+            <ArrowRightIcon className="w-4 h-4" />
+          </Link>
+        ) : (
+          <Link
+            to="/conquistas"
+            className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+          >
+            Ver conquistas
+            <ArrowRightIcon className="w-4 h-4" />
+          </Link>
+        )}
+      </div>
+
       </div>
     </div>
   );
