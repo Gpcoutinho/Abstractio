@@ -239,7 +239,7 @@ const Missao: React.FC = () => {
           className={`group inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-colors ${
             jaConcluida
               ? 'bg-green-500/15 border border-green-500 text-green-400 hover:bg-red-500/10 hover:border-red-500/60 hover:text-red-400'
-              : 'text-white bg-gradient-to-r from-[#7c5cff] to-[#34d399] shadow-[0_6px_18px_rgba(76,29,149,0.12)] hover:-translate-y-[3px]'
+              : 'text-white bg-gradient-to-r from-primary to-accent shadow-[0_6px_18px_rgba(76,29,149,0.12)] hover:-translate-y-[3px]'
           }`}
         >
           {jaConcluida ? (

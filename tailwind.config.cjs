@@ -8,15 +8,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'bgPrimary':     '#1A1A1A',
-        'bgSecondary':   '#2A2A2A',
-        'borderDark':    '#444444',
-        'textPrimary':   '#FFFFFF',
-        'textSecondary': '#AAAAAA',
-        'primary':       '#4F33A9',
-        'secondary':     '#8A4FFF',
-        'accent':        '#6EEB83',
-        'purpleAccent':  '#9747FF',
+        'bgPrimary':     '#0F172A',
+        'bgSecondary':   '#1E293B',
+        'borderDark':    '#334155',
+        'textPrimary':   '#F8FAFC',
+        'textSecondary': '#94A3B8',
+        'primary':       '#7C3AED',
+        'secondary':     '#A78BFA',
+        'accent':        '#06B6D4',
+        'purpleAccent':  '#9F7AEA',
+        'success':       '#10B981',
       },
       keyframes: {
         float: {

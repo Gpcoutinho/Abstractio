@@ -47,7 +47,7 @@ const HeroCarousel: React.FC = () => {
               )}
               <Link
                 to="/trilha"
-                className="inline-flex items-center justify-center px-6 py-3 text-white font-semibold rounded-lg bg-gradient-to-r from-[#7c5cff] to-[#34d399] shadow-[0_6px_18px_rgba(76,29,149,0.12)] transition duration-150 ease-in-out hover:-translate-y-[3px]"
+                className="inline-flex items-center justify-center px-6 py-3 text-white font-semibold rounded-lg bg-gradient-to-r from-primary to-accent shadow-[0_6px_18px_rgba(76,29,149,0.12)] transition duration-150 ease-in-out hover:-translate-y-[3px]"
               >
                 {progressoGeral > 0 ? 'Continuar trilha' : 'Começar trilha'}
               </Link>

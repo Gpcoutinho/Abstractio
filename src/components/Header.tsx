@@ -65,7 +65,7 @@ const Header: React.FC = () => {
           <div
             className="w-9 h-9 rounded-md flex-shrink-0"
             aria-hidden="true"
-            style={{ background: 'linear-gradient(90deg, #7c5cff, #34d399)' }}
+            style={{ background: 'linear-gradient(90deg, #7C3AED, #06B6D4)' }}
           />
           <span className="text-2xl md:text-3xl font-bold tracking-tight text-textPrimary">Abstractio</span>
         </Link>
@@ -100,7 +100,7 @@ const Header: React.FC = () => {
                 <div
                   className="w-8 h-8 rounded-md flex-shrink-0"
                   aria-hidden="true"
-                  style={{ background: 'linear-gradient(90deg, #7c5cff, #34d399)' }}
+                  style={{ background: 'linear-gradient(90deg, #7C3AED, #06B6D4)' }}
                 />
                 <span className="font-bold text-lg">Abstractio</span>
               </Link>
