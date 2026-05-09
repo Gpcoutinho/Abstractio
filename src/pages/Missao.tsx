@@ -7,7 +7,6 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
-import ButtonCTA from '../components/ButtonCTA';
 import PageWrapper from '../components/PageWrapper';
 import CodeBlock from '../components/CodeBlock';
 import interativoHtml from '../assets/interativos/nivel_1_missao_7.html?raw';
@@ -210,14 +209,13 @@ const Missao: React.FC = () => {
             {/* Botões */}
             <div className="mt-5 flex items-center gap-3">
               {!respondida && (
-                <ButtonCTA
-                  compact
+                <button
                   onClick={handleSubmit}
                   disabled={selecionada === null}
-                  className="disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   Responder
-                </ButtonCTA>
+                </button>
               )}
 
               {respondida && !acertou && (
@@ -234,26 +232,28 @@ const Missao: React.FC = () => {
       )}
 
       {/* Marcar como concluída */}
-      <div className="mt-10 flex justify-center">
-        <button
-          onClick={() => jaConcluida ? desmarcarMissao(missao.id) : completarMissao(missao.id)}
-          className={`group inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-colors ${
-            jaConcluida
-              ? 'bg-success/15 border border-success text-success hover:bg-danger/10 hover:border-danger/60 hover:text-danger'
-              : 'text-white bg-gradient-to-r from-primary to-accent shadow-[0_6px_18px_rgba(76,29,149,0.12)] hover:-translate-y-[3px]'
-          }`}
-        >
-          {jaConcluida ? (
-            <span className="relative inline-flex items-center justify-center">
-              <span className="inline-flex items-center gap-2 transition-opacity group-hover:opacity-0">
-                <CheckCircleIcon className="w-5 h-5" /> Concluída
-              </span>
-              <span className="absolute inset-0 inline-flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
-                Desmarcar
-              </span>
-            </span>
-          ) : 'Marcar como concluída'}
-        </button>
+      <div className="mt-10 flex flex-col items-center gap-2">
+        {jaConcluida ? (
+          <>
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-success/15 border border-success text-success font-semibold">
+              <CheckCircleIcon className="w-5 h-5" /> Concluída
+            </div>
+            <button
+              onClick={() => desmarcarMissao(missao.id)}
+              className="text-sm text-textSecondary hover:text-danger transition-colors"
+            >
+              desmarcar
+            </button>
+          </>
+        ) : (
+          <button
+            onClick={() => completarMissao(missao.id)}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-colors"
+          >
+            <CheckCircleIcon className="w-5 h-5" />
+            Marcar como concluída
+          </button>
+        )}
       </div>
 
       {/* Navegação de rodapé */}
