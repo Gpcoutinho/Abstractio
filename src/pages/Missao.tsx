@@ -9,6 +9,7 @@ import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
 import ButtonCTA from '../components/ButtonCTA';
 import PageWrapper from '../components/PageWrapper';
+import CodeBlock from '../components/CodeBlock';
 import interativoHtml from '../assets/interativos/nivel_1_missao_7.html?raw';
 
 const interativos: Record<string, string> = {
@@ -127,15 +128,13 @@ const Missao: React.FC = () => {
         prose-headings:text-textPrimary prose-headings:font-bold
         prose-p:text-textBody prose-p:leading-relaxed
         prose-strong:text-textPrimary
-        prose-code:text-accent prose-code:bg-bgSecondary prose-code:px-1 prose-code:rounded
-        prose-pre:bg-bgSecondary prose-pre:border prose-pre:border-borderDark prose-pre:rounded-lg
         prose-blockquote:border-l-accent prose-blockquote:text-textSecondary
         prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary
         prose-li:text-textBody">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}
-          components={{ 'bolo-factory': () => <BoloFactory /> }}
+          components={{ 'bolo-factory': () => <BoloFactory />, code: CodeBlock }}
         >
           {missao.theory}
         </ReactMarkdown>
