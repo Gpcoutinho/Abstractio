@@ -7,6 +7,8 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
+import ButtonCTA from '../components/ButtonCTA';
+import PageWrapper from '../components/PageWrapper';
 import interativoHtml from '../assets/interativos/nivel_1_missao_7.html?raw';
 
 const interativos: Record<string, string> = {
@@ -30,12 +32,12 @@ const Missao: React.FC = () => {
 
   if (!nivel || !missao) {
     return (
-      <div className="app-wrapper max-w-3xl mx-auto pt-28 pb-12 px-5">
+      <PageWrapper className="max-w-3xl pb-12">
         <p className="text-textSecondary">Missão não encontrada.</p>
         <Link to="/trilha" className="text-accent hover:underline mt-4 inline-block">
           ← Voltar à trilha
         </Link>
-      </div>
+      </PageWrapper>
     );
   }
 
@@ -207,13 +209,14 @@ const Missao: React.FC = () => {
             {/* Botões */}
             <div className="mt-5 flex items-center gap-3">
               {!respondida && (
-                <button
+                <ButtonCTA
+                  compact
                   onClick={handleSubmit}
                   disabled={selecionada === null}
-                  className="hero-cta px-5 py-2 rounded-lg font-semibold disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   Responder
-                </button>
+                </ButtonCTA>
               )}
 
               {respondida && !acertou && (
@@ -236,7 +239,7 @@ const Missao: React.FC = () => {
           className={`group inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-colors ${
             jaConcluida
               ? 'bg-green-500/15 border border-green-500 text-green-400 hover:bg-red-500/10 hover:border-red-500/60 hover:text-red-400'
-              : 'hero-cta'
+              : 'text-white bg-gradient-to-r from-[#7c5cff] to-[#34d399] shadow-[0_6px_18px_rgba(76,29,149,0.12)] hover:-translate-y-[3px]'
           }`}
         >
           {jaConcluida ? (

@@ -24,7 +24,7 @@ const Header: React.FC = () => {
   const avatarSrc = AVATAR_SRCS[avatarIdx] ?? AVATAR_SRCS[0];
 
   return (
-    <header className="site-header fixed top-0 w-full bg-bgSecondary text-textPrimary z-50 shadow-lg border-b border-borderDark">
+    <header className="backdrop-blur-[6px] fixed top-0 w-full bg-bgSecondary text-textPrimary z-50 shadow-lg border-b border-borderDark">
       <div className="flex items-center h-20 px-8">
 
         {/* User info + avatar */}
@@ -65,7 +65,7 @@ const Header: React.FC = () => {
           <div
             className="w-9 h-9 rounded-md flex-shrink-0"
             aria-hidden="true"
-            style={{ background: 'linear-gradient(90deg, var(--accent), var(--accent-2))' }}
+            style={{ background: 'linear-gradient(90deg, #7c5cff, #34d399)' }}
           />
           <span className="text-2xl md:text-3xl font-bold tracking-tight text-textPrimary">Abstractio</span>
         </Link>
@@ -100,7 +100,7 @@ const Header: React.FC = () => {
                 <div
                   className="w-8 h-8 rounded-md flex-shrink-0"
                   aria-hidden="true"
-                  style={{ background: 'linear-gradient(90deg, var(--accent), var(--accent-2))' }}
+                  style={{ background: 'linear-gradient(90deg, #7c5cff, #34d399)' }}
                 />
                 <span className="font-bold text-lg">Abstractio</span>
               </Link>

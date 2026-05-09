@@ -5,6 +5,7 @@ import { CheckCircleIcon as CheckCircleSolid } from '@heroicons/react/24/solid';
 import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
 import Footer from '../components/Footer';
+import PageWrapper from '../components/PageWrapper';
 const totalMissoes = niveis.reduce((acc, n) => acc + n.missoes.length, 0);
 
 const Trilha: React.FC = () => {
@@ -12,7 +13,7 @@ const Trilha: React.FC = () => {
 
   return (
     <>
-      <div className="app-wrapper max-w-3xl mx-auto pt-28 pb-16 px-5">
+      <PageWrapper className="max-w-3xl pb-16">
 
         {/* Cabeçalho */}
         <div className="mb-10">
@@ -87,7 +88,7 @@ const Trilha: React.FC = () => {
             );
           })}
         </div>
-      </div>
+      </PageWrapper>
 
       <Footer />
     </>

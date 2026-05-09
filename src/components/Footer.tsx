@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Footer: React.FC = () => (
-  <footer className="site-footer bg-bgSecondary text-textSecondary text-center py-8 px-5 border-t border-borderDark">
+  <footer className="text-sm bg-bgSecondary text-textSecondary text-center py-8 px-5 border-t border-borderDark">
     <div className="max-w-6xl mx-auto">
       <ul className="flex justify-center space-x-8 mb-5 list-none text-sm">
         <li><a href="#" className="hover:text-accent transition-colors">Sobre</a></li>

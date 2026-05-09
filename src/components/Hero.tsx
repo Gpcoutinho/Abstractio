@@ -1,5 +1,6 @@
 import React from 'react';
 import Mascote from './Mascote';
+import ButtonCTA from './ButtonCTA';
 
 const Hero: React.FC = () => (
   // O pt-20 compensa a altura do Header fixo (h-20)
@@ -12,9 +13,7 @@ const Hero: React.FC = () => (
           Aprenda os conceitos abstratos da Ciência da Computação na prática, com lições interativas e quizzes para todos os níveis.
         </p>
         <div className="mt-3">
-          <button type="button" className="hero-cta">
-            Comece Agora
-          </button>
+          <ButtonCTA type="button">Comece Agora</ButtonCTA>
         </div>
       </div>
 

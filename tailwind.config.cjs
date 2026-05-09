@@ -8,18 +8,24 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Cores base (Dark Mode)
-        'bgPrimary': '#1A1A1A',     // Fundo escuro
-        'bgSecondary': '#2A2A2A',  // Cartões e elementos
-        'borderDark': '#444444',   // Bordas e linhas de separação
-        'textPrimary': '#FFFFFF',  // Texto principal
-        'textSecondary': '#AAAAAA',// Texto secundário/parágrafo
-        
-        // Cores de Destaque
-        'primary': '#4F33A9',      // Base do gradiente (Roxo Escuro)
-        'secondary': '#8A4FFF',    // Fim do gradiente (Roxo Claro)
-        'accent': '#6EEB83',       // Verde Neon para CTA (Login/Comece Agora)
-        'purpleAccent': '#9747FF', // Roxo claro (Botões Explorar)
+        'bgPrimary':     '#1A1A1A',
+        'bgSecondary':   '#2A2A2A',
+        'borderDark':    '#444444',
+        'textPrimary':   '#FFFFFF',
+        'textSecondary': '#AAAAAA',
+        'primary':       '#4F33A9',
+        'secondary':     '#8A4FFF',
+        'accent':        '#6EEB83',
+        'purpleAccent':  '#9747FF',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%':      { transform: 'translateY(-8px)' },
+        },
+      },
+      animation: {
+        float: 'float 6s ease-in-out infinite',
       },
     },
   },

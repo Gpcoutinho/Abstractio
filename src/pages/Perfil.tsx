@@ -5,6 +5,7 @@ import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
 import type { Genero } from '../contexts/ProgressContext';
 import Footer from '../components/Footer';
+import PageWrapper from '../components/PageWrapper';
 import imgPolvinho from '../assets/avatares/polvinho.png';
 import imgExplorador from '../assets/avatares/explorador.png';
 import imgMestreDosMaras from '../assets/avatares/mestredosmares.png';
@@ -40,7 +41,7 @@ const Perfil: React.FC = () => {
 
   return (
     <>
-      <div className="app-wrapper max-w-2xl mx-auto pt-28 pb-16 px-5">
+      <PageWrapper className="max-w-2xl pb-16">
         <h1 className="text-3xl font-bold text-textPrimary mb-10">Perfil</h1>
 
         {/* Resumo de progresso */}
@@ -185,7 +186,7 @@ const Perfil: React.FC = () => {
           </div>
         </section>
 
-      </div>
+      </PageWrapper>
       <Footer />
     </>
   );

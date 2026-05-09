@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
 import Footer from '../components/Footer';
+import PageWrapper from '../components/PageWrapper';
 
 const Conquistas: React.FC = () => {
   const { completed, pontuacao } = useProgress();
@@ -10,7 +11,7 @@ const Conquistas: React.FC = () => {
 
   return (
     <>
-      <div className="app-wrapper max-w-5xl mx-auto pt-28 pb-16 px-5">
+      <PageWrapper className="max-w-5xl pb-16">
 
         {/* Cabeçalho */}
         <div className="mb-10">
@@ -56,7 +57,7 @@ const Conquistas: React.FC = () => {
           ))}
         </div>
 
-      </div>
+      </PageWrapper>
       <Footer />
     </>
   );
