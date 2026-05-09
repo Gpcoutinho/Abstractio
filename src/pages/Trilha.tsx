@@ -74,7 +74,7 @@ const Trilha: React.FC = () => {
                             <PlayCircleIcon className="w-5 h-5 text-textSecondary group-hover:text-accent flex-shrink-0 transition-colors" />
                           )}
                           <span className={`flex-1 ${concluida ? 'text-textSecondary line-through' : 'text-textPrimary'}`}>
-                            {missao.icon} {missao.title}
+                            {missao.icon} Missão {nivel.id === 1 ? missaoIdx : missaoIdx + 1} — {missao.title}
                           </span>
                           <span className={`text-xs ${concluida ? 'text-accent' : 'text-textSecondary'}`}>
                             {concluida ? '✓ 15 pts' : '+15 pts'}
