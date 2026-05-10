@@ -1,22 +1,33 @@
-import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { HomeIcon, MapIcon, TrophyIcon, XMarkIcon, UserCircleIcon } from '@heroicons/react/24/outline';
-import { Link as RouterLink } from 'react-router-dom';
-import { useProgress } from '../hooks/useProgress';
-import imgPolvinho from '../assets/avatares/polvinho.png';
-import imgExplorador from '../assets/avatares/explorador.png';
-import imgMestreDosMaras from '../assets/avatares/mestredosmares.png';
+import React, { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import {
+  HomeIcon,
+  MapIcon,
+  TrophyIcon,
+  XMarkIcon,
+  UserCircleIcon,
+} from "@heroicons/react/24/outline";
+import { Link as RouterLink } from "react-router-dom";
+import { useProgress } from "../hooks/useProgress";
+import imgPolvinho from "../assets/avatares/polvinho.png";
+import imgExplorador from "../assets/avatares/explorador.png";
+import imgMestreDosMaras from "../assets/avatares/mestredosmares.png";
 
-const AVATAR_SRCS: (string | null)[] = [imgPolvinho, imgExplorador, imgMestreDosMaras, null];
+const AVATAR_SRCS: (string | null)[] = [
+  imgPolvinho,
+  imgExplorador,
+  imgMestreDosMaras,
+  null,
+];
 
 const NAV_ITEMS = [
-  { to: '/', label: 'Home', Icon: HomeIcon, exact: true },
-  { to: '/trilha', label: 'Trilha', Icon: MapIcon, exact: false },
-  { to: '/conquistas', label: 'Conquistas', Icon: TrophyIcon, exact: false },
+  { to: "/", label: "Home", Icon: HomeIcon, exact: true },
+  { to: "/trilha", label: "Trilha", Icon: MapIcon, exact: false },
+  { to: "/conquistas", label: "Conquistas", Icon: TrophyIcon, exact: false },
 ];
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-  `font-medium transition-colors ${isActive ? 'text-accent' : 'text-textPrimary hover:text-accent'}`;
+  `font-medium transition-colors ${isActive ? "text-accent" : "text-textPrimary hover:text-accent"}`;
 
 const Header: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -26,7 +37,6 @@ const Header: React.FC = () => {
   return (
     <header className="backdrop-blur-[6px] fixed top-0 w-full bg-bgSecondary text-textPrimary z-50 shadow-lg border-b border-borderDark">
       <div className="flex items-center h-20 px-8">
-
         {/* User info + avatar */}
         <div className="hidden md:flex items-center gap-3 justify-start self-stretch flex-1">
           <RouterLink
@@ -34,19 +44,29 @@ const Header: React.FC = () => {
             className="flex w-32 h-32 rounded-full ring-2 ring-accent/40 overflow-hidden hover:ring-accent transition-all flex-shrink-0 self-start mt-2 shadow-2xl z-10"
             title="Perfil"
           >
-            {avatarSrc
-              ? <img src={avatarSrc} alt="Avatar" className="w-full h-full object-cover block" />
-              : <div className="w-full h-full bg-bgPrimary flex items-center justify-center">
-                  <UserCircleIcon className="w-6 h-6 text-textSecondary" />
-                </div>
-            }
+            {avatarSrc ? (
+              <img
+                src={avatarSrc}
+                alt="Avatar"
+                className="w-full h-full object-cover block"
+              />
+            ) : (
+              <div className="w-full h-full bg-bgPrimary flex items-center justify-center">
+                <UserCircleIcon className="w-6 h-6 text-textSecondary" />
+              </div>
+            )}
           </RouterLink>
           <div className="text-left">
-            <p className="text-xs text-textSecondary leading-tight">{nivelDisplay}</p>
-            <p className="text-sm text-textPrimary font-medium leading-tight">{nomeDisplay}</p>
-            <span className="text-sm text-accent font-semibold">{pontuacao} pts</span>
+            <p className="text-xs text-textSecondary leading-tight">
+              {nivelDisplay}
+            </p>
+            <p className="text-sm text-textPrimary font-medium leading-tight">
+              {nomeDisplay}
+            </p>
+            <span className="text-sm text-accent font-semibold">
+              {pontuacao} pts
+            </span>
           </div>
-          
         </div>
 
         {/* Nav desktop */}
@@ -58,16 +78,16 @@ const Header: React.FC = () => {
           ))}
         </nav>
 
-        
-
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 flex-1 justify-end">
-          <div
-            className="w-9 h-9 rounded-md flex-shrink-0"
-            aria-hidden="true"
-            style={{ background: 'linear-gradient(90deg, #7C3AED, #06B6D4)' }}
+          <img
+            src="/isotipo.svg"
+            alt="Isotipo"
+            className="w-10 h-10 rounded-md"
           />
-          <span className="text-2xl md:text-3xl font-bold tracking-tight text-textPrimary">Abstractio</span>
+          <span className="text-2xl md:text-3xl font-bold tracking-tight text-textPrimary">
+            Abstractio
+          </span>
         </Link>
 
         {/* Mobile menu toggle */}
@@ -82,8 +102,19 @@ const Header: React.FC = () => {
           {open ? (
             <XMarkIcon className="h-6 w-6" />
           ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
           )}
         </button>
@@ -92,19 +123,34 @@ const Header: React.FC = () => {
       {/* Mobile menu */}
       {open && (
         <div className="md:hidden fixed inset-0 z-50 flex">
-          <button aria-hidden="true" onClick={() => setOpen(false)} className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
-          <nav id="mobile-menu" className="relative ml-auto w-80 max-w-full h-full bg-bgSecondary border-l border-borderDark shadow-xl p-6 flex flex-col">
-
+          <button
+            aria-hidden="true"
+            onClick={() => setOpen(false)}
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+          />
+          <nav
+            id="mobile-menu"
+            className="relative ml-auto w-80 max-w-full h-full bg-bgSecondary border-l border-borderDark shadow-xl p-6 flex flex-col"
+          >
             <div className="flex items-center justify-between mb-6">
-              <Link to="/" onClick={() => setOpen(false)} className="flex items-center gap-3">
+              <Link
+                to="/"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-3"
+              >
                 <div
                   className="w-8 h-8 rounded-md flex-shrink-0"
                   aria-hidden="true"
-                  style={{ background: 'linear-gradient(90deg, #7C3AED, #06B6D4)' }}
+                  style={{
+                    background: "linear-gradient(90deg, #7C3AED, #06B6D4)",
+                  }}
                 />
                 <span className="font-bold text-lg">Abstractio</span>
               </Link>
-              <button onClick={() => setOpen(false)} className="p-2 rounded-md hover:bg-bgPrimary/30">
+              <button
+                onClick={() => setOpen(false)}
+                className="p-2 rounded-md hover:bg-bgPrimary/30"
+              >
                 <XMarkIcon className="w-6 h-6 text-textPrimary" />
               </button>
             </div>
@@ -117,7 +163,7 @@ const Header: React.FC = () => {
                     end={exact}
                     onClick={() => setOpen(false)}
                     className={({ isActive }) =>
-                      `flex items-center gap-3 ${isActive ? 'text-accent' : 'text-textPrimary hover:text-accent'}`
+                      `flex items-center gap-3 ${isActive ? "text-accent" : "text-textPrimary hover:text-accent"}`
                     }
                   >
                     <Icon className="w-5 h-5" />
@@ -130,11 +176,12 @@ const Header: React.FC = () => {
             <div className="mt-auto pt-4 border-t border-borderDark flex items-center gap-3">
               <UserCircleIcon className="w-8 h-8 text-textSecondary flex-shrink-0" />
               <div>
-                <p className="text-sm text-textPrimary font-medium">{nivelDisplay}</p>
+                <p className="text-sm text-textPrimary font-medium">
+                  {nivelDisplay}
+                </p>
                 <p className="text-xs text-accent">{pontuacao} pts</p>
               </div>
             </div>
-
           </nav>
         </div>
       )}
