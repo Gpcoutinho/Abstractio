@@ -4,6 +4,63 @@ import { diagramRow, oceanPolvo, objectCard, codeCard } from '../../visuals';
 // prettier-ignore
 const diagrama = diagramRow([oceanPolvo('meu_polvo'), objectCard('Entidade', 'meu_polvo', { nome: '"Polvonilson"', cor: '"Roxo"' }), codeCard('Código Python', `meu_polvo = {\n    "nome": "Polvonilson",\n    "cor": "Roxo"\n}`)]);
 
+// ── Helpers para os slides do card ───────────────────────────────────────────
+
+function slidePolvo(tag: string, id: string, bodyColor: string, lightColor: string): string {
+  return `<figure style="flex:0 0 auto;margin:0"><svg viewBox="0 0 100 124" xmlns="http://www.w3.org/2000/svg" style="width:86px;display:block;border-radius:8px"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#07111e"/><stop offset="100%" stop-color="#040c16"/></linearGradient></defs><rect width="100" height="124" fill="url(#${id})" rx="8"/><ellipse cx="50" cy="44" rx="20" ry="18" fill="${lightColor}"/><ellipse cx="50" cy="54" rx="22" ry="20" fill="${bodyColor}"/><circle cx="43" cy="44" r="4" fill="white"/><circle cx="57" cy="44" r="4" fill="white"/><circle cx="43" cy="45" r="2.2" fill="#1a0a30"/><circle cx="57" cy="45" r="2.2" fill="#1a0a30"/><path d="M46,53 Q50,58 54,53" stroke="#c0a0e0" stroke-width="1.2" fill="none" stroke-linecap="round"/><path d="M32,65 Q24,80 28,94" stroke="${bodyColor}" stroke-width="3.5" fill="none" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" values="-5,32,65;5,32,65;-5,32,65" dur="2.1s" repeatCount="indefinite"/></path><path d="M40,70 Q34,84 38,96" stroke="${bodyColor}" stroke-width="3.5" fill="none" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" values="4,40,70;-4,40,70;4,40,70" dur="2.6s" repeatCount="indefinite"/></path><path d="M50,72 Q48,86 50,98" stroke="${bodyColor}" stroke-width="3.5" fill="none" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" values="-3,50,72;3,50,72;-3,50,72" dur="1.9s" repeatCount="indefinite"/></path><path d="M60,70 Q64,84 62,96" stroke="${bodyColor}" stroke-width="3.5" fill="none" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" values="3,60,70;-3,60,70;3,60,70" dur="2.3s" repeatCount="indefinite"/></path><path d="M68,65 Q76,80 72,94" stroke="${bodyColor}" stroke-width="3.5" fill="none" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" values="-4,68,65;4,68,65;-4,68,65" dur="2s" repeatCount="indefinite"/></path><rect x="22" y="104" width="56" height="14" rx="3" fill="#1a0a30" opacity="0.9"/><text x="50" y="115" text-anchor="middle" font-family="'Courier New', monospace" font-size="9" font-weight="700" fill="#8A4FFF">${tag}</text></svg></figure>`;
+}
+
+function codeVar(name: string, value: string): string {
+  return `<span style="color:#7dd3fc">${name}</span><span style="color:#94a3b8"> = </span><span style="color:#34d399">"${value}"</span>`;
+}
+
+function slidePre(lines: string[]): string {
+  return `<pre style="margin:0;background:#1e1e35;border:1px solid #3d3d5e;border-radius:8px;padding:0.75rem 1rem;font-family:'Courier New',monospace;font-size:12px;color:#e2e8f0;overflow-x:auto;line-height:1.8">${lines.join('\n')}</pre>`;
+}
+
+function slideHtml(polvosHtml: string, codeHtml: string, caption: string): string {
+  return `<div style="display:flex;flex-direction:column;gap:1rem"><div style="display:flex;justify-content:center;gap:1.25rem;flex-wrap:wrap">${polvosHtml}</div>${codeHtml}<p style="text-align:center;font-size:12px;color:#64748b;margin:0">${caption}</p></div>`;
+}
+
+const p1 = slidePolvo('polvo 1', 'sbg-p1', '#7c5cbf', '#9b7dd4');
+const p2 = slidePolvo('polvo 2', 'sbg-p2', '#3a7aba', '#5a9ad4');
+const p3 = slidePolvo('polvo 3', 'sbg-p3', '#2a9a6a', '#4ab884');
+
+const slide1 = slideHtml(
+  p1,
+  slidePre([
+    codeVar('polvo1_nome', 'Polvonilson'),
+    codeVar('polvo1_cor ', 'Roxo'),
+  ]),
+  '2 variáveis utilizadas para definir 1 polvo.'
+);
+
+const slide2 = slideHtml(
+  `${p1}${p2}`,
+  slidePre([
+    codeVar('polvo1_nome', 'Polvonilson'),
+    codeVar('polvo1_cor ', 'Roxo'),
+    codeVar('polvo2_nome', 'Azulão'),
+    codeVar('polvo2_cor ', 'Azul'),
+  ]),
+  '4 variáveis utilizadas para definir 2 polvos.'
+);
+
+const slide3 = slideHtml(
+  `${p1}${p2}${p3}`,
+  slidePre([
+    codeVar('polvo1_nome', 'Polvonilson'),
+    codeVar('polvo1_cor ', 'Roxo'),
+    codeVar('polvo2_nome', 'Azulão'),
+    codeVar('polvo2_cor ', 'Azul'),
+    codeVar('polvo3_nome', 'Marinho'),
+    codeVar('polvo3_cor ', 'Verde'),
+  ]),
+  'E para 100 polvos?'
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 const missao: Missao = {
   id: "1-1",
   title: "O que é POO?",
@@ -65,13 +122,7 @@ Por esses motivos, te incentivamos a continuar a trilha! Cada missão vai refor�
     explanation: "POO é um paradigma que organiza o código em objetos com atributos (dados) e métodos (comportamentos)."
   },
   cards: [
-    {
-      slides: [
-        "**Slide 1** — placeholder de especificação.",
-        "**Slide 2** — placeholder de especificação.",
-        "**Slide 3** — placeholder de especificação.",
-      ],
-    },
+    { title: "Programação Procedural", slides: [slide1, slide2, slide3] },
   ],
   has_interativo: false
 };

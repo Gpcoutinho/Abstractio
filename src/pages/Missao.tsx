@@ -154,10 +154,12 @@ const Missao: React.FC = () => {
               return (
                 <SlideCard
                   key={`card-${cardIdx}`}
+                  title={card.title}
                   slides={card.slides.map((s, j) => (
                     <ReactMarkdown
                       key={j}
                       remarkPlugins={[remarkGfm]}
+                      rehypePlugins={[rehypeRaw]}
                       components={{
                         p: ({ children }) => <p className="text-textBody leading-relaxed m-0">{children}</p>,
                         strong: ({ children }) => <strong className="text-textPrimary">{children}</strong>,

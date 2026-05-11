@@ -6,6 +6,7 @@ export interface Exercise {
 }
 
 export interface SlideCardData {
+  title?: string;
   slides: string[];
 }
 
