@@ -59,6 +59,27 @@ const slide3 = slideHtml(
   'E para 100 polvos?'
 );
 
+function codeDicts(entries: [string, [string, string][]][]) {
+  const lines: string[] = [];
+  entries.forEach(([varName, fields], idx) => {
+    if (idx > 0) lines.push('');
+    lines.push(`<span style="color:#7dd3fc">${varName}</span><span style="color:#94a3b8"> = </span><span style="color:#e2e8f0">{</span>`);
+    fields.forEach(([k, v]) => lines.push(`    <span style="color:#c4b5fd">"${k}"</span><span style="color:#94a3b8">: </span><span style="color:#34d399">"${v}"</span>`));
+    lines.push(`<span style="color:#e2e8f0">}</span>`);
+  });
+  return slidePre(lines);
+}
+
+const ooFields: [string, [string, string][]][] = [
+  ['polvo1', [['nome', 'Polvonilson'], ['cor', 'Roxo']]],
+  ['polvo2', [['nome', 'Azulão'],      ['cor', 'Azul']]],
+  ['polvo3', [['nome', 'Marinho'],     ['cor', 'Verde']]],
+];
+
+const slideOO1 = slideHtml(p1,          codeDicts(ooFields.slice(0, 1)), '1 objeto agrupa tudo sobre 1 polvo.');
+const slideOO2 = slideHtml(`${p1}${p2}`, codeDicts(ooFields.slice(0, 2)), 'Outro polvo? Mesma estrutura.');
+const slideOO3 = slideHtml(`${p1}${p2}${p3}`, codeDicts(ooFields.slice(0, 3)), '100 polvos? Mesma estrutura, 100 vezes.');
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 const missao: Missao = {
@@ -76,7 +97,7 @@ De forma bem direta: é simplesmente **uma maneira diferente de organizar o seu 
 
 Em vez de focar apenas no passo a passo (o algoritmo), a POO foca nos **atores** que fazem o programa funcionar. A gente para de pensar em variáveis espalhadas e passa a pensar em pacotes chamados **Objetos**.
 
-{{card:0}}
+{{cards:0,1}}
 
 ## O problema que a POO resolve
 
@@ -122,7 +143,8 @@ Por esses motivos, te incentivamos a continuar a trilha! Cada missão vai refor�
     explanation: "POO é um paradigma que organiza o código em objetos com atributos (dados) e métodos (comportamentos)."
   },
   cards: [
-    { title: "Programação Procedural", slides: [slide1, slide2, slide3] },
+    { title: "Pensamento Procedural", slides: [slide1, slide2, slide3] },
+    { title: "Pensamento Orientado a Objetos", slides: [slideOO1, slideOO2, slideOO3] },
   ],
   has_interativo: false
 };

@@ -146,30 +146,54 @@ const Missao: React.FC = () => {
         prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary
         prose-li:text-textBody"
         >
-          {missao.theory.split(/\{\{card:(\d+)\}\}/).map((part, i) => {
+          {missao.theory.split(/(\{\{cards?:[0-9,]+\}\})/).map((part, i) => {
             if (i % 2 === 1) {
-              const cardIdx = parseInt(part);
-              const card = missao.cards?.[cardIdx];
-              if (!card) return null;
-              return (
-                <SlideCard
-                  key={`card-${cardIdx}`}
-                  title={card.title}
-                  slides={card.slides.map((s, j) => (
-                    <ReactMarkdown
-                      key={j}
-                      remarkPlugins={[remarkGfm]}
-                      rehypePlugins={[rehypeRaw]}
-                      components={{
-                        p: ({ children }) => <p className="text-textBody leading-relaxed m-0">{children}</p>,
-                        strong: ({ children }) => <strong className="text-textPrimary">{children}</strong>,
-                      }}
-                    >
-                      {s}
-                    </ReactMarkdown>
-                  ))}
-                />
-              );
+              const indices = part.match(/\d+/g)!.map(Number);
+              const isRow = part.startsWith("{{cards:");
+
+              const renderCard = (idx: number, className?: string) => {
+                const card = missao.cards?.[idx];
+                if (!card) return null;
+                return (
+                  <SlideCard
+                    key={`card-${idx}`}
+                    title={card.title}
+                    className={className}
+                    slides={card.slides.map((s, j) => (
+                      <ReactMarkdown
+                        key={j}
+                        remarkPlugins={[remarkGfm]}
+                        rehypePlugins={[rehypeRaw]}
+                        components={{
+                          p: ({ children }) => <p className="text-textBody leading-relaxed m-0">{children}</p>,
+                          strong: ({ children }) => <strong className="text-textPrimary">{children}</strong>,
+                        }}
+                      >
+                        {s}
+                      </ReactMarkdown>
+                    ))}
+                  />
+                );
+              };
+
+              if (isRow) {
+                return (
+                  <div key={i} className="not-prose flex flex-col md:flex-row items-stretch gap-4 my-6">
+                    {indices.map((idx, pos) => (
+                      <React.Fragment key={idx}>
+                        {pos > 0 && (
+                          <div className="flex items-center justify-center shrink-0">
+                            <span className="text-2xl font-bold text-borderDark select-none">✕</span>
+                          </div>
+                        )}
+                        {renderCard(idx, "flex-1 min-w-0 my-0")}
+                      </React.Fragment>
+                    ))}
+                  </div>
+                );
+              }
+
+              return renderCard(indices[0]);
             }
             return (
               <ReactMarkdown

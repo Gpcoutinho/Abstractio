@@ -2,16 +2,17 @@ import React, { useState } from "react";
 
 interface SlideCardProps {
   title?: string;
+  className?: string;
   slides: React.ReactNode[];
 }
 
-const SlideCard: React.FC<SlideCardProps> = ({ title, slides }) => {
+const SlideCard: React.FC<SlideCardProps> = ({ title, className = "", slides }) => {
   const [current, setCurrent] = useState(0);
   const isFirst = current === 0;
   const isLast = current === slides.length - 1;
 
   return (
-    <div className="bg-bgSecondary border border-borderDark rounded-xl p-6 my-6 flex flex-col gap-6">
+    <div className={`bg-bgSecondary border border-borderDark rounded-xl p-6 my-6 flex flex-col gap-6 ${className}`}>
       {title && (
         <p className="text-xs font-semibold text-textSecondary uppercase tracking-wider pb-4 border-b border-borderDark m-0">
           {title}
