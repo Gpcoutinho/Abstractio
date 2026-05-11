@@ -3,35 +3,13 @@
 
 @layer components {
   .pb-wrap {
-    @apply bg-bgSecondary border border-borderDark rounded-lg p-2;
-    width: calc(100% + 6rem);
-    margin-left: -3rem;
-    margin-right: -3rem;
+    @apply bg-bgSecondary border border-borderDark rounded-lg p-4;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     cursor: grab;
-  }
-
-  @screen sm {
-    .pb-wrap {
-      width: calc(100% + 10rem);
-      margin-left: -5rem;
-      margin-right: -5rem;
-    }
-  }
-
-  @screen md {
-    .pb-wrap {
-      width: calc(100% + 16rem);
-      margin-left: -8rem;
-      margin-right: -8rem;
-    }
-  }
-
-  @screen lg {
-    .pb-wrap {
-      width: calc(100% + 22rem);
-      margin-left: -12rem;
-      margin-right: -12rem;
-    }
+    overflow: hidden;
+    user-select: none;
   }
 
   .pb-wrap.dragging {
@@ -61,10 +39,10 @@
 
   .pb-track {
     @apply flex items-center gap-0.5 overflow-x-auto;
-    min-height: 2.5rem;
-    min-width: 0;
+    min-height: 2rem;
     width: 100%;
-    padding-bottom: 0.125rem;
+    padding: 0 10px;
+    -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
 
@@ -85,7 +63,7 @@
   }
 
   .pb-connector {
-    @apply h-0.5 flex-1 rounded-full bg-bgPrimary;
+    @apply h-0.5 rounded-full bg-bgPrimary shrink-0;
     min-width: 0.75rem;
   }
 
