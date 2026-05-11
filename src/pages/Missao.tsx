@@ -148,11 +148,12 @@ const Missao: React.FC = () => {
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw]}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             components={{
               "bolo-factory": () => <BoloFactory />,
               code: CodeBlock,
-              pre: ({ children }) => <>{children}</>,
-            }}
+              pre: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+            } as any}
           >
             {missao.theory}
           </ReactMarkdown>
