@@ -31,7 +31,7 @@ src/
     Missao.tsx            ← Conteúdo: teoria + mini-jogo + exercício
     Conquistas.tsx        ← Estante de troféus
   components/
-    Header.tsx            ← Logo + nav + pontuação + rank + avatar circle
+    Sidebar.tsx           ← sidebar lateral: avatar, pontuação, rank e nav (desktop fixo, mobile gaveta)
     HeroCarousel.tsx      ← 2 slides (roxo e verde menta)
     Mascote.tsx           ← Polvo animado (aparece no slide 1 do hero)
     MissaoCard.tsx        ← Linha de missão com status (Heroicons), nome e pts
@@ -66,13 +66,16 @@ src/
 
 Não existe rota `/trilhas` — há apenas uma trilha (POO) por enquanto.
 
-## Navegação (Header)
+## Navegação (Sidebar)
 
-Ordem dos itens: **Home → Trilha → Conquistas**
+Componente: `Sidebar.tsx` — largura 200px, fixa à esquerda no desktop, gaveta deslizante da esquerda no mobile.
 
-Canto direito: **[pontuação] [rank] [avatar circle]**
+Estrutura vertical (de cima para baixo):
+1. Logo (isotipo + "Abstractio")
+2. Avatar circle (link para `/perfil`) + nome + rank + pontuação
+3. Nav: **Home → Trilha → Conquistas**
 
-- Perfil não está no menu — será acessado via clique no avatar circle (implementação futura)
+Mobile: topbar fina (h-12) com hamburger + logo; sidebar oculta por padrão.
 
 ## Nomenclatura (Importante — manter consistência)
 

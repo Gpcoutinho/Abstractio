@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { ProgressProvider } from './contexts/ProgressContext';
-import Header from './components/Header';
+import Sidebar from './components/Sidebar';
 import Home from './pages/Home';
 import Trilha from './pages/Trilha';
 import Missao from './pages/Missao';
@@ -19,8 +19,8 @@ const App: React.FC = () => {
     <ProgressProvider>
       <div className="min-h-screen bg-bgPrimary">
         <ScrollToTop />
-        <Header />
-        <main>
+        <Sidebar />
+        <main className="md:ml-[200px] pt-12 md:pt-0">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/trilha" element={<Trilha />} />

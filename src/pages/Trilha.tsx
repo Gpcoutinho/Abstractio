@@ -15,10 +15,11 @@ const Trilha: React.FC = () => {
   return (
     <>
       <PageWrapper className="max-w-3xl pb-16">
-
         {/* Cabeçalho */}
         <div className="mb-10">
-          <h1 className="text-3xl font-bold text-textPrimary mb-1">Trilha POO</h1>
+          <h1 className="text-3xl font-bold text-textPrimary mb-1">
+            Trilha POO
+          </h1>
           <p className="text-textSecondary">
             Programação Orientada a Objetos em Python — {totalMissoes} missões
           </p>
@@ -29,19 +30,25 @@ const Trilha: React.FC = () => {
 
         {/* Níveis */}
         <div className="space-y-10">
-          {niveis.map(nivel => {
-            const concluidas = nivel.missoes.filter(m => completed.includes(m.id)).length;
+          {niveis.map((nivel) => {
+            const concluidas = nivel.missoes.filter((m) =>
+              completed.includes(m.id),
+            ).length;
             const nivelConcluido = concluidas === nivel.missoes.length;
 
             return (
               <section key={nivel.id}>
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h2 className="text-lg font-semibold text-textPrimary">{nivel.title}</h2>
+                    <h2 className="text-lg font-semibold text-textPrimary">
+                      {nivel.title}
+                    </h2>
                     <p className="text-sm text-textSecondary">
                       {concluidas}/{nivel.missoes.length} missões
                       {nivelConcluido && (
-                        <span className="ml-2 text-accent font-medium">· Completo</span>
+                        <span className="ml-2 text-accent font-medium">
+                          · Completo
+                        </span>
                       )}
                     </p>
                   </div>
@@ -57,17 +64,23 @@ const Trilha: React.FC = () => {
                           to={`/missao/${nivel.id}/${missaoIdx + 1}`}
                           className="flex items-center gap-4 p-4 rounded-lg border border-borderDark bg-bgSecondary hover:border-accent transition-colors group"
                         >
+                          <span
+                            className={`flex-1 ${concluida ? "text-textSecondary line-through" : "text-textPrimary"}`}
+                          >
+                            {missao.icon} Missão{" "}
+                            {nivel.id === 1 ? missaoIdx : missaoIdx + 1} —{" "}
+                            {missao.title}
+                          </span>
+                          <span
+                            className={`text-xs ${concluida ? "text-accent" : "text-textSecondary"}`}
+                          >
+                            {concluida ? "✓ 15 pts" : "+15 pts"}
+                          </span>
                           {concluida ? (
                             <CheckCircleSolid className="w-5 h-5 text-accent flex-shrink-0" />
                           ) : (
-                            <PlayCircleIcon className="w-5 h-5 text-textSecondary group-hover:text-accent flex-shrink-0 transition-colors" />
+                            <CheckCircleSolid className="w-5 h-5 text-textSecondary group-hover:text-accent flex-shrink-0 transition-colors" />
                           )}
-                          <span className={`flex-1 ${concluida ? 'text-textSecondary line-through' : 'text-textPrimary'}`}>
-                            {missao.icon} {missao.title}
-                          </span>
-                          <span className={`text-xs ${concluida ? 'text-accent' : 'text-textSecondary'}`}>
-                            {concluida ? '✓ 15 pts' : '+15 pts'}
-                          </span>
                         </Link>
                       </li>
                     );

@@ -31,6 +31,7 @@ Documento de especificação do produto. Define escopo, progressão, regras de c
 
 | # | Missão |
 |---|--------|
+| 0 | Antes de começar |
 | 1 | O que é POO? |
 | 2 | Objeto |
 | 3 | Classe |
@@ -184,16 +185,23 @@ Todas as missões estão disponíveis desde o início — sem desbloqueio sequen
 
 | Token | Hex | Uso |
 |---|---|---|
-| `bgPrimary` | `#1A1A1A` | Fundo global |
-| `bgSecondary` | `#2A2A2A` | Superfícies / cards |
-| `primary` | `#4F33A9` | Roxo base |
-| `secondary` | `#8A4FFF` | Roxo claro / destaque |
-| `accent` | `#6EEB83` | Verde neon / sucesso |
+| `bgPrimary` | `#0F172A` | Fundo global |
+| `bgSecondary` | `#1E293B` | Superfícies / cards |
+| `borderDark` | `#334155` | Bordas e divisores |
+| `textPrimary` | `#F8FAFC` | Texto principal |
+| `textSecondary` | `#94A3B8` | Texto secundário / labels |
+| `textBody` | `#CBD5E1` | Corpo de texto (teoria) |
+| `primary` | `#7C3AED` | Roxo base |
+| `secondary` | `#A78BFA` | Roxo claro / lavanda |
+| `purpleAccent` | `#9F7AEA` | Variante roxa de acento |
+| `accent` | `#06B6D4` | Ciano / destaque interativo |
+| `success` | `#10B981` | Verde / acerto |
+| `danger` | `#FB7185` | Vermelho / erro |
 
 ### Gradientes
 
-- **Hero roxo:** `linear-gradient(135deg, #4c1d95, #6d28d9, #7c3aed)`
-- **Hero verde:** `linear-gradient(135deg, #065f46, #059669, #10b981)`
+- **Hero slide 1 (roxo):** `linear-gradient(135deg, #3b0764, #7C3AED, #A78BFA)`
+- **Hero slide 2 (ciano):** `linear-gradient(135deg, #164e63, #0369a1, #06B6D4)`
 
 ### Ícones
 
