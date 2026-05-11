@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import BoloFactory from "../components/BoloFactory";
+import SlideCard from "../components/SlideCard";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -145,18 +146,45 @@ const Missao: React.FC = () => {
         prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary
         prose-li:text-textBody"
         >
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw]}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            components={{
-              "bolo-factory": () => <BoloFactory />,
-              code: CodeBlock,
-              pre: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-            } as any}
-          >
-            {missao.theory}
-          </ReactMarkdown>
+          {missao.theory.split(/\{\{card:(\d+)\}\}/).map((part, i) => {
+            if (i % 2 === 1) {
+              const cardIdx = parseInt(part);
+              const card = missao.cards?.[cardIdx];
+              if (!card) return null;
+              return (
+                <SlideCard
+                  key={`card-${cardIdx}`}
+                  slides={card.slides.map((s, j) => (
+                    <ReactMarkdown
+                      key={j}
+                      remarkPlugins={[remarkGfm]}
+                      components={{
+                        p: ({ children }) => <p className="text-textBody leading-relaxed m-0">{children}</p>,
+                        strong: ({ children }) => <strong className="text-textPrimary">{children}</strong>,
+                      }}
+                    >
+                      {s}
+                    </ReactMarkdown>
+                  ))}
+                />
+              );
+            }
+            return (
+              <ReactMarkdown
+                key={i}
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeRaw]}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                components={{
+                  "bolo-factory": () => <BoloFactory />,
+                  code: CodeBlock,
+                  pre: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+                } as any}
+              >
+                {part}
+              </ReactMarkdown>
+            );
+          })}
         </section>
 
         {/* Mini-jogo */}
