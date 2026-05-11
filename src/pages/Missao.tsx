@@ -84,7 +84,7 @@ const Missao: React.FC = () => {
   return (
     <div>
       {/* Navegação fixa */}
-      <div className="sticky top-4 z-40 bg-bgPrimary">
+      <div className="sticky top-0 z-40 bg-bgPrimary py-2">
         <nav>
           <div className="max-w-3xl mx-auto px-5 h-11 flex items-center justify-between">
             <div className="flex items-center gap-5">
