@@ -11,11 +11,11 @@ function slidePolvo(tag: string, id: string, bodyColor: string, lightColor: stri
 }
 
 function codeVar(name: string, value: string): string {
-  return `<span style="color:#7dd3fc">${name}</span><span style="color:#94a3b8"> = </span><span style="color:#34d399">"${value}"</span>`;
+  return `<span style="color:#CBD5E1">${name}</span><span style="color:#94A3B8"> = </span><span style="color:#60A5FA">"${value}"</span>`;
 }
 
 function slidePre(lines: string[]): string {
-  return `<pre style="margin:0;background:#1e1e35;border:1px solid #3d3d5e;border-radius:8px;padding:0.75rem 1rem;font-family:'Courier New',monospace;font-size:12px;color:#e2e8f0;overflow-x:auto;line-height:1.8">${lines.join('\n')}</pre>`;
+  return `<pre style="margin:0;background:#1E293B;border:1px solid #334155;border-radius:8px;padding:0.75rem 1rem;font-family:'Fira Code',ui-monospace,SFMono-Regular,monospace;font-size:0.875rem;color:#CBD5E1;overflow-x:auto;line-height:1.8">${lines.join('\n')}</pre>`;
 }
 
 function slideHtml(polvosHtml: string, codeHtml: string, caption: string): string {
@@ -63,9 +63,9 @@ function codeDicts(entries: [string, [string, string][]][]) {
   const lines: string[] = [];
   entries.forEach(([varName, fields], idx) => {
     if (idx > 0) lines.push('');
-    lines.push(`<span style="color:#7dd3fc">${varName}</span><span style="color:#94a3b8"> = </span><span style="color:#e2e8f0">{</span>`);
-    fields.forEach(([k, v]) => lines.push(`    <span style="color:#c4b5fd">"${k}"</span><span style="color:#94a3b8">: </span><span style="color:#34d399">"${v}"</span>`));
-    lines.push(`<span style="color:#e2e8f0">}</span>`);
+    lines.push(`<span style="color:#CBD5E1">${varName}</span><span style="color:#94A3B8"> = </span><span style="color:#94A3B8">{</span>`);
+    fields.forEach(([k, v]) => lines.push(`    <span style="color:#60A5FA">"${k}"</span><span style="color:#94A3B8">: </span><span style="color:#60A5FA">"${v}"</span>`));
+    lines.push(`<span style="color:#94A3B8">}</span>`);
   });
   return slidePre(lines);
 }
