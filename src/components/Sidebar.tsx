@@ -56,7 +56,11 @@ const Sidebar: React.FC = () => {
           </svg>
         </button>
         <Link to="/" className="flex items-center gap-2">
-          <img src="/isotipo.svg" alt="Isotipo" className="w-7 h-7 rounded-md" />
+          <img
+            src="/isotipo.png"
+            alt="Isotipo"
+            className="w-7 h-7 rounded-md"
+          />
           <span className="font-bold text-textPrimary">Abstractio</span>
         </Link>
       </div>
@@ -78,7 +82,11 @@ const Sidebar: React.FC = () => {
       >
         {/* Logo */}
         <div className="flex items-center gap-3 px-5 h-16 border-b border-borderDark flex-shrink-0">
-          <img src="/isotipo.svg" alt="Isotipo" className="w-8 h-8 rounded-md" />
+          <img
+            src="/isotipo.png"
+            alt="Isotipo"
+            className="w-8 h-8 rounded-md"
+          />
           <span className="text-xl font-bold tracking-tight text-textPrimary">
             Abstractio
           </span>
