@@ -1,0 +1,154 @@
+import React, { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import {
+  HomeIcon,
+  MapIcon,
+  TrophyIcon,
+  XMarkIcon,
+  UserCircleIcon,
+} from "@heroicons/react/24/outline";
+import { useProgress } from "../hooks/useProgress";
+import imgPolvinho from "../assets/avatares/polvinho.png";
+import imgExplorador from "../assets/avatares/explorador.png";
+import imgMestreDosMaras from "../assets/avatares/mestredosmares.png";
+
+const AVATAR_SRCS: (string | null)[] = [
+  imgPolvinho,
+  imgExplorador,
+  imgMestreDosMaras,
+  null,
+];
+
+const NAV_ITEMS = [
+  { to: "/", label: "Home", Icon: HomeIcon, exact: true },
+  { to: "/trilha", label: "Trilha", Icon: MapIcon, exact: false },
+  { to: "/conquistas", label: "Conquistas", Icon: TrophyIcon, exact: false },
+];
+
+const Sidebar: React.FC = () => {
+  const [open, setOpen] = useState(false);
+  const { pontuacao, nivelDisplay, nomeDisplay, avatarIdx } = useProgress();
+  const avatarSrc = AVATAR_SRCS[avatarIdx] ?? AVATAR_SRCS[0];
+
+  return (
+    <>
+      {/* Mobile topbar */}
+      <div className="md:hidden fixed top-0 left-0 right-0 h-12 bg-bgSecondary border-b border-borderDark z-40 flex items-center px-4 gap-3">
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="p-1.5 rounded-md hover:bg-bgPrimary/40"
+          aria-label="Abrir menu"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 text-textPrimary"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+        <Link to="/" className="flex items-center gap-2">
+          <img src="/isotipo.svg" alt="Isotipo" className="w-7 h-7 rounded-md" />
+          <span className="font-bold text-textPrimary">Abstractio</span>
+        </Link>
+      </div>
+
+      {/* Mobile overlay */}
+      {open && (
+        <button
+          aria-hidden="true"
+          onClick={() => setOpen(false)}
+          className="md:hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-40"
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside
+        className={`fixed top-0 left-0 h-full w-[200px] bg-bgSecondary border-r border-borderDark z-50 flex flex-col transition-transform duration-200 ${
+          open ? "translate-x-0" : "-translate-x-full"
+        } md:translate-x-0`}
+      >
+        {/* Logo */}
+        <div className="flex items-center gap-3 px-5 h-16 border-b border-borderDark flex-shrink-0">
+          <img src="/isotipo.svg" alt="Isotipo" className="w-8 h-8 rounded-md" />
+          <span className="text-xl font-bold tracking-tight text-textPrimary">
+            Abstractio
+          </span>
+          <button
+            onClick={() => setOpen(false)}
+            className="md:hidden ml-auto p-1 rounded-md hover:bg-bgPrimary/30"
+            aria-label="Fechar menu"
+          >
+            <XMarkIcon className="w-5 h-5 text-textPrimary" />
+          </button>
+        </div>
+
+        {/* Avatar + info */}
+        <div className="flex flex-col items-center px-5 py-6 border-b border-borderDark flex-shrink-0">
+          <Link
+            to="/perfil"
+            onClick={() => setOpen(false)}
+            className="w-28 h-28 rounded-full ring-2 ring-accent/40 overflow-hidden hover:ring-accent transition-all shadow-lg"
+            title="Perfil"
+          >
+            {avatarSrc ? (
+              <img
+                src={avatarSrc}
+                alt="Avatar"
+                className="w-full h-full object-cover block"
+              />
+            ) : (
+              <div className="w-full h-full bg-bgPrimary flex items-center justify-center">
+                <UserCircleIcon className="w-8 h-8 text-textSecondary" />
+              </div>
+            )}
+          </Link>
+          <p className="mt-3 text-sm font-medium text-textPrimary leading-tight text-center">
+            {nomeDisplay}
+          </p>
+          <p className="text-xs text-textSecondary leading-tight text-center">
+            {nivelDisplay}
+          </p>
+          <span className="mt-1 text-sm text-accent font-semibold">
+            {pontuacao} pts
+          </span>
+        </div>
+
+        {/* Nav */}
+        <nav className="flex-1 px-3 py-4 overflow-y-auto">
+          <ul className="space-y-1">
+            {NAV_ITEMS.map(({ to, label, Icon, exact }) => (
+              <li key={to}>
+                <NavLink
+                  to={to}
+                  end={exact}
+                  onClick={() => setOpen(false)}
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
+                      isActive
+                        ? "bg-accent/15 text-accent"
+                        : "text-textPrimary hover:bg-bgPrimary/50 hover:text-accent"
+                    }`
+                  }
+                >
+                  <Icon className="w-5 h-5 flex-shrink-0" />
+                  <span className="font-medium">{label}</span>
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+    </>
+  );
+};
+
+export default Sidebar;

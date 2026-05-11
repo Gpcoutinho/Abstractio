@@ -69,10 +69,10 @@ const Missao: React.FC = () => {
   };
 
   return (
-    <div className="pt-20">
+    <div>
 
       {/* Navegação fixa */}
-      <div className="sticky top-20 z-40 bg-bgPrimary">
+      <div className="sticky top-0 z-40 bg-bgPrimary">
         <nav className="border-b border-accent/20">
           <div className="max-w-3xl mx-auto px-5 h-11 flex items-center justify-between">
             <div className="flex items-center gap-5">

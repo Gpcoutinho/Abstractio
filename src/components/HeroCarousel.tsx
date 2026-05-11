@@ -18,7 +18,7 @@ const HeroCarousel: React.FC = () => {
   const next = () => setCurrent(c => (c === 1 ? 0 : 1));
 
   return (
-    <section className="relative mt-20 overflow-hidden" style={{ minHeight: '420px' }}>
+    <section className="relative overflow-hidden min-h-[680px] md:min-h-[500px]">
 
       {/* Slide 1 — Roxo */}
       <div
