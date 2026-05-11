@@ -23,7 +23,7 @@ const HeroCarousel: React.FC = () => {
       {/* Slide 1 — Roxo */}
       <div
         className={`absolute inset-0 py-20 px-14 transition-opacity duration-500 ${current === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
-        style={{ background: 'linear-gradient(135deg, #4c1d95, #6d28d9, #7c3aed)' }}
+        style={{ background: 'linear-gradient(135deg, #3b0764, #7C3AED, #A78BFA)' }}
       >
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8">
           <div className="flex-1 text-center md:text-left">
@@ -55,7 +55,7 @@ const HeroCarousel: React.FC = () => {
       {/* Slide 2 — Verde menta */}
       <div
         className={`absolute inset-0 py-20 px-14 transition-opacity duration-500 ${current === 1 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
-        style={{ background: 'linear-gradient(135deg, #065f46, #059669, #10b981)' }}
+        style={{ background: 'linear-gradient(135deg, #164e63, #0369a1, #06B6D4)' }}
       >
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-extrabold text-white text-center mb-12">
