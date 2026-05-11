@@ -34,4 +34,6 @@ Para tornar essa jornada mais leve, pedimos que você se coloque no lugar do pro
 
 ---
 
+> ⚠️ Lembrete: este não é um curso de Java ou Python, mas algumas informações sobre a linguagem serão trazidas conforme a necessidade.
+
 Vamos juntos?

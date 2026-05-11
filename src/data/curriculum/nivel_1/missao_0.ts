@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+import type { Missao } from "../types";
 
 const missao: Missao = {
   id: "1-0",
@@ -35,6 +35,9 @@ Para tornar essa jornada mais leve, pedimos que você se coloque no lugar do pro
 ---
 
 Vamos juntos?
+
+
+> ⚠️ Lembrete: este não é um curso de Java ou Python, mas algumas informações sobre as linguagens serão trazidas conforme a necessidade.
 `,
   has_interativo: false,
 };
