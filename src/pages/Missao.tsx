@@ -135,7 +135,7 @@ const Missao: React.FC = () => {
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}
-          components={{ 'bolo-factory': () => <BoloFactory />, code: CodeBlock }}
+          components={{ 'bolo-factory': () => <BoloFactory />, code: CodeBlock, pre: ({ children }) => <>{children}</> }}
         >
           {missao.theory}
         </ReactMarkdown>

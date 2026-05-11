@@ -27,7 +27,6 @@ export const moldeBoloAnimation = `<figure style="margin:1.5rem auto;display:fle
       34%,60%{opacity:1}
     }
   </style>
-  <rect width="200" height="280" fill="#0e0e1a" rx="12"/>
   <ellipse class="mb-glow" cx="100" cy="194" rx="48" ry="10" fill="url(#mbag)"/>
   <!-- Bolo desenhado antes do corpo da forma — o corpo o cobre quando está dentro -->
   <g class="mb-cake">
@@ -72,7 +71,6 @@ export const diagramaObjetos = `<figure style="margin:1.5rem 0">
       to{opacity:1;transform:translateY(0)}
     }
   </style>
-  <rect width="680" height="300" fill="#0e0e1a" rx="12"/>
   <text x="340" y="26" text-anchor="middle" fill="#7878a0" font-size="13" font-family="monospace">Objetos do mundo real têm características e comportamentos</text>
 
   <!-- Card 1 - Cachorro -->
@@ -132,7 +130,6 @@ export const diagramaInstancias = `<figure style="margin:1.5rem 0">
       to{opacity:1;transform:translateY(0)}
     }
   </style>
-  <rect width="280" height="258" fill="#0e0e1a" rx="12"/>
   <g class="ii2">
     <rect x="46" y="18" width="188" height="222" rx="10" fill="#111a20" stroke="#1a5a8a" stroke-width="1.5"/>
     <rect x="46" y="18" width="188" height="46" rx="10" fill="#152030"/>
@@ -164,7 +161,6 @@ export const diagramaClasseObjeto = `<figure style="margin:1.5rem 0">
     }
     @keyframes oFadeIn{from{opacity:0}to{opacity:1}}
   </style>
-  <rect width="460" height="258" fill="#0e0e1a" rx="12"/>
 
   <!-- Class panel -->
   <g class="ii1">
@@ -219,7 +215,6 @@ export const diagramaClasseMetodo = `<figure style="margin:1.5rem 0">
     }
     @keyframes oFadeIn{from{opacity:0}to{opacity:1}}
   </style>
-  <rect width="680" height="255" fill="#0e0e1a" rx="12"/>
 
   <!-- Class panel -->
   <g class="ii1">
