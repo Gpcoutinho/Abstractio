@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+import type { Missao } from "../types";
 
 const missao: Missao = {
   id: "1-0",
@@ -25,7 +25,7 @@ Então qual seria esse propósito tão essencial da POO? Se eu já consigo defin
 
 ## Conheça o Sr. Polvonilson
 
-Para tornar essa jornada mais leve, pedimos que você se coloque no lugar do protagonista lúdico da plataforma, o Sr. Polvonilson. Ele é um biólogo marinho apaixonado pelos oceanos, especificamente por polvos. E é nesse contexto leve que você vai entender todos os conceitos da POO:
+Para tornar essa jornada mais leve, pedimos que você se coloque no lugar do protagonista lúdico da plataforma, o Sr. Polvonilson. Ele é um **polvo cientista** cheio de curiosidade sobre o oceano e tudo que existe nele. E é nesse contexto leve que você vai entender todos os conceitos da POO:
 
 - **Fundamentos** — Classes, Objetos, Atributos, Métodos e Construtores
 - **Pilares** — Abstração, Encapsulamento, Herança e Polimorfismo
@@ -35,6 +35,9 @@ Para tornar essa jornada mais leve, pedimos que você se coloque no lugar do pro
 ---
 
 Vamos juntos?
+
+
+> ⚠️ Lembrete: este não é um curso de Java ou Python, mas algumas informações sobre as linguagens serão trazidas conforme a necessidade.
 `,
   has_interativo: false,
 };

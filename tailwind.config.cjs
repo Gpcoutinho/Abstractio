@@ -35,6 +35,14 @@ module.exports = {
       animation: {
         float: 'float 6s ease-in-out infinite',
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            'blockquote p:first-of-type::before': { content: 'none' },
+            'blockquote p:last-of-type::after':   { content: 'none' },
+          },
+        },
+      },
     },
   },
   plugins: [require('@tailwindcss/typography')],

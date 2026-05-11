@@ -5,11 +5,17 @@ export interface Exercise {
   explanation: string;
 }
 
+export interface SlideCardData {
+  title?: string;
+  slides: string[];
+}
+
 export interface Missao {
   id: string;
   title: string;
   icon: string;
   theory: string;
+  cards?: SlideCardData[];
   exercise?: Exercise;
   has_interativo: boolean;
   interativo_html?: string;
