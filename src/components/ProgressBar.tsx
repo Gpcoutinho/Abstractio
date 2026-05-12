@@ -96,7 +96,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ curriculum, completedMissions
               )}
 
               {!isFirstOfNivel && (
-                <div className={`pb-connector ${isDone ? 'done' : ''}`} />
+                <div className={`pb-connector ${isDone ? 'done' : ''} ${idx === activeIndex ? 'active' : ''}`} />
               )}
 
               <div

@@ -15,6 +15,7 @@ import { useProgress } from "../hooks/useProgress";
 import PageWrapper from "../components/PageWrapper";
 import CodeBlock from "../components/CodeBlock";
 import interativoHtml from "../assets/interativos/nivel_1_missao_7.html?raw";
+import ProgressBar from '../components/ProgressBar';
 
 const interativos: Record<string, string> = {
   "interativos/nivel_1_missao_7.html": interativoHtml,
@@ -37,6 +38,8 @@ const Missao: React.FC = () => {
 
   const nivel = niveis.find((n) => n.id === Number(nivelIdx));
   const missao = nivel?.missoes[Number(missaoIdx) - 1];
+  
+  const { completed } = useProgress();
 
   if (!nivel || !missao) {
     return (
@@ -86,6 +89,9 @@ const Missao: React.FC = () => {
     <div>
       {/* Navegação fixa */}
       <div className="sticky top-0 z-40 bg-bgPrimary py-2">
+          <div className="max-w-3xl mx-auto pt-1 px-5">
+            <ProgressBar curriculum={niveis} completedMissions={completed} />
+          </div>
         <nav>
           <div className="max-w-3xl mx-auto px-5 h-11 flex items-center justify-between">
             <div className="flex items-center gap-5">
@@ -126,7 +132,7 @@ const Missao: React.FC = () => {
           </div>
         </nav>
         <header className="border-b border-accent/10">
-          <div className="max-w-3xl mx-auto px-5 py-4">
+          <div className="max-w-3xl mx-auto px-5 py-2">
             <p className="text-textSecondary text-sm mb-1">{nivel.title}</p>
             <h1 className="text-2xl font-bold text-textPrimary">
               {missao.icon} {missao.title}
