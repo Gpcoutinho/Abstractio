@@ -15,6 +15,9 @@ const Trilha: React.FC = () => {
   return (
     <>
       <PageWrapper className="max-w-3xl pb-16">
+        <div className="mb-6">
+          <ProgressBar curriculum={niveis} completedMissions={completed} />
+        </div>
         {/* Cabeçalho */}
         <div className="mb-10">
           <h1 className="text-3xl font-bold text-textPrimary mb-1">
@@ -23,9 +26,6 @@ const Trilha: React.FC = () => {
           <p className="text-textSecondary">
             Programação Orientada a Objetos em Python — {totalMissoes} missões
           </p>
-          <div className="mt-6">
-            <ProgressBar curriculum={niveis} completedMissions={completed} />
-          </div>
         </div>
 
         {/* Níveis */}
@@ -72,12 +72,12 @@ const Trilha: React.FC = () => {
                             {missao.title}
                           </span>
                           <span
-                            className={`text-xs ${concluida ? "text-accent" : "text-textSecondary"}`}
+                            className={`text-xs ${concluida ? "text-success" : "text-textSecondary"}`}
                           >
                             {concluida ? "✓ 15 pts" : "+15 pts"}
                           </span>
                           {concluida ? (
-                            <CheckCircleSolid className="w-5 h-5 text-accent flex-shrink-0" />
+                            <CheckCircleSolid className="w-5 h-5 text-success flex-shrink-0" />
                           ) : (
                             <CheckCircleSolid className="w-5 h-5 text-textSecondary group-hover:text-accent flex-shrink-0 transition-colors" />
                           )}

@@ -3,7 +3,7 @@
 
 @layer components {
   .pb-wrap {
-    @apply bg-bgSecondary border border-borderDark rounded-lg p-4;
+    @apply bg-bgSecondary border border-borderDark rounded-lg p-4 py-2;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
@@ -26,7 +26,7 @@
   }
 
   .pb-header {
-    @apply flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 mb-2 text-xs;
+    @apply flex flex-row sm:flex-row items-start sm:items-center justify-between w-full gap-1 mb-2 text-xs;
   }
 
   .pb-title {
@@ -59,7 +59,7 @@
   }
 
   .pb-sep-line {
-    @apply w-px h-5 bg-borderDark;
+    @apply w-px h-4 bg-borderDark;
   }
 
   .pb-connector {
@@ -67,8 +67,13 @@
     min-width: 0.75rem;
   }
 
+  .pb-connector.active {
+    @apply h-0.5 rounded-full bg-accent shrink-0;
+    min-width: 0.75rem;
+  }
+
   .pb-connector.done {
-    @apply bg-accent;
+    @apply bg-success;
   }
 
   .pb-dot {
@@ -76,7 +81,7 @@
   }
 
   .pb-dot.done {
-    @apply bg-accent border-accent;
+    @apply bg-success border-success;
   }
 
   .pb-dot.active {
