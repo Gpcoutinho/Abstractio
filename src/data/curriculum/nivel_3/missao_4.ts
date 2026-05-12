@@ -3,7 +3,7 @@ import type { Missao } from '../types';
 const missao: Missao = {
   id: "3-4",
   title: "Classes Abstratas",
-  icon: "🏛️",
+  icon: "PiBank",
   theory: `
 ## O problema sem contratos
 

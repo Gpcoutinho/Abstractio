@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { PlayCircleIcon } from '@heroicons/react/24/outline';
 import { CheckCircleIcon as CheckCircleSolid } from '@heroicons/react/24/solid';
 import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
 import Footer from '../components/Footer';
+import MissionIcon from '../components/MissionIcon';
 import PageWrapper from '../components/PageWrapper';
 import ProgressBar from '../components/ProgressBar';
 const totalMissoes = niveis.reduce((acc, n) => acc + n.missoes.length, 0);
 
 const Trilha: React.FC = () => {
-  const { completed, progressoGeral } = useProgress();
+  const { completed } = useProgress();
 
   return (
     <>
@@ -67,7 +67,8 @@ const Trilha: React.FC = () => {
                           <span
                             className={`flex-1 ${concluida ? "text-textSecondary line-through" : "text-textPrimary"}`}
                           >
-                            {missao.icon} Missão{" "}
+                            <MissionIcon iconName={missao.icon} completed={concluida} className="mr-2 w-5 h-5" />
+                            Missão{" "}
                             {nivel.id === 1 ? missaoIdx : missaoIdx + 1} —{" "}
                             {missao.title}
                           </span>

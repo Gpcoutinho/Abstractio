@@ -3,7 +3,7 @@ import type { Missao } from '../types';
 const missao: Missao = {
   id: "4-1",
   title: "Introdução ao nível",
-  icon: "🏛️",
+  icon: "PiBank",
   theory: `
 ## O arquiteto mestre — Engenharia e Qualidade
 

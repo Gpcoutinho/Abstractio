@@ -41,7 +41,8 @@ const Perfil: React.FC = () => {
 
   return (
     <>
-      <PageWrapper className="max-w-2xl pb-16">
+    <div className="min-h-screen flex flex-col">
+      <PageWrapper className="flex-grow max-w-2xl pb-16">
         <h1 className="text-3xl font-bold text-textPrimary mb-10">Perfil</h1>
 
         {/* Resumo de progresso */}
@@ -188,6 +189,7 @@ const Perfil: React.FC = () => {
 
       </PageWrapper>
       <Footer />
+    </div>
     </>
   );
 };

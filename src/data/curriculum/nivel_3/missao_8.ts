@@ -3,7 +3,7 @@ import type { Missao } from '../types';
 const missao: Missao = {
   id: "3-8",
   title: "Resumo",
-  icon: "📋",
+  icon: "PiClipboard",
   theory: `
 ## Resumo — A sociedade dos objetos
 

@@ -4,7 +4,7 @@ import { moldeBoloAnimation, diagramaClasseObjeto } from '../../visuals/nivel_1'
 const missao: Missao = {
   id: "1-3",
   title: "Classe",
-  icon: "📐",
+  icon: "PiRuler",
   theory: `
 ## A forma de assar bolo
 

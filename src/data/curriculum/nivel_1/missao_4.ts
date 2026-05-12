@@ -3,7 +3,7 @@ import type { Missao } from '../types';
 const missao: Missao = {
   id: "1-4",
   title: "Atributos",
-  icon: "🏷️",
+  icon: "PiTag",
   theory: `
 ## O que um objeto *sabe*
 

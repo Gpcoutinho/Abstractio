@@ -3,7 +3,7 @@ import type { Missao } from '../types';
 const missao: Missao = {
   id: "4-2",
   title: "Coesão",
-  icon: "🎯",
+  icon: "PiTarget",
   theory: `
 ## Coesão
 

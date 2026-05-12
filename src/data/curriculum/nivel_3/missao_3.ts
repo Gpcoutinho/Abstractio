@@ -3,7 +3,7 @@ import type { Missao } from '../types';
 const missao: Missao = {
   id: "3-3",
   title: "Sobrecarga",
-  icon: "🔀",
+  icon: "PiShuffle",
   theory: `
 ## Sobrecarga (Overload)
 

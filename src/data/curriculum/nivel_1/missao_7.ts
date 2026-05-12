@@ -3,7 +3,7 @@ import type { Missao } from '../types';
 const missao: Missao = {
   id: "1-7",
   title: "Resumo",
-  icon: "📋",
+  icon: "PiClipboard",
   theory: `
 ## Você chegou até aqui — vamos revisar!
 

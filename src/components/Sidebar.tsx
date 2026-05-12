@@ -81,7 +81,14 @@ const Sidebar: React.FC = () => {
         } md:translate-x-0`}
       >
         {/* Logo */}
-        <div className="flex items-center gap-3 px-5 h-16 border-b border-borderDark flex-shrink-0">
+        <div className="flex items-center justify-center gap-3 h-16 border-b border-borderDark flex-shrink-0">
+          <button
+            onClick={() => setOpen(false)}
+            className="md:hidden ml-1 rounded-md hover:bg-bgPrimary/30"
+            aria-label="Fechar menu"
+          >
+            <XMarkIcon className="w-5 h-5 text-textPrimary" />
+          </button>
           <img
             src="/isotipo.png"
             alt="Isotipo"
@@ -90,13 +97,6 @@ const Sidebar: React.FC = () => {
           <span className="text-xl font-bold tracking-tight text-textPrimary">
             Abstractio
           </span>
-          <button
-            onClick={() => setOpen(false)}
-            className="md:hidden ml-auto p-1 rounded-md hover:bg-bgPrimary/30"
-            aria-label="Fechar menu"
-          >
-            <XMarkIcon className="w-5 h-5 text-textPrimary" />
-          </button>
         </div>
 
         {/* Avatar + info */}

@@ -3,7 +3,7 @@ import type { Missao } from '../types';
 const missao: Missao = {
   id: "3-6",
   title: "Associação",
-  icon: "↔️",
+  icon: "PiArrowsHorizontal",
   theory: `
 ## Objetos que se conhecem
 

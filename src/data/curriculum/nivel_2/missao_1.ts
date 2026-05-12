@@ -3,7 +3,7 @@ import type { Missao } from '../types';
 const missao: Missao = {
   id: "2-1",
   title: "Introdução ao nível",
-  icon: "🌍",
+  icon: "PiGlobe",
   theory: `
 ## Por que objetos precisam de regras?
 
