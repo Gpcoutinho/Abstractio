@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
 import Footer from '../components/Footer';
+import MissionIcon from '../components/MissionIcon';
 import PageWrapper from '../components/PageWrapper';
 
 const Conquistas: React.FC = () => {
@@ -42,7 +43,7 @@ const Conquistas: React.FC = () => {
                           : 'border-borderDark bg-bgSecondary opacity-35 grayscale hover:opacity-50'
                       }`}
                     >
-                      <span className="text-3xl leading-none">{missao.icon}</span>
+                      <MissionIcon iconName={missao.icon} completed={earned} className="w-8 h-8" />
                       <span className="text-xs text-center text-textSecondary leading-tight line-clamp-2">
                         {missao.title}
                       </span>

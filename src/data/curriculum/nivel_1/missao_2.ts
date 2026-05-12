@@ -4,7 +4,7 @@ import { diagramaObjetos, diagramaInstancias } from '../../visuals/nivel_1';
 const missao: Missao = {
   id: "1-2",
   title: "Objeto",
-  icon: "🔵",
+  icon: "PiCircle",
   theory: `
 ## Olhe ao seu redor
 

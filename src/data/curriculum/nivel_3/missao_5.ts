@@ -3,7 +3,7 @@ import type { Missao } from '../types';
 const missao: Missao = {
   id: "3-5",
   title: "Interfaces",
-  icon: "🔌",
+  icon: "PiPlug",
   theory: `
 ## Interface: contrato puro
 

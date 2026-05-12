@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import BoloFactory from "../components/BoloFactory";
 import SlideCard from "../components/SlideCard";
@@ -14,6 +14,7 @@ import { niveis } from "../data/curriculum";
 import { useProgress } from "../hooks/useProgress";
 import PageWrapper from "../components/PageWrapper";
 import CodeBlock from "../components/CodeBlock";
+import MissionIcon from "../components/MissionIcon";
 import interativoHtml from "../assets/interativos/nivel_1_missao_7.html?raw";
 import ProgressBar from '../components/ProgressBar';
 
@@ -30,7 +31,7 @@ const Missao: React.FC = () => {
     nivelIdx: string;
     missaoIdx: string;
   }>();
-  const { completarMissao, desmarcarMissao, isMissaoConcluida } = useProgress();
+  const { completarMissao, desmarcarMissao, isMissaoConcluida, completed } = useProgress();
 
   const [selecionada, setSelecionada] = useState<number | null>(null);
   const [respondida, setRespondida] = useState(false);
@@ -62,7 +63,6 @@ const Missao: React.FC = () => {
 
   const nivel = niveis.find((n) => n.id === Number(nivelIdx));
   const missao = nivel?.missoes[Number(missaoIdx) - 1];
-  const { completed } = useProgress();
 
   if (!nivel || !missao) {
     return (
@@ -112,9 +112,7 @@ const Missao: React.FC = () => {
               <div className="px-5 py-4">
                 <ProgressBar 
                   curriculum={niveis}
-                  completedMissions={completed} 
-                  currentNivel={nivel.id} 
-                  currentMissao={missaoIdxNum}
+                  completedMissions={completed}
                 />
               </div>
             </div>
@@ -159,7 +157,11 @@ const Missao: React.FC = () => {
                 {nivel.title}
               </p>
               <h1 className={`font-bold text-textPrimary flex items-center gap-2 transition-all duration-300 ${showBar ? "text-xl" : "text-sm"}`}>
-                <span className={`transition-all ${showBar ? "text-xl" : "text-lg"}`}>{missao.icon}</span>
+                <MissionIcon
+                  iconName={missao.icon}
+                  completed={jaConcluida}
+                  className={showBar ? "w-7 h-7 transition-all duration-300" : "w-6 h-6 transition-all duration-300"}
+                />
                 {missao.title}
               </h1>
             </div>

@@ -4,7 +4,7 @@ import { diagramaClasseMetodo } from '../../visuals/nivel_1';
 const missao: Missao = {
   id: "1-5",
   title: "Métodos",
-  icon: "⚙️",
+  icon: "PiGear",
   theory: `
 ## O que um objeto sabe *fazer*
 
