@@ -21,9 +21,9 @@ const interativos: Record<string, string> = {
   "interativos/nivel_1_missao_7.html": interativoHtml,
 };
 
-// PARÂMETROS DE AJUSTE DA ANIMAÇÃO
-const LIMITE_PARA_ESCONDER = 200; //px
-const LIMITE_PARA_MOSTRAR = 50;  //px
+// Parâmetros de ajuste da animação
+const Limite_para_esconder = 200; //px
+const Limite_para_mostrar = 50;  //px
 
 const Missao: React.FC = () => {
   const { nivelIdx, missaoIdx } = useParams<{
@@ -49,9 +49,9 @@ const Missao: React.FC = () => {
     const handleScroll = () => {
       const scrollAtual = window.scrollY;
 
-      if (scrollAtual > LIMITE_PARA_ESCONDER) {
+      if (scrollAtual > Limite_para_esconder) {
         setShowBar(false);
-      } else if (scrollAtual < LIMITE_PARA_MOSTRAR) {
+      } else if (scrollAtual < Limite_para_mostrar) {
         setShowBar(true);
       }
     };
@@ -128,6 +128,13 @@ const Missao: React.FC = () => {
                   <span className="hidden sm:inline">Trilha</span>
                 </Link>
                 
+                {missaoAnterior && (
+                  <Link to={missaoAnterior} className="hidden md:inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors">
+                    <ArrowLeftIcon className="w-4 h-4" />
+                    Anterior
+                  </Link>
+                )}
+
                 {!showBar && (
                   <button 
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -136,13 +143,6 @@ const Missao: React.FC = () => {
                     <div className="w-1.5 h-1.5 bg-accent rounded-full animate-pulse" />
                     Progresso
                   </button>
-                )}
-
-                {missaoAnterior && (
-                  <Link to={missaoAnterior} className="hidden md:inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors">
-                    <ArrowLeftIcon className="w-4 h-4" />
-                    Anterior
-                  </Link>
                 )}
               </div>
 
