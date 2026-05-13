@@ -14,8 +14,8 @@ const Trilha: React.FC = () => {
 
   return (
     <>
-    <div className="min-h-screen flex flex-col">
-      <PageWrapper className="flex-grow max-w-3xl pb-16">
+    <div className="min-h-screen flex flex-col bg-bgPrimary overflow-x-hidden">
+      <PageWrapper className="flex-grow w-full max-w-3xl mx-auto px-5 pb-16">
         <div className="mb-6">
           <ProgressBar curriculum={niveis} completedMissions={completed} />
         </div>
@@ -66,7 +66,7 @@ const Trilha: React.FC = () => {
                           className="flex items-center gap-4 p-4 rounded-lg border border-borderDark bg-bgSecondary hover:border-accent transition-colors group"
                         >
                           <span
-                            className={`flex-1 ${concluida ? "text-textSecondary line-through" : "text-textPrimary"}`}
+                            className={`flex-1 min-w-0 ${concluida ? "text-textSecondary line-through" : "text-textPrimary"}`}
                           >
                             <MissionIcon iconName={missao.icon} completed={concluida} className="mr-2 w-5 h-5" />
                             Missão{" "}
