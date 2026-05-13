@@ -12,7 +12,8 @@ const Conquistas: React.FC = () => {
 
   return (
     <>
-      <PageWrapper className="max-w-5xl pb-16">
+    <div className="min-h-screen flex flex-col">
+      <PageWrapper className="flex-grow max-w-5xl pb-16">
 
         {/* Cabeçalho */}
         <div className="mb-10">
@@ -60,6 +61,7 @@ const Conquistas: React.FC = () => {
 
       </PageWrapper>
       <Footer />
+    </div>
     </>
   );
 };

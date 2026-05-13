@@ -14,7 +14,8 @@ const Trilha: React.FC = () => {
 
   return (
     <>
-      <PageWrapper className="max-w-3xl pb-16">
+    <div className="min-h-screen flex flex-col">
+      <PageWrapper className="flex-grow max-w-3xl pb-16">
         <div className="mb-6">
           <ProgressBar curriculum={niveis} completedMissions={completed} />
         </div>
@@ -94,6 +95,7 @@ const Trilha: React.FC = () => {
       </PageWrapper>
 
       <Footer />
+    </div>
     </>
   );
 };
