@@ -112,24 +112,25 @@ const Missao: React.FC = () => {
               <div className="px-5 py-4">
                 <ProgressBar 
                   curriculum={niveis}
-                  completedMissions={completed}
+                  completedMissions={completed} 
+                  currentNivel={nivel.id} 
+                  currentMissao={missaoIdxNum}
                 />
               </div>
             </div>
           </div>
 
           <nav className="border-t border-borderDark/5">
-            <div className="px-5 h-11 flex items-center justify-between">
-              <div className="flex items-center gap-4">
+            <div className="px-5 h-11 flex items-center gap-4 justify-between">
+              <div className="flex items-center gap-4 justify-between">                
                 <Link to="/trilha" className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors">
                   <ArrowLeftIcon className="w-4 h-4" />
-                  <span className="hidden sm:inline">Trilha</span>
+                  <span className="sm:inline">Trilha</span>
                 </Link>
-                
                 {missaoAnterior && (
-                  <Link to={missaoAnterior} className="hidden md:inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors">
+                  <Link to={missaoAnterior} className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors">
                     <ArrowLeftIcon className="w-4 h-4" />
-                    Anterior
+                    <span className="sm:inline">Anterior</span>
                   </Link>
                 )}
 
