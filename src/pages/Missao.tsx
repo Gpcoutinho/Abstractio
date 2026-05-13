@@ -112,9 +112,7 @@ const Missao: React.FC = () => {
               <div className="px-5 py-4">
                 <ProgressBar 
                   curriculum={niveis}
-                  completedMissions={completed} 
-                  currentNivel={nivel.id} 
-                  currentMissao={missaoIdxNum}
+                  completedMissions={completed}
                 />
               </div>
             </div>
