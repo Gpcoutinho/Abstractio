@@ -185,9 +185,9 @@ const Missao: React.FC = () => {
                     className={className}
                     slides={card.slides.map((s, j) => (
                       <ReactMarkdown key={j} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={{
-                        p: ({ children }) => <p className="text-textBody leading-relaxed m-0">{children}</p>,
-                        strong: ({ children }) => <strong className="text-textPrimary">{children}</strong>,
-                        table: ({ children }) => (
+                        p: ({ children }: { children?: React.ReactNode }) => <p className="text-textBody leading-relaxed m-0">{children}</p>,
+                        strong: ({ children }: { children?: React.ReactNode }) => <strong className="text-textPrimary">{children}</strong>,
+                        table: ({ children }: { children?: React.ReactNode }) => (
                           <div className="overflow-x-auto my-4">
                             <table className="min-w-full">{children}</table>
                           </div>
@@ -222,12 +222,12 @@ const Missao: React.FC = () => {
                 "bolo-factory": () => <BoloFactory />,
                 code: CodeBlock,
                 pre: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-                table: ({ children }) => (
+                table: ({ children }: { children?: React.ReactNode }) => (
                   <div className="overflow-x-auto my-4">
                     <table className="min-w-full">{children}</table>
                   </div>
                 ),
-              } as any}>
+              } as React.ComponentProps<typeof ReactMarkdown>['components']}>
                 {part}
               </ReactMarkdown>
             );
