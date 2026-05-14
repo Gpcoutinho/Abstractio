@@ -6,15 +6,16 @@ import { useProgress } from '../hooks/useProgress';
 import type { Genero } from '../contexts/ProgressContext';
 import Footer from '../components/Footer';
 import PageWrapper from '../components/PageWrapper';
-import imgPolvinho from '../assets/avatares/polvinho.png';
-import imgExplorador from '../assets/avatares/explorador.png';
-import imgMestreDosMaras from '../assets/avatares/mestredosmares.png';
+import imgPolvinho from '../assets/avatares/avatar-polvinho.png';
+import imgExplorador from '../assets/avatares/avatar-explorador.png';
+import imgMestreDosMaras from '../assets/avatares/avatar-mestredosmares.png';
+import imgKraken from '../assets/avatares/avatar-kraken.png';
 
 const AVATARES = [
   { src: imgPolvinho,      label: 'Polvinho',         nivelMin: 0 },
   { src: imgExplorador,    label: 'Explorador',        nivelMin: 1 },
   { src: imgMestreDosMaras, label: 'Mestre dos Mares', nivelMin: 2 },
-  { src: null,             label: 'Kraken',            nivelMin: 3 },
+  { src: imgKraken,        label: 'Kraken',            nivelMin: 3 },
 ];
 
 const totalMissoes = niveis.reduce((acc, n) => acc + n.missoes.length, 0);
@@ -110,7 +111,7 @@ const Perfil: React.FC = () => {
                   onClick={() => desbloqueado && setAvatarIdx(i)}
                   disabled={!desbloqueado}
                   title={desbloqueado ? avatar.label : `Conclua o Nível ${avatar.nivelMin} para desbloquear`}
-                  className={`relative w-32 h-32 rounded-full border-2 overflow-hidden transition-all focus:outline-none
+                  className={`relative w-32 h-32 rounded-full border-2 overflow-hidden transition-all focus:outline-none bg-bgPrimary
                     ${selecionado ? 'border-accent scale-105' : 'border-borderDark'}
                     ${desbloqueado ? 'hover:border-accent cursor-pointer' : 'opacity-40 cursor-not-allowed grayscale'}
                   `}

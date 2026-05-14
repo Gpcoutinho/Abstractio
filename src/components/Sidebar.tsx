@@ -8,15 +8,16 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { useProgress } from "../hooks/useProgress";
-import imgPolvinho from "../assets/avatares/polvinho.png";
-import imgExplorador from "../assets/avatares/explorador.png";
-import imgMestreDosMaras from "../assets/avatares/mestredosmares.png";
+import imgPolvinho from "../assets/avatares/avatar-polvinho.png";
+import imgExplorador from "../assets/avatares/avatar-explorador.png";
+import imgMestreDosMaras from "../assets/avatares/avatar-mestredosmares.png";
+import imgKraken from "../assets/avatares/avatar-kraken.png";
 
 const AVATAR_SRCS: (string | null)[] = [
   imgPolvinho,
   imgExplorador,
   imgMestreDosMaras,
-  null,
+  imgKraken,
 ];
 
 const NAV_ITEMS = [
@@ -104,7 +105,7 @@ const Sidebar: React.FC = () => {
           <Link
             to="/perfil"
             onClick={() => setOpen(false)}
-            className="w-28 h-28 rounded-full ring-2 ring-accent/40 overflow-hidden hover:ring-accent transition-all shadow-lg"
+            className="w-28 h-28 rounded-full ring-2 ring-accent/40 overflow-hidden hover:ring-accent transition-all shadow-lg bg-bgPrimary"
             title="Perfil"
           >
             {avatarSrc ? (
