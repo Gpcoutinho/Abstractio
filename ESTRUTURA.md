@@ -205,7 +205,7 @@ Todas as missões estão disponíveis desde o início — sem desbloqueio sequen
 
 ### Ícones
 
-Usar **Heroicons** para status e UI. Emojis apenas em ícones de missão (campo `icon` no currículo).
+Usar **Phosphor Icons** para status e UI.
 
 ---
 
