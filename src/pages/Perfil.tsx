@@ -10,12 +10,15 @@ import imgPolvinho from '../assets/avatares/avatar-polvinho.png';
 import imgExplorador from '../assets/avatares/avatar-explorador.png';
 import imgMestreDosMaras from '../assets/avatares/avatar-mestredosmares.png';
 import imgKraken from '../assets/avatares/avatar-kraken.png';
+import imgOcultoExplorador from '../assets/avatares/avataroculto-explorador.png';
+import imgOcultoMestreDosMaras from '../assets/avatares/avataroculto-mestredosmares.png';
+import imgOcultoKraken from '../assets/avatares/avataroculto-kraken.png';
 
 const AVATARES = [
-  { src: imgPolvinho,      label: 'Polvinho',         nivelMin: 0 },
-  { src: imgExplorador,    label: 'Explorador',        nivelMin: 1 },
-  { src: imgMestreDosMaras, label: 'Mestre dos Mares', nivelMin: 2 },
-  { src: imgKraken,        label: 'Kraken',            nivelMin: 3 },
+  { src: imgPolvinho,      hiddenSrc: imgPolvinho,          label: 'Polvinho',         nivelMin: 0 },
+  { src: imgExplorador,    hiddenSrc: imgOcultoExplorador,  label: 'Explorador',        nivelMin: 1 },
+  { src: imgMestreDosMaras, hiddenSrc: imgOcultoMestreDosMaras, label: 'Mestre dos Mares', nivelMin: 2 },
+  { src: imgKraken,        hiddenSrc: imgOcultoKraken,      label: 'Kraken',            nivelMin: 3 },
 ];
 
 const totalMissoes = niveis.reduce((acc, n) => acc + n.missoes.length, 0);
@@ -105,26 +108,36 @@ const Perfil: React.FC = () => {
             {AVATARES.map((avatar, i) => {
               const desbloqueado = niveis_concluidos.length >= avatar.nivelMin;
               const selecionado = avatarIdx === i;
+              
               return (
                 <button
                   key={i}
                   onClick={() => desbloqueado && setAvatarIdx(i)}
                   disabled={!desbloqueado}
                   title={desbloqueado ? avatar.label : `Conclua o Nível ${avatar.nivelMin} para desbloquear`}
-                  className={`relative w-32 h-32 rounded-full border-2 overflow-hidden transition-all focus:outline-none bg-bgPrimary
+                  className={`relative w-32 h-32 rounded-full border-2 overflow-hidden transition-all focus:outline-none bg-bgPrimary flex items-center justify-center
                     ${selecionado ? 'border-accent scale-105' : 'border-borderDark'}
-                    ${desbloqueado ? 'hover:border-accent cursor-pointer' : 'opacity-40 cursor-not-allowed grayscale'}
+                    ${desbloqueado ? 'hover:border-accent cursor-pointer' : 'cursor-not-allowed'}
                   `}
                 >
-                  {avatar.src ? (
-                    <img src={avatar.src} alt={avatar.label} className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="w-full h-full bg-bgPrimary flex items-center justify-center">
-                      <LockClosedIcon className="w-6 h-6 text-textSecondary" />
+                  {/* Se estiver desbloqueado, mostra a imagem normal. 
+                      Se bloqueado, mostra a silhueta (hiddenSrc) com filtro de brilho baixo */}
+                  <img
+                    src={desbloqueado ? avatar.src : avatar.hiddenSrc ?? avatar.src}
+                    alt={avatar.label}
+                    className={`w-full h-full object-cover transition-all ${!desbloqueado ? 'opacity-30 grayscale brightness-50' : ''}`}
+                  />
+
+                  {/* CADEADO: Aparece apenas se estiver bloqueado, posicionado no centro */}
+                  {!desbloqueado && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                      <LockClosedIcon className="w-8 h-8 text-textSecondary" />
                     </div>
                   )}
-                  {selecionado && (
-                    <div className="absolute inset-0 ring-2 ring-accent ring-inset rounded-full" />
+
+                  {/* Feedback visual de seleção */}
+                  {selecionado && desbloqueado && (
+                    <div className="absolute inset-0 ring-4 ring-accent ring-inset rounded-full pointer-events-none" />
                   )}
                 </button>
               );
