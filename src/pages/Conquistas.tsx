@@ -36,7 +36,7 @@ const Conquistas: React.FC = () => {
                   return (
                     <Link
                       key={missao.id}
-                      to={`/missao/${nivel.id}/${missaoIdx}`}
+                      to={`/missao/${nivel.id}/${missaoIdx + 1}`}
                       title={missao.title}
                       className={`flex flex-col items-center gap-2 w-24 p-3 rounded-xl border transition-all ${
                         earned
