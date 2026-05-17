@@ -83,7 +83,13 @@ No próximo nível, você vai descobrir os **4 Pilares da POO**:
       "A classe herda do objeto → o construtor é opcional → os métodos definem os atributos."
     ],
     correct: 1,
-    explanation: "Exato! A classe define o molde, o construtor (`__init__`) prepara o estado inicial, e o objeto é a instância concreta criada a partir disso."
+    explanation: "Exato! A classe define o molde, o construtor (`__init__`) prepara o estado inicial, e o objeto é a instância concreta criada a partir disso.",
+    wrong_explanations: [
+      "A sequência está invertida. A classe já existe antes do objeto — é ela o molde. O construtor não define a classe; ele inicializa o objeto criado a partir dela.",
+      "",
+      "O construtor não cria a classe — a classe já existe na declaração `class`. O `__init__` inicializa o objeto recém-criado. A ordem correta é: classe define o molde → objeto é criado → construtor inicializa o estado.",
+      "Em Python, o objeto herda da classe (toda classe herda de `object` por padrão), não o contrário. Além disso, são os atributos que guardam dados — os métodos os utilizam."
+    ]
   },
   has_interativo: true,
   interativo_html: "interativos/nivel_1_missao_7.html"

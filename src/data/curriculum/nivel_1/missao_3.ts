@@ -96,7 +96,13 @@ class conta_bancaria: # evitar
       "Um erro de sintaxe comum em Python."
     ],
     correct: 1,
-    explanation: "Exato! Uma classe é um molde. A partir dela criamos quantos objetos (instâncias) quisermos."
+    explanation: "Exato! Uma classe é um molde. A partir dela criamos quantos objetos (instâncias) quisermos.",
+    wrong_explanations: [
+      "Isso descreve uma instância (objeto), não uma classe. A classe é o molde; o objeto é o produto concreto criado a partir dela.",
+      "",
+      "Bibliotecas são coleções de código externo que você importa. Classes são estruturas da própria linguagem para definir tipos de objetos.",
+      "`class` é uma palavra reservada válida do Python para declarar uma classe — o oposto de um erro de sintaxe."
+    ]
   },
   has_interativo: false
 };

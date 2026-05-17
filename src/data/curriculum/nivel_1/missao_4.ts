@@ -95,7 +95,13 @@ Na maioria dos casos você usará **atributos de instância** — cada objeto co
       "Parâmetros obrigatórios passados na criação da classe."
     ],
     correct: 1,
-    explanation: "Correto! Atributos de instância são definidos com `self.nome = valor` dentro do `__init__`. Cada objeto tem os seus próprios — mudar um não afeta os outros."
+    explanation: "Correto! Atributos de instância são definidos com `self.nome = valor` dentro do `__init__`. Cada objeto tem os seus próprios — mudar um não afeta os outros.",
+    wrong_explanations: [
+      "Isso descreve atributos de classe (declarados fora do `__init__`). Atributos de instância são definidos com `self` dentro do `__init__` e pertencem exclusivamente a cada objeto.",
+      "",
+      "Métodos são comportamentos (funções da classe), não dados. Atributos guardam informações; métodos executam ações.",
+      "Os parâmetros são recebidos pelo `__init__`, mas os atributos são os valores atribuídos com `self.nome = valor` — e podem ter padrão, não sendo sempre obrigatórios."
+    ]
   },
   has_interativo: false
 };

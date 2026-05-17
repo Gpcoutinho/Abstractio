@@ -3,6 +3,7 @@ export interface Exercise {
   options: string[];
   correct: number;
   explanation: string;
+  wrong_explanations?: string[];
 }
 
 export interface SlideCardData {

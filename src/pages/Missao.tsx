@@ -250,10 +250,10 @@ const Missao: React.FC = () => {
                 {missao.exercise.options.map((opcao, i) => {
                   let estilo = "border-borderDark";
                   if (respondida) {
-                    if (i === missao.exercise!.correct)
-                      estilo = "border-success bg-success/10";
-                    else if (i === selecionada)
-                      estilo = "border-danger bg-danger/10";
+                    if (i === selecionada)
+                      estilo = acertou
+                        ? "border-success bg-success/10"
+                        : "border-danger bg-danger/10";
                   } else if (i === selecionada) {
                     estilo = "border-accent bg-accent/10";
                   }
@@ -289,7 +289,9 @@ const Missao: React.FC = () => {
                     {acertou ? "✓ Correto!" : "✗ Não foi dessa vez."}
                   </p>
                   <p className="text-textSecondary text-sm">
-                    {missao.exercise.explanation}
+                    {acertou
+                      ? missao.exercise.explanation
+                      : (selecionada !== null && missao.exercise.wrong_explanations?.[selecionada]) || missao.exercise.explanation}
                   </p>
                 </div>
               )}

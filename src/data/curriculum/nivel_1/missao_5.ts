@@ -103,7 +103,13 @@ ${diagramaClasseMetodo}
       "Para indicar que o método é público e acessível externamente."
     ],
     correct: 1,
-    explanation: "Correto! `self` é uma referência à instância. Sem ele, o método não saberia qual objeto está manipulando."
+    explanation: "Correto! `self` é uma referência à instância. Sem ele, o método não saberia qual objeto está manipulando.",
+    wrong_explanations: [
+      "`self` não é opcional. Sem ele, o Python não passa a instância ao método automaticamente, causando `TypeError` ao tentar acessar qualquer atributo do objeto.",
+      "",
+      "Funções comuns em Python podem ter zero parâmetros. O `self` é específico de métodos de instância, para que eles saibam em qual objeto estão operando.",
+      "Visibilidade em Python é controlada por prefixos de nome (`_` ou `__`), não pelo `self`. O `self` serve para o método referenciar o objeto que o chamou."
+    ]
   },
   has_interativo: false
 };

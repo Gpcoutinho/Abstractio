@@ -97,7 +97,13 @@ print(caneta)  # Caneta — R$2.50 (100 em estoque)
       "O objeto é criado, mas seus atributos ficam como `None` até serem definidos."
     ],
     correct: 1,
-    explanation: "Correto! `__init__` é chamado automaticamente pelo Python no momento da criação do objeto. Você não precisa invocá-lo."
+    explanation: "Correto! `__init__` é chamado automaticamente pelo Python no momento da criação do objeto. Você não precisa invocá-lo.",
+    wrong_explanations: [
+      "`__init__` é chamado automaticamente pelo Python ao criar o objeto. Não existe um método `p.init()` — e você nunca precisa invocá-lo manualmente em uso normal.",
+      "",
+      "Não há erro. O Python chama `__init__` implicitamente durante a criação do objeto. A chamada explícita só ocorre em casos especiais, como `super().__init__()` em herança.",
+      "Os atributos são definidos durante a criação, dentro do `__init__`. Eles já existem com os valores corretos no instante em que o objeto fica disponível."
+    ]
   },
   has_interativo: false
 };

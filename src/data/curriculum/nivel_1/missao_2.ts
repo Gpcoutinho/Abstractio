@@ -108,7 +108,13 @@ for carro in frota:
       "`Gato.gato1()` e `Gato.gato2()`"
     ],
     correct: 1,
-    explanation: "Correto! Em Python, instanciamos objetos chamando a classe como função: `Gato()`. Cada chamada cria uma instância independente."
+    explanation: "Correto! Em Python, instanciamos objetos chamando a classe como função: `Gato()`. Cada chamada cria uma instância independente.",
+    wrong_explanations: [
+      "Sem parênteses, `Gato` é apenas uma referência à classe, não cria nenhum objeto. Para instanciar, é preciso chamar `Gato()` com parênteses.",
+      "",
+      "A palavra-chave `new` existe em Java e C#, mas não em Python. Em Python, basta chamar a classe com parênteses: `Gato()`.",
+      "Essa sintaxe tentaria chamar métodos chamados `gato1` e `gato2` dentro da classe, que não existem. Para criar objetos, chamamos a própria classe: `Gato()`."
+    ]
   },
   has_interativo: false
 };

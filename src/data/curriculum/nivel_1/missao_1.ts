@@ -140,7 +140,13 @@ Por esses motivos, te incentivamos a continuar a trilha! Cada missão vai refor�
       "Um método exclusivo para criar interfaces gráficas."
     ],
     correct: 1,
-    explanation: "POO é um paradigma que organiza o código em objetos com atributos (dados) e métodos (comportamentos)."
+    explanation: "POO é um paradigma que organiza o código em objetos com atributos (dados) e métodos (comportamentos).",
+    wrong_explanations: [
+      "Isso descreve o paradigma procedural, não a POO. Na procedural, o código é uma sequência de passos; na POO, o foco é em objetos que agrupam dados e comportamentos.",
+      "",
+      "POO é um paradigma de programação, não uma linguagem. Python e Java são linguagens que suportam POO, mas o paradigma existe independente delas.",
+      "POO não é exclusiva de interfaces gráficas — ela é usada em qualquer tipo de software: sistemas web, jogos, análise de dados, etc."
+    ]
   },
   cards: [
     { title: "Pensamento Procedural", slides: [slide1, slide2, slide3] },

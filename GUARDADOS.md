@@ -23,6 +23,13 @@ Ideias boas que ficaram de fora de algum lugar por timing, complexidade ou simpl
 
 ---
 
+## `wrong_explanations` nos exercícios dos Níveis 2, 3 e 4
+
+**Origem:** implementado no Nível 1 em maio/2026
+**Motivo guardado:** campo `wrong_explanations?: string[]` adicionado ao tipo `Exercise` e à UI (`Missao.tsx`). Já funciona no Nível 1. Falta preencher o mesmo campo em todas as missões dos níveis 2, 3 e 4 — uma string por alternativa errada, na mesma ordem das `options`, deixando `""` na posição da correta.
+
+---
+
 ## Mascote animado na seção "Conheça o Sr. Polvonilson" (Missão 1-0)
 
 **Origem:** Missão 1-0 — "Antes de começar"
