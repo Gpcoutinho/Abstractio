@@ -3,7 +3,7 @@ import type { Missao } from '../types';
 const missao: Missao = {
   id: "4-6",
   title: "Design Patterns",
-  icon: "🗺️",
+  icon: "PiMapTrifold",
   theory: `
 ## Design Patterns
 

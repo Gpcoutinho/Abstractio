@@ -85,7 +85,7 @@ const slideOO3 = slideHtml(`${p1}${p2}${p3}`, codeDicts(ooFields.slice(0, 3)), '
 const missao: Missao = {
   id: "1-1",
   title: "O que é POO?",
-  icon: "🧩",
+  icon: "PiPuzzlePiece",
   theory: `
 E aí, vamos dar o primeiro passo na nossa trilha?
 

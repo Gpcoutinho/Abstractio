@@ -3,7 +3,7 @@ import type { Missao } from '../types';
 const missao: Missao = {
   id: "2-6",
   title: "Resumo",
-  icon: "📋",
+  icon: "PiClipboard",
   theory: `
 ## Resumo — Os 4 Pilares
 

@@ -3,7 +3,7 @@ import type { Missao } from '../types';
 const missao: Missao = {
   id: "2-5",
   title: "Polimorfismo",
-  icon: "🎭",
+  icon: "PiMaskHappy",
   theory: `
 ## Polimorfismo
 

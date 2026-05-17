@@ -3,7 +3,7 @@ import type { Missao } from "../types";
 const missao: Missao = {
   id: "1-0",
   title: "Antes de começar",
-  icon: "🌊",
+  icon: "PiWaveform",
   theory: `
 ## Mas pra quê estudar isso?
 

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
 import Footer from '../components/Footer';
+import MissionIcon from '../components/MissionIcon';
 import PageWrapper from '../components/PageWrapper';
 
 const Conquistas: React.FC = () => {
@@ -11,7 +12,8 @@ const Conquistas: React.FC = () => {
 
   return (
     <>
-      <PageWrapper className="max-w-5xl pb-16">
+    <div className="min-h-screen flex flex-col">
+      <PageWrapper className="flex-grow max-w-5xl pb-16">
 
         {/* Cabeçalho */}
         <div className="mb-10">
@@ -34,7 +36,7 @@ const Conquistas: React.FC = () => {
                   return (
                     <Link
                       key={missao.id}
-                      to={`/missao/${nivel.id}/${missaoIdx}`}
+                      to={`/missao/${nivel.id}/${missaoIdx + 1}`}
                       title={missao.title}
                       className={`flex flex-col items-center gap-2 w-24 p-3 rounded-xl border transition-all ${
                         earned
@@ -42,7 +44,7 @@ const Conquistas: React.FC = () => {
                           : 'border-borderDark bg-bgSecondary opacity-35 grayscale hover:opacity-50'
                       }`}
                     >
-                      <span className="text-3xl leading-none">{missao.icon}</span>
+                      <MissionIcon iconName={missao.icon} completed={earned} className="w-8 h-8" />
                       <span className="text-xs text-center text-textSecondary leading-tight line-clamp-2">
                         {missao.title}
                       </span>
@@ -59,6 +61,7 @@ const Conquistas: React.FC = () => {
 
       </PageWrapper>
       <Footer />
+    </div>
     </>
   );
 };

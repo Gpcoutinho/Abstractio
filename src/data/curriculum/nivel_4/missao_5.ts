@@ -3,7 +3,7 @@ import type { Missao } from '../types';
 const missao: Missao = {
   id: "4-5",
   title: "Generics",
-  icon: "🧪",
+  icon: "PiFlask",
   theory: `
 ## Generics
 

@@ -3,7 +3,7 @@ import type { Missao } from '../types';
 const missao: Missao = {
   id: "1-6",
   title: "Construtor",
-  icon: "🏗️",
+  icon: "PiBuilding",
   theory: `
 ## O momento do nascimento
 

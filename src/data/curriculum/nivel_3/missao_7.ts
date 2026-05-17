@@ -3,7 +3,7 @@ import type { Missao } from '../types';
 const missao: Missao = {
   id: "3-7",
   title: "Agregação e Composição",
-  icon: "🧱",
+  icon: "PiFactory",
   theory: `
 ## Dois tipos de "tem um"
 

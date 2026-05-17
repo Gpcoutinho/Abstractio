@@ -1,0 +1,98 @@
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .pb-wrap {
+    @apply bg-bgSecondary border border-borderDark rounded-lg p-4 py-2;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    cursor: grab;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  .pb-wrap.dragging {
+    cursor: grabbing;
+    user-select: none;
+  }
+
+  .pb-wrap.no-scroll {
+    cursor: default;
+  }
+
+  .pb-wrap.no-scroll.dragging {
+    cursor: default;
+  }
+
+  .pb-header {
+    @apply flex flex-row sm:flex-row items-start sm:items-center justify-between w-full gap-1 mb-2 text-xs;
+  }
+
+  .pb-title {
+    @apply text-textPrimary font-semibold;
+  }
+
+  .pb-percent {
+    @apply text-textSecondary;
+  }
+
+  .pb-track {
+    @apply flex items-center gap-0.5 overflow-x-auto;
+    min-height: 2rem;
+    width: 100%;
+    padding: 0 10px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .pb-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pb-separator {
+    @apply flex flex-col items-center gap-0.5 shrink-0;
+  }
+
+  .pb-sep-label {
+    @apply text-[0.6rem] uppercase tracking-[0.15em] text-textSecondary font-semibold whitespace-nowrap;
+  }
+
+  .pb-sep-line {
+    @apply w-px h-4 bg-borderDark;
+  }
+
+  .pb-connector {
+    @apply h-0.5 rounded-full bg-bgPrimary shrink-0;
+    min-width: 0.75rem;
+  }
+
+  .pb-connector.active {
+    @apply h-0.5 rounded-full bg-accent shrink-0;
+    min-width: 0.75rem;
+  }
+
+  .pb-connector.done {
+    @apply bg-success;
+  }
+
+  .pb-dot {
+    @apply w-3 h-3 rounded-full border border-borderDark bg-bgPrimary shrink-0 flex items-center justify-center;
+  }
+
+  .pb-dot.done {
+    @apply bg-success border-success;
+  }
+
+  .pb-dot.active {
+    @apply border-accent;
+  }
+
+  .pb-dot.active .dot-inner {
+    @apply w-1 h-1 rounded-full bg-accent;
+  }
+
+  .dot-inner {
+    @apply rounded-full;
+  }
+}

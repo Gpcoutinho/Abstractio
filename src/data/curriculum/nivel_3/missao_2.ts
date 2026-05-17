@@ -3,7 +3,7 @@ import type { Missao } from '../types';
 const missao: Missao = {
   id: "3-2",
   title: "Sobrescrita",
-  icon: "✏️",
+  icon: "PiPencil",
   theory: `
 ## Sobrescrita (Override)
 

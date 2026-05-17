@@ -3,7 +3,7 @@ import type { Missao } from '../types';
 const missao: Missao = {
   id: "3-1",
   title: "Introdução ao nível",
-  icon: "🏙️",
+  icon: "PiCity",
   theory: `
 ## A sociedade dos objetos — Mecânica e Relações
 

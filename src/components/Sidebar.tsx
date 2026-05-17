@@ -8,15 +8,16 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { useProgress } from "../hooks/useProgress";
-import imgPolvinho from "../assets/avatares/polvinho.png";
-import imgExplorador from "../assets/avatares/explorador.png";
-import imgMestreDosMaras from "../assets/avatares/mestredosmares.png";
+import imgPolvinho from "../assets/avatares/avatar-polvinho.png";
+import imgExplorador from "../assets/avatares/avatar-explorador.png";
+import imgMestreDosMaras from "../assets/avatares/avatar-mestredosmares.png";
+import imgKraken from "../assets/avatares/avatar-kraken.png";
 
 const AVATAR_SRCS: (string | null)[] = [
   imgPolvinho,
   imgExplorador,
   imgMestreDosMaras,
-  null,
+  imgKraken,
 ];
 
 const NAV_ITEMS = [
@@ -81,7 +82,14 @@ const Sidebar: React.FC = () => {
         } md:translate-x-0`}
       >
         {/* Logo */}
-        <div className="flex items-center gap-3 px-5 h-16 border-b border-borderDark flex-shrink-0">
+        <div className="flex items-center justify-center gap-3 h-16 border-b border-borderDark flex-shrink-0">
+          <button
+            onClick={() => setOpen(false)}
+            className="md:hidden ml-1 rounded-md hover:bg-bgPrimary/30"
+            aria-label="Fechar menu"
+          >
+            <XMarkIcon className="w-5 h-5 text-textPrimary" />
+          </button>
           <img
             src="/isotipo.png"
             alt="Isotipo"
@@ -90,13 +98,6 @@ const Sidebar: React.FC = () => {
           <span className="text-xl font-bold tracking-tight text-textPrimary">
             Abstractio
           </span>
-          <button
-            onClick={() => setOpen(false)}
-            className="md:hidden ml-auto p-1 rounded-md hover:bg-bgPrimary/30"
-            aria-label="Fechar menu"
-          >
-            <XMarkIcon className="w-5 h-5 text-textPrimary" />
-          </button>
         </div>
 
         {/* Avatar + info */}
@@ -104,7 +105,7 @@ const Sidebar: React.FC = () => {
           <Link
             to="/perfil"
             onClick={() => setOpen(false)}
-            className="w-28 h-28 rounded-full ring-2 ring-accent/40 overflow-hidden hover:ring-accent transition-all shadow-lg"
+            className="w-28 h-28 rounded-full ring-2 ring-accent/40 overflow-hidden hover:ring-accent transition-all shadow-lg bg-bgPrimary"
             title="Perfil"
           >
             {avatarSrc ? (
