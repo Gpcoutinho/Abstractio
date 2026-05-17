@@ -31,9 +31,19 @@ module.exports = {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%':      { transform: 'translateY(-8px)' },
         },
+        'pop-in': {
+          '0%':   { opacity: '0', transform: 'scale(0.82) translateY(12px)' },
+          '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+        },
+        'fade-in': {
+          '0%':   { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
       },
       animation: {
-        float: 'float 6s ease-in-out infinite',
+        float:    'float 6s ease-in-out infinite',
+        'pop-in': 'pop-in 0.28s cubic-bezier(0.34,1.56,0.64,1) forwards',
+        'fade-in':'fade-in 0.2s ease-out forwards',
       },
       typography: {
         DEFAULT: {

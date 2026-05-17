@@ -37,7 +37,8 @@ const Missao: React.FC = () => {
   const [respondida, setRespondida] = useState(false);
   const [tentativas, setTentativas] = useState(0);
   const [conchasGanhasAgora, setConchasGanhasAgora] = useState<number | null>(null);
-  
+  const [showCelebration, setShowCelebration] = useState(false);
+
   // Estado do Header Retrátil
   const [showBar, setShowBar] = useState(true);
 
@@ -46,6 +47,7 @@ const Missao: React.FC = () => {
     setRespondida(false);
     setTentativas(0);
     setConchasGanhasAgora(null);
+    setShowCelebration(false);
   }, [nivelIdx, missaoIdx]);
 
   // Lógica de Scroll com Histerese (Zona Morta)
@@ -109,6 +111,7 @@ const Missao: React.FC = () => {
         setConchasGanhasAgora(conchasValor(tentativas));
       }
       completarMissao(missao.id, novasTentativas);
+      setShowCelebration(true);
     }
   };
 
@@ -395,6 +398,62 @@ const Missao: React.FC = () => {
           )}
         </div>
       </div>
+
+      {/* Modal comemorativo */}
+      {showCelebration && missao && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bgPrimary/75 backdrop-blur-sm animate-fade-in"
+          onClick={() => setShowCelebration(false)}
+        >
+          <div
+            className="bg-bgSecondary border border-borderDark rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl animate-pop-in"
+            onClick={e => e.stopPropagation()}
+          >
+            <h2 className="text-2xl font-bold text-textPrimary mb-1">Missão Concluída!</h2>
+            <p className="text-textSecondary text-sm mb-5">{missao.title}</p>
+
+            <div className="flex justify-center mb-5">
+              <div className="w-20 h-20 rounded-full bg-success/10 border-2 border-success flex items-center justify-center">
+                <MissionIcon iconName={missao.icon} completed={true} className="w-10 h-10" />
+              </div>
+            </div>
+
+            <Link
+              to="/conquistas"
+              onClick={() => setShowCelebration(false)}
+              className="inline-flex items-center gap-1 text-sm text-textSecondary hover:text-textPrimary transition-colors mb-5"
+            >
+              Ver conquistas
+              <ArrowRightIcon className="w-3.5 h-3.5" />
+            </Link>
+
+            {conchasGanhasAgora !== null && (
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent/10 border border-accent/30 text-accent font-semibold text-sm mb-6">
+                🐚 +{conchasGanhasAgora} conchas
+              </div>
+            )}
+
+            <div className="mt-2 flex flex-col gap-3">
+              {proximaMissao ? (
+                <Link
+                  to={proximaMissao}
+                  onClick={() => setShowCelebration(false)}
+                  className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-lg bg-accent text-bgPrimary font-bold hover:opacity-90 transition-opacity"
+                >
+                  Seguir para a próxima missão
+                  <ArrowRightIcon className="w-4 h-4" />
+                </Link>
+              ) : null}
+              <button
+                onClick={() => setShowCelebration(false)}
+                className="text-sm text-textSecondary hover:text-textPrimary transition-colors"
+              >
+                Ficar nesta missão
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
