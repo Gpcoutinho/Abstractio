@@ -12,6 +12,7 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { niveis } from "../data/curriculum";
 import { useProgress } from "../hooks/useProgress";
+import { useCelebration } from "../hooks/useCelebration";
 import PageWrapper from "../components/PageWrapper";
 import CodeBlock from "../components/CodeBlock";
 import MissionIcon from "../components/MissionIcon";
@@ -32,6 +33,7 @@ const Missao: React.FC = () => {
     missaoIdx: string;
   }>();
   const { completarMissao, desmarcarMissao, isMissaoConcluida, completed, jaGanhouConchas } = useProgress();
+  const { celebrate } = useCelebration();
 
   const [selecionada, setSelecionada] = useState<number | null>(null);
   const [respondida, setRespondida] = useState(false);
@@ -112,6 +114,7 @@ const Missao: React.FC = () => {
       }
       completarMissao(missao.id, novasTentativas);
       setShowCelebration(true);
+      celebrate();
     }
   };
 
