@@ -28,7 +28,7 @@ const NAV_ITEMS = [
 
 const Sidebar: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const { pontuacao, nivelDisplay, nomeDisplay, avatarIdx } = useProgress();
+  const { conchas, nivelDisplay, nomeDisplay, avatarIdx } = useProgress();
   const avatarSrc = AVATAR_SRCS[avatarIdx] ?? AVATAR_SRCS[0];
 
   return (
@@ -127,7 +127,7 @@ const Sidebar: React.FC = () => {
             {nivelDisplay}
           </p>
           <span className="mt-1 text-sm text-accent font-semibold">
-            {pontuacao} pts
+            {conchas} conchas
           </span>
         </div>
 

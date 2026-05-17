@@ -31,10 +31,12 @@ const Missao: React.FC = () => {
     nivelIdx: string;
     missaoIdx: string;
   }>();
-  const { completarMissao, desmarcarMissao, isMissaoConcluida, completed } = useProgress();
+  const { completarMissao, desmarcarMissao, isMissaoConcluida, completed, jaGanhouConchas } = useProgress();
 
   const [selecionada, setSelecionada] = useState<number | null>(null);
   const [respondida, setRespondida] = useState(false);
+  const [tentativas, setTentativas] = useState(0);
+  const [conchasGanhasAgora, setConchasGanhasAgora] = useState<number | null>(null);
   
   // Estado do Header Retrátil
   const [showBar, setShowBar] = useState(true);
@@ -42,6 +44,8 @@ const Missao: React.FC = () => {
   useEffect(() => {
     setSelecionada(null);
     setRespondida(false);
+    setTentativas(0);
+    setConchasGanhasAgora(null);
   }, [nivelIdx, missaoIdx]);
 
   // Lógica de Scroll com Histerese (Zona Morta)
@@ -93,9 +97,19 @@ const Missao: React.FC = () => {
   const jaConcluida = isMissaoConcluida(missao.id);
   const acertou = missao.exercise ? selecionada === missao.exercise.correct : false;
 
+  const conchasValor = (t: number) => t <= 0 ? 15 : t === 1 ? 10 : 5;
+
   const handleSubmit = () => {
     if (selecionada === null) return;
+    const novasTentativas = tentativas + 1;
+    setTentativas(novasTentativas);
     setRespondida(true);
+    if (selecionada === missao.exercise!.correct) {
+      if (!jaGanhouConchas(missao.id)) {
+        setConchasGanhasAgora(conchasValor(tentativas));
+      }
+      completarMissao(missao.id, novasTentativas);
+    }
   };
 
   return (
@@ -250,6 +264,11 @@ const Missao: React.FC = () => {
             <hr className="border-borderDark my-10" />
             <section className="bg-bgSecondary border border-borderDark rounded-xl p-6">
               <h2 className="text-2xl font-bold text-textPrimary mb-4">Exercício</h2>
+              {jaGanhouConchas(missao.id) && !respondida && (
+                <p className="text-xs text-textSecondary bg-bgPrimary border border-borderDark rounded-lg px-3 py-2 mb-4">
+                  Você já completou este exercício. Tentar novamente não gera novas conchas.
+                </p>
+              )}
               <p className="text-textPrimary mb-5">{missao.exercise.question}</p>
               <fieldset className="space-y-3">
                 <legend className="sr-only">Opções de resposta</legend>
@@ -286,6 +305,12 @@ const Missao: React.FC = () => {
                       ? missao.exercise.explanation
                       : (selecionada !== null && missao.exercise.wrong_explanations?.[selecionada]) || missao.exercise.explanation}
                   </p>
+                  {acertou && conchasGanhasAgora !== null && (
+                    <p className="text-success text-xs font-medium mt-2">🐚 Você ganhou {conchasGanhasAgora} conchas!</p>
+                  )}
+                  {!acertou && !jaGanhouConchas(missao.id) && (
+                    <p className="text-danger/70 text-xs mt-2">🐚 Próxima tentativa vale {tentativas === 1 ? 10 : 5} conchas</p>
+                  )}
                 </div>
               )}
               <div className="mt-5 flex items-center gap-3">
@@ -294,9 +319,17 @@ const Missao: React.FC = () => {
                     Responder
                   </button>
                 )}
+                {!respondida && !jaGanhouConchas(missao.id) && (
+                  <span className="text-xs text-textSecondary">🐚 Vale {conchasValor(tentativas)} conchas</span>
+                )}
                 {respondida && !acertou && (
                   <button onClick={() => { setSelecionada(null); setRespondida(false); }} className="px-5 py-2 rounded-lg border border-borderDark text-textSecondary hover:border-accent hover:text-textPrimary transition-colors text-sm">
                     Tentar novamente
+                  </button>
+                )}
+                {respondida && acertou && (
+                  <button onClick={() => { setSelecionada(null); setRespondida(false); setTentativas(0); setConchasGanhasAgora(null); }} className="text-xs text-textSecondary hover:text-textPrimary transition-colors">
+                    Refazer
                   </button>
                 )}
               </div>
@@ -315,11 +348,50 @@ const Missao: React.FC = () => {
                 desmarcar
               </button>
             </>
-          ) : (
+          ) : !missao.exercise ? (
             <button onClick={() => completarMissao(missao.id)} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-colors">
               <CheckCircleIcon className="w-5 h-5" />
               Marcar como concluída
             </button>
+          ) : null}
+        </div>
+
+        {/* Navegação de rodapé */}
+        <div className="mt-8 pt-6 border-t border-borderDark flex items-center justify-between">
+          <div className="flex items-center gap-5">
+            <Link
+              to="/trilha"
+              className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+            >
+              <ArrowLeftIcon className="w-4 h-4" />
+              Voltar à trilha
+            </Link>
+            {missaoAnterior && (
+              <Link
+                to={missaoAnterior}
+                className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+              >
+                <ArrowLeftIcon className="w-4 h-4" />
+                Missão anterior
+              </Link>
+            )}
+          </div>
+          {proximaMissao ? (
+            <Link
+              to={proximaMissao}
+              className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+            >
+              Próxima missão
+              <ArrowRightIcon className="w-4 h-4" />
+            </Link>
+          ) : (
+            <Link
+              to="/conquistas"
+              className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+            >
+              Ver conquistas
+              <ArrowRightIcon className="w-4 h-4" />
+            </Link>
           )}
         </div>
       </div>

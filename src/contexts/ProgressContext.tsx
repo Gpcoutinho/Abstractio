@@ -8,7 +8,8 @@ export type Genero = 'masculino' | 'feminino' | 'outro' | '';
 interface ProgressState {
   completed: string[];
   niveis_concluidos: number[];
-  pontuacao: number;
+  conchas: number;
+  conchas_por_missao: Record<string, number>;
   nome: string;
   genero: Genero;
   avatarIdx: number;
@@ -17,7 +18,8 @@ interface ProgressState {
 const DEFAULT_STATE: ProgressState = {
   completed: [],
   niveis_concluidos: [],
-  pontuacao: 0,
+  conchas: 0,
+  conchas_por_missao: {},
   nome: '',
   genero: '',
   avatarIdx: 0,
@@ -42,11 +44,12 @@ function calcNiveisConcluidos(completed: string[]): number[] {
 export interface ProgressContextValue {
   completed: string[];
   niveis_concluidos: number[];
-  pontuacao: number;
+  conchas: number;
+  conchas_por_missao: Record<string, number>;
   nome: string;
   genero: Genero;
   avatarIdx: number;
-  completarMissao: (missaoId: string) => void;
+  completarMissao: (missaoId: string, tentativas?: number) => void;
   desmarcarMissao: (missaoId: string) => void;
   setNome: (nome: string) => void;
   setGenero: (genero: Genero) => void;
@@ -66,15 +69,24 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   }, [state]);
 
-  const completarMissao = useCallback((missaoId: string) => {
+  const completarMissao = useCallback((missaoId: string, tentativas: number = 1) => {
     setState(prev => {
       if (prev.completed.includes(missaoId)) return prev;
       const completed = [...prev.completed, missaoId];
+      const niveis_concluidos = calcNiveisConcluidos(completed);
+
+      // Já ganhou conchas nessa missão antes (desmarcou e refez) — não ganha de novo
+      if (prev.conchas_por_missao[missaoId] !== undefined) {
+        return { ...prev, completed, niveis_concluidos };
+      }
+
+      const ganhas = tentativas <= 1 ? 15 : tentativas === 2 ? 10 : 5;
       return {
         ...prev,
         completed,
-        niveis_concluidos: calcNiveisConcluidos(completed),
-        pontuacao: prev.pontuacao + 15,
+        niveis_concluidos,
+        conchas: prev.conchas + ganhas,
+        conchas_por_missao: { ...prev.conchas_por_missao, [missaoId]: ganhas },
       };
     });
   }, []);
@@ -87,7 +99,7 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         ...prev,
         completed,
         niveis_concluidos: calcNiveisConcluidos(completed),
-        pontuacao: Math.max(0, prev.pontuacao - 15),
+        // conchas e conchas_por_missao são preservados
       };
     });
   }, []);

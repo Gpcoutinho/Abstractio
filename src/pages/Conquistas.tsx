@@ -7,7 +7,7 @@ import MissionIcon from '../components/MissionIcon';
 import PageWrapper from '../components/PageWrapper';
 
 const Conquistas: React.FC = () => {
-  const { completed, pontuacao } = useProgress();
+  const { completed, conchas, conchas_por_missao } = useProgress();
   const totalMissoes = niveis.reduce((acc, n) => acc + n.missoes.length, 0);
 
   return (
@@ -19,7 +19,7 @@ const Conquistas: React.FC = () => {
         <div className="mb-10">
           <h1 className="text-3xl font-bold text-textPrimary mb-1">Conquistas</h1>
           <p className="text-textSecondary">
-            {completed.length} de {totalMissoes} troféus · {pontuacao} pts
+            {completed.length} de {totalMissoes} troféus · {conchas} conchas
           </p>
         </div>
 
@@ -48,8 +48,10 @@ const Conquistas: React.FC = () => {
                       <span className="text-xs text-center text-textSecondary leading-tight line-clamp-2">
                         {missao.title}
                       </span>
-                      {earned && (
-                        <span className="text-xs text-accent font-semibold">15 pts</span>
+                      {conchas_por_missao[missao.id] !== undefined && (
+                        <span className="text-xs text-accent font-semibold">
+                          {conchas_por_missao[missao.id]} conchas
+                        </span>
                       )}
                     </Link>
                   );

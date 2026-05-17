@@ -31,7 +31,7 @@ const GENERO_OPTIONS: { value: Genero; label: string }[] = [
 ];
 
 const Perfil: React.FC = () => {
-  const { nome, genero, pontuacao, completed, nivelDisplay, avatarIdx, setNome, setGenero, setAvatarIdx, niveis_concluidos } = useProgress();
+  const { nome, genero, conchas, completed, nivelDisplay, avatarIdx, setNome, setGenero, setAvatarIdx, niveis_concluidos } = useProgress();
   const [nomeInput, setNomeInput] = useState(nome);
   const [salvo, setSalvo] = useState(false);
 
@@ -56,8 +56,8 @@ const Perfil: React.FC = () => {
           </h2>
           <div className="grid grid-cols-3 gap-4 text-center">
             <div>
-              <p className="text-2xl font-bold text-accent">{pontuacao}</p>
-              <p className="text-xs text-textSecondary mt-1">pontos</p>
+              <p className="text-2xl font-bold text-accent">{conchas}</p>
+              <p className="text-xs text-textSecondary mt-1">conchas</p>
             </div>
             <div>
               <p className="text-2xl font-bold text-textPrimary">{completed.length}</p>

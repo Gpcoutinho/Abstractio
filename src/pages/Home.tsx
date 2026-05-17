@@ -37,7 +37,7 @@ const FEATURE_CARDS = [
 ];
 
 const Home: React.FC = () => {
-  const { progressoGeral, pontuacao } = useProgress();
+  const { progressoGeral, conchas } = useProgress();
 
   return (
     <>
@@ -50,7 +50,7 @@ const Home: React.FC = () => {
               <h2 className="text-3xl font-bold text-textPrimary mb-2">Minha trilha</h2>
               <p className="text-textSecondary mb-10">
                 {progressoGeral > 0
-                  ? `${progressoGeral}% concluído · ${pontuacao} pts acumulados`
+                  ? `${progressoGeral}% concluído · ${conchas} conchas`
                   : 'Escolha por onde começar.'}
               </p>
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
