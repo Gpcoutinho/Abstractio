@@ -6,11 +6,12 @@ import { useProgress } from '../hooks/useProgress';
 import Footer from '../components/Footer';
 import MissionIcon from '../components/MissionIcon';
 import PageWrapper from '../components/PageWrapper';
+import ShellIcon from '../components/ShellIcon';
 import ProgressBar from '../components/ProgressBar';
 const totalMissoes = niveis.reduce((acc, n) => acc + n.missoes.length, 0);
 
 const Trilha: React.FC = () => {
-  const { completed } = useProgress();
+  const { completed, conchas_por_missao } = useProgress();
 
   return (
     <>
@@ -73,10 +74,9 @@ const Trilha: React.FC = () => {
                             {nivel.id === 1 ? missaoIdx : missaoIdx + 1} —{" "}
                             {missao.title}
                           </span>
-                          <span
-                            className={`text-xs ${concluida ? "text-success" : "text-textSecondary"}`}
-                          >
-                            {concluida ? "✓ 15 pts" : "+15 pts"}
+                          <span className={`text-xs flex items-center gap-1 ${concluida ? "text-success" : "text-textSecondary"}`}>
+                            {concluida ? `✓ ${conchas_por_missao[missao.id] ?? 15}` : "+15"}
+                            <ShellIcon className="w-3.5 h-3.5" />
                           </span>
                           {concluida ? (
                             <CheckCircleSolid className="w-5 h-5 text-success flex-shrink-0" />

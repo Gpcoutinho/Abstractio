@@ -8,6 +8,7 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { useProgress } from "../hooks/useProgress";
+import ShellIcon from "./ShellIcon";
 import imgPolvinho from "../assets/avatares/avatar-polvinho.png";
 import imgExplorador from "../assets/avatares/avatar-explorador.png";
 import imgMestreDosMaras from "../assets/avatares/avatar-mestredosmares.png";
@@ -126,8 +127,9 @@ const Sidebar: React.FC = () => {
           <p className="text-xs text-textSecondary leading-tight text-center">
             {nivelDisplay}
           </p>
-          <span className="mt-1 text-sm text-accent font-semibold">
-            {conchas} conchas
+          <span className="mt-1 text-sm text-accent font-semibold flex items-center gap-1">
+            <ShellIcon className="w-4 h-4" style={{ color: '#22d3ee' }} />
+            {conchas}
           </span>
         </div>
 
