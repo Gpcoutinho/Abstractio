@@ -21,12 +21,13 @@ function emblemFontSize(text: string): string {
 interface HexBadgeProps {
   earned: boolean;
   emblem?: string;
+  interactive?: boolean;
   children: React.ReactNode;
   className?: string;
 }
 
-const HexBadge: React.FC<HexBadgeProps> = ({ earned, emblem, children, className }) => (
-  <div className={`relative group ${className ?? ''}`}>
+const HexBadge: React.FC<HexBadgeProps> = ({ earned, emblem, interactive = true, children, className }) => (
+  <div className={`relative ${interactive ? 'group' : ''} ${className ?? ''}`}>
     {/* SVG mantém proporção natural do hex regular (87:100) sem distorção */}
     <svg viewBox="0 0 87 100" className="block w-full" aria-hidden="true">
       {/* Borda externa */}
@@ -34,7 +35,7 @@ const HexBadge: React.FC<HexBadgeProps> = ({ earned, emblem, children, className
         d={PATH}
         className={`transition-colors ${
           earned
-            ? 'fill-[#A78BFA] group-hover:fill-[#06B6D4]'
+            ? `fill-[#A78BFA] ${interactive ? 'group-hover:fill-[#06B6D4]' : ''}`
             : 'fill-[#334155]'
         }`}
       />
