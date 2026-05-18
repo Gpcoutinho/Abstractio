@@ -7,7 +7,7 @@ import { useProgress } from '../hooks/useProgress';
 const STEPS = [
   { num: '01', title: 'Leia a teoria', desc: 'Cada missão começa com uma explicação clara do conceito.' },
   { num: '02', title: 'Resolva o exercício', desc: 'Teste seu entendimento com uma questão de múltipla escolha.' },
-  { num: '03', title: 'Ganhe o troféu', desc: 'Complete a missão e conquiste seu troféu na estante.' },
+  { num: '03', title: 'Ganhe o emblema', desc: 'Complete a missão e conquiste seu emblema na estante.' },
 ];
 
 const HeroCarousel: React.FC = () => {

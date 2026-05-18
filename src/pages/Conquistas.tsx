@@ -31,11 +31,11 @@ const Conquistas: React.FC = () => {
         <div className="mb-10">
           <h1 className="text-3xl font-bold text-textPrimary mb-1">Conquistas</h1>
           <p className="text-textSecondary">
-            {completed.length} de {totalMissoes} troféus · {conchas} conchas
+            {completed.length} de {totalMissoes} emblemas · {conchas} conchas
           </p>
         </div>
 
-        {/* Troféus por nível */}
+        {/* Emblemas por nível */}
         <div className="space-y-12">
           {niveis.map(nivel => (
             <section key={nivel.id}>

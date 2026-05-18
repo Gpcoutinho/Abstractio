@@ -15,7 +15,7 @@ const FEATURE_CARDS = [
   },
   {
     title: 'Conquistas',
-    description: 'Veja os troféus que você conquistou ao longo da trilha.',
+    description: 'Veja os emblemas que você conquistou ao longo da trilha.',
     to: '/conquistas',
     Icon: TrophyIcon,
     locked: false,

@@ -41,7 +41,7 @@ const Perfil: React.FC = () => {
     setTimeout(() => setSalvo(false), 2000);
   };
 
-  const trofeusConcluidos = completed.length;
+  const emblemasConcluidos = completed.length;
 
   return (
     <>
@@ -70,11 +70,11 @@ const Perfil: React.FC = () => {
           </div>
         </section>
 
-        {/* Troféus */}
+        {/* Emblemas */}
         <section className="bg-bgSecondary border border-borderDark rounded-xl p-6 mb-6">
           <div className="flex items-center justify-between mb-2">
             <h2 className="text-sm font-semibold text-textSecondary uppercase tracking-widest">
-              Troféus
+              Emblemas
             </h2>
             <Link to="/conquistas" className="text-xs text-accent hover:underline">
               Ver todos →
@@ -84,13 +84,13 @@ const Perfil: React.FC = () => {
             <TrophyIcon className="w-8 h-8 text-accent flex-shrink-0" />
             <div>
               <p className="text-textPrimary font-semibold">
-                {trofeusConcluidos} de {totalMissoes} troféus conquistados
+                {emblemasConcluidos} de {totalMissoes} emblemas conquistados
               </p>
               <div className="w-full h-1.5 bg-bgPrimary rounded-full mt-2 overflow-hidden">
                 <div
                   className="h-full rounded-full"
                   style={{
-                    width: `${Math.round((trofeusConcluidos / totalMissoes) * 100)}%`,
+                    width: `${Math.round((emblemasConcluidos / totalMissoes) * 100)}%`,
                     background: 'linear-gradient(90deg, #4F33A9, #8A4FFF)',
                   }}
                 />
