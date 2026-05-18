@@ -11,13 +11,21 @@ const PATH =
   "L5.2,78 Q0,75 0,69 " +
   "L0,31 Q0,25 5.2,22 Z";
 
+function emblemFontSize(text: string): string {
+  const len = text.length;
+  if (len <= 20) return 'text-[8px]';
+  if (len <= 28) return 'text-[7px]';
+  return 'text-[6px]';
+}
+
 interface HexBadgeProps {
   earned: boolean;
+  emblem?: string;
   children: React.ReactNode;
   className?: string;
 }
 
-const HexBadge: React.FC<HexBadgeProps> = ({ earned, children, className }) => (
+const HexBadge: React.FC<HexBadgeProps> = ({ earned, emblem, children, className }) => (
   <div className={`relative group ${className ?? ''}`}>
     {/* SVG mantém proporção natural do hex regular (87:100) sem distorção */}
     <svg viewBox="0 0 87 100" className="block w-full" aria-hidden="true">
@@ -39,6 +47,11 @@ const HexBadge: React.FC<HexBadgeProps> = ({ earned, children, className }) => (
     </svg>
     <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5">
       {children}
+      {emblem && (
+        <span className={`font-bold uppercase tracking-wide text-success/80 text-center leading-tight px-3 line-clamp-2 ${emblemFontSize(emblem)}`}>
+          {emblem}
+        </span>
+      )}
     </div>
   </div>
 );

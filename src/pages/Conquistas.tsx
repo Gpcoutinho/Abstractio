@@ -53,14 +53,10 @@ const Conquistas: React.FC = () => {
                       >
                         <HexBadge
                           earned={earned}
+                          emblem={missao.emblem}
                           className={earned ? '' : 'opacity-35 grayscale'}
                         >
                           <MissionIcon iconName={missao.icon} completed={earned} className="w-9 h-9" />
-                          {missao.emblem && (
-                            <span className="text-[8px] font-bold uppercase tracking-wide text-success/80 text-center leading-tight px-4 line-clamp-2">
-                              {missao.emblem}
-                            </span>
-                          )}
                         </HexBadge>
                       </Link>
 

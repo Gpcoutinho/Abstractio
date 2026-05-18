@@ -417,13 +417,8 @@ const Missao: React.FC = () => {
             <p className="text-textSecondary text-sm mb-5">{missao.title}</p>
 
             <div className="flex justify-center mb-5">
-              <HexBadge earned={true} className="w-28">
+              <HexBadge earned={true} emblem={missao.emblem} className="w-28">
                 <MissionIcon iconName={missao.icon} completed={true} className="w-10 h-10" />
-                {missao.emblem && (
-                  <span className="text-[8px] font-bold uppercase tracking-wide text-success/90 text-center leading-tight px-4 line-clamp-2">
-                    {missao.emblem}
-                  </span>
-                )}
               </HexBadge>
             </div>
 
