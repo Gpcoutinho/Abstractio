@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TrophyIcon, LockClosedIcon } from '@heroicons/react/24/outline';
 import { niveis } from '../data/curriculum';
+import { MOLDURAS } from '../data/molduras';
 import { useProgress } from '../hooks/useProgress';
 import type { Genero } from '../contexts/ProgressContext';
+import ShellIcon from '../components/ShellIcon';
+import AvatarFrame from '../components/AvatarFrame';
 import Footer from '../components/Footer';
 import PageWrapper from '../components/PageWrapper';
 import imgPolvinho from '../assets/avatares/avatar-polvinho.png';
@@ -31,7 +34,8 @@ const GENERO_OPTIONS: { value: Genero; label: string }[] = [
 ];
 
 const Perfil: React.FC = () => {
-  const { nome, genero, conchas, completed, nivelDisplay, avatarIdx, setNome, setGenero, setAvatarIdx, niveis_concluidos } = useProgress();
+  const { nome, genero, conchas, completed, nivelDisplay, avatarIdx, setNome, setGenero, setAvatarIdx, niveis_concluidos, moldurasDesbloqueadas, molduraAtiva, comprarMoldura, setMolduraAtiva } = useProgress();
+  const molduraAtivaData = MOLDURAS.find(m => m.id === molduraAtiva) ?? MOLDURAS[0];
   const [nomeInput, setNomeInput] = useState(nome);
   const [salvo, setSalvo] = useState(false);
 
@@ -108,44 +112,109 @@ const Perfil: React.FC = () => {
             {AVATARES.map((avatar, i) => {
               const desbloqueado = niveis_concluidos.length >= avatar.nivelMin;
               const selecionado = avatarIdx === i;
-              
+
               return (
-                <button
-                  key={i}
-                  onClick={() => desbloqueado && setAvatarIdx(i)}
-                  disabled={!desbloqueado}
-                  title={desbloqueado ? avatar.label : `Conclua o Nível ${avatar.nivelMin} para desbloquear`}
-                  className={`relative w-32 h-32 rounded-full border-2 overflow-hidden transition-all focus:outline-none bg-bgPrimary flex items-center justify-center
-                    ${selecionado ? 'border-accent scale-105' : 'border-borderDark'}
-                    ${desbloqueado ? 'hover:border-accent cursor-pointer' : 'cursor-not-allowed'}
-                  `}
-                >
-                  {/* Se estiver desbloqueado, mostra a imagem normal. 
-                      Se bloqueado, mostra a silhueta (hiddenSrc) com filtro de brilho baixo */}
-                  <img
-                    src={desbloqueado ? avatar.src : avatar.hiddenSrc ?? avatar.src}
-                    alt={avatar.label}
-                    className={`w-full h-full object-cover transition-all ${!desbloqueado ? 'opacity-30 grayscale brightness-50' : ''}`}
-                  />
-
-                  {/* CADEADO: Aparece apenas se estiver bloqueado, posicionado no centro */}
-                  {!desbloqueado && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                      <LockClosedIcon className="w-8 h-8 text-textSecondary" />
-                    </div>
-                  )}
-
-                  {/* Feedback visual de seleção */}
-                  {selecionado && desbloqueado && (
-                    <div className="absolute inset-0 ring-4 ring-accent ring-inset rounded-full pointer-events-none" />
-                  )}
-                </button>
+                <AvatarFrame key={i} moldura={selecionado ? molduraAtivaData : MOLDURAS[0]}>
+                  <button
+                    onClick={() => desbloqueado && setAvatarIdx(i)}
+                    disabled={!desbloqueado}
+                    title={desbloqueado ? avatar.label : `Conclua o Nível ${avatar.nivelMin} para desbloquear`}
+                    className={`relative w-32 h-32 rounded-full border-2 overflow-hidden transition-all focus:outline-none bg-bgPrimary flex items-center justify-center
+                      ${selecionado ? 'border-accent scale-105' : 'border-borderDark'}
+                      ${desbloqueado ? 'hover:border-accent cursor-pointer' : 'cursor-not-allowed'}
+                    `}
+                  >
+                    <img
+                      src={desbloqueado ? avatar.src : avatar.hiddenSrc ?? avatar.src}
+                      alt={avatar.label}
+                      className={`w-full h-full object-cover transition-all ${!desbloqueado ? 'opacity-30 grayscale brightness-50' : ''}`}
+                    />
+                    {!desbloqueado && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                        <LockClosedIcon className="w-8 h-8 text-textSecondary" />
+                      </div>
+                    )}
+                    {selecionado && desbloqueado && (
+                      <div className="absolute inset-0 ring-4 ring-accent ring-inset rounded-full pointer-events-none" />
+                    )}
+                  </button>
+                </AvatarFrame>
               );
             })}
           </div>
           <p className="text-xs text-textSecondary mt-3">
             Novos avatares são desbloqueados ao concluir cada nível.
           </p>
+        </section>
+
+        {/* Molduras */}
+        <section className="bg-bgSecondary border border-borderDark rounded-xl p-6 mb-6">
+          <h2 className="text-sm font-semibold text-textSecondary uppercase tracking-widest mb-1">
+            Molduras
+          </h2>
+          <p className="text-xs text-textSecondary mb-5">
+            Compre molduras com suas conchas e aplique ao avatar.
+          </p>
+          <div className="grid grid-cols-3 gap-4">
+            {MOLDURAS.map(moldura => {
+              const owned = moldurasDesbloqueadas.includes(moldura.id);
+              const ativa = molduraAtiva === moldura.id;
+              const podaComprar = !owned && conchas >= moldura.custo;
+              const avatarSrc = AVATARES[avatarIdx]?.src ?? AVATARES[0].src;
+
+              return (
+                <div key={moldura.id} className="flex flex-col items-center gap-2">
+                  {/* Preview */}
+                  <AvatarFrame moldura={moldura}>
+                    <div className="w-14 h-14 rounded-full overflow-hidden bg-bgPrimary">
+                      <img src={avatarSrc} alt={moldura.nome} className="w-full h-full object-cover" />
+                    </div>
+                  </AvatarFrame>
+
+                  {/* Nome */}
+                  <p className="text-xs font-medium text-textPrimary text-center leading-tight">{moldura.nome}</p>
+
+                  {/* Ação */}
+                  {moldura.custo === 0 ? (
+                    <button
+                      onClick={() => setMolduraAtiva(moldura.id)}
+                      className={`text-xs px-3 py-1 rounded-full transition-colors ${
+                        ativa
+                          ? 'bg-accent/20 text-accent font-semibold'
+                          : 'text-textSecondary hover:text-textPrimary'
+                      }`}
+                    >
+                      {ativa ? 'Ativa' : 'Usar'}
+                    </button>
+                  ) : owned ? (
+                    <button
+                      onClick={() => setMolduraAtiva(moldura.id)}
+                      className={`text-xs px-3 py-1 rounded-full transition-colors ${
+                        ativa
+                          ? 'bg-accent/20 text-accent font-semibold'
+                          : 'text-textSecondary hover:text-textPrimary'
+                      }`}
+                    >
+                      {ativa ? 'Ativa' : 'Usar'}
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => comprarMoldura(moldura.id)}
+                      disabled={!podaComprar}
+                      className={`inline-flex items-center gap-1 text-xs px-3 py-1 rounded-full transition-colors ${
+                        podaComprar
+                          ? 'bg-accent/10 text-accent hover:bg-accent/20'
+                          : 'text-textSecondary/40 cursor-not-allowed'
+                      }`}
+                    >
+                      {moldura.custo}
+                      <ShellIcon className="w-3 h-3" />
+                    </button>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </section>
 
         {/* Dados do usuário */}

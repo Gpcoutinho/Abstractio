@@ -8,6 +8,8 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { useProgress } from "../hooks/useProgress";
+import { MOLDURAS } from "../data/molduras";
+import AvatarFrame from "./AvatarFrame";
 import ShellIcon from "./ShellIcon";
 import imgPolvinho from "../assets/avatares/avatar-polvinho.png";
 import imgExplorador from "../assets/avatares/avatar-explorador.png";
@@ -29,8 +31,9 @@ const NAV_ITEMS = [
 
 const Sidebar: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const { conchas, nivelDisplay, nomeDisplay, avatarIdx } = useProgress();
+  const { conchas, nivelDisplay, nomeDisplay, avatarIdx, molduraAtiva } = useProgress();
   const avatarSrc = AVATAR_SRCS[avatarIdx] ?? AVATAR_SRCS[0];
+  const moldura = MOLDURAS.find(m => m.id === molduraAtiva) ?? MOLDURAS[0];
 
   return (
     <>
@@ -103,24 +106,26 @@ const Sidebar: React.FC = () => {
 
         {/* Avatar + info */}
         <div className="flex flex-col items-center px-5 py-6 border-b border-borderDark flex-shrink-0">
-          <Link
-            to="/perfil"
-            onClick={() => setOpen(false)}
-            className="w-28 h-28 rounded-full ring-2 ring-accent/40 overflow-hidden hover:ring-accent transition-all shadow-lg bg-bgPrimary"
-            title="Perfil"
-          >
-            {avatarSrc ? (
-              <img
-                src={avatarSrc}
-                alt="Avatar"
-                className="w-full h-full object-cover block"
-              />
-            ) : (
-              <div className="w-full h-full bg-bgPrimary flex items-center justify-center">
-                <UserCircleIcon className="w-8 h-8 text-textSecondary" />
-              </div>
-            )}
-          </Link>
+          <AvatarFrame moldura={moldura}>
+            <Link
+              to="/perfil"
+              onClick={() => setOpen(false)}
+              className="w-28 h-28 rounded-full ring-2 ring-accent/40 overflow-hidden hover:ring-accent transition-all shadow-lg bg-bgPrimary block"
+              title="Perfil"
+            >
+              {avatarSrc ? (
+                <img
+                  src={avatarSrc}
+                  alt="Avatar"
+                  className="w-full h-full object-cover block"
+                />
+              ) : (
+                <div className="w-full h-full bg-bgPrimary flex items-center justify-center">
+                  <UserCircleIcon className="w-8 h-8 text-textSecondary" />
+                </div>
+              )}
+            </Link>
+          </AvatarFrame>
           <p className="mt-3 text-sm font-medium text-textPrimary leading-tight text-center">
             {nomeDisplay}
           </p>

@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
 import { niveis } from '../data/curriculum';
+import { MOLDURAS } from '../data/molduras';
 
 const STORAGE_KEY = 'abstractio:progress';
 
@@ -13,6 +14,8 @@ interface ProgressState {
   nome: string;
   genero: Genero;
   avatarIdx: number;
+  moldurasDesbloqueadas: string[];
+  molduraAtiva: string;
 }
 
 const DEFAULT_STATE: ProgressState = {
@@ -23,6 +26,8 @@ const DEFAULT_STATE: ProgressState = {
   nome: '',
   genero: '',
   avatarIdx: 0,
+  moldurasDesbloqueadas: ['none'],
+  molduraAtiva: 'none',
 };
 
 function loadFromStorage(): ProgressState {
@@ -49,11 +54,15 @@ export interface ProgressContextValue {
   nome: string;
   genero: Genero;
   avatarIdx: number;
+  moldurasDesbloqueadas: string[];
+  molduraAtiva: string;
   completarMissao: (missaoId: string, tentativas?: number) => void;
   desmarcarMissao: (missaoId: string) => void;
   setNome: (nome: string) => void;
   setGenero: (genero: Genero) => void;
   setAvatarIdx: (idx: number) => void;
+  comprarMoldura: (molduraId: string) => void;
+  setMolduraAtiva: (molduraId: string) => void;
 }
 
 export const ProgressContext = createContext<ProgressContextValue | undefined>(undefined);
@@ -116,8 +125,25 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setState(prev => ({ ...prev, avatarIdx }));
   }, []);
 
+  const comprarMoldura = useCallback((molduraId: string) => {
+    setState(prev => {
+      if (prev.moldurasDesbloqueadas.includes(molduraId)) return prev;
+      const moldura = MOLDURAS.find(m => m.id === molduraId);
+      if (!moldura || prev.conchas < moldura.custo) return prev;
+      return {
+        ...prev,
+        conchas: prev.conchas - moldura.custo,
+        moldurasDesbloqueadas: [...prev.moldurasDesbloqueadas, molduraId],
+      };
+    });
+  }, []);
+
+  const setMolduraAtiva = useCallback((molduraId: string) => {
+    setState(prev => ({ ...prev, molduraAtiva: molduraId }));
+  }, []);
+
   return (
-    <ProgressContext.Provider value={{ ...state, completarMissao, desmarcarMissao, setNome, setGenero, setAvatarIdx }}>
+    <ProgressContext.Provider value={{ ...state, completarMissao, desmarcarMissao, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva }}>
       {children}
     </ProgressContext.Provider>
   );
