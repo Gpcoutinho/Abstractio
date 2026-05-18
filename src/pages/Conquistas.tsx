@@ -45,13 +45,13 @@ const Conquistas: React.FC = () => {
                 {nivel.missoes.map((missao, missaoIdx) => {
                   const earned = completed.includes(missao.id);
                   return (
-                    <div key={missao.id} className="flex flex-col items-center gap-1.5 w-24">
+                    <div key={missao.id} className="flex flex-col items-center gap-1.5 w-28">
                       {/* Label discreto acima */}
                       <div className="text-center px-1">
-                        <p className="text-[9px] text-textSecondary/40 uppercase tracking-wider leading-none mb-0.5">
+                        <p className="text-[10px] text-textSecondary/50 uppercase tracking-wider leading-none mb-0.5">
                           Missão {missaoIdx}
                         </p>
-                        <p className="text-[10px] text-textSecondary/60 leading-tight line-clamp-1">
+                        <p className="text-xs text-textSecondary/70 leading-tight line-clamp-1">
                           {missao.title}
                         </p>
                       </div>
@@ -72,9 +72,9 @@ const Conquistas: React.FC = () => {
 
                       {/* Conchas */}
                       {conchas_por_missao[missao.id] !== undefined && (
-                        <span className="inline-flex items-center gap-0.5 text-[10px] text-accent font-semibold">
+                        <span className="inline-flex items-center gap-0.5 text-xs text-accent font-semibold">
                           {conchas_por_missao[missao.id]}
-                          <ShellIcon className="w-2.5 h-2.5" />
+                          <ShellIcon className="w-3 h-3" />
                         </span>
                       )}
                     </div>
@@ -112,7 +112,7 @@ const Conquistas: React.FC = () => {
             </button>
 
             <div className="flex justify-center mb-5">
-              <HexBadge earned={earned} emblem={missao.emblem} interactive={false} className="w-36">
+              <HexBadge earned={earned} emblem={missao.emblem} interactive={false} large className="w-36">
                 <MissionIcon iconName={missao.icon} completed={earned} className="w-12 h-12" />
               </HexBadge>
             </div>
