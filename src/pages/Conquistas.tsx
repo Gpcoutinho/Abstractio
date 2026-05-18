@@ -4,6 +4,7 @@ import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
 import Footer from '../components/Footer';
 import MissionIcon from '../components/MissionIcon';
+import HexBadge from '../components/HexBadge';
 import PageWrapper from '../components/PageWrapper';
 
 const Conquistas: React.FC = () => {
@@ -45,21 +46,22 @@ const Conquistas: React.FC = () => {
                         </p>
                       </div>
 
-                      {/* Emblema retangular */}
+                      {/* Emblema hexagonal */}
                       <Link
                         to={`/missao/${nivel.id}/${missaoIdx + 1}`}
-                        className={`flex flex-col items-center justify-center gap-2 w-full py-5 px-2 rounded-xl border transition-all ${
-                          earned
-                            ? 'border-secondary bg-gradient-to-b from-primary/60 to-bgSecondary hover:border-accent'
-                            : 'border-borderDark bg-bgSecondary opacity-35 grayscale hover:opacity-50'
-                        }`}
+                        className="block w-full transition-transform hover:scale-105"
                       >
-                        <MissionIcon iconName={missao.icon} completed={earned} className="w-9 h-9" />
-                        {missao.emblem && (
-                          <span className="text-[9px] font-semibold uppercase tracking-wide text-success/80 text-center leading-tight">
-                            {missao.emblem}
-                          </span>
-                        )}
+                        <HexBadge
+                          earned={earned}
+                          className={earned ? '' : 'opacity-35 grayscale'}
+                        >
+                          <MissionIcon iconName={missao.icon} completed={earned} className="w-9 h-9" />
+                          {missao.emblem && (
+                            <span className="text-[8px] font-bold uppercase tracking-wide text-success/80 text-center leading-tight px-4 line-clamp-2">
+                              {missao.emblem}
+                            </span>
+                          )}
+                        </HexBadge>
                       </Link>
 
                       {/* Conchas */}

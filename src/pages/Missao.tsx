@@ -16,6 +16,7 @@ import { useCelebration } from "../hooks/useCelebration";
 import PageWrapper from "../components/PageWrapper";
 import CodeBlock from "../components/CodeBlock";
 import MissionIcon from "../components/MissionIcon";
+import HexBadge from "../components/HexBadge";
 import interativoHtml from "../assets/interativos/nivel_1_missao_7.html?raw";
 import ProgressBar from '../components/ProgressBar';
 
@@ -415,15 +416,15 @@ const Missao: React.FC = () => {
             <h2 className="text-2xl font-bold text-textPrimary mb-1">Missão Concluída!</h2>
             <p className="text-textSecondary text-sm mb-5">{missao.title}</p>
 
-            <div className="flex flex-col items-center mb-5">
-              <div className="w-20 h-20 rounded-full bg-success/10 border-2 border-success flex items-center justify-center mb-2">
+            <div className="flex justify-center mb-5">
+              <HexBadge earned={true} className="w-28">
                 <MissionIcon iconName={missao.icon} completed={true} className="w-10 h-10" />
-              </div>
-              {missao.emblem && (
-                <span className="text-xs font-semibold uppercase tracking-widest text-success/80">
-                  {missao.emblem}
-                </span>
-              )}
+                {missao.emblem && (
+                  <span className="text-[8px] font-bold uppercase tracking-wide text-success/90 text-center leading-tight px-4 line-clamp-2">
+                    {missao.emblem}
+                  </span>
+                )}
+              </HexBadge>
             </div>
 
             <Link
