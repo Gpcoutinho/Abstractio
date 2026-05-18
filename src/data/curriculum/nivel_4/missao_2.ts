@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "4-2",
   title: "Coesão",
   icon: "PiTarget",
+  emblem: "O Foco do Leviatã",
   theory: `
 ## Coesão
 

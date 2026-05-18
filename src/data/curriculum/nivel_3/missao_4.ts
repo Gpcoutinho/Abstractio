@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "3-4",
   title: "Classes Abstratas",
   icon: "PiBank",
+  emblem: "Fantasma do Abismo",
   theory: `
 ## O problema sem contratos
 

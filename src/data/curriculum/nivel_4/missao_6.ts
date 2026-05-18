@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "4-6",
   title: "Design Patterns",
   icon: "PiMapTrifold",
+  emblem: "Engenheiro(a) das Fossas Marianas",
   theory: `
 ## Design Patterns
 

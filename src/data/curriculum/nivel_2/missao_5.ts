@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "2-5",
   title: "Polimorfismo",
   icon: "PiMaskHappy",
+  emblem: "Metamorfo(a) das Marés",
   theory: `
 ## Polimorfismo
 

@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "3-7",
   title: "Agregação e Composição",
   icon: "PiFactory",
+  emblem: "Arquiteto(a) do Ecossistema",
   theory: `
 ## Dois tipos de "tem um"
 

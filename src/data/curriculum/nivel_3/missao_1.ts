@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "3-1",
   title: "Introdução ao nível",
   icon: "PiCity",
+  emblem: "O Canto das Baleias",
   theory: `
 ## A sociedade dos objetos — Mecânica e Relações
 

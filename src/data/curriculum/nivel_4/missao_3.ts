@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "4-3",
   title: "Acoplamento",
   icon: "PiLockOpen",
+  emblem: "Desacorrentador(a) de Tentáculos",
   theory: `
 ## Acoplamento
 

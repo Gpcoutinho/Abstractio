@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "2-1",
   title: "Introdução ao nível",
   icon: "PiGlobe",
+  emblem: "Preparando o Submarino",
   theory: `
 ## Por que objetos precisam de regras?
 

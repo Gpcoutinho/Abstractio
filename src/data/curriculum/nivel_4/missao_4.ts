@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "4-4",
   title: "SOLID",
   icon: "PiDiamond",
+  emblem: "O Códice S.O.L.I.D.o",
   theory: `
 ## SOLID
 

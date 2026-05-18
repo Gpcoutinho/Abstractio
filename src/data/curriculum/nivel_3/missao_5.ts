@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "3-5",
   title: "Interfaces",
   icon: "PiPlug",
+  emblem: "Embaixador(a) dos Corais",
   theory: `
 ## Interface: contrato puro
 

@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "3-2",
   title: "Sobrescrita",
   icon: "PiPencil",
+  emblem: "Sobrescritor(a) de Ondas",
   theory: `
 ## Sobrescrita (Override)
 

@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "3-6",
   title: "Associação",
   icon: "PiArrowsHorizontal",
+  emblem: "O Elo Marinho",
   theory: `
 ## Objetos que se conhecem
 

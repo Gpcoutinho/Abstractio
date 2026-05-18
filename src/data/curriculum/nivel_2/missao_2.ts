@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "2-2",
   title: "Abstração",
   icon: "PiSpinner",
+  emblem: "Rei/Rainha da Abstração",
   theory: `
 ## Abstração
 

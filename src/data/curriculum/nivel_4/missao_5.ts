@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "4-5",
   title: "Generics",
   icon: "PiFlask",
+  emblem: "Devorador(a) de Tipos",
   theory: `
 ## Generics
 

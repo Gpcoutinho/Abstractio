@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "3-3",
   title: "Sobrecarga",
   icon: "PiShuffle",
+  emblem: "Titã da Sobrecarga",
   theory: `
 ## Sobrecarga (Overload)
 

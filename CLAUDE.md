@@ -206,7 +206,7 @@ Essas linhas descrevem o visual existente (ou desejado) naquele ponto da teoria.
 
 1. Antes de executar qualquer comando de escrita, alteração de arquivo ou build, **explicar detalhadamente** o que pretende fazer e **aguardar um "ok" explícito** da Rebecca
 2. Implementar + testar localmente
-3. Perguntar à Rebecca se deseja commitar antes de qualquer commit
+3. Antes de qualquer commit: mostrar a mensagem proposta e os arquivos que serão incluídos, e **aguardar ok explícito** antes de executar o `git commit`
 4. Ao final de mudanças maiores, informar quantas linhas foram adicionadas/excluídas
 
 

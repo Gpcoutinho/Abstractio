@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "3-8",
   title: "Resumo",
   icon: "PiClipboard",
+  emblem: "Mestre dos Mares",
   theory: `
 ## Resumo — A sociedade dos objetos
 

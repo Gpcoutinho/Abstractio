@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "2-4",
   title: "Herança",
   icon: "PiDna",
+  emblem: "Lorde dos Cefalópodes",
   theory: `
 ## Herança
 

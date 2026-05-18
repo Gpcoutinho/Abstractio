@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "4-1",
   title: "Introdução ao nível",
   icon: "PiBank",
+  emblem: "O Despertar do Kraken",
   theory: `
 ## O arquiteto mestre — Engenharia e Qualidade
 

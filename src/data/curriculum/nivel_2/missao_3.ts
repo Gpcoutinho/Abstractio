@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "2-3",
   title: "Encapsulamento",
   icon: "PiLock",
+  emblem: "Encapsulador(a) de Pérolas",
   theory: `
 ## Encapsulamento
 

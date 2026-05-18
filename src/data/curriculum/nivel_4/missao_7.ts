@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "4-7",
   title: "Resumo",
   icon: "PiClipboard",
+  emblem: "O(A) Kraken do Código",
   theory: `
 ## Resumo — O arquiteto mestre
 
