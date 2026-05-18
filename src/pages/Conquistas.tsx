@@ -131,14 +131,16 @@ const Conquistas: React.FC = () => {
               </p>
             )}
 
+            <div className="mt-6 pt-4 border-t border-borderDark w-full flex justify-center">
             <Link
               to={`/missao/${nivel.id}/${missaoIdx + 1}`}
               onClick={() => setSelected(null)}
-              className="inline-flex items-center gap-1 text-xs text-textSecondary hover:text-textPrimary transition-colors mt-5"
+              className="inline-flex items-center gap-1 text-xs text-textSecondary hover:text-textPrimary transition-colors"
             >
               ir para a missão
               <ArrowRightIcon className="w-3 h-3" />
             </Link>
+            </div>
           </div>
         </div>
       );
