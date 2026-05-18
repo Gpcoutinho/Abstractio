@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "1-6",
   title: "Construtor",
   icon: "PiBuilding",
+  emblem: "O Nascimento",
   theory: `
 ## O momento do nascimento
 

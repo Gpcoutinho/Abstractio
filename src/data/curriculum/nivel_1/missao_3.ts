@@ -5,6 +5,7 @@ const missao: Missao = {
   id: "1-3",
   title: "Classe",
   icon: "PiRuler",
+  emblem: "Modelador Mágico",
   theory: `
 ## A forma de assar bolo
 

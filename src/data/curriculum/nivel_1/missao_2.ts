@@ -5,6 +5,7 @@ const missao: Missao = {
   id: "1-2",
   title: "Objeto",
   icon: "PiCircle",
+  emblem: "Criatura Marinha",
   theory: `
 ## Olhe ao seu redor
 

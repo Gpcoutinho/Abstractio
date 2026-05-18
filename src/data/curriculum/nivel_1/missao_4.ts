@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "1-4",
   title: "Atributos",
   icon: "PiTag",
+  emblem: "Pintor(a) de Tentáculos",
   theory: `
 ## O que um objeto *sabe*
 

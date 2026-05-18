@@ -415,10 +415,15 @@ const Missao: React.FC = () => {
             <h2 className="text-2xl font-bold text-textPrimary mb-1">Missão Concluída!</h2>
             <p className="text-textSecondary text-sm mb-5">{missao.title}</p>
 
-            <div className="flex justify-center mb-5">
-              <div className="w-20 h-20 rounded-full bg-success/10 border-2 border-success flex items-center justify-center">
+            <div className="flex flex-col items-center mb-5">
+              <div className="w-20 h-20 rounded-full bg-success/10 border-2 border-success flex items-center justify-center mb-2">
                 <MissionIcon iconName={missao.icon} completed={true} className="w-10 h-10" />
               </div>
+              {missao.emblem && (
+                <span className="text-xs font-semibold uppercase tracking-widest text-success/80">
+                  {missao.emblem}
+                </span>
+              )}
             </div>
 
             <Link
@@ -431,9 +436,9 @@ const Missao: React.FC = () => {
             </Link>
 
             {conchasGanhasAgora !== null && (
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent/10 border border-accent/30 text-accent font-semibold text-sm mb-6">
+              <p className="text-accent font-semibold text-sm mb-6">
                 🐚 +{conchasGanhasAgora} conchas
-              </div>
+              </p>
             )}
 
             <div className="mt-2 flex flex-col gap-3">

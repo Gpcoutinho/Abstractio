@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "1-7",
   title: "Resumo",
   icon: "PiClipboard",
+  emblem: "Polvo Graduado",
   theory: `
 ## Você chegou até aqui — vamos revisar!
 

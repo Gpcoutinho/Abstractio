@@ -48,6 +48,11 @@ const Conquistas: React.FC = () => {
                       <span className="text-xs text-center text-textSecondary leading-tight line-clamp-2">
                         {missao.title}
                       </span>
+                      {missao.emblem && (
+                        <span className="text-[10px] text-center font-semibold uppercase tracking-wide text-success/70 leading-tight line-clamp-2">
+                          {missao.emblem}
+                        </span>
+                      )}
                       {conchas_por_missao[missao.id] !== undefined && (
                         <span className="text-xs text-accent font-semibold">
                           {conchas_por_missao[missao.id]} conchas

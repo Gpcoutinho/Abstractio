@@ -5,6 +5,7 @@ const missao: Missao = {
   id: "1-5",
   title: "Métodos",
   icon: "PiGear",
+  emblem: "Nadando Rápido",
   theory: `
 ## O que um objeto sabe *fazer*
 

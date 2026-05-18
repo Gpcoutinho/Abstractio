@@ -15,6 +15,7 @@ export interface Missao {
   id: string;
   title: string;
   icon: string;
+  emblem?: string;
   theory: string;
   cards?: SlideCardData[];
   exercise?: Exercise;

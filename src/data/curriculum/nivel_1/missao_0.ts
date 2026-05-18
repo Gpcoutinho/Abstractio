@@ -4,6 +4,7 @@ const missao: Missao = {
   id: "1-0",
   title: "Antes de começar",
   icon: "PiWaveform",
+  emblem: "Molhando os tentáculos",
   theory: `
 ## Mas pra quê estudar isso?
 

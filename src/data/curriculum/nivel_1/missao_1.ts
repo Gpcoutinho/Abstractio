@@ -86,6 +86,7 @@ const missao: Missao = {
   id: "1-1",
   title: "O que é POO?",
   icon: "PiPuzzlePiece",
+  emblem: "O grande oceano",
   theory: `
 E aí, vamos dar o primeiro passo na nossa trilha?
 
