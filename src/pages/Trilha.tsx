@@ -8,6 +8,7 @@ import MissionIcon from '../components/MissionIcon';
 import PageWrapper from '../components/PageWrapper';
 import ShellIcon from '../components/ShellIcon';
 import ProgressBar from '../components/ProgressBar';
+import { CircleIcon } from '@phosphor-icons/react/dist/icons/Circle';
 const totalMissoes = niveis.reduce((acc, n) => acc + n.missoes.length, 0);
 
 const Trilha: React.FC = () => {
@@ -81,7 +82,7 @@ const Trilha: React.FC = () => {
                           {concluida ? (
                             <CheckCircleSolid className="w-5 h-5 text-success flex-shrink-0" />
                           ) : (
-                            <CheckCircleSolid className="w-5 h-5 text-textSecondary group-hover:text-accent flex-shrink-0 transition-colors" />
+                            <CircleIcon className="w-5 h-5 text-textSecondary group-hover:text-accent flex-shrink-0 transition-colors" />
                           )}
                         </Link>
                       </li>
