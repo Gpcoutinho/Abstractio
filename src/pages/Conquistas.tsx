@@ -4,6 +4,7 @@ import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { niveis } from '../data/curriculum';
 import type { Missao, Nivel } from '../data/curriculum/types';
 import { useProgress } from '../hooks/useProgress';
+import { resolveEmblem } from '../utils/emblem';
 import Footer from '../components/Footer';
 import MissionIcon from '../components/MissionIcon';
 import HexBadge from '../components/HexBadge';
@@ -17,7 +18,7 @@ type SelectedEmblem = {
 };
 
 const Conquistas: React.FC = () => {
-  const { completed, conchas, conchas_por_missao } = useProgress();
+  const { completed, conchas, conchas_por_missao, genero } = useProgress();
   const totalMissoes = niveis.reduce((acc, n) => acc + n.missoes.length, 0);
   const [selected, setSelected] = useState<SelectedEmblem | null>(null);
 
@@ -63,7 +64,7 @@ const Conquistas: React.FC = () => {
                       >
                         <HexBadge
                           earned={earned}
-                          emblem={missao.emblem}
+                          emblem={resolveEmblem(missao.emblem, genero)}
                           className={earned ? '' : 'opacity-35 grayscale'}
                         >
                           <MissionIcon iconName={missao.icon} completed={earned} className="w-9 h-9" />
@@ -112,7 +113,7 @@ const Conquistas: React.FC = () => {
             </button>
 
             <div className="flex justify-center mb-5">
-              <HexBadge earned={earned} emblem={missao.emblem} interactive={false} large className="w-36">
+              <HexBadge earned={earned} emblem={resolveEmblem(missao.emblem, genero)} interactive={false} large className="w-36">
                 <MissionIcon iconName={missao.icon} completed={earned} className="w-12 h-12" />
               </HexBadge>
             </div>

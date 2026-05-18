@@ -13,6 +13,7 @@ import rehypeRaw from "rehype-raw";
 import { niveis } from "../data/curriculum";
 import { useProgress } from "../hooks/useProgress";
 import { useCelebration } from "../hooks/useCelebration";
+import { resolveEmblem } from "../utils/emblem";
 import PageWrapper from "../components/PageWrapper";
 import CodeBlock from "../components/CodeBlock";
 import MissionIcon from "../components/MissionIcon";
@@ -33,7 +34,7 @@ const Missao: React.FC = () => {
     nivelIdx: string;
     missaoIdx: string;
   }>();
-  const { completarMissao, desmarcarMissao, isMissaoConcluida, completed, jaGanhouConchas } = useProgress();
+  const { completarMissao, desmarcarMissao, isMissaoConcluida, completed, jaGanhouConchas, genero } = useProgress();
   const { celebrate } = useCelebration();
 
   const [selecionada, setSelecionada] = useState<number | null>(null);
@@ -417,7 +418,7 @@ const Missao: React.FC = () => {
             <p className="text-textSecondary text-sm mb-5">{missao.title}</p>
 
             <div className="flex justify-center mb-5">
-              <HexBadge earned={true} emblem={missao.emblem} interactive={false} className="w-28">
+              <HexBadge earned={true} emblem={resolveEmblem(missao.emblem, genero)} interactive={false} className="w-28">
                 <MissionIcon iconName={missao.icon} completed={true} className="w-10 h-10" />
               </HexBadge>
             </div>

@@ -196,7 +196,7 @@ const Perfil: React.FC = () => {
               ))}
             </select>
             <p className="text-xs text-textSecondary mt-1">
-              Usado futuramente para personalizar nomenclaturas de conquistas.
+              Personaliza os títulos dos emblemas nas conquistas.
             </p>
           </div>
         </section>
