@@ -75,7 +75,7 @@ const LinkedSlideRow: React.FC<LinkedSlideRowProps> = ({ cards }) => {
         ))}
       </div>
       <div className="flex items-center justify-between px-2 pt-3">
-        <div>
+        <div className="flex-1">
           {!isFirst && (
             <button
               onClick={() => navigate(current - 1)}
@@ -95,7 +95,7 @@ const LinkedSlideRow: React.FC<LinkedSlideRowProps> = ({ cards }) => {
             />
           ))}
         </div>
-        <div>
+        <div className="flex-1 flex justify-end">
           {isLast ? (
             <button
               onClick={() => navigate(0)}

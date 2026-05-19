@@ -130,7 +130,7 @@ const SlidesPOO: React.FC = () => {
       </div>
 
       <div className="flex items-center justify-between pt-5 mt-4 border-t border-borderDark">
-        <div>
+        <div className="flex-1">
           {current > 0 && (
             <button
               onClick={() => setCurrent((c) => c - 1)}
@@ -150,7 +150,7 @@ const SlidesPOO: React.FC = () => {
             />
           ))}
         </div>
-        <div>
+        <div className="flex-1 flex justify-end">
           {current < TOTAL - 1 ? (
             <button
               onClick={() => setCurrent((c) => c + 1)}
