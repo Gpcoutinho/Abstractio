@@ -66,7 +66,7 @@ interface MissionIconProps {
 const defaultClasses = 'inline-flex';
 
 const MissionIcon: React.FC<MissionIconProps> = ({ iconName, completed, className }) => {
-  const IconComponent = iconMap[iconName as PerIconName] ?? Circle;
+  const IconComponent = iconMap[iconName as PerIconName] ?? CircleIcon;
   const weight = completed ? 'fill' : 'regular';
   const colorClass = completed ? 'text-success' : 'text-textSecondary';
 
