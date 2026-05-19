@@ -2,15 +2,6 @@
 
 App educacional gamificado para ensinar **Programação Orientada a Objetos (POO)** em Python.
 
-## Skills Disponíveis
-
-| Skill | O que faz |
-|---|---|
-| `/repassar-txt <arquivo.txt>` | Formata um rascunho `.txt` no padrão `.md` de missão, resumindo o resultado antes de salvar |
-| `/repassar-md <N-M>` | Lê o `.md` da missão, resume as mudanças e aguarda ok antes de atualizar o `.ts` |
-| `/repassar-reverse <direção> <N-M>` | Sentido inverso: `ts-md` atualiza o `.md` a partir do `.ts`; `md-txt` atualiza o `.txt` a partir do `.md` |
-| `/commit` | Propõe mensagem de commit em pt-BR, lista arquivos e aguarda ok antes de executar |
-
 ## Stack
 
 - **Build:** Vite + React 19 + TypeScript
