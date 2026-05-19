@@ -256,7 +256,7 @@ const Missao: React.FC = () => {
           <header className={`border-t border-borderDark/5 transition-all duration-500 ease-in-out ${showBar ? "py-4" : "py-2"}`}>
             <div className="px-5">
               <p className={`text-textSecondary text-[10px] uppercase tracking-wider transition-all duration-300 ${showBar ? "opacity-100 mb-1" : "opacity-0 h-0"}`}>
-                {nivel.title}
+                {nivel.title} · Missão {missaoIdx}
               </p>
               <h1 className={`font-bold text-textPrimary flex items-center gap-2 transition-all duration-300 ${showBar ? "text-xl" : "text-sm"}`}>
                 <MissionIcon
@@ -264,7 +264,10 @@ const Missao: React.FC = () => {
                   completed={jaConcluida}
                   className={showBar ? "w-7 h-7 transition-all duration-300" : "w-6 h-6 transition-all duration-300"}
                 />
-                {missao.title}
+                <span>
+                  {!showBar && <span className="text-textSecondary font-normal">Missão {missaoIdx} — </span>}
+                  {missao.title}
+                </span>
               </h1>
             </div>
           </header>
