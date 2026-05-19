@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import BoloFactory from "../components/BoloFactory";
 import SlideCard from "../components/SlideCard";
@@ -35,12 +35,20 @@ interface LinkedSlideRowProps {
 
 const LinkedSlideRow: React.FC<LinkedSlideRowProps> = ({ cards }) => {
   const [current, setCurrent] = useState(0);
+  const rowRef = useRef<HTMLDivElement>(null);
   const maxSlides = Math.max(...cards.map((c) => c.slides.length));
   const isFirst = current === 0;
   const isLast = current === maxSlides - 1;
 
+  const navigate = (next: number) => {
+    setCurrent(next);
+    requestAnimationFrame(() => {
+      rowRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  };
+
   return (
-    <div className="not-prose my-6">
+    <div ref={rowRef} className="not-prose my-6">
       <div className="flex flex-col md:flex-row items-stretch gap-4">
         {cards.map((card, pos) => (
           <React.Fragment key={pos}>
@@ -63,7 +71,7 @@ const LinkedSlideRow: React.FC<LinkedSlideRowProps> = ({ cards }) => {
         <div>
           {!isFirst && (
             <button
-              onClick={() => setCurrent((c) => c - 1)}
+              onClick={() => navigate(current - 1)}
               className="text-sm text-textSecondary hover:text-textPrimary transition-colors"
             >
               ← Anterior
@@ -83,14 +91,14 @@ const LinkedSlideRow: React.FC<LinkedSlideRowProps> = ({ cards }) => {
         <div>
           {isLast ? (
             <button
-              onClick={() => setCurrent(0)}
+              onClick={() => navigate(0)}
               className="text-sm text-accent hover:text-secondary transition-colors"
             >
               Voltar ao início
             </button>
           ) : (
             <button
-              onClick={() => setCurrent((c) => c + 1)}
+              onClick={() => navigate(current + 1)}
               className="text-sm text-accent hover:text-secondary transition-colors"
             >
               Próximo →

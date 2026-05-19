@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface SlideCardProps {
   title?: string;
@@ -14,6 +14,19 @@ const SlideCard: React.FC<SlideCardProps> = ({ title, className = "", slides, ex
   const isFirst = current === 0;
   const isLast = current === slides.length - 1;
 
+  const [shownIndex, setShownIndex] = useState(current);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    if (shownIndex === current) return;
+    setIsVisible(false);
+    const t = setTimeout(() => {
+      setShownIndex(current);
+      setIsVisible(true);
+    }, 150);
+    return () => clearTimeout(t);
+  }, [current]);
+
   return (
     <div className={`bg-bgSecondary border border-borderDark rounded-xl p-6 my-6 flex flex-col gap-6 ${className}`}>
       {title && (
@@ -21,7 +34,12 @@ const SlideCard: React.FC<SlideCardProps> = ({ title, className = "", slides, ex
           {title}
         </p>
       )}
-      <div className="min-h-[80px]">{slides[current]}</div>
+      <div
+        className="min-h-[80px] transition-opacity duration-150 ease-in-out"
+        style={{ opacity: isVisible ? 1 : 0 }}
+      >
+        {slides[shownIndex]}
+      </div>
       {!hideNav && (
         <div className="flex items-center justify-between pt-4 border-t border-borderDark">
           <div>
