@@ -70,7 +70,16 @@ const LinkedSlideRow: React.FC<LinkedSlideRowProps> = ({ cards }) => {
             </button>
           )}
         </div>
-        <span className="text-xs text-textSecondary">{current + 1} / {maxSlides}</span>
+        <div className="flex items-center gap-1.5">
+          {Array.from({ length: maxSlides }).map((_, i) => (
+            <span
+              key={i}
+              className={`block w-2 h-2 rounded-full transition-colors ${
+                i === current ? 'bg-accent' : 'bg-borderDark'
+              }`}
+            />
+          ))}
+        </div>
         <div>
           {isLast ? (
             <button
