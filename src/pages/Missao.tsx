@@ -29,6 +29,70 @@ const interativos: Record<string, string> = {
 const Limite_para_esconder = 200; //px
 const Limite_para_mostrar = 50;  //px
 
+interface LinkedSlideRowProps {
+  cards: { title?: string; className?: string; slides: React.ReactNode[] }[];
+}
+
+const LinkedSlideRow: React.FC<LinkedSlideRowProps> = ({ cards }) => {
+  const [current, setCurrent] = useState(0);
+  const maxSlides = Math.max(...cards.map((c) => c.slides.length));
+  const isFirst = current === 0;
+  const isLast = current === maxSlides - 1;
+
+  return (
+    <div className="not-prose my-6">
+      <div className="flex flex-col md:flex-row items-stretch gap-4">
+        {cards.map((card, pos) => (
+          <React.Fragment key={pos}>
+            {pos > 0 && (
+              <div className="flex items-center justify-center shrink-0">
+                <span className="text-2xl font-bold text-borderDark select-none">✕</span>
+              </div>
+            )}
+            <SlideCard
+              title={card.title}
+              className="flex-1 min-w-0 my-0"
+              slides={card.slides}
+              externalCurrent={Math.min(current, card.slides.length - 1)}
+              hideNav
+            />
+          </React.Fragment>
+        ))}
+      </div>
+      <div className="flex items-center justify-between px-2 pt-3">
+        <div>
+          {!isFirst && (
+            <button
+              onClick={() => setCurrent((c) => c - 1)}
+              className="text-sm text-textSecondary hover:text-textPrimary transition-colors"
+            >
+              ← Anterior
+            </button>
+          )}
+        </div>
+        <span className="text-xs text-textSecondary">{current + 1} / {maxSlides}</span>
+        <div>
+          {isLast ? (
+            <button
+              onClick={() => setCurrent(0)}
+              className="text-sm text-accent hover:text-secondary transition-colors"
+            >
+              Voltar ao início
+            </button>
+          ) : (
+            <button
+              onClick={() => setCurrent((c) => c + 1)}
+              className="text-sm text-accent hover:text-secondary transition-colors"
+            >
+              Próximo →
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Missao: React.FC = () => {
   const { nivelIdx, missaoIdx } = useParams<{
     nivelIdx: string;
@@ -222,20 +286,27 @@ const Missao: React.FC = () => {
                 );
               };
               if (isRow) {
-                return (
-                  <div key={i} className="not-prose flex flex-col md:flex-row items-stretch gap-4 my-6">
-                    {indices.map((idx, pos) => (
-                      <React.Fragment key={idx}>
-                        {pos > 0 && (
-                          <div className="flex items-center justify-center shrink-0">
-                            <span className="text-2xl font-bold text-borderDark select-none">✕</span>
+                const rowCards = indices.map((idx) => {
+                  const card = missao.cards?.[idx];
+                  if (!card) return null;
+                  return {
+                    title: card.title,
+                    slides: card.slides.map((s, j) => (
+                      <ReactMarkdown key={j} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={{
+                        p: ({ children }: { children?: React.ReactNode }) => <p className="text-textBody leading-relaxed m-0">{children}</p>,
+                        strong: ({ children }: { children?: React.ReactNode }) => <strong className="text-textPrimary">{children}</strong>,
+                        table: ({ children }: { children?: React.ReactNode }) => (
+                          <div className="overflow-x-auto my-4">
+                            <table className="min-w-full">{children}</table>
                           </div>
-                        )}
-                        {renderCard(idx, "flex-1 min-w-0 my-0")}
-                      </React.Fragment>
-                    ))}
-                  </div>
-                );
+                        ),
+                      }}>
+                        {s}
+                      </ReactMarkdown>
+                    )),
+                  };
+                }).filter(Boolean) as { title?: string; slides: React.ReactNode[] }[];
+                return <LinkedSlideRow key={i} cards={rowCards} />;
               }
               return renderCard(indices[0]);
             }
