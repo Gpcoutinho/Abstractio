@@ -2,7 +2,7 @@ import type { Missao } from '../types';
 import { moldeBoloAnimation, diagramaClasseObjeto } from '../../visuals/nivel_1';
 
 const missao: Missao = {
-  id: "1-3",
+  id: "1-5",
   title: "Classe",
   icon: "PiRuler",
   emblem: "Modelador Mágico",

@@ -27,16 +27,16 @@ Documento de especificação do produto. Define escopo, progressão, regras de c
 ## Níveis e Missões
 
 ### Nível 1 — Fundamentos: O despertar do Polvinho
-> Introdução à POO: o que são objetos, classes, atributos, métodos e construtores
+> Introdução à POO seguindo abordagem **Objects-First**: o aluno usa objetos antes de aprender a criá-los
 
 | # | Missão |
 |---|--------|
 | 0 | Antes de começar |
 | 1 | O que é POO? |
 | 2 | Objeto |
-| 3 | Classe |
-| 4 | Atributos |
-| 5 | Métodos |
+| 3 | Atributos |
+| 4 | Métodos |
+| 5 | Classe |
 | 6 | Construtor |
 | 7 | Resumo |
 

@@ -34,10 +34,15 @@ src/
     Sidebar.tsx           ← sidebar lateral: avatar, pontuação, rank e nav (desktop fixo, mobile gaveta)
     HeroCarousel.tsx      ← 2 slides (roxo e verde menta)
     Mascote.tsx           ← Polvo animado (aparece no slide 1 do hero)
-    MissaoCard.tsx        ← Linha de missão com status (Heroicons), nome e pts
-    ExerciseQuestion.tsx  ← Múltipla escolha com feedback
-    InterativoFrame.tsx   ← <iframe srcDoc> para mini-jogos HTML
-    TrophyCard.tsx        ← Card de troféu (earned / unearned)
+    SlideCard.tsx         ← card com slides navegáveis; aceita externalCurrent + hideNav para modo controlado
+    AvatarFrame.tsx       ← molduras animadas do avatar (Bolhas, Maré Alta, Kraken, Coral, Aurora Boreal)
+    HexBadge.tsx          ← emblema hexagonal SVG (viewBox 87×100)
+    MissionIcon.tsx       ← ícone de missão (Phosphor Icons)
+    CodeBlock.tsx         ← bloco de código com syntax highlight
+    ProgressBar.tsx       ← barra de progresso da trilha
+    PageWrapper.tsx       ← wrapper de página com max-width e padding
+    BoloFactory.tsx       ← componente interativo da missão de Classe
+    Card.tsx              ← card genérico reutilizável
   contexts/
     ProgressContext.tsx   ← Estado global de progresso
   hooks/
@@ -46,13 +51,13 @@ src/
     curriculum/
       types.ts            ← Tipos TypeScript: Nivel, Missao, Exercise
       index.ts            ← Exporta array `niveis` com os 4 níveis
-      nivel_1/            ← Missões do Nível 1 (missao_1.ts … missao_6.ts + index.ts)
+      nivel_1/            ← Missões do Nível 1 (missao_0.ts … missao_7.ts + index.ts)
       nivel_2/            ← Missões do Nível 2
       nivel_3/            ← Missões do Nível 3
       nivel_4/            ← Missões do Nível 4
   assets/
     interativos/
-      nivel_1_missao_1.html  ← Mini-jogo drag & drop (HTML autossuficiente)
+      nivel_1_missao_7.html  ← Mini-jogo (HTML autossuficiente)
 ```
 
 ## Rotas
@@ -149,9 +154,18 @@ const missao: Missao = {
 };
 ```
 
+## Slides de Conteúdo (SlideCard / LinkedSlideRow)
+
+Dentro da teoria, blocos de slides são declarados com `{{card:N}}` (slide único) ou `{{cards:N,M}}` (dois cards lado a lado, sincronizados).
+
+- `SlideCard` — card com navegação interna; suporta `externalCurrent` + `hideNav` para modo controlado
+- `LinkedSlideRow` — renderizado automaticamente para `{{cards:N,M}}`; compartilha um único controle de navegação entre os cards, com dots indicadores e recentramento automático via `scrollIntoView`
+
+Os slides de cada card ficam em `missao.cards[N].slides[]` como strings HTML ou ReactNode.
+
 ## Mini-Jogos (Interativos)
 
-Arquivo: `src/assets/interativos/nivel_1_missao_1.html`
+Arquivo: `src/assets/interativos/nivel_1_missao_7.html`
 
 HTML/CSS/JS autossuficiente. Renderizar via `<iframe srcDoc={html}>`.
 Hoje existe apenas 1 mini-jogo (drag & drop, missão 1).
@@ -204,7 +218,12 @@ Essas linhas descrevem o visual existente (ou desejado) naquele ponto da teoria.
 
 ## Fluxo de Desenvolvimento
 
-1. Antes de executar qualquer comando de escrita, alteração de arquivo ou build, **explicar detalhadamente** o que pretende fazer e **aguardar um "ok" explícito** da Rebecca
+> ⚠️ **REGRA INVIOLÁVEL: nunca escrever, editar ou deletar arquivos sem aprovação explícita da Rebecca.**
+> Isso inclui qualquer arquivo de código, conteúdo, configuração ou documentação.
+> Explicar o que será feito → aguardar "sim" (ou equivalente) → só então executar.
+> "Posso implementar?" sem resposta afirmativa = não implementar.
+
+1. Descrever detalhadamente o que pretende fazer e **aguardar "ok" explícito** antes de qualquer alteração
 2. Implementar + testar localmente
 3. Antes de qualquer commit: mostrar a mensagem proposta e os arquivos que serão incluídos, e **aguardar ok explícito** antes de executar o `git commit`
 4. Ao final de mudanças maiores, informar quantas linhas foram adicionadas/excluídas

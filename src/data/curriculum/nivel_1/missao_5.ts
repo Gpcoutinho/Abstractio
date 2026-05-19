@@ -2,7 +2,7 @@ import type { Missao } from '../types';
 import { diagramaClasseMetodo } from '../../visuals/nivel_1';
 
 const missao: Missao = {
-  id: "1-5",
+  id: "1-4",
   title: "Métodos",
   icon: "PiGear",
   emblem: "Nadando Rápido",
