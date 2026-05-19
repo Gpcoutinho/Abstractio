@@ -1,7 +1,7 @@
 import type { Missao } from '../types';
 
 const missao: Missao = {
-  id: "1-4",
+  id: "1-3",
   title: "Atributos",
   icon: "PiTag",
   emblem: "Pintor(a) de Tentáculos",
