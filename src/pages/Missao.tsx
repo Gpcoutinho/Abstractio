@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
-import BoloFactory from "../components/BoloFactory";
-import PolvosInterativo from "../components/PolvosInterativo";
-import TresPolvosInterativo from "../components/TresPolvosInterativo";
-import FichaInterativo from "../components/FichaInterativo";
-import FichaAcesso from "../components/FichaAcesso";
+import BoloFactory from "../components/missoes/nivel_1/missao_5/BoloFactory";
+import PolvosInterativo from "../components/missoes/nivel_1/missao_2/PolvosInterativo";
+import TresPolvosInterativo from "../components/missoes/nivel_1/missao_2/TresPolvosInterativo";
+import FichaInterativo from "../components/missoes/nivel_1/missao_3/FichaInterativo";
+import FichaAcesso from "../components/missoes/nivel_1/missao_3/FichaAcesso";
 import SlideCard from "../components/SlideCard";
 import {
   ArrowLeftIcon,
