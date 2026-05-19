@@ -56,13 +56,13 @@ const FichaInterativo: React.FC = () => {
 
         {/* Thiago SVG */}
         <div className="flex-1 flex flex-col items-center justify-center py-10 gap-1">
-          <svg viewBox="0 0 130 140" width="110" xmlns="http://www.w3.org/2000/svg" style={{ overflow: 'visible' }}>
+          <svg viewBox="0 0 130 140" width="140" xmlns="http://www.w3.org/2000/svg" style={{ overflow: 'visible' }}>
 
             {/* Nome tag */}
             {selected === 'nome' && (
               <g>
-                <rect x="20" y="4" width="90" height="20" rx="4" fill="#1e1840" stroke="#4F33A9" strokeWidth="1" />
-                <text x="65" y="17" textAnchor="middle" fill={LIGHT} fontSize="10" fontFamily="monospace">Thiago</text>
+                <rect x="20" y="3" width="90" height="24" rx="4" fill="#1e1840" stroke="#4F33A9" strokeWidth="1" />
+                <text x="65" y="19" textAnchor="middle" fill={LIGHT} fontSize="13" fontFamily="monospace">Thiago</text>
               </g>
             )}
 
@@ -82,7 +82,7 @@ const FichaInterativo: React.FC = () => {
 
             {/* Contador de tentáculos */}
             {selected === 'num_tentaculos' && (
-              <text x="65" y="124" textAnchor="middle" fill={LIGHT} fontSize="9" fontFamily="monospace">× 8 tentáculos</text>
+              <text x="65" y="124" textAnchor="middle" fill={LIGHT} fontSize="12" fontFamily="monospace">× 8 tentáculos</text>
             )}
 
             {/* Corpo */}
@@ -104,14 +104,14 @@ const FichaInterativo: React.FC = () => {
                 <line x1="116" y1="24" x2="116" y2="114" stroke={LIGHT} strokeWidth="1.5" strokeDasharray="3,2" />
                 <line x1="112" y1="24" x2="120" y2="24" stroke={LIGHT} strokeWidth="1.5" />
                 <line x1="112" y1="114" x2="120" y2="114" stroke={LIGHT} strokeWidth="1.5" />
-                <text x="124" y="72" fill={LIGHT} fontSize="8" fontFamily="monospace" textAnchor="start">25</text>
-                <text x="124" y="81" fill={LIGHT} fontSize="8" fontFamily="monospace" textAnchor="start">cm</text>
+                <text x="124" y="70" fill={LIGHT} fontSize="11" fontFamily="monospace" textAnchor="start">25</text>
+                <text x="124" y="82" fill={LIGHT} fontSize="11" fontFamily="monospace" textAnchor="start">cm</text>
               </g>
             )}
 
             {/* Espécie */}
             {selected === 'especie' && (
-              <text x="65" y="130" textAnchor="middle" fill={LIGHT} fontSize="7.5" fontFamily="monospace" fontStyle="italic">
+              <text x="65" y="131" textAnchor="middle" fill={LIGHT} fontSize="11" fontFamily="monospace" fontStyle="italic">
                 Octopus vulgaris
               </text>
             )}
