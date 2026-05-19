@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import BoloFactory from "../components/BoloFactory";
+import PolvosInterativo from "../components/PolvosInterativo";
+import TresPolvosInterativo from "../components/TresPolvosInterativo";
 import SlideCard from "../components/SlideCard";
 import {
   ArrowLeftIcon,
@@ -333,6 +335,8 @@ const Missao: React.FC = () => {
             return (
               <ReactMarkdown key={i} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={{
                 "bolo-factory": () => <BoloFactory />,
+                "polvos-interativo": () => <PolvosInterativo />,
+                "tres-polvos-interativo": () => <TresPolvosInterativo />,
                 code: CodeBlock,
                 pre: ({ children }: { children: React.ReactNode }) => <>{children}</>,
                 table: ({ children }: { children?: React.ReactNode }) => (

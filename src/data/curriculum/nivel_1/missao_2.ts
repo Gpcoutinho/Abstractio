@@ -1,5 +1,5 @@
 import type { Missao } from '../types';
-import { diagramaObjetos, diagramaInstancias } from '../../visuals/nivel_1';
+import { diagramaObjetos } from '../../visuals/nivel_1';
 
 const missao: Missao = {
   id: "1-2",
@@ -7,114 +7,82 @@ const missao: Missao = {
   icon: "PiCircle",
   emblem: "Criatura Marinha",
   theory: `
-## Olhe ao seu redor
+## Objetos estão em todo lugar
 
-Cadeira. Celular. Cachorro. Caneta.
+Olhe ao redor. Cadeira. Celular. Cachorro. Caneta.
 
 Todo objeto do mundo real tem duas coisas em comum:
 
 - **Características** — como ele *é* (cor, nome, tamanho, peso...)
-- **Comportamentos** — o que ele *faz* (latir, carregar, rolar, escrever...)
+- **Ações** — o que ele *faz* (latir, carregar, rolar, escrever...)
 
 ${diagramaObjetos}
 
-A **Programação Orientada a Objetos (POO)** usa exatamente essa lógica para organizar programas: em vez de uma lista enorme de instruções soltas, você cria **objetos** que imitam coisas do mundo real — cada um com seus próprios dados e ações.
+Em programação, os objetos funcionam exatamente igual: possuem características próprias e realizam ações. Na nossa jornada, utilizaremos o universo marinho, em especial os polvos, que são animais muito versáteis - assim como a POO - para ilustrar o funcionamento desses objetos.
 
 ---
 
-## O biscoito, não a forma
+## Polvonilson encontra Polvinho
 
-Imagine uma **forma de cortar biscoitos** em formato de estrela. Com ela você faz quantas estrelas quiser — cada uma com sua própria cobertura e decoração.
+O Sr. Polvonilson está em expedição pelo oceano quando avista uma criatura que nunca viu.
 
-A forma é o molde. O biscoito é o **produto real**.
+Ela existe. Tem uma cor. Um tamanho. Um número de tentáculos. E sabe fazer coisas — nada, se camufla, solta tinta.
 
-Em POO, o **objeto** é esse produto — algo concreto que existe na memória do computador, com seus próprios dados.
+Polvonilson não sabe como essa criatura foi criada. Não importa — ele consegue observá-la e interagir com ela. Isso é um **objeto**: algo com características próprias e ações que sabe executar.
 
-> **Objeto** = uma coisa concreta criada a partir de um molde (a classe). Cada objeto tem seus próprios dados e existe de forma independente.
-
-"Criar um objeto" também é chamado de **instanciar**. O objeto é uma **instância** da classe.
+<polvos-interativo></polvos-interativo>
 
 ---
 
-## Cada objeto tem seu próprio estado
+## Cada objeto é único
 
-Esse é o ponto mais importante: **mexer em um objeto não afeta os outros**.
+No oceano de Polvonilson há outros polvos. Cada um é uma entidade separada — mesma natureza, dados completamente diferentes.
 
-\`\`\`python
-class Carro:
-    def __init__(self, modelo):
-        self.modelo     = modelo
-        self.ligado     = False   # começa desligado
-        self.velocidade = 0       # começa parado
+Thiago é roxo com 8 tentáculos. Ana é azul com 6. Douglas é verde.
 
-    def ligar(self):
-        self.ligado = True
-        return f"{self.modelo} ligado!"
+Mude as características de um — o outro não muda. Cada objeto guarda seus próprios dados de forma independente.
 
-    def acelerar(self, km):
-        if self.ligado:
-            self.velocidade += km
-            return f"{self.modelo} a {self.velocidade} km/h"
-        return f"{self.modelo} está desligado!"
-
-# Dois objetos criados do mesmo molde
-fusca = Carro("Fusca")
-gol   = Carro("Gol")
-
-print(fusca.ligar())       # Fusca ligado!
-print(fusca.acelerar(60))  # Fusca a 60 km/h
-
-print(gol.ligado)          # False — Gol continua desligado
-print(fusca.velocidade)    # 60
-print(gol.velocidade)      # 0
-\`\`\`
+<tres-polvos-interativo></tres-polvos-interativo>
 
 ---
 
-## As três propriedades de todo objeto
+## As três marcas de todo objeto
 
-| Propriedade | O que é | No exemplo |
+Todo objeto — de um polvo a um celular — carrega três marcas:
+
+| Marca | O que é | Exemplo |
 |---|---|---|
-| **Identidade** | O que diferencia um do outro | \`fusca\` ≠ \`gol\` |
-| **Estado** | Os valores atuais dos dados | \`fusca.ligado = True\`, \`gol.ligado = False\` |
-| **Comportamento** | O que o objeto sabe fazer | \`.ligar()\`, \`.acelerar()\` |
-
-${diagramaInstancias}
+| **Identidade** | O que o diferencia dos outros | Thiago ≠ Ana ≠ Douglas |
+| **Estado** | As características que carrega no momento | cor: Roxo, tentáculos: 8 |
+| **Comportamento** | O que ele sabe fazer | nadar, dar pirueta, soltar tinta |
 
 ---
 
-## Você pode criar quantos objetos quiser
+## De onde Polvinho veio?
 
-A classe é um molde reutilizável infinitamente:
+Polvonilson observa, interage, anota. Mas uma pergunta fica no ar:
 
-\`\`\`python
-frota = [Carro("Fusca"), Carro("Gol"), Carro("Uno"), Carro("Palio")]
+*Quem definiu que Polvinho seria roxo? Que teria 8 tentáculos? Que saberia nadar?*
 
-for carro in frota:
-    print(carro.ligar())
-# Fusca ligado!
-# Gol ligado!
-# Uno ligado!
-# Palio ligado!
-\`\`\`
+A resposta ainda é um mistério. A caixa preta ainda está fechada.
 
-> **Resumindo:** Um objeto é a instância concreta criada a partir de uma classe. Cada objeto tem seu próprio estado independente — mexer em um não afeta os outros.
+Isso você descobre na **Missão 5**.
 `,
   exercise: {
-    question: "Dado `class Gato`, qual opção cria corretamente **dois objetos distintos**?",
+    question: "Polvonilson encontra dois polvos: Thiago (roxo, 8 tentáculos) e Ana (azul, 6 tentáculos). Ele muda a cor de Thiago para verde. O que acontece com Ana?",
     options: [
-      "`gato1 = Gato` e `gato2 = Gato`",
-      "`gato1 = Gato()` e `gato2 = Gato()`",
-      "`gato1 = new Gato()` e `gato2 = new Gato()`",
-      "`Gato.gato1()` e `Gato.gato2()`"
+      "Ana também fica verde — objetos do mesmo tipo compartilham características.",
+      "Ana continua azul — cada objeto guarda seus próprios dados de forma independente.",
+      "Ana desaparece — só pode existir um polvo de cada vez.",
+      "Ana perde todas as características — qualquer mudança afeta todos os objetos."
     ],
     correct: 1,
-    explanation: "Correto! Em Python, instanciamos objetos chamando a classe como função: `Gato()`. Cada chamada cria uma instância independente.",
+    explanation: "Cada objeto existe de forma independente. Mudar Thiago não afeta Ana — cada um carrega seus próprios dados.",
     wrong_explanations: [
-      "Sem parênteses, `Gato` é apenas uma referência à classe, não cria nenhum objeto. Para instanciar, é preciso chamar `Gato()` com parênteses.",
+      "Não. Cada objeto é independente — tem seus próprios dados. Mudar Thiago não afeta Ana em nada.",
       "",
-      "A palavra-chave `new` existe em Java e C#, mas não em Python. Em Python, basta chamar a classe com parênteses: `Gato()`.",
-      "Essa sintaxe tentaria chamar métodos chamados `gato1` e `gato2` dentro da classe, que não existem. Para criar objetos, chamamos a própria classe: `Gato()`."
+      "Não. Vários objetos do mesmo tipo podem existir ao mesmo tempo. Thiago e Ana são entidades separadas e independentes.",
+      "Não. Mudar uma característica de Thiago só afeta Thiago. Ana é uma entidade independente com seus próprios dados intactos."
     ]
   },
   has_interativo: false

@@ -1,102 +1,72 @@
 # Missão 1-2 — Objeto
 
-**Ícone:** 🔵
-**Pontos:** 15
+**Ícone:** PiCircle
+**Emblema:** Criatura Marinha
 
 ## Teoria
 
-## Olhe ao seu redor
+### Objetos estão em todo lugar
 
-Cadeira. Celular. Cachorro. Caneta.
+Olhe ao redor. Cadeira. Celular. Cachorro. Caneta.
 
 Todo objeto do mundo real tem duas coisas em comum:
 
-- **Características** — como ele *é* (cor, nome, tamanho, peso...)
-- **Comportamentos** — o que ele *faz* (latir, carregar, rolar, escrever...)
+- **Características** — como ele _é_ (cor, nome, tamanho, peso...)
+- **Ações** — o que ele _faz_ (latir, carregar, rolar, escrever...)
 
-> [svg: três cards lado a lado — Cachorro, Celular e Carro — cada um com fundo escuro e borda roxa. Cada card tem o nome em roxo claro no topo, um emoji no centro, uma linha separadora, atributos listados em cinza abaixo (ex: nome, raça, idade) e métodos em verde (ex: latir(), buscar()). Os cards aparecem com animação de fade+slide para cima em sequência. Legenda: "Características em roxo · comportamentos em verde".]
+> [svg: três cards — Cachorro, Celular e Carro — com seções explícitas "características" (dados em cinza) e "ações" (comportamentos em verde). Animação fade+slide em sequência. Adaptar labels do diagramaObjetos existente.]
 
-A **Programação Orientada a Objetos (POO)** usa exatamente essa lógica para organizar programas: em vez de uma lista enorme de instruções soltas, você cria **objetos** que imitam coisas do mundo real — cada um com seus próprios dados e ações.
-
----
-
-## O biscoito, não a forma
-
-Imagine uma **forma de cortar biscoitos** em formato de estrela. Com ela você faz quantas estrelas quiser — cada uma com sua própria cobertura e decoração.
-
-A forma é o molde. O biscoito é o **produto real**.
-
-Em POO, o **objeto** é esse produto — algo concreto que existe na memória do computador, com seus próprios dados.
-
-> **Objeto** = uma coisa concreta criada a partir de um molde (a classe). Cada objeto tem seus próprios dados e existe de forma independente.
-
-"Criar um objeto" também é chamado de **instanciar**. O objeto é uma **instância** da classe.
+Em programação, os objetos funcionam exatamente igual: possuem características próprias e realizam ações. Na nossa jornada, utilizaremos o universo marinho, em especial os polvos, que são animais muito versáteis - assim como a POO - para ilustrar o funcionamento desses objetos.
 
 ---
 
-## Cada objeto tem seu próprio estado
+### Polvonilson encontra Polvinho
 
-Esse é o ponto mais importante: **mexer em um objeto não afeta os outros**.
+O Sr. Polvonilson está em expedição pelo oceano quando avista uma criatura que nunca viu.
 
-```python
-class Carro:
-    def __init__(self, modelo):
-        self.modelo     = modelo
-        self.ligado     = False   # começa desligado
-        self.velocidade = 0       # começa parado
+Ela existe. Tem uma cor. Um tamanho. Um número de tentáculos. E sabe fazer coisas — nada, se camufla, solta tinta.
 
-    def ligar(self):
-        self.ligado = True
-        return f"{self.modelo} ligado!"
+Polvonilson não sabe como essa criatura foi criada. Não importa — ele consegue observá-la e interagir com ela. Isso é um **objeto**: algo com características próprias e ações que sabe executar.
 
-    def acelerar(self, km):
-        if self.ligado:
-            self.velocidade += km
-            return f"{self.modelo} a {self.velocidade} km/h"
-        return f"{self.modelo} está desligado!"
-
-# Dois objetos criados do mesmo molde
-fusca = Carro("Fusca")
-gol   = Carro("Gol")
-
-print(fusca.ligar())       # Fusca ligado!
-print(fusca.acelerar(60))  # Fusca a 60 km/h
-
-print(gol.ligado)          # False — Gol continua desligado
-print(fusca.velocidade)    # 60
-print(gol.velocidade)      # 0
-```
+> [interativo: PolvosInterativo — painel esquerdo "Características" com seletores de cor (Roxo / Azul / Verde), tamanho (Pequeno / Grande) e tentáculos (6 / 8); painel direito "Ações" com botões Nadar, Dar pirueta, Soltar tinta; Polvinho no centro reage visualmente a cada seleção e ação. Sem código visível.]
 
 ---
 
-## As três propriedades de todo objeto
+### Cada objeto é único
 
-| Propriedade | O que é | No exemplo |
-|---|---|---|
-| **Identidade** | O que diferencia um do outro | `fusca` ≠ `gol` |
-| **Estado** | Os valores atuais dos dados | `fusca.ligado = True`, `gol.ligado = False` |
-| **Comportamento** | O que o objeto sabe fazer | `.ligar()`, `.acelerar()` |
+No oceano de Polvonilson há outros polvos. Cada um é uma entidade separada — mesma natureza, dados completamente diferentes.
 
-> [svg: painel único centralizado "Objetos Criados" (borda azul). Dois cards internos — "rex" (nome: Rex, raça: Lab) e "bolt" (nome: Bolt, raça: Husky) — em azul escuro com borda azul. Legenda: "Cada objeto existe de forma independente na memória". Animação de fade+slide para cima.]
+Polvinho é roxo e pequeno. Azulão é azul e grande. Marinho é verde.
+
+Mudar algo em Polvinho não muda Azulão. Cada objeto guarda seus próprios dados de forma independente.
+
+> [svg: três polvos lado a lado — Polvinho (roxo, pequeno, 8 tentáculos), Azulão (azul, grande, 6 tentáculos), Marinho (verde, médio, 8 tentáculos) — cada um com card de dados abaixo.]
 
 ---
 
-## Você pode criar quantos objetos quiser
+### As três marcas de todo objeto
 
-A classe é um molde reutilizável infinitamente:
+Todo objeto — de um polvo a um celular — carrega três marcas:
 
-```python
-frota = [Carro("Fusca"), Carro("Gol"), Carro("Uno"), Carro("Palio")]
+| Marca             | O que é                                   | Em Polvinho                      |
+| ----------------- | ----------------------------------------- | -------------------------------- |
+| **Identidade**    | O que o diferencia dos outros             | Polvinho ≠ Azulão ≠ Marinho      |
+| **Estado**        | As características que carrega no momento | cor: Roxo, tentáculos: 8         |
+| **Comportamento** | O que ele sabe fazer                      | nadar, dar pirueta, soltar tinta |
 
-for carro in frota:
-    print(carro.ligar())
-# Fusca ligado!
-# Gol ligado!
-# Uno ligado!
-# Palio ligado!
-```
+---
 
-> **Resumindo:** Um objeto é a instância concreta criada a partir de uma classe. Cada objeto tem seu próprio estado independente — mexer em um não afeta os outros.
+### De onde Polvinho veio?
+
+Polvonilson observa, interage, anota. Mas uma pergunta fica no ar:
+
+_Quem definiu que Polvinho seria roxo? Que teria 8 tentáculos? Que saberia nadar?_
+
+A resposta ainda é um mistério. A caixa preta ainda está fechada.
+
+Isso você descobre na **Missão 5**.
+
+---
 
 ## Mini-jogo
 
@@ -104,11 +74,11 @@ for carro in frota:
 
 ## Exercício
 
-**Pergunta:** Dado `class Gato`, qual opção cria corretamente **dois objetos distintos**?
+**Pergunta:** Polvonilson encontra dois polvos: Polvinho (roxo, 8 tentáculos) e Azulão (azul, 6 tentáculos). Ele muda a cor de Polvinho para verde. O que acontece com Azulão?
 
-- [ ] `gato1 = Gato` e `gato2 = Gato`
-- [x] `gato1 = Gato()` e `gato2 = Gato()` ← correta
-- [ ] `gato1 = new Gato()` e `gato2 = new Gato()`
-- [ ] `Gato.gato1()` e `Gato.gato2()`
+- [ ] Azulão também fica verde — objetos do mesmo tipo compartilham características.
+- [x] Azulão continua azul — cada objeto guarda seus próprios dados de forma independente. ← correta
+- [ ] Azulão desaparece — só pode existir um polvo de cada vez.
+- [ ] Azulão perde todas as características — qualquer mudança afeta todos os objetos.
 
-**Explicação:** Em Python, instanciamos objetos chamando a classe como função: `Gato()`. Cada chamada cria uma instância independente.
+**Explicação:** Cada objeto existe de forma independente. Mudar Polvinho não afeta Azulão — cada um carrega seus próprios dados.
