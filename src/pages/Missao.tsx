@@ -6,6 +6,8 @@ import TresPolvosInterativo from "../components/missoes/nivel_1/missao_2/TresPol
 import FichaInterativo from "../components/missoes/nivel_1/missao_3/FichaInterativo";
 import FichaAcesso from "../components/missoes/nivel_1/missao_3/FichaAcesso";
 import PolvonilsonIntro from "../components/missoes/nivel_1/missao_0/PolvonilsonIntro";
+import CadernoAbertura from "../components/missoes/nivel_1/missao_1/CadernoAbertura";
+import SlidesPOO from "../components/missoes/nivel_1/missao_1/SlidesPOO";
 import SlideCard from "../components/SlideCard";
 import {
   ArrowLeftIcon,
@@ -282,8 +284,9 @@ const Missao: React.FC = () => {
       {/* Conteúdo da Missão */}
       <div className="max-w-3xl mx-auto pt-8 pb-16 px-5">
         <section className="mb-8 prose prose-invert max-w-none prose-headings:text-textPrimary prose-headings:font-bold prose-p:text-textBody prose-p:leading-relaxed prose-strong:text-textPrimary prose-blockquote:border-l-accent prose-blockquote:text-textSecondary prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary prose-li:text-textBody">
-          {missao.theory.split(/(\{\{cards?:[0-9,]+\}\})/).map((part, i) => {
+          {missao.theory.split(/(\{\{cards?:[0-9,]+\}\}|\{\{[a-z][a-z-]*\}\})/).map((part, i) => {
             if (i % 2 === 1) {
+              if (part === '{{slides-poo}}') return <SlidesPOO key={i} />;
               const indices = part.match(/\d+/g)!.map(Number);
               const isRow = part.startsWith("{{cards:");
               const renderCard = (idx: number, className?: string) => {
@@ -338,11 +341,19 @@ const Missao: React.FC = () => {
             return (
               <ReactMarkdown key={i} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={{
                 "polvonilson-intro": () => <PolvonilsonIntro />,
+                "caderno-abertura": () => <CadernoAbertura />,
+                "slides-poo": () => <SlidesPOO />,
                 "bolo-factory": () => <BoloFactory />,
                 "polvos-interativo": () => <PolvosInterativo />,
                 "tres-polvos-interativo": () => <TresPolvosInterativo />,
                 "ficha-interativo": () => <FichaInterativo />,
                 "ficha-acesso": () => <FichaAcesso />,
+                p: ({ node, children, ...props }: any) => {
+                  const hasBlock = node?.children?.some(
+                    (c: any) => c.type === 'element' && !['a','strong','em','code','span','br'].includes(c.tagName)
+                  );
+                  return hasBlock ? <>{children}</> : <p {...props}>{children}</p>;
+                },
                 code: CodeBlock,
                 pre: ({ children }: { children: React.ReactNode }) => <>{children}</>,
                 table: ({ children }: { children?: React.ReactNode }) => (

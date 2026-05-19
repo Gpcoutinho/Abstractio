@@ -6,15 +6,19 @@ const missao: Missao = {
   icon: "PiPuzzlePiece",
   emblem: "O grande oceano",
   theory: `
-E aí, vamos dar o primeiro passo na nossa trilha?
+<caderno-abertura />
 
-Se você já cursou a disciplina de Introdução à Programação (provavelmente em C ou Python), você aprendeu a programar no paradigma **Procedural**. Lembre que a programação procedural é como uma **receita de bolo**: o código é um algoritmo linear, um passo a passo. Você cria variáveis soltas e depois cria funções separadas para mexer nelas.
+Se você já cursou a disciplina de Introdução à Programação (provavelmente em C ou Python), você aprendeu a programar no paradigma **Procedural** — exatamente como as anotações de Polvonilson: um passo a passo, variáveis soltas espalhadas por aí.
 
 ## Mas afinal, o que é a Orientação a Objetos (POO)?
 
-De forma bem direta: é simplesmente **uma maneira diferente de organizar o seu código**, pensando em **entidades vivas** em vez de listas de comandos.
+{{slides-poo}}
 
-Em vez de focar apenas no passo a passo (o algoritmo), a POO foca nos **atores** que fazem o programa funcionar. A gente para de pensar em variáveis espalhadas e passa a pensar em pacotes chamados **Objetos**.
+> "A orientação a objetos é um método de desenvolvimento que organiza o software como uma coleção de objetos — cada um incorporando estrutura de dados e comportamento."
+>
+> — Grady Booch, *Análise e Projeto Orientado a Objetos com Aplicações*
+
+Em outras palavras: em vez de papéis soltos, Polvonilson vai aprender a criar **fichas** — uma por criatura, com tudo que ela é e tudo que ela sabe fazer. A POO foca nos **atores** que fazem o programa funcionar, não na lista de comandos.
 
 Vamos para a próxima etapa?
 `,
