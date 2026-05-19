@@ -3,6 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import BoloFactory from "../components/BoloFactory";
 import PolvosInterativo from "../components/PolvosInterativo";
 import TresPolvosInterativo from "../components/TresPolvosInterativo";
+import FichaInterativo from "../components/FichaInterativo";
+import FichaAcesso from "../components/FichaAcesso";
 import SlideCard from "../components/SlideCard";
 import {
   ArrowLeftIcon,
@@ -337,6 +339,8 @@ const Missao: React.FC = () => {
                 "bolo-factory": () => <BoloFactory />,
                 "polvos-interativo": () => <PolvosInterativo />,
                 "tres-polvos-interativo": () => <TresPolvosInterativo />,
+                "ficha-interativo": () => <FichaInterativo />,
+                "ficha-acesso": () => <FichaAcesso />,
                 code: CodeBlock,
                 pre: ({ children }: { children: React.ReactNode }) => <>{children}</>,
                 table: ({ children }: { children?: React.ReactNode }) => (

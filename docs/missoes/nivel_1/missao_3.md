@@ -1,90 +1,70 @@
-# Missão 1-3 — Classe
+# Missão 1-3 — Atributos
 
-**Ícone:** 📐
-**Pontos:** 15
+**Ícone:** PiTag
+**Emblema:** Pintor(a) de Tentáculos
 
 ## Teoria
 
-## A forma de assar bolo
+### Polvonilson abre o caderno
 
-Na missão anterior, você conheceu o **objeto** — o bolo. Agora é hora de conhecer o **molde**: a **classe**.
+Na missão anterior, Polvonilson encontrou Thiago no oceano. Ele existe, é único, tem identidade própria.
 
-A forma de assar bolos não é um bolo. Ela é a instrução de como criar bolos. Uma classe funciona exatamente assim: define como os objetos daquele tipo devem ser.
+Agora Polvonilson tira o caderno de campo e começa a registrar tudo o que observa: cor, tamanho, número de tentáculos, espécie...
 
-> **Classe** = o molde que descreve como os objetos serão criados — quais dados eles têm e o que sabem fazer.
+Cada informação registrada é um **atributo** — um dado que pertence especificamente a Thiago.
 
-> [animação: forma de bolo (roxo, alças laterais, label "class Bolo") no centro. Um bolo com cobertura rosa, drips e cereja sobe da forma com easing spring, flutua com brilho roxo e estrelas, depois desce de volta. Loop contínuo. Legenda: "a forma cria o bolo".]
+> **Atributo** = uma informação que pertence a um objeto. Cada objeto guarda os seus próprios valores.
 
----
+> [interativo: FichaInterativo — ficha de observação de Thiago com atributos clicáveis. Ao clicar em cada atributo, revela o valor e a linha Python correspondente: `thiago.cor → "roxo"`. Thiago aparece ao lado com a característica destacada visualmente.]
 
-**Cuidado para não confundir os bolos**
-
-Se você já aprendeu que "um algoritmo é como uma receita de bolo", prepare-se — na POO usamos a mesma analogia com um papel diferente, e isso costuma dar um nó. A diferença está no foco:
-
-- **Procedural (Algoritmo = Receita = Ações):** foca em **verbos** — *quebre* os ovos, *misture* a farinha, *asse* por 40 minutos. A receita *é* o programa: executa de cima a baixo uma vez e produz um resultado.
-- **POO (Classe = Receita/Forma = Ingredientes):** foca em **substantivos** — não importa *como* você fez a massa; importa a *estrutura*: "todo bolo que sair daqui seguirá este molde". A classe não executa sozinha — ela existe para criar objetos.
-
-Resumindo: a receita é uma **lista de tarefas**. A classe é uma **fábrica**.
-
-> [animação: dois painéis lado a lado. Esquerdo — "Receita (Procedural)": lista de 3 passos com seta e um único 🎂, legenda "executa uma vez". Direito — "Classe (POO)": bloco "class Bolo:" com botão "Produzir Bolo" que a cada clique adiciona um 🎂 abaixo. Legenda: "Mesma palavra, papéis opostos."]
+<ficha-interativo></ficha-interativo>
 
 ---
 
-## Criando uma classe
+### O ponto — como acessar um atributo
+
+Em Python, o ponto (`.`) é a forma de acessar um atributo de um objeto. É como Polvonilson apontando para Thiago e dizendo: *"me dê sua cor"*.
 
 ```python
-# "class" avisa o Python: "estou criando um molde"
-class Cachorro:
-    def __init__(self, nome, raca):
-        self.nome = nome   # dado que todo cachorro tem
-        self.raca = raca   # dado que todo cachorro tem
-
-    def apresentar(self):
-        return f"Au! Sou {self.nome}, um {self.raca}!"
+print(thiago.nome)             # Thiago
+print(thiago.cor)              # roxo
+print(thiago.num_tentaculos)   # 8
+print(thiago.tamanho_cm)       # 25
+print(thiago.especie)          # Octopus vulgaris
 ```
 
-Criando cachorros a partir do molde:
-
-```python
-rex  = Cachorro("Rex",  "Labrador")
-bolt = Cachorro("Bolt", "Husky")
-mia  = Cachorro("Mia",  "Poodle")
-
-print(rex.apresentar())   # Au! Sou Rex, um Labrador!
-print(bolt.apresentar())  # Au! Sou Bolt, um Husky!
-print(mia.apresentar())   # Au! Sou Mia, um Poodle!
-```
-
-**Uma classe, três objetos diferentes** — o molde é o mesmo, cada produto é único.
-
-> [svg: dois painéis conectados por seta — "class Cachorro" (ícone 📐, borda roxa, legenda "O Molde") → seta "Cria" → "Objetos Criados" com cards rex e bolt (borda azul). Animação de fade em sequência. Legenda: "A classe é o molde — os objetos são os produtos criados a partir dela".]
+A estrutura é sempre: `objeto.atributo`.
 
 ---
 
-## O que uma classe pode ter
+### Cada polvo guarda os seus
 
-| Parte | O que é | Exemplo |
-|---|---|---|
-| **Atributo** | Uma característica | `self.nome`, `self.raca` |
-| **Método** | Um comportamento | `def apresentar(self)` |
-| **Construtor** | O setup inicial | `def __init__(self, ...)` |
+No oceano há outros polvos. Cada um carrega seus próprios atributos — completamente independentes entre si.
 
-Cada uma dessas partes terá sua própria missão neste nível.
+```python
+print(thiago.cor)    # roxo
+print(ana.cor)       # azul
+print(douglas.cor)   # verde
+```
+
+Mudar a cor de Thiago não afeta Ana. Mudar Ana não afeta Douglas. Cada objeto é uma entidade separada com seus próprios dados.
 
 ---
 
-## Regra de nomenclatura
+### Atributos podem mudar
 
-Por convenção, nomes de classes em Python usam **PascalCase** — cada palavra começa com maiúscula:
+O estado de um objeto pode evoluir. Polvonilson observa Thiago se camuflando e atualiza o caderno:
 
 ```python
-class Cachorro:       # correto
-class ContaBancaria:  # correto
-class cachorro:       # evitar
-class conta_bancaria: # evitar
+thiago.cor = "transparente"
+print(thiago.cor)  # transparente
 ```
 
-> **Resumindo:** Uma classe é o molde que define como um tipo de objeto deve ser — com suas características e comportamentos. A partir de uma classe, você cria quantos objetos quiser.
+Só `thiago.cor` mudou. Ana e Douglas continuam com as suas.
+
+> [svg: diagrama simples — `thiago.cor` com valor `"roxo"` → seta de atribuição → valor `"transparente"`. Outros polvos ao lado sem alteração.]
+
+---
 
 ## Mini-jogo
 
@@ -92,11 +72,11 @@ class conta_bancaria: # evitar
 
 ## Exercício
 
-**Pergunta:** Escolha a alternativa que melhor define o que é uma **classe**:
+**Pergunta:** Polvonilson lê `thiago.cor` e vê `"roxo"`. Em seguida escreve `ana.cor = "verde"`. O que acontece com `thiago.cor`?
 
-- [ ] Um objeto específico criado em tempo de execução.
-- [x] Um molde que descreve as propriedades e comportamentos de um tipo de objeto. ← correta
-- [ ] Uma biblioteca externa usada para executar a linguagem.
-- [ ] Um erro de sintaxe comum em Python.
+- [ ] Muda para `"verde"` — objetos do mesmo tipo compartilham atributos.
+- [x] Continua `"roxo"` — cada objeto guarda seus próprios atributos. ← correta
+- [ ] Fica indefinido — só um polvo pode ter cor definida por vez.
+- [ ] Gera um erro — não é possível alterar atributos de objetos separados.
 
-**Explicação:** Uma classe é um molde. A partir dela criamos quantos objetos (instâncias) quisermos.
+**Explicação:** Atributos pertencem a cada objeto individualmente. Mudar `ana.cor` não afeta `thiago.cor` — são dados completamente independentes.
