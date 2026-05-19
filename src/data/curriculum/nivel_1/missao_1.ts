@@ -1,9 +1,4 @@
 import type { Missao } from '../types';
-import { diagramRow, oceanPolvo, objectCard, codeCard } from '../../visuals';
-import { slidesProcedural, slidesOO } from '../../visuals/nivel_1/missao_1';
-
-// prettier-ignore
-const diagrama = diagramRow([oceanPolvo('meu_polvo'), objectCard('Entidade', 'meu_polvo', { nome: '"Polvonilson"', cor: '"Roxo"' }), codeCard('Código Python', `meu_polvo = {\n    "nome": "Polvonilson",\n    "cor": "Roxo"\n}`)]);
 
 const missao: Missao = {
   id: "1-1",
@@ -20,8 +15,6 @@ Se você já cursou a disciplina de Introdução à Programação (provavelmente
 De forma bem direta: é simplesmente **uma maneira diferente de organizar o seu código**, pensando em **entidades vivas** em vez de listas de comandos.
 
 Em vez de focar apenas no passo a passo (o algoritmo), a POO foca nos **atores** que fazem o programa funcionar. A gente para de pensar em variáveis espalhadas e passa a pensar em pacotes chamados **Objetos**.
-
-{{cards:0,1}}
 
 ## O problema que a POO resolve
 
@@ -45,11 +38,9 @@ Até aqui, tudo bem, certo? Mas e se precisarmos de 100 polvos no nosso oceano? 
 
 É exatamente aqui que a POO entra para salvar o dia. Na POO, nós paramos de lidar com variáveis soltas e criamos um pacote auto-suficiente chamado **Objeto** que guarda toda a informação necessária sobre aquela entidade.
 
-A mágica da POO acontece porque o código te permite materializar o seu modelo mental. Olha como fica fácil definir a estrutura do nosso mascote:
+A mágica da POO acontece porque o código te permite materializar o seu modelo mental. Olha como fica fácil definir a estrutura do nosso mascote.
 
-${diagrama}
-
-Olha que limpo! Todas as características estão unidas nesse pacote.
+Todas as características ficam unidas num único pacote.
 
 Percebe como a POO ajuda muito mais? Se quisermos 100 polvos agora, é só usar essa mesma estrutura 100 vezes. O código fica limpo, organizado e faz sentido para a mente humana.
 
@@ -72,10 +63,6 @@ Por esses motivos, te incentivamos a continuar a trilha! Cada missão vai refor�
       "POO não é exclusiva de interfaces gráficas — ela é usada em qualquer tipo de software: sistemas web, jogos, análise de dados, etc."
     ]
   },
-  cards: [
-    { title: "Pensamento Procedural", slides: slidesProcedural },
-    { title: "Pensamento Orientado a Objetos", slides: slidesOO },
-  ],
   has_interativo: false
 };
 
