@@ -5,6 +5,7 @@ import PolvosInterativo from "../components/missoes/nivel_1/missao_2/PolvosInter
 import TresPolvosInterativo from "../components/missoes/nivel_1/missao_2/TresPolvosInterativo";
 import FichaInterativo from "../components/missoes/nivel_1/missao_3/FichaInterativo";
 import FichaAcesso from "../components/missoes/nivel_1/missao_3/FichaAcesso";
+import PolvonilsonIntro from "../components/missoes/nivel_1/missao_0/PolvonilsonIntro";
 import SlideCard from "../components/SlideCard";
 import {
   ArrowLeftIcon,
@@ -336,6 +337,7 @@ const Missao: React.FC = () => {
             }
             return (
               <ReactMarkdown key={i} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={{
+                "polvonilson-intro": () => <PolvonilsonIntro />,
                 "bolo-factory": () => <BoloFactory />,
                 "polvos-interativo": () => <PolvosInterativo />,
                 "tres-polvos-interativo": () => <TresPolvosInterativo />,
