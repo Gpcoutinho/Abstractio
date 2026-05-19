@@ -6,7 +6,9 @@
 
 Rodar em paralelo:
 - `git status` — ver arquivos modificados e não rastreados
-- `git diff` — ver mudanças staged e unstaged
+- `git diff --stat` — ver **todas** as mudanças desde o último commit, não só a última alteração feita
+
+A mensagem deve cobrir todas as mudanças listadas, não apenas a última. Se houver arquivos não relacionados entre si, propor commits separados.
 
 **Passo 2 — Propor a mensagem**
 
