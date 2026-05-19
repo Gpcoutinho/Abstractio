@@ -12,7 +12,7 @@ const nivel_1: Nivel = {
   id: 1,
   title: "Nível 1 — Fundamentos: O despertar do Polvinho",
   short: "Fundamentos",
-  missoes: [missao_0, missao_1, missao_2, missao_3, missao_4, missao_5, missao_6, missao_7],
+  missoes: [missao_0, missao_1, missao_2, missao_4, missao_5, missao_3, missao_6, missao_7],
 };
 
 export default nivel_1;
