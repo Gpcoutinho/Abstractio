@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 type AttrKey = 'nome' | 'cor' | 'num_tentaculos' | 'tamanho_cm' | 'especie';
 
 const ATRIBUTOS: { key: AttrKey; value: string }[] = [
-  { key: 'nome',           value: '"Thiago"'          },
-  { key: 'cor',            value: '"roxo"'             },
+  { key: 'nome',           value: '"Ada"'             },
+  { key: 'cor',            value: '"rosa"'             },
   { key: 'num_tentaculos', value: '8'                  },
   { key: 'tamanho_cm',     value: '25'                 },
   { key: 'especie',        value: '"Octopus vulgaris"' },
@@ -21,8 +21,8 @@ const TENTACULOS_DATA = [
   { d: 'M99,66 Q112,86 106,104', dur: '2.2s', vals: '5,99,66;-5,99,66;5,99,66'     },
 ];
 
-const BODY  = '#7c5cbf';
-const LIGHT = '#a080d8';
+const BODY  = '#db2777';
+const LIGHT = '#f472b6';
 
 const FichaAcesso: React.FC = () => {
   const [selected, setSelected] = useState<AttrKey | null>(null);
@@ -41,7 +41,7 @@ const FichaAcesso: React.FC = () => {
     <div className="not-prose my-6 rounded-xl border border-borderDark bg-bgSecondary overflow-hidden">
       <div className="flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-borderDark">
 
-        {/* Thiago SVG */}
+        {/* Ada SVG */}
         <div className="flex-1 flex flex-col items-center justify-center py-10 gap-1">
           <svg viewBox="0 0 130 140" width="150" xmlns="http://www.w3.org/2000/svg" style={{ overflow: 'visible' }}>
 
@@ -89,12 +89,12 @@ const FichaAcesso: React.FC = () => {
 
             {selected === 'nome' && (
               <g>
-                <rect x="20" y="3" width="90" height="24" rx="4" fill="#1e1840" stroke="#4F33A9" strokeWidth="1" />
-                <text x="65" y="19" textAnchor="middle" fill={LIGHT} fontSize="13" fontFamily="monospace">Thiago</text>
+                <rect x="20" y="3" width="90" height="24" rx="4" fill="#2d0a1a" stroke={BODY} strokeWidth="1" />
+                <text x="65" y="19" textAnchor="middle" fill={LIGHT} fontSize="13" fontFamily="monospace">Ada</text>
               </g>
             )}
           </svg>
-          <p className="text-xs text-textSecondary font-mono">thiago</p>
+          <p className="text-xs text-textSecondary font-mono">ada</p>
         </div>
 
         {/* Access panel */}
@@ -118,7 +118,7 @@ const FichaAcesso: React.FC = () => {
             <div className="space-y-2 animate-in fade-in duration-200">
               <div className="bg-bgPrimary rounded-lg px-3 py-2.5 border border-borderDark">
                 <p className="text-[10px] text-textSecondary mb-1">acesso</p>
-                <code className="text-sm text-accent font-mono break-all">thiago.{attr.key}</code>
+                <code className="text-sm text-accent font-mono break-all">ada.{attr.key}</code>
               </div>
               <div className="flex justify-center text-textSecondary">↓</div>
               <div className="bg-bgPrimary rounded-lg px-3 py-2.5 border border-accent/30">

@@ -1,70 +1,70 @@
-# Missão 1-2 — Objeto
+﻿# MissÃ£o 1-2 â€” Objeto
 
-**Ícone:** PiCircle
+**Ãcone:** PiCircle
 **Emblema:** Criatura Marinha
 
 ## Teoria
 
-### Objetos estão em todo lugar
+### Objetos estÃ£o em todo lugar
 
 Olhe ao redor. Cadeira. Celular. Cachorro. Caneta.
 
 Todo objeto do mundo real tem duas coisas em comum:
 
-- **Características** — como ele _é_ (cor, nome, tamanho, peso...)
-- **Ações** — o que ele _faz_ (latir, carregar, rolar, escrever...)
+- **CaracterÃ­sticas** â€” como ele _Ã©_ (cor, nome, tamanho, peso...)
+- **AÃ§Ãµes** â€” o que ele _faz_ (latir, carregar, rolar, escrever...)
 
-> [svg: três cards — Cachorro, Celular e Carro — com seções explícitas "características" (dados em cinza) e "ações" (comportamentos em verde). Animação fade+slide em sequência. Adaptar labels do diagramaObjetos existente.]
+> [svg: trÃªs cards â€” Cachorro, Celular e Carro â€” com seÃ§Ãµes explÃ­citas "caracterÃ­sticas" (dados em cinza) e "aÃ§Ãµes" (comportamentos em verde). AnimaÃ§Ã£o fade+slide em sequÃªncia. Adaptar labels do diagramaObjetos existente.]
 
-Em programação, os objetos funcionam exatamente igual: possuem características próprias e realizam ações. Na nossa jornada, utilizaremos o universo marinho, em especial os polvos, que são animais muito versáteis - assim como a POO - para ilustrar o funcionamento desses objetos.
-
----
-
-### Polvonilson encontra Polvinho
-
-O Sr. Polvonilson está em expedição pelo oceano quando avista uma criatura que nunca viu.
-
-Ela existe. Tem uma cor. Um tamanho. Um número de tentáculos. E sabe fazer coisas — nada, se camufla, solta tinta.
-
-Polvonilson não sabe como essa criatura foi criada. Não importa — ele consegue observá-la e interagir com ela. Isso é um **objeto**: algo com características próprias e ações que sabe executar.
-
-> [interativo: PolvosInterativo — painel esquerdo "Características" com seletores de cor (Roxo / Azul / Verde), tamanho (Pequeno / Grande) e tentáculos (6 / 8); painel direito "Ações" com botões Nadar, Dar pirueta, Soltar tinta; Polvinho no centro reage visualmente a cada seleção e ação. Sem código visível.]
+Em programaÃ§Ã£o, os objetos funcionam exatamente igual: possuem caracterÃ­sticas prÃ³prias e realizam aÃ§Ãµes. Na nossa jornada, utilizaremos o universo marinho, em especial os polvos, que sÃ£o animais muito versÃ¡teis - assim como a POO - para ilustrar o funcionamento desses objetos.
 
 ---
 
-### Cada objeto é único
+### Otto encontra Ada
 
-No oceano de Polvonilson há outros polvos. Cada um é uma entidade separada — mesma natureza, dados completamente diferentes.
+O Sr. Otto estÃ¡ em expediÃ§Ã£o pelo oceano quando avista uma criatura que nunca viu.
 
-Polvinho é roxo e pequeno. Azulão é azul e grande. Marinho é verde.
+Ela existe. Tem uma cor. Um tamanho. Um nÃºmero de tentÃ¡culos. E sabe fazer coisas â€” nada, se camufla, solta tinta.
 
-Mudar algo em Polvinho não muda Azulão. Cada objeto guarda seus próprios dados de forma independente.
+Otto nÃ£o sabe como essa criatura foi criada. NÃ£o importa â€” ele consegue observÃ¡-la e interagir com ela. Isso Ã© um **objeto**: algo com caracterÃ­sticas prÃ³prias e aÃ§Ãµes que sabe executar.
 
-> [svg: três polvos lado a lado — Polvinho (roxo, pequeno, 8 tentáculos), Azulão (azul, grande, 6 tentáculos), Marinho (verde, médio, 8 tentáculos) — cada um com card de dados abaixo.]
+> [interativo: PolvosInterativo â€” painel esquerdo "CaracterÃ­sticas" com seletores de cor (Roxo / Azul / Verde), tamanho (Pequeno / Grande) e tentÃ¡culos (6 / 8); painel direito "AÃ§Ãµes" com botÃµes Nadar, Dar pirueta, Soltar tinta; Ada no centro reage visualmente a cada seleÃ§Ã£o e aÃ§Ã£o. Sem cÃ³digo visÃ­vel.]
 
 ---
 
-### As três marcas de todo objeto
+### Cada objeto Ã© Ãºnico
 
-Todo objeto — de um polvo a um celular — carrega três marcas:
+No oceano de Otto hÃ¡ outros polvos. Cada um Ã© uma entidade separada â€” mesma natureza, dados completamente diferentes.
 
-| Marca             | O que é                                   | Em Polvinho                      |
+Ada Ã© roxo e pequeno. AzulÃ£o Ã© azul e grande. Marinho Ã© verde.
+
+Mudar algo em Ada nÃ£o muda AzulÃ£o. Cada objeto guarda seus prÃ³prios dados de forma independente.
+
+> [svg: trÃªs polvos lado a lado â€” Ada (roxo, pequeno, 8 tentÃ¡culos), AzulÃ£o (azul, grande, 6 tentÃ¡culos), Marinho (verde, mÃ©dio, 8 tentÃ¡culos) â€” cada um com card de dados abaixo.]
+
+---
+
+### As trÃªs marcas de todo objeto
+
+Todo objeto â€” de um polvo a um celular â€” carrega trÃªs marcas:
+
+| Marca             | O que Ã©                                   | Em Ada                      |
 | ----------------- | ----------------------------------------- | -------------------------------- |
-| **Identidade**    | O que o diferencia dos outros             | Polvinho ≠ Azulão ≠ Marinho      |
-| **Estado**        | As características que carrega no momento | cor: Roxo, tentáculos: 8         |
+| **Identidade**    | O que o diferencia dos outros             | Ada â‰  AzulÃ£o â‰  Marinho      |
+| **Estado**        | As caracterÃ­sticas que carrega no momento | cor: Roxo, tentÃ¡culos: 8         |
 | **Comportamento** | O que ele sabe fazer                      | nadar, dar pirueta, soltar tinta |
 
 ---
 
-### De onde Polvinho veio?
+### De onde Ada veio?
 
-Polvonilson observa, interage, anota. Mas uma pergunta fica no ar:
+Otto observa, interage, anota. Mas uma pergunta fica no ar:
 
-_Quem definiu que Polvinho seria roxo? Que teria 8 tentáculos? Que saberia nadar?_
+_Quem definiu que Ada seria roxo? Que teria 8 tentÃ¡culos? Que saberia nadar?_
 
-A resposta ainda é um mistério. A caixa preta ainda está fechada.
+A resposta ainda Ã© um mistÃ©rio. A caixa preta ainda estÃ¡ fechada.
 
-Isso você descobre na **Missão 5**.
+Isso vocÃª descobre na **MissÃ£o 5**.
 
 ---
 
@@ -72,13 +72,13 @@ Isso você descobre na **Missão 5**.
 
 - [ ] Tem interativo
 
-## Exercício
+## ExercÃ­cio
 
-**Pergunta:** Polvonilson encontra dois polvos: Polvinho (roxo, 8 tentáculos) e Azulão (azul, 6 tentáculos). Ele muda a cor de Polvinho para verde. O que acontece com Azulão?
+**Pergunta:** Otto encontra dois polvos: Ada (roxo, 8 tentÃ¡culos) e AzulÃ£o (azul, 6 tentÃ¡culos). Ele muda a cor de Ada para verde. O que acontece com AzulÃ£o?
 
-- [ ] Azulão também fica verde — objetos do mesmo tipo compartilham características.
-- [x] Azulão continua azul — cada objeto guarda seus próprios dados de forma independente. ← correta
-- [ ] Azulão desaparece — só pode existir um polvo de cada vez.
-- [ ] Azulão perde todas as características — qualquer mudança afeta todos os objetos.
+- [ ] AzulÃ£o tambÃ©m fica verde â€” objetos do mesmo tipo compartilham caracterÃ­sticas.
+- [x] AzulÃ£o continua azul â€” cada objeto guarda seus prÃ³prios dados de forma independente. â† correta
+- [ ] AzulÃ£o desaparece â€” sÃ³ pode existir um polvo de cada vez.
+- [ ] AzulÃ£o perde todas as caracterÃ­sticas â€” qualquer mudanÃ§a afeta todos os objetos.
 
-**Explicação:** Cada objeto existe de forma independente. Mudar Polvinho não afeta Azulão — cada um carrega seus próprios dados.
+**ExplicaÃ§Ã£o:** Cada objeto existe de forma independente. Mudar Ada nÃ£o afeta AzulÃ£o â€” cada um carrega seus prÃ³prios dados.

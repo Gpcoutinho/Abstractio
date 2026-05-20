@@ -11,7 +11,7 @@ type PolvoData = {
 };
 
 const POLVOS: PolvoData[] = [
-  { tag: 'polvo 1', varName: 'polvo1', body: '#7c5cbf', light: '#9b7dd4', nome: 'Polvonilson', cor: 'Roxo'  },
+  { tag: 'polvo 1', varName: 'polvo1', body: '#7c5cbf', light: '#9b7dd4', nome: 'Otto', cor: 'Roxo'  },
   { tag: 'polvo 2', varName: 'polvo2', body: '#3a7aba', light: '#5a9ad4', nome: 'Azulão',      cor: 'Azul'  },
   { tag: 'polvo 3', varName: 'polvo3', body: '#2a9a6a', light: '#4ab884', nome: 'Marinho',     cor: 'Verde' },
 ];

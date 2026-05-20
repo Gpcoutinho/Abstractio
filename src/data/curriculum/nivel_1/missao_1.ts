@@ -8,7 +8,7 @@ const missao: Missao = {
   theory: `
 <caderno-abertura />
 
-Se você já cursou a disciplina de Introdução à Programação (provavelmente em C ou Python), você aprendeu a programar no paradigma **Procedural** — exatamente como as anotações de Polvonilson: um passo a passo, variáveis soltas espalhadas por aí.
+Se você já cursou a disciplina de Introdução à Programação (provavelmente em C ou Python), você aprendeu a programar no paradigma **Procedural** — exatamente como as anotações de Otto: um passo a passo, variáveis soltas espalhadas por aí.
 
 ## Mas afinal, o que é a Orientação a Objetos (POO)?
 
@@ -18,7 +18,7 @@ Se você já cursou a disciplina de Introdução à Programação (provavelmente
 >
 > — Grady Booch, *Análise e Projeto Orientado a Objetos com Aplicações*
 
-Em outras palavras: em vez de papéis soltos, Polvonilson vai aprender a criar **fichas** — uma por criatura, com tudo que ela é e tudo que ela sabe fazer. A POO foca nos **atores** que fazem o programa funcionar, não na lista de comandos.
+Em outras palavras: em vez de papéis soltos, Otto vai aprender a criar **fichas** — uma por criatura, com tudo que ela é e tudo que ela sabe fazer. A POO foca nos **atores** que fazem o programa funcionar, não na lista de comandos.
 
 Vamos para a próxima etapa?
 `,

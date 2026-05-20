@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 type AttrKey = 'nome' | 'cor' | 'num_tentaculos' | 'tamanho_cm' | 'especie';
 
 const ATRIBUTOS: { key: AttrKey; value: string }[] = [
-  { key: 'nome',           value: '"Thiago"'          },
-  { key: 'cor',            value: '"roxo"'             },
+  { key: 'nome',           value: '"Ada"'             },
+  { key: 'cor',            value: '"rosa"'             },
   { key: 'num_tentaculos', value: '8'                  },
   { key: 'tamanho_cm',     value: '25'                 },
   { key: 'especie',        value: '"Octopus vulgaris"' },
@@ -21,8 +21,8 @@ const TENTACULOS_DATA = [
   { d: 'M99,66 Q112,86 106,104', dur: '2.2s', vals: '5,99,66;-5,99,66;5,99,66'     },
 ];
 
-const BODY  = '#7c5cbf';
-const LIGHT = '#a080d8';
+const BODY  = '#db2777';
+const LIGHT = '#f472b6';
 
 const FichaInterativo: React.FC = () => {
   const [selected, setSelected] = useState<AttrKey | null>(null);
@@ -42,7 +42,7 @@ const FichaInterativo: React.FC = () => {
 
         {/* Attribute list */}
         <div className="p-5 md:w-52 space-y-2">
-          <p className="text-[10px] font-bold text-accent uppercase tracking-widest mb-3">Atributos de Thiago</p>
+          <p className="text-[10px] font-bold text-accent uppercase tracking-widest mb-3">Atributos de Ada</p>
           {ATRIBUTOS.map(a => (
             <button
               key={a.key}
@@ -54,15 +54,15 @@ const FichaInterativo: React.FC = () => {
           ))}
         </div>
 
-        {/* Thiago SVG */}
+        {/* Ada SVG */}
         <div className="flex-1 flex flex-col items-center justify-center py-10 gap-1">
           <svg viewBox="0 0 130 140" width="140" xmlns="http://www.w3.org/2000/svg" style={{ overflow: 'visible' }}>
 
             {/* Nome tag */}
             {selected === 'nome' && (
               <g>
-                <rect x="20" y="3" width="90" height="24" rx="4" fill="#1e1840" stroke="#4F33A9" strokeWidth="1" />
-                <text x="65" y="19" textAnchor="middle" fill={LIGHT} fontSize="13" fontFamily="monospace">Thiago</text>
+                <rect x="20" y="3" width="90" height="24" rx="4" fill="#2d0a1a" stroke={BODY} strokeWidth="1" />
+                <text x="65" y="19" textAnchor="middle" fill={LIGHT} fontSize="13" fontFamily="monospace">Ada</text>
               </g>
             )}
 
@@ -116,7 +116,7 @@ const FichaInterativo: React.FC = () => {
               </text>
             )}
           </svg>
-          <p className="text-xs text-textSecondary font-mono">thiago</p>
+          <p className="text-xs text-textSecondary font-mono">ada</p>
         </div>
 
       </div>

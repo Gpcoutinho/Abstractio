@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
-type Cor = 'Roxo' | 'Azul' | 'Verde';
+type Cor = 'Rosa' | 'Azul' | 'Verde';
 type Tamanho = 'Pequeno' | 'Grande';
 type NTentaculos = 6 | 8;
 type Acao = 'nadar' | 'pirueta' | 'tinta' | null;
 
 const COR_MAP: Record<Cor, { body: string; light: string }> = {
-  Roxo:  { body: '#7c5cbf', light: '#a080d8' },
+  Rosa:  { body: '#db2777', light: '#f472b6' },
   Azul:  { body: '#2c6ea8', light: '#5090d0' },
   Verde: { body: '#1e8858', light: '#3aaa78' },
 };
 
 const ACAO_MSG: Record<NonNullable<Acao>, string> = {
-  nadar:   '🌊 Polvinho está nadando!',
-  pirueta: '🌀 Polvinho deu uma pirueta!',
-  tinta:   '🖤 Polvinho soltou tinta!',
+  nadar:   '🌊 Ada está nadando!',
+  pirueta: '🌀 Ada deu uma pirueta!',
+  tinta:   '🖤 Ada soltou tinta!',
 };
 
 const TENTACULOS_DATA = [
@@ -29,7 +29,7 @@ const TENTACULOS_DATA = [
 ];
 
 const PolvosInterativo: React.FC = () => {
-  const [cor, setCor] = useState<Cor>('Roxo');
+  const [cor, setCor] = useState<Cor>('Rosa');
   const [tamanho, setTamanho] = useState<Tamanho>('Pequeno');
   const [tentaculos, setTentaculos] = useState<NTentaculos>(8);
   const [acao, setAcao] = useState<Acao>(null);
@@ -91,7 +91,7 @@ const PolvosInterativo: React.FC = () => {
           <div className="space-y-1.5">
             <p className="text-xs text-textSecondary">Cor</p>
             <div className="flex gap-2 flex-wrap">
-              {(['Roxo', 'Azul', 'Verde'] as Cor[]).map(c => (
+              {(['Rosa', 'Azul', 'Verde'] as Cor[]).map(c => (
                 <button key={c} onClick={() => setCor(c)} className={chip(cor === c)}>{c}</button>
               ))}
             </div>

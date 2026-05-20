@@ -1,68 +1,68 @@
-# Missão 1-3 — Atributos
+﻿# MissÃ£o 1-3 â€” Atributos
 
-**Ícone:** PiTag
-**Emblema:** Pintor(a) de Tentáculos
+**Ãcone:** PiTag
+**Emblema:** Pintor(a) de TentÃ¡culos
 
 ## Teoria
 
-### Polvonilson abre o caderno
+### Otto abre o caderno
 
-Na missão anterior, Polvonilson encontrou Thiago no oceano. Ele existe, é único, tem identidade própria.
+Na missÃ£o anterior, Otto encontrou Ada no oceano. Ele existe, Ã© Ãºnico, tem identidade prÃ³pria.
 
-Agora Polvonilson tira o caderno de campo e começa a registrar tudo o que observa: cor, tamanho, número de tentáculos, espécie...
+Agora Otto tira o caderno de campo e comeÃ§a a registrar tudo o que observa: cor, tamanho, nÃºmero de tentÃ¡culos, espÃ©cie...
 
-Cada informação registrada é um **atributo** — um dado que pertence especificamente a Thiago.
+Cada informaÃ§Ã£o registrada Ã© um **atributo** â€” um dado que pertence especificamente a Ada.
 
-> **Atributo** = uma informação que pertence a um objeto. Cada objeto guarda os seus próprios valores.
+> **Atributo** = uma informaÃ§Ã£o que pertence a um objeto. Cada objeto guarda os seus prÃ³prios valores.
 
-> [interativo: FichaInterativo — ficha de observação de Thiago com atributos clicáveis. Ao clicar em cada atributo, revela o valor e a linha Python correspondente: `thiago.cor → "roxo"`. Thiago aparece ao lado com a característica destacada visualmente.]
+> [interativo: FichaInterativo â€” ficha de observaÃ§Ã£o de Ada com atributos clicÃ¡veis. Ao clicar em cada atributo, revela o valor e a linha Python correspondente: `Ada.cor â†’ "rosa"`. Ada aparece ao lado com a caracterÃ­stica destacada visualmente.]
 
 <ficha-interativo></ficha-interativo>
 
 ---
 
-### O ponto — como acessar um atributo
+### O ponto â€” como acessar um atributo
 
-Em Python, o ponto (`.`) é a forma de acessar um atributo de um objeto. É como Polvonilson apontando para Thiago e dizendo: *"me dê sua cor"*.
+Em Python, o ponto (`.`) Ã© a forma de acessar um atributo de um objeto. Ã‰ como Otto apontando para Ada e dizendo: *"me dÃª sua cor"*.
 
 ```python
-print(thiago.nome)             # Thiago
-print(thiago.cor)              # roxo
-print(thiago.num_tentaculos)   # 8
-print(thiago.tamanho_cm)       # 25
-print(thiago.especie)          # Octopus vulgaris
+print(Ada.nome)             # Ada
+print(Ada.cor)              # rosa
+print(Ada.num_tentaculos)   # 8
+print(Ada.tamanho_cm)       # 25
+print(Ada.especie)          # Octopus vulgaris
 ```
 
-A estrutura é sempre: `objeto.atributo`.
+A estrutura Ã© sempre: `objeto.atributo`.
 
 ---
 
 ### Cada polvo guarda os seus
 
-No oceano há outros polvos. Cada um carrega seus próprios atributos — completamente independentes entre si.
+No oceano hÃ¡ outros polvos. Cada um carrega seus prÃ³prios atributos â€” completamente independentes entre si.
 
 ```python
-print(thiago.cor)    # roxo
+print(Ada.cor)    # rosa
 print(ana.cor)       # azul
 print(douglas.cor)   # verde
 ```
 
-Mudar a cor de Thiago não afeta Ana. Mudar Ana não afeta Douglas. Cada objeto é uma entidade separada com seus próprios dados.
+Mudar a cor de Ada nÃ£o afeta Ana. Mudar Ana nÃ£o afeta Douglas. Cada objeto Ã© uma entidade separada com seus prÃ³prios dados.
 
 ---
 
 ### Atributos podem mudar
 
-O estado de um objeto pode evoluir. Polvonilson observa Thiago se camuflando e atualiza o caderno:
+O estado de um objeto pode evoluir. Otto observa Ada se camuflando e atualiza o caderno:
 
 ```python
-thiago.cor = "transparente"
-print(thiago.cor)  # transparente
+Ada.cor = "transparente"
+print(Ada.cor)  # transparente
 ```
 
-Só `thiago.cor` mudou. Ana e Douglas continuam com as suas.
+SÃ³ `Ada.cor` mudou. Ana e Douglas continuam com as suas.
 
-> [svg: diagrama simples — `thiago.cor` com valor `"roxo"` → seta de atribuição → valor `"transparente"`. Outros polvos ao lado sem alteração.]
+> [svg: diagrama simples â€” `Ada.cor` com valor `"rosa"` â†’ seta de atribuiÃ§Ã£o â†’ valor `"transparente"`. Outros polvos ao lado sem alteraÃ§Ã£o.]
 
 ---
 
@@ -70,13 +70,13 @@ Só `thiago.cor` mudou. Ana e Douglas continuam com as suas.
 
 - [ ] Tem interativo
 
-## Exercício
+## ExercÃ­cio
 
-**Pergunta:** Polvonilson lê `thiago.cor` e vê `"roxo"`. Em seguida escreve `ana.cor = "verde"`. O que acontece com `thiago.cor`?
+**Pergunta:** Otto lÃª `Ada.cor` e vÃª `"rosa"`. Em seguida escreve `ana.cor = "verde"`. O que acontece com `Ada.cor`?
 
-- [ ] Muda para `"verde"` — objetos do mesmo tipo compartilham atributos.
-- [x] Continua `"roxo"` — cada objeto guarda seus próprios atributos. ← correta
-- [ ] Fica indefinido — só um polvo pode ter cor definida por vez.
-- [ ] Gera um erro — não é possível alterar atributos de objetos separados.
+- [ ] Muda para `"verde"` â€” objetos do mesmo tipo compartilham atributos.
+- [x] Continua `"rosa"` â€” cada objeto guarda seus prÃ³prios atributos. â† correta
+- [ ] Fica indefinido â€” sÃ³ um polvo pode ter cor definida por vez.
+- [ ] Gera um erro â€” nÃ£o Ã© possÃ­vel alterar atributos de objetos separados.
 
-**Explicação:** Atributos pertencem a cada objeto individualmente. Mudar `ana.cor` não afeta `thiago.cor` — são dados completamente independentes.
+**ExplicaÃ§Ã£o:** Atributos pertencem a cada objeto individualmente. Mudar `ana.cor` nÃ£o afeta `Ada.cor` â€” sÃ£o dados completamente independentes.

@@ -22,13 +22,13 @@ Em programação, os objetos funcionam exatamente igual: possuem característica
 
 ---
 
-## Polvonilson encontra Polvinho
+## Otto encontra Ada
 
-O Sr. Polvonilson está em expedição pelo oceano quando avista uma criatura que nunca viu.
+O Sr. Otto está em expedição pelo oceano quando avista uma criatura que nunca viu.
 
 Ela existe. Tem uma cor. Um tamanho. Um número de tentáculos. E sabe fazer coisas — nada, se camufla, solta tinta.
 
-Polvonilson não sabe como essa criatura foi criada. Não importa — ele consegue observá-la e interagir com ela. Isso é um **objeto**: algo com características próprias e ações que sabe executar.
+Otto não sabe como essa criatura foi criada. Não importa — ele consegue observá-la e interagir com ela. Isso é um **objeto**: algo com características próprias e ações que sabe executar.
 
 <polvos-interativo></polvos-interativo>
 
@@ -36,9 +36,9 @@ Polvonilson não sabe como essa criatura foi criada. Não importa — ele conseg
 
 ## Cada objeto é único
 
-No oceano de Polvonilson há outros polvos. Cada um é uma entidade separada — mesma natureza, dados completamente diferentes.
+No oceano de Otto há outros polvos. Cada um é uma entidade separada — mesma natureza, dados completamente diferentes.
 
-Thiago é roxo com 8 tentáculos. Ana é azul com 6. Douglas é verde.
+Ada é rosa com 8 tentáculos. Ana é azul com 6. Douglas é verde.
 
 Mude as características de um — o outro não muda. Cada objeto guarda seus próprios dados de forma independente.
 
@@ -52,24 +52,24 @@ Todo objeto — de um polvo a um celular — carrega três marcas:
 
 | Marca | O que é | Exemplo |
 |---|---|---|
-| **Identidade** | O que o diferencia dos outros | Thiago ≠ Ana ≠ Douglas |
-| **Estado** | As características que carrega no momento | cor: Roxo, tentáculos: 8 |
+| **Identidade** | O que o diferencia dos outros | Ada ≠ Ana ≠ Douglas |
+| **Estado** | As características que carrega no momento | cor: Rosa, tentáculos: 8 |
 | **Comportamento** | O que ele sabe fazer | nadar, dar pirueta, soltar tinta |
 
 ---
 
-## De onde Polvinho veio?
+## De onde Ada veio?
 
-Polvonilson observa, interage, anota. Mas uma pergunta fica no ar:
+Otto observa, interage, anota. Mas uma pergunta fica no ar:
 
-*Quem definiu que Polvinho seria roxo? Que teria 8 tentáculos? Que saberia nadar?*
+*Quem definiu que Ada seria rosa? Que teria 8 tentáculos? Que saberia nadar?*
 
 A resposta ainda é um mistério. A caixa preta ainda está fechada.
 
 Isso você descobre na **Missão 5**.
 `,
   exercise: {
-    question: "Polvonilson encontra dois polvos: Thiago (roxo, 8 tentáculos) e Ana (azul, 6 tentáculos). Ele muda a cor de Thiago para verde. O que acontece com Ana?",
+    question: "Otto encontra dois polvos: Ada (rosa, 8 tentáculos) e Ana (azul, 6 tentáculos). Ele muda a cor de Ada para verde. O que acontece com Ana?",
     options: [
       "Ana também fica verde — objetos do mesmo tipo compartilham características.",
       "Ana continua azul — cada objeto guarda seus próprios dados de forma independente.",
@@ -77,12 +77,12 @@ Isso você descobre na **Missão 5**.
       "Ana perde todas as características — qualquer mudança afeta todos os objetos."
     ],
     correct: 1,
-    explanation: "Cada objeto existe de forma independente. Mudar Thiago não afeta Ana — cada um carrega seus próprios dados.",
+    explanation: "Cada objeto existe de forma independente. Mudar Ada não afeta Ana — cada um carrega seus próprios dados.",
     wrong_explanations: [
-      "Não. Cada objeto é independente — tem seus próprios dados. Mudar Thiago não afeta Ana em nada.",
+      "Não. Cada objeto é independente — tem seus próprios dados. Mudar Ada não afeta Ana em nada.",
       "",
-      "Não. Vários objetos do mesmo tipo podem existir ao mesmo tempo. Thiago e Ana são entidades separadas e independentes.",
-      "Não. Mudar uma característica de Thiago só afeta Thiago. Ana é uma entidade independente com seus próprios dados intactos."
+      "Não. Vários objetos do mesmo tipo podem existir ao mesmo tempo. Ada e Ana são entidades separadas e independentes.",
+      "Não. Mudar uma característica de Ada só afeta Ada. Ana é uma entidade independente com seus próprios dados intactos."
     ]
   },
   has_interativo: false

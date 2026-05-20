@@ -24,9 +24,9 @@ Então qual seria esse propósito tão essencial da POO? Se eu já consigo defin
 
 ---
 
-## Conheça o Sr. Polvonilson
+## Conheça o Sr. Otto
 
-Para tornar essa jornada mais leve, pedimos que você se coloque no lugar do protagonista lúdico da plataforma, o Sr. Polvonilson. Ele é um **polvo cientista** cheio de curiosidade sobre o oceano e tudo que existe nele. E é nesse contexto leve que você vai entender todos os conceitos da POO:
+Para tornar essa jornada mais leve, pedimos que você se coloque no lugar do protagonista lúdico da plataforma, o Sr. Otto. Ele é um **polvo cientista** cheio de curiosidade sobre o oceano e tudo que existe nele. E é nesse contexto leve que você vai entender todos os conceitos da POO:
 
 <polvonilson-intro />
 

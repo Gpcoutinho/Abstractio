@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-type Cor = 'Roxo' | 'Azul' | 'Verde';
+type Cor = 'Rosa' | 'Azul' | 'Verde';
 type NTentaculos = 6 | 8;
 
 const COR_MAP: Record<Cor, { body: string; light: string }> = {
-  Roxo:  { body: '#7c5cbf', light: '#a080d8' },
+  Rosa:  { body: '#db2777', light: '#f472b6' },
   Azul:  { body: '#2c6ea8', light: '#5090d0' },
   Verde: { body: '#1e8858', light: '#3aaa78' },
 };
@@ -27,7 +27,7 @@ interface PolvoConfig {
 }
 
 const INITIAL: PolvoConfig[] = [
-  { name: 'Thiago',  cor: 'Roxo',  tentaculos: 8 },
+  { name: 'Ada',     cor: 'Rosa',  tentaculos: 8 },
   { name: 'Ana',     cor: 'Azul',  tentaculos: 6 },
   { name: 'Douglas', cor: 'Verde', tentaculos: 8 },
 ];
@@ -84,7 +84,7 @@ const TresPolvosInterativo: React.FC = () => {
                 <div className="space-y-1">
                   <p className="text-[10px] text-textSecondary uppercase tracking-wider">Cor</p>
                   <div className="flex gap-1.5 flex-wrap">
-                    {(['Roxo', 'Azul', 'Verde'] as Cor[]).map(c => (
+                    {(['Rosa', 'Azul', 'Verde'] as Cor[]).map(c => (
                       <button key={c} onClick={() => update(idx, { cor: c })} className={chip(polvo.cor === c)}>
                         {c}
                       </button>
