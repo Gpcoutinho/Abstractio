@@ -288,6 +288,7 @@ const Missao: React.FC = () => {
         <section className="mb-8 prose prose-invert max-w-none prose-headings:text-textPrimary prose-headings:font-bold prose-p:text-textBody prose-p:leading-relaxed prose-strong:text-textPrimary prose-blockquote:border-l-accent prose-blockquote:text-textSecondary prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary prose-li:text-textBody">
           {missao.theory.split(/(\{\{cards?:[0-9,]+\}\}|\{\{[a-z][a-z-]*\}\})/).map((part, i) => {
             if (i % 2 === 1) {
+              if (part === '{{caderno-abertura}}') return <CadernoAbertura key={i} />;
               if (part === '{{polvonilson-intro}}') return <PolvonilsonIntro key={i} />;
               if (part === '{{slides-poo}}') return <SlidesPOO key={i} />;
               if (part === '{{o-que-vai-encontrar}}') return <OQueVaiEncontrar key={i} />;
