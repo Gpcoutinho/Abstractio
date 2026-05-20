@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import SlideCard from '../../../SlideCard';
+import SlideCard from '../../SlideCard';
 
 type PolvoData = {
   tag: string;
