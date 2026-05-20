@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { TrophyIcon, LockClosedIcon } from '@heroicons/react/24/outline';
 import { niveis } from '../data/curriculum';
 import { MOLDURAS } from '../data/molduras';
+import { ACESSORIOS } from '../data/acessorios';
 import { useProgress } from '../hooks/useProgress';
 import type { Genero } from '../contexts/ProgressContext';
 import ShellIcon from '../components/ShellIcon';
@@ -33,11 +34,14 @@ const GENERO_OPTIONS: { value: Genero; label: string }[] = [
   { value: 'outro', label: 'Outro' },
 ];
 
+type LojaTab = 'molduras' | 'acessorios' | 'cores';
+
 const Perfil: React.FC = () => {
-  const { nome, genero, conchas, completed, nivelDisplay, avatarIdx, setNome, setGenero, setAvatarIdx, niveis_concluidos, moldurasDesbloqueadas, molduraAtiva, comprarMoldura, setMolduraAtiva } = useProgress();
+  const { nome, genero, conchas, completed, nivelDisplay, avatarIdx, setNome, setGenero, setAvatarIdx, niveis_concluidos, moldurasDesbloqueadas, molduraAtiva, comprarMoldura, setMolduraAtiva, acessoriosDesbloqueados, acessorioAtivo, comprarAcessorio, setAcessorioAtivo } = useProgress();
   const molduraAtivaData = MOLDURAS.find(m => m.id === molduraAtiva) ?? MOLDURAS[0];
   const [nomeInput, setNomeInput] = useState(nome);
   const [salvo, setSalvo] = useState(false);
+  const [lojaTab, setLojaTab] = useState<LojaTab>('molduras');
 
   const handleSalvarNome = () => {
     setNome(nomeInput.trim());
@@ -147,73 +151,121 @@ const Perfil: React.FC = () => {
           </p>
         </section>
 
-        {/* Molduras */}
-        <section className="bg-bgSecondary border border-borderDark rounded-xl p-6 mb-6">
-          <h2 className="text-sm font-semibold text-textSecondary uppercase tracking-widest mb-1">
-            Molduras
-          </h2>
-          <p className="text-xs text-textSecondary mb-5">
-            Compre molduras com suas conchas e aplique ao avatar.
-          </p>
-          <div className="grid grid-cols-3 gap-4">
-            {MOLDURAS.map(moldura => {
-              const owned = moldurasDesbloqueadas.includes(moldura.id);
-              const ativa = molduraAtiva === moldura.id;
-              const podaComprar = !owned && conchas >= moldura.custo;
-              const avatarSrc = AVATARES[avatarIdx]?.src ?? AVATARES[0].src;
+        {/* Loja de conchas — card unificado com tabs */}
+        <section className="bg-bgSecondary border border-borderDark rounded-xl mb-6">
+          {/* Header */}
+          <div className="px-6 pt-6 pb-0">
+            <h2 className="text-sm font-semibold text-textSecondary uppercase tracking-widest mb-4">
+              Loja de conchas
+            </h2>
+            {/* Tabs */}
+            <div className="flex gap-1 border-b border-borderDark">
+              {(['molduras', 'acessorios', 'cores'] as LojaTab[]).map(tab => {
+                const labels: Record<LojaTab, string> = { molduras: 'Molduras', acessorios: 'Acessórios', cores: 'Cores' };
+                const ativa = lojaTab === tab;
+                return (
+                  <button
+                    key={tab}
+                    onClick={() => setLojaTab(tab)}
+                    className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 -mb-px ${
+                      ativa
+                        ? 'border-accent text-accent'
+                        : 'border-transparent text-textSecondary hover:text-textPrimary'
+                    }`}
+                  >
+                    {labels[tab]}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
 
-              return (
-                <div key={moldura.id} className="flex flex-col items-center gap-2">
-                  {/* Preview */}
-                  <AvatarFrame moldura={moldura}>
-                    <div className="w-14 h-14 rounded-full overflow-hidden bg-bgPrimary">
-                      <img src={avatarSrc} alt={moldura.nome} className="w-full h-full object-cover" />
+          {/* Conteúdo da tab */}
+          <div className="p-6">
+            {lojaTab === 'molduras' && (
+              <div className="grid grid-cols-3 gap-4">
+                {MOLDURAS.map(moldura => {
+                  const owned = moldurasDesbloqueadas.includes(moldura.id);
+                  const ativa = molduraAtiva === moldura.id;
+                  const podaComprar = !owned && conchas >= moldura.custo;
+                  const avatarSrc = AVATARES[avatarIdx]?.src ?? AVATARES[0].src;
+                  return (
+                    <div key={moldura.id} className="flex flex-col items-center gap-2">
+                      <AvatarFrame moldura={moldura}>
+                        <div className="w-28 h-28 rounded-full overflow-hidden bg-bgPrimary">
+                          <img src={avatarSrc} alt={moldura.nome} className="w-full h-full object-cover" />
+                        </div>
+                      </AvatarFrame>
+                      <p className="text-xs font-medium text-textPrimary text-center leading-tight">{moldura.nome}</p>
+                      {moldura.custo === 0 || owned ? (
+                        <button
+                          onClick={() => setMolduraAtiva(moldura.id)}
+                          className={`text-xs px-3 py-1 rounded-full transition-colors ${ativa ? 'bg-accent/20 text-accent font-semibold' : 'text-textSecondary hover:text-textPrimary'}`}
+                        >
+                          {ativa ? 'Ativa' : 'Usar'}
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => comprarMoldura(moldura.id)}
+                          disabled={!podaComprar}
+                          className={`inline-flex items-center gap-1 text-xs px-3 py-1 rounded-full transition-colors ${podaComprar ? 'bg-accent/10 text-accent hover:bg-accent/20' : 'text-textSecondary/40 cursor-not-allowed'}`}
+                        >
+                          {moldura.custo}
+                          <ShellIcon className="w-3 h-3" />
+                        </button>
+                      )}
                     </div>
-                  </AvatarFrame>
+                  );
+                })}
+              </div>
+            )}
 
-                  {/* Nome */}
-                  <p className="text-xs font-medium text-textPrimary text-center leading-tight">{moldura.nome}</p>
+            {lojaTab === 'acessorios' && (
+              <div className="grid grid-cols-3 gap-4">
+                {ACESSORIOS.map(acessorio => {
+                  const owned = acessoriosDesbloqueados.includes(acessorio.id);
+                  const ativo = acessorioAtivo === acessorio.id;
+                  const podeComprar = !owned && conchas >= acessorio.custo;
+                  const avatarSrc = AVATARES[avatarIdx]?.src ?? AVATARES[0].src;
+                  return (
+                    <div key={acessorio.id} className="flex flex-col items-center gap-2">
+                      <div className="relative w-28 h-28 rounded-full overflow-hidden bg-bgPrimary">
+                        <img src={avatarSrc} alt={acessorio.nome} className="w-full h-full object-cover" />
+                        {acessorio.src && (
+                          <img src={acessorio.src} alt={acessorio.nome} className="absolute inset-0 w-full h-full object-cover" />
+                        )}
+                      </div>
+                      <p className="text-xs font-medium text-textPrimary text-center leading-tight">{acessorio.nome}</p>
+                      {acessorio.custo === 0 || owned ? (
+                        <button
+                          onClick={() => setAcessorioAtivo(acessorio.id)}
+                          className={`text-xs px-3 py-1 rounded-full transition-colors ${ativo ? 'bg-accent/20 text-accent font-semibold' : 'text-textSecondary hover:text-textPrimary'}`}
+                        >
+                          {ativo ? 'Ativo' : 'Usar'}
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => comprarAcessorio(acessorio.id)}
+                          disabled={!podeComprar}
+                          className={`inline-flex items-center gap-1 text-xs px-3 py-1 rounded-full transition-colors ${podeComprar ? 'bg-accent/10 text-accent hover:bg-accent/20' : 'text-textSecondary/40 cursor-not-allowed'}`}
+                        >
+                          {acessorio.custo}
+                          <ShellIcon className="w-3 h-3" />
+                        </button>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
 
-                  {/* Ação */}
-                  {moldura.custo === 0 ? (
-                    <button
-                      onClick={() => setMolduraAtiva(moldura.id)}
-                      className={`text-xs px-3 py-1 rounded-full transition-colors ${
-                        ativa
-                          ? 'bg-accent/20 text-accent font-semibold'
-                          : 'text-textSecondary hover:text-textPrimary'
-                      }`}
-                    >
-                      {ativa ? 'Ativa' : 'Usar'}
-                    </button>
-                  ) : owned ? (
-                    <button
-                      onClick={() => setMolduraAtiva(moldura.id)}
-                      className={`text-xs px-3 py-1 rounded-full transition-colors ${
-                        ativa
-                          ? 'bg-accent/20 text-accent font-semibold'
-                          : 'text-textSecondary hover:text-textPrimary'
-                      }`}
-                    >
-                      {ativa ? 'Ativa' : 'Usar'}
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => comprarMoldura(moldura.id)}
-                      disabled={!podaComprar}
-                      className={`inline-flex items-center gap-1 text-xs px-3 py-1 rounded-full transition-colors ${
-                        podaComprar
-                          ? 'bg-accent/10 text-accent hover:bg-accent/20'
-                          : 'text-textSecondary/40 cursor-not-allowed'
-                      }`}
-                    >
-                      {moldura.custo}
-                      <ShellIcon className="w-3 h-3" />
-                    </button>
-                  )}
-                </div>
-              );
-            })}
+            {lojaTab === 'cores' && (
+              <div className="flex flex-col items-center justify-center py-10 gap-3 text-center">
+                <p className="text-3xl">🎨</p>
+                <p className="text-sm font-medium text-textPrimary">Em breve</p>
+                <p className="text-xs text-textSecondary">Cores de avatar chegam em uma próxima atualização.</p>
+              </div>
+            )}
           </div>
         </section>
 
