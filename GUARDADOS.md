@@ -30,7 +30,7 @@ Ideias boas que ficaram de fora de algum lugar por timing, complexidade ou simpl
 
 ---
 
-## Mascote animado na seÃ§Ã£o "ConheÃ§a o Sr. Otto" (MissÃ£o 1-0)
+## Mascote animado na seÃ§Ã£o "ConheÃ§a Otto" (MissÃ£o 1-0)
 
 **Origem:** MissÃ£o 1-0 â€” "Antes de comeÃ§ar"
-**Motivo guardado:** Ideia adiada por prioridade. Adicionar o SVG animado do Otto (tentÃ¡culos ondulando + bolhas) logo abaixo do tÃ­tulo `## ConheÃ§a o Sr. Otto`, antes do texto, para o usuÃ¡rio ver o personagem antes de ler sobre ele. O SVG jÃ¡ existe na missÃ£o 1-1 e pode ser reutilizado.
+**Motivo guardado:** Ideia adiada por prioridade. Adicionar o SVG animado do Otto (tentÃ¡culos ondulando + bolhas) logo abaixo do tÃ­tulo `## ConheÃ§a Otto`, antes do texto, para o usuÃ¡rio ver o personagem antes de ler sobre ele. O SVG jÃ¡ existe na missÃ£o 1-1 e pode ser reutilizado.

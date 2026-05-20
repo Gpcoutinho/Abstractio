@@ -23,9 +23,9 @@ EntÃ£o qual seria esse propÃ³sito tÃ£o essencial da POO? Se eu jÃ¡ consi
 
 ---
 
-## ConheÃ§a o Sr. Otto
+## ConheÃ§a Otto
 
-Para tornar essa jornada mais leve, pedimos que vocÃª se coloque no lugar do protagonista lÃºdico da plataforma, o Sr. Otto. Ele Ã© um **polvo cientista** cheio de curiosidade sobre o oceano e tudo que existe nele. E Ã© nesse contexto leve que vocÃª vai entender todos os conceitos da POO:
+Para tornar essa jornada mais leve, pedimos que vocÃª se coloque no lugar do protagonista lÃºdico da plataforma, Otto. Ele Ã© um **polvo cientista** cheio de curiosidade sobre o oceano e tudo que existe nele. E Ã© nesse contexto leve que vocÃª vai entender todos os conceitos da POO:
 
 - **Fundamentos** â€” Classes, Objetosâ€¦
 - **Pilares** â€” AbstraÃ§Ã£o, Encapsulamento, HeranÃ§a e Polimorfismo

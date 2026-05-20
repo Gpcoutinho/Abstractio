@@ -22,7 +22,7 @@ Em programaÃ§Ã£o, os objetos funcionam exatamente igual: possuem caracterÃ�
 
 ### Otto encontra Ada
 
-O Sr. Otto estÃ¡ em expediÃ§Ã£o pelo oceano quando avista uma criatura que nunca viu.
+Otto estÃ¡ em expediÃ§Ã£o pelo oceano quando avista uma criatura que nunca viu.
 
 Ela existe. Tem uma cor. Um tamanho. Um nÃºmero de tentÃ¡culos. E sabe fazer coisas â€” nada, se camufla, solta tinta.
 

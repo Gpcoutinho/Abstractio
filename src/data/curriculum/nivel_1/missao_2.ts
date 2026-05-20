@@ -24,7 +24,7 @@ Em programação, os objetos funcionam exatamente igual: possuem característica
 
 ## Otto encontra Ada
 
-O Sr. Otto está em expedição pelo oceano quando avista uma criatura que nunca viu.
+Otto está em expedição pelo oceano quando avista uma criatura que nunca viu.
 
 Ela existe. Tem uma cor. Um tamanho. Um número de tentáculos. E sabe fazer coisas — nada, se camufla, solta tinta.
 

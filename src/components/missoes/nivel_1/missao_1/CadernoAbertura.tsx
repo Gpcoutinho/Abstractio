@@ -13,7 +13,7 @@ const CadernoAbertura: React.FC = () => (
         <p className="text-sm font-bold text-amber-800">
           Caderno de Campo — Vol. 1
         </p>
-        <p className="text-sm text-amber-700">Pesquisador: Sr. Otto</p>
+        <p className="text-sm text-amber-700">Pesquisador: Otto</p>
         <p className="text-sm text-amber-700">Dia 1 — Oceano Atlântico Sul</p>
       </div>
 

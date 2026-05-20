@@ -7,7 +7,7 @@ Cada missÃ£o deve ter um exemplo principal dentro desse universo. Aplicar ao r
 
 ## Arco Geral
 
-O **Sr. Otto** Ã© um polvo cientista curioso que estuda e organiza o oceano ao seu redor usando Python + POO.
+O **Otto** Ã© um polvo cientista curioso que estuda e organiza o oceano ao seu redor usando Python + POO.
 A trilha acompanha sua jornada em quatro etapas:
 
 | NÃ­vel | Etapa | CenÃ¡rio |
@@ -23,7 +23,7 @@ A trilha acompanha sua jornada em quatro etapas:
 
 | MissÃ£o | Conceito | Elemento marinho central | Nomes sugeridos | NÃºcleo do exemplo |
 |---|---|---|---|---|
-| 1-0 | Antes de comeÃ§ar | ApresentaÃ§Ã£o do Sr. Otto | â€” | Sem cÃ³digo. Narrativa jÃ¡ estabelecida na missÃ£o. |
+| 1-0 | Antes de comeÃ§ar | ApresentaÃ§Ã£o do Otto | â€” | Sem cÃ³digo. Narrativa jÃ¡ estabelecida na missÃ£o. |
 | 1-1 | O que Ã© POO? | Dados soltos de polvos | `polvo1_nome`, `polvo1_cor`, `meu_polvo` | Sem POO: variÃ¡veis soltas `polvo1_nome`, `polvo1_cor`... caos com 100 polvos. Com POO: cada polvo vira um objeto organizado. Narrativa jÃ¡ parcialmente escrita na missÃ£o atual. |
 | 1-2 | Objeto | Ada encontrado no oceano | `Ada`, `azulao`, `marinho` | Otto *encontra* Ada no oceano. NÃ£o sabe ainda como ele foi criado â€” apenas observa que ele existe, tem identidade prÃ³pria (`nome`, `cor`) e Ã© diferente de outros polvos. MetÃ¡fora da caixa preta: vocÃª usa sem saber o que hÃ¡ dentro. Nenhuma `class` aparece ainda. |
 | 1-3 | Atributos | Ficha de observaÃ§Ã£o de Ada | `Ada.nome`, `Ada.cor`, `Ada.num_tentaculos`, `Ada.tamanho_cm`, `Ada.especie` | Otto *lÃª* os atributos de Ada preenchendo a ficha de campo. Ele acessa dados de um objeto que jÃ¡ existe â€” nÃ£o define nada ainda. ReforÃ§ar: atributo Ã© informaÃ§Ã£o que pertence ao objeto, cada polvo guarda os seus prÃ³prios valores. |
@@ -78,7 +78,7 @@ A trilha acompanha sua jornada em quatro etapas:
 
 ## Notas de ConsistÃªncia
 
-- O protagonista Ã© sempre **Sr. Otto** â€” polvo cientista, nunca "o programador" ou "o desenvolvedor".
+- O protagonista Ã© sempre **Otto** â€” polvo cientista, nunca "o programador" ou "o desenvolvedor".
 - O polvo principal chama-se **Ada** (roxo, `Octopus vulgaris`, o que aparece na tela inicial).
 - A hierarquia de heranÃ§a estabelecida Ã©: `Molusco â†’ Cefalopode â†’ Polvo / Lula / Sepia`.
 - Criaturas secundÃ¡rias recorrentes: `Peixe`, `Tubarao`, `Tartaruga`, `Linguado`.
