@@ -65,7 +65,7 @@ const Sidebar: React.FC = () => {
           <img
             src="/isotipo.png"
             alt="Isotipo"
-            className="w-7 h-7 rounded-md"
+            className="w-7 h-7 rounded-md object-contain"
           />
           <img src={logotipoImg} alt="Abstractio" className="h-5 object-contain" />
         </Link>
@@ -98,7 +98,7 @@ const Sidebar: React.FC = () => {
           <img
             src="/isotipo.png"
             alt="Isotipo"
-            className="w-8 h-8 rounded-md"
+            className="w-10 h-10 rounded-md object-contain"
           />
           <img src={logotipoImg} alt="Abstractio" className="h-6 object-contain" />
         </div>
