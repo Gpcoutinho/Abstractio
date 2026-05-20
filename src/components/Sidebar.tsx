@@ -87,7 +87,7 @@ const Sidebar: React.FC = () => {
         } md:translate-x-0`}
       >
         {/* Logo */}
-        <div className="flex items-center justify-center gap-3 h-16 border-b border-borderDark flex-shrink-0">
+        <div className="flex items-center justify-center gap-1.5 h-16 border-b border-borderDark flex-shrink-0">
           <button
             onClick={() => setOpen(false)}
             className="md:hidden ml-1 rounded-md hover:bg-bgPrimary/30"
