@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { useProgress } from "../hooks/useProgress";
 import { MOLDURAS } from "../data/molduras";
+import { ACESSORIOS } from "../data/acessorios";
 import AvatarFrame from "./AvatarFrame";
 import ShellIcon from "./ShellIcon";
 import imgPolvinho from "../assets/avatares/avatar-polvinho.png";
@@ -31,9 +32,10 @@ const NAV_ITEMS = [
 
 const Sidebar: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const { conchas, nivelDisplay, nomeDisplay, avatarIdx, molduraAtiva } = useProgress();
+  const { conchas, nivelDisplay, nomeDisplay, avatarIdx, molduraAtiva, acessorioAtivo } = useProgress();
   const avatarSrc = AVATAR_SRCS[avatarIdx] ?? AVATAR_SRCS[0];
   const moldura = MOLDURAS.find(m => m.id === molduraAtiva) ?? MOLDURAS[0];
+  const acessorioSrc = ACESSORIOS.find(a => a.id === acessorioAtivo)?.src ?? '';
 
   return (
     <>
@@ -110,7 +112,7 @@ const Sidebar: React.FC = () => {
             <Link
               to="/perfil"
               onClick={() => setOpen(false)}
-              className="w-28 h-28 rounded-full ring-2 ring-accent/40 overflow-hidden hover:ring-accent transition-all shadow-lg bg-bgPrimary block"
+              className="relative w-32 h-32 rounded-full ring-2 ring-accent/40 overflow-hidden hover:ring-accent transition-all shadow-lg bg-bgPrimary block"
               title="Perfil"
             >
               {avatarSrc ? (
@@ -123,6 +125,13 @@ const Sidebar: React.FC = () => {
                 <div className="w-full h-full bg-bgPrimary flex items-center justify-center">
                   <UserCircleIcon className="w-8 h-8 text-textSecondary" />
                 </div>
+              )}
+              {acessorioSrc && (
+                <img
+                  src={acessorioSrc}
+                  alt="Acessório"
+                  className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                />
               )}
             </Link>
           </AvatarFrame>

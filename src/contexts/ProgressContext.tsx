@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
 import { niveis } from '../data/curriculum';
 import { MOLDURAS } from '../data/molduras';
+import { ACESSORIOS } from '../data/acessorios';
 
 const STORAGE_KEY = 'abstractio:progress';
 
@@ -16,6 +17,8 @@ interface ProgressState {
   avatarIdx: number;
   moldurasDesbloqueadas: string[];
   molduraAtiva: string;
+  acessoriosDesbloqueados: string[];
+  acessorioAtivo: string;
 }
 
 const DEFAULT_STATE: ProgressState = {
@@ -28,6 +31,8 @@ const DEFAULT_STATE: ProgressState = {
   avatarIdx: 0,
   moldurasDesbloqueadas: ['none'],
   molduraAtiva: 'none',
+  acessoriosDesbloqueados: ['none'],
+  acessorioAtivo: 'none',
 };
 
 function loadFromStorage(): ProgressState {
@@ -56,6 +61,8 @@ export interface ProgressContextValue {
   avatarIdx: number;
   moldurasDesbloqueadas: string[];
   molduraAtiva: string;
+  acessoriosDesbloqueados: string[];
+  acessorioAtivo: string;
   completarMissao: (missaoId: string, tentativas?: number) => void;
   desmarcarMissao: (missaoId: string) => void;
   setNome: (nome: string) => void;
@@ -63,6 +70,8 @@ export interface ProgressContextValue {
   setAvatarIdx: (idx: number) => void;
   comprarMoldura: (molduraId: string) => void;
   setMolduraAtiva: (molduraId: string) => void;
+  comprarAcessorio: (acessorioId: string) => void;
+  setAcessorioAtivo: (acessorioId: string) => void;
 }
 
 export const ProgressContext = createContext<ProgressContextValue | undefined>(undefined);
@@ -142,8 +151,25 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setState(prev => ({ ...prev, molduraAtiva: molduraId }));
   }, []);
 
+  const comprarAcessorio = useCallback((acessorioId: string) => {
+    setState(prev => {
+      if (prev.acessoriosDesbloqueados.includes(acessorioId)) return prev;
+      const acessorio = ACESSORIOS.find(a => a.id === acessorioId);
+      if (!acessorio || prev.conchas < acessorio.custo) return prev;
+      return {
+        ...prev,
+        conchas: prev.conchas - acessorio.custo,
+        acessoriosDesbloqueados: [...prev.acessoriosDesbloqueados, acessorioId],
+      };
+    });
+  }, []);
+
+  const setAcessorioAtivo = useCallback((acessorioId: string) => {
+    setState(prev => ({ ...prev, acessorioAtivo: acessorioId }));
+  }, []);
+
   return (
-    <ProgressContext.Provider value={{ ...state, completarMissao, desmarcarMissao, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva }}>
+    <ProgressContext.Provider value={{ ...state, completarMissao, desmarcarMissao, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva, comprarAcessorio, setAcessorioAtivo }}>
       {children}
     </ProgressContext.Provider>
   );
