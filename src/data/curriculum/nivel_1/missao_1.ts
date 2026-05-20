@@ -16,6 +16,8 @@ Para piorar: Marta, do laboratório vizinho, também estava usando as mesmas fol
 
 Você pode estar pensando: *"basta cada um usar os seus próprios papéis"*. Certo — isso resolve o problema de espaço. Mas agora Otto anota "cor: rosa", Marta escreve "pink", Pedro registra um código hexadecimal. Na hora de comparar 100 criaturas coletadas por 4 pesquisadores diferentes, o caos volta — com outro nome.
 
+{{dados-globais}}
+
 O problema não é só onde os dados ficam. É que os dados e as regras de como usá-los vivem separados — e qualquer um pode inventar as suas.
 
 A POO propõe juntar os dois: a ficha de Ada não é só um papel com dados. É um pacote completo — os dados e as regras de como registrá-los andam juntos, inseparáveis.
