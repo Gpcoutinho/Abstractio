@@ -27,6 +27,7 @@ import MissionIcon from "../components/MissionIcon";
 import HexBadge from "../components/HexBadge";
 import interativoHtml from "../assets/interativos/nivel_1_missao_7.html?raw";
 import ProgressBar from '../components/ProgressBar';
+import ConceitoBox from '../components/ConceitoBox';
 
 const interativos: Record<string, string> = {
   "interativos/nivel_1_missao_7.html": interativoHtml,
@@ -342,6 +343,7 @@ const Missao: React.FC = () => {
               <ReactMarkdown key={i} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={{
                 "polvonilson-intro": () => <PolvonilsonIntro />,
                 "caderno-abertura": () => <CadernoAbertura />,
+                "conceito": ({ children }: { children?: React.ReactNode }) => <ConceitoBox>{children}</ConceitoBox>,
                 "slides-poo": () => <SlidesPOO />,
                 "bolo-factory": () => <BoloFactory />,
                 "polvos-interativo": () => <PolvosInterativo />,

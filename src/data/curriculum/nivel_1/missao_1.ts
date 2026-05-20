@@ -14,14 +14,13 @@ Se você já cursou a disciplina de Introdução à Programação (provavelmente
 
 {{slides-poo}}
 
-> "A orientação a objetos é um método de desenvolvimento que organiza o software como uma coleção de objetos — cada um incorporando estrutura de dados e comportamento."
->
-> — Grady Booch, *Análise e Projeto Orientado a Objetos com Aplicações*
+<conceito>Programação Orientada a Objetos é um paradigma que organiza o software em torno de <strong>objetos</strong> — entidades que possuem um <strong>estado</strong> (o que sabem sobre si mesmas) e um <strong>comportamento</strong> (o que sabem fazer).</conceito>
 
-Em outras palavras: em vez de papéis soltos, Otto vai aprender a criar **fichas** — uma por criatura, com tudo que ela é e tudo que ela sabe fazer. A POO foca nos **atores** que fazem o programa funcionar, não na lista de comandos.
+Em vez de uma lista interminável de comandos, a POO organiza o software em torno de **objetos** — entidades que *sabem coisas* (seu estado) e *sabem fazer coisas* (seu comportamento).
 
-Vamos para a próxima etapa?
-`,
+Otto não vai mais anotar tudo em papéis soltos. Ele vai criar uma **ficha para Ada**: o que ela é, o que ela sabe fazer. Uma ficha por criatura — organizada, completa, reutilizável.
+
+Vamos para a próxima etapa?`,
   exercise: {
     question: "Qual das alternativas melhor define a Programação Orientada a Objetos?",
     options: [
