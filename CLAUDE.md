@@ -220,6 +220,10 @@ Essas linhas descrevem o visual existente (ou desejado) naquele ponto da teoria.
 4. Ao final de mudanças maiores, informar quantas linhas foram adicionadas/excluídas
 
 
+## Commits
+
+Nunca incluir linha "Co-Authored-By" nas mensagens de commit.
+
 ## Deploy
 
 App client-side puro. Build: `npm run build` → pasta `dist/`
