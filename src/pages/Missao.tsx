@@ -28,6 +28,7 @@ import HexBadge from "../components/HexBadge";
 import interativoHtml from "../assets/interativos/nivel_1_missao_7.html?raw";
 import ProgressBar from '../components/ProgressBar';
 import ConceitoBox from '../components/ConceitoBox';
+import OQueVaiEncontrar from '../components/missoes/nivel_1/missao_0/OQueVaiEncontrar';
 
 const interativos: Record<string, string> = {
   "interativos/nivel_1_missao_7.html": interativoHtml,
@@ -287,7 +288,9 @@ const Missao: React.FC = () => {
         <section className="mb-8 prose prose-invert max-w-none prose-headings:text-textPrimary prose-headings:font-bold prose-p:text-textBody prose-p:leading-relaxed prose-strong:text-textPrimary prose-blockquote:border-l-accent prose-blockquote:text-textSecondary prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary prose-li:text-textBody">
           {missao.theory.split(/(\{\{cards?:[0-9,]+\}\}|\{\{[a-z][a-z-]*\}\})/).map((part, i) => {
             if (i % 2 === 1) {
+              if (part === '{{polvonilson-intro}}') return <PolvonilsonIntro key={i} />;
               if (part === '{{slides-poo}}') return <SlidesPOO key={i} />;
+              if (part === '{{o-que-vai-encontrar}}') return <OQueVaiEncontrar key={i} />;
               const indices = part.match(/\d+/g)!.map(Number);
               const isRow = part.startsWith("{{cards:");
               const renderCard = (idx: number, className?: string) => {
