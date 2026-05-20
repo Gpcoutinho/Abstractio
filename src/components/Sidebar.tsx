@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import logotipoImg from '../assets/logotipo-removebg.png';
 import { Link, NavLink } from "react-router-dom";
 import {
   HomeIcon,
@@ -64,9 +65,9 @@ const Sidebar: React.FC = () => {
           <img
             src="/isotipo.png"
             alt="Isotipo"
-            className="w-7 h-7 rounded-md"
+            className="w-7 h-7 rounded-md object-contain"
           />
-          <span className="font-bold text-textPrimary">Abstractio</span>
+          <img src={logotipoImg} alt="Abstractio" className="h-5 object-contain" />
         </Link>
       </div>
 
@@ -86,7 +87,7 @@ const Sidebar: React.FC = () => {
         } md:translate-x-0`}
       >
         {/* Logo */}
-        <div className="flex items-center justify-center gap-3 h-16 border-b border-borderDark flex-shrink-0">
+        <div className="flex items-center justify-center gap-1.5 h-16 border-b border-borderDark flex-shrink-0">
           <button
             onClick={() => setOpen(false)}
             className="md:hidden ml-1 rounded-md hover:bg-bgPrimary/30"
@@ -97,11 +98,9 @@ const Sidebar: React.FC = () => {
           <img
             src="/isotipo.png"
             alt="Isotipo"
-            className="w-8 h-8 rounded-md"
+            className="w-10 h-10 rounded-md object-contain"
           />
-          <span className="text-xl font-bold tracking-tight text-textPrimary">
-            Abstractio
-          </span>
+          <img src={logotipoImg} alt="Abstractio" className="h-6 object-contain" />
         </div>
 
         {/* Avatar + info */}

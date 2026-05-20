@@ -27,7 +27,7 @@ export function useProgress() {
     ? Math.round((completed.length / totalMissoes) * 100)
     : 0;
 
-  const nomeDisplay = nome.trim() || 'Sr. Polvonilson';
+  const nomeDisplay = nome.trim() || 'Otto';
 
   return {
     completed,

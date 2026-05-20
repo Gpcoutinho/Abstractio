@@ -1,97 +1,90 @@
-# Missão 1-5 — Métodos
+# Missão 1-3 — Classe
 
-**Ícone:** ⚙️
+**Ícone:** 📐
 **Pontos:** 15
 
 ## Teoria
 
-## O que um objeto sabe *fazer*
+## A forma de assar bolo
 
-Você já sabe que objetos têm **atributos** (o que sabem). Agora veja o que eles sabem **fazer**.
+Na missão anterior, você conheceu o **objeto** — o bolo. Agora é hora de conhecer o **molde**: a **classe**.
 
-Esses comportamentos são os **métodos**: funções que vivem dentro de uma classe e descrevem as ações dos objetos.
+A forma de assar bolos não é um bolo. Ela é a instrução de como criar bolos. Uma classe funciona exatamente assim: define como os objetos daquele tipo devem ser.
+
+> **Classe** = o molde que descreve como os objetos serão criados — quais dados eles têm e o que sabem fazer.
+
+> [animação: forma de bolo (roxo, alças laterais, label "class Bolo") no centro. Um bolo com cobertura rosa, drips e cereja sobe da forma com easing spring, flutua com brilho roxo e estrelas, depois desce de volta. Loop contínuo. Legenda: "a forma cria o bolo".]
+
+---
+
+**Cuidado para não confundir os bolos**
+
+Se você já aprendeu que "um algoritmo é como uma receita de bolo", prepare-se — na POO usamos a mesma analogia com um papel diferente, e isso costuma dar um nó. A diferença está no foco:
+
+- **Procedural (Algoritmo = Receita = Ações):** foca em **verbos** — *quebre* os ovos, *misture* a farinha, *asse* por 40 minutos. A receita *é* o programa: executa de cima a baixo uma vez e produz um resultado.
+- **POO (Classe = Receita/Forma = Ingredientes):** foca em **substantivos** — não importa *como* você fez a massa; importa a *estrutura*: "todo bolo que sair daqui seguirá este molde". A classe não executa sozinha — ela existe para criar objetos.
+
+Resumindo: a receita é uma **lista de tarefas**. A classe é uma **fábrica**.
+
+> [animação: dois painéis lado a lado. Esquerdo — "Receita (Procedural)": lista de 3 passos com seta e um único 🎂, legenda "executa uma vez". Direito — "Classe (POO)": bloco "class Bolo:" com botão "Produzir Bolo" que a cada clique adiciona um 🎂 abaixo. Legenda: "Mesma palavra, papéis opostos."]
+
+---
+
+## Criando uma classe
 
 ```python
+# "class" avisa o Python: "estou criando um molde"
 class Cachorro:
-    def __init__(self, nome):
-        self.nome = nome
+    def __init__(self, nome, raca):
+        self.nome = nome   # dado que todo cachorro tem
+        self.raca = raca   # dado que todo cachorro tem
 
-    def latir(self):                       # método sem parâmetros extras
-        return f"{self.nome}: Au au au!"
-
-    def buscar(self, objeto):              # método com parâmetro
-        return f"{self.nome} foi buscar o {objeto}!"
-
-rex = Cachorro("Rex")
-print(rex.latir())           # Rex: Au au au!
-print(rex.buscar("graveto")) # Rex foi buscar o graveto!
+    def apresentar(self):
+        return f"Au! Sou {self.nome}, um {self.raca}!"
 ```
 
----
-
-## O mistério do `self`
-
-Todo método tem `self` como primeiro parâmetro — mas quando você chama o método, não passa nada para ele. Por quê?
-
-Se você tem dois cachorros e chama `rex.latir()` e `bolt.latir()`, os dois usam o **mesmo método**. O `self` é o que diz ao método em qual objeto ele está operando:
+Criando cachorros a partir do molde:
 
 ```python
-class Cachorro:
-    def __init__(self, nome):
-        self.nome = nome
+rex  = Cachorro("Rex",  "Labrador")
+bolt = Cachorro("Bolt", "Husky")
+mia  = Cachorro("Mia",  "Poodle")
 
-    def latir(self):
-        # self.nome acessa o nome DESTE cachorro específico
-        return f"{self.nome}: Au au!"
-
-rex  = Cachorro("Rex")
-bolt = Cachorro("Bolt")
-
-# Python traduz rex.latir() para Cachorro.latir(rex)
-print(rex.latir())   # Rex: Au au!
-print(bolt.latir())  # Bolt: Au au!
+print(rex.apresentar())   # Au! Sou Rex, um Labrador!
+print(bolt.apresentar())  # Au! Sou Bolt, um Husky!
+print(mia.apresentar())   # Au! Sou Mia, um Poodle!
 ```
 
-> **Resumindo o `self`:** é a referência ao objeto que chamou o método — sem ele, o método não saberia em qual objeto está operando.
+**Uma classe, três objetos diferentes** — o molde é o mesmo, cada produto é único.
+
+> [svg: dois painéis conectados por seta — "class Cachorro" (ícone 📐, borda roxa, legenda "O Molde") → seta "Cria" → "Objetos Criados" com cards rex e bolt (borda azul). Animação de fade em sequência. Legenda: "A classe é o molde — os objetos são os produtos criados a partir dela".]
 
 ---
 
-## Um exemplo completo
+## O que uma classe pode ter
 
-```python
-class ContaBancaria:
-    def __init__(self, titular, saldo=0):
-        self.titular = titular
-        self.saldo   = saldo
-
-    def depositar(self, valor):
-        self.saldo += valor
-        return f"Saldo: R${self.saldo:.2f}"
-
-    def sacar(self, valor):
-        if valor > self.saldo:
-            return f"Saldo insuficiente. Você tem R${self.saldo:.2f}"
-        self.saldo -= valor
-        return f"Saldo: R${self.saldo:.2f}"
-
-conta = ContaBancaria("Maria", 100.0)
-print(conta.depositar(50))  # Saldo: R$150.00
-print(conta.sacar(30))      # Saldo: R$120.00
-```
-
----
-
-## Método vs. função comum
-
-| | Função | Método |
+| Parte | O que é | Exemplo |
 |---|---|---|
-| Onde fica | Fora de uma classe | Dentro de uma classe |
-| Acessa dados do objeto? | Não | Sim (via `self`) |
-| Como chamar | `latir(cachorro)` | `cachorro.latir()` |
+| **Atributo** | Uma característica | `self.nome`, `self.raca` |
+| **Método** | Um comportamento | `def apresentar(self)` |
+| **Construtor** | O setup inicial | `def __init__(self, ...)` |
 
-> [svg: três painéis completos — "class Cachorro" (roxo) → seta "Cria" → "Objetos Criados" com rex e bolt (azul) → seta "Chama" → "Método" com rex.latir() retornando "Rex: Au au au!" (verde). Animação de fade em sequência. Legenda: "Classe → objetos → método em ação". SVG idêntico ao da missão 1, agora com o quadro completo após o aluno ter aprendido os três conceitos.]
+Cada uma dessas partes terá sua própria missão neste nível.
 
-> **Resumindo:** Métodos são as ações que um objeto sabe executar. Sempre têm `self` para saber em qual objeto estão operando — mas você não precisa passá-lo na chamada.
+---
+
+## Regra de nomenclatura
+
+Por convenção, nomes de classes em Python usam **PascalCase** — cada palavra começa com maiúscula:
+
+```python
+class Cachorro:       # correto
+class ContaBancaria:  # correto
+class cachorro:       # evitar
+class conta_bancaria: # evitar
+```
+
+> **Resumindo:** Uma classe é o molde que define como um tipo de objeto deve ser — com suas características e comportamentos. A partir de uma classe, você cria quantos objetos quiser.
 
 ## Mini-jogo
 
@@ -99,11 +92,11 @@ print(conta.sacar(30))      # Saldo: R$120.00
 
 ## Exercício
 
-**Pergunta:** Por que todo método de instância em Python deve ter `self` como primeiro parâmetro?
+**Pergunta:** Escolha a alternativa que melhor define o que é uma **classe**:
 
-- [ ] É uma convenção opcional que melhora apenas a legibilidade.
-- [x] Para que o método acesse e modifique os atributos do objeto específico que o chamou. ← correta
-- [ ] Porque o Python exige que toda função tenha ao menos um parâmetro.
-- [ ] Para indicar que o método é público e acessível externamente.
+- [ ] Um objeto específico criado em tempo de execução.
+- [x] Um molde que descreve as propriedades e comportamentos de um tipo de objeto. ← correta
+- [ ] Uma biblioteca externa usada para executar a linguagem.
+- [ ] Um erro de sintaxe comum em Python.
 
-**Explicação:** `self` é uma referência à instância. Sem ele, o método não saberia qual objeto está manipulando.
+**Explicação:** Uma classe é um molde. A partir dela criamos quantos objetos (instâncias) quisermos.

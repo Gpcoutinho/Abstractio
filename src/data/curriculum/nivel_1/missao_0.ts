@@ -24,14 +24,17 @@ Então qual seria esse propósito tão essencial da POO? Se eu já consigo defin
 
 ---
 
-## Conheça o Sr. Polvonilson
+## Conheça Otto
 
-Para tornar essa jornada mais leve, pedimos que você se coloque no lugar do protagonista lúdico da plataforma, o Sr. Polvonilson. Ele é um **polvo cientista** cheio de curiosidade sobre o oceano e tudo que existe nele. E é nesse contexto leve que você vai entender todos os conceitos da POO:
+Para tornar essa jornada mais leve, pedimos que você se coloque no lugar do protagonista lúdico da plataforma, Otto. Ele é um **polvo cientista** cheio de curiosidade sobre o oceano e tudo que existe nele. E é nesse contexto leve que você vai entender todos os conceitos da POO:
 
-- **Fundamentos** — Classes, Objetos, Atributos, Métodos e Construtores
-- **Pilares** — Abstração, Encapsulamento, Herança e Polimorfismo
-- **Mecânicas** — Contratos(Classes Abstratas e Interfaces) e Relacionamentos (Associação, Agregação e Composição)
-- **Engenharias** — Coesão, Acoplamento, Princípios SOLID e Design Patterns
+{{polvonilson-intro}}
+
+---
+
+## O que você vai encontrar por aqui
+
+{{o-que-vai-encontrar}}
 
 ---
 

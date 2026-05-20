@@ -1,108 +1,75 @@
 import type { Missao } from '../types';
-import { moldeBoloAnimation, diagramaClasseObjeto } from '../../visuals/nivel_1';
 
 const missao: Missao = {
-  id: "1-5",
-  title: "Classe",
-  icon: "PiRuler",
-  emblem: "Modelador Mágico",
+  id: "1-3",
+  title: "Atributos",
+  icon: "PiTag",
+  emblem: "Pintor(a) de Tentáculos",
   theory: `
-## A forma de assar bolo
+## Otto abre o caderno
 
-Na missão anterior, você conheceu o **objeto** — o bolo. Agora é hora de conhecer o **molde**: a **classe**.
+Na missão anterior, Otto encontrou Ada no oceano. Ela existe, é única, tem identidade própria.
 
-A forma de assar bolos não é um bolo. Ela é a instrução de como criar bolos. Uma classe funciona exatamente assim: define como os objetos daquele tipo devem ser.
+Agora Otto tira o caderno de campo e começa a registrar tudo o que observa: cor, tamanho, número de tentáculos, espécie...
 
-> **Classe** = o molde que descreve como os objetos serão criados — quais dados eles têm e o que sabem fazer.
+Cada informação registrada é um **atributo** — um dado que pertence especificamente a Ada.
 
-${moldeBoloAnimation}
+> **Atributo** = uma informação que pertence a um objeto. Cada objeto guarda os seus próprios valores.
 
----
-
-**Cuidado para não confundir os bolos**
-
-Se você já aprendeu que "um algoritmo é como uma receita de bolo", prepare-se — na POO usamos a mesma analogia com um papel diferente, e isso costuma dar um nó. A diferença está no foco:
-
-- **Procedural (Algoritmo = Receita = Ações):** foca em **verbos** — *quebre* os ovos, *misture* a farinha, *asse* por 40 minutos. A receita *é* o programa: executa de cima a baixo uma vez e produz um resultado.
-- **POO (Classe = Receita/Forma = Ingredientes):** foca em **substantivos** — não importa *como* (passos) você fez a massa; importa a *estrutura* (ingredientes): "todo bolo que sair daqui seguirá este molde". A classe não executa sozinha — ela existe para criar objetos.
-
-Resumindo: a receita é uma **lista de tarefas**. A classe é uma **fábrica**.
-
-<bolo-factory></bolo-factory>
+<ficha-interativo></ficha-interativo>
 
 ---
 
-## Criando uma classe
+## O ponto — como acessar um atributo
+
+Em Python, o ponto (\`.\`) é a forma de acessar um atributo de um objeto. É como Otto apontando para Ada e dizendo: *"me dê sua cor"*.
+
+<ficha-acesso></ficha-acesso>
+
+A estrutura é sempre: \`objeto.atributo\`.
+
+---
+
+## Cada polvo guarda os seus
+
+No oceano há outros polvos. Cada um carrega seus próprios atributos — completamente independentes entre si.
 
 \`\`\`python
-# "class" avisa o Python: "estou criando um molde"
-class Cachorro:
-    def __init__(self, nome, raca):
-        self.nome = nome   # dado que todo cachorro tem
-        self.raca = raca   # dado que todo cachorro tem
-
-    def apresentar(self):
-        return f"Au! Sou {self.nome}, um {self.raca}!"
+print(ada.cor)     # rosa
+print(ana.cor)     # azul
+print(douglas.cor) # verde
 \`\`\`
 
-Criando cachorros a partir do molde:
-
-\`\`\`python
-rex  = Cachorro("Rex",  "Labrador")
-bolt = Cachorro("Bolt", "Husky")
-mia  = Cachorro("Mia",  "Poodle")
-
-print(rex.apresentar())   # Au! Sou Rex, um Labrador!
-print(bolt.apresentar())  # Au! Sou Bolt, um Husky!
-print(mia.apresentar())   # Au! Sou Mia, um Poodle!
-\`\`\`
-
-**Uma classe, três objetos diferentes** — o molde é o mesmo, cada produto é único.
-
-${diagramaClasseObjeto}
+Mudar a cor de Ada não afeta Ana. Mudar Ana não afeta Douglas. Cada objeto é uma entidade separada com seus próprios dados.
 
 ---
 
-## O que uma classe pode ter
+## Atributos podem mudar
 
-| Parte | O que é | Exemplo |
-|---|---|---|
-| **Atributo** | Uma característica | \`self.nome\`, \`self.raca\` |
-| **Método** | Um comportamento | \`def apresentar(self)\` |
-| **Construtor** | O setup inicial | \`def __init__(self, ...)\` |
-
-Cada uma dessas partes terá sua própria missão neste nível.
-
----
-
-## Regra de nomenclatura
-
-Por convenção, nomes de classes em Python usam **PascalCase** — cada palavra começa com maiúscula:
+O estado de um objeto pode evoluir. Otto observa Ada se camuflando e atualiza o caderno:
 
 \`\`\`python
-class Cachorro:       # correto
-class ContaBancaria:  # correto
-class cachorro:       # evitar
-class conta_bancaria: # evitar
+ada.cor = "transparente"
+print(ada.cor)  # transparente
 \`\`\`
 
-> **Resumindo:** Uma classe é o molde que define como um tipo de objeto deve ser — com suas características e comportamentos. A partir de uma classe, você cria quantos objetos quiser.
+Só \`ada.cor\` mudou. Ana e Douglas continuam com as suas.
 `,
   exercise: {
-    question: "Escolha a alternativa que melhor define o que é uma **classe**:",
+    question: "Otto lê `ada.cor` e vê `\"rosa\"`. Em seguida escreve `ana.cor = \"verde\"`. O que acontece com `ada.cor`?",
     options: [
-      "Um objeto específico criado em tempo de execução.",
-      "Um molde que descreve as propriedades e comportamentos de um tipo de objeto.",
-      "Uma biblioteca externa usada para executar a linguagem.",
-      "Um erro de sintaxe comum em Python."
+      "Muda para \"verde\" — objetos do mesmo tipo compartilham atributos.",
+      "Continua \"rosa\" — cada objeto guarda seus próprios atributos.",
+      "Fica indefinido — só um polvo pode ter cor definida por vez.",
+      "Gera um erro — não é possível alterar atributos de objetos separados."
     ],
     correct: 1,
-    explanation: "Exato! Uma classe é um molde. A partir dela criamos quantos objetos (instâncias) quisermos.",
+    explanation: "Atributos pertencem a cada objeto individualmente. Mudar `ana.cor` não afeta `ada.cor` — são dados completamente independentes.",
     wrong_explanations: [
-      "Isso descreve uma instância (objeto), não uma classe. A classe é o molde; o objeto é o produto concreto criado a partir dela.",
+      "Não. Atributos são independentes por objeto. Mudar `ana.cor` só afeta Ana — Ada mantém seus próprios dados intactos.",
       "",
-      "Bibliotecas são coleções de código externo que você importa. Classes são estruturas da própria linguagem para definir tipos de objetos.",
-      "`class` é uma palavra reservada válida do Python para declarar uma classe — o oposto de um erro de sintaxe."
+      "Não. Vários objetos podem ter o mesmo atributo definido ao mesmo tempo. Ada e Ana são entidades independentes, cada uma com sua própria `cor`.",
+      "Não. Alterar o atributo de um objeto nunca afeta o de outro. `ana.cor = \"verde\"` é válido e só modifica Ana."
     ]
   },
   has_interativo: false

@@ -1,6 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
-import BoloFactory from "../components/BoloFactory";
+import BoloFactory from "../components/missoes/nivel_1/missao_5/BoloFactory";
+import PolvosInterativo from "../components/missoes/nivel_1/missao_2/PolvosInterativo";
+import TresPolvosInterativo from "../components/missoes/nivel_1/missao_2/TresPolvosInterativo";
+import FichaInterativo from "../components/missoes/nivel_1/missao_3/FichaInterativo";
+import FichaAcesso from "../components/missoes/nivel_1/missao_3/FichaAcesso";
+import PolvonilsonIntro from "../components/missoes/nivel_1/missao_0/PolvonilsonIntro";
+import CadernoAbertura from "../components/missoes/nivel_1/missao_1/CadernoAbertura";
+import SlidesPOO from "../components/missoes/nivel_1/missao_1/SlidesPOO";
 import SlideCard from "../components/SlideCard";
 import {
   ArrowLeftIcon,
@@ -20,6 +27,8 @@ import MissionIcon from "../components/MissionIcon";
 import HexBadge from "../components/HexBadge";
 import interativoHtml from "../assets/interativos/nivel_1_missao_7.html?raw";
 import ProgressBar from '../components/ProgressBar';
+import ConceitoBox from '../components/ConceitoBox';
+import OQueVaiEncontrar from '../components/missoes/nivel_1/missao_0/OQueVaiEncontrar';
 
 const interativos: Record<string, string> = {
   "interativos/nivel_1_missao_7.html": interativoHtml,
@@ -68,7 +77,7 @@ const LinkedSlideRow: React.FC<LinkedSlideRowProps> = ({ cards }) => {
         ))}
       </div>
       <div className="flex items-center justify-between px-2 pt-3">
-        <div>
+        <div className="flex-1">
           {!isFirst && (
             <button
               onClick={() => navigate(current - 1)}
@@ -88,7 +97,7 @@ const LinkedSlideRow: React.FC<LinkedSlideRowProps> = ({ cards }) => {
             />
           ))}
         </div>
-        <div>
+        <div className="flex-1 flex justify-end">
           {isLast ? (
             <button
               onClick={() => navigate(0)}
@@ -256,7 +265,7 @@ const Missao: React.FC = () => {
           <header className={`border-t border-borderDark/5 transition-all duration-500 ease-in-out ${showBar ? "py-4" : "py-2"}`}>
             <div className="px-5">
               <p className={`text-textSecondary text-[10px] uppercase tracking-wider transition-all duration-300 ${showBar ? "opacity-100 mb-1" : "opacity-0 h-0"}`}>
-                {nivel.title} · Missão {missaoIdx}
+                {nivel.title} · Missão {missao.id.split('-')[1]}
               </p>
               <h1 className={`font-bold text-textPrimary flex items-center gap-2 transition-all duration-300 ${showBar ? "text-xl" : "text-sm"}`}>
                 <MissionIcon
@@ -265,7 +274,7 @@ const Missao: React.FC = () => {
                   className={showBar ? "w-7 h-7 transition-all duration-300" : "w-6 h-6 transition-all duration-300"}
                 />
                 <span>
-                  {!showBar && <span className="text-textSecondary font-normal">Missão {missaoIdx} — </span>}
+                  {!showBar && <span className="text-textSecondary font-normal">Missão {missao.id.split('-')[1]} — </span>}
                   {missao.title}
                 </span>
               </h1>
@@ -277,8 +286,11 @@ const Missao: React.FC = () => {
       {/* Conteúdo da Missão */}
       <div className="max-w-3xl mx-auto pt-8 pb-16 px-5">
         <section className="mb-8 prose prose-invert max-w-none prose-headings:text-textPrimary prose-headings:font-bold prose-p:text-textBody prose-p:leading-relaxed prose-strong:text-textPrimary prose-blockquote:border-l-accent prose-blockquote:text-textSecondary prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary prose-li:text-textBody">
-          {missao.theory.split(/(\{\{cards?:[0-9,]+\}\})/).map((part, i) => {
+          {missao.theory.split(/(\{\{cards?:[0-9,]+\}\}|\{\{[a-z][a-z-]*\}\})/).map((part, i) => {
             if (i % 2 === 1) {
+              if (part === '{{polvonilson-intro}}') return <PolvonilsonIntro key={i} />;
+              if (part === '{{slides-poo}}') return <SlidesPOO key={i} />;
+              if (part === '{{o-que-vai-encontrar}}') return <OQueVaiEncontrar key={i} />;
               const indices = part.match(/\d+/g)!.map(Number);
               const isRow = part.startsWith("{{cards:");
               const renderCard = (idx: number, className?: string) => {
@@ -332,7 +344,21 @@ const Missao: React.FC = () => {
             }
             return (
               <ReactMarkdown key={i} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={{
+                "polvonilson-intro": () => <PolvonilsonIntro />,
+                "caderno-abertura": () => <CadernoAbertura />,
+                "conceito": ({ children }: { children?: React.ReactNode }) => <ConceitoBox>{children}</ConceitoBox>,
+                "slides-poo": () => <SlidesPOO />,
                 "bolo-factory": () => <BoloFactory />,
+                "polvos-interativo": () => <PolvosInterativo />,
+                "tres-polvos-interativo": () => <TresPolvosInterativo />,
+                "ficha-interativo": () => <FichaInterativo />,
+                "ficha-acesso": () => <FichaAcesso />,
+                p: ({ node, children, ...props }: any) => {
+                  const hasBlock = node?.children?.some(
+                    (c: any) => c.type === 'element' && !['a','strong','em','code','span','br'].includes(c.tagName)
+                  );
+                  return hasBlock ? <>{children}</> : <p {...props}>{children}</p>;
+                },
                 code: CodeBlock,
                 pre: ({ children }: { children: React.ReactNode }) => <>{children}</>,
                 table: ({ children }: { children?: React.ReactNode }) => (

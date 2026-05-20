@@ -75,7 +75,7 @@ const CodeBlock: React.FC<Props> = ({ className, children }) => {
 
   if (!match) {
     return (
-      <code className="text-accent bg-bgSecondary px-1 rounded font-mono text-sm">
+      <code className="text-accent font-mono text-sm font-normal">
         {children}
       </code>
     );

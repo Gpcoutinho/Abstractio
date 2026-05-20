@@ -1,90 +1,97 @@
-# Missão 1-4 — Atributos
+# Missão 1-5 — Métodos
 
-**Ícone:** 🏷️
+**Ícone:** ⚙️
 **Pontos:** 15
 
 ## Teoria
 
-## O que um objeto *sabe*
+## O que um objeto sabe *fazer*
 
-Pessoas têm nome, idade, altura. Carros têm modelo, cor, velocidade. Contas têm saldo, titular, número.
+Você já sabe que objetos têm **atributos** (o que sabem). Agora veja o que eles sabem **fazer**.
 
-Essas características — os **dados** que descrevem um objeto — são chamadas de **atributos**.
-
-> **Atributo** = uma informação que pertence a um objeto específico. Cada objeto guarda seus próprios valores.
-
----
-
-## Atributos na prática
-
-```python
-class Pessoa:
-    def __init__(self, nome, idade):
-        self.nome  = nome   # atributo: nome da pessoa
-        self.idade = idade  # atributo: idade da pessoa
-
-ana   = Pessoa("Ana",   28)
-pedro = Pessoa("Pedro", 35)
-
-# Cada objeto tem seus próprios valores
-print(ana.nome)    # Ana
-print(pedro.nome)  # Pedro
-print(ana.idade)   # 28
-print(pedro.idade) # 35
-```
-
-O ponto (`.`) é a forma de acessar um atributo: `objeto.atributo`.
-
----
-
-## Atributos podem mudar
-
-O estado de um objeto pode evoluir ao longo do tempo:
-
-```python
-class ContaBancaria:
-    def __init__(self, titular):
-        self.titular = titular
-        self.saldo   = 0.0      # começa zerado
-
-conta = ContaBancaria("Maria")
-print(conta.saldo)   # 0.0
-
-conta.saldo += 100   # depósito
-print(conta.saldo)   # 100.0
-
-conta.saldo -= 30    # saque
-print(conta.saldo)   # 70.0
-```
-
----
-
-## Atributos de instância vs. atributos de classe
-
-| Tipo | Onde fica | Compartilhado? | Exemplo |
-|---|---|---|---|
-| **De instância** | Dentro do `__init__` com `self` | Não — cada objeto tem o seu | `self.nome` |
-| **De classe** | Fora do `__init__`, direto na classe | Sim — todos os objetos compartilham | `especie = "Canis"` |
+Esses comportamentos são os **métodos**: funções que vivem dentro de uma classe e descrevem as ações dos objetos.
 
 ```python
 class Cachorro:
-    especie = "Canis lupus familiaris"  # atributo de classe — igual para todos
-
     def __init__(self, nome):
-        self.nome = nome  # atributo de instância — único por objeto
+        self.nome = nome
+
+    def latir(self):                       # método sem parâmetros extras
+        return f"{self.nome}: Au au au!"
+
+    def buscar(self, objeto):              # método com parâmetro
+        return f"{self.nome} foi buscar o {objeto}!"
+
+rex = Cachorro("Rex")
+print(rex.latir())           # Rex: Au au au!
+print(rex.buscar("graveto")) # Rex foi buscar o graveto!
+```
+
+---
+
+## O mistério do `self`
+
+Todo método tem `self` como primeiro parâmetro — mas quando você chama o método, não passa nada para ele. Por quê?
+
+Se você tem dois cachorros e chama `rex.latir()` e `bolt.latir()`, os dois usam o **mesmo método**. O `self` é o que diz ao método em qual objeto ele está operando:
+
+```python
+class Cachorro:
+    def __init__(self, nome):
+        self.nome = nome
+
+    def latir(self):
+        # self.nome acessa o nome DESTE cachorro específico
+        return f"{self.nome}: Au au!"
 
 rex  = Cachorro("Rex")
 bolt = Cachorro("Bolt")
 
-print(rex.nome)     # Rex    — único do rex
-print(bolt.nome)    # Bolt   — único do bolt
-print(rex.especie)  # Canis lupus familiaris — compartilhado
-print(bolt.especie) # Canis lupus familiaris — o mesmo valor
+# Python traduz rex.latir() para Cachorro.latir(rex)
+print(rex.latir())   # Rex: Au au!
+print(bolt.latir())  # Bolt: Au au!
 ```
 
-Na maioria dos casos você usará **atributos de instância** — cada objeto com seus próprios dados.
+> **Resumindo o `self`:** é a referência ao objeto que chamou o método — sem ele, o método não saberia em qual objeto está operando.
 
-> **Resumindo:** Atributos são os dados que descrevem um objeto. Cada instância guarda seus próprios valores. Você acessa um atributo com `objeto.atributo`.
+---
+
+## Um exemplo completo
+
+```python
+class ContaBancaria:
+    def __init__(self, titular, saldo=0):
+        self.titular = titular
+        self.saldo   = saldo
+
+    def depositar(self, valor):
+        self.saldo += valor
+        return f"Saldo: R${self.saldo:.2f}"
+
+    def sacar(self, valor):
+        if valor > self.saldo:
+            return f"Saldo insuficiente. Você tem R${self.saldo:.2f}"
+        self.saldo -= valor
+        return f"Saldo: R${self.saldo:.2f}"
+
+conta = ContaBancaria("Maria", 100.0)
+print(conta.depositar(50))  # Saldo: R$150.00
+print(conta.sacar(30))      # Saldo: R$120.00
+```
+
+---
+
+## Método vs. função comum
+
+| | Função | Método |
+|---|---|---|
+| Onde fica | Fora de uma classe | Dentro de uma classe |
+| Acessa dados do objeto? | Não | Sim (via `self`) |
+| Como chamar | `latir(cachorro)` | `cachorro.latir()` |
+
+> [svg: três painéis completos — "class Cachorro" (roxo) → seta "Cria" → "Objetos Criados" com rex e bolt (azul) → seta "Chama" → "Método" com rex.latir() retornando "Rex: Au au au!" (verde). Animação de fade em sequência. Legenda: "Classe → objetos → método em ação". SVG idêntico ao da missão 1, agora com o quadro completo após o aluno ter aprendido os três conceitos.]
+
+> **Resumindo:** Métodos são as ações que um objeto sabe executar. Sempre têm `self` para saber em qual objeto estão operando — mas você não precisa passá-lo na chamada.
 
 ## Mini-jogo
 
@@ -92,11 +99,11 @@ Na maioria dos casos você usará **atributos de instância** — cada objeto co
 
 ## Exercício
 
-**Pergunta:** O que são **atributos de instância** em uma classe Python?
+**Pergunta:** Por que todo método de instância em Python deve ter `self` como primeiro parâmetro?
 
-- [ ] Variáveis globais compartilhadas por todos os objetos da classe.
-- [x] Dados definidos com `self` no `__init__` que pertencem a cada objeto individualmente. ← correta
-- [ ] Métodos que retornam informações sobre o objeto.
-- [ ] Parâmetros obrigatórios passados na criação da classe.
+- [ ] É uma convenção opcional que melhora apenas a legibilidade.
+- [x] Para que o método acesse e modifique os atributos do objeto específico que o chamou. ← correta
+- [ ] Porque o Python exige que toda função tenha ao menos um parâmetro.
+- [ ] Para indicar que o método é público e acessível externamente.
 
-**Explicação:** Atributos de instância são definidos com `self.nome = valor` dentro do `__init__`. Cada objeto tem os seus próprios — mudar um não afeta os outros.
+**Explicação:** `self` é uma referência à instância. Sem ele, o método não saberia qual objeto está manipulando.
