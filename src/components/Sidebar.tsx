@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import logotipoImg from '../assets/logotipo-removebg.png';
 import { Link, NavLink } from "react-router-dom";
 import {
   HomeIcon,
@@ -66,7 +67,7 @@ const Sidebar: React.FC = () => {
             alt="Isotipo"
             className="w-7 h-7 rounded-md"
           />
-          <span className="font-bold text-textPrimary">Abstractio</span>
+          <img src={logotipoImg} alt="Abstractio" className="h-5 object-contain" />
         </Link>
       </div>
 
@@ -99,9 +100,7 @@ const Sidebar: React.FC = () => {
             alt="Isotipo"
             className="w-8 h-8 rounded-md"
           />
-          <span className="text-xl font-bold tracking-tight text-textPrimary">
-            Abstractio
-          </span>
+          <img src={logotipoImg} alt="Abstractio" className="h-6 object-contain" />
         </div>
 
         {/* Avatar + info */}
