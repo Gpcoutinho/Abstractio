@@ -38,7 +38,7 @@
   }
 
   .pb-track {
-    @apply flex items-center gap-0.5 overflow-x-auto;
+    @apply flex items-center gap-2 overflow-x-auto;
     min-height: 2rem;
     width: 100%;
     padding: 0 10px;
@@ -58,41 +58,12 @@
     @apply text-[0.6rem] uppercase tracking-[0.15em] text-textSecondary font-semibold whitespace-nowrap;
   }
 
-  .pb-sep-line {
-    @apply w-px h-4 bg-borderDark;
+  .pb-sep-count {
+    @apply text-[0.6rem] text-textSecondary tabular-nums text-center whitespace-nowrap;
   }
 
-  .pb-connector {
-    @apply h-0.5 rounded-full bg-bgPrimary shrink-0;
-    min-width: 0.75rem;
+  .pb-sep-count.complete {
+    @apply text-success;
   }
 
-  .pb-connector.active {
-    @apply h-0.5 rounded-full bg-accent shrink-0;
-    min-width: 0.75rem;
-  }
-
-  .pb-connector.done {
-    @apply bg-success;
-  }
-
-  .pb-dot {
-    @apply w-3 h-3 rounded-full border border-borderDark bg-bgPrimary shrink-0 flex items-center justify-center;
-  }
-
-  .pb-dot.done {
-    @apply bg-success border-success;
-  }
-
-  .pb-dot.active {
-    @apply border-accent;
-  }
-
-  .pb-dot.active .dot-inner {
-    @apply w-1 h-1 rounded-full bg-accent;
-  }
-
-  .dot-inner {
-    @apply rounded-full;
-  }
 }

@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import type { Nivel } from '../data/curriculum/types';
+import MissionIcon from './MissionIcon';
 import './ProgressBar.css';
 
 interface ProgressBarProps {
@@ -61,6 +62,11 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ curriculum, completedMissions
   const pct = total > 0 ? Math.round((doneCount / total) * 100) : 0;
   const activeIndex = flatMissions.findIndex(missao => !completedMissions.includes(missao.id));
 
+  const levelProgress = curriculum.map(nivel => ({
+    total: nivel.missoes.length,
+    done: nivel.missoes.filter(m => completedMissions.includes(m.id)).length,
+  }));
+
   return (
     <div
       className={`pb-wrap ${isDragging ? 'dragging' : ''} ${!hasOverflow ? 'no-scroll' : ''}`}
@@ -86,25 +92,27 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ curriculum, completedMissions
           const isDone = completedMissions.includes(missao.id);
           const isActive = idx === activeIndex;
 
+          const lvl = levelProgress[missao.nivelIdx];
+          const lvlComplete = lvl.done === lvl.total;
+
           return (
             <React.Fragment key={missao.id}>
               {isFirstOfNivel && (
                 <div className="pb-separator">
                   <div className="pb-sep-label">{missao.nivelLabel}</div>
-                  <div className="pb-sep-line" />
+                  <div className={`pb-sep-count${lvlComplete ? ' complete' : ''}`}>
+                    {lvl.done}/{lvl.total}
+                  </div>
                 </div>
               )}
 
-              {!isFirstOfNivel && (
-                <div className={`pb-connector ${isDone ? 'done' : ''} ${idx === activeIndex ? 'active' : ''}`} />
-              )}
-
-              <div
-                className={`pb-dot ${isDone ? 'done' : ''} ${isActive ? 'active' : ''}`}
-                title={missao.title}
-              >
-                {isActive && <div className="dot-inner" />}
-              </div>
+              <span className="shrink-0" title={missao.title}>
+                <MissionIcon
+                  iconName={missao.icon}
+                  completed={isDone}
+                  className={`w-4 h-4${isActive && !isDone ? ' !text-accent' : ''}`}
+                />
+              </span>
             </React.Fragment>
           );
         })}
