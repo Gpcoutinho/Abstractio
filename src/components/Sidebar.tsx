@@ -141,7 +141,7 @@ const Sidebar: React.FC = () => {
             {nivelDisplay}
           </p>
           <span className="mt-1 text-sm text-accent font-semibold flex items-center gap-1">
-            <ShellIcon className="w-4 h-4" style={{ color: '#22d3ee' }} />
+            <ShellIcon className="w-4 h-4" style={{ color: '#06B6D4' }} />
             {conchas}
           </span>
         </div>

@@ -25,6 +25,7 @@ import PageWrapper from "../components/PageWrapper";
 import CodeBlock from "../components/CodeBlock";
 import MissionIcon from "../components/MissionIcon";
 import HexBadge from "../components/HexBadge";
+import ShellIcon from "../components/ShellIcon";
 import interativoHtml from "../assets/interativos/nivel_1_missao_7.html?raw";
 import ProgressBar from '../components/ProgressBar';
 import ConceitoBox from '../components/ConceitoBox';
@@ -431,10 +432,10 @@ const Missao: React.FC = () => {
                       : (selecionada !== null && missao.exercise.wrong_explanations?.[selecionada]) || missao.exercise.explanation}
                   </p>
                   {acertou && conchasGanhasAgora !== null && (
-                    <p className="text-success text-xs font-medium mt-2">🐚 Você ganhou {conchasGanhasAgora} conchas!</p>
+                    <p className="text-success text-xs font-medium mt-2 flex items-center gap-1"><ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} /> Você ganhou {conchasGanhasAgora} conchas!</p>
                   )}
                   {!acertou && !jaGanhouConchas(missao.id) && (
-                    <p className="text-danger/70 text-xs mt-2">🐚 Próxima tentativa vale {tentativas === 1 ? 10 : 5} conchas</p>
+                    <p className="text-danger/70 text-xs mt-2 flex items-center gap-1"><ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} /> Próxima tentativa vale {tentativas === 1 ? 10 : 5} conchas</p>
                   )}
                 </div>
               )}
@@ -445,7 +446,7 @@ const Missao: React.FC = () => {
                   </button>
                 )}
                 {!respondida && !jaGanhouConchas(missao.id) && (
-                  <span className="text-xs text-textSecondary">🐚 Vale {conchasValor(tentativas)} conchas</span>
+                  <span className="text-xs text-textSecondary inline-flex items-center gap-1"><ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} /> Vale {conchasValor(tentativas)} conchas</span>
                 )}
                 {respondida && !acertou && (
                   <button onClick={() => { setSelecionada(null); setRespondida(false); }} className="px-5 py-2 rounded-lg border border-borderDark text-textSecondary hover:border-accent hover:text-textPrimary transition-colors text-sm">
@@ -550,8 +551,8 @@ const Missao: React.FC = () => {
             </Link>
 
             {conchasGanhasAgora !== null && (
-              <p className="text-accent font-semibold text-sm mb-6">
-                🐚 +{conchasGanhasAgora} conchas
+              <p className="text-accent font-semibold text-sm mb-6 flex items-center justify-center gap-1">
+                <ShellIcon className="w-4 h-4 shrink-0" style={{ color: '#06B6D4' }} /> +{conchasGanhasAgora} conchas
               </p>
             )}
 
