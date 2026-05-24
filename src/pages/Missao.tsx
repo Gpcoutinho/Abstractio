@@ -33,6 +33,7 @@ import ProgressBar from '../components/ProgressBar';
 import ConceitoBox from '../components/ConceitoBox';
 import OQueVaiEncontrar from '../components/missoes/nivel_1/missao_0/OQueVaiEncontrar';
 import ReferenciasBlock from '../components/ReferenciasBlock';
+import AdaCard from '../components/missoes/nivel_1/AdaCard';
 
 const interativos: Record<string, string> = {
   "interativos/nivel_1_missao_7.html": interativoHtml,
@@ -293,6 +294,7 @@ const Missao: React.FC = () => {
           {missao.theory.split(/(\{\{cards?:[0-9,]+\}\}|\{\{[a-z][a-z-]*\}\})/).map((part, i) => {
             if (i % 2 === 1) {
               if (part === '{{duvida-objeto-unico}}') return <DuvidaBlock key={i} pergunta="O que define quais características e ações farão parte de um objeto?" resposta="Essa decisão cabe ao modelador — a pessoa que está criando aquele objeto. Ela vai decidir o que é importante representar e o que pode ser ignorado. Você verá isso em detalhes nas missões seguintes." />;
+              if (part === '{{ada-card-objeto}}') return <AdaCard key={i} nivel="objeto" />;
               if (part === '{{caderno-abertura}}') return <CadernoAbertura key={i} />;
               if (part === '{{dados-globais}}') return <DadosGlobais key={i} />;
               if (part === '{{caos-anotacoes}}') return <CaosAnotacoes key={i} />;

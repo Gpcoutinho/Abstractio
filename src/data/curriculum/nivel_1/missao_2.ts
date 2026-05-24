@@ -12,6 +12,8 @@ const missao: Missao = {
 
 Otto está em expedição pelo oceano quando avista um polvo que não conhecia.
 
+{{ada-card-objeto}}
+
 Ela existe. Tem cor. Tem tamanho. Tem tentáculos. E sabe fazer coisas – nada, se camufla, solta tinta.
 
 Otto não sabe como essa criatura foi criada. Não importa – ele consegue observá-la e interagir com ela.
@@ -75,7 +77,7 @@ Todo objeto – de um polvo a um celular – carrega três marcas:
 |---|---|---|
 | **Identidade** | O que a diferencia das outras | Ada é uma entidade única |
 | **Características** | Os dados que carrega | cor: rosa, tentáculos: 8 |
-| **Ações** | O que ela sabe fazer | nadar, dar pirueta, soltar tinta |
+| **Ações** | O que ela sabe fazer | nadar, camuflar, soltar tinta |
 
 ---
 
