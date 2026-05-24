@@ -223,9 +223,10 @@ const Missao: React.FC = () => {
           }`}>
             <div className="overflow-hidden">
               <div className="px-5 py-4">
-                <ProgressBar 
+                <ProgressBar
                   curriculum={niveis}
                   completedMissions={completed}
+                  currentMissionId={missao.id}
                 />
               </div>
             </div>
