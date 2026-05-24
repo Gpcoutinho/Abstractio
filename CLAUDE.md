@@ -253,6 +253,38 @@ idade_cachorro1 = 3
 
 Comentários técnicos de código (ex: `# chama Animal.__init__`) podem permanecer dentro do bloco quando explicam a linha específica, não a seção.
 
+### Blocos de código — tamanho e ritmo
+
+Evitar blocos longos. A cada trecho lógico, fechar o bloco, explicar em texto e abrir um novo bloco:
+
+```markdown
+<!-- correto -->
+Primeiro, definimos os atributos:
+
+\`\`\`python
+class Polvo:
+    def __init__(self, cor):
+        self.cor = cor
+\`\`\`
+
+Com isso, cada polvo carrega sua própria cor. Agora adicionamos um método:
+
+\`\`\`python
+    def nadar(self):
+        print(f"{self.cor} está nadando")
+\`\`\`
+
+<!-- evitar -->
+\`\`\`python
+class Polvo:
+    def __init__(self, cor):
+        self.cor = cor
+
+    def nadar(self):
+        print(f"{self.cor} está nadando")
+\`\`\`
+```
+
 ## Bloco de Dúvida Frequente
 
 Componente: `src/components/missoes/reutilizaveis/DuvidaBlock.tsx`

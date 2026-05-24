@@ -110,22 +110,30 @@ Mudar algo em Ada não muda os outros. Cada objeto guarda seus próprios dados d
 
 > [svg: três polvos lado a lado – Ada (rosa, 8 tentáculos) + dois outros – cada um com card de dados abaixo.]
 
-Mas o que torna Ada *ela mesma* – e não qualquer outro polvo? Em Python, cada objeto criado recebe um endereço único na memória:
+Mas o que torna Ada *ela mesma* – e não qualquer outro polvo?
+
+Python simplificado – dois objetos com as mesmas características:
 
 ```python
 ada   = {"cor": "rosa", "tentaculos": 8}
 outra = {"cor": "rosa", "tentaculos": 8}
+```
 
+Cada um recebe um endereço único na memória:
+
+```python
 print(id(ada))    # 4371856896
 print(id(outra))  # 4371857024
+```
 
+Endereços diferentes – entidades diferentes. Agora a comparação:
+
+```python
 print(ada == outra)  # True  – mesmas características
 print(ada is outra)  # False – entidades distintas
 ```
 
-*Python simplificado – `id()` retorna o endereço único de cada objeto na memória. `==` compara características; `is` compara identidade.*
-
-Ada e `outra` têm as mesmas características, mas são entidades diferentes. Ada é Ada.
+`==` compara os dados; `is` compara a identidade. Ada e `outra` têm as mesmas características, mas são entidades diferentes. Ada é Ada.
 
 ---
 
