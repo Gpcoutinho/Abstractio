@@ -1,5 +1,19 @@
 # Abstractio — Frontend React
 
+---
+
+> ## ⛔ REGRAS INVIOLÁVEIS DE COMMIT
+>
+> **1. NUNCA executar `git commit` sem antes:**
+> - mostrar a mensagem proposta e os arquivos que serão incluídos
+> - receber "ok" explícito da Rebecca
+>
+> Isso vale para qualquer commit, sem exceção. Não há situação em que commitar diretamente seja aceitável — nem mudanças pequenas, nem "só formatação".
+>
+> **2. NUNCA incluir "Co-Authored-By" ou qualquer autoria do Claude nas mensagens de commit.**
+
+---
+
 App educacional gamificado para ensinar **Programação Orientada a Objetos (POO)** em Python.
 
 ## Stack
@@ -34,13 +48,15 @@ src/
     PageWrapper.tsx       ← wrapper de página com max-width e padding
     BoloFactory.tsx       ← componente interativo da missão de Classe
     Card.tsx              ← card genérico reutilizável
+    ConceitoBox.tsx       ← caixa de destaque para definições; renderiza a tag <conceito>
+    ReferenciasBlock.tsx  ← bloco bibliográfico colapsável; aparece após a teoria quando references[] existe
   contexts/
     ProgressContext.tsx   ← Estado global de progresso
   hooks/
     useProgress.ts        ← Hook único para consumir o contexto
   data/
     curriculum/
-      types.ts            ← Tipos TypeScript: Nivel, Missao, Exercise
+      types.ts            ← Tipos TypeScript: Nivel, Missao, Exercise, Reference
       index.ts            ← Exporta array `niveis` com os 4 níveis
       nivel_1/            ← Missões do Nível 1 (missao_0.ts … missao_7.ts + index.ts)
       nivel_2/            ← Missões do Nível 2
@@ -124,6 +140,7 @@ Persistido em **localStorage**. Sem sync com backend.
 | Opção com `[x]` | `exercise.correct` (índice 0-based) |
 | Textos das opções | `exercise.options` |
 | `**Explicação:**` | `exercise.explanation` |
+| Seção `### Fontes bibliográficas` (nas notas) | `references[]` — cada fonte vira um objeto `{ author, year, title, location, note }` |
 
 Fonte: módulos TypeScript em `src/data/curriculum/nivel_N/missao_N.ts` — importados estaticamente, sem fetch.
 
@@ -168,6 +185,22 @@ Paleta e gradientes em `ESTRUTURA.md`. Tailwind config em `tailwind.config.cjs`.
 ## Comentários e Pedidos nos Arquivos de Conteúdo
 
 Linhas que começam com `[nota]` são instruções ou comentários da Rebecca — **não são conteúdo a ser escrito na tela**. Ignorar ao renderizar; processar como pedido/diretriz ao editar.
+
+## Convenção de Pontuação
+
+Usar sempre **travessão médio (`–`)**, nunca travessão longo (`—`) em textos de conteúdo (teoria, exercícios, narrativa). O travessão longo soa como escrita gerada por IA.
+
+## Tag `<conceito>`
+
+Renderizada pelo componente `ConceitoBox`. Formato obrigatório:
+
+```html
+<conceito><strong>Palavra-chave</strong>: definição da palavra-chave.</conceito>
+```
+
+- O separador entre termo e definição é sempre `:`, nunca `–` ou `—`
+- A palavra-chave fica em `<strong>`
+- Usar apenas para definições centrais da missão — não para todo conceito mencionado
 
 ## Convenção de Exemplos de Código
 
@@ -273,10 +306,6 @@ Essas linhas descrevem o visual existente (ou desejado) naquele ponto da teoria.
 ## ESTRUTURA.md
 
 Quando uma mudança no projeto tornar o `ESTRUTURA.md` desatualizado, avisar o que será alterado e aguardar ok antes de editar — mesma regra que vale para qualquer outro arquivo.
-
-## Commits
-
-Nunca incluir linha "Co-Authored-By" nas mensagens de commit.
 
 ## Deploy
 
