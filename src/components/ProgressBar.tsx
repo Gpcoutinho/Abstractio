@@ -15,6 +15,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ curriculum, completedMissions
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [hasOverflow, setHasOverflow] = useState(true);
+  const [tooltipData, setTooltipData] = useState<{ text: string; x: number; y: number } | null>(null);
 
   useEffect(() => {
     const checkOverflow = () => {
@@ -29,9 +30,18 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ curriculum, completedMissions
     return () => window.removeEventListener('resize', checkOverflow);
   }, []);
 
+  const handleMissionEnter = (e: React.MouseEvent<HTMLDivElement>, title: string) => {
+    if (isDragging) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    setTooltipData({ text: title, x: rect.left + rect.width / 2, y: rect.bottom + 8 });
+  };
+
+  const handleMissionLeave = () => setTooltipData(null);
+
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!hasOverflow || !trackRef.current) return;
     setIsDragging(true);
+    setTooltipData(null);
     setStartX(e.pageX);
     setScrollLeft(trackRef.current.scrollLeft);
   };
@@ -68,6 +78,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ curriculum, completedMissions
   }));
 
   return (
+    <>
     <div
       className={`pb-wrap ${isDragging ? 'dragging' : ''} ${!hasOverflow ? 'no-scroll' : ''}`}
       ref={wrapRef}
@@ -112,7 +123,8 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ curriculum, completedMissions
 
               <div
                 className={`pb-mission${isDone ? ' done' : ''}${isActive ? ' active' : ''}`}
-                title={missao.title}
+                onMouseEnter={(e) => handleMissionEnter(e, missao.title)}
+                onMouseLeave={handleMissionLeave}
               >
                 <div className="pb-dot-layer" />
                 <MissionIcon
@@ -126,6 +138,13 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ curriculum, completedMissions
         })}
       </div>
     </div>
+
+    {tooltipData && (
+      <div className="pb-tooltip" style={{ left: tooltipData.x, top: tooltipData.y }}>
+        {tooltipData.text}
+      </div>
+    )}
+    </>
   );
 };
 
