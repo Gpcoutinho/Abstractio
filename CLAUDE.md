@@ -171,6 +171,31 @@ Linhas que começam com `[nota]` são instruções ou comentários da Rebecca �
 
 ## Convenção de Exemplos de Código
 
+### Rótulo de tipo de código
+
+Todo bloco de código deve ser precedido por um rótulo indicando sua natureza. Usar **sempre** um dos três:
+
+| Rótulo | Significado | Quando usar |
+|---|---|---|
+| `Python` | Código real e executável | Pode ser copiado e rodado sem modificação |
+| `Python simplificado` | Python válido, estrutura provisória | Usa proxy (dict, lista) antes da classe estar definida; roda, mas não representa a estrutura final |
+| `Pseudocódigo` | Conceitual, não executa | Ilustra lógica sem sintaxe completa |
+
+O rótulo vai **antes** do bloco, como frase curta:
+
+```markdown
+Python simplificado — identidade de dois objetos com as mesmas características:
+
+\`\`\`python
+ada   = {"cor": "rosa", "tentaculos": 8}
+outra = {"cor": "rosa", "tentaculos": 8}
+\`\`\`
+```
+
+Nunca omitir o rótulo, mesmo quando o tipo parecer óbvio pelo contexto.
+
+### Comentários explicativos
+
 Comentários explicativos **nunca ficam dentro do bloco de código**. A explicação vai antes (como título ou frase introdutória) ou depois (como legenda), fora do bloco:
 
 ```markdown
@@ -194,6 +219,31 @@ idade_cachorro1 = 3
 ```
 
 Comentários técnicos de código (ex: `# chama Animal.__init__`) podem permanecer dentro do bloco quando explicam a linha específica, não a seção.
+
+## Bloco de Dúvida Frequente
+
+Componente: `src/components/missoes/reutilizaveis/DuvidaBlock.tsx`
+Props: `pergunta: string`, `resposta: string`
+
+Usado para antecipar dúvidas comuns ao longo da leitura da teoria. Cada dúvida recebe um placeholder descritivo registrado em `Missao.tsx`:
+
+```typescript
+// Em Missao.tsx:
+if (part === '{{duvida-nome-descritivo}}')
+  return <DuvidaBlock key={i} pergunta="..." resposta="..." />;
+```
+
+Convenção de nomenclatura do placeholder: `{{duvida-[conceito]-[descritor]}}` — ex: `{{duvida-objeto-unico}}`, `{{duvida-classe-instancia}}`.
+
+Nos arquivos `.md`, inserir o placeholder no ponto exato da teoria onde a dúvida naturalmente surgirá:
+
+```markdown
+Um objeto é uma entidade que existe de forma independente na memória.
+
+{{duvida-objeto-unico}}
+
+Cada objeto carrega suas próprias características...
+```
 
 ## Convenção de Visuais nos `.md`
 
