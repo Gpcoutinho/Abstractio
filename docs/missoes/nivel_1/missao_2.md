@@ -35,10 +35,10 @@ Usar **sempre** estes termos — nunca misturar com "estado", "comportamento" ou
 
 ---
 
-### Estrutura proposta (Objects First — BlueJ)
+### Estrutura das seções (Objects First — BlueJ)
 1. Otto encontra Ada → observação antes da definição
 2. Cada objeto é único → multiplicidade, independência
-3. Objetos estão em todo lugar → generalização para o mundo real
+3. Objetos estão em todo lugar → generalização para o mundo real (reescrita como expansão pós-Ada)
 4. As três marcas de todo objeto → tabela com terminologia corrigida
 5. De onde Ada veio? → gancho para missão 5
 
@@ -69,7 +69,7 @@ print(ada is outra)  # False — entidades distintas
 ---
 
 ### Dúvidas previstas
-- `{{duvida-objeto-unico}}` — O que define quais características e ações farão parte de um objeto?
+- `{{duvida-objeto-unico}}` — O que define quais características e ações farão parte de um objeto? → removida desta missão; reservada para outra
 
 <!-- FIM DAS NOTAS -->
 
@@ -82,30 +82,21 @@ print(ada is outra)  # False — entidades distintas
 
 ## Teoria
 
-### Objetos estão em todo lugar
-
-Olhe ao redor. Cadeira. Celular. Cachorro. Caneta.
-
-Todo objeto do mundo real tem duas coisas em comum:
-
-- **Características** — como ele _é_ (cor, nome, tamanho, peso...)
-- **Ações** — o que ele _faz_ (latir, carregar, rolar, escrever...)
-
-> [svg: três cards — Cachorro, Celular e Carro — com seções explícitas "características" (dados em cinza) e "ações" (comportamentos em verde). Animação fade+slide em sequência. Adaptar labels do diagramaObjetos existente.]
-
-Em programação, os objetos funcionam exatamente igual: possuem características próprias e realizam ações. Na nossa jornada, utilizaremos o universo marinho, em especial os polvos, que são animais muito versáteis - assim como a POO - para ilustrar o funcionamento desses objetos.
-
----
-
 ### Otto encontra Ada
 
-Otto está em expedição pelo oceano quando avista uma criatura que nunca viu.
+*Você já pensa em objetos sem perceber.*
 
-Ela existe. Tem uma cor. Um tamanho. Um número de tentáculos. E sabe fazer coisas — nada, se camufla, solta tinta.
+Otto está em expedição pelo oceano quando avista um polvo que não conhecia.
 
-Otto não sabe como essa criatura foi criada. Não importa — ele consegue observá-la e interagir com ela. Isso é um **objeto**: algo com características próprias e ações que sabe executar.
+Ela existe. Tem cor. Tem tamanho. Tem tentáculos. E sabe fazer coisas — nada, se camufla, solta tinta.
 
-> [interativo: PolvosInterativo — painel esquerdo "Características" com seletores de cor (Roxo / Azul / Verde), tamanho (Pequeno / Grande) e tentáculos (6 / 8); painel direito "Ações" com botões Nadar, Dar pirueta, Soltar tinta; Ada no centro reage visualmente a cada seleção e ação. Sem código visível.]
+Otto não sabe como essa criatura foi criada. Não importa — ele consegue observá-la e interagir com ela.
+
+Isso é um **objeto**: uma entidade com características próprias e ações que sabe executar.
+
+<conceito><strong>Objeto</strong> — uma entidade com características próprias e ações que sabe executar.</conceito>
+
+> [interativo: card Ada como caixa preta — só o polvo visível, sem dados internos]
 
 ---
 
@@ -119,6 +110,33 @@ Mudar algo em Ada não muda os outros. Cada objeto guarda seus próprios dados d
 
 > [svg: três polvos lado a lado — Ada (rosa, 8 tentáculos) + dois outros — cada um com card de dados abaixo.]
 
+Mas o que torna Ada *ela mesma* — e não qualquer outro polvo? Em Python, cada objeto criado recebe um endereço único na memória:
+
+```python
+ada   = {"cor": "rosa", "tentaculos": 8}
+outra = {"cor": "rosa", "tentaculos": 8}
+
+print(id(ada))    # 4371856896
+print(id(outra))  # 4371857024
+
+print(ada == outra)  # True  — mesmas características
+print(ada is outra)  # False — entidades distintas
+```
+
+*Python simplificado — `id()` retorna o endereço único de cada objeto na memória. `==` compara características; `is` compara identidade.*
+
+Ada e `outra` têm as mesmas características, mas são entidades diferentes. Ada é Ada.
+
+---
+
+### Objetos estão em todo lugar
+
+Ada não é um caso especial.
+
+Olhe ao redor — cadeira, celular, cachorro, caneta. Cada um deles também tem características próprias e ações que sabe executar.
+
+O oceano de Otto é uma metáfora do mundo real: tudo que existe pode ser pensado como um objeto.
+
 ---
 
 ### As três marcas de todo objeto
@@ -126,7 +144,7 @@ Mudar algo em Ada não muda os outros. Cada objeto guarda seus próprios dados d
 Todo objeto — de um polvo a um celular — carrega três marcas:
 
 | Marca | O que é | Em Ada |
-| --- | --- | --- |
+|---|---|---|
 | **Identidade** | O que a diferencia das outras | Ada é uma entidade única |
 | **Características** | Os dados que carrega | cor: rosa, tentáculos: 8 |
 | **Ações** | O que ela sabe fazer | nadar, dar pirueta, soltar tinta |
@@ -137,7 +155,7 @@ Todo objeto — de um polvo a um celular — carrega três marcas:
 
 Otto observa, interage, anota. Mas uma pergunta fica no ar:
 
-_Quem definiu que Ada seria rosa? Que teria 8 tentáculos? Que saberia nadar?_
+*Quem definiu que Ada seria rosa? Que teria 8 tentáculos? Que saberia nadar?*
 
 A resposta ainda é um mistério. A caixa preta ainda está fechada.
 
