@@ -75,7 +75,7 @@ const AdaCard: React.FC<{ nivel: NivelAdaCard }> = ({ nivel }) => {
       {/* Nota caixa preta — apenas missão 2 */}
       {nivel === "objeto" && (
         <p className="text-xs text-textSecondary/50 text-center max-w-[200px] leading-relaxed italic">
-          Ada existe e você pode interagir com ela — mas o que está dentro ainda não é visível. Isso é uma caixa preta.
+          Ada existe. Você pode interagir com ela — mas o que está dentro ainda não é visível.
         </p>
       )}
     </div>

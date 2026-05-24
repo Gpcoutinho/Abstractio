@@ -8,15 +8,13 @@ const missao: Missao = {
   theory: `
 ## Otto encontra Ada
 
-*Você já pensa em objetos sem perceber.*
-
 Otto está em expedição pelo oceano quando avista um polvo que não conhecia.
 
 {{ada-card-objeto}}
 
 Ela existe. Tem cor. Tem tamanho. Tem tentáculos. E sabe fazer coisas – nada, se camufla, solta tinta.
 
-Otto não sabe como essa criatura foi criada. Não importa – ele consegue observá-la e interagir com ela.
+Para Otto, Ada é uma <destaque>caixa preta</destaque>: ele consegue observá-la e interagir com ela sem saber o que está dentro.
 
 Isso é um <destaque>objeto</destaque>: uma entidade com características próprias e ações que sabe executar.
 
@@ -60,6 +58,8 @@ print(ada is outra)  # False – entidades distintas
 ---
 
 ## Objetos estão em todo lugar
+
+*Você já pensa em objetos sem perceber.*
 
 Ada não é um caso especial.
 
