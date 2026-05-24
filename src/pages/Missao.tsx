@@ -354,7 +354,7 @@ const Missao: React.FC = () => {
               <ReactMarkdown key={i} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={{
                 "polvonilson-intro": () => <PolvonilsonIntro />,
                 "caderno-abertura": () => <CadernoAbertura />,
-                "conceito": ({ children }: { children?: React.ReactNode }) => <ConceitoBox>{children}</ConceitoBox>,
+                "conceito": ({ children, note }: { children?: React.ReactNode; note?: string }) => <ConceitoBox note={note}>{children}</ConceitoBox>,
                 "destaque": ({ children }: { children?: React.ReactNode }) => <span className="underline decoration-wavy decoration-pink-400 decoration-2 underline-offset-4">{children}</span>,
                 "slides-poo": () => <SlidesPOO />,
                 "bolo-factory": () => <BoloFactory />,

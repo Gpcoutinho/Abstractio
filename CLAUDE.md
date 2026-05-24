@@ -205,12 +205,17 @@ Renderiza como `<span>` com `underline decoration-wavy decoration-pink-400 decor
 Renderizada pelo componente `ConceitoBox`. Formato obrigatório:
 
 ```html
-<conceito><strong>Palavra-chave</strong>: definição da palavra-chave.</conceito>
+<conceito note="adapt. Weisfeld, 2019"><strong>Palavra-chave</strong>: definição formal.</conceito>
 ```
 
 - O separador entre termo e definição é sempre `:`, nunca `–` ou `—`
 - A palavra-chave fica em `<strong>`
+- A definição deve ser **formal e distinta** da explicação narrativa que a precede — de preferência adaptada de uma fonte bibliográfica
+- O atributo `note` é opcional; quando presente, aparece como rodapé discreto (itálico, tom secundário) — usar para crédito bibliográfico curto (ex: `"adapt. Weisfeld, 2019"`)
 - Usar apenas para definições centrais da missão — não para todo conceito mencionado
+
+**Padrão narrativa → conceito:**
+A explicação narrativa é informal e coloquial (descoberta com Otto). O `<conceito>` é a versão formal e citable da mesma ideia — nunca idênticos.
 
 ## Convenção de Exemplos de Código
 

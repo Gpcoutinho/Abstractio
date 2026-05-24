@@ -94,7 +94,7 @@ Otto não sabe como essa criatura foi criada. Não importa – ele consegue obse
 
 Isso é um <destaque>objeto</destaque>: uma entidade com características próprias e ações que sabe executar.
 
-<conceito><strong>Objeto</strong> – uma entidade com características próprias e ações que sabe executar.</conceito>
+<conceito note="adapt. Weisfeld, 2019"><strong>Objeto</strong>: entidade que reúne, de forma inseparável, características próprias e as ações que é capaz de executar.</conceito>
 
 > [interativo: card Ada como caixa preta – só o polvo visível, sem dados internos]
 
