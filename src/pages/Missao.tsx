@@ -355,7 +355,7 @@ const Missao: React.FC = () => {
                 "polvonilson-intro": () => <PolvonilsonIntro />,
                 "caderno-abertura": () => <CadernoAbertura />,
                 "conceito": ({ children }: { children?: React.ReactNode }) => <ConceitoBox>{children}</ConceitoBox>,
-                "destaque": ({ children }: { children?: React.ReactNode }) => <span className="underline decoration-wavy decoration-pink-400 decoration-2">{children}</span>,
+                "destaque": ({ children }: { children?: React.ReactNode }) => <span className="underline decoration-wavy decoration-pink-400 decoration-2 underline-offset-4">{children}</span>,
                 "slides-poo": () => <SlidesPOO />,
                 "bolo-factory": () => <BoloFactory />,
                 "polvos-interativo": () => <PolvosInterativo />,

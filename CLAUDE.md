@@ -198,7 +198,7 @@ Sublinhado ondulado rosa para ênfase narrativa inline. Usar quando uma palavra-
 Isso é um <destaque>objeto</destaque>: uma entidade com características próprias.
 ```
 
-Renderiza como `<span>` com `underline decoration-wavy decoration-pink-400`. O negrito (`**bold**`) continua reservado para uso estrutural (tabelas, listas, labels).
+Renderiza como `<span>` com `underline decoration-wavy decoration-pink-400 decoration-2 underline-offset-4`. O offset evita que o sublinhado colida com descidas de letras (g, j, p, y). O negrito (`**bold**`) continua reservado para uso estrutural (tabelas, listas, labels).
 
 ## Tag `<conceito>`
 
