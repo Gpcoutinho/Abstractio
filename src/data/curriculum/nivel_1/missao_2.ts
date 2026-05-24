@@ -101,6 +101,22 @@ Isso você descobre na **Missão 5**.
     ],
   },
   has_interativo: false,
+  references: [
+    {
+      author: "Weisfeld, M.",
+      year: 2019,
+      title: "The Object-Oriented Thought Process",
+      location: "5. ed. cap. 1, p. 6–14",
+      note: "definição de objeto como entidade com dados e comportamentos; conceito de atributos e métodos",
+    },
+    {
+      author: "Kölling, M., Quig, B., Patterson, A., Rosenberg, J.",
+      year: 2003,
+      title: "The BlueJ System and its Pedagogy",
+      location: "Computer Science Education, 13(4), p. 249–268",
+      note: "princípio Objects First: observar e interagir com objetos antes de qualquer formalização",
+    },
+  ],
 };
 
 export default missao;

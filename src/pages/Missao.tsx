@@ -32,6 +32,7 @@ import interativoHtml from "../assets/interativos/nivel_1_missao_7.html?raw";
 import ProgressBar from '../components/ProgressBar';
 import ConceitoBox from '../components/ConceitoBox';
 import OQueVaiEncontrar from '../components/missoes/nivel_1/missao_0/OQueVaiEncontrar';
+import ReferenciasBlock from '../components/ReferenciasBlock';
 
 const interativos: Record<string, string> = {
   "interativos/nivel_1_missao_7.html": interativoHtml,
@@ -379,6 +380,11 @@ const Missao: React.FC = () => {
             );
           })}
         </section>
+
+        {/* Referências bibliográficas */}
+        {missao.references && missao.references.length > 0 && (
+          <ReferenciasBlock references={missao.references} />
+        )}
 
         {/* Mini-jogo */}
         {missao.has_interativo && missao.interativo_html && interativos[missao.interativo_html] && (
