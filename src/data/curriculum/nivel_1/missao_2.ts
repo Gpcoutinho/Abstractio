@@ -18,7 +18,7 @@ Otto não sabe como essa criatura foi criada. Não importa – ele consegue obse
 
 Isso é um **objeto**: uma entidade com características próprias e ações que sabe executar.
 
-<conceito><strong>Objeto</strong> – uma entidade com características próprias e ações que sabe executar.</conceito>
+<conceito><strong>Objeto</strong>: uma entidade com características próprias e ações que sabe executar.</conceito>
 
 ---
 

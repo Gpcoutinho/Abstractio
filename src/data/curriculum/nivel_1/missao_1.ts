@@ -16,23 +16,23 @@ Para piorar: Marta, do laboratório vizinho, também estava usando as mesmas fol
 
 {{caos-anotacoes}}
 
-Você pode estar pensando: *"basta cada um usar os seus próprios papéis"*. Certo — isso resolve o problema de espaço. Mas agora Otto anota "cor: rosa", Marta escreve "pink", Pedro registra um código hexadecimal. Na hora de comparar 100 criaturas coletadas por 4 pesquisadores diferentes, o caos volta — com outro nome.
+Você pode estar pensando: *"basta cada um usar os seus próprios papéis"*. Certo – isso resolve o problema de espaço. Mas agora Otto anota "cor: rosa", Marta escreve "pink", Pedro registra um código hexadecimal. Na hora de comparar 100 criaturas coletadas por 4 pesquisadores diferentes, o caos volta – com outro nome.
 
 {{dados-globais}}
 
-O problema não é só onde os dados ficam. É que os dados e as regras de como usá-los vivem separados — e qualquer um pode inventar as suas.
+O problema não é só onde os dados ficam. É que os dados e as regras de como usá-los vivem separados – e qualquer um pode inventar as suas.
 
-A POO propõe juntar os dois: a ficha de Ada não é só um papel com dados. É um pacote completo — os dados e as regras de como registrá-los andam juntos, inseparáveis.
+A POO propõe juntar os dois: a ficha de Ada não é só um papel com dados. É um pacote completo – os dados e as regras de como registrá-los andam juntos, inseparáveis.
 
 ## Mas afinal, o que é a Orientação a Objetos (POO)?
 
 {{slides-poo}}
 
-<conceito>Programação Orientada a Objetos é um paradigma que organiza o software em torno de <strong>objetos</strong> — entidades que possuem um <strong>estado</strong> (o que sabem sobre si mesmas) e um <strong>comportamento</strong> (o que sabem fazer).</conceito>
+<conceito>Programação Orientada a Objetos é um paradigma que organiza o software em torno de <strong>objetos</strong> – entidades que possuem um <strong>estado</strong> (o que sabem sobre si mesmas) e um <strong>comportamento</strong> (o que sabem fazer).</conceito>
 
-Em vez de uma lista interminável de comandos, a POO organiza o software em torno de **objetos** — entidades que *sabem coisas* (seu estado) e *sabem fazer coisas* (seu comportamento).
+Em vez de uma lista interminável de comandos, a POO organiza o software em torno de **objetos** – entidades que *sabem coisas* (seu estado) e *sabem fazer coisas* (seu comportamento).
 
-Otto não vai mais anotar tudo em papéis soltos. Ele vai criar uma **ficha para Ada**: o que ela é, o que ela sabe fazer. Uma ficha por criatura — organizada, completa, reutilizável.
+Otto não vai mais anotar tudo em papéis soltos. Ele vai criar uma **ficha para Ada**: o que ela é, o que ela sabe fazer. Uma ficha por criatura – organizada, completa, reutilizável.
 
 Vamos para a próxima etapa?`,
   exercise: {
@@ -51,7 +51,7 @@ Vamos para a próxima etapa?`,
       "Isso descreve o paradigma procedural, não a POO. Na procedural, o código é uma sequência de passos; na POO, o foco é em objetos que agrupam dados e comportamentos.",
       "",
       "POO é um paradigma de programação, não uma linguagem. Python e Java são linguagens que suportam POO, mas o paradigma existe independente delas.",
-      "POO não é exclusiva de interfaces gráficas — ela é usada em qualquer tipo de software: sistemas web, jogos, análise de dados, etc.",
+      "POO não é exclusiva de interfaces gráficas – ela é usada em qualquer tipo de software: sistemas web, jogos, análise de dados, etc.",
     ],
   },
   has_interativo: false,
