@@ -82,7 +82,7 @@
   .pb-track-wrap.at-end::after    { opacity: 0; }
 
   .pb-track {
-    @apply flex items-center gap-0.5 overflow-x-auto;
+    @apply flex items-start gap-0.5 overflow-x-auto;
     min-height: 2.5rem;
     width: 100%;
     padding: 0 10px;
@@ -99,7 +99,7 @@
   }
 
   .pb-level-header {
-    @apply flex items-center gap-1;
+    @apply flex items-center gap-1 leading-none;
     padding-left: 6px;
     margin-bottom: 11px;
   }
@@ -112,7 +112,7 @@
     @apply bg-borderDark shrink-0;
     width: 1px;
     align-self: stretch;
-    margin: 3px 6px;
+    margin: 3px 4px;
   }
 
   .pb-sep-label {
@@ -149,7 +149,7 @@
 
   .pb-connector {
     @apply h-0.5 rounded-full bg-bgPrimary shrink-0;
-    min-width: 0.75rem;
+    min-width: 1rem;
   }
 
   .pb-connector.active {
