@@ -36,6 +36,7 @@ const AdaCard: React.FC<{ nivel: NivelAdaCard }> = ({ nivel }) => {
           <PolvinhoSVG
             cor="Rosa"
             tentaculos={8}
+            femea
             acao={acao}
             acaoKey={acaoKey}
             width={100}

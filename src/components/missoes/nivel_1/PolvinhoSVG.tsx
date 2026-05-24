@@ -10,19 +10,20 @@ export const COR_MAP: Record<CorPolvo, { body: string; light: string }> = {
 };
 
 const TENTACULOS_DATA = [
-  { d: "M31,66 Q18,86 24,104",   dur: "2.2s", vals: "-5,31,66;5,31,66;-5,31,66"    },
-  { d: "M41,70 Q29,90 35,108",   dur: "2.1s", vals: "4,41,70;-4,41,70;4,41,70"     },
-  { d: "M51,74 Q42,94 47,112",   dur: "2.6s", vals: "-3,51,74;3,51,74;-3,51,74"    },
-  { d: "M61,76 Q56,96 61,114",   dur: "1.9s", vals: "3,61,76;-3,61,76;3,61,76"     },
-  { d: "M69,76 Q74,96 69,114",   dur: "2.3s", vals: "-3,69,76;3,69,76;-3,69,76"    },
-  { d: "M79,74 Q88,94 83,112",   dur: "2.0s", vals: "4,79,74;-4,79,74;4,79,74"     },
-  { d: "M89,70 Q101,90 95,108",  dur: "2.5s", vals: "-4,89,70;4,89,70;-4,89,70"    },
-  { d: "M99,66 Q112,86 106,104", dur: "2.2s", vals: "5,99,66;-5,99,66;5,99,66"     },
+  { d: "M40,70 C28,84 18,96 25,112",    dur: "2.2s", vals: "-5,40,70;5,40,70;-5,40,70"    },
+  { d: "M48,73 C36,87 28,100 33,114",   dur: "2.1s", vals: "4,48,73;-4,48,73;4,48,73"     },
+  { d: "M56,75 C46,89 40,102 44,115",   dur: "2.6s", vals: "-3,56,75;3,56,75;-3,56,75"    },
+  { d: "M62,76 C56,90 52,104 55,116",   dur: "1.9s", vals: "3,62,76;-3,62,76;3,62,76"     },
+  { d: "M68,76 C74,90 78,104 75,116",   dur: "2.3s", vals: "-3,68,76;3,68,76;-3,68,76"    },
+  { d: "M75,75 C84,89 90,102 86,115",   dur: "2.0s", vals: "4,75,75;-4,75,75;4,75,75"     },
+  { d: "M83,73 C94,87 102,100 97,114",  dur: "2.5s", vals: "-4,83,73;4,83,73;-4,83,73"    },
+  { d: "M91,70 C106,84 112,96 105,112", dur: "2.2s", vals: "5,91,70;-5,91,70;5,91,70"     },
 ];
 
 interface Props {
   cor: CorPolvo;
   tentaculos: 6 | 8;
+  femea?: boolean;
   acao?: AcaoPolvo;
   acaoKey?: number;
   scale?: number;
@@ -34,6 +35,7 @@ interface Props {
 const PolvinhoSVG: React.FC<Props> = ({
   cor,
   tentaculos,
+  femea = false,
   acao = null,
   acaoKey = 0,
   scale = 1,
@@ -42,6 +44,7 @@ const PolvinhoSVG: React.FC<Props> = ({
   className = "",
 }) => {
   const { body, light } = COR_MAP[cor];
+  const gradId = `pv-g-${cor}`;
   const activeTentacles = tentaculos === 6 ? TENTACULOS_DATA.slice(1, 7) : TENTACULOS_DATA;
 
   const wrapperStyle: React.CSSProperties =
@@ -84,6 +87,7 @@ const PolvinhoSVG: React.FC<Props> = ({
           100% { opacity: 0; transform: scale(1.4); }
         }
       `}</style>
+
       <div key={acaoKey} style={wrapperStyle} onClick={onClick}>
         <svg
           viewBox="0 0 130 130"
@@ -91,6 +95,14 @@ const PolvinhoSVG: React.FC<Props> = ({
           xmlns="http://www.w3.org/2000/svg"
           style={{ overflow: "visible" }}
         >
+          <defs>
+            <radialGradient id={gradId} cx="38%" cy="30%" r="65%">
+              <stop offset="0%" stopColor={light} />
+              <stop offset="100%" stopColor={body} />
+            </radialGradient>
+          </defs>
+
+          {/* Tentáculos */}
           {activeTentacles.map((t, i) => (
             <path key={i} d={t.d} stroke={body} strokeWidth="4.5" fill="none" strokeLinecap="round">
               <animateTransform
@@ -102,20 +114,53 @@ const PolvinhoSVG: React.FC<Props> = ({
               />
             </path>
           ))}
-          <ellipse cx="65" cy="42" rx="22" ry="20" fill={light} />
-          <ellipse cx="65" cy="56" rx="26" ry="22" fill={body} />
-          <circle cx="55" cy="42" r="5" fill="white" />
-          <circle cx="75" cy="42" r="5" fill="white" />
-          <circle cx="55" cy="43" r="2.8" fill="#1a0a30" />
-          <circle cx="75" cy="43" r="2.8" fill="#1a0a30" />
-          <circle cx="53.5" cy="41.5" r="1" fill="white" opacity="0.8" />
-          <circle cx="73.5" cy="41.5" r="1" fill="white" opacity="0.8" />
-          <path d="M59,53 Q65,59 71,53" stroke={light} strokeWidth="1.5" fill="none" strokeLinecap="round" />
+
+          {/* Corpo */}
+          <path
+            d="M65,16 C87,16 94,32 93,50 C92,64 83,76 65,76 C47,76 38,64 37,50 C36,32 43,16 65,16 Z"
+            fill={`url(#${gradId})`}
+          />
+
+          {/* Bochechas */}
+          <ellipse cx="44" cy="57" rx="8" ry="5.5" fill={light} opacity="0.3" />
+          <ellipse cx="86" cy="57" rx="8" ry="5.5" fill={light} opacity="0.3" />
+
+          {/* Olhos — brancos */}
+          <ellipse cx="53" cy="46" rx="6.5" ry="7" fill="white" />
+          <ellipse cx="77" cy="46" rx="6.5" ry="7" fill="white" />
+
+          {/* Pupilas */}
+          <ellipse cx="54" cy="47" rx="3.5" ry="4" fill="#1a0a30" />
+          <ellipse cx="78" cy="47" rx="3.5" ry="4" fill="#1a0a30" />
+
+          {/* Brilho dos olhos */}
+          <circle cx="52" cy="45" r="1.3" fill="white" opacity="0.9" />
+          <circle cx="76" cy="45" r="1.3" fill="white" opacity="0.9" />
+
+          {/* Cílios — apenas para fêmeas
+               Mesmo shape base rotacionado em ângulos diferentes.
+               Olho esquerdo: fios apontam para a esquerda (-60°, -85°, -110° a partir do eixo Y).
+               Olho direito: espelho (+60°, +85°, +110°). */}
+          {femea && (
+            <>
+              <g transform="translate(47,41) rotate(-60)"><path d="M0,0 C0.4,-1.5 0.5,-3.2 0,-5" stroke="#1a0a30" strokeWidth="1.1" fill="none" strokeLinecap="round" /></g>
+              <g transform="translate(47,42) rotate(-85)"><path d="M0,0 C0.4,-1.5 0.5,-3.2 0,-5" stroke="#1a0a30" strokeWidth="1.1" fill="none" strokeLinecap="round" /></g>
+              <g transform="translate(47,43) rotate(-110)"><path d="M0,0 C0.4,-1.5 0.5,-3.2 0,-5" stroke="#1a0a30" strokeWidth="1.1" fill="none" strokeLinecap="round" /></g>
+              <g transform="translate(83,41) rotate(60)"><path d="M0,0 C-0.4,-1.5 -0.5,-3.2 0,-5" stroke="#1a0a30" strokeWidth="1.1" fill="none" strokeLinecap="round" /></g>
+              <g transform="translate(83,42) rotate(85)"><path d="M0,0 C-0.4,-1.5 -0.5,-3.2 0,-5" stroke="#1a0a30" strokeWidth="1.1" fill="none" strokeLinecap="round" /></g>
+              <g transform="translate(83,43) rotate(110)"><path d="M0,0 C-0.4,-1.5 -0.5,-3.2 0,-5" stroke="#1a0a30" strokeWidth="1.1" fill="none" strokeLinecap="round" /></g>
+            </>
+          )}
+
+          {/* Sorriso */}
+          <path d="M57,59 Q65,66 73,59" stroke={light} strokeWidth="2" fill="none" strokeLinecap="round" />
+
+          {/* Tinta */}
           {acao === "tinta" && (
             <ellipse
-              cx="65" cy="92" rx="26" ry="11"
+              cx="65" cy="96" rx="26" ry="11"
               fill="#0a0614"
-              style={{ animation: "pv-tinta 1.5s ease-out forwards", transformOrigin: "65px 92px" }}
+              style={{ animation: "pv-tinta 1.5s ease-out forwards", transformOrigin: "65px 96px" }}
             />
           )}
         </svg>
