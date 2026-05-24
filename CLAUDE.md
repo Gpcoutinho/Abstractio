@@ -270,6 +270,10 @@ Essas linhas descrevem o visual existente (ou desejado) naquele ponto da teoria.
 4. Ao final de mudanças maiores, informar quantas linhas foram adicionadas/excluídas
 
 
+## ESTRUTURA.md
+
+Quando uma mudança no projeto tornar o `ESTRUTURA.md` desatualizado, avisar o que será alterado e aguardar ok antes de editar — mesma regra que vale para qualquer outro arquivo.
+
 ## Commits
 
 Nunca incluir linha "Co-Authored-By" nas mensagens de commit.
