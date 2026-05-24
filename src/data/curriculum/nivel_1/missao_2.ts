@@ -12,25 +12,25 @@ const missao: Missao = {
 
 Otto está em expedição pelo oceano quando avista um polvo que não conhecia.
 
-Ela existe. Tem cor. Tem tamanho. Tem tentáculos. E sabe fazer coisas — nada, se camufla, solta tinta.
+Ela existe. Tem cor. Tem tamanho. Tem tentáculos. E sabe fazer coisas – nada, se camufla, solta tinta.
 
-Otto não sabe como essa criatura foi criada. Não importa — ele consegue observá-la e interagir com ela.
+Otto não sabe como essa criatura foi criada. Não importa – ele consegue observá-la e interagir com ela.
 
 Isso é um **objeto**: uma entidade com características próprias e ações que sabe executar.
 
-<conceito><strong>Objeto</strong> — uma entidade com características próprias e ações que sabe executar.</conceito>
+<conceito><strong>Objeto</strong> – uma entidade com características próprias e ações que sabe executar.</conceito>
 
 ---
 
 ## Cada objeto é único
 
-No oceano de Otto há outros polvos. Cada um é uma entidade separada — mesma natureza, dados completamente diferentes.
+No oceano de Otto há outros polvos. Cada um é uma entidade separada – mesma natureza, dados completamente diferentes.
 
-Ada é rosa com 8 tentáculos. Ao lado dela há outros dois polvos — cada um com sua própria cor e seus próprios dados.
+Ada é rosa com 8 tentáculos. Ao lado dela há outros dois polvos – cada um com sua própria cor e seus próprios dados.
 
 Mudar algo em Ada não muda os outros. Cada objeto guarda seus próprios dados de forma independente.
 
-Mas o que torna Ada *ela mesma* — e não qualquer outro polvo? Em Python, cada objeto criado recebe um endereço único na memória:
+Mas o que torna Ada *ela mesma* – e não qualquer outro polvo? Em Python, cada objeto criado recebe um endereço único na memória:
 
 \`\`\`python
 ada   = {"cor": "rosa", "tentaculos": 8}
@@ -39,11 +39,11 @@ outra = {"cor": "rosa", "tentaculos": 8}
 print(id(ada))    # 4371856896
 print(id(outra))  # 4371857024
 
-print(ada == outra)  # True  — mesmas características
-print(ada is outra)  # False — entidades distintas
+print(ada == outra)  # True  – mesmas características
+print(ada is outra)  # False – entidades distintas
 \`\`\`
 
-*Python simplificado — \`id()\` retorna o endereço único de cada objeto na memória. \`==\` compara características; \`is\` compara identidade.*
+*Python simplificado – \`id()\` retorna o endereço único de cada objeto na memória. \`==\` compara características; \`is\` compara identidade.*
 
 Ada e \`outra\` têm as mesmas características, mas são entidades diferentes. Ada é Ada.
 
@@ -53,7 +53,7 @@ Ada e \`outra\` têm as mesmas características, mas são entidades diferentes. 
 
 Ada não é um caso especial.
 
-Olhe ao redor — cadeira, celular, cachorro, caneta. Cada um deles também tem características próprias e ações que sabe executar.
+Olhe ao redor – cadeira, celular, cachorro, caneta. Cada um deles também tem características próprias e ações que sabe executar.
 
 O oceano de Otto é uma metáfora do mundo real: tudo que existe pode ser pensado como um objeto.
 
@@ -61,7 +61,7 @@ O oceano de Otto é uma metáfora do mundo real: tudo que existe pode ser pensad
 
 ## As três marcas de todo objeto
 
-Todo objeto — de um polvo a um celular — carrega três marcas:
+Todo objeto – de um polvo a um celular – carrega três marcas:
 
 | Marca | O que é | Em Ada |
 |---|---|---|
@@ -85,16 +85,16 @@ Isso você descobre na **Missão 5**.
     question:
       "Otto encontra dois polvos: Ada (rosa, 8 tentáculos) e um segundo polvo (azul, 6 tentáculos). Ele muda a cor de Ada para verde. O que acontece com o segundo polvo?",
     options: [
-      "O segundo polvo também fica verde — objetos do mesmo tipo compartilham características.",
-      "O segundo polvo continua azul — cada objeto guarda seus próprios dados de forma independente.",
-      "O segundo polvo desaparece — só pode existir um polvo de cada vez.",
-      "O segundo polvo perde todas as características — qualquer mudança afeta todos os objetos.",
+      "O segundo polvo também fica verde – objetos do mesmo tipo compartilham características.",
+      "O segundo polvo continua azul – cada objeto guarda seus próprios dados de forma independente.",
+      "O segundo polvo desaparece – só pode existir um polvo de cada vez.",
+      "O segundo polvo perde todas as características – qualquer mudança afeta todos os objetos.",
     ],
     correct: 1,
     explanation:
-      "Cada objeto existe de forma independente. Mudar Ada não afeta o outro polvo — cada um carrega seus próprios dados.",
+      "Cada objeto existe de forma independente. Mudar Ada não afeta o outro polvo – cada um carrega seus próprios dados.",
     wrong_explanations: [
-      "Não. Cada objeto é independente — tem seus próprios dados. Mudar Ada não afeta o outro polvo em nada.",
+      "Não. Cada objeto é independente – tem seus próprios dados. Mudar Ada não afeta o outro polvo em nada.",
       "",
       "Não. Vários objetos do mesmo tipo podem existir ao mesmo tempo. São entidades separadas e independentes.",
       "Não. Mudar uma característica de Ada só afeta Ada. O outro polvo é uma entidade independente com seus próprios dados intactos.",
