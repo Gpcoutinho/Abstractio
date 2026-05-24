@@ -92,7 +92,7 @@ Ela existe. Tem cor. Tem tamanho. Tem tentáculos. E sabe fazer coisas – nada,
 
 Otto não sabe como essa criatura foi criada. Não importa – ele consegue observá-la e interagir com ela.
 
-Isso é um **objeto**: uma entidade com características próprias e ações que sabe executar.
+Isso é um <destaque>objeto</destaque>: uma entidade com características próprias e ações que sabe executar.
 
 <conceito><strong>Objeto</strong> – uma entidade com características próprias e ações que sabe executar.</conceito>
 

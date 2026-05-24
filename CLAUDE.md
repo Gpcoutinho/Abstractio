@@ -190,6 +190,16 @@ Linhas que começam com `[nota]` são instruções ou comentários da Rebecca �
 
 Usar sempre **travessão médio (`–`)**, nunca travessão longo (`—`) em textos de conteúdo (teoria, exercícios, narrativa). O travessão longo soa como escrita gerada por IA.
 
+## Tag `<destaque>`
+
+Sublinhado ondulado rosa para ênfase narrativa inline. Usar quando uma palavra-chave aparece pela primeira vez no fluxo do texto — não em tabelas, listas ou cabeçalhos.
+
+```html
+Isso é um <destaque>objeto</destaque>: uma entidade com características próprias.
+```
+
+Renderiza como `<span>` com `underline decoration-wavy decoration-pink-400`. O negrito (`**bold**`) continua reservado para uso estrutural (tabelas, listas, labels).
+
 ## Tag `<conceito>`
 
 Renderizada pelo componente `ConceitoBox`. Formato obrigatório:
