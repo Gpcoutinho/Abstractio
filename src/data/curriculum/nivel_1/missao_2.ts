@@ -85,6 +85,80 @@ Isso você descobre na **Missão 5**.
       "Não. Mudar uma característica de Ada só afeta Ada. Ana é uma entidade independente com seus próprios dados intactos."
     ]
   },
+  extra_exercises: [
+    {
+      id: '1-2-e1',
+      question: 'Dois objetos criados a partir da mesma classe:',
+      options: [
+        'Sempre têm os mesmos valores de atributos',
+        'Têm seus próprios valores, independentes dos outros',
+        'Compartilham atributos numéricos, mas não textuais',
+        'São idênticos até que um deles seja alterado manualmente',
+      ],
+      correct: 1,
+      explanation: 'Cada objeto é independente. `rex = Cachorro("Rex")` e `buddy = Cachorro("Buddy")` são objetos distintos com seus próprios valores. Alterar `rex.nome` não afeta `buddy.nome`.',
+    },
+    {
+      id: '1-2-e2',
+      question: 'Em Python, qual linha cria um objeto a partir da classe `Carro`?',
+      options: [
+        '`meu_carro = Carro("vermelho")`',
+        '`Carro = meu_carro("vermelho")`',
+        '`object Carro("vermelho")`',
+        '`new Carro("vermelho")`',
+      ],
+      correct: 0,
+      explanation: 'Em Python, criamos objetos chamando a classe como se fosse uma função: `objeto = NomeDaClasse(argumentos)`. Não usamos `new` (como no Java) nem `object`. O resultado é uma instância da classe.',
+    },
+    {
+      id: '1-2-e3',
+      question: 'O que é uma "instância" de uma classe?',
+      options: [
+        'O nome dado ao arquivo onde a classe está definida',
+        'Um método especial que inicializa a classe',
+        'Uma cópia da classe sem modificações',
+        'Um objeto concreto criado a partir da classe',
+      ],
+      correct: 3,
+      explanation: 'Instância e objeto são termos intercambiáveis. Quando fazemos `ada = Polvo()`, `ada` é uma instância (objeto concreto) da classe `Polvo`. A classe é o molde; a instância é o produto fabricado com esse molde.',
+    },
+    {
+      id: '1-2-e4',
+      question: 'Num sistema com classes `Gato`, `Cachorro` e `Passaro`, quantos objetos podemos ter ao mesmo tempo?',
+      options: [
+        'Apenas um objeto por classe',
+        'No máximo três objetos no total',
+        'Qualquer quantidade de objetos de qualquer dessas classes',
+        'Apenas objetos da última classe definida no código',
+      ],
+      correct: 2,
+      explanation: 'Não há limite para o número de objetos. Podemos ter `felix = Gato()`, `tom = Gato()`, `rex = Cachorro()`, `tweety = Passaro()` — todos coexistindo no mesmo programa.',
+    },
+    {
+      id: '1-2-e5',
+      question: '`ada = Polvo("rosa", 8)` e `ana = Polvo("azul", 6)`. Qual afirmação é verdadeira?',
+      options: [
+        '`ada` e `ana` são objetos independentes com atributos distintos',
+        '`ada` e `ana` compartilham os mesmos atributos por serem da mesma classe',
+        'Não é possível criar dois objetos com o mesmo tipo simultaneamente',
+        '`ana` é uma cópia de `ada` com valores modificados',
+      ],
+      correct: 0,
+      explanation: 'Cada objeto tem sua própria "cópia" dos atributos. `ada.cor` é `"rosa"` e `ana.cor` é `"azul"`. Alterar `ada.tentaculos = 10` não afeta `ana.tentaculos`. Eles são completamente independentes.',
+    },
+    {
+      id: '1-2-e6',
+      question: 'Dois objetos `a = Gato("Mimi")` e `b = Gato("Mimi")` têm os mesmos valores. Eles são o mesmo objeto?',
+      options: [
+        'Sim. Objetos com os mesmos dados são considerados idênticos em Python',
+        'Sim. Python reutiliza o mesmo espaço na memória para evitar duplicatas',
+        'Não. Cada objeto é uma entidade distinta na memória, mesmo com dados iguais',
+        'Depende — só são diferentes se criados em linhas de código distintas',
+      ],
+      correct: 2,
+      explanation: 'Identidade significa que cada objeto é uma entidade distinta na memória. Mesmo que `a` e `b` tenham os mesmos dados, são dois objetos diferentes. Em Python, `a is b` retorna `False` — eles ocupam lugares distintos na memória.',
+    },
+  ],
   has_interativo: false
 };
 

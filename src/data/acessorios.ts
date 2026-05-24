@@ -12,8 +12,8 @@ export interface Acessorio {
 
 export const ACESSORIOS: Acessorio[] = [
   { id: 'none',   nome: 'Nenhum',         custo: 0,  src: '' },
-  { id: 'pirata', nome: 'Chapéu Pirata',  custo: 20, src: imgPirata },
-  { id: 'cowboy', nome: 'Chapéu Cowboy',  custo: 20, src: imgCowboy },
-  { id: 'ninja',  nome: 'Chapéu Ninja',   custo: 20, src: imgNinja },
-  { id: 'natal',  nome: 'Chapéu de Natal', custo: 20, src: imgNatal },
+  { id: 'pirata', nome: 'Chapéu Pirata',  custo: 40, src: imgPirata },
+  { id: 'cowboy', nome: 'Chapéu Cowboy',  custo: 40, src: imgCowboy },
+  { id: 'ninja',  nome: 'Chapéu Ninja',   custo: 40, src: imgNinja },
+  { id: 'natal',  nome: 'Chapéu de Natal', custo: 40, src: imgNatal },
 ];

@@ -112,6 +112,80 @@ ${diagramaClasseMetodo}
       "Visibilidade em Python é controlada por prefixos de nome (`_` ou `__`), não pelo `self`. O `self` serve para o método referenciar o objeto que o chamou."
     ]
   },
+  extra_exercises: [
+    {
+      id: '1-4-e1',
+      question: 'Qual é a diferença entre uma função comum e um método em Python?',
+      options: [
+        'Métodos não podem receber parâmetros, ao contrário das funções',
+        'Funções sempre retornam valores; métodos nunca retornam',
+        'Não há diferença — método é apenas outro nome para função',
+        'Um método é definido dentro de uma classe e opera sobre objetos daquela classe',
+      ],
+      correct: 3,
+      explanation: 'Métodos são funções definidas dentro de uma classe. A grande diferença é que métodos têm acesso ao objeto (`self`) e podem ler e modificar seus atributos. Uma função comum não tem esse vínculo com nenhum objeto.',
+    },
+    {
+      id: '1-4-e2',
+      question: 'Como se chama o método `latir()` de um objeto chamado `rex`?',
+      options: [
+        '`rex.latir()`',
+        '`latir(rex)`',
+        '`Cachorro.latir()`',
+        '`call rex.latir`',
+      ],
+      correct: 0,
+      explanation: 'Métodos são chamados com a notação ponto: `objeto.metodo()`. O `rex.latir()` diz ao objeto `rex` para executar a ação `latir`. O Python automaticamente passa `rex` como `self` nessa chamada.',
+    },
+    {
+      id: '1-4-e3',
+      question: 'Um método `depositar(self, valor)` faz `self.saldo += valor`. O que isso significa?',
+      options: [
+        'O método retorna o novo saldo sem modificar o objeto',
+        'O método modifica o atributo `saldo` do objeto diretamente',
+        'O método cria uma nova conta com saldo maior',
+        'O método apaga o atributo `saldo` anterior',
+      ],
+      correct: 1,
+      explanation: '`self.saldo += valor` acessa e modifica o atributo `saldo` do objeto atual. Depois de `conta.depositar(100)`, `conta.saldo` terá aumentado em 100. Essa é uma das principais utilidades dos métodos: alterar o estado do objeto.',
+    },
+    {
+      id: '1-4-e4',
+      question: 'Qual código define corretamente o método `miar()` na classe `Gato` que imprime "Miau!"?',
+      options: [
+        '`def miar(self):\n    print("Miau!")`',
+        '`def miar():\n    print("Miau!")`',
+        '`method miar(self):\n    print("Miau!")`',
+        '`def Gato.miar(self):\n    print("Miau!")`',
+      ],
+      correct: 0,
+      explanation: 'Métodos de instância são definidos com `def nome(self):` dentro da classe. O `self` é obrigatório como primeiro parâmetro. Não existe a palavra-chave `method` em Python, e não se usa `Classe.metodo` na definição.',
+    },
+    {
+      id: '1-4-e5',
+      question: 'Um `Carro` tem os métodos `acelerar()` e `frear()`. Qual afirmação está correta?',
+      options: [
+        'Apenas o primeiro método definido pode usar `self`',
+        'Métodos de objetos nunca podem alterar o estado do objeto',
+        'Os dois métodos podem acessar e modificar atributos como `self.velocidade`',
+        'Os métodos só funcionam se `velocidade` for declarado fora da classe',
+      ],
+      correct: 2,
+      explanation: 'Qualquer método de instância pode usar `self` para ler e modificar atributos. `acelerar` pode fazer `self.velocidade += 10` e `frear` pode fazer `self.velocidade -= 10`. Ambos têm acesso completo ao estado do objeto.',
+    },
+    {
+      id: '1-4-e6',
+      question: 'Por que `self` não precisa ser passado explicitamente ao chamar `rex.latir()`?',
+      options: [
+        '`self` é uma variável global criada automaticamente pelo Python',
+        '`self` é ignorado quando não é passado explicitamente',
+        'Python automaticamente passa `rex` como `self` ao usar a notação ponto',
+        'Python usa o nome da variável `rex` como `self` diretamente',
+      ],
+      correct: 2,
+      explanation: 'Quando você escreve `rex.latir()`, o Python internamente faz `Cachorro.latir(rex)` — passa o objeto à esquerda do ponto como primeiro argumento (`self`). Por isso, ao definir o método você declara `self`, mas ao chamá-lo não precisa passá-lo.',
+    },
+  ],
   has_interativo: false
 };
 
