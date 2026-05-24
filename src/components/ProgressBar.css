@@ -101,7 +101,7 @@
   .pb-level-header {
     @apply flex items-center gap-1;
     padding-left: 6px;
-    margin-bottom: 3px;
+    margin-bottom: 11px;
   }
 
   .pb-level-dots {
