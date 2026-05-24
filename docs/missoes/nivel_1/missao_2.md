@@ -1,4 +1,73 @@
-﻿# MissÃ£o 1-2 â€” Objeto
+﻿<!-- NOTAS DE DESENVOLVIMENTO — não são conteúdo da missão -->
+
+## [notas] Referências e decisões para esta missão
+
+### Fontes bibliográficas
+
+**Weisfeld — Cap. 1, p. 10–14 ("What Exactly Is an Object?")**
+Foco: objeto como entidade com dados e comportamentos. Apresentar sem ainda definir classe formalmente.
+
+Trechos disponíveis:
+- `referencias/Weisfeld/missao_2_trechos.txt` — definição central (p. 6): *"an object is an entity that contains both data and behavior"*
+- `referencias/Weisfeld/guardados.txt` — Bloco 4: *"people already think in terms of objects"* → gancho de abertura
+- `referencias/Weisfeld/guardados.txt` — Bloco 5: *"Objects are the building blocks of an OO program"* → encerramento conceitual
+- `referencias/Weisfeld/guardados.txt` — Bloco 6: definições compactas de objeto, atributo e método
+
+**BlueJ — Kölling et al. (2003)**
+Princípio Objects First: o aluno observa e interage com objetos antes de qualquer formalização. A definição deve emergir da experiência, não antecedê-la.
+Resumo completo: `referencias/BlueJ/resumo_bluej_pedagogy.txt`
+
+---
+
+### Linha narrativa (narrativa_exemplos.md)
+- Otto *encontra* Ada no oceano. Não sabe como foi criada — apenas observa que existe, tem identidade própria e é diferente de outros polvos.
+- Metáfora da caixa preta: você usa sem saber o que há dentro.
+- Nenhuma `class` aparece ainda.
+- Nomes: `Ada`, `azulao`, `marinho`
+
+---
+
+### Terminologia fixada para o app inteiro
+Usar **sempre** estes termos — nunca misturar com "estado", "comportamento" ou "atributos":
+- Dados do objeto → **características**
+- O que o objeto faz → **ações**
+- Tabela "três marcas": Identidade / **Características** / **Ações**
+
+---
+
+### Estrutura proposta (Objects First — BlueJ)
+1. Otto encontra Ada → observação antes da definição
+2. Cada objeto é único → multiplicidade, independência
+3. Objetos estão em todo lugar → generalização para o mundo real
+4. As três marcas de todo objeto → tabela com terminologia corrigida
+5. De onde Ada veio? → gancho para missão 5
+
+**Visuais disponíveis:**
+- `diagramaObjetos` SVG (3 cards: Cachorro, Celular, Carro) → guardado em `docs/guardados.md`; pode voltar na Seção 3 com labels corrigidos
+- Interativos `PolvosInterativo` e `TresPolvosInterativo` → removidos temporariamente; componentes mantidos em `src/components/missoes/nivel_1/missao_2/`
+
+### Seção de identidade na memória (código Python)
+
+Incluir mini-seção mostrando que dois objetos com características idênticas são entidades distintas.
+Rótulo: **Python simplificado** (usa dict como proxy — Polvo ainda não existe nesta missão).
+
+```python
+ada   = {"cor": "rosa", "tentaculos": 8}
+outra = {"cor": "rosa", "tentaculos": 8}
+
+print(id(ada))    # 4371856896
+print(id(outra))  # 4371857024
+
+print(ada == outra)  # True  — mesmas características
+print(ada is outra)  # False — entidades distintas
+```
+
+`id()` = "digital" única de cada objeto na memória. `==` compara características; `is` compara identidade.
+
+<!-- FIM DAS NOTAS -->
+
+---
+# MissÃ£o 1-2 â€” Objeto
 
 **Ãcone:** PiCircle
 **Emblema:** Criatura Marinha
@@ -82,3 +151,5 @@ Isso vocÃª descobre na **MissÃ£o 5**.
 - [ ] AzulÃ£o perde todas as caracterÃ­sticas â€” qualquer mudanÃ§a afeta todos os objetos.
 
 **ExplicaÃ§Ã£o:** Cada objeto existe de forma independente. Mudar Ada nÃ£o afeta AzulÃ£o â€” cada um carrega seus prÃ³prios dados.
+
+
