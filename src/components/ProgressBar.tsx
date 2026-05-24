@@ -106,13 +106,21 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ curriculum, completedMissions
                 </div>
               )}
 
-              <span className="shrink-0" title={missao.title}>
+              {!isFirstOfNivel && (
+                <div className={`pb-connector ${isDone ? 'done' : ''} ${idx === activeIndex ? 'active' : ''}`} />
+              )}
+
+              <div
+                className={`pb-mission${isDone ? ' done' : ''}${isActive ? ' active' : ''}`}
+                title={missao.title}
+              >
+                <div className="pb-dot-layer" />
                 <MissionIcon
                   iconName={missao.icon}
                   completed={isDone}
-                  className={`w-4 h-4${isActive && !isDone ? ' !text-accent' : ''}`}
+                  className={`pb-icon-layer w-6 h-6${isActive && !isDone ? ' !text-accent' : ''}`}
                 />
-              </span>
+              </div>
             </React.Fragment>
           );
         })}
