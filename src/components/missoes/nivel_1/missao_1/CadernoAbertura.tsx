@@ -1,24 +1,24 @@
 import React from "react";
-import postit from "../../../../assets/postit.png";
 
 const PostIt: React.FC<{ text: string; rotation: string; className?: string }> = ({ text, rotation, className }) => (
   <div
-    className={`relative w-40 ${className ?? ""}`}
-    style={{ transform: `rotate(${rotation})` }}
+    className={`relative w-36 ${className ?? ""}`}
+    style={{
+      transform: `rotate(${rotation})`,
+      background: "#fef9c3",
+      border: "1.5px solid #d97706",
+      borderRadius: "4px",
+      boxShadow: "2px 3px 6px rgba(0,0,0,0.12)",
+      padding: "10px 10px",
+      minHeight: "56px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}
   >
-    <img src={postit} alt="" className="w-full" />
     <p
-      className="absolute text-sm text-stone-700 text-center leading-snug m-0"
-      style={{
-        fontFamily: "'Playwrite GB J', cursive",
-        top: "24%",
-        left: "24%",
-        right: "4%",
-        bottom: "8%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
+      className="text-sm text-stone-700 text-center leading-snug m-0"
+      style={{ fontFamily: "'Playwrite GB J', cursive" }}
     >
       {text}
     </p>

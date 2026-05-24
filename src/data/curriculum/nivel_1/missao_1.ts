@@ -14,6 +14,8 @@ Se você já cursou a disciplina de Introdução à Programação (provavelmente
 
 Para piorar: Marta, do laboratório vizinho, também estava usando as mesmas folhas para anotar as dela. E Pedro. E Joana. Ninguém sabia mais o que era de quem.
 
+{{caos-anotacoes}}
+
 Você pode estar pensando: *"basta cada um usar os seus próprios papéis"*. Certo — isso resolve o problema de espaço. Mas agora Otto anota "cor: rosa", Marta escreve "pink", Pedro registra um código hexadecimal. Na hora de comparar 100 criaturas coletadas por 4 pesquisadores diferentes, o caos volta — com outro nome.
 
 {{dados-globais}}

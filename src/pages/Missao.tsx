@@ -8,6 +8,7 @@ import FichaAcesso from "../components/missoes/nivel_1/missao_3/FichaAcesso";
 import PolvonilsonIntro from "../components/missoes/nivel_1/missao_0/PolvonilsonIntro";
 import CadernoAbertura from "../components/missoes/nivel_1/missao_1/CadernoAbertura";
 import DadosGlobais from "../components/missoes/nivel_1/missao_1/DadosGlobais";
+import CaosAnotacoes from "../components/missoes/nivel_1/missao_1/CaosAnotacoes";
 import SlidesPOO from "../components/missoes/nivel_1/missao_1/SlidesPOO";
 import SlideCard from "../components/SlideCard";
 import {
@@ -291,6 +292,7 @@ const Missao: React.FC = () => {
             if (i % 2 === 1) {
               if (part === '{{caderno-abertura}}') return <CadernoAbertura key={i} />;
               if (part === '{{dados-globais}}') return <DadosGlobais key={i} />;
+              if (part === '{{caos-anotacoes}}') return <CaosAnotacoes key={i} />;
               if (part === '{{polvonilson-intro}}') return <PolvonilsonIntro key={i} />;
               if (part === '{{slides-poo}}') return <SlidesPOO key={i} />;
               if (part === '{{o-que-vai-encontrar}}') return <OQueVaiEncontrar key={i} />;
