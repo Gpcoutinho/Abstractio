@@ -32,7 +32,7 @@ Mudar algo em Ada não muda os outros. Cada objeto guarda seus próprios dados d
 
 Mas o que torna Ada *ela mesma* – e não qualquer outro polvo?
 
-Python simplificado – dois objetos com as mesmas características:
+Python simplificado – para demonstrar o conceito, dois objetos com os mesmos dados:
 
 \`\`\`python
 ada   = {"cor": "rosa", "tentaculos": 8}
@@ -53,7 +53,7 @@ print(ada == outra)  # True  – mesmas características
 print(ada is outra)  # False – entidades distintas
 \`\`\`
 
-\`==\` compara os dados; \`is\` compara a identidade. Ada e \`outra\` têm as mesmas características, mas são entidades diferentes. Ada é Ada.
+\`==\` compara os dados; \`is\` compara a identidade. Mesmo com dados idênticos, Ada e \`outra\` são entidades distintas. Ada é Ada.
 
 ---
 
