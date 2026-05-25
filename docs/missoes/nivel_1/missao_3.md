@@ -1,29 +1,29 @@
-﻿# MissÃ£o 1-3 â€” Atributos
+ Missão 1-3 — Atributos
 
-**Ãcone:** PiTag
-**Emblema:** Pintor(a) de TentÃ¡culos
+**Ícone:** PiTag
+**Emblema:** Pintor(a) de Tentáculos
 
 ## Teoria
 
 ### Otto abre o caderno
 
-Na missÃ£o anterior, Otto encontrou Ada no oceano. Ele existe, Ã© Ãºnico, tem identidade prÃ³pria.
+Na missão anterior, Otto encontrou Ada no oceano. Ele existe, é único, tem identidade própria.
 
-Agora Otto tira o caderno de campo e comeÃ§a a registrar tudo o que observa: cor, tamanho, nÃºmero de tentÃ¡culos, espÃ©cie...
+Agora Otto tira o caderno de campo e começa a registrar tudo o que observa: cor, tamanho, número de tentáculos, espécie...
 
-Cada informaÃ§Ã£o registrada Ã© um **atributo** â€” um dado que pertence especificamente a Ada.
+Cada informação registrada é um **atributo** — um dado que pertence especificamente a Ada.
 
-> **Atributo** = uma informaÃ§Ã£o que pertence a um objeto. Cada objeto guarda os seus prÃ³prios valores.
+> **Atributo** = uma informação que pertence a um objeto. Cada objeto guarda os seus próprios valores.
 
-> [interativo: FichaInterativo â€” ficha de observaÃ§Ã£o de Ada com atributos clicÃ¡veis. Ao clicar em cada atributo, revela o valor e a linha Python correspondente: `Ada.cor â†’ "rosa"`. Ada aparece ao lado com a caracterÃ­stica destacada visualmente.]
+> [interativo: FichaInterativo — ficha de observação de Ada com atributos clicáveis. Ao clicar em cada atributo, revela o valor e a linha Python correspondente: `Ada.cor → "rosa"`. Ada aparece ao lado com a característica destacada visualmente.]
 
 <ficha-interativo></ficha-interativo>
 
 ---
 
-### O ponto â€” como acessar um atributo
+### O ponto — como acessar um atributo
 
-Em Python, o ponto (`.`) Ã© a forma de acessar um atributo de um objeto. Ã‰ como Otto apontando para Ada e dizendo: *"me dÃª sua cor"*.
+Em Python, o ponto (`.`) é a forma de acessar um atributo de um objeto. É como Otto apontando para Ada e dizendo: *"me dê sua cor"*.
 
 ```python
 print(Ada.nome)             # Ada
@@ -33,13 +33,13 @@ print(Ada.tamanho_cm)       # 25
 print(Ada.especie)          # Octopus vulgaris
 ```
 
-A estrutura Ã© sempre: `objeto.atributo`.
+A estrutura é sempre: `objeto.atributo`.
 
 ---
 
 ### Cada polvo guarda os seus
 
-No oceano hÃ¡ outros polvos. Cada um carrega seus prÃ³prios atributos â€” completamente independentes entre si.
+No oceano há outros polvos. Cada um carrega seus próprios atributos — completamente independentes entre si.
 
 ```python
 print(Ada.cor)    # rosa
@@ -47,7 +47,7 @@ print(ana.cor)       # azul
 print(douglas.cor)   # verde
 ```
 
-Mudar a cor de Ada nÃ£o afeta Ana. Mudar Ana nÃ£o afeta Douglas. Cada objeto Ã© uma entidade separada com seus prÃ³prios dados.
+Mudar a cor de Ada não afeta Ana. Mudar Ana não afeta Douglas. Cada objeto é uma entidade separada com seus próprios dados.
 
 ---
 
@@ -60,9 +60,9 @@ Ada.cor = "transparente"
 print(Ada.cor)  # transparente
 ```
 
-SÃ³ `Ada.cor` mudou. Ana e Douglas continuam com as suas.
+Só `Ada.cor` mudou. Ana e Douglas continuam com as suas.
 
-> [svg: diagrama simples â€” `Ada.cor` com valor `"rosa"` â†’ seta de atribuiÃ§Ã£o â†’ valor `"transparente"`. Outros polvos ao lado sem alteraÃ§Ã£o.]
+> [svg: diagrama simples — `Ada.cor` com valor `"rosa"` → seta de atribuição → valor `"transparente"`. Outros polvos ao lado sem alteração.]
 
 ---
 
@@ -70,13 +70,13 @@ SÃ³ `Ada.cor` mudou. Ana e Douglas continuam com as suas.
 
 - [ ] Tem interativo
 
-## ExercÃ­cio
+## Exercício
 
-**Pergunta:** Otto lÃª `Ada.cor` e vÃª `"rosa"`. Em seguida escreve `ana.cor = "verde"`. O que acontece com `Ada.cor`?
+**Pergunta:** Otto lê `Ada.cor` e vê `"rosa"`. Em seguida escreve `ana.cor = "verde"`. O que acontece com `Ada.cor`?
 
-- [ ] Muda para `"verde"` â€” objetos do mesmo tipo compartilham atributos.
-- [x] Continua `"rosa"` â€” cada objeto guarda seus prÃ³prios atributos. â† correta
-- [ ] Fica indefinido â€” sÃ³ um polvo pode ter cor definida por vez.
-- [ ] Gera um erro â€” nÃ£o Ã© possÃ­vel alterar atributos de objetos separados.
+- [ ] Muda para `"verde"` — objetos do mesmo tipo compartilham atributos.
+- [x] Continua `"rosa"` — cada objeto guarda seus próprios atributos. ← correta
+- [ ] Fica indefinido — só um polvo pode ter cor definida por vez.
+- [ ] Gera um erro — não é possível alterar atributos de objetos separados.
 
-**ExplicaÃ§Ã£o:** Atributos pertencem a cada objeto individualmente. Mudar `ana.cor` nÃ£o afeta `Ada.cor` â€” sÃ£o dados completamente independentes.
+**Explicação:** Atributos pertencem a cada objeto individualmente. Mudar `ana.cor` não afeta `Ada.cor` — são dados completamente independentes.
