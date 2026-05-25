@@ -100,7 +100,7 @@ Não importa se é um polvo ou uma conta bancária – todo objeto pode ser desc
 | **Características** | Os dados que carrega | cor: rosa, tentáculos: 8 | saldo, titular |
 | **Ações** | O que ela sabe fazer | nadar, camuflar, soltar tinta | depositar, sacar, consultar saldo |
 
-<destaque-marker>Identidade</destaque-marker>, <destaque-marker>características</destaque-marker>, <destaque-marker>ações</destaque-marker>. Onde houver um objeto, esses três estarão presentes.
+<destaque-marker>Identidade, características e ações</destaque-marker>. Onde houver um objeto, esses três estarão presentes.
 
 ---
 
