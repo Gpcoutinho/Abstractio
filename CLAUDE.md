@@ -212,6 +212,16 @@ uma <destaque-reto>entidade</destaque-reto> (algo que existe de forma independen
 
 Renderiza como `<span>` com `underline decoration-[#c4b5fd] decoration-2 underline-offset-4`. A cor é a mesma usada na pergunta do `DuvidaBlock`, criando coerência visual entre o termo e seu esclarecimento.
 
+## Tag `<destaque-marker>`
+
+Fundo amarelo estilo marca-texto com texto escuro para contraste. Usar para destacar trechos de código inline, valores literais ou termos que merecem atenção visual forte.
+
+```html
+O valor padrão é <destaque-marker>None</destaque-marker> quando nenhum argumento é passado.
+```
+
+Renderiza como `<span>` com `bg-yellow-200 text-gray-900 px-0.5 rounded-sm`.
+
 ## Tag `<conceito>`
 
 Renderizada pelo componente `ConceitoBox`. Formato obrigatório:
