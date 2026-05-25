@@ -27,7 +27,6 @@ const BauDeConchas: React.FC<Props> = ({ missaoId, extras, proximaMissao }) => {
   const { getExtrasDone, completarExtraExercise, penalizarExtraErro } = useProgress();
   const extrasDone = getExtrasDone(missaoId);
   const doneCount = extrasDone.length;
-  const tier = calcTier(doneCount);
   const allDone = doneCount >= extras.length;
 
   const firstIncomplete = extras.findIndex(ex => !extrasDone.includes(ex.id));

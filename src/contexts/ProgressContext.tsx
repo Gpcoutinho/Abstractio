@@ -149,7 +149,7 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     });
   }, []);
 
-  const penalizarExtraErro = useCallback((missaoId: string) => {
+  const penalizarExtraErro = useCallback((_missaoId: string) => {
     setState(prev => ({
       ...prev,
       conchas: Math.max(0, prev.conchas - 1),
