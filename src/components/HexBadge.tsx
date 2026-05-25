@@ -16,7 +16,7 @@ type TierKey = Exclude<TierLevel, 'none'>;
 
 // Brilho metálico via drop-shadow (contorna o SVG shape)
 const TIER_GLOW: Record<TierKey, string> = {
-  bronze: 'drop-shadow(0 0 1px #fcd34d) drop-shadow(0 0 3px #b45309)',
+  bronze: 'drop-shadow(0 0 1px #b45309) drop-shadow(0 0 3px #7c2d12)',
   silver: 'drop-shadow(0 0 1px #f1f5f9) drop-shadow(0 0 3px #64748b)',
   gold:   'drop-shadow(0 0 1px #fef08a) drop-shadow(0 0 4px #ca8a04)',
 };
@@ -24,12 +24,12 @@ const TIER_GLOW: Record<TierKey, string> = {
 // Stops do gradiente diagonal (escuro → brilho → escuro) — textura metálica
 const TIER_GRADIENT_STOPS: Record<TierKey, { offset: string; color: string }[]> = {
   bronze: [
-    { offset: '0%',   color: '#78350f' },
-    { offset: '30%',  color: '#d97706' },
-    { offset: '48%',  color: '#fcd34d' },
-    { offset: '58%',  color: '#fbbf24' },
-    { offset: '78%',  color: '#b45309' },
-    { offset: '100%', color: '#92400e' },
+    { offset: '0%',   color: '#431407' },
+    { offset: '30%',  color: '#7c2d12' },
+    { offset: '48%',  color: '#b45309' },
+    { offset: '58%',  color: '#9a3412' },
+    { offset: '78%',  color: '#7c2d12' },
+    { offset: '100%', color: '#3d0a00' },
   ],
   silver: [
     { offset: '0%',   color: '#475569' },

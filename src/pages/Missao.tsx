@@ -35,6 +35,7 @@ import ProgressBar from '../components/ProgressBar';
 import ConceitoBox from '../components/ConceitoBox';
 import OQueVaiEncontrar from '../components/missoes/nivel_1/missao_0/OQueVaiEncontrar';
 import BauDeConchas from '../components/BauDeConchas';
+import { TreasureChest } from '@phosphor-icons/react';
 import ReferenciasBlock from '../components/ReferenciasBlock';
 import AdaCard from '../components/missoes/nivel_1/AdaCard';
 
@@ -511,7 +512,7 @@ const Missao: React.FC = () => {
               <p className="text-sm font-semibold text-textPrimary">Baú de Conchas</p>
               <p className="text-xs text-textSecondary mt-0.5">
                 {jaConcluida
-                  ? `${missao.extra_exercises!.length} exercícios extras · ganhe até ${missao.extra_exercises!.length * 3} conchas`
+                  ? 'Responda exercícios · ganhe mais conchas · evolua suas conquistas'
                   : 'Disponível após concluir a missão'}
               </p>
             </div>
@@ -520,7 +521,7 @@ const Missao: React.FC = () => {
               disabled={!jaConcluida}
               className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-accent text-accent text-sm font-semibold hover:bg-accent/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent"
             >
-              <ShellIcon className="w-4 h-4 shrink-0" style={{ color: 'currentColor' }} />
+              <TreasureChest className="w-4 h-4 shrink-0" weight="bold" />
               Abrir Baú
             </button>
           </div>
@@ -609,7 +610,7 @@ const Missao: React.FC = () => {
                   }}
                   className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-colors"
                 >
-                  <ShellIcon className="w-4 h-4 shrink-0" style={{ color: 'currentColor' }} />
+                  <TreasureChest className="w-4 h-4 shrink-0" weight="bold" />
                   Abrir Baú de Conchas
                 </button>
               )}

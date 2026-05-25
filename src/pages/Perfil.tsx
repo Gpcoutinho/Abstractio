@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { TrophyIcon, LockClosedIcon } from '@heroicons/react/24/outline';
 import { niveis } from '../data/curriculum';
@@ -42,6 +42,15 @@ const Perfil: React.FC = () => {
   const [nomeInput, setNomeInput] = useState(nome);
   const [salvo, setSalvo] = useState(false);
   const [lojaTab, setLojaTab] = useState<LojaTab>('molduras');
+  const lojaRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (window.location.hash === '#loja') {
+      setTimeout(() => {
+        lojaRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  }, []);
 
   const handleSalvarNome = () => {
     setNome(nomeInput.trim());
@@ -152,7 +161,7 @@ const Perfil: React.FC = () => {
         </section>
 
         {/* Loja de conchas — card unificado com tabs */}
-        <section className="bg-bgSecondary border border-borderDark rounded-xl mb-6">
+        <section id="loja" ref={lojaRef} className="bg-bgSecondary border border-borderDark rounded-xl mb-6">
           {/* Header */}
           <div className="px-6 pt-6 pb-0">
             <h2 className="text-sm font-semibold text-textSecondary uppercase tracking-widest mb-4">

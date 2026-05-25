@@ -14,9 +14,9 @@ interface Props {
 }
 
 const TIER_META: { threshold: number; stars: number; label: string; color: string }[] = [
-  { threshold: 2, stars: 1, label: 'Bronze', color: 'text-amber-500' },
-  { threshold: 4, stars: 2, label: 'Prata',  color: 'text-slate-300' },
-  { threshold: 6, stars: 3, label: 'Ouro',   color: 'text-yellow-400' },
+  { threshold: 2, stars: 1, label: 'Bronze', color: 'text-amber-700' },
+  { threshold: 4, stars: 2, label: 'Prata',  color: 'text-slate-400' },
+  { threshold: 6, stars: 3, label: 'Ouro',   color: 'text-yellow-600' },
 ];
 
 function tierMeta(tier: Exclude<TierLevel, 'none'>) {
