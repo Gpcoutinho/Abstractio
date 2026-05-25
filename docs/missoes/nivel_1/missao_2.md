@@ -117,7 +117,7 @@ ada = {
 }
 ```
 
-Mudar algo em Ada não muda os outros. Cada objeto guarda seus próprios dados de forma independente.
+Mudar algo em Ada não muda os outros. Cada objeto guarda seus próprios dados de forma independente – ou seja, se Ada mudar de cor agora, os outros polvos continuam exatamente como estavam.
 
 > [svg: três polvos lado a lado – Ada (rosa, 8 tentáculos) + dois outros – cada um com card de dados abaixo.]
 
@@ -137,14 +137,14 @@ print(id(ada))    # 4371856896
 print(id(outra))  # 4371857024
 ```
 
-Endereços diferentes – entidades diferentes. Agora a comparação:
+Endereços diferentes – entidades diferentes. Ou seja: mesmo com dados idênticos, Ada e `outra` são dois objetos distintos. Agora a comparação:
 
 ```python-simplificado
 print(ada == outra)  # True  – mesmas características
 print(ada is outra)  # False – entidades distintas
 ```
 
-`==` compara os dados; `is` compara a identidade. Mesmo com dados idênticos, Ada e `outra` são entidades distintas. Ada é Ada.
+`==` compara os dados – ou seja, pergunta "têm o mesmo conteúdo?". `is` compara a identidade – isto é, pergunta "são a mesma coisa?". Mesmo com dados idênticos, Ada e `outra` são entidades distintas. Ada é Ada.
 
 ---
 

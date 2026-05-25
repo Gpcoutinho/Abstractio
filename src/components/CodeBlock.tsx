@@ -15,6 +15,7 @@ const oceanTheme = {
     background: 'none',
     fontFamily: 'Fira Code, ui-monospace, SFMono-Regular, monospace',
     fontSize: '0.875rem',
+    fontVariantLigatures: 'none',
   },
 
   // Comentários
@@ -82,7 +83,7 @@ const CodeBlock: React.FC<Props> = ({ className, children }) => {
 
   if (!match) {
     return (
-      <code className="text-accent font-mono text-sm font-normal">
+      <code className="text-accent font-mono text-sm font-normal [font-variant-ligatures:none]">
         {children}
       </code>
     );

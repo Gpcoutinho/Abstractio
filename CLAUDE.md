@@ -188,6 +188,17 @@ Paleta e gradientes em `ESTRUTURA.md`. Tailwind config em `tailwind.config.cjs`.
 
 Linhas que começam com `[nota]` são instruções ou comentários da Rebecca — **não são conteúdo a ser escrito na tela**. Ignorar ao renderizar; processar como pedido/diretriz ao editar.
 
+## Linguagem do Conteúdo
+
+O conteúdo preza por **clareza com repetição intencional**. Explicações diretas demais perdem o aluno — o mesmo conceito deve aparecer de formas diferentes ao longo da leitura.
+
+Usar "ou seja," e "isto é," como gatilhos naturais de reformulação: eles obrigam a reafirmar o conceito com outras palavras, reforçando a compreensão sem parecer repetitivo.
+
+Usar referências explícitas ao material próximo para criar sensação de acompanhamento — o aluno nunca deve se sentir largado:
+- Antes de um bloco: *"como demonstra o trecho abaixo"*, *"veja o exemplo a seguir"*
+- Depois de um bloco: *"como visto acima"*, *"note que no bloco acima..."*
+- Entre seções: *"como Otto já percebeu"*, *"voltando ao exemplo de Ada"*
+
 ## Convenção de Pontuação
 
 Usar sempre **travessão médio (`–`)**, nunca travessão longo (`—`) em textos de conteúdo (teoria, exercícios, narrativa). O travessão longo soa como escrita gerada por IA.
