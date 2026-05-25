@@ -8,17 +8,19 @@ const missao: Missao = {
   theory: `
 ## Otto encontra Ada
 
-Otto está em expedição pelo oceano quando avista um polvo que não conhecia.
+Otto está em expedição pelo oceano quando avista um polvo que não conhecia... Ada.
 
 {{ada-card-objeto}}
 
-Ela existe. Tem cor. Tem tamanho. Tem tentáculos. E sabe fazer coisas – nada, se camufla, solta tinta.
+Ela tem uma cor, um tamanho e um número de tentáculos. E sabe fazer coisas – nada, se camufla, solta tinta.
 
-Para Otto, Ada é uma <destaque>caixa preta</destaque>: ele consegue observá-la e interagir com ela sem saber o que está dentro.
+Para Otto, Ada é uma <destaque>caixa preta</destaque>: ele consegue observá-la e interagir com ela mesmo sem conhecer todos os seus detalhes.
 
-Isso é um <destaque>objeto</destaque>: uma entidade com características próprias e ações que sabe executar.
+Isso é um <destaque>objeto</destaque>: uma entidade (algo que existe de forma independente) com características próprias e ações que sabe executar.
 
 <conceito note="adapt. Weisfeld, 2019"><strong>Objeto</strong>: entidade que reúne, de forma inseparável, características próprias e as ações que é capaz de executar.</conceito>
+
+{{duvida-entidade-definicao}}
 
 ---
 
@@ -127,6 +129,12 @@ Isso você descobre na **Missão 5**.
       note: "princípio Objects First: observar e interagir com objetos antes de qualquer formalização",
     },
   ],
+  duvidas: {
+    "duvida-entidade-definicao": {
+      pergunta: "O que significa 'entidade'?",
+      resposta: "Entidade é qualquer coisa que existe de forma independente – um animal, um documento, um evento. Em programação, usamos o termo para dizer que um objeto tem existência própria: ocupa um lugar na memória, tem uma identidade única e persiste enquanto o programa precisar dele. Ada é uma entidade porque existe por conta própria, independente de qualquer outro polvo.",
+    },
+  },
 };
 
 export default missao;

@@ -293,7 +293,7 @@ const Missao: React.FC = () => {
         <section className="mb-8 prose prose-invert max-w-none prose-headings:text-textPrimary prose-headings:font-bold prose-p:text-textBody prose-p:leading-relaxed prose-strong:text-textPrimary prose-blockquote:border-l-accent prose-blockquote:text-textSecondary prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary prose-li:text-textBody">
           {missao.theory.split(/(\{\{cards?:[0-9,]+\}\}|\{\{[a-z][a-z-]*\}\})/).map((part, i) => {
             if (i % 2 === 1) {
-              if (part === '{{duvida-objeto-unico}}') return <DuvidaBlock key={i} pergunta="O que define quais características e ações farão parte de um objeto?" resposta="Essa decisão cabe ao modelador — a pessoa que está criando aquele objeto. Ela vai decidir o que é importante representar e o que pode ser ignorado. Você verá isso em detalhes nas missões seguintes." />;
+              if (part.startsWith('{{duvida-')) { const d = missao.duvidas?.[part.slice(2, -2)]; if (d) return <DuvidaBlock key={i} pergunta={d.pergunta} resposta={d.resposta} />; }
               if (part === '{{ada-card-objeto}}') return <AdaCard key={i} nivel="objeto" />;
               if (part === '{{caderno-abertura}}') return <CadernoAbertura key={i} />;
               if (part === '{{dados-globais}}') return <DadosGlobais key={i} />;

@@ -84,17 +84,19 @@ print(ada is outra)  # False – entidades distintas
 
 ### Otto encontra Ada
 
-Otto está em expedição pelo oceano quando avista um polvo que não conhecia.
+Otto está em expedição pelo oceano quando avista um polvo que não conhecia... Ada.
 
 {{ada-card-objeto}}
 
-Ela existe. Tem cor. Tem tamanho. Tem tentáculos. E sabe fazer coisas – nada, se camufla, solta tinta.
+Ela tem uma cor, um tamanho e um número de tentáculos. E sabe fazer coisas – nada, se camufla, solta tinta.
 
-Para Otto, Ada é uma <destaque>caixa preta</destaque>: ele consegue observá-la e interagir com ela sem saber o que está dentro.
+Para Otto, Ada é uma <destaque>caixa preta</destaque>: ele consegue observá-la e interagir com ela mesmo sem conhecer todos os seus detalhes.
 
-Isso é um <destaque>objeto</destaque>: uma entidade com características próprias e ações que sabe executar.
+Isso é um <destaque>objeto</destaque>: uma entidade (algo que existe de forma independente) com características próprias e ações que sabe executar.
 
 <conceito note="adapt. Weisfeld, 2019"><strong>Objeto</strong>: entidade que reúne, de forma inseparável, características próprias e as ações que é capaz de executar.</conceito>
+
+{{duvida-entidade-definicao}}
 
 > [interativo: card Ada como caixa preta – só o polvo visível, sem dados internos]
 
