@@ -92,11 +92,11 @@ Ela tem uma cor, um tamanho e um número de tentáculos. E sabe fazer coisas –
 
 Para Otto, Ada é uma <destaque>caixa preta</destaque>: ele consegue observá-la e interagir com ela mesmo sem conhecer todos os seus detalhes.
 
-Isso é um <destaque>objeto</destaque>: uma entidade (algo que existe de forma independente) com características próprias e ações que sabe executar.
-
-<conceito note="adapt. Weisfeld, 2019"><strong>Objeto</strong>: entidade que reúne, de forma inseparável, características próprias e as ações que é capaz de executar.</conceito>
+Isso é um <destaque>objeto</destaque>: uma <destaque-reto>entidade</destaque-reto> (algo que existe de forma independente) com características próprias e ações que sabe executar.
 
 {{duvida-entidade-definicao}}
+
+<conceito note="adapt. Weisfeld, 2019"><strong>Objeto</strong>: entidade que reúne, de forma inseparável, características próprias e as ações que é capaz de executar.</conceito>
 
 > [interativo: card Ada como caixa preta – só o polvo visível, sem dados internos]
 

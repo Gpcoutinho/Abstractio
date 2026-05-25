@@ -16,11 +16,11 @@ Ela tem uma cor, um tamanho e um número de tentáculos. E sabe fazer coisas –
 
 Para Otto, Ada é uma <destaque>caixa preta</destaque>: ele consegue observá-la e interagir com ela mesmo sem conhecer todos os seus detalhes.
 
-Isso é um <destaque>objeto</destaque>: uma entidade (algo que existe de forma independente) com características próprias e ações que sabe executar.
-
-<conceito note="adapt. Weisfeld, 2019"><strong>Objeto</strong>: entidade que reúne, de forma inseparável, características próprias e as ações que é capaz de executar.</conceito>
+Isso é um <destaque>objeto</destaque>: uma <destaque-reto>entidade</destaque-reto> (algo que existe de forma independente) com características próprias e ações que sabe executar.
 
 {{duvida-entidade-definicao}}
+
+<conceito note="adapt. Weisfeld, 2019"><strong>Objeto</strong>: entidade que reúne, de forma inseparável, características próprias e as ações que é capaz de executar.</conceito>
 
 ---
 
@@ -132,7 +132,7 @@ Isso você descobre na **Missão 5**.
   duvidas: {
     "duvida-entidade-definicao": {
       pergunta: "O que significa 'entidade'?",
-      resposta: "Entidade é qualquer coisa que existe de forma independente – um animal, um documento, um evento. Em programação, usamos o termo para dizer que um objeto tem existência própria: ocupa um lugar na memória, tem uma identidade única e persiste enquanto o programa precisar dele. Ada é uma entidade porque existe por conta própria, independente de qualquer outro polvo.",
+      resposta: "'Entidade' é um termo central em POO e nos diagramas UML – você vai encontrá-lo com frequência. Significa algo que existe de forma independente, com identidade própria, distinguível de tudo o mais. Ada é uma entidade: ela existe e é única.",
     },
   },
 };

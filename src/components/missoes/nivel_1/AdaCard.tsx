@@ -25,10 +25,11 @@ const AdaCard: React.FC<{ nivel: NivelAdaCard }> = ({ nivel }) => {
   return (
     <div className="not-prose my-6 flex flex-col items-center gap-3">
       <div className="w-52 rounded-xl border border-borderDark bg-bgSecondary overflow-hidden">
-
         {/* Header */}
         <div className="px-4 py-2.5 border-b border-borderDark text-center">
-          <span className="text-xs font-bold text-textPrimary tracking-wide">Ada</span>
+          <span className="text-xs font-bold text-textPrimary tracking-wide">
+            Ada
+          </span>
         </div>
 
         {/* Polvo */}
@@ -67,16 +68,17 @@ const AdaCard: React.FC<{ nivel: NivelAdaCard }> = ({ nivel }) => {
           <div className="px-4 pt-3 pb-4 border-t border-borderDark space-y-1">
             <p className="text-xs font-mono text-textSecondary">nadar()</p>
             <p className="text-xs font-mono text-textSecondary">camuflar()</p>
-            <p className="text-xs font-mono text-textSecondary">soltarTinta()</p>
+            <p className="text-xs font-mono text-textSecondary">
+              soltarTinta()
+            </p>
           </div>
         )}
-
       </div>
 
       {/* Nota caixa preta — apenas missão 2 */}
       {nivel === "objeto" && (
         <p className="text-xs text-textSecondary/50 text-center max-w-[200px] leading-relaxed italic">
-          Ada existe. Você pode interagir com ela — mas o que está dentro ainda não é visível.
+          Esta é Ada. Você pode interagir com ela.
         </p>
       )}
     </div>

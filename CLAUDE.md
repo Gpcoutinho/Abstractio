@@ -8,6 +8,8 @@
 > - mostrar a mensagem proposta e os arquivos que serão incluídos
 > - receber "ok" explícito da Rebecca
 >
+> Sempre terminar a proposta de commit com **"ok?"** para lembrar a Rebecca de responder.
+>
 > Isso vale para qualquer commit, sem exceção. Não há situação em que commitar diretamente seja aceitável — nem mudanças pequenas, nem "só formatação".
 >
 > **2. NUNCA incluir "Co-Authored-By" ou qualquer autoria do Claude nas mensagens de commit.**
@@ -199,6 +201,16 @@ Isso é um <destaque>objeto</destaque>: uma entidade com características própr
 ```
 
 Renderiza como `<span>` com `underline decoration-wavy decoration-pink-400 decoration-2 underline-offset-4`. O offset evita que o sublinhado colida com descidas de letras (g, j, p, y). O negrito (`**bold**`) continua reservado para uso estrutural (tabelas, listas, labels).
+
+## Tag `<destaque-reto>`
+
+Sublinhado reto lilás (`#c4b5fd`) para termos técnicos sendo introduzidos — especialmente os que têm um `DuvidaBlock` associado logo abaixo.
+
+```html
+uma <destaque-reto>entidade</destaque-reto> (algo que existe de forma independente)
+```
+
+Renderiza como `<span>` com `underline decoration-[#c4b5fd] decoration-2 underline-offset-4`. A cor é a mesma usada na pergunta do `DuvidaBlock`, criando coerência visual entre o termo e seu esclarecimento.
 
 ## Tag `<conceito>`
 

@@ -358,6 +358,7 @@ const Missao: React.FC = () => {
                 "caderno-abertura": () => <CadernoAbertura />,
                 "conceito": ({ children, note }: { children?: React.ReactNode; note?: string }) => <ConceitoBox note={note}>{children}</ConceitoBox>,
                 "destaque": ({ children }: { children?: React.ReactNode }) => <span className="underline decoration-wavy decoration-pink-400 decoration-2 underline-offset-4">{children}</span>,
+                "destaque-reto": ({ children }: { children?: React.ReactNode }) => <span className="underline decoration-[#c4b5fd] decoration-2 underline-offset-4">{children}</span>,
                 "slides-poo": () => <SlidesPOO />,
                 "bolo-factory": () => <BoloFactory />,
                 "polvos-interativo": () => <PolvosInterativo />,
@@ -366,7 +367,7 @@ const Missao: React.FC = () => {
                 "ficha-acesso": () => <FichaAcesso />,
                 p: ({ node, children, ...props }: any) => {
                   const hasBlock = node?.children?.some(
-                    (c: any) => c.type === 'element' && !['a','strong','em','code','span','br','destaque'].includes(c.tagName)
+                    (c: any) => c.type === 'element' && !['a','strong','em','code','span','br','destaque','destaque-reto'].includes(c.tagName)
                   );
                   return hasBlock ? <>{children}</> : <p {...props}>{children}</p>;
                 },
