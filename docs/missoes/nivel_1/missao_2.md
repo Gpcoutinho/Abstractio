@@ -152,11 +152,20 @@ print(ada is outra)  # False – entidades distintas
 
 *Você já pensa em objetos sem perceber.*
 
-Ada não é um caso especial.
+Otto olha para Ada e percebe: o que ela é – uma entidade com características e ações – não é exclusividade do oceano.
 
-Olhe ao redor – cadeira, celular, cachorro, caneta. Cada um deles também tem características próprias e ações que sabe executar.
+Um celular tem características (modelo, bateria) e ações (ligar, tirar foto). Uma conta bancária tem características (saldo, titular) e ações (depositar, sacar). O princípio é o mesmo – só o contexto muda.
 
-O oceano de Otto é uma metáfora do mundo real: tudo que existe pode ser pensado como um objeto.
+E é exatamente esse princípio que aparece no mercado de trabalho. Objetos como `ContaBancaria`, `Usuario` e `Produto` são tão reais quanto Ada – têm características próprias, existem de forma independente e cada um carrega seus próprios dados.
+
+Veja como o padrão se repete:
+
+| | Ada | ContaBancaria |
+|---|---|---|
+| **Características** | cor, tentáculos | saldo, titular |
+| **Ações** | nadar, camuflar, soltar tinta | depositar, sacar, consultar saldo |
+
+O oceano é uma metáfora. Os objetos são reais.
 
 ---
 
