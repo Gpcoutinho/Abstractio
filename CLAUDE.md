@@ -336,13 +336,19 @@ class Polvo:
 Componente: `src/components/missoes/reutilizaveis/DuvidaBlock.tsx`
 Props: `pergunta: string`, `resposta: string`
 
-Usado para antecipar dúvidas comuns ao longo da leitura da teoria. Cada dúvida recebe um placeholder descritivo registrado em `Missao.tsx`:
+Usado para antecipar dúvidas comuns ao longo da leitura da teoria. Cada dúvida é declarada diretamente no campo `duvidas` do arquivo `.ts` da missão — **não é necessário registrar nada em `Missao.tsx`**:
 
 ```typescript
-// Em Missao.tsx:
-if (part === '{{duvida-nome-descritivo}}')
-  return <DuvidaBlock key={i} pergunta="..." resposta="..." />;
+// Em missao_N.ts:
+duvidas: {
+  "duvida-entidade-definicao": {
+    pergunta: "O que significa 'entidade'?",
+    resposta: "Significa algo que existe de forma independente, com identidade própria.",
+  },
+},
 ```
+
+`Missao.tsx` resolve o placeholder dinamicamente: qualquer `{{duvida-*}}` encontrado na teoria busca a chave correspondente em `missao.duvidas` e renderiza o `DuvidaBlock` automaticamente.
 
 Convenção de nomenclatura do placeholder: `{{duvida-[conceito]-[descritor]}}` — ex: `{{duvida-objeto-unico}}`, `{{duvida-classe-instancia}}`.
 
