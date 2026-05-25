@@ -66,7 +66,6 @@ print(ada is outra)  # False – entidades distintas
 
 \`==\` compara os dados – ou seja, pergunta "têm o mesmo conteúdo?". \`is\` compara a identidade – isto é, pergunta "são a mesma coisa?". Mesmo com dados idênticos, \`ada\` e \`outra\` são entidades distintas. Ada é Ada.
 
-
 ---
 
 ## Objetos estão em todo lugar
@@ -94,7 +93,7 @@ O oceano é uma metáfora. Os objetos são reais.
 
 Não importa se é um polvo ou uma conta bancária – todo objeto pode ser descrito pelos mesmos três elementos:
 
-| Elemento | O que é | Em Ada | Em ContaBancaria |
+| Elemento | O que é | Ada | ContaBancaria |
 |---|---|---|---|
 | **Identidade** | O que a torna única | Ada é uma entidade única | cada conta é única |
 | **Características** | Os dados que carrega | cor: rosa, tentáculos: 8 | saldo, titular |
