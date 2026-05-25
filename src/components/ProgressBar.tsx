@@ -53,7 +53,8 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ curriculum, completedMissions
     const id = setTimeout(() => {
       if (!trackRef.current) return;
       const missions = trackRef.current.querySelectorAll<HTMLElement>('.pb-mission');
-      const activeEl = missions[activeIndex];
+      const scrollIdx = viewingIndex >= 0 ? viewingIndex : activeIndex;
+      const activeEl = missions[scrollIdx];
       if (!activeEl) return;
       const track = trackRef.current;
       const trackRect = track.getBoundingClientRect();
