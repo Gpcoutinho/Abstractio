@@ -8,6 +8,7 @@ import {
   XMarkIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
+import { TreasureChest } from "@phosphor-icons/react";
 import { useProgress } from "../hooks/useProgress";
 import { MOLDURAS } from "../data/molduras";
 import { ACESSORIOS } from "../data/acessorios";
@@ -25,10 +26,13 @@ const AVATAR_SRCS: (string | null)[] = [
   imgKraken,
 ];
 
-const NAV_ITEMS = [
+type NavItem = { to: string; label: string; Icon: React.ComponentType<{ className?: string }>; exact: boolean };
+
+const NAV_ITEMS: NavItem[] = [
   { to: "/", label: "Home", Icon: HomeIcon, exact: true },
   { to: "/trilha", label: "Trilha", Icon: MapIcon, exact: false },
   { to: "/conquistas", label: "Conquistas", Icon: TrophyIcon, exact: false },
+  { to: "/bau", label: "Baú de Conchas", Icon: TreasureChest, exact: false },
 ];
 
 const Sidebar: React.FC = () => {
@@ -84,7 +88,7 @@ const Sidebar: React.FC = () => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full w-[200px] bg-bgSecondary border-r border-borderDark z-50 flex flex-col transition-transform duration-200 ${
+        className={`fixed top-0 left-0 h-full w-[220px] bg-bgSecondary border-r border-borderDark z-50 flex flex-col transition-transform duration-200 ${
           open ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0`}
       >
