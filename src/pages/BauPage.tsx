@@ -57,55 +57,64 @@ const BauPage: React.FC = () => {
             <p className="text-textSecondary text-sm">Ganhe mais conchas e evolua suas conquistas</p>
           </div>
 
-          <div className="space-y-2">
-            {missionsWithExtras.map(({ missao, nivel }) => {
-              const done = isMissaoConcluida(missao.id);
-              const tierVal = getTier(missao.id);
-              const tierCount = { none: 0, bronze: 1, silver: 2, gold: 3 }[tierVal];
-              const extrasDone = getExtrasDone(missao.id).length;
-              const extrasTotal = missao.extra_exercises!.length;
-
-              const hasTierStyle = done && tierVal !== 'none';
-
+          <div className="space-y-10">
+            {niveis.map(nivel => {
+              const nivelMissions = missionsWithExtras.filter(m => m.nivel.id === nivel.id);
+              if (!nivelMissions.length) return null;
               return (
-                <button
-                  key={missao.id}
-                  onClick={() => done && setSelectedId(missao.id)}
-                  disabled={!done}
-                  className={`w-full flex items-center gap-4 p-4 rounded-xl text-left transition-all ${
-                    !done
-                      ? 'border border-borderDark bg-bgSecondary opacity-40 cursor-not-allowed'
-                      : tierVal === 'none'
-                      ? 'border border-borderDark bg-bgSecondary cursor-pointer hover:border-accent/50'
-                      : 'cursor-pointer hover:brightness-110'
-                  }`}
-                  style={hasTierStyle ? TIER_CARD_STYLE[tierVal] : undefined}
-                >
-                  <MissionIcon iconName={missao.icon} completed={done} className="w-8 h-8 shrink-0" />
+                <section key={nivel.id}>
+                  <h2 className="text-base font-semibold text-textSecondary uppercase tracking-widest mb-3">
+                    {nivel.title}
+                  </h2>
+                  <div className="space-y-2">
+                    {nivelMissions.map(({ missao }) => {
+                      const done = isMissaoConcluida(missao.id);
+                      const tierVal = getTier(missao.id);
+                      const tierCount = { none: 0, bronze: 1, silver: 2, gold: 3 }[tierVal];
+                      const extrasDone = getExtrasDone(missao.id).length;
+                      const extrasTotal = missao.extra_exercises!.length;
+                      const hasTierStyle = done && tierVal !== 'none';
 
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[10px] text-textSecondary uppercase tracking-wider leading-none mb-0.5">
-                      {nivel.title}
-                    </p>
-                    <p className="text-sm font-semibold text-textPrimary leading-snug truncate">
-                      {missao.title}
-                    </p>
-                  </div>
+                      return (
+                        <button
+                          key={missao.id}
+                          onClick={() => done && setSelectedId(missao.id)}
+                          disabled={!done}
+                          className={`w-full flex items-center gap-4 p-4 rounded-xl text-left transition-all ${
+                            !done
+                              ? 'border border-borderDark bg-bgSecondary opacity-40 cursor-not-allowed'
+                              : tierVal === 'none'
+                              ? 'border border-borderDark bg-bgSecondary cursor-pointer hover:border-accent/50'
+                              : 'cursor-pointer hover:brightness-110'
+                          }`}
+                          style={hasTierStyle ? TIER_CARD_STYLE[tierVal] : undefined}
+                        >
+                          <MissionIcon iconName={missao.icon} completed={done} className="w-8 h-8 shrink-0" />
 
-                  <div className="flex items-center gap-3 shrink-0">
-                    <div className="flex items-center gap-0.5">
-                      {[1, 2, 3].map(n =>
-                        tierCount >= n
-                          ? <StarSolid key={n} className="w-3.5 h-3.5 text-yellow-400" />
-                          : <StarOutline key={n} className="w-3.5 h-3.5 text-borderDark" />
-                      )}
-                    </div>
-                    <span className="text-xs text-textSecondary tabular-nums w-8 text-right">
-                      {extrasDone}/{extrasTotal}
-                    </span>
-                    {!done && <LockClosedIcon className="w-3.5 h-3.5 text-textSecondary/50" />}
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-semibold text-textPrimary leading-snug truncate">
+                              {missao.title}
+                            </p>
+                          </div>
+
+                          <div className="flex items-center gap-3 shrink-0">
+                            <div className="flex items-center gap-0.5">
+                              {[1, 2, 3].map(n =>
+                                tierCount >= n
+                                  ? <StarSolid key={n} className="w-3.5 h-3.5 text-yellow-400" />
+                                  : <StarOutline key={n} className="w-3.5 h-3.5 text-borderDark" />
+                              )}
+                            </div>
+                            <span className="text-xs text-textSecondary tabular-nums w-8 text-right">
+                              {extrasDone}/{extrasTotal}
+                            </span>
+                            {!done && <LockClosedIcon className="w-3.5 h-3.5 text-textSecondary/50" />}
+                          </div>
+                        </button>
+                      );
+                    })}
                   </div>
-                </button>
+                </section>
               );
             })}
           </div>
