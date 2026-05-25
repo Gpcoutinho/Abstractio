@@ -337,6 +337,17 @@ SVGs, animações, imagens e mini-jogos são documentados nos `.md` com blockquo
 
 Essas linhas descrevem o visual existente (ou desejado) naquele ponto da teoria. Não são conteúdo textual da missão — são referências de implementação para alinhar o `.md` com o `.ts`.
 
+## Perguntas para a Rebecca
+
+Evitar perguntas abertas que exijam resposta longa digitada. Preferir sempre:
+- **Sim / Não**
+- **Alternativas numeradas** — "1, 2 ou 3?"
+- **Alternativas com letra** — "a, b ou c?"
+
+Nunca perguntar "qual você prefere?" ou "o que você quer fazer?" sem já listar as opções.
+
+---
+
 ## Fluxo de Desenvolvimento
 
 > ⚠️ **REGRA INVIOLÁVEL: nunca escrever, editar ou deletar arquivos sem aprovação explícita da Rebecca.**
