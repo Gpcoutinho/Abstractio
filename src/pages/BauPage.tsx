@@ -54,7 +54,7 @@ const BauPage: React.FC = () => {
 
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-textPrimary mb-1">Baú de Conchas</h1>
-            <p className="text-textSecondary text-sm">Ganhe mais conchas e evolua suas conquistas</p>
+            <p className="text-textSecondary text-sm">Responda exercícios · ganhe mais conchas · evolua suas conquistas</p>
           </div>
 
           <div className="space-y-10">

@@ -512,7 +512,7 @@ const Missao: React.FC = () => {
               <p className="text-sm font-semibold text-textPrimary">Baú de Conchas</p>
               <p className="text-xs text-textSecondary mt-0.5">
                 {jaConcluida
-                  ? 'Ganhe mais conchas · evolua suas conquistas'
+                  ? 'Responda exercícios · ganhe mais conchas · evolua suas conquistas'
                   : 'Disponível após concluir a missão'}
               </p>
             </div>
