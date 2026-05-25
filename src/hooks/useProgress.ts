@@ -14,9 +14,13 @@ export function useProgress() {
   const ctx = useContext(ProgressContext);
   if (!ctx) throw new Error('useProgress deve ser usado dentro de ProgressProvider');
 
-  const { completed, niveis_concluidos, conchas, conchas_por_missao, extras_concluidos, nome, genero, avatarIdx, moldurasDesbloqueadas, molduraAtiva, acessoriosDesbloqueados, acessorioAtivo, completarMissao, desmarcarMissao, completarExtraExercise, penalizarExtraErro, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva, comprarAcessorio, setAcessorioAtivo } = ctx;
+  const { completed, niveis_concluidos, conchas, conchas_por_missao, extras_concluidos, erros_por_missao, nome, genero, avatarIdx, moldurasDesbloqueadas, molduraAtiva, acessoriosDesbloqueados, acessorioAtivo, completarMissao, desmarcarMissao, registrarErroMissao, completarExtraExercise, penalizarExtraErro, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva, comprarAcessorio, setAcessorioAtivo } = ctx;
 
   const isMissaoConcluida = (missaoId: string) => completed.includes(missaoId);
+  const getConchasValor = (missaoId: string): number => {
+    const erros = erros_por_missao[missaoId] ?? 0;
+    return erros >= 2 ? 4 : erros === 1 ? 8 : 12;
+  };
   const isNivelConcluido = (nivelId: number) => niveis_concluidos.includes(nivelId);
   const jaGanhouConchas = (missaoId: string) => conchas_por_missao[missaoId] !== undefined;
   const getExtrasDone = (missaoId: string): string[] => extras_concluidos[missaoId] ?? [];
@@ -48,6 +52,7 @@ export function useProgress() {
     acessorioAtivo,
     completarMissao,
     desmarcarMissao,
+    registrarErroMissao,
     completarExtraExercise,
     penalizarExtraErro,
     setNome,
@@ -60,6 +65,7 @@ export function useProgress() {
     isMissaoConcluida,
     isNivelConcluido,
     jaGanhouConchas,
+    getConchasValor,
     getExtrasDone,
     getTier,
     nivelNome,

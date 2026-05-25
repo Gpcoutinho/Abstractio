@@ -133,7 +133,7 @@ const Missao: React.FC = () => {
     nivelIdx: string;
     missaoIdx: string;
   }>();
-  const { completarMissao, desmarcarMissao, isMissaoConcluida, completed, jaGanhouConchas, genero } = useProgress();
+  const { completarMissao, desmarcarMissao, registrarErroMissao, isMissaoConcluida, completed, jaGanhouConchas, genero } = useProgress();
   const { celebrate } = useCelebration();
 
   const [selecionada, setSelecionada] = useState<number | null>(null);
@@ -219,6 +219,8 @@ const Missao: React.FC = () => {
       completarMissao(missao.id, novasTentativas);
       setShowCelebration(true);
       celebrate();
+    } else {
+      registrarErroMissao(missao.id);
     }
   };
 
@@ -244,19 +246,17 @@ const Missao: React.FC = () => {
           </div>
 
           <nav className="border-t border-borderDark/5">
-            <div className="px-5 h-11 flex items-center gap-4 justify-between">
-              <div className="flex items-center gap-4 justify-between">
-                <Link to="/trilha" className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors">
-                  <ArrowLeftIcon className="w-4 h-4" />
-                  <span className="sm:inline">Trilha</span>
-                </Link>
+            <div className="px-5 h-11 flex items-center justify-between">
+              <div className="flex-1">
                 {missaoAnterior && (
                   <Link to={missaoAnterior} className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors">
                     <ArrowLeftIcon className="w-4 h-4" />
-                    <span className="sm:inline">Anterior</span>
+                    <span className="sm:inline">Missão anterior</span>
                   </Link>
                 )}
+              </div>
 
+              <div className="flex-1 flex justify-center">
                 {!showBar && (
                   <button
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -268,10 +268,14 @@ const Missao: React.FC = () => {
                 )}
               </div>
 
-              <Link to={proximaMissao || "/conquistas"} className="inline-flex items-center gap-2 text-sm text-accent font-semibold hover:opacity-80 transition-opacity">
-                {proximaMissao ? "Próxima" : "Conquistas"}
-                <ArrowRightIcon className="w-4 h-4" />
-              </Link>
+              <div className="flex-1 flex justify-end">
+                {proximaMissao && (
+                  <Link to={proximaMissao} className="inline-flex items-center gap-2 text-sm text-accent font-semibold hover:opacity-80 transition-opacity">
+                    Próxima missão
+                    <ArrowRightIcon className="w-4 h-4" />
+                  </Link>
+                )}
+              </div>
             </div>
           </nav>
 
@@ -530,13 +534,6 @@ const Missao: React.FC = () => {
         {/* Navegação de rodapé */}
         <div className="mt-8 pt-6 border-t border-borderDark flex items-center justify-between">
           <div className="flex items-center gap-5">
-            <Link
-              to="/trilha"
-              className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
-            >
-              <ArrowLeftIcon className="w-4 h-4" />
-              Voltar à trilha
-            </Link>
             {missaoAnterior && (
               <Link
                 to={missaoAnterior}
@@ -550,7 +547,7 @@ const Missao: React.FC = () => {
           {proximaMissao ? (
             <Link
               to={proximaMissao}
-              className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-accent font-semibold hover:opacity-80 transition-opacity"
             >
               Próxima missão
               <ArrowRightIcon className="w-4 h-4" />
@@ -558,7 +555,7 @@ const Missao: React.FC = () => {
           ) : (
             <Link
               to="/conquistas"
-              className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-accent font-semibold hover:opacity-80 transition-opacity"
             >
               Ver conquistas
               <ArrowRightIcon className="w-4 h-4" />

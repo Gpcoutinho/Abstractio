@@ -12,7 +12,7 @@ import { CircleIcon } from '@phosphor-icons/react/dist/icons/Circle';
 const totalMissoes = niveis.reduce((acc, n) => acc + n.missoes.length, 0);
 
 const Trilha: React.FC = () => {
-  const { completed, conchas_por_missao } = useProgress();
+  const { completed, conchas_por_missao, getConchasValor } = useProgress();
 
   return (
     <>
@@ -76,7 +76,7 @@ const Trilha: React.FC = () => {
                             {missao.title}
                           </span>
                           <span className={`text-xs flex items-center gap-1 ${concluida ? "text-success" : "text-textSecondary"}`}>
-                            {concluida ? `✓ ${conchas_por_missao[missao.id] ?? 15}` : "+15"}
+                            {concluida ? `✓ ${conchas_por_missao[missao.id]}` : `+${getConchasValor(missao.id)}`}
                             <ShellIcon className="w-3.5 h-3.5" />
                           </span>
                           {concluida ? (

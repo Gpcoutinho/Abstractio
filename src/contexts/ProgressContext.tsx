@@ -13,6 +13,7 @@ interface ProgressState {
   conchas: number;
   conchas_por_missao: Record<string, number>;
   extras_concluidos: Record<string, string[]>;
+  erros_por_missao: Record<string, number>;
   nome: string;
   genero: Genero;
   avatarIdx: number;
@@ -28,6 +29,7 @@ const DEFAULT_STATE: ProgressState = {
   conchas: 0,
   conchas_por_missao: {},
   extras_concluidos: {},
+  erros_por_missao: {},
   nome: '',
   genero: '',
   avatarIdx: 0,
@@ -68,6 +70,7 @@ export interface ProgressContextValue {
   conchas: number;
   conchas_por_missao: Record<string, number>;
   extras_concluidos: Record<string, string[]>;
+  erros_por_missao: Record<string, number>;
   nome: string;
   genero: Genero;
   avatarIdx: number;
@@ -77,6 +80,7 @@ export interface ProgressContextValue {
   acessorioAtivo: string;
   completarMissao: (missaoId: string, tentativas?: number) => void;
   desmarcarMissao: (missaoId: string) => void;
+  registrarErroMissao: (missaoId: string) => void;
   completarExtraExercise: (missaoId: string, extraId: string) => void;
   penalizarExtraErro: (missaoId: string) => void;
   setNome: (nome: string) => void;
@@ -121,6 +125,16 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         conchas_por_missao: { ...prev.conchas_por_missao, [missaoId]: ganhas },
       };
     });
+  }, []);
+
+  const registrarErroMissao = useCallback((missaoId: string) => {
+    setState(prev => ({
+      ...prev,
+      erros_por_missao: {
+        ...prev.erros_por_missao,
+        [missaoId]: (prev.erros_por_missao[missaoId] ?? 0) + 1,
+      },
+    }));
   }, []);
 
   const desmarcarMissao = useCallback((missaoId: string) => {
@@ -203,7 +217,7 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, []);
 
   return (
-    <ProgressContext.Provider value={{ ...state, completarMissao, desmarcarMissao, completarExtraExercise, penalizarExtraErro, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva, comprarAcessorio, setAcessorioAtivo }}>
+    <ProgressContext.Provider value={{ ...state, completarMissao, desmarcarMissao, registrarErroMissao, completarExtraExercise, penalizarExtraErro, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva, comprarAcessorio, setAcessorioAtivo }}>
       {children}
     </ProgressContext.Provider>
   );
