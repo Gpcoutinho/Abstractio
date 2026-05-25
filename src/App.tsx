@@ -10,8 +10,8 @@ import BauPage from './pages/BauPage';
 import Perfil from './pages/Perfil';
 
 const ScrollToTop: React.FC = () => {
-  const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  const { pathname, hash } = useLocation();
+  useEffect(() => { if (!hash) window.scrollTo(0, 0); }, [pathname, hash]);
   return null;
 };
 

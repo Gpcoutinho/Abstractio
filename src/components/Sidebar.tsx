@@ -144,10 +144,15 @@ const Sidebar: React.FC = () => {
           <p className="text-xs text-textSecondary leading-tight text-center">
             {nivelDisplay}
           </p>
-          <span className="mt-1 text-sm text-accent font-semibold flex items-center gap-1">
+          <Link
+            to="/perfil#loja"
+            onClick={() => setOpen(false)}
+            className="mt-1 text-sm text-accent font-semibold flex items-center gap-1 hover:opacity-70 transition-opacity"
+            title="Ir para a loja de conchas"
+          >
             <ShellIcon className="w-4 h-4" style={{ color: '#06B6D4' }} />
             {conchas}
-          </span>
+          </Link>
         </div>
 
         {/* Nav */}
