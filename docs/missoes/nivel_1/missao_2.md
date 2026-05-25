@@ -171,11 +171,11 @@ O oceano é uma metáfora. Os objetos são reais.
 
 ### As três marcas de todo objeto
 
-Todo objeto – de um polvo a um celular – carrega três marcas:
+Todo objeto – de um polvo a uma conta bancária – carrega três marcas:
 
 | Marca | O que é | Em Ada |
 |---|---|---|
-| **Identidade** | O que a diferencia das outras | Ada é uma entidade única |
+| **Identidade** | O que a torna única | Ada é uma entidade única |
 | **Características** | Os dados que carrega | cor: rosa, tentáculos: 8 |
 | **Ações** | O que ela sabe fazer | nadar, camuflar, soltar tinta |
 

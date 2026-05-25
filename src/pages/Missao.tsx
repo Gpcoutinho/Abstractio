@@ -376,8 +376,18 @@ const Missao: React.FC = () => {
                 pre: ({ children }: { children: React.ReactNode }) => <>{children}</>,
                 table: ({ children }: { children?: React.ReactNode }) => (
                   <div className="overflow-x-auto my-4">
-                    <table className="min-w-full">{children}</table>
+                    <table className="min-w-full border-collapse border border-slate-700 rounded-lg overflow-hidden">{children}</table>
                   </div>
+                ),
+                th: ({ children }: { children?: React.ReactNode }) => (
+                  <th className="bg-slate-800 text-textPrimary font-semibold text-left px-4 py-2.5 border-b-2 border-slate-600 text-sm">
+                    {children}
+                  </th>
+                ),
+                td: ({ children }: { children?: React.ReactNode }) => (
+                  <td className="text-textSecondary px-4 py-2.5 border-b border-slate-700/60 text-sm">
+                    {children}
+                  </td>
                 ),
               } as React.ComponentProps<typeof ReactMarkdown>['components']}>
                 {part}
