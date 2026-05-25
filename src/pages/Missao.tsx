@@ -201,6 +201,10 @@ const Missao: React.FC = () => {
     return null;
   })();
 
+  const isNextLevel = proximaMissao !== null && missaoIdxNum >= nivel.missoes.length;
+  const nextNivel = isNextLevel ? niveis.find((n) => n.id === nivel.id + 1) : null;
+  const proximaLabel = nextNivel ? `Próximo nível – ${nextNivel.short}` : 'Próxima missão';
+
   const jaConcluida = isMissaoConcluida(missao.id);
   const hasExtras = !!(missao.extra_exercises && missao.extra_exercises.length > 0);
   const acertou = missao.exercise ? selecionada === missao.exercise.correct : false;
@@ -269,9 +273,14 @@ const Missao: React.FC = () => {
               </div>
 
               <div className="flex-1 flex justify-end">
-                {proximaMissao && (
+                {proximaMissao ? (
                   <Link to={proximaMissao} className="inline-flex items-center gap-2 text-sm text-accent font-semibold hover:opacity-80 transition-opacity">
-                    Próxima missão
+                    {proximaLabel}
+                    <ArrowRightIcon className="w-4 h-4" />
+                  </Link>
+                ) : (
+                  <Link to="/conquistas" className="inline-flex items-center gap-2 text-sm text-accent font-semibold hover:opacity-80 transition-opacity">
+                    Ver conquistas
                     <ArrowRightIcon className="w-4 h-4" />
                   </Link>
                 )}
@@ -549,7 +558,7 @@ const Missao: React.FC = () => {
               to={proximaMissao}
               className="inline-flex items-center gap-2 text-sm text-accent font-semibold hover:opacity-80 transition-opacity"
             >
-              Próxima missão
+              {proximaLabel}
               <ArrowRightIcon className="w-4 h-4" />
             </Link>
           ) : (
