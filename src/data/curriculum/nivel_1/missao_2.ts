@@ -43,14 +43,14 @@ Mudar algo em Ada não muda os outros. Cada objeto guarda seus próprios dados d
 
 Mas o que torna Ada *ela mesma* – e não qualquer outro polvo?
 
-Dois objetos com os mesmos dados:
+Vejamos a seguir o que acontece quando dois objetos carregam exatamente os mesmos dados:
 
 \`\`\`python-simplificado
 ada   = {"cor": "rosa", "tentaculos": 8}
 outra = {"cor": "rosa", "tentaculos": 8}
 \`\`\`
 
-Cada um recebe um endereço único na memória:
+O que será que aconteceria se perguntássemos ao Python qual é o endereço de memória de cada um? Será que, tendo as mesmas características, o Python englobaria os dois em um só? Ou criaria duas variáveis com endereços diferentes? Veredito: se temos dois objetos distintos, então cada um recebe um endereço único na memória. Veja:
 
 \`\`\`python-simplificado
 print(id(ada))    # 4371856896
@@ -64,7 +64,7 @@ print(ada == outra)  # True  – mesmas características
 print(ada is outra)  # False – entidades distintas
 \`\`\`
 
-\`==\` compara os dados – ou seja, pergunta "têm o mesmo conteúdo?". \`is\` compara a identidade – isto é, pergunta "são a mesma coisa?". Mesmo com dados idênticos, Ada e \`outra\` são entidades distintas. Ada é Ada.
+\`==\` compara os dados – ou seja, pergunta "têm o mesmo conteúdo?". \`is\` compara a identidade – isto é, pergunta "são a mesma coisa?". Mesmo com dados idênticos, \`ada\` e \`outra\` são entidades distintas. Ada é Ada.
 
 
 ---
