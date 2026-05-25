@@ -65,13 +65,20 @@ const oceanTheme = {
   'variable': { color: '#CBD5E1' },
 };
 
+// Mapeamento de linguagem → { lang para o highlighter, label para o badge }
+const LANG_MAP: Record<string, { lang: string; label: string }> = {
+  'python':              { lang: 'python', label: 'Python'              },
+  'python-simplificado': { lang: 'python', label: 'Python simplificado' },
+  'pseudocodigo':        { lang: 'python', label: 'Pseudocódigo'        },
+};
+
 type Props = {
   className?: string;
   children?: React.ReactNode;
 };
 
 const CodeBlock: React.FC<Props> = ({ className, children }) => {
-  const match = /language-(\w+)/.exec(className ?? '');
+  const match = /language-([\w-]+)/.exec(className ?? '');
 
   if (!match) {
     return (
@@ -81,12 +88,18 @@ const CodeBlock: React.FC<Props> = ({ className, children }) => {
     );
   }
 
+  const key = match[1];
+  const { lang, label } = LANG_MAP[key] ?? { lang: key, label: key };
+
   return (
-    <div className="not-prose my-4">
+    <div className="not-prose my-4 rounded-lg overflow-hidden border border-slate-700">
+      <div className="flex justify-end px-3 py-1.5 bg-[#1E293B] border-b border-slate-700">
+        <span className="text-xs font-mono text-slate-400">{label}</span>
+      </div>
       <SyntaxHighlighter
-        language={match[1]}
+        language={lang}
         style={oceanTheme}
-        customStyle={{ margin: 0, borderRadius: '0.5rem', border: '1px solid #334155' }}
+        customStyle={{ margin: 0, borderRadius: 0, border: 'none' }}
       >
         {String(children).replace(/\n$/, '')}
       </SyntaxHighlighter>

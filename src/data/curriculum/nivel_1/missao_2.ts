@@ -20,7 +20,7 @@ Isso é um <destaque>objeto</destaque>: uma <destaque-reto>entidade</destaque-re
 
 {{duvida-entidade-definicao}}
 
-<conceito note="adapt. Weisfeld, 2019"><strong>Objeto</strong>: entidade que reúne, de forma inseparável, características próprias e as ações que é capaz de executar.</conceito>
+<conceito note="adapt. Weisfeld, 2019"><strong>Objeto</strong>: entidade que reúne, de forma inseparável, <destaque-marker>características</destaque-marker> próprias e as <destaque-marker>ações</destaque-marker> que é capaz de executar.</conceito>
 
 ---
 
@@ -28,29 +28,38 @@ Isso é um <destaque>objeto</destaque>: uma <destaque-reto>entidade</destaque-re
 
 No oceano de Otto há outros polvos. Cada um é uma entidade separada – mesma natureza, dados completamente diferentes.
 
-Ada é rosa com 8 tentáculos. Ao lado dela há outros dois polvos – cada um com sua própria cor e seus próprios dados.
+Ada é rosa com 8 tentáculos. Mas no oceano há outros polvos – cada um com sua própria cor e seus próprios dados.
+
+Abaixo você pode ver a estrutura essencial de um objeto no universo da POO – o seu nome de referência e as chaves contendo suas características. Guarde esse formato:
+
+\`\`\`python-simplificado
+ada = {
+    "cor": "rosa",
+    "tentaculos": 8
+}
+\`\`\`
 
 Mudar algo em Ada não muda os outros. Cada objeto guarda seus próprios dados de forma independente.
 
 Mas o que torna Ada *ela mesma* – e não qualquer outro polvo?
 
-Python simplificado – para demonstrar o conceito, dois objetos com os mesmos dados:
+Dois objetos com os mesmos dados:
 
-\`\`\`python
+\`\`\`python-simplificado
 ada   = {"cor": "rosa", "tentaculos": 8}
 outra = {"cor": "rosa", "tentaculos": 8}
 \`\`\`
 
 Cada um recebe um endereço único na memória:
 
-\`\`\`python
+\`\`\`python-simplificado
 print(id(ada))    # 4371856896
 print(id(outra))  # 4371857024
 \`\`\`
 
 Endereços diferentes – entidades diferentes. Agora a comparação:
 
-\`\`\`python
+\`\`\`python-simplificado
 print(ada == outra)  # True  – mesmas características
 print(ada is outra)  # False – entidades distintas
 \`\`\`
@@ -132,7 +141,8 @@ Isso você descobre na **Missão 5**.
   duvidas: {
     "duvida-entidade-definicao": {
       pergunta: "O que significa 'entidade'?",
-      resposta: "'Entidade' é um termo central em POO e nos diagramas UML – você vai encontrá-lo com frequência. Significa algo que existe de forma independente, com identidade própria, distinguível de tudo o mais. Ada é uma entidade: ela existe e é única.",
+      resposta:
+        "'Entidade' é um termo central em POO e nos diagramas UML – você vai encontrá-lo com frequência. Significa algo que existe de forma independente, com identidade própria, distinguível de tudo o mais. Ada é uma entidade: ela existe e é única.",
     },
   },
 };

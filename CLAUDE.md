@@ -243,26 +243,24 @@ A explicação narrativa é informal e coloquial (descoberta com Otto). O `<conc
 
 ### Rótulo de tipo de código
 
-Todo bloco de código deve ser precedido por um rótulo indicando sua natureza. Usar **sempre** um dos três:
+O rótulo é especificado como **sufixo da linguagem** no fence do código — `CodeBlock.tsx` o exibe como badge no canto superior direito do bloco. Nunca escrever o rótulo no texto corrido.
 
-| Rótulo | Significado | Quando usar |
+| Linguagem no fence | Badge exibido | Quando usar |
 |---|---|---|
-| `Python` | Código real e executável | Pode ser copiado e rodado sem modificação |
-| `Python simplificado` | Python válido, estrutura provisória | Usa proxy (dict, lista) antes da classe estar definida; roda, mas não representa a estrutura final |
-| `Pseudocódigo` | Conceitual, não executa | Ilustra lógica sem sintaxe completa |
+| ` ```python` | Python | Código real e executável |
+| ` ```python-simplificado` | Python simplificado | Usa proxy (dict, lista) antes da classe estar definida |
+| ` ```pseudocodigo` | Pseudocódigo | Ilustra lógica sem sintaxe completa |
 
-O rótulo vai **antes** do bloco, como frase curta:
+O texto antes do bloco deve ser uma **explicação em prosa** — não o rótulo:
 
 ```markdown
-Python simplificado — identidade de dois objetos com as mesmas características:
+Dois objetos com os mesmos dados:
 
-\`\`\`python
+\`\`\`python-simplificado
 ada   = {"cor": "rosa", "tentaculos": 8}
 outra = {"cor": "rosa", "tentaculos": 8}
 \`\`\`
 ```
-
-Nunca omitir o rótulo, mesmo quando o tipo parecer óbvio pelo contexto.
 
 ### Comentários explicativos
 
