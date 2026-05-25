@@ -1,5 +1,19 @@
 # Abstractio — Frontend React
 
+---
+
+> ## ⛔ REGRAS INVIOLÁVEIS DE COMMIT
+>
+> **1. NUNCA executar `git commit` sem antes:**
+> - mostrar a mensagem proposta e os arquivos que serão incluídos
+> - receber "ok" explícito da Rebecca
+>
+> Isso vale para qualquer commit, sem exceção. Não há situação em que commitar diretamente seja aceitável — nem mudanças pequenas, nem "só formatação".
+>
+> **2. NUNCA incluir "Co-Authored-By" ou qualquer autoria do Claude nas mensagens de commit.**
+
+---
+
 App educacional gamificado para ensinar **Programação Orientada a Objetos (POO)** em Python.
 
 ## Stack
@@ -34,13 +48,15 @@ src/
     PageWrapper.tsx       ← wrapper de página com max-width e padding
     BoloFactory.tsx       ← componente interativo da missão de Classe
     Card.tsx              ← card genérico reutilizável
+    ConceitoBox.tsx       ← caixa de destaque para definições; renderiza a tag <conceito>
+    ReferenciasBlock.tsx  ← bloco bibliográfico colapsável; aparece após a teoria quando references[] existe
   contexts/
     ProgressContext.tsx   ← Estado global de progresso
   hooks/
     useProgress.ts        ← Hook único para consumir o contexto
   data/
     curriculum/
-      types.ts            ← Tipos TypeScript: Nivel, Missao, Exercise
+      types.ts            ← Tipos TypeScript: Nivel, Missao, Exercise, Reference
       index.ts            ← Exporta array `niveis` com os 4 níveis
       nivel_1/            ← Missões do Nível 1 (missao_0.ts … missao_7.ts + index.ts)
       nivel_2/            ← Missões do Nível 2
@@ -124,6 +140,7 @@ Persistido em **localStorage**. Sem sync com backend.
 | Opção com `[x]` | `exercise.correct` (índice 0-based) |
 | Textos das opções | `exercise.options` |
 | `**Explicação:**` | `exercise.explanation` |
+| Seção `### Fontes bibliográficas` (nas notas) | `references[]` — cada fonte vira um objeto `{ author, year, title, location, note }` |
 
 Fonte: módulos TypeScript em `src/data/curriculum/nivel_N/missao_N.ts` — importados estaticamente, sem fetch.
 
@@ -169,7 +186,63 @@ Paleta e gradientes em `ESTRUTURA.md`. Tailwind config em `tailwind.config.cjs`.
 
 Linhas que começam com `[nota]` são instruções ou comentários da Rebecca — **não são conteúdo a ser escrito na tela**. Ignorar ao renderizar; processar como pedido/diretriz ao editar.
 
+## Convenção de Pontuação
+
+Usar sempre **travessão médio (`–`)**, nunca travessão longo (`—`) em textos de conteúdo (teoria, exercícios, narrativa). O travessão longo soa como escrita gerada por IA.
+
+## Tag `<destaque>`
+
+Sublinhado ondulado rosa para ênfase narrativa inline. Usar quando uma palavra-chave aparece pela primeira vez no fluxo do texto — não em tabelas, listas ou cabeçalhos.
+
+```html
+Isso é um <destaque>objeto</destaque>: uma entidade com características próprias.
+```
+
+Renderiza como `<span>` com `underline decoration-wavy decoration-pink-400 decoration-2 underline-offset-4`. O offset evita que o sublinhado colida com descidas de letras (g, j, p, y). O negrito (`**bold**`) continua reservado para uso estrutural (tabelas, listas, labels).
+
+## Tag `<conceito>`
+
+Renderizada pelo componente `ConceitoBox`. Formato obrigatório:
+
+```html
+<conceito note="adapt. Weisfeld, 2019"><strong>Palavra-chave</strong>: definição formal.</conceito>
+```
+
+- O separador entre termo e definição é sempre `:`, nunca `–` ou `—`
+- A palavra-chave fica em `<strong>`
+- A definição deve ser **formal e distinta** da explicação narrativa que a precede — de preferência adaptada de uma fonte bibliográfica
+- O atributo `note` é opcional; quando presente, aparece como rodapé discreto (itálico, tom secundário) — usar para crédito bibliográfico curto (ex: `"adapt. Weisfeld, 2019"`)
+- Usar apenas para definições centrais da missão — não para todo conceito mencionado
+
+**Padrão narrativa → conceito:**
+A explicação narrativa é informal e coloquial (descoberta com Otto). O `<conceito>` é a versão formal e citable da mesma ideia — nunca idênticos.
+
 ## Convenção de Exemplos de Código
+
+### Rótulo de tipo de código
+
+Todo bloco de código deve ser precedido por um rótulo indicando sua natureza. Usar **sempre** um dos três:
+
+| Rótulo | Significado | Quando usar |
+|---|---|---|
+| `Python` | Código real e executável | Pode ser copiado e rodado sem modificação |
+| `Python simplificado` | Python válido, estrutura provisória | Usa proxy (dict, lista) antes da classe estar definida; roda, mas não representa a estrutura final |
+| `Pseudocódigo` | Conceitual, não executa | Ilustra lógica sem sintaxe completa |
+
+O rótulo vai **antes** do bloco, como frase curta:
+
+```markdown
+Python simplificado — identidade de dois objetos com as mesmas características:
+
+\`\`\`python
+ada   = {"cor": "rosa", "tentaculos": 8}
+outra = {"cor": "rosa", "tentaculos": 8}
+\`\`\`
+```
+
+Nunca omitir o rótulo, mesmo quando o tipo parecer óbvio pelo contexto.
+
+### Comentários explicativos
 
 Comentários explicativos **nunca ficam dentro do bloco de código**. A explicação vai antes (como título ou frase introdutória) ou depois (como legenda), fora do bloco:
 
@@ -194,6 +267,63 @@ idade_cachorro1 = 3
 ```
 
 Comentários técnicos de código (ex: `# chama Animal.__init__`) podem permanecer dentro do bloco quando explicam a linha específica, não a seção.
+
+### Blocos de código — tamanho e ritmo
+
+Evitar blocos longos. A cada trecho lógico, fechar o bloco, explicar em texto e abrir um novo bloco:
+
+```markdown
+<!-- correto -->
+Primeiro, definimos os atributos:
+
+\`\`\`python
+class Polvo:
+    def __init__(self, cor):
+        self.cor = cor
+\`\`\`
+
+Com isso, cada polvo carrega sua própria cor. Agora adicionamos um método:
+
+\`\`\`python
+    def nadar(self):
+        print(f"{self.cor} está nadando")
+\`\`\`
+
+<!-- evitar -->
+\`\`\`python
+class Polvo:
+    def __init__(self, cor):
+        self.cor = cor
+
+    def nadar(self):
+        print(f"{self.cor} está nadando")
+\`\`\`
+```
+
+## Bloco de Dúvida Frequente
+
+Componente: `src/components/missoes/reutilizaveis/DuvidaBlock.tsx`
+Props: `pergunta: string`, `resposta: string`
+
+Usado para antecipar dúvidas comuns ao longo da leitura da teoria. Cada dúvida recebe um placeholder descritivo registrado em `Missao.tsx`:
+
+```typescript
+// Em Missao.tsx:
+if (part === '{{duvida-nome-descritivo}}')
+  return <DuvidaBlock key={i} pergunta="..." resposta="..." />;
+```
+
+Convenção de nomenclatura do placeholder: `{{duvida-[conceito]-[descritor]}}` — ex: `{{duvida-objeto-unico}}`, `{{duvida-classe-instancia}}`.
+
+Nos arquivos `.md`, inserir o placeholder no ponto exato da teoria onde a dúvida naturalmente surgirá:
+
+```markdown
+Um objeto é uma entidade que existe de forma independente na memória.
+
+{{duvida-objeto-unico}}
+
+Cada objeto carrega suas próprias características...
+```
 
 ## Convenção de Visuais nos `.md`
 
@@ -220,9 +350,9 @@ Essas linhas descrevem o visual existente (ou desejado) naquele ponto da teoria.
 4. Ao final de mudanças maiores, informar quantas linhas foram adicionadas/excluídas
 
 
-## Commits
+## ESTRUTURA.md
 
-Nunca incluir linha "Co-Authored-By" nas mensagens de commit.
+Quando uma mudança no projeto tornar o `ESTRUTURA.md` desatualizado, avisar o que será alterado e aguardar ok antes de editar — mesma regra que vale para qualquer outro arquivo.
 
 ## Deploy
 

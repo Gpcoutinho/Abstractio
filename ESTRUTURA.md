@@ -86,9 +86,11 @@ Documento de especificação do produto. Define escopo, progressão, regras de c
 Toda missão tem 3 partes, nesta ordem:
 
 ```
-1. Teoria       ← conteúdo expositivo em markdown com visuais obrigatórios
-2. Interativo   ← mini-jogo ou simulação (opcional por missão)
-3. Exercício    ← questão de múltipla escolha com feedback
+1. Teoria        ← conteúdo expositivo em markdown com visuais obrigatórios
+2. Interativo    ← mini-jogo ou simulação (opcional por missão)
+3. Exercício     ← questão de múltipla escolha com feedback
+4. Referências   ← bloco bibliográfico colapsável (opcional; aparece quando a missão
+                    usa fontes diretas — campo references[] no .ts)
 ```
 
 ---
