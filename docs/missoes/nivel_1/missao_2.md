@@ -173,11 +173,11 @@ O oceano é uma metáfora. Os objetos são reais.
 
 Não importa se é um polvo ou uma conta bancária – todo objeto pode ser descrito pelos mesmos três elementos:
 
-| Elemento | O que é | Em Ada |
-|---|---|---|
-| **Identidade** | O que a torna única | Ada é uma entidade única |
-| **Características** | Os dados que carrega | cor: rosa, tentáculos: 8 |
-| **Ações** | O que ela sabe fazer | nadar, camuflar, soltar tinta |
+| Elemento | O que é | Em Ada | Em ContaBancaria |
+|---|---|---|---|
+| **Identidade** | O que a torna única | Ada é uma entidade única | cada conta é única |
+| **Características** | Os dados que carrega | cor: rosa, tentáculos: 8 | saldo, titular |
+| **Ações** | O que ela sabe fazer | nadar, camuflar, soltar tinta | depositar, sacar, consultar saldo |
 
 <destaque-marker>Identidade</destaque-marker>, <destaque-marker>características</destaque-marker>, <destaque-marker>ações</destaque-marker>. Onde houver um objeto, esses três estarão presentes.
 
