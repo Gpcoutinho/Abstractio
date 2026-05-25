@@ -7,6 +7,9 @@ import FichaInterativo from "../components/missoes/nivel_1/missao_3/FichaInterat
 import FichaAcesso from "../components/missoes/nivel_1/missao_3/FichaAcesso";
 import PolvonilsonIntro from "../components/missoes/nivel_1/missao_0/PolvonilsonIntro";
 import CadernoAbertura from "../components/missoes/nivel_1/missao_1/CadernoAbertura";
+import DadosGlobais from "../components/missoes/nivel_1/missao_1/DadosGlobais";
+import CaosAnotacoes from "../components/missoes/nivel_1/missao_1/CaosAnotacoes";
+import DuvidaBlock from "../components/missoes/reutilizaveis/DuvidaBlock";
 import SlidesPOO from "../components/missoes/nivel_1/missao_1/SlidesPOO";
 import SlideCard from "../components/SlideCard";
 import {
@@ -30,6 +33,8 @@ import interativoHtml from "../assets/interativos/nivel_1_missao_7.html?raw";
 import ProgressBar from '../components/ProgressBar';
 import ConceitoBox from '../components/ConceitoBox';
 import OQueVaiEncontrar from '../components/missoes/nivel_1/missao_0/OQueVaiEncontrar';
+import ReferenciasBlock from '../components/ReferenciasBlock';
+import AdaCard from '../components/missoes/nivel_1/AdaCard';
 
 const interativos: Record<string, string> = {
   "interativos/nivel_1_missao_7.html": interativoHtml,
@@ -290,6 +295,11 @@ const Missao: React.FC = () => {
         <section className="mb-8 prose prose-invert max-w-none prose-headings:text-textPrimary prose-headings:font-bold prose-p:text-textBody prose-p:leading-relaxed prose-strong:text-textPrimary prose-blockquote:border-l-accent prose-blockquote:text-textSecondary prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary prose-li:text-textBody">
           {missao.theory.split(/(\{\{cards?:[0-9,]+\}\}|\{\{[a-z][a-z-]*\}\})/).map((part, i) => {
             if (i % 2 === 1) {
+              if (part === '{{duvida-objeto-unico}}') return <DuvidaBlock key={i} pergunta="O que define quais características e ações farão parte de um objeto?" resposta="Essa decisão cabe ao modelador — a pessoa que está criando aquele objeto. Ela vai decidir o que é importante representar e o que pode ser ignorado. Você verá isso em detalhes nas missões seguintes." />;
+              if (part === '{{ada-card-objeto}}') return <AdaCard key={i} nivel="objeto" />;
+              if (part === '{{caderno-abertura}}') return <CadernoAbertura key={i} />;
+              if (part === '{{dados-globais}}') return <DadosGlobais key={i} />;
+              if (part === '{{caos-anotacoes}}') return <CaosAnotacoes key={i} />;
               if (part === '{{polvonilson-intro}}') return <PolvonilsonIntro key={i} />;
               if (part === '{{slides-poo}}') return <SlidesPOO key={i} />;
               if (part === '{{o-que-vai-encontrar}}') return <OQueVaiEncontrar key={i} />;
@@ -348,7 +358,8 @@ const Missao: React.FC = () => {
               <ReactMarkdown key={i} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={{
                 "polvonilson-intro": () => <PolvonilsonIntro />,
                 "caderno-abertura": () => <CadernoAbertura />,
-                "conceito": ({ children }: { children?: React.ReactNode }) => <ConceitoBox>{children}</ConceitoBox>,
+                "conceito": ({ children, note }: { children?: React.ReactNode; note?: string }) => <ConceitoBox note={note}>{children}</ConceitoBox>,
+                "destaque": ({ children }: { children?: React.ReactNode }) => <span className="underline decoration-wavy decoration-pink-400 decoration-2 underline-offset-4">{children}</span>,
                 "slides-poo": () => <SlidesPOO />,
                 "bolo-factory": () => <BoloFactory />,
                 "polvos-interativo": () => <PolvosInterativo />,
@@ -357,7 +368,7 @@ const Missao: React.FC = () => {
                 "ficha-acesso": () => <FichaAcesso />,
                 p: ({ node, children, ...props }: any) => {
                   const hasBlock = node?.children?.some(
-                    (c: any) => c.type === 'element' && !['a','strong','em','code','span','br'].includes(c.tagName)
+                    (c: any) => c.type === 'element' && !['a','strong','em','code','span','br','destaque'].includes(c.tagName)
                   );
                   return hasBlock ? <>{children}</> : <p {...props}>{children}</p>;
                 },
@@ -374,6 +385,11 @@ const Missao: React.FC = () => {
             );
           })}
         </section>
+
+        {/* Referências bibliográficas */}
+        {missao.references && missao.references.length > 0 && (
+          <ReferenciasBlock references={missao.references} />
+        )}
 
         {/* Mini-jogo */}
         {missao.has_interativo && missao.interativo_html && interativos[missao.interativo_html] && (

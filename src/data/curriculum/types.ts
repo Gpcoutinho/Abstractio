@@ -1,3 +1,11 @@
+export interface Reference {
+  author: string;
+  title: string;
+  year?: number;
+  location?: string;
+  note?: string;
+}
+
 export interface Exercise {
   question: string;
   options: string[];
@@ -21,6 +29,7 @@ export interface Missao {
   exercise?: Exercise;
   has_interativo: boolean;
   interativo_html?: string;
+  references?: Reference[];
 }
 
 export interface Nivel {

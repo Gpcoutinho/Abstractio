@@ -1,58 +1,163 @@
-﻿# MissÃ£o 1-2 â€” Objeto
+<!-- NOTAS DE DESENVOLVIMENTO – não são conteúdo da missão -->
 
-**Ãcone:** PiCircle
+## [notas] Referências e decisões para esta missão
+
+### Fontes bibliográficas
+
+**Weisfeld – Cap. 1, p. 10–14 ("What Exactly Is an Object?")**
+Foco: objeto como entidade com dados e comportamentos. Apresentar sem ainda definir classe formalmente.
+
+Trechos disponíveis:
+- `referencias/Weisfeld/missao_2_trechos.txt` – definição central (p. 6): *"an object is an entity that contains both data and behavior"*
+- `referencias/Weisfeld/guardados.txt` – Bloco 4: *"people already think in terms of objects"* → gancho de abertura
+- `referencias/Weisfeld/guardados.txt` – Bloco 5: *"Objects are the building blocks of an OO program"* → encerramento conceitual
+- `referencias/Weisfeld/guardados.txt` – Bloco 6: definições compactas de objeto, atributo e método
+
+**BlueJ – Kölling et al. (2003)**
+Princípio Objects First: o aluno observa e interage com objetos antes de qualquer formalização. A definição deve emergir da experiência, não antecedê-la.
+Resumo completo: `referencias/BlueJ/resumo_bluej_pedagogy.txt`
+
+---
+
+### Linha narrativa (narrativa_exemplos.md)
+- Otto *encontra* Ada no oceano. Não sabe como foi criada – apenas observa que existe, tem identidade própria e é diferente de outros polvos.
+- Metáfora da caixa preta: você usa sem saber o que há dentro.
+- Nenhuma `class` aparece ainda.
+- Nomes: `Ada`, `azulao`, `marinho` (sem nome por enquanto – retornam com o interativo)
+
+---
+
+### Terminologia fixada para o app inteiro
+Usar **sempre** estes termos – nunca misturar com "estado", "comportamento" ou "atributos":
+- Dados do objeto → **características**
+- O que o objeto faz → **ações**
+- Tabela "três marcas": Identidade / **Características** / **Ações**
+
+---
+
+### Estrutura das seções (Objects First – BlueJ)
+1. Otto encontra Ada → observação antes da definição
+2. Cada objeto é único → multiplicidade, independência
+3. Objetos estão em todo lugar → generalização para o mundo real (reescrita como expansão pós-Ada)
+4. As três marcas de todo objeto → tabela com terminologia corrigida
+5. De onde Ada veio? → gancho para missão 5
+
+**Visuais disponíveis:**
+- `diagramaObjetos` SVG (3 cards: Cachorro, Celular, Carro) → guardado em `docs/guardados.md`; pode voltar na Seção 3 com labels corrigidos
+- Interativos `PolvosInterativo` e `TresPolvosInterativo` → removidos temporariamente; componentes mantidos em `src/components/missoes/nivel_1/missao_2/`
+
+---
+
+### Seção de identidade na memória (código Python)
+
+Incluir mini-seção mostrando que dois objetos com características idênticas são entidades distintas.
+Rótulo: **Python simplificado** (usa dict como proxy – Polvo ainda não existe nesta missão).
+
+```python
+ada   = {"cor": "rosa", "tentaculos": 8}
+outra = {"cor": "rosa", "tentaculos": 8}
+
+print(id(ada))    # 4371856896
+print(id(outra))  # 4371857024
+
+print(ada == outra)  # True  – mesmas características
+print(ada is outra)  # False – entidades distintas
+```
+
+`id()` = "digital" única de cada objeto na memória. `==` compara características; `is` compara identidade.
+
+---
+
+### Dúvidas previstas
+- `{{duvida-objeto-unico}}` – O que define quais características e ações farão parte de um objeto? → removida desta missão; reservada para outra
+
+<!-- FIM DAS NOTAS -->
+
+---
+
+# Missão 1-2 – Objeto
+
+**Ícone:** PiCircle
 **Emblema:** Criatura Marinha
 
 ## Teoria
 
-### Objetos estÃ£o em todo lugar
-
-Olhe ao redor. Cadeira. Celular. Cachorro. Caneta.
-
-Todo objeto do mundo real tem duas coisas em comum:
-
-- **CaracterÃ­sticas** â€” como ele _Ã©_ (cor, nome, tamanho, peso...)
-- **AÃ§Ãµes** â€” o que ele _faz_ (latir, carregar, rolar, escrever...)
-
-> [svg: trÃªs cards â€” Cachorro, Celular e Carro â€” com seÃ§Ãµes explÃ­citas "caracterÃ­sticas" (dados em cinza) e "aÃ§Ãµes" (comportamentos em verde). AnimaÃ§Ã£o fade+slide em sequÃªncia. Adaptar labels do diagramaObjetos existente.]
-
-Em programaÃ§Ã£o, os objetos funcionam exatamente igual: possuem caracterÃ­sticas prÃ³prias e realizam aÃ§Ãµes. Na nossa jornada, utilizaremos o universo marinho, em especial os polvos, que sÃ£o animais muito versÃ¡teis - assim como a POO - para ilustrar o funcionamento desses objetos.
-
----
-
 ### Otto encontra Ada
 
-Otto estÃ¡ em expediÃ§Ã£o pelo oceano quando avista uma criatura que nunca viu.
+Otto está em expedição pelo oceano quando avista um polvo que não conhecia.
 
-Ela existe. Tem uma cor. Um tamanho. Um nÃºmero de tentÃ¡culos. E sabe fazer coisas â€” nada, se camufla, solta tinta.
+{{ada-card-objeto}}
 
-Otto nÃ£o sabe como essa criatura foi criada. NÃ£o importa â€” ele consegue observÃ¡-la e interagir com ela. Isso Ã© um **objeto**: algo com caracterÃ­sticas prÃ³prias e aÃ§Ãµes que sabe executar.
+Ela existe. Tem cor. Tem tamanho. Tem tentáculos. E sabe fazer coisas – nada, se camufla, solta tinta.
 
-> [interativo: PolvosInterativo â€” painel esquerdo "CaracterÃ­sticas" com seletores de cor (Roxo / Azul / Verde), tamanho (Pequeno / Grande) e tentÃ¡culos (6 / 8); painel direito "AÃ§Ãµes" com botÃµes Nadar, Dar pirueta, Soltar tinta; Ada no centro reage visualmente a cada seleÃ§Ã£o e aÃ§Ã£o. Sem cÃ³digo visÃ­vel.]
+Para Otto, Ada é uma <destaque>caixa preta</destaque>: ele consegue observá-la e interagir com ela sem saber o que está dentro.
 
----
+Isso é um <destaque>objeto</destaque>: uma entidade com características próprias e ações que sabe executar.
 
-### Cada objeto Ã© Ãºnico
+<conceito note="adapt. Weisfeld, 2019"><strong>Objeto</strong>: entidade que reúne, de forma inseparável, características próprias e as ações que é capaz de executar.</conceito>
 
-No oceano de Otto hÃ¡ outros polvos. Cada um Ã© uma entidade separada â€” mesma natureza, dados completamente diferentes.
-
-Ada Ã© roxo e pequeno. AzulÃ£o Ã© azul e grande. Marinho Ã© verde.
-
-Mudar algo em Ada nÃ£o muda AzulÃ£o. Cada objeto guarda seus prÃ³prios dados de forma independente.
-
-> [svg: trÃªs polvos lado a lado â€” Ada (roxo, pequeno, 8 tentÃ¡culos), AzulÃ£o (azul, grande, 6 tentÃ¡culos), Marinho (verde, mÃ©dio, 8 tentÃ¡culos) â€” cada um com card de dados abaixo.]
+> [interativo: card Ada como caixa preta – só o polvo visível, sem dados internos]
 
 ---
 
-### As trÃªs marcas de todo objeto
+### Cada objeto é único
 
-Todo objeto â€” de um polvo a um celular â€” carrega trÃªs marcas:
+No oceano de Otto há outros polvos. Cada um é uma entidade separada – mesma natureza, dados completamente diferentes.
 
-| Marca             | O que Ã©                                   | Em Ada                      |
-| ----------------- | ----------------------------------------- | -------------------------------- |
-| **Identidade**    | O que o diferencia dos outros             | Ada â‰  AzulÃ£o â‰  Marinho      |
-| **Estado**        | As caracterÃ­sticas que carrega no momento | cor: Roxo, tentÃ¡culos: 8         |
-| **Comportamento** | O que ele sabe fazer                      | nadar, dar pirueta, soltar tinta |
+Ada é rosa com 8 tentáculos. Ao lado dela há outros dois polvos – cada um com sua própria cor e seus próprios dados.
+
+Mudar algo em Ada não muda os outros. Cada objeto guarda seus próprios dados de forma independente.
+
+> [svg: três polvos lado a lado – Ada (rosa, 8 tentáculos) + dois outros – cada um com card de dados abaixo.]
+
+Mas o que torna Ada *ela mesma* – e não qualquer outro polvo?
+
+Python simplificado – para demonstrar o conceito, dois objetos com os mesmos dados:
+
+```python
+ada   = {"cor": "rosa", "tentaculos": 8}
+outra = {"cor": "rosa", "tentaculos": 8}
+```
+
+Cada um recebe um endereço único na memória:
+
+```python
+print(id(ada))    # 4371856896
+print(id(outra))  # 4371857024
+```
+
+Endereços diferentes – entidades diferentes. Agora a comparação:
+
+```python
+print(ada == outra)  # True  – mesmas características
+print(ada is outra)  # False – entidades distintas
+```
+
+`==` compara os dados; `is` compara a identidade. Mesmo com dados idênticos, Ada e `outra` são entidades distintas. Ada é Ada.
+
+---
+
+### Objetos estão em todo lugar
+
+*Você já pensa em objetos sem perceber.*
+
+Ada não é um caso especial.
+
+Olhe ao redor – cadeira, celular, cachorro, caneta. Cada um deles também tem características próprias e ações que sabe executar.
+
+O oceano de Otto é uma metáfora do mundo real: tudo que existe pode ser pensado como um objeto.
+
+---
+
+### As três marcas de todo objeto
+
+Todo objeto – de um polvo a um celular – carrega três marcas:
+
+| Marca | O que é | Em Ada |
+|---|---|---|
+| **Identidade** | O que a diferencia das outras | Ada é uma entidade única |
+| **Características** | Os dados que carrega | cor: rosa, tentáculos: 8 |
+| **Ações** | O que ela sabe fazer | nadar, camuflar, soltar tinta |
 
 ---
 
@@ -60,11 +165,11 @@ Todo objeto â€” de um polvo a um celular â€” carrega trÃªs marcas:
 
 Otto observa, interage, anota. Mas uma pergunta fica no ar:
 
-_Quem definiu que Ada seria roxo? Que teria 8 tentÃ¡culos? Que saberia nadar?_
+*Quem definiu que Ada seria rosa? Que teria 8 tentáculos? Que saberia nadar?*
 
-A resposta ainda Ã© um mistÃ©rio. A caixa preta ainda estÃ¡ fechada.
+A resposta ainda é um mistério. A caixa preta ainda está fechada.
 
-Isso vocÃª descobre na **MissÃ£o 5**.
+Isso você descobre na **Missão 5**.
 
 ---
 
@@ -72,13 +177,13 @@ Isso vocÃª descobre na **MissÃ£o 5**.
 
 - [ ] Tem interativo
 
-## ExercÃ­cio
+## Exercício
 
-**Pergunta:** Otto encontra dois polvos: Ada (roxo, 8 tentÃ¡culos) e AzulÃ£o (azul, 6 tentÃ¡culos). Ele muda a cor de Ada para verde. O que acontece com AzulÃ£o?
+**Pergunta:** Otto encontra dois polvos: Ada (rosa, 8 tentáculos) e um segundo polvo (azul, 6 tentáculos). Ele muda a cor de Ada para verde. O que acontece com o segundo polvo?
 
-- [ ] AzulÃ£o tambÃ©m fica verde â€” objetos do mesmo tipo compartilham caracterÃ­sticas.
-- [x] AzulÃ£o continua azul â€” cada objeto guarda seus prÃ³prios dados de forma independente. â† correta
-- [ ] AzulÃ£o desaparece â€” sÃ³ pode existir um polvo de cada vez.
-- [ ] AzulÃ£o perde todas as caracterÃ­sticas â€” qualquer mudanÃ§a afeta todos os objetos.
+- [ ] O segundo polvo também fica verde – objetos do mesmo tipo compartilham características.
+- [x] O segundo polvo continua azul – cada objeto guarda seus próprios dados de forma independente. ← correta
+- [ ] O segundo polvo desaparece – só pode existir um polvo de cada vez.
+- [ ] O segundo polvo perde todas as características – qualquer mudança afeta todos os objetos.
 
-**ExplicaÃ§Ã£o:** Cada objeto existe de forma independente. Mudar Ada nÃ£o afeta AzulÃ£o â€” cada um carrega seus prÃ³prios dados.
+**Explicação:** Cada objeto existe de forma independente. Mudar Ada não afeta o outro polvo – cada um carrega seus próprios dados.
