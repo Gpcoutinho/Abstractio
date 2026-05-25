@@ -17,6 +17,9 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ curriculum, completedMissions
   const wrapRef = useRef<HTMLDivElement>(null);
   const dragMovedRef = useRef(false);
   const dragStartXRef = useRef(0);
+  const touchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const touchHideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const touchStartPosRef = useRef<{ x: number; y: number } | null>(null);
 
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -68,6 +71,30 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ curriculum, completedMissions
   };
 
   const handleMissionLeave = () => setTooltipData(null);
+
+  const handleMissionTouchStart = (e: React.TouchEvent<HTMLDivElement>, title: string) => {
+    if (touchHideTimerRef.current) clearTimeout(touchHideTimerRef.current);
+    const touch = e.touches[0];
+    touchStartPosRef.current = { x: touch.clientX, y: touch.clientY };
+    const rect = e.currentTarget.getBoundingClientRect();
+    touchTimerRef.current = setTimeout(() => {
+      setTooltipData({ text: title, x: rect.left + rect.width / 2, y: rect.bottom + 8 });
+      touchHideTimerRef.current = setTimeout(() => setTooltipData(null), 2000);
+    }, 500);
+  };
+
+  const handleMissionTouchEnd = () => {
+    if (touchTimerRef.current) { clearTimeout(touchTimerRef.current); touchTimerRef.current = null; }
+  };
+
+  const handleMissionTouchMove = (e: React.TouchEvent) => {
+    if (!touchTimerRef.current || !touchStartPosRef.current) return;
+    const t = e.touches[0];
+    if (Math.abs(t.clientX - touchStartPosRef.current.x) > 10 || Math.abs(t.clientY - touchStartPosRef.current.y) > 10) {
+      clearTimeout(touchTimerRef.current);
+      touchTimerRef.current = null;
+    }
+  };
 
   const handleMissionClick = (nivelIdx: number, missaoIdx: number) => {
     if (!dragMovedRef.current) {
@@ -158,41 +185,51 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ curriculum, completedMissions
 
         <div className={`pb-track-wrap${atStart ? ' at-start' : ''}${atEnd ? ' at-end' : ''}`}>
           <div className="pb-track" ref={trackRef} onScroll={handleTrackScroll}>
-            {flatMissions.map((missao, idx) => {
-              const isFirstOfNivel = idx === 0 || missao.nivelIdx !== flatMissions[idx - 1].nivelIdx;
-              const isDone = completedMissions.includes(missao.id);
-              const isActive = idx === activeIndex;
-              const isCurrent = idx === viewingIndex;
-              const lvl = levelProgress[missao.nivelIdx];
+            {curriculum.map((nivel, nIdx) => {
+              const lvl = levelProgress[nIdx];
               const lvlComplete = lvl.done === lvl.total;
 
               return (
-                <React.Fragment key={missao.id}>
-                  {isFirstOfNivel && (
-                    <div className="pb-separator">
-                      <div className="pb-sep-label">{missao.nivelLabel}</div>
-                      <div className={`pb-sep-count${lvlComplete ? ' complete' : ''}`}>
-                        {lvl.done}/{lvl.total}
-                      </div>
+                <React.Fragment key={nIdx}>
+                  {nIdx > 0 && <div className="pb-level-divider" />}
+                  <div className="pb-level-group">
+                    <div className="pb-level-header">
+                      <span className="pb-sep-label">{nivel.short}</span>
+                      <span className="pb-sep-divider">·</span>
+                      <span className={`pb-sep-count${lvlComplete ? ' complete' : ''}`}>{lvl.done}/{lvl.total}</span>
                     </div>
-                  )}
+                    <div className="pb-level-dots">
+                      {nivel.missoes.map((missao, mIdx) => {
+                        const flatIdx = flatMissions.findIndex(m => m.id === missao.id);
+                        const isDone = completedMissions.includes(missao.id);
+                        const isActive = flatIdx === activeIndex;
+                        const isCurrent = flatIdx === viewingIndex;
 
-                  {!isFirstOfNivel && (
-                    <div className={`pb-connector${isDone ? ' done' : ''}${isActive ? ' active' : ''}`} />
-                  )}
-
-                  <div
-                    className={`pb-mission${isDone ? ' done' : ''}${isActive ? ' active' : ''}${isCurrent ? ' current' : ''}`}
-                    onMouseEnter={(e) => handleMissionEnter(e, missao.title)}
-                    onMouseLeave={handleMissionLeave}
-                    onClick={() => handleMissionClick(missao.nivelIdx, missao.missaoIdx)}
-                  >
-                    <div className="pb-dot-layer" />
-                    <MissionIcon
-                      iconName={missao.icon}
-                      completed={isDone}
-                      className={`pb-icon-layer w-6 h-6${isActive && !isDone ? ' !text-accent' : ''}`}
-                    />
+                        return (
+                          <React.Fragment key={missao.id}>
+                            {mIdx > 0 && (
+                              <div className={`pb-connector${isDone ? ' done' : ''}${isActive ? ' active' : ''}`} />
+                            )}
+                            <div
+                              className={`pb-mission${isDone ? ' done' : ''}${isActive ? ' active' : ''}${isCurrent ? ' current' : ''}`}
+                              onMouseEnter={(e) => handleMissionEnter(e, missao.title)}
+                              onMouseLeave={handleMissionLeave}
+                              onTouchStart={(e) => handleMissionTouchStart(e, missao.title)}
+                              onTouchEnd={handleMissionTouchEnd}
+                              onTouchMove={handleMissionTouchMove}
+                              onClick={() => handleMissionClick(nIdx, mIdx)}
+                            >
+                              <div className="pb-dot-layer" />
+                              <MissionIcon
+                                iconName={missao.icon}
+                                completed={isDone}
+                                className={`pb-icon-layer w-6 h-6${isActive && !isDone ? ' !text-accent' : ''}`}
+                              />
+                            </div>
+                          </React.Fragment>
+                        );
+                      })}
+                    </div>
                   </div>
                 </React.Fragment>
               );

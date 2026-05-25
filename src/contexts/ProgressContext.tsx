@@ -12,6 +12,7 @@ interface ProgressState {
   niveis_concluidos: number[];
   conchas: number;
   conchas_por_missao: Record<string, number>;
+  extras_concluidos: Record<string, string[]>;
   nome: string;
   genero: Genero;
   avatarIdx: number;
@@ -26,6 +27,7 @@ const DEFAULT_STATE: ProgressState = {
   niveis_concluidos: [],
   conchas: 0,
   conchas_por_missao: {},
+  extras_concluidos: {},
   nome: '',
   genero: '',
   avatarIdx: 0,
@@ -51,11 +53,21 @@ function calcNiveisConcluidos(completed: string[]): number[] {
     .map(nivel => nivel.id);
 }
 
+export type TierLevel = 'none' | 'bronze' | 'silver' | 'gold';
+
+export function calcTier(extrasDone: number): TierLevel {
+  if (extrasDone >= 6) return 'gold';
+  if (extrasDone >= 4) return 'silver';
+  if (extrasDone >= 2) return 'bronze';
+  return 'none';
+}
+
 export interface ProgressContextValue {
   completed: string[];
   niveis_concluidos: number[];
   conchas: number;
   conchas_por_missao: Record<string, number>;
+  extras_concluidos: Record<string, string[]>;
   nome: string;
   genero: Genero;
   avatarIdx: number;
@@ -65,6 +77,8 @@ export interface ProgressContextValue {
   acessorioAtivo: string;
   completarMissao: (missaoId: string, tentativas?: number) => void;
   desmarcarMissao: (missaoId: string) => void;
+  completarExtraExercise: (missaoId: string, extraId: string) => void;
+  penalizarExtraErro: (missaoId: string) => void;
   setNome: (nome: string) => void;
   setGenero: (genero: Genero) => void;
   setAvatarIdx: (idx: number) => void;
@@ -98,7 +112,7 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         return { ...prev, completed, niveis_concluidos };
       }
 
-      const ganhas = tentativas <= 1 ? 15 : tentativas === 2 ? 10 : 5;
+      const ganhas = tentativas <= 1 ? 12 : tentativas === 2 ? 8 : 4;
       return {
         ...prev,
         completed,
@@ -120,6 +134,26 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         // conchas e conchas_por_missao são preservados
       };
     });
+  }, []);
+
+  const completarExtraExercise = useCallback((missaoId: string, extraId: string) => {
+    setState(prev => {
+      const jaFeitos = prev.extras_concluidos[missaoId] ?? [];
+      if (jaFeitos.includes(extraId)) return prev;
+      const novos = [...jaFeitos, extraId];
+      return {
+        ...prev,
+        conchas: prev.conchas + 3,
+        extras_concluidos: { ...prev.extras_concluidos, [missaoId]: novos },
+      };
+    });
+  }, []);
+
+  const penalizarExtraErro = useCallback((missaoId: string) => {
+    setState(prev => ({
+      ...prev,
+      conchas: Math.max(0, prev.conchas - 1),
+    }));
   }, []);
 
   const setNome = useCallback((nome: string) => {
@@ -169,7 +203,7 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, []);
 
   return (
-    <ProgressContext.Provider value={{ ...state, completarMissao, desmarcarMissao, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva, comprarAcessorio, setAcessorioAtivo }}>
+    <ProgressContext.Provider value={{ ...state, completarMissao, desmarcarMissao, completarExtraExercise, penalizarExtraErro, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva, comprarAcessorio, setAcessorioAtivo }}>
       {children}
     </ProgressContext.Provider>
   );

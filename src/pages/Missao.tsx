@@ -16,6 +16,7 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon,
   CheckCircleIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -33,6 +34,7 @@ import interativoHtml from "../assets/interativos/nivel_1_missao_7.html?raw";
 import ProgressBar from '../components/ProgressBar';
 import ConceitoBox from '../components/ConceitoBox';
 import OQueVaiEncontrar from '../components/missoes/nivel_1/missao_0/OQueVaiEncontrar';
+import BauDeConchas from '../components/BauDeConchas';
 import ReferenciasBlock from '../components/ReferenciasBlock';
 import AdaCard from '../components/missoes/nivel_1/AdaCard';
 
@@ -138,6 +140,7 @@ const Missao: React.FC = () => {
   const [tentativas, setTentativas] = useState(0);
   const [conchasGanhasAgora, setConchasGanhasAgora] = useState<number | null>(null);
   const [showCelebration, setShowCelebration] = useState(false);
+  const [showBau, setShowBau] = useState(false);
 
   // Estado do Header Retrátil
   const [showBar, setShowBar] = useState(true);
@@ -148,6 +151,7 @@ const Missao: React.FC = () => {
     setTentativas(0);
     setConchasGanhasAgora(null);
     setShowCelebration(false);
+    setShowBau(false);
   }, [nivelIdx, missaoIdx]);
 
   // Lógica de Scroll com Histerese (Zona Morta)
@@ -197,9 +201,10 @@ const Missao: React.FC = () => {
   })();
 
   const jaConcluida = isMissaoConcluida(missao.id);
+  const hasExtras = !!(missao.extra_exercises && missao.extra_exercises.length > 0);
   const acertou = missao.exercise ? selecionada === missao.exercise.correct : false;
 
-  const conchasValor = (t: number) => t <= 0 ? 15 : t === 1 ? 10 : 5;
+  const conchasValor = (t: number) => t <= 0 ? 12 : t === 1 ? 8 : 4;
 
   const handleSubmit = () => {
     if (selecionada === null) return;
@@ -221,7 +226,7 @@ const Missao: React.FC = () => {
       {/* Navegação fixa */}
       <div className="sticky top-0 z-40 bg-bgPrimary shadow-sm border-b border-borderDark/10">
         <div className="max-w-3xl mx-auto">
-          
+
           {/* Progress Bar: Animação via CSS Grid (Não treme o layout) */}
           <div className={`grid transition-all duration-500 ease-in-out ${
             showBar ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
@@ -239,7 +244,7 @@ const Missao: React.FC = () => {
 
           <nav className="border-t border-borderDark/5">
             <div className="px-5 h-11 flex items-center gap-4 justify-between">
-              <div className="flex items-center gap-4 justify-between">                
+              <div className="flex items-center gap-4 justify-between">
                 <Link to="/trilha" className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors">
                   <ArrowLeftIcon className="w-4 h-4" />
                   <span className="sm:inline">Trilha</span>
@@ -252,7 +257,7 @@ const Missao: React.FC = () => {
                 )}
 
                 {!showBar && (
-                  <button 
+                  <button
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                     className="flex items-center gap-2 px-2 py-1 bg-accent/10 border border-accent/20 rounded text-[10px] font-bold text-accent uppercase animate-in fade-in slide-in-from-top-1"
                   >
@@ -446,13 +451,13 @@ const Missao: React.FC = () => {
                   <p className="text-textSecondary text-sm">
                     {acertou
                       ? missao.exercise.explanation
-                      : (selecionada !== null && missao.exercise.wrong_explanations?.[selecionada]) || missao.exercise.explanation}
+                      : (selecionada !== null && missao.exercise.wrong_explanations?.[selecionada]) || ''}
                   </p>
                   {acertou && conchasGanhasAgora !== null && (
                     <p className="text-success text-xs font-medium mt-2 flex items-center gap-1"><ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} /> Você ganhou {conchasGanhasAgora} conchas!</p>
                   )}
                   {!acertou && !jaGanhouConchas(missao.id) && (
-                    <p className="text-danger/70 text-xs mt-2 flex items-center gap-1"><ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} /> Próxima tentativa vale {tentativas === 1 ? 10 : 5} conchas</p>
+                    <p className="text-danger/70 text-xs mt-2 flex items-center gap-1"><ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} /> Próxima tentativa vale {tentativas === 1 ? 8 : 4} conchas</p>
                   )}
                 </div>
               )}
@@ -498,6 +503,28 @@ const Missao: React.FC = () => {
             </button>
           ) : null}
         </div>
+
+        {/* Baú de Conchas */}
+        {hasExtras && (
+          <div className="mt-8 bg-bgSecondary border border-borderDark rounded-xl p-5 flex items-center justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold text-textPrimary">Baú de Conchas</p>
+              <p className="text-xs text-textSecondary mt-0.5">
+                {jaConcluida
+                  ? `${missao.extra_exercises!.length} exercícios extras · ganhe até ${missao.extra_exercises!.length * 3} conchas`
+                  : 'Disponível após concluir a missão'}
+              </p>
+            </div>
+            <button
+              onClick={() => setShowBau(true)}
+              disabled={!jaConcluida}
+              className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-accent text-accent text-sm font-semibold hover:bg-accent/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+            >
+              <ShellIcon className="w-4 h-4 shrink-0" style={{ color: 'currentColor' }} />
+              Abrir Baú
+            </button>
+          </div>
+        )}
 
         {/* Navegação de rodapé */}
         <div className="mt-8 pt-6 border-t border-borderDark flex items-center justify-between">
@@ -574,6 +601,18 @@ const Missao: React.FC = () => {
             )}
 
             <div className="mt-2 flex flex-col gap-3">
+              {hasExtras && (
+                <button
+                  onClick={() => {
+                    setShowCelebration(false);
+                    setShowBau(true);
+                  }}
+                  className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-colors"
+                >
+                  <ShellIcon className="w-4 h-4 shrink-0" style={{ color: 'currentColor' }} />
+                  Abrir Baú de Conchas
+                </button>
+              )}
               {proximaMissao ? (
                 <Link
                   to={proximaMissao}
@@ -590,6 +629,40 @@ const Missao: React.FC = () => {
               >
                 Ficar nesta missão
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Baú de Conchas */}
+      {showBau && hasExtras && (
+        <div
+          className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-8 bg-bgPrimary/80 backdrop-blur-sm animate-fade-in"
+          onClick={() => setShowBau(false)}
+        >
+          <div
+            className="bg-bgPrimary border border-borderDark rounded-2xl w-full max-w-xl shadow-2xl animate-pop-in max-h-[90vh] flex flex-col"
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-borderDark/30 shrink-0">
+              <div>
+                <h2 className="text-lg font-bold text-textPrimary">Baú de Conchas</h2>
+                <p className="text-xs text-textSecondary">exercícios extras</p>
+              </div>
+              <button
+                onClick={() => setShowBau(false)}
+                className="text-textSecondary hover:text-textPrimary transition-colors"
+                aria-label="Fechar"
+              >
+                <XMarkIcon className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="overflow-y-auto px-6 py-5">
+              <BauDeConchas
+                missaoId={missao.id}
+                extras={missao.extra_exercises!}
+                proximaMissao={proximaMissao}
+              />
             </div>
           </div>
         </div>

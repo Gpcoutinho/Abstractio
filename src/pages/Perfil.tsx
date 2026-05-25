@@ -183,7 +183,7 @@ const Perfil: React.FC = () => {
           {/* Conteúdo da tab */}
           <div className="p-6">
             {lojaTab === 'molduras' && (
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {MOLDURAS.map(moldura => {
                   const owned = moldurasDesbloqueadas.includes(moldura.id);
                   const ativa = molduraAtiva === moldura.id;
@@ -221,7 +221,7 @@ const Perfil: React.FC = () => {
             )}
 
             {lojaTab === 'acessorios' && (
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {ACESSORIOS.map(acessorio => {
                   const owned = acessoriosDesbloqueados.includes(acessorio.id);
                   const ativo = acessorioAtivo === acessorio.id;

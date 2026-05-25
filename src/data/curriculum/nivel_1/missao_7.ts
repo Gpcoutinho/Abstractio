@@ -92,6 +92,80 @@ No próximo nível, você vai descobrir os **4 Pilares da POO**:
       "Em Python, o objeto herda da classe (toda classe herda de `object` por padrão), não o contrário. Além disso, são os atributos que guardam dados — os métodos os utilizam."
     ]
   },
+  extra_exercises: [
+    {
+      id: '1-7-e1',
+      question: 'Um livro de uma biblioteca tem título, autor e número de páginas. Em POO, esses dados são:',
+      options: [
+        'Métodos — ações que o objeto sabe executar',
+        'Construtores — parâmetros passados na criação',
+        'Atributos — informações que pertencem ao objeto',
+        'Classes — modelos para outros objetos',
+      ],
+      correct: 2,
+      explanation: 'Título, autor e páginas são dados que descrevem o objeto — são seus **atributos**. Já ações como `emprestar()` ou `devolver()` seriam **métodos**. O construtor receberia esses dados ao criar o livro, e a classe seria o molde que define toda essa estrutura.',
+    },
+    {
+      id: '1-7-e2',
+      question: 'Num sistema de biblioteca, `livro.emprestar(usuario)` é chamado. Onde esse comportamento foi definido?',
+      options: [
+        'Dentro da classe `Livro`, como um método',
+        'Como uma função global no arquivo principal',
+        'Automaticamente pelo Python ao importar a classe',
+        'Dentro do objeto `usuario`, não de `livro`',
+      ],
+      correct: 0,
+      explanation: '`emprestar` é um método definido dentro da classe `Livro`. Quando chamamos `livro.emprestar(usuario)`, o Python executa o código de `def emprestar(self, usuario):` dentro da classe, passando o objeto `livro` como `self`.',
+    },
+    {
+      id: '1-7-e3',
+      question: 'Qual das opções cria corretamente um `Livro` com título e autor?',
+      options: [
+        '`new Livro("Python Fluente", "Ramalho")`',
+        '`l = Livro("Python Fluente", "Ramalho")`',
+        '`Livro.create("Python Fluente", "Ramalho")`',
+        '`object l = Livro("Python Fluente", "Ramalho")`',
+      ],
+      correct: 1,
+      explanation: 'Em Python, criamos objetos chamando a classe como função: `variavel = Classe(argumentos)`. Não usamos `new` (Java), `.create()` nem `object`. Os argumentos são passados diretamente para o `__init__`.',
+    },
+    {
+      id: '1-7-e4',
+      question: 'Qual elemento da POO une todos os outros — definindo atributos, construtor e métodos de um tipo de objeto?',
+      options: [
+        'A classe — o molde que descreve a estrutura completa do objeto',
+        'O objeto — que contém todos os outros elementos dentro de si',
+        'O atributo — pois guarda as referências aos métodos',
+        'O `self` — pois conecta todos os elementos em tempo de execução',
+      ],
+      correct: 0,
+      explanation: 'A **classe** é o elemento central que organiza tudo: define quais atributos os objetos terão, o construtor (`__init__`) que os inicializa, e os métodos que descrevem seu comportamento. Os objetos são criados a partir da classe e carregam esses elementos.',
+    },
+    {
+      id: '1-7-e5',
+      question: 'O que a linha `self.titulo = titulo` faz dentro do `__init__` de `Livro`?',
+      options: [
+        'Cria uma cópia da classe `Livro` chamada `titulo`',
+        'Define `titulo` como um método que retorna o título',
+        'Atribui um valor padrão de `None` ao título do livro',
+        'Armazena o valor do parâmetro `titulo` no atributo `titulo` do objeto sendo criado',
+      ],
+      correct: 3,
+      explanation: '`self.titulo = titulo` pega o valor passado no parâmetro `titulo` (ex: `"Python Fluente"`) e salva no atributo `titulo` do objeto atual (`self`). A partir daí, podemos acessar esse valor com `livro.titulo`.',
+    },
+    {
+      id: '1-7-e6',
+      question: 'Dado:\n```python\nclass Livro:\n    def __init__(self, titulo, autor):\n        self.titulo = titulo\n        self.autor = autor\n    def resumo(self):\n        return f"{self.titulo} por {self.autor}"\n```\nO que `print(Livro("1984", "Orwell").resumo())` exibe?',
+      options: [
+        '`titulo por autor`',
+        '`1984 por Orwell`',
+        '`Livro("1984", "Orwell")`',
+        'Erro — `resumo()` não recebe `self` automaticamente',
+      ],
+      correct: 1,
+      explanation: '`Livro("1984", "Orwell")` cria o objeto com `self.titulo = "1984"` e `self.autor = "Orwell"`. Ao chamar `.resumo()`, Python executa o método passando o objeto como `self`. O f-string retorna `"1984 por Orwell"`.',
+    },
+  ],
   has_interativo: true,
   interativo_html: "interativos/nivel_1_missao_7.html"
 };

@@ -1,5 +1,6 @@
 import { useContext } from 'react';
-import { ProgressContext } from '../contexts/ProgressContext';
+import { ProgressContext, calcTier } from '../contexts/ProgressContext';
+import type { TierLevel } from '../contexts/ProgressContext';
 import { niveis } from '../data/curriculum';
 
 const NIVEL_NOMES = ['Polvinho', 'Explorador', 'Mestre dos Mares', 'Kraken'];
@@ -13,11 +14,13 @@ export function useProgress() {
   const ctx = useContext(ProgressContext);
   if (!ctx) throw new Error('useProgress deve ser usado dentro de ProgressProvider');
 
-  const { completed, niveis_concluidos, conchas, conchas_por_missao, nome, genero, avatarIdx, moldurasDesbloqueadas, molduraAtiva, acessoriosDesbloqueados, acessorioAtivo, completarMissao, desmarcarMissao, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva, comprarAcessorio, setAcessorioAtivo } = ctx;
+  const { completed, niveis_concluidos, conchas, conchas_por_missao, extras_concluidos, nome, genero, avatarIdx, moldurasDesbloqueadas, molduraAtiva, acessoriosDesbloqueados, acessorioAtivo, completarMissao, desmarcarMissao, completarExtraExercise, penalizarExtraErro, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva, comprarAcessorio, setAcessorioAtivo } = ctx;
 
   const isMissaoConcluida = (missaoId: string) => completed.includes(missaoId);
   const isNivelConcluido = (nivelId: number) => niveis_concluidos.includes(nivelId);
   const jaGanhouConchas = (missaoId: string) => conchas_por_missao[missaoId] !== undefined;
+  const getExtrasDone = (missaoId: string): string[] => extras_concluidos[missaoId] ?? [];
+  const getTier = (missaoId: string): TierLevel => calcTier(getExtrasDone(missaoId).length);
 
   const nivelNomeIdx = Math.min(niveis_concluidos.length, NIVEL_NOMES.length - 1);
   const nivelNome = NIVEL_NOMES[nivelNomeIdx];
@@ -34,6 +37,7 @@ export function useProgress() {
     niveis_concluidos,
     conchas,
     conchas_por_missao,
+    extras_concluidos,
     nome,
     nomeDisplay,
     genero,
@@ -44,6 +48,8 @@ export function useProgress() {
     acessorioAtivo,
     completarMissao,
     desmarcarMissao,
+    completarExtraExercise,
+    penalizarExtraErro,
     setNome,
     setGenero,
     setAvatarIdx,
@@ -54,8 +60,12 @@ export function useProgress() {
     isMissaoConcluida,
     isNivelConcluido,
     jaGanhouConchas,
+    getExtrasDone,
+    getTier,
     nivelNome,
     nivelDisplay,
     progressoGeral,
   };
 }
+
+export type { TierLevel };

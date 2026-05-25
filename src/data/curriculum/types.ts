@@ -14,6 +14,14 @@ export interface Exercise {
   wrong_explanations?: string[];
 }
 
+export interface ExtraExercise {
+  id: string;
+  question: string;
+  options: string[];
+  correct: number;
+  explanation: string;
+}
+
 export interface SlideCardData {
   title?: string;
   slides: string[];
@@ -27,6 +35,7 @@ export interface Missao {
   theory: string;
   cards?: SlideCardData[];
   exercise?: Exercise;
+  extra_exercises?: ExtraExercise[];
   has_interativo: boolean;
   interativo_html?: string;
   references?: Reference[];

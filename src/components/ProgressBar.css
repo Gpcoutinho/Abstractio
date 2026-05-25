@@ -82,8 +82,8 @@
   .pb-track-wrap.at-end::after    { opacity: 0; }
 
   .pb-track {
-    @apply flex items-center gap-0.5 overflow-x-auto;
-    min-height: 2rem;
+    @apply flex items-start gap-0.5 overflow-x-auto;
+    min-height: 2.5rem;
     width: 100%;
     padding: 0 10px;
     -webkit-overflow-scrolling: touch;
@@ -94,12 +94,33 @@
     display: none;
   }
 
-  .pb-separator {
-    @apply flex flex-col items-center gap-0.5 shrink-0;
+  .pb-level-group {
+    @apply flex flex-col shrink-0;
+  }
+
+  .pb-level-header {
+    @apply flex items-center gap-1 leading-none;
+    padding-left: 6px;
+    margin-bottom: 11px;
+  }
+
+  .pb-level-dots {
+    @apply flex items-center;
+  }
+
+  .pb-level-divider {
+    @apply bg-borderDark shrink-0;
+    width: 1px;
+    align-self: stretch;
+    margin: 3px 4px;
   }
 
   .pb-sep-label {
     @apply text-[0.6rem] uppercase tracking-[0.15em] text-textSecondary font-semibold whitespace-nowrap;
+  }
+
+  .pb-sep-divider {
+    @apply text-[0.6rem] text-textSecondary/40;
   }
 
   .pb-tooltip {
@@ -119,7 +140,7 @@
   }
 
   .pb-sep-count {
-    @apply text-[0.6rem] text-textSecondary tabular-nums text-center whitespace-nowrap;
+    @apply text-[0.65rem] text-textSecondary tabular-nums whitespace-nowrap font-medium;
   }
 
   .pb-sep-count.complete {
@@ -128,7 +149,7 @@
 
   .pb-connector {
     @apply h-0.5 rounded-full bg-bgPrimary shrink-0;
-    min-width: 0.75rem;
+    min-width: 1rem;
   }
 
   .pb-connector.active {

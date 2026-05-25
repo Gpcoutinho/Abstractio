@@ -106,6 +106,80 @@ print(caneta)  # Caneta — R$2.50 (100 em estoque)
       "Os atributos são definidos durante a criação, dentro do `__init__`. Eles já existem com os valores corretos no instante em que o objeto fica disponível."
     ]
   },
+  extra_exercises: [
+    {
+      id: '1-6-e1',
+      question: 'Qual é o nome do construtor em Python?',
+      options: [
+        '`__init__`',
+        '`__new__`',
+        '`__create__`',
+        '`__start__`',
+      ],
+      correct: 0,
+      explanation: 'Em Python, o construtor é sempre o método `__init__` (com dois underscores antes e depois — chamado de "dunder init"). Ele é chamado automaticamente quando um objeto é criado com `objeto = Classe(...)`.',
+    },
+    {
+      id: '1-6-e2',
+      question: 'É obrigatório definir `__init__` em todas as classes Python?',
+      options: [
+        'Sim. Toda classe deve ter um `__init__`, ou ocorre erro',
+        'Não. Sem `__init__`, Python usa um construtor padrão que cria o objeto sem atributos inicializados',
+        'Só é obrigatório quando a classe tem mais de dois atributos',
+        'Só é obrigatório quando a classe herda de outra',
+      ],
+      correct: 1,
+      explanation: 'O `__init__` é opcional. Se você não definir, Python usa um construtor herdado de `object` que simplesmente cria o objeto vazio. Você ainda pode adicionar atributos depois, mas sem `__init__` eles não são criados automaticamente.',
+    },
+    {
+      id: '1-6-e3',
+      question: 'O que `def __init__(self, nome, idade):` declara numa classe?',
+      options: [
+        'Cria automaticamente os atributos `nome` e `idade` sem precisar de `self.nome = nome`',
+        'Inicializa a classe inteira antes de qualquer objeto ser criado',
+        'Define o construtor — o método chamado ao criar um novo objeto, recebendo `nome` e `idade` como dados iniciais',
+        'Define um método comum chamado `init` que precisa ser chamado manualmente',
+      ],
+      correct: 2,
+      explanation: '`__init__` é o construtor. Ao escrever `p = Pessoa("Ana", 30)`, Python chama automaticamente `__init__(p, "Ana", 30)`. Porém, para salvar esses dados no objeto, ainda é necessário `self.nome = nome` e `self.idade = idade`.',
+    },
+    {
+      id: '1-6-e4',
+      question: 'Por que usar `__init__` em vez de definir atributos fora da classe após criar o objeto?',
+      options: [
+        'Porque Python não permite atribuir atributos fora da classe',
+        'Para garantir que todo objeto nasça com os dados necessários, evitando objetos incompletos',
+        'Para economizar linhas de código',
+        'Porque `__init__` é o único lugar onde `self` funciona',
+      ],
+      correct: 1,
+      explanation: 'O `__init__` garante que todo objeto criado começa num estado válido. Sem ele, você precisaria lembrar de inicializar cada atributo manualmente toda vez. Se esquecer um, o programa pode quebrar ao tentar acessar um atributo que não existe.',
+    },
+    {
+      id: '1-6-e5',
+      question: 'Dado `class Produto:\n    def __init__(self, nome):\n        self.nome = nome\n        self.estoque = 0`. Qual é `p.estoque` após `p = Produto("Caneta")`?',
+      options: [
+        '`None`',
+        '`"Caneta"`',
+        '`0`',
+        'Causa erro — `estoque` não foi passado como argumento',
+      ],
+      correct: 2,
+      explanation: 'O construtor pode inicializar atributos com valores padrão sem precisar recebê-los como parâmetro. `self.estoque = 0` sempre define `estoque` como `0` para qualquer novo produto. Não é preciso passar `estoque` ao criar o objeto.',
+    },
+    {
+      id: '1-6-e6',
+      question: 'Um construtor pode chamar outros métodos da própria classe?',
+      options: [
+        'Não. O `__init__` só pode executar atribuições de atributos',
+        'Sim. O `__init__` pode chamar outros métodos usando `self.metodo()`',
+        'Só se os outros métodos também forem construtores',
+        'Não. Outros métodos só existem depois que o `__init__` terminar',
+      ],
+      correct: 1,
+      explanation: 'O `__init__` é um método como qualquer outro e pode chamar outros métodos da classe com `self.metodo()`. Isso é útil para validar dados ou configurar o objeto de forma mais complexa durante a criação.',
+    },
+  ],
   has_interativo: false
 };
 
