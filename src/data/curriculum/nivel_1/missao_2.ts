@@ -90,15 +90,17 @@ O oceano é uma metáfora. Os objetos são reais.
 
 ---
 
-## As três marcas de todo objeto
+## Os três elementos de todo objeto
 
-Todo objeto – de um polvo a uma conta bancária – carrega três marcas:
+Não importa se é um polvo ou uma conta bancária – todo objeto pode ser descrito pelos mesmos três elementos:
 
-| Marca | O que é | Em Ada |
+| Elemento | O que é | Em Ada |
 |---|---|---|
 | **Identidade** | O que a torna única | Ada é uma entidade única |
 | **Características** | Os dados que carrega | cor: rosa, tentáculos: 8 |
 | **Ações** | O que ela sabe fazer | nadar, camuflar, soltar tinta |
+
+<destaque-marker>Identidade</destaque-marker>, <destaque-marker>características</destaque-marker>, <destaque-marker>ações</destaque-marker>. Onde houver um objeto, esses três estarão presentes.
 
 ---
 

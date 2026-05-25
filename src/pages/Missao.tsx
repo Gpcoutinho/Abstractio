@@ -290,7 +290,7 @@ const Missao: React.FC = () => {
 
       {/* Conteúdo da Missão */}
       <div className="max-w-3xl mx-auto pt-8 pb-16 px-5">
-        <section className="mb-8 prose prose-invert max-w-none prose-headings:text-textPrimary prose-headings:font-bold prose-p:text-textBody prose-p:leading-relaxed prose-strong:text-textPrimary prose-blockquote:border-l-accent prose-blockquote:text-textSecondary prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary prose-li:text-textBody">
+        <section className="mb-8 prose prose-invert max-w-none prose-headings:text-textPrimary prose-headings:font-bold prose-p:text-textBody prose-p:leading-relaxed prose-strong:text-textPrimary prose-blockquote:border-l-accent prose-blockquote:text-textSecondary prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary prose-li:text-textBody [&_h2]:border-l-2 [&_h2]:border-accent/50 [&_h2]:pl-3">
           {missao.theory.split(/(\{\{cards?:[0-9,]+\}\}|\{\{[a-z][a-z-]*\}\})/).map((part, i) => {
             if (i % 2 === 1) {
               if (part.startsWith('{{duvida-')) { const d = missao.duvidas?.[part.slice(2, -2)]; if (d) return <DuvidaBlock key={i} pergunta={d.pergunta} resposta={d.resposta} />; }
