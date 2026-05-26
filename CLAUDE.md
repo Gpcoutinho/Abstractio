@@ -8,6 +8,8 @@
 > - mostrar a mensagem proposta e os arquivos que serão incluídos
 > - receber "ok" explícito da Rebecca
 >
+> Sempre terminar a proposta de commit com **"ok?"** para lembrar a Rebecca de responder.
+>
 > Isso vale para qualquer commit, sem exceção. Não há situação em que commitar diretamente seja aceitável — nem mudanças pequenas, nem "só formatação".
 >
 > **2. NUNCA incluir "Co-Authored-By" ou qualquer autoria do Claude nas mensagens de commit.**
@@ -186,6 +188,17 @@ Paleta e gradientes em `ESTRUTURA.md`. Tailwind config em `tailwind.config.cjs`.
 
 Linhas que começam com `[nota]` são instruções ou comentários da Rebecca — **não são conteúdo a ser escrito na tela**. Ignorar ao renderizar; processar como pedido/diretriz ao editar.
 
+## Linguagem do Conteúdo
+
+O conteúdo preza por **clareza com repetição intencional**. Explicações diretas demais perdem o aluno — o mesmo conceito deve aparecer de formas diferentes ao longo da leitura.
+
+Usar "ou seja," e "isto é," como gatilhos naturais de reformulação: eles obrigam a reafirmar o conceito com outras palavras, reforçando a compreensão sem parecer repetitivo.
+
+Usar referências explícitas ao material próximo para criar sensação de acompanhamento — o aluno nunca deve se sentir largado:
+- Antes de um bloco: *"como demonstra o trecho abaixo"*, *"veja o exemplo a seguir"*
+- Depois de um bloco: *"como visto acima"*, *"note que no bloco acima..."*
+- Entre seções: *"como Otto já percebeu"*, *"voltando ao exemplo de Ada"*
+
 ## Convenção de Pontuação
 
 Usar sempre **travessão médio (`–`)**, nunca travessão longo (`—`) em textos de conteúdo (teoria, exercícios, narrativa). O travessão longo soa como escrita gerada por IA.
@@ -199,6 +212,26 @@ Isso é um <destaque>objeto</destaque>: uma entidade com características própr
 ```
 
 Renderiza como `<span>` com `underline decoration-wavy decoration-pink-400 decoration-2 underline-offset-4`. O offset evita que o sublinhado colida com descidas de letras (g, j, p, y). O negrito (`**bold**`) continua reservado para uso estrutural (tabelas, listas, labels).
+
+## Tag `<destaque-reto>`
+
+Sublinhado reto lilás (`#c4b5fd`) para termos técnicos sendo introduzidos — especialmente os que têm um `DuvidaBlock` associado logo abaixo.
+
+```html
+uma <destaque-reto>entidade</destaque-reto> (algo que existe de forma independente)
+```
+
+Renderiza como `<span>` com `underline decoration-[#c4b5fd] decoration-2 underline-offset-4`. A cor é a mesma usada na pergunta do `DuvidaBlock`, criando coerência visual entre o termo e seu esclarecimento.
+
+## Tag `<destaque-marker>`
+
+Fundo amarelo estilo marca-texto com texto escuro para contraste. Usar para destacar trechos de código inline, valores literais ou termos que merecem atenção visual forte.
+
+```html
+O valor padrão é <destaque-marker>None</destaque-marker> quando nenhum argumento é passado.
+```
+
+Renderiza como `<span>` com `bg-yellow-200 text-gray-900 px-0.5 rounded-sm`.
 
 ## Tag `<conceito>`
 
@@ -221,26 +254,24 @@ A explicação narrativa é informal e coloquial (descoberta com Otto). O `<conc
 
 ### Rótulo de tipo de código
 
-Todo bloco de código deve ser precedido por um rótulo indicando sua natureza. Usar **sempre** um dos três:
+O rótulo é especificado como **sufixo da linguagem** no fence do código — `CodeBlock.tsx` o exibe como badge no canto superior direito do bloco. Nunca escrever o rótulo no texto corrido.
 
-| Rótulo | Significado | Quando usar |
+| Linguagem no fence | Badge exibido | Quando usar |
 |---|---|---|
-| `Python` | Código real e executável | Pode ser copiado e rodado sem modificação |
-| `Python simplificado` | Python válido, estrutura provisória | Usa proxy (dict, lista) antes da classe estar definida; roda, mas não representa a estrutura final |
-| `Pseudocódigo` | Conceitual, não executa | Ilustra lógica sem sintaxe completa |
+| ` ```python` | Python | Código real e executável |
+| ` ```python-simplificado` | Python simplificado | Usa proxy (dict, lista) antes da classe estar definida |
+| ` ```pseudocodigo` | Pseudocódigo | Ilustra lógica sem sintaxe completa |
 
-O rótulo vai **antes** do bloco, como frase curta:
+O texto antes do bloco deve ser uma **explicação em prosa** — não o rótulo:
 
 ```markdown
-Python simplificado — identidade de dois objetos com as mesmas características:
+Dois objetos com os mesmos dados:
 
-\`\`\`python
+\`\`\`python-simplificado
 ada   = {"cor": "rosa", "tentaculos": 8}
 outra = {"cor": "rosa", "tentaculos": 8}
 \`\`\`
 ```
-
-Nunca omitir o rótulo, mesmo quando o tipo parecer óbvio pelo contexto.
 
 ### Comentários explicativos
 
@@ -305,13 +336,19 @@ class Polvo:
 Componente: `src/components/missoes/reutilizaveis/DuvidaBlock.tsx`
 Props: `pergunta: string`, `resposta: string`
 
-Usado para antecipar dúvidas comuns ao longo da leitura da teoria. Cada dúvida recebe um placeholder descritivo registrado em `Missao.tsx`:
+Usado para antecipar dúvidas comuns ao longo da leitura da teoria. Cada dúvida é declarada diretamente no campo `duvidas` do arquivo `.ts` da missão — **não é necessário registrar nada em `Missao.tsx`**:
 
 ```typescript
-// Em Missao.tsx:
-if (part === '{{duvida-nome-descritivo}}')
-  return <DuvidaBlock key={i} pergunta="..." resposta="..." />;
+// Em missao_N.ts:
+duvidas: {
+  "duvida-entidade-definicao": {
+    pergunta: "O que significa 'entidade'?",
+    resposta: "Significa algo que existe de forma independente, com identidade própria.",
+  },
+},
 ```
+
+`Missao.tsx` resolve o placeholder dinamicamente: qualquer `{{duvida-*}}` encontrado na teoria busca a chave correspondente em `missao.duvidas` e renderiza o `DuvidaBlock` automaticamente.
 
 Convenção de nomenclatura do placeholder: `{{duvida-[conceito]-[descritor]}}` — ex: `{{duvida-objeto-unico}}`, `{{duvida-classe-instancia}}`.
 
@@ -336,6 +373,17 @@ SVGs, animações, imagens e mini-jogos são documentados nos `.md` com blockquo
 ```
 
 Essas linhas descrevem o visual existente (ou desejado) naquele ponto da teoria. Não são conteúdo textual da missão — são referências de implementação para alinhar o `.md` com o `.ts`.
+
+## Perguntas para a Rebecca
+
+Evitar perguntas abertas que exijam resposta longa digitada. Preferir sempre:
+- **Sim / Não**
+- **Alternativas numeradas** — "1, 2 ou 3?"
+- **Alternativas com letra** — "a, b ou c?"
+
+Nunca perguntar "qual você prefere?" ou "o que você quer fazer?" sem já listar as opções.
+
+---
 
 ## Fluxo de Desenvolvimento
 

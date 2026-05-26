@@ -1,39 +1,39 @@
-﻿# MissÃ£o 1-0 â€” Antes de comeÃ§ar
+ Missão 1-0 — Antes de começar
 
-**Ãcone:** ðŸŒŠ
+**Ícone:** 🌊
 **Pontos:** 0
 
 ## Teoria
 
-## Mas pra quÃª estudar isso?
+## Mas pra quê estudar isso?
 
-VocÃª estÃ¡ vivendo sua vida plenamente: aprendeu a programar em C ou Python, entendeu que algoritmos sÃ£o uma lista de instruÃ§Ãµes sequenciais que resolvem um problema, que operadores condicionais *if/else* auxiliam em **tomadas de decisÃ£o**, e que matrizes surgem quando arrays jÃ¡ nÃ£o sÃ£o suficientes. Lindo, completo.
+Você está vivendo sua vida plenamente: aprendeu a programar em C ou Python, entendeu que algoritmos são uma lista de instruções sequenciais que resolvem um problema, que operadores condicionais *if/else* auxiliam em **tomadas de decisão**, e que matrizes surgem quando arrays já não são suficientes. Lindo, completo.
 
-De repente, chega o momento que todos temem: a disciplina de POO. A primeira pergunta que eu me fiz, sendo sincera, foi: "Mas pra quÃª estudar isso?". Eu jÃ¡ me sentia capaz de resolver todos os problemas do mundo utilizando a programaÃ§Ã£o procedural, linear, organizadaâ€¦ essa histÃ³ria de objetos chegou do nada para bagunÃ§ar tudo.
-
----
-
-## Paradigmas nÃ£o competem â€” se complementam
-
-Se vocÃª, assim como eu, tambÃ©m compartilha desse sentimento, o Abstractio Ã© pra vocÃª. NÃ£o me entenda mal: eu ainda amo a programaÃ§Ã£o procedural. No entanto, a orientaÃ§Ã£o a objetos tem um valor especial sÃ³ dela, que resolve inÃºmeros problemas que a procedural, sozinha, nÃ£o daria conta. E essa Ã© a beleza â€” vamos encontrar um lado positivo â€” dos diversos paradigmas de programaÃ§Ã£o. Cada um serve a um propÃ³sito:
-
-> Na medicina: vocÃª nÃ£o vai ao oftalmologista quando pega uma gripe, e nem marca um cardiologista para tratar um pÃ© quebrado. As especialidades nÃ£o competem entre si, elas se complementam.
-
-EntÃ£o qual seria esse propÃ³sito tÃ£o essencial da POO? Se eu jÃ¡ consigo definir variÃ¡veis e utilizÃ¡-las na procedural, qual a necessidade de criar um Objeto e administrÃ¡-lo? Esse questionamento serÃ¡ o pontapÃ© inicial dos nossos estudos. E a gente promete: vale MUITO a pena entender esse universo fantÃ¡stico dos Objetos.
+De repente, chega o momento que todos temem: a disciplina de POO. A primeira pergunta que eu me fiz, sendo sincera, foi: "Mas pra quê estudar isso?". Eu já me sentia capaz de resolver todos os problemas do mundo utilizando a programação procedural, linear, organizada… essa história de objetos chegou do nada para bagunçar tudo.
 
 ---
 
-## ConheÃ§a Otto
+## Paradigmas não competem — se complementam
 
-Para tornar essa jornada mais leve, pedimos que vocÃª se coloque no lugar do protagonista lÃºdico da plataforma, Otto. Ele Ã© um **polvo cientista** cheio de curiosidade sobre o oceano e tudo que existe nele. E Ã© nesse contexto leve que vocÃª vai entender todos os conceitos da POO:
+Se você, assim como eu, também compartilha desse sentimento, o Abstractio é pra você. Não me entenda mal: eu ainda amo a programação procedural. No entanto, a orientação a objetos tem um valor especial só dela, que resolve inúmeros problemas que a procedural, sozinha, não daria conta. E essa é a beleza — vamos encontrar um lado positivo — dos diversos paradigmas de programação. Cada um serve a um propósito:
 
-- **Fundamentos** â€” Classes, Objetosâ€¦
-- **Pilares** â€” AbstraÃ§Ã£o, Encapsulamento, HeranÃ§a e Polimorfismo
-- **MecÃ¢nicas** â€” leis e relacionamentos
-- **Engenharias** â€” CoesÃ£o, Acoplamento, PrincÃ­pios SOLID e Design Patterns
+> Na medicina: você não vai ao oftalmologista quando pega uma gripe, e nem marca um cardiologista para tratar um pé quebrado. As especialidades não competem entre si, elas se complementam.
+
+Então qual seria esse propósito tão essencial da POO? Se eu já consigo definir variáveis e utilizá-las na procedural, qual a necessidade de criar um Objeto e administrá-lo? Esse questionamento será o pontapé inicial dos nossos estudos. E a gente promete: vale MUITO a pena entender esse universo fantástico dos Objetos.
 
 ---
 
-> âš ï¸ Lembrete: este nÃ£o Ã© um curso de Java ou Python, mas algumas informaÃ§Ãµes sobre a linguagem serÃ£o trazidas conforme a necessidade.
+## Conheça Otto
+
+Para tornar essa jornada mais leve, pedimos que você se coloque no lugar do protagonista lúdico da plataforma, Otto. Ele é um **polvo cientista** cheio de curiosidade sobre o oceano e tudo que existe nele. E é nesse contexto leve que você vai entender todos os conceitos da POO:
+
+- **Fundamentos** — Classes, Objetos…
+- **Pilares** — Abstração, Encapsulamento, Herança e Polimorfismo
+- **Mecânicas** — leis e relacionamentos
+- **Engenharias** — Coesão, Acoplamento, Princípios SOLID e Design Patterns
+
+---
+
+> ⚠️ Lembrete: este não é um curso de Java ou Python, mas algumas informações sobre a linguagem serão trazidas conforme a necessidade.
 
 Vamos juntos?

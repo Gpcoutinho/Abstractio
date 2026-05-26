@@ -311,10 +311,10 @@ const Missao: React.FC = () => {
 
       {/* Conteúdo da Missão */}
       <div className="max-w-3xl mx-auto pt-8 pb-16 px-5">
-        <section className="mb-8 prose prose-invert max-w-none prose-headings:text-textPrimary prose-headings:font-bold prose-p:text-textBody prose-p:leading-relaxed prose-strong:text-textPrimary prose-blockquote:border-l-accent prose-blockquote:text-textSecondary prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary prose-li:text-textBody">
+        <section className="mb-8 prose prose-invert max-w-none prose-headings:text-textPrimary prose-headings:font-bold prose-p:text-textBody prose-p:leading-relaxed prose-strong:text-textPrimary prose-blockquote:border-l-accent prose-blockquote:text-textSecondary prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary prose-li:text-textBody [&_h2]:border-l-2 [&_h2]:border-accent/50 [&_h2]:pl-3">
           {missao.theory.split(/(\{\{cards?:[0-9,]+\}\}|\{\{[a-z][a-z-]*\}\})/).map((part, i) => {
             if (i % 2 === 1) {
-              if (part === '{{duvida-objeto-unico}}') return <DuvidaBlock key={i} pergunta="O que define quais características e ações farão parte de um objeto?" resposta="Essa decisão cabe ao modelador — a pessoa que está criando aquele objeto. Ela vai decidir o que é importante representar e o que pode ser ignorado. Você verá isso em detalhes nas missões seguintes." />;
+              if (part.startsWith('{{duvida-')) { const d = missao.duvidas?.[part.slice(2, -2)]; if (d) return <DuvidaBlock key={i} pergunta={d.pergunta} resposta={d.resposta} />; }
               if (part === '{{ada-card-objeto}}') return <AdaCard key={i} nivel="objeto" />;
               if (part === '{{caderno-abertura}}') return <CadernoAbertura key={i} />;
               if (part === '{{dados-globais}}') return <DadosGlobais key={i} />;
@@ -379,6 +379,8 @@ const Missao: React.FC = () => {
                 "caderno-abertura": () => <CadernoAbertura />,
                 "conceito": ({ children, note }: { children?: React.ReactNode; note?: string }) => <ConceitoBox note={note}>{children}</ConceitoBox>,
                 "destaque": ({ children }: { children?: React.ReactNode }) => <span className="underline decoration-wavy decoration-pink-400 decoration-2 underline-offset-4">{children}</span>,
+                "destaque-reto": ({ children }: { children?: React.ReactNode }) => <span className="underline decoration-[#c4b5fd] decoration-2 underline-offset-4">{children}</span>,
+                "destaque-marker": ({ children }: { children?: React.ReactNode }) => <span className="bg-yellow-200 text-gray-900 px-0.5 rounded-sm">{children}</span>,
                 "slides-poo": () => <SlidesPOO />,
                 "bolo-factory": () => <BoloFactory />,
                 "polvos-interativo": () => <PolvosInterativo />,
@@ -387,7 +389,7 @@ const Missao: React.FC = () => {
                 "ficha-acesso": () => <FichaAcesso />,
                 p: ({ node, children, ...props }: any) => {
                   const hasBlock = node?.children?.some(
-                    (c: any) => c.type === 'element' && !['a','strong','em','code','span','br','destaque'].includes(c.tagName)
+                    (c: any) => c.type === 'element' && !['a','strong','em','code','span','br','destaque','destaque-reto','destaque-marker'].includes(c.tagName)
                   );
                   return hasBlock ? <>{children}</> : <p {...props}>{children}</p>;
                 },
@@ -395,8 +397,18 @@ const Missao: React.FC = () => {
                 pre: ({ children }: { children: React.ReactNode }) => <>{children}</>,
                 table: ({ children }: { children?: React.ReactNode }) => (
                   <div className="overflow-x-auto my-4">
-                    <table className="min-w-full">{children}</table>
+                    <table className="min-w-full border-collapse border border-slate-700 rounded-lg overflow-hidden">{children}</table>
                   </div>
+                ),
+                th: ({ children }: { children?: React.ReactNode }) => (
+                  <th className="bg-slate-800 text-textPrimary font-semibold text-left px-4 py-2.5 border-b-2 border-slate-600 text-sm">
+                    {children}
+                  </th>
+                ),
+                td: ({ children }: { children?: React.ReactNode }) => (
+                  <td className="text-textSecondary px-4 py-2.5 border-b border-slate-700/60 text-sm">
+                    {children}
+                  </td>
                 ),
               } as React.ComponentProps<typeof ReactMarkdown>['components']}>
                 {part}

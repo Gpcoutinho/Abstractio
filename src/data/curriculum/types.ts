@@ -1,3 +1,8 @@
+export interface Duvida {
+  pergunta: string;
+  resposta: string;
+}
+
 export interface Reference {
   author: string;
   title: string;
@@ -39,6 +44,7 @@ export interface Missao {
   has_interativo: boolean;
   interativo_html?: string;
   references?: Reference[];
+  duvidas?: Record<string, Duvida>;
 }
 
 export interface Nivel {

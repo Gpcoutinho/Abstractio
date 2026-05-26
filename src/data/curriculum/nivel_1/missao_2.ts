@@ -8,17 +8,19 @@ const missao: Missao = {
   theory: `
 ## Otto encontra Ada
 
-Otto está em expedição pelo oceano quando avista um polvo que não conhecia.
+Otto está em expedição pelo oceano quando avista um polvo que não conhecia... Ada.
 
 {{ada-card-objeto}}
 
-Ela existe. Tem cor. Tem tamanho. Tem tentáculos. E sabe fazer coisas – nada, se camufla, solta tinta.
+Ela tem uma cor, um tamanho e um número de tentáculos. E sabe fazer coisas – nada, se camufla, solta tinta.
 
-Para Otto, Ada é uma <destaque>caixa preta</destaque>: ele consegue observá-la e interagir com ela sem saber o que está dentro.
+Para Otto, Ada é uma "caixa preta": ele consegue observá-la e interagir com ela mesmo sem conhecer todos os seus detalhes.
 
-Isso é um <destaque>objeto</destaque>: uma entidade com características próprias e ações que sabe executar.
+Isso é um <destaque>objeto</destaque>: uma <destaque-reto>entidade</destaque-reto> (algo que existe de forma independente) com características próprias e ações que sabe executar.
 
-<conceito note="adapt. Weisfeld, 2019"><strong>Objeto</strong>: entidade que reúne, de forma inseparável, características próprias e as ações que é capaz de executar.</conceito>
+{{duvida-entidade-definicao}}
+
+<conceito note="adapt. Weisfeld, 2019"><strong>Objeto</strong>: entidade que reúne, de forma inseparável, <destaque-marker>características</destaque-marker> próprias e as <destaque-marker>ações</destaque-marker> que é capaz de executar.</conceito>
 
 ---
 
@@ -26,34 +28,43 @@ Isso é um <destaque>objeto</destaque>: uma entidade com características própr
 
 No oceano de Otto há outros polvos. Cada um é uma entidade separada – mesma natureza, dados completamente diferentes.
 
-Ada é rosa com 8 tentáculos. Ao lado dela há outros dois polvos – cada um com sua própria cor e seus próprios dados.
+Ada é rosa com 8 tentáculos. Mas no oceano há outros polvos – cada um com sua própria cor e seus próprios dados.
 
-Mudar algo em Ada não muda os outros. Cada objeto guarda seus próprios dados de forma independente.
+Abaixo você pode ver a estrutura essencial de um objeto no universo da POO – o seu nome de referência e as chaves contendo suas características. Guarde esse formato:
+
+\`\`\`python-simplificado
+ada = {
+    "cor": "rosa",
+    "tentaculos": 8
+}
+\`\`\`
+
+Mudar algo em Ada não muda os outros. Cada objeto guarda seus próprios dados de forma independente – ou seja, se Ada mudar de cor agora, os outros polvos continuam exatamente como estavam.
 
 Mas o que torna Ada *ela mesma* – e não qualquer outro polvo?
 
-Python simplificado – para demonstrar o conceito, dois objetos com os mesmos dados:
+Vejamos a seguir o que acontece quando dois objetos carregam exatamente os mesmos dados:
 
-\`\`\`python
+\`\`\`python-simplificado
 ada   = {"cor": "rosa", "tentaculos": 8}
 outra = {"cor": "rosa", "tentaculos": 8}
 \`\`\`
 
-Cada um recebe um endereço único na memória:
+O que será que aconteceria se perguntássemos ao Python qual é o endereço de memória de cada um? Será que, tendo as mesmas características, o Python englobaria os dois em um só? Ou criaria duas variáveis com endereços diferentes? Veredito: se temos dois objetos distintos, então cada um recebe um endereço único na memória. Veja:
 
-\`\`\`python
+\`\`\`python-simplificado
 print(id(ada))    # 4371856896
 print(id(outra))  # 4371857024
 \`\`\`
 
-Endereços diferentes – entidades diferentes. Agora a comparação:
+Endereços diferentes – entidades diferentes. Ou seja: mesmo com dados idênticos, Ada e \`outra\` são dois objetos distintos. Agora a comparação:
 
-\`\`\`python
+\`\`\`python-simplificado
 print(ada == outra)  # True  – mesmas características
 print(ada is outra)  # False – entidades distintas
 \`\`\`
 
-\`==\` compara os dados; \`is\` compara a identidade. Mesmo com dados idênticos, Ada e \`outra\` são entidades distintas. Ada é Ada.
+\`==\` compara os dados – ou seja, pergunta "têm o mesmo conteúdo?". \`is\` compara a identidade – isto é, pergunta "são a mesma coisa?". Mesmo com dados idênticos, \`ada\` e \`outra\` são entidades distintas. Ada é Ada.
 
 ---
 
@@ -61,23 +72,34 @@ print(ada is outra)  # False – entidades distintas
 
 *Você já pensa em objetos sem perceber.*
 
-Ada não é um caso especial.
+Otto olha para Ada e percebe: o que ela é – uma entidade com características e ações – não é exclusividade do oceano.
 
-Olhe ao redor – cadeira, celular, cachorro, caneta. Cada um deles também tem características próprias e ações que sabe executar.
+Um celular tem características (modelo, bateria) e ações (ligar, tirar foto). Uma conta bancária tem características (saldo, titular) e ações (depositar, sacar). O princípio é o mesmo – só o contexto muda.
 
-O oceano de Otto é uma metáfora do mundo real: tudo que existe pode ser pensado como um objeto.
+E é exatamente esse princípio que aparece no mercado de trabalho. Objetos como \`ContaBancaria\`, \`Usuario\` e \`Produto\` são tão reais quanto Ada – têm características próprias, existem de forma independente e cada um carrega seus próprios dados.
+
+Veja como o padrão se repete:
+
+| | Ada | ContaBancaria |
+|---|---|---|
+| **Características** | cor, tentáculos | saldo, titular |
+| **Ações** | nadar, camuflar, soltar tinta | depositar, sacar, consultar saldo |
+
+O oceano é uma metáfora. Os objetos são reais.
 
 ---
 
-## As três marcas de todo objeto
+## Os três elementos de todo objeto
 
-Todo objeto – de um polvo a um celular – carrega três marcas:
+Não importa se é um polvo ou uma conta bancária – todo objeto pode ser descrito pelos mesmos três elementos:
 
-| Marca | O que é | Em Ada |
-|---|---|---|
-| **Identidade** | O que a diferencia das outras | Ada é uma entidade única |
-| **Características** | Os dados que carrega | cor: rosa, tentáculos: 8 |
-| **Ações** | O que ela sabe fazer | nadar, camuflar, soltar tinta |
+| Elemento | O que é | Ada | ContaBancaria |
+|---|---|---|---|
+| **Identidade** | O que a torna única | Ada é uma entidade única | cada conta é única |
+| **Características** | Os dados que carrega | cor: rosa, tentáculos: 8 | saldo, titular |
+| **Ações** | O que ela sabe fazer | nadar, camuflar, soltar tinta | depositar, sacar, consultar saldo |
+
+<destaque-marker>Identidade, características e ações</destaque-marker>. Onde houver um objeto, esses três estarão presentes.
 
 ---
 
@@ -201,6 +223,13 @@ Isso você descobre na **Missão 5**.
       note: "princípio Objects First: observar e interagir com objetos antes de qualquer formalização",
     },
   ],
+  duvidas: {
+    "duvida-entidade-definicao": {
+      pergunta: "O que significa 'entidade'?",
+      resposta:
+        "'Entidade' é um termo central em POO e nos diagramas UML – você vai encontrá-lo com frequência. Significa algo que existe de forma independente, com identidade própria, distinguível de tudo o mais. Ada é uma entidade: ela existe e é única.",
+    },
+  },
 };
 
 export default missao;
