@@ -199,6 +199,8 @@ Usar referências explícitas ao material próximo para criar sensação de acom
 - Depois de um bloco: *"como visto acima"*, *"note que no bloco acima..."*
 - Entre seções: *"como Otto já percebeu"*, *"voltando ao exemplo de Ada"*
 
+**Retomada no início de missões e seções:** no início de cada missão e de cada seção, retomar sutilmente o que foi visto antes – sem repetir palavra por palavra, mas ancorando o novo conteúdo no que o aluno já sabe. Cria continuidade e reduz a sensação de salto entre temas.
+
 ## Convenção de Pontuação
 
 Usar sempre **travessão médio (`–`)**, nunca travessão longo (`—`) em textos de conteúdo (teoria, exercícios, narrativa). O travessão longo soa como escrita gerada por IA.
