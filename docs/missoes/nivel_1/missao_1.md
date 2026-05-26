@@ -1,4 +1,37 @@
- Missão 1-1 — O que é POO?
+<!-- NOTAS DE DESENVOLVIMENTO – não são conteúdo da missão -->
+
+## [notas] Referências e decisões para esta missão
+
+### Linha narrativa
+- Otto usa folhas de papel soltas para anotar dados de criaturas – metáfora do código procedural.
+- Marta, Pedro e Joana introduzem o caos de dados compartilhados sem estrutura.
+- Ada aparece como criatura catalogada – primeiro contato com o nome antes da missão 2.
+- A ficha de Ada como "pacote completo" é o gancho para o conceito de objeto.
+
+---
+
+### Terminologia
+O `<conceito>` desta missão usa "estado" e "comportamento" (termos padrão da área).
+A partir da missão 2, a plataforma adota "características" e "ações".
+
+---
+
+### Componentes implementados
+- `{{caderno-abertura}}` → `CadernoAbertura` – abertura da teoria
+- `{{caos-anotacoes}}` → `CaosAnotacoes` – após o caderno
+- `{{dados-globais}}` → `DadosGlobais` – demonstração do problema de dados soltos
+- `{{slides-poo}}` → `SlidesPOO` – definição de POO
+
+---
+
+### Exercício
+Pergunta sobre a definição de POO. Baú de Conchas com 6 extras.
+
+<!-- FIM DAS NOTAS -->
+
+---
+
+# Missão 1-1 — O que é POO?
 
 **Ícone:** 🧩
 **Pontos:** 15
@@ -63,8 +96,8 @@ Por esses motivos, te incentivamos a continuar a trilha! Cada missão vai refor�
 **Pergunta:** Qual das alternativas melhor define a Programação Orientada a Objetos?
 
 - [ ] Uma sequência linear de instruções que o computador executa.
-- [x] Um paradigma que organiza o software em torno de objetos com atributos e métodos. ← correta
+- [x] Um paradigma que organiza o software em torno de objetos com características e ações. ← correta
 - [ ] Uma linguagem de programação específica como Python ou Java.
 - [ ] Um método exclusivo para criar interfaces gráficas.
 
-**Explicação:** POO é um paradigma que organiza o código em objetos com atributos (dados) e métodos (comportamentos).
+**Explicação:** POO é um paradigma que organiza o código em objetos com características (dados) e ações (comportamentos).

@@ -1,4 +1,33 @@
- Missão 1-0 — Antes de começar
+<!-- NOTAS DE DESENVOLVIMENTO – não são conteúdo da missão -->
+
+## [notas] Referências e decisões para esta missão
+
+### Voz e tom
+Escrita em primeira pessoa pela Rebecca. Sem fontes bibliográficas – texto introdutório e pessoal.
+
+---
+
+### Linha narrativa
+- Dúvida genuína como ponto de partida: "Mas pra quê estudar isso?"
+- Paradigmas como especialidades médicas: metáfora da gripe vs. pé quebrado.
+- Apresentação do Otto como protagonista e guia da trilha.
+
+---
+
+### Componentes implementados
+- `{{polvonilson-intro}}` → `PolvonilsonIntro` – Seção "Conheça Otto"
+- `{{o-que-vai-encontrar}}` → `OQueVaiEncontrar` – Seção "O que você vai encontrar por aqui"
+
+---
+
+### Exercício
+Sem exercício principal. Baú de Conchas com 6 extras sobre paradigmas de programação.
+
+<!-- FIM DAS NOTAS -->
+
+---
+
+# Missão 1-0 — Antes de começar
 
 **Ícone:** 🌊
 **Pontos:** 0
