@@ -40,13 +40,13 @@ Vamos para a próxima etapa?`,
       "Qual das alternativas melhor define a Programação Orientada a Objetos?",
     options: [
       "Uma sequência linear de instruções que o computador executa.",
-      "Um paradigma que organiza o software em torno de objetos com atributos e métodos.",
+      "Um paradigma que organiza o software em torno de objetos com características e ações.",
       "Uma linguagem de programação específica como Python ou Java.",
       "Um método exclusivo para criar interfaces gráficas.",
     ],
     correct: 1,
     explanation:
-      "POO é um paradigma que organiza o código em objetos com atributos (dados) e métodos (comportamentos).",
+      "POO é um paradigma que organiza o código em objetos com características (dados) e ações (comportamentos).",
     wrong_explanations: [
       "Isso descreve o paradigma procedural, não a POO. Na procedural, o código é uma sequência de passos; na POO, o foco é em objetos que agrupam dados e comportamentos.",
       "",
