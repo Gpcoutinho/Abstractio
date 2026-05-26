@@ -56,13 +56,16 @@ Então qual seria esse propósito tão essencial da POO? Se eu já consigo defin
 
 Para tornar essa jornada mais leve, pedimos que você se coloque no lugar do protagonista lúdico da plataforma, Otto. Ele é um **polvo cientista** cheio de curiosidade sobre o oceano e tudo que existe nele. E é nesse contexto leve que você vai entender todos os conceitos da POO:
 
-- **Fundamentos** — Classes, Objetos…
-- **Pilares** — Abstração, Encapsulamento, Herança e Polimorfismo
-- **Mecânicas** — leis e relacionamentos
-- **Engenharias** — Coesão, Acoplamento, Princípios SOLID e Design Patterns
+{{polvonilson-intro}}
 
 ---
 
-> ⚠️ Lembrete: este não é um curso de Java ou Python, mas algumas informações sobre a linguagem serão trazidas conforme a necessidade.
+## O que você vai encontrar por aqui
+
+{{o-que-vai-encontrar}}
+
+---
 
 Vamos juntos?
+
+> ⚠️ Lembrete: este não é um curso de Java ou Python, mas algumas informações sobre as linguagens serão trazidas conforme a necessidade.
