@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ArrowRightIcon, XMarkIcon, StarIcon as StarOutline } from '@heroicons/react/24/outline';
+import { StarIcon as StarSolid } from '@heroicons/react/24/solid';
 import { niveis } from '../data/curriculum';
 import type { Missao, Nivel } from '../data/curriculum/types';
 import { useProgress } from '../hooks/useProgress';
@@ -18,7 +19,7 @@ type SelectedEmblem = {
 };
 
 const Conquistas: React.FC = () => {
-  const { completed, conchas, conchas_por_missao, genero } = useProgress();
+  const { completed, conchas, conchas_por_missao, genero, getTier } = useProgress();
   const totalMissoes = niveis.reduce((acc, n) => acc + n.missoes.length, 0);
   const [selected, setSelected] = useState<SelectedEmblem | null>(null);
 
@@ -45,6 +46,10 @@ const Conquistas: React.FC = () => {
               <div className="flex flex-wrap gap-5">
                 {nivel.missoes.map((missao, missaoIdx) => {
                   const earned = completed.includes(missao.id);
+                  const tierVal = getTier(missao.id);
+                  const tier = tierVal !== 'none' ? tierVal : undefined;
+                  const tierCount = { none: 0, bronze: 1, silver: 2, gold: 3 }[tierVal];
+                  const hasExtras = !!(missao.extra_exercises?.length);
                   return (
                     <div key={missao.id} className="flex flex-col items-center gap-1.5 w-28">
                       {/* Label discreto acima */}
@@ -65,11 +70,23 @@ const Conquistas: React.FC = () => {
                         <HexBadge
                           earned={earned}
                           emblem={resolveEmblem(missao.emblem, genero)}
+                          tier={tier}
                           className={earned ? '' : 'opacity-35 grayscale'}
                         >
                           <MissionIcon iconName={missao.icon} completed={earned} className="w-9 h-9" />
                         </HexBadge>
                       </button>
+
+                      {/* Estrelas de tier (apenas missões com extras) */}
+                      {hasExtras && (
+                        <div className="flex items-center gap-0.5">
+                          {[1, 2, 3].map(n =>
+                            tierCount >= n
+                              ? <StarSolid key={n} className="w-3.5 h-3.5 text-yellow-400" />
+                              : <StarOutline key={n} className="w-3.5 h-3.5 text-borderDark" />
+                          )}
+                        </div>
+                      )}
 
                       {/* Conchas */}
                       {conchas_por_missao[missao.id] !== undefined && (
@@ -95,6 +112,10 @@ const Conquistas: React.FC = () => {
       const { missao, nivel, missaoIdx } = selected;
       const earned = completed.includes(missao.id);
       const conchasGanhas = conchas_por_missao[missao.id];
+      const modalTierVal = getTier(missao.id);
+      const modalTier = modalTierVal !== 'none' ? modalTierVal : undefined;
+      const modalTierCount = { none: 0, bronze: 1, silver: 2, gold: 3 }[modalTierVal];
+      const modalHasExtras = !!(missao.extra_exercises?.length);
       return (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bgPrimary/80 backdrop-blur-sm animate-fade-in"
@@ -113,7 +134,7 @@ const Conquistas: React.FC = () => {
             </button>
 
             <div className="flex justify-center mb-5">
-              <HexBadge earned={earned} emblem={resolveEmblem(missao.emblem, genero)} interactive={false} large className="w-36">
+              <HexBadge earned={earned} emblem={resolveEmblem(missao.emblem, genero)} interactive={false} large tier={modalTier} className="w-36">
                 <MissionIcon iconName={missao.icon} completed={earned} className="w-12 h-12" />
               </HexBadge>
             </div>
@@ -124,6 +145,16 @@ const Conquistas: React.FC = () => {
             <p className="text-textPrimary font-semibold mb-1">
               Missão {missaoIdx} · {missao.title}
             </p>
+
+            {modalHasExtras && (
+              <div className="flex items-center justify-center gap-1 mt-2">
+                {[1, 2, 3].map(n =>
+                  modalTierCount >= n
+                    ? <StarSolid key={n} className="w-4 h-4 text-yellow-400" />
+                    : <StarOutline key={n} className="w-4 h-4 text-borderDark" />
+                )}
+              </div>
+            )}
 
             {conchasGanhas !== undefined && (
               <p className="inline-flex items-center gap-1 text-accent text-sm font-semibold mt-3">

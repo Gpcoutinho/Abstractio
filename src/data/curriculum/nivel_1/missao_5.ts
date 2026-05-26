@@ -105,6 +105,80 @@ class conta_bancaria: # evitar
       "`class` é uma palavra reservada válida do Python para declarar uma classe — o oposto de um erro de sintaxe."
     ]
   },
+  extra_exercises: [
+    {
+      id: '1-5-e1',
+      question: 'Quantos objetos podemos criar a partir de uma única classe?',
+      options: [
+        'Apenas um objeto por classe',
+        'No máximo 10, por limitação do Python',
+        'Apenas o número de atributos que a classe tem',
+        'Quantos quisermos — não há limite',
+      ],
+      correct: 3,
+      explanation: 'Uma classe é um molde reutilizável. Assim como uma forma de bolo pode ser usada infinitas vezes, uma classe pode criar ilimitados objetos. Cada objeto tem seus próprios valores de atributos, mas todos seguem a mesma estrutura definida pela classe.',
+    },
+    {
+      id: '1-5-e2',
+      question: 'Qual analogia melhor representa a relação entre classe e objeto?',
+      options: [
+        'A planta arquitetônica (classe) e as casas construídas a partir dela (objetos)',
+        'O nome de uma pessoa (classe) e a identidade dela (objeto)',
+        'Um arquivo de código (classe) e o programa em execução (objeto)',
+        'Um banco de dados (classe) e uma consulta SQL (objeto)',
+      ],
+      correct: 0,
+      explanation: 'A planta arquitetônica define como todas as casas daquele modelo serão. Cada casa construída é um objeto independente com seus próprios detalhes. A planta é a classe; as casas são os objetos.',
+    },
+    {
+      id: '1-5-e3',
+      question: 'Qual sintaxe declara corretamente uma classe chamada `Bicicleta` em Python?',
+      options: [
+        '`def Bicicleta():`',
+        '`class Bicicleta:`',
+        '`object Bicicleta:`',
+        '`new class Bicicleta:`',
+      ],
+      correct: 1,
+      explanation: 'Em Python, classes são declaradas com a palavra-chave `class` seguida do nome (em PascalCase por convenção) e dois-pontos. Não se usa `def` (que é para funções), `object` ou `new class`.',
+    },
+    {
+      id: '1-5-e4',
+      question: 'Classes diferentes podem ter atributos com o mesmo nome?',
+      options: [
+        'Não. Atributos têm nomes globais únicos em Python',
+        'Só se forem do mesmo tipo de dado',
+        'Sim. Cada classe tem seu próprio espaço — atributos com o mesmo nome em classes diferentes não conflitam',
+        'Apenas se uma classe herdar da outra',
+      ],
+      correct: 2,
+      explanation: 'Classes são espaços de nomes independentes. `Cachorro.nome` e `Gato.nome` são atributos completamente separados. Não há conflito. Isso é parte do encapsulamento — cada classe gerencia seus próprios dados sem interferir nas outras.',
+    },
+    {
+      id: '1-5-e5',
+      question: 'Uma classe precisa ter objetos criados para existir e ser válida no código?',
+      options: [
+        'Não. Uma classe pode ser definida sem nunca criar objetos a partir dela',
+        'Sim. Uma classe sem objetos causa erro em Python',
+        'Sim. Python só reconhece classes que tenham ao menos um objeto',
+        'Não, mas uma classe sem objetos ocupa memória desnecessariamente e deve ser evitada',
+      ],
+      correct: 0,
+      explanation: 'A definição da classe (`class Bicicleta:`) é apenas um molde no código. Ela existe independentemente de objetos. Você pode definir uma classe, importá-la em outro módulo e só criar objetos muito mais tarde.',
+    },
+    {
+      id: '1-5-e6',
+      question: 'Qual é a principal vantagem de usar classes no lugar de variáveis soltas para modelar cachorros?',
+      options: [
+        'Classes tornam o programa mais rápido por usar menos memória',
+        'Classes eliminam a necessidade de funções no código',
+        'Classes permitem usar nomes de variáveis maiores',
+        'Classes agrupam dados e comportamentos relacionados, tornando o código organizado e reutilizável',
+      ],
+      correct: 3,
+      explanation: 'Com variáveis soltas, para 100 cachorros você teria `nome_cachorro1`, `nome_cachorro2`... um caos! Com uma classe `Cachorro`, você cria uma lista de objetos. Os dados ficam organizados, e a lógica de como um cachorro funciona está dentro da classe.',
+    },
+  ],
   has_interativo: false
 };
 

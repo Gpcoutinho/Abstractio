@@ -1,6 +1,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes pb-tooltip-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(6px) scale(0.93);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
 @layer components {
   .pb-wrap {
     @apply bg-bgSecondary border border-borderDark rounded-lg p-4 py-2;
@@ -37,9 +48,42 @@
     @apply text-textSecondary;
   }
 
+  .pb-scroll-btn {
+    @apply flex items-center justify-center w-5 h-5 rounded text-textSecondary hover:text-textPrimary transition-colors disabled:opacity-25 disabled:cursor-not-allowed;
+  }
+
+  .pb-track-wrap {
+    position: relative;
+  }
+
+  .pb-track-wrap::before,
+  .pb-track-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1.75rem;
+    z-index: 2;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .pb-track-wrap::before {
+    left: 0;
+    background: linear-gradient(to right, #1E293B, transparent);
+  }
+
+  .pb-track-wrap::after {
+    right: 0;
+    background: linear-gradient(to left, #1E293B, transparent);
+  }
+
+  .pb-track-wrap.at-start::before { opacity: 0; }
+  .pb-track-wrap.at-end::after    { opacity: 0; }
+
   .pb-track {
-    @apply flex items-center gap-0.5 overflow-x-auto;
-    min-height: 2rem;
+    @apply flex items-start gap-0.5 overflow-x-auto;
+    min-height: 2.5rem;
     width: 100%;
     padding: 0 10px;
     -webkit-overflow-scrolling: touch;
@@ -50,49 +94,169 @@
     display: none;
   }
 
-  .pb-separator {
-    @apply flex flex-col items-center gap-0.5 shrink-0;
+  .pb-level-group {
+    @apply flex flex-col shrink-0;
+  }
+
+  .pb-level-header {
+    @apply flex items-center gap-1 leading-none;
+    padding-left: 6px;
+    margin-bottom: 11px;
+  }
+
+  .pb-level-dots {
+    @apply flex items-center;
+  }
+
+  .pb-level-divider {
+    @apply bg-borderDark shrink-0;
+    width: 1px;
+    align-self: stretch;
+    margin: 3px 4px;
   }
 
   .pb-sep-label {
     @apply text-[0.6rem] uppercase tracking-[0.15em] text-textSecondary font-semibold whitespace-nowrap;
   }
 
-  .pb-sep-line {
-    @apply w-px h-4 bg-borderDark;
+  .pb-sep-divider {
+    @apply text-[0.6rem] text-textSecondary/40;
+  }
+
+  .pb-tooltip {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    transform: translateX(-50%);
+    background-color: #1E293B;
+    border: 1px solid #334155;
+    border-radius: 0.375rem;
+    padding: 3px 10px;
+    font-size: 0.7rem;
+    color: #F8FAFC;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+    animation: pb-tooltip-in 0.2s cubic-bezier(0.34, 1.2, 0.64, 1) 0.15s both;
+  }
+
+  .pb-sep-count {
+    @apply text-[0.65rem] text-textSecondary tabular-nums whitespace-nowrap font-medium;
+  }
+
+  .pb-sep-count.complete {
+    @apply text-success;
   }
 
   .pb-connector {
     @apply h-0.5 rounded-full bg-bgPrimary shrink-0;
-    min-width: 0.75rem;
+    min-width: 1rem;
   }
 
   .pb-connector.active {
-    @apply h-0.5 rounded-full bg-accent shrink-0;
-    min-width: 0.75rem;
+    @apply bg-accent;
   }
 
   .pb-connector.done {
     @apply bg-success;
   }
 
-  .pb-dot {
-    @apply w-3 h-3 rounded-full border border-borderDark bg-bgPrimary shrink-0 flex items-center justify-center;
+  /* Mission dot + hover icon */
+  /* padding expande a área de hover; margin negativa igual cancela o espaço no layout flex */
+  .pb-mission {
+    box-sizing: content-box;
+    position: relative;
+    width: 0.75rem;
+    height: 0.75rem;
+    padding: 6.5px 16px;
+    margin: -6.5px -16px;
+    flex-shrink: 0;
+    overflow: visible;
+    cursor: pointer;
+    z-index: 0;
   }
 
-  .pb-dot.done {
+  .pb-wrap.dragging .pb-mission {
+    cursor: grabbing;
+  }
+
+  .pb-mission:hover {
+    z-index: 10;
+  }
+
+  .pb-dot-layer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.75rem;
+    height: 0.75rem;
+    @apply rounded-full border border-borderDark bg-bgPrimary;
+    transition: opacity 0.15s ease, transform 0.2s ease;
+  }
+
+  .pb-mission.done .pb-dot-layer {
     @apply bg-success border-success;
   }
 
-  .pb-dot.active {
+  .pb-mission.current::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #06B6D4;
+    pointer-events: none;
+  }
+
+  .pb-mission.active .pb-dot-layer {
     @apply border-accent;
   }
 
-  .pb-dot.active .dot-inner {
-    @apply w-1 h-1 rounded-full bg-accent;
+  .pb-mission.active .pb-dot-layer::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.25rem;
+    height: 0.25rem;
+    @apply rounded-full bg-accent;
   }
 
-  .dot-inner {
-    @apply rounded-full;
+  .pb-icon-layer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3);
+    transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
   }
+
+  .pb-mission:hover .pb-dot-layer {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  .pb-mission:hover .pb-icon-layer {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+  }
+
+  /* Desabilita animação de hover durante drag */
+  .pb-wrap.dragging .pb-mission .pb-dot-layer {
+    opacity: 1 !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .pb-wrap.dragging .pb-mission .pb-icon-layer {
+    opacity: 0 !important;
+    transform: translate(-50%, -50%) scale(0.3) !important;
+  }
+
 }

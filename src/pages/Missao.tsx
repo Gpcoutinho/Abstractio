@@ -16,6 +16,7 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon,
   CheckCircleIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -28,10 +29,13 @@ import PageWrapper from "../components/PageWrapper";
 import CodeBlock from "../components/CodeBlock";
 import MissionIcon from "../components/MissionIcon";
 import HexBadge from "../components/HexBadge";
+import ShellIcon from "../components/ShellIcon";
 import interativoHtml from "../assets/interativos/nivel_1_missao_7.html?raw";
 import ProgressBar from '../components/ProgressBar';
 import ConceitoBox from '../components/ConceitoBox';
 import OQueVaiEncontrar from '../components/missoes/nivel_1/missao_0/OQueVaiEncontrar';
+import BauDeConchas from '../components/BauDeConchas';
+import { TreasureChest } from '@phosphor-icons/react';
 import ReferenciasBlock from '../components/ReferenciasBlock';
 import AdaCard from '../components/missoes/nivel_1/AdaCard';
 
@@ -129,7 +133,7 @@ const Missao: React.FC = () => {
     nivelIdx: string;
     missaoIdx: string;
   }>();
-  const { completarMissao, desmarcarMissao, isMissaoConcluida, completed, jaGanhouConchas, genero } = useProgress();
+  const { completarMissao, desmarcarMissao, registrarErroMissao, isMissaoConcluida, completed, jaGanhouConchas, genero } = useProgress();
   const { celebrate } = useCelebration();
 
   const [selecionada, setSelecionada] = useState<number | null>(null);
@@ -137,6 +141,7 @@ const Missao: React.FC = () => {
   const [tentativas, setTentativas] = useState(0);
   const [conchasGanhasAgora, setConchasGanhasAgora] = useState<number | null>(null);
   const [showCelebration, setShowCelebration] = useState(false);
+  const [showBau, setShowBau] = useState(false);
 
   // Estado do Header Retrátil
   const [showBar, setShowBar] = useState(true);
@@ -147,6 +152,7 @@ const Missao: React.FC = () => {
     setTentativas(0);
     setConchasGanhasAgora(null);
     setShowCelebration(false);
+    setShowBau(false);
   }, [nivelIdx, missaoIdx]);
 
   // Lógica de Scroll com Histerese (Zona Morta)
@@ -195,10 +201,15 @@ const Missao: React.FC = () => {
     return null;
   })();
 
+  const isNextLevel = proximaMissao !== null && missaoIdxNum >= nivel.missoes.length;
+  const nextNivel = isNextLevel ? niveis.find((n) => n.id === nivel.id + 1) : null;
+  const proximaLabel = nextNivel ? `Próximo nível – ${nextNivel.short}` : 'Próxima missão';
+
   const jaConcluida = isMissaoConcluida(missao.id);
+  const hasExtras = !!(missao.extra_exercises && missao.extra_exercises.length > 0);
   const acertou = missao.exercise ? selecionada === missao.exercise.correct : false;
 
-  const conchasValor = (t: number) => t <= 0 ? 15 : t === 1 ? 10 : 5;
+  const conchasValor = (t: number) => t <= 0 ? 12 : t === 1 ? 8 : 4;
 
   const handleSubmit = () => {
     if (selecionada === null) return;
@@ -212,6 +223,8 @@ const Missao: React.FC = () => {
       completarMissao(missao.id, novasTentativas);
       setShowCelebration(true);
       celebrate();
+    } else {
+      registrarErroMissao(missao.id);
     }
   };
 
@@ -220,37 +233,36 @@ const Missao: React.FC = () => {
       {/* Navegação fixa */}
       <div className="sticky top-0 z-40 bg-bgPrimary shadow-sm border-b border-borderDark/10">
         <div className="max-w-3xl mx-auto">
-          
+
           {/* Progress Bar: Animação via CSS Grid (Não treme o layout) */}
           <div className={`grid transition-all duration-500 ease-in-out ${
             showBar ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
           }`}>
             <div className="overflow-hidden">
               <div className="px-5 py-4">
-                <ProgressBar 
+                <ProgressBar
                   curriculum={niveis}
                   completedMissions={completed}
+                  currentMissionId={missao.id}
                 />
               </div>
             </div>
           </div>
 
           <nav className="border-t border-borderDark/5">
-            <div className="px-5 h-11 flex items-center gap-4 justify-between">
-              <div className="flex items-center gap-4 justify-between">                
-                <Link to="/trilha" className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors">
-                  <ArrowLeftIcon className="w-4 h-4" />
-                  <span className="sm:inline">Trilha</span>
-                </Link>
+            <div className="px-5 h-11 flex items-center justify-between">
+              <div className="flex-1">
                 {missaoAnterior && (
                   <Link to={missaoAnterior} className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors">
                     <ArrowLeftIcon className="w-4 h-4" />
-                    <span className="sm:inline">Anterior</span>
+                    <span className="sm:inline">Missão anterior</span>
                   </Link>
                 )}
+              </div>
 
+              <div className="flex-1 flex justify-center">
                 {!showBar && (
-                  <button 
+                  <button
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                     className="flex items-center gap-2 px-2 py-1 bg-accent/10 border border-accent/20 rounded text-[10px] font-bold text-accent uppercase animate-in fade-in slide-in-from-top-1"
                   >
@@ -260,10 +272,19 @@ const Missao: React.FC = () => {
                 )}
               </div>
 
-              <Link to={proximaMissao || "/conquistas"} className="inline-flex items-center gap-2 text-sm text-accent font-semibold hover:opacity-80 transition-opacity">
-                {proximaMissao ? "Próxima" : "Conquistas"}
-                <ArrowRightIcon className="w-4 h-4" />
-              </Link>
+              <div className="flex-1 flex justify-end">
+                {proximaMissao ? (
+                  <Link to={proximaMissao} className="inline-flex items-center gap-2 text-sm text-accent font-semibold hover:opacity-80 transition-opacity">
+                    {proximaLabel}
+                    <ArrowRightIcon className="w-4 h-4" />
+                  </Link>
+                ) : (
+                  <Link to="/conquistas" className="inline-flex items-center gap-2 text-sm text-accent font-semibold hover:opacity-80 transition-opacity">
+                    Ver conquistas
+                    <ArrowRightIcon className="w-4 h-4" />
+                  </Link>
+                )}
+              </div>
             </div>
           </nav>
 
@@ -456,13 +477,13 @@ const Missao: React.FC = () => {
                   <p className="text-textSecondary text-sm">
                     {acertou
                       ? missao.exercise.explanation
-                      : (selecionada !== null && missao.exercise.wrong_explanations?.[selecionada]) || missao.exercise.explanation}
+                      : (selecionada !== null && missao.exercise.wrong_explanations?.[selecionada]) || ''}
                   </p>
                   {acertou && conchasGanhasAgora !== null && (
-                    <p className="text-success text-xs font-medium mt-2">🐚 Você ganhou {conchasGanhasAgora} conchas!</p>
+                    <p className="text-success text-xs font-medium mt-2 flex items-center gap-1"><ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} /> Você ganhou {conchasGanhasAgora} conchas!</p>
                   )}
                   {!acertou && !jaGanhouConchas(missao.id) && (
-                    <p className="text-danger/70 text-xs mt-2">🐚 Próxima tentativa vale {tentativas === 1 ? 10 : 5} conchas</p>
+                    <p className="text-danger/70 text-xs mt-2 flex items-center gap-1"><ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} /> Próxima tentativa vale {tentativas === 1 ? 8 : 4} conchas</p>
                   )}
                 </div>
               )}
@@ -473,7 +494,7 @@ const Missao: React.FC = () => {
                   </button>
                 )}
                 {!respondida && !jaGanhouConchas(missao.id) && (
-                  <span className="text-xs text-textSecondary">🐚 Vale {conchasValor(tentativas)} conchas</span>
+                  <span className="text-xs text-textSecondary inline-flex items-center gap-1"><ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} /> Vale {conchasValor(tentativas)} conchas</span>
                 )}
                 {respondida && !acertou && (
                   <button onClick={() => { setSelecionada(null); setRespondida(false); }} className="px-5 py-2 rounded-lg border border-borderDark text-textSecondary hover:border-accent hover:text-textPrimary transition-colors text-sm">
@@ -509,16 +530,31 @@ const Missao: React.FC = () => {
           ) : null}
         </div>
 
+        {/* Baú de Conchas */}
+        {hasExtras && (
+          <div className="mt-8 bg-bgSecondary border border-borderDark rounded-xl p-5 flex items-center justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold text-textPrimary">Baú de Conchas</p>
+              <p className="text-xs text-textSecondary mt-0.5">
+                {jaConcluida
+                  ? 'Responda exercícios · ganhe mais conchas · evolua suas conquistas'
+                  : 'Disponível após concluir a missão'}
+              </p>
+            </div>
+            <button
+              onClick={() => setShowBau(true)}
+              disabled={!jaConcluida}
+              className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-accent text-accent text-sm font-semibold hover:bg-accent/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+            >
+              <TreasureChest className="w-4 h-4 shrink-0" weight="bold" />
+              Abrir Baú
+            </button>
+          </div>
+        )}
+
         {/* Navegação de rodapé */}
         <div className="mt-8 pt-6 border-t border-borderDark flex items-center justify-between">
           <div className="flex items-center gap-5">
-            <Link
-              to="/trilha"
-              className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
-            >
-              <ArrowLeftIcon className="w-4 h-4" />
-              Voltar à trilha
-            </Link>
             {missaoAnterior && (
               <Link
                 to={missaoAnterior}
@@ -532,15 +568,15 @@ const Missao: React.FC = () => {
           {proximaMissao ? (
             <Link
               to={proximaMissao}
-              className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-accent font-semibold hover:opacity-80 transition-opacity"
             >
-              Próxima missão
+              {proximaLabel}
               <ArrowRightIcon className="w-4 h-4" />
             </Link>
           ) : (
             <Link
               to="/conquistas"
-              className="inline-flex items-center gap-2 text-sm text-textSecondary hover:text-textPrimary transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-accent font-semibold hover:opacity-80 transition-opacity"
             >
               Ver conquistas
               <ArrowRightIcon className="w-4 h-4" />
@@ -578,12 +614,24 @@ const Missao: React.FC = () => {
             </Link>
 
             {conchasGanhasAgora !== null && (
-              <p className="text-accent font-semibold text-sm mb-6">
-                🐚 +{conchasGanhasAgora} conchas
+              <p className="text-accent font-semibold text-sm mb-6 flex items-center justify-center gap-1">
+                <ShellIcon className="w-4 h-4 shrink-0" style={{ color: '#06B6D4' }} /> +{conchasGanhasAgora} conchas
               </p>
             )}
 
             <div className="mt-2 flex flex-col gap-3">
+              {hasExtras && (
+                <button
+                  onClick={() => {
+                    setShowCelebration(false);
+                    setShowBau(true);
+                  }}
+                  className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-colors"
+                >
+                  <TreasureChest className="w-4 h-4 shrink-0" weight="bold" />
+                  Abrir Baú de Conchas
+                </button>
+              )}
               {proximaMissao ? (
                 <Link
                   to={proximaMissao}
@@ -600,6 +648,40 @@ const Missao: React.FC = () => {
               >
                 Ficar nesta missão
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Baú de Conchas */}
+      {showBau && hasExtras && (
+        <div
+          className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-8 bg-bgPrimary/80 backdrop-blur-sm animate-fade-in"
+          onClick={() => setShowBau(false)}
+        >
+          <div
+            className="bg-bgPrimary border border-borderDark rounded-2xl w-full max-w-xl shadow-2xl animate-pop-in max-h-[90vh] flex flex-col"
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-borderDark/30 shrink-0">
+              <div>
+                <h2 className="text-lg font-bold text-textPrimary">Baú de Conchas</h2>
+                <p className="text-xs text-textSecondary">exercícios extras</p>
+              </div>
+              <button
+                onClick={() => setShowBau(false)}
+                className="text-textSecondary hover:text-textPrimary transition-colors"
+                aria-label="Fechar"
+              >
+                <XMarkIcon className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="overflow-y-auto px-6 py-5">
+              <BauDeConchas
+                missaoId={missao.id}
+                extras={missao.extra_exercises!}
+                proximaMissao={proximaMissao}
+              />
             </div>
           </div>
         </div>

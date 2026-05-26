@@ -8,8 +8,10 @@ import {
   XMarkIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
+import { TreasureChest } from "@phosphor-icons/react";
 import { useProgress } from "../hooks/useProgress";
 import { MOLDURAS } from "../data/molduras";
+import { ACESSORIOS } from "../data/acessorios";
 import AvatarFrame from "./AvatarFrame";
 import ShellIcon from "./ShellIcon";
 import imgPolvinho from "../assets/avatares/avatar-polvinho.png";
@@ -24,17 +26,21 @@ const AVATAR_SRCS: (string | null)[] = [
   imgKraken,
 ];
 
-const NAV_ITEMS = [
+type NavItem = { to: string; label: string; Icon: React.ComponentType<{ className?: string }>; exact: boolean };
+
+const NAV_ITEMS: NavItem[] = [
   { to: "/", label: "Home", Icon: HomeIcon, exact: true },
   { to: "/trilha", label: "Trilha", Icon: MapIcon, exact: false },
   { to: "/conquistas", label: "Conquistas", Icon: TrophyIcon, exact: false },
+  { to: "/bau", label: "Baú de Conchas", Icon: TreasureChest, exact: false },
 ];
 
 const Sidebar: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const { conchas, nivelDisplay, nomeDisplay, avatarIdx, molduraAtiva } = useProgress();
+  const { conchas, nivelDisplay, nomeDisplay, avatarIdx, molduraAtiva, acessorioAtivo } = useProgress();
   const avatarSrc = AVATAR_SRCS[avatarIdx] ?? AVATAR_SRCS[0];
   const moldura = MOLDURAS.find(m => m.id === molduraAtiva) ?? MOLDURAS[0];
+  const acessorioSrc = ACESSORIOS.find(a => a.id === acessorioAtivo)?.src ?? '';
 
   return (
     <>
@@ -82,7 +88,7 @@ const Sidebar: React.FC = () => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full w-[200px] bg-bgSecondary border-r border-borderDark z-50 flex flex-col transition-transform duration-200 ${
+        className={`fixed top-0 left-0 h-full w-[220px] bg-bgSecondary border-r border-borderDark z-50 flex flex-col transition-transform duration-200 ${
           open ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0`}
       >
@@ -109,7 +115,7 @@ const Sidebar: React.FC = () => {
             <Link
               to="/perfil"
               onClick={() => setOpen(false)}
-              className="w-28 h-28 rounded-full ring-2 ring-accent/40 overflow-hidden hover:ring-accent transition-all shadow-lg bg-bgPrimary block"
+              className="relative w-32 h-32 rounded-full ring-2 ring-accent/40 overflow-hidden hover:ring-accent transition-all shadow-lg bg-bgPrimary block"
               title="Perfil"
             >
               {avatarSrc ? (
@@ -123,6 +129,13 @@ const Sidebar: React.FC = () => {
                   <UserCircleIcon className="w-8 h-8 text-textSecondary" />
                 </div>
               )}
+              {acessorioSrc && (
+                <img
+                  src={acessorioSrc}
+                  alt="Acessório"
+                  className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                />
+              )}
             </Link>
           </AvatarFrame>
           <p className="mt-3 text-sm font-medium text-textPrimary leading-tight text-center">
@@ -131,10 +144,15 @@ const Sidebar: React.FC = () => {
           <p className="text-xs text-textSecondary leading-tight text-center">
             {nivelDisplay}
           </p>
-          <span className="mt-1 text-sm text-accent font-semibold flex items-center gap-1">
-            <ShellIcon className="w-4 h-4" style={{ color: '#22d3ee' }} />
+          <Link
+            to="/perfil#loja"
+            onClick={() => setOpen(false)}
+            className="mt-1 text-sm text-accent font-semibold flex items-center gap-1 hover:opacity-70 transition-opacity"
+            title="Ir para a loja de conchas"
+          >
+            <ShellIcon className="w-4 h-4" style={{ color: '#06B6D4' }} />
             {conchas}
-          </span>
+          </Link>
         </div>
 
         {/* Nav */}

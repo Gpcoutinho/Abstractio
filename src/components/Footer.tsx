@@ -8,7 +8,7 @@ const Footer: React.FC = () => (
         <li><a href="#" className="hover:text-accent transition-colors">Contato</a></li>
         <li><a href="#" className="hover:text-accent transition-colors">Política de Privacidade</a></li>
       </ul>
-      <p className="text-xs">&copy; 2023 Abstractio. Todos os direitos reservados.</p>
+      <p className="text-xs">&copy; 2026 Abstractio. Todos os direitos reservados.</p>
     </div>
   </footer>
 );

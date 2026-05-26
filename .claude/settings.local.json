@@ -7,7 +7,9 @@
       "Bash(git commit *)",
       "Bash(npx tsc *)",
       "Bash(node *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "mcp__ide__getDiagnostics",
+      "Bash(powershell -Command 'Get-Content '\\\\''C:\\\\Projetos\\\\Abstractio\\\\src\\\\data\\\\curriculum\\\\nivel_1$f.ts'\\\\'' | Select-Object -First 30')"
     ]
   }
 }
