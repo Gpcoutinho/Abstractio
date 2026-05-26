@@ -417,11 +417,6 @@ const Missao: React.FC = () => {
           })}
         </section>
 
-        {/* Referências bibliográficas */}
-        {missao.references && missao.references.length > 0 && (
-          <ReferenciasBlock references={missao.references} />
-        )}
-
         {/* Mini-jogo */}
         {missao.has_interativo && missao.interativo_html && interativos[missao.interativo_html] && (
           <section className="mb-8">
@@ -429,6 +424,29 @@ const Missao: React.FC = () => {
             <div className="rounded-lg overflow-hidden border border-borderDark">
               <iframe srcDoc={interativos[missao.interativo_html]} title="Mini-jogo interativo" className="w-full" style={{ height: "480px", border: "none" }} sandbox="allow-scripts" />
             </div>
+          </section>
+        )}
+
+        {/* Resumo */}
+        {missao.resumo && missao.resumo.length > 0 && (
+          <hr className="border-borderDark my-10" />
+        )}
+        {missao.resumo && missao.resumo.length > 0 && (
+          <section className="mb-8 bg-bgSecondary border border-borderDark/60 rounded-xl p-6">
+            <h2 className="text-2xl font-bold text-textPrimary mb-4">Resumo</h2>
+            <ul className="space-y-2">
+              {missao.resumo.map((item, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-textBody">
+                  <span className="text-accent mt-0.5 shrink-0">·</span>
+                  <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={{
+                    p: ({ children }: { children?: React.ReactNode }) => <span>{children}</span>,
+                    strong: ({ children }: { children?: React.ReactNode }) => <strong className="text-textPrimary">{children}</strong>,
+                  }}>
+                    {item}
+                  </ReactMarkdown>
+                </li>
+              ))}
+            </ul>
           </section>
         )}
 
@@ -547,6 +565,11 @@ const Missao: React.FC = () => {
               Exercícios Extras
             </button>
           </div>
+        )}
+
+        {/* Referências bibliográficas */}
+        {missao.references && missao.references.length > 0 && (
+          <ReferenciasBlock references={missao.references} />
         )}
 
         {/* Navegação de rodapé */}

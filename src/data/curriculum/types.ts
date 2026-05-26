@@ -39,6 +39,7 @@ export interface Missao {
   emblem?: string;
   theory: string;
   cards?: SlideCardData[];
+  resumo?: string[];
   exercise?: Exercise;
   extra_exercises?: ExtraExercise[];
   has_interativo: boolean;

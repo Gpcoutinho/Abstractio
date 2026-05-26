@@ -206,6 +206,13 @@ Isso você descobre na **Missão 5**.
       explanation: 'O princípio de objeto é universal. Qualquer entidade com características próprias e ações que sabe executar é um objeto. O contexto muda; o princípio é o mesmo.',
     },
   ],
+  resumo: [
+    "**Objeto** – entidade que reúne, de forma inseparável, características e ações",
+    "**Identidade** – cada objeto existe de forma única na memória, distinguível de qualquer outro",
+    "**Características** – os dados que o objeto carrega",
+    "**Ações** – o que o objeto sabe executar",
+    "**Caixa preta** – você pode observar e interagir com um objeto sem conhecer seus detalhes internos",
+  ],
   has_interativo: false,
   references: [
     {
