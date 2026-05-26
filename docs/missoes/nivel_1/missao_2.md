@@ -199,6 +199,16 @@ Isso você descobre na **Missão 5**.
 
 - [ ] Tem interativo
 
+## Resumo
+
+**Nesta missão:**
+
+- **Objeto** – entidade que reúne, de forma inseparável, características e ações
+- **Identidade** – cada objeto existe de forma única na memória, distinguível de qualquer outro
+- **Características** – os dados que o objeto carrega
+- **Ações** – o que o objeto sabe executar
+- **Caixa preta** – você pode observar e interagir com um objeto sem conhecer seus detalhes internos
+
 ## Exercício
 
 **Pergunta:** Otto encontra dois polvos: Ada (rosa, 8 tentáculos) e um segundo polvo (azul, 6 tentáculos). Ele muda a cor de Ada para verde. O que acontece com o segundo polvo?

@@ -206,6 +206,13 @@ Isso você descobre na **Missão 5**.
       explanation: 'Identidade significa que cada objeto é uma entidade distinta na memória. Mesmo que `a` e `b` tenham os mesmos dados, são dois objetos diferentes. Em Python, `a is b` retorna `False` — eles ocupam lugares distintos na memória.',
     },
   ],
+  resumo: [
+    "**Objeto** – entidade que reúne, de forma inseparável, características e ações",
+    "**Identidade** – cada objeto existe de forma única na memória, distinguível de qualquer outro",
+    "**Características** – os dados que o objeto carrega",
+    "**Ações** – o que o objeto sabe executar",
+    "**Caixa preta** – você pode observar e interagir com um objeto sem conhecer seus detalhes internos",
+  ],
   has_interativo: false,
   references: [
     {
