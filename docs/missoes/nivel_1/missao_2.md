@@ -19,11 +19,12 @@ Resumo completo: `referencias/BlueJ/resumo_bluej_pedagogy.txt`
 
 ---
 
-### Linha narrativa (narrativa_exemplos.md)
-- Otto *encontra* Ada no oceano. Não sabe como foi criada – apenas observa que existe, tem identidade própria e é diferente de outros polvos.
-- Metáfora da caixa preta: você usa sem saber o que há dentro.
-- Nenhuma `class` aparece ainda.
-- Nomes: `Ada`, `azulao`, `marinho` (sem nome por enquanto – retornam com o interativo)
+### Linha narrativa
+- Otto encontra Ada no oceano. Observa características e ações sem saber como foi criada.
+- Metáfora da caixa preta: introduzida na abertura.
+- Variável `outra` usada nos exemplos de código para demonstrar identidade distinta com dados idênticos.
+- Segundo polvo sem nome: aparece no exercício (azul, 6 tentáculos).
+- Nenhuma `class` aparece em nenhum momento.
 
 ---
 
@@ -42,9 +43,8 @@ Usar **sempre** estes termos – nunca misturar com "estado", "comportamento" ou
 4. As três marcas de todo objeto → tabela com terminologia corrigida
 5. De onde Ada veio? → gancho para missão 5
 
-**Visuais disponíveis:**
-- `diagramaObjetos` SVG (3 cards: Cachorro, Celular, Carro) → guardado em `docs/guardados.md`; pode voltar na Seção 3 com labels corrigidos
-- Interativos `PolvosInterativo` e `TresPolvosInterativo` → removidos temporariamente; componentes mantidos em `src/components/missoes/nivel_1/missao_2/`
+**Visuais:**
+- `{{ada-card-objeto}}` → componente `AdaCard` com `nivel="objeto"` – Seção 1
 
 ---
 
@@ -70,6 +70,34 @@ print(ada is outra)  # False – entidades distintas
 
 ### Dúvidas previstas
 - `{{duvida-objeto-unico}}` – O que define quais características e ações farão parte de um objeto? → removida desta missão; reservada para outra
+
+---
+
+### Resumo (campo `resumo` no .ts)
+
+Adicionado em 2025-05-25. Aparece como card com `<h2>` "Resumo" + `<hr>` separador, entre o mini-jogo e o exercício.
+
+Itens:
+- **Objeto** – entidade que reúne, de forma inseparável, características e ações
+- **Identidade** – cada objeto existe de forma única na memória, distinguível de qualquer outro
+- **Características** – os dados que o objeto carrega
+- **Ações** – o que o objeto sabe executar
+- **Caixa preta** – você pode observar e interagir com um objeto sem conhecer seus detalhes internos
+
+---
+
+### Ordem das seções na página (Missao.tsx)
+
+Válida para todas as missões a partir de 2025-05-25:
+
+1. Teoria
+2. Mini-jogo *(se `has_interativo: true`)*
+3. Resumo *(se `resumo` preenchido)*
+4. Exercício
+5. Footer (Concluída / Marcar como concluída)
+6. Baú de Conchas *(se `extra_exercises` preenchido)*
+7. Referências bibliográficas *(colapsável; se `references` preenchido)*
+8. Navegação de rodapé
 
 <!-- FIM DAS NOTAS -->
 
