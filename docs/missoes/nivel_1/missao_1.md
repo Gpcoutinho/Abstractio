@@ -11,8 +11,7 @@
 ---
 
 ### Terminologia
-O `<conceito>` desta missão usa "estado" e "comportamento" (termos padrão da área).
-A partir da missão 2, a plataforma adota "características" e "ações".
+Usar sempre "características" e "ações" – nunca "estado", "comportamento", "atributos" ou "métodos".
 
 ---
 

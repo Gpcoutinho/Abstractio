@@ -28,9 +28,9 @@ A POO propõe juntar os dois: a ficha de Ada não é só um papel com dados. É 
 
 {{slides-poo}}
 
-<conceito>Programação Orientada a Objetos é um paradigma que organiza o software em torno de <strong>objetos</strong> – entidades que possuem um <strong>estado</strong> (o que sabem sobre si mesmas) e um <strong>comportamento</strong> (o que sabem fazer).</conceito>
+<conceito>Programação Orientada a Objetos é um paradigma que organiza o software em torno de <strong>objetos</strong> – entidades que possuem <strong>características</strong> próprias e <strong>ações</strong> que sabem executar.</conceito>
 
-Em vez de uma lista interminável de comandos, a POO organiza o software em torno de **objetos** – entidades que *sabem coisas* (seu estado) e *sabem fazer coisas* (seu comportamento).
+Em vez de uma lista interminável de comandos, a POO organiza o software em torno de **objetos** – entidades com **características** próprias e **ações** que sabem executar.
 
 Otto não vai mais anotar tudo em papéis soltos. Ele vai criar uma **ficha para Ada**: o que ela é, o que ela sabe fazer. Uma ficha por criatura – organizada, completa, reutilizável.
 
@@ -57,78 +57,78 @@ Vamos para a próxima etapa?`,
   extra_exercises: [
     {
       id: '1-1-e1',
-      question: 'Na computação, um paradigma de programação pode ser entendido como:',
+      question: 'Em POO, as "características" de um objeto se referem a:',
       options: [
-        'Uma linguagem específica como Python ou Java',
-        'Uma lente através da qual o programador enxerga a arquitetura do sistema',
-        'Um conjunto de bibliotecas para construir programas',
-        'Um método de depuração de código',
+        'O conjunto de informações que o objeto armazena sobre si mesmo',
+        'O conjunto de ações que o objeto sabe executar',
+        'O nome da classe que originou o objeto',
+        'A posição do objeto na memória do computador',
       ],
-      correct: 1,
-      explanation: '"Orientada" significa "focada em" ou "guiada por". Na computação isso é chamado de paradigma — uma lente que define como o programador organiza e enxerga a arquitetura do sistema.',
+      correct: 0,
+      explanation: 'As características de um objeto são o conjunto de dados que ele guarda. O saldo de uma conta bancária, a cor de um carro, o nome de um cachorro — esses são dados que descrevem o objeto.',
     },
     {
       id: '1-1-e2',
-      question: 'Na POO, o foco do programador deixa de ser:',
+      question: 'Um objeto `Cachorro` sabe executar a ação `latir()`. Essa ação representa:',
       options: [
-        'Usar variáveis para armazenar informações',
-        'Criar funções que executam tarefas',
-        'Escrever uma lista de comandos sequenciais para o computador executar',
-        'Escolher a linguagem de programação mais adequada',
+        'As características do objeto',
+        'As ações — o que o objeto sabe fazer',
+        'A identidade única do objeto',
+        'O tipo de dado do objeto',
       ],
-      correct: 2,
-      explanation: 'Na POO, você para de pensar em "lista de passos" e passa a modelar atores — objetos que conversam e interagem entre si para fazer o sistema funcionar.',
+      correct: 1,
+      explanation: 'Ações são tudo que um objeto sabe executar. `latir()`, `correr()` e `comer()` definem o que um `Cachorro` sabe fazer — essas são as ações do objeto.',
     },
     {
       id: '1-1-e3',
-      question: 'Qual é o problema central que a POO resolve em relação ao paradigma procedural?',
+      question: 'Na POO, características e ações de um objeto ficam:',
       options: [
-        'O código procedural é mais lento que o orientado a objetos',
-        'No procedural, não é possível criar funções para manipular dados',
-        'Dados e as regras de como usá-los vivem separados — qualquer um pode inventar as suas',
-        'No procedural, não é possível usar mais de uma variável com o mesmo nome',
+        'Separadas — dados em variáveis globais, funções em módulos distintos',
+        'Todas armazenadas em dicionários Python',
+        'Agrupadas dentro do mesmo objeto, tornando o código mais organizado',
+        'Espalhadas pelo código, acessadas por qualquer função',
       ],
       correct: 2,
-      explanation: 'No procedural, variáveis ficam soltas e as regras de como manipulá-las são funções separadas. Qualquer parte do código pode acessar e modificar esses dados do seu próprio jeito, gerando inconsistência.',
+      explanation: 'Na POO, características e ações vivem juntas no mesmo objeto. Isso evita o problema do código procedural, onde variáveis soltas são acessadas de qualquer lugar.',
     },
     {
       id: '1-1-e4',
-      question: 'Na POO, a solução para dados soltos e regras separadas é:',
+      question: 'Por que a POO facilita a manutenção de sistemas grandes?',
       options: [
-        'Guardar todos os dados em um único arquivo de configuração',
-        'Criar um pacote completo onde dados e regras ficam juntos, inseparáveis',
-        'Proibir o uso de variáveis globais no programa',
-        'Dividir o código em módulos independentes',
+        'Porque elimina completamente a necessidade de funções no código',
+        'Porque POO gera código automaticamente sem intervenção do programador',
+        'Porque objetos consomem menos memória do que variáveis simples',
+        'Porque cada objeto é responsável pelas suas próprias características e ações, localizando alterações',
       ],
-      correct: 1,
-      explanation: 'O objeto é esse pacote completo — os dados e as regras de como registrá-los e manipulá-los andam sempre juntos. Não há mais "qualquer um pode inventar as suas".',
+      correct: 3,
+      explanation: 'Na POO, cada objeto é responsável por uma parte do sistema. Para alterar como um `Cliente` funciona, você mexe apenas naquele tipo de objeto. No código procedural, uma mudança pode exigir alterações espalhadas por todo o programa.',
     },
     {
       id: '1-1-e5',
-      question: 'Na POO, os Objetos são:',
+      question: 'O trecho `nome = "Rex"` / `idade = 3` / `print(nome, idade)` usa qual paradigma?',
       options: [
-        'Funções especiais que retornam múltiplos valores',
-        'Variáveis do tipo lista ou dicionário',
-        'Blocos de código que representam entidades — físicas ou abstratas',
-        'Módulos externos importados no programa',
+        'POO — porque usa variáveis para guardar informações',
+        'Paradigma funcional — porque não usa objetos',
+        'Procedural — os dados são variáveis soltas, sem organização em objetos',
+        'POO — porque usa `print`, que é uma ação',
       ],
       correct: 2,
-      explanation: 'Objetos representam entidades do mundo real ou abstrato — uma conta bancária, um produto, uma criatura. Cada objeto agrupa os dados dessa entidade e as ações que ela sabe realizar.',
+      explanation: 'Variáveis soltas (`nome`, `idade`) sem um objeto que as agrupe são uma marca do paradigma procedural. Na POO, esses dados estariam agrupados dentro de um objeto `Cachorro`, com suas próprias características.',
     },
     {
       id: '1-1-e6',
-      question: 'Em POO, todo objeto possui estado e comportamento. O comportamento se refere a:',
+      question: 'Qual das opções NÃO é um bom exemplo de objeto em POO?',
       options: [
-        'Os dados que o objeto armazena sobre si mesmo',
-        'O nome do bloco de código que originou o objeto',
-        'O que o objeto sabe fazer — suas ações',
-        'O valor atual de cada um dos dados do objeto',
+        'Uma conta bancária com saldo e titular',
+        'A operação `2 + 3` em um cálculo isolado',
+        'Um cachorro com nome, raça e idade',
+        'Um produto com nome, preço e estoque',
       ],
-      correct: 2,
-      explanation: 'Estado é o que o objeto sabe sobre si mesmo. Comportamento é o que ele sabe fazer. Juntos, esses dois aspectos formam um objeto completo na POO.',
+      correct: 1,
+      explanation: 'A operação `2 + 3` é apenas uma expressão matemática, sem características próprias nem ações. Conta, cachorro e produto, por outro lado, têm dados que os descrevem e ações que sabem executar — são bons candidatos a objetos.',
     },
   ],
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;
