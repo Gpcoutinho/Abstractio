@@ -1,4 +1,4 @@
- Missão 1-3 — Atributos
+﻿ Missão 1-3 — Atributos
 
 **Ícone:** PiTag
 **Emblema:** Pintor(a) de Tentáculos
@@ -68,7 +68,7 @@ Só `Ada.cor` mudou. Ana e Douglas continuam com as suas.
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "1-7",
@@ -166,8 +166,8 @@ No próximo nível, você vai descobrir os **4 Pilares da POO**:
       explanation: '`Livro("1984", "Orwell")` cria o objeto com `self.titulo = "1984"` e `self.autor = "Orwell"`. Ao chamar `.resumo()`, Python executa o método passando o objeto como `self`. O f-string retorna `"1984 por Orwell"`.',
     },
   ],
-  has_interativo: true,
-  interativo_html: "interativos/nivel_1_missao_7.html"
+  has_minigame: true,
+  minigame_html: "interativos/nivel_1_missao_7.html"
 };
 
 export default missao;

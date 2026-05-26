@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "1-3",
@@ -146,7 +146,7 @@ Só \`ada.cor\` mudou. Ana e Douglas continuam com as suas.
       explanation: 'Quando executamos `c = Carro("vermelho")`, o `__init__` é chamado com `cor = "vermelho"`. A linha `self.cor = cor` armazena `"vermelho"` no atributo `cor` do objeto `c`. Por isso, `c.cor` retorna `"vermelho"`.',
     },
   ],
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

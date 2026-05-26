@@ -1,4 +1,4 @@
-# Missão 4-2 — Coesão
+﻿# Missão 4-2 — Coesão
 
 **Ícone:** 🎯
 **Pontos:** 15
@@ -60,7 +60,7 @@ Faça a pergunta: **"O que esta classe faz?"**
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

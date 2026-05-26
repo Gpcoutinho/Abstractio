@@ -1,4 +1,4 @@
-import type { Missao } from "../types";
+﻿import type { Missao } from "../types";
 
 const missao: Missao = {
   id: "1-1",
@@ -128,7 +128,7 @@ Vamos para a próxima etapa?`,
       explanation: 'A operação `2 + 3` é apenas uma expressão matemática, sem características próprias nem ações. Conta, cachorro e produto, por outro lado, têm dados que os descrevem e ações que sabem executar — são bons candidatos a objetos.',
     },
   ],
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "1-6",
@@ -180,7 +180,7 @@ print(caneta)  # Caneta — R$2.50 (100 em estoque)
       explanation: 'O `__init__` é um método como qualquer outro e pode chamar outros métodos da classe com `self.metodo()`. Isso é útil para validar dados ou configurar o objeto de forma mais complexa durante a criação.',
     },
   ],
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

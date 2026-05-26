@@ -1,4 +1,4 @@
-import type { Missao } from "../types";
+﻿import type { Missao } from "../types";
 
 const missao: Missao = {
   id: "1-0",
@@ -117,7 +117,7 @@ Vamos juntos?
       explanation: 'No paradigma funcional, tudo é função. Os dados não mudam (imutabilidade) e funções não têm efeitos colaterais. É diferente da POO, onde objetos têm estado que pode mudar com o tempo.',
     },
   ],
-  has_interativo: false,
+  has_minigame: false,
 };
 
 export default missao;

@@ -1,4 +1,4 @@
-# Missão 3-8 — Resumo
+﻿# Missão 3-8 — Resumo
 
 **Ícone:** 📋
 **Pontos:** 15
@@ -73,7 +73,7 @@ print(pedido.finalizar(CartaoCredito()))
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

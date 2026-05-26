@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "3-7",
@@ -114,7 +114,7 @@ Faça a pergunta: **"a parte faz sentido existir sem o todo?"**
     correct: 2,
     explanation: "Correto! Livros existem independentemente e podem ser parte de múltiplas coleções — isso é agregação: relação 'tem um' sem controle do ciclo de vida."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

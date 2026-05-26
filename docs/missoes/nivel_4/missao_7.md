@@ -1,4 +1,4 @@
-# Missão 4-7 — Resumo
+﻿# Missão 4-7 — Resumo
 
 **Ícone:** 📋
 **Pontos:** 15
@@ -42,7 +42,7 @@ Design de software é uma habilidade que se aprofunda com prática. Os próximos
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

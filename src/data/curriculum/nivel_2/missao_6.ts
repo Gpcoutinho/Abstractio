@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "2-6",
@@ -60,7 +60,7 @@ for v in frota:
     correct: 2,
     explanation: "Correto! O polimorfismo é o pilar que permite escrever código genérico que funciona com diferentes tipos — sem precisar de condicionais para cada um."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

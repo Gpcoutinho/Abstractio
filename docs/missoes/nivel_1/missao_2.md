@@ -1,4 +1,4 @@
-<!-- NOTAS DE DESENVOLVIMENTO – não são conteúdo da missão -->
+﻿<!-- NOTAS DE DESENVOLVIMENTO – não são conteúdo da missão -->
 
 ## [notas] Referências e decisões para esta missão
 
@@ -91,7 +91,7 @@ Itens:
 Válida para todas as missões a partir de 2025-05-25:
 
 1. Teoria
-2. Mini-jogo *(se `has_interativo: true`)*
+2. Mini-jogo *(se `has_minigame: true`)*
 3. Resumo *(se `resumo` preenchido)*
 4. Exercício
 5. Footer (Concluída / Marcar como concluída)
@@ -225,7 +225,7 @@ Isso você descobre na **Missão 5**.
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Resumo
 

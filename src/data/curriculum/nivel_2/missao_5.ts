@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "2-5",
@@ -74,7 +74,7 @@ for x in todos:
     correct: 1,
     explanation: "Correto! Duck Typing permite que qualquer objeto seja usado polimorficamente desde que implemente a interface esperada, sem precisar herdar de uma classe específica."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

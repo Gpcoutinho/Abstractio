@@ -1,4 +1,4 @@
-# Missão 1-3 — Classe
+﻿# Missão 1-3 — Classe
 
 **Ícone:** 📐
 **Pontos:** 15
@@ -88,7 +88,7 @@ class conta_bancaria: # evitar
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

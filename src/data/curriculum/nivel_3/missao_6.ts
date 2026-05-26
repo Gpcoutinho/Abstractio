@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "3-6",
@@ -83,7 +83,7 @@ print(prof.alunos[0].nome)   # Bia
     correct: 1,
     explanation: "Correto! Na associação, os objetos interagem mas são independentes — nenhum controla o ciclo de vida do outro."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

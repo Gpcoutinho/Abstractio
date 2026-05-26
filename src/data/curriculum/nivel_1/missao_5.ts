@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 import { moldeBoloAnimation, diagramaClasseObjeto } from '../../visuals/nivel_1';
 
 const missao: Missao = {
@@ -179,7 +179,7 @@ class conta_bancaria: # evitar
       explanation: 'Com variáveis soltas, para 100 cachorros você teria `nome_cachorro1`, `nome_cachorro2`... um caos! Com uma classe `Cachorro`, você cria uma lista de objetos. Os dados ficam organizados, e a lógica de como um cachorro funciona está dentro da classe.',
     },
   ],
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

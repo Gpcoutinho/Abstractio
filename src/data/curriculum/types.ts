@@ -1,4 +1,4 @@
-export interface Duvida {
+﻿export interface Duvida {
   pergunta: string;
   resposta: string;
 }
@@ -42,8 +42,8 @@ export interface Missao {
   resumo?: string[];
   exercise?: Exercise;
   extra_exercises?: ExtraExercise[];
-  has_interativo: boolean;
-  interativo_html?: string;
+  has_minigame: boolean;
+  minigame_html?: string;
   references?: Reference[];
   duvidas?: Record<string, Duvida>;
 }

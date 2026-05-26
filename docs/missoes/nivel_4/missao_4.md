@@ -1,4 +1,4 @@
-# Missão 4-4 — SOLID
+﻿# Missão 4-4 — SOLID
 
 **Ícone:** 🪨
 **Pontos:** 15
@@ -87,7 +87,7 @@ class Servico:
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 
