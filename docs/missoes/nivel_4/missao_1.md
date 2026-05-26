@@ -1,4 +1,4 @@
-# Missão 4-1 — Introdução ao nível
+﻿# Missão 4-1 — Introdução ao nível
 
 **Ícone:** 🏛️
 **Pontos:** 15
@@ -32,7 +32,7 @@ Um bom arquiteto não apenas empilha tijolos — ele projeta estruturas que:
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

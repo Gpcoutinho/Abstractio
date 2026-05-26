@@ -1,4 +1,4 @@
-# Missão 3-6 — Associação
+﻿# Missão 3-6 — Associação
 
 **Ícone:** ↔️
 **Pontos:** 15
@@ -73,7 +73,7 @@ print(prof.alunos[0].nome)   # Bia
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "3-5",
@@ -85,7 +85,7 @@ Se \`Usuario\` não implementar algum dos métodos abstratos, o Python lança um
     correct: 1,
     explanation: "Correto! Uma interface pura em Python é uma classe ABC com apenas @abstractmethod — ela define o contrato sem implementar nada."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

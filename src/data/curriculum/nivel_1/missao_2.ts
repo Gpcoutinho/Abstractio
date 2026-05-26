@@ -1,4 +1,4 @@
-import type { Missao } from "../types";
+﻿import type { Missao } from "../types";
 
 const missao: Missao = {
   id: "1-2",
@@ -213,7 +213,7 @@ Isso você descobre na **Missão 5**.
     "**Ações** – o que o objeto sabe executar",
     "**Caixa preta** – você pode observar e interagir com um objeto sem conhecer seus detalhes internos",
   ],
-  has_interativo: false,
+  has_minigame: false,
   references: [
     {
       author: "Weisfeld, M.",

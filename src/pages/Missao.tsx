@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+﻿import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import BoloFactory from "../components/missoes/nivel_1/missao_5/BoloFactory";
 import PolvosInterativo from "../components/missoes/nivel_1/missao_2/PolvosInterativo";
@@ -418,11 +418,11 @@ const Missao: React.FC = () => {
         </section>
 
         {/* Mini-jogo */}
-        {missao.has_interativo && missao.interativo_html && interativos[missao.interativo_html] && (
+        {missao.has_minigame && missao.minigame_html && interativos[missao.minigame_html] && (
           <section className="mb-8">
             <h2 className="text-lg font-semibold text-textPrimary mb-3">Mini-jogo interativo</h2>
             <div className="rounded-lg overflow-hidden border border-borderDark">
-              <iframe srcDoc={interativos[missao.interativo_html]} title="Mini-jogo interativo" className="w-full" style={{ height: "480px", border: "none" }} sandbox="allow-scripts" />
+              <iframe srcDoc={interativos[missao.minigame_html]} title="Mini-jogo interativo" className="w-full" style={{ height: "480px", border: "none" }} sandbox="allow-scripts" />
             </div>
           </section>
         )}

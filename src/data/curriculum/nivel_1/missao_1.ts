@@ -1,4 +1,4 @@
-import type { Missao } from "../types";
+﻿import type { Missao } from "../types";
 
 const missao: Missao = {
   id: "1-1",

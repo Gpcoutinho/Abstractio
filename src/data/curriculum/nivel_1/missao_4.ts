@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 import { diagramaClasseMetodo } from '../../visuals/nivel_1';
 
 const missao: Missao = {
@@ -186,7 +186,7 @@ ${diagramaClasseMetodo}
       explanation: 'Quando você escreve `rex.latir()`, o Python internamente faz `Cachorro.latir(rex)` — passa o objeto à esquerda do ponto como `self`. Por isso você declara `self` na definição, mas não o passa na chamada.',
     },
   ],
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

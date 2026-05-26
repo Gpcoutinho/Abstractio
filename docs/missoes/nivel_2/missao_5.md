@@ -1,4 +1,4 @@
-# Missão 2-5 — Polimorfismo
+﻿# Missão 2-5 — Polimorfismo
 
 **Ícone:** 🎭
 **Pontos:** 15
@@ -64,7 +64,7 @@ for x in todos:
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

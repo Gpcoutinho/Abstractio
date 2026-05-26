@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "1-3",
@@ -146,7 +146,7 @@ Só \`ada.cor\` mudou. Ana e Douglas continuam com as suas.
       explanation: 'O estado de um objeto pode evoluir. Basta usar a notação ponto: `objeto.atributo = novo_valor`. Só esse objeto é afetado — os demais continuam com os seus próprios valores.',
     },
   ],
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

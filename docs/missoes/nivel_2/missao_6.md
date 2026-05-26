@@ -1,4 +1,4 @@
-# Missão 2-6 — Resumo
+﻿# Missão 2-6 — Resumo
 
 **Ícone:** 📋
 **Pontos:** 15
@@ -50,7 +50,7 @@ for v in frota:
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

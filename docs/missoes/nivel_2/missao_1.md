@@ -1,4 +1,4 @@
-# Missão 2-1 — Introdução ao nível
+﻿# Missão 2-1 — Introdução ao nível
 
 **Ícone:** 🌍
 **Pontos:** 15
@@ -48,7 +48,7 @@ Juntos, os 4 pilares produzem código que é:
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

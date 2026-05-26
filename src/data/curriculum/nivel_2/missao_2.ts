@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "2-2",
@@ -68,7 +68,7 @@ for f in formas:
     correct: 1,
     explanation: "Perfeito! Classes abstratas (ABC) definem contratos. Métodos com @abstractmethod obrigam as subclasses a implementá-los."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

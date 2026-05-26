@@ -1,4 +1,4 @@
-# Missão 3-3 — Sobrecarga
+﻿# Missão 3-3 — Sobrecarga
 
 **Ícone:** 🔀
 **Pontos:** 15
@@ -59,7 +59,7 @@ print(processar("ola"))   # Texto: OLA
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

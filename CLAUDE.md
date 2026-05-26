@@ -1,4 +1,4 @@
-# Abstractio — Frontend React
+﻿# Abstractio — Frontend React
 
 ---
 
@@ -136,8 +136,8 @@ Persistido em **localStorage**. Sem sync com backend.
 | `# Missão N-N — Título` | `title` |
 | `**Ícone:**` | `icon` |
 | Seção `## Teoria` | `theory` (template literal) |
-| `[x] Tem interativo` | `has_interativo: true` |
-| `**Arquivo:**` | `interativo_html` |
+| `[x] Tem mini-jogo` | `has_minigame: true` |
+| `**Arquivo:**` | `minigame_html` |
 | `**Pergunta:**` | `exercise.question` |
 | Opção com `[x]` | `exercise.correct` (índice 0-based) |
 | Textos das opções | `exercise.options` |
@@ -159,8 +159,8 @@ const missao: Missao = {
     correct: 1,
     explanation: "..."
   },
-  has_interativo: true,
-  interativo_html: "interativos/nivel_1_missao_1.html"
+  has_minigame: true,
+  minigame_html: "interativos/nivel_1_missao_1.html"
 };
 ```
 

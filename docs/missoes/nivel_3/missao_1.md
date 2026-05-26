@@ -1,4 +1,4 @@
-# Missão 3-1 — Introdução ao nível
+﻿# Missão 3-1 — Introdução ao nível
 
 **Ícone:** 🏙️
 **Pontos:** 15
@@ -33,7 +33,7 @@ Pense em objetos como pessoas em uma cidade:
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

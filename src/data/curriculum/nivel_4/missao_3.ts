@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "4-3",
@@ -77,7 +77,7 @@ pedido.finalizar()
     correct: 1,
     explanation: "Correto! Injeção de dependência desacopla a classe de suas implementações concretas — ela recebe o que precisa de fora, facilitando troca e testes."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

@@ -1,4 +1,4 @@
-# Abstractio — Estrutura e Definição do App
+﻿# Abstractio — Estrutura e Definição do App
 
 Documento de especificação do produto. Define escopo, progressão, regras de conteúdo e padrões visuais. Paralelo ao `CLAUDE.md` (que foca na implementação técnica).
 
@@ -139,7 +139,7 @@ Princípios de escrita:
   - Preenchimento de código (ex: completar uma classe)
   - Quiz visual (diferente do exercício final — sem pontuação)
 
-Missões sem interativo usam `has_interativo: false`. Não deixar campo vazio.
+Missões sem interativo usam `has_minigame: false`. Não deixar campo vazio.
 
 ---
 

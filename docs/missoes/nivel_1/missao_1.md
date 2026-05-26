@@ -1,4 +1,4 @@
-<!-- NOTAS DE DESENVOLVIMENTO – não são conteúdo da missão -->
+﻿<!-- NOTAS DE DESENVOLVIMENTO – não são conteúdo da missão -->
 
 ## [notas] Referências e decisões para esta missão
 
@@ -88,7 +88,7 @@ Por esses motivos, te incentivamos a continuar a trilha! Cada missão vai refor�
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

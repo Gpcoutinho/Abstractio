@@ -1,4 +1,4 @@
-# Missão 1-5 — Métodos
+﻿# Missão 1-5 — Métodos
 
 **Ícone:** ⚙️
 **Pontos:** 15
@@ -95,7 +95,7 @@ print(conta.sacar(30))      # Saldo: R$120.00
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

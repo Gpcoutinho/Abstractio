@@ -1,4 +1,4 @@
-# Missão 4-3 — Acoplamento
+﻿# Missão 4-3 — Acoplamento
 
 **Ícone:** 🔓
 **Pontos:** 15
@@ -67,7 +67,7 @@ pedido.finalizar()
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 
