@@ -8,23 +8,31 @@ const missao: Missao = {
   theory: `
 ## Otto abre o caderno
 
-Na missão anterior, Otto descobriu que todo objeto tem três marcas: identidade, características e ações.
+Na missão anterior, Otto descobriu que todo objeto tem três marcas: <destaque-reto>identidade, características e ações</destaque-reto>.
 
-Ada é rosa. Tem 8 tentáculos. Mede 25 cm.
+Nesta missão, daremos enfoque especial às <destaque-marker>características</destaque-marker> de Ada: ela é rosa, tem 8 tentáculos e mede 25 cm.
+
+Vamos adicionar essas informações ao nosso caderno de campo? Ficaria assim:
+
+{{ada-card-rotulado}}
 
 Mas como o Python guarda isso? Se Otto precisasse descrever Ada *para um computador*, o que escreveria?
 
 Ele abre o caderno de campo e começa a registrar – cada informação com um rótulo e um valor. Cor: rosa. Tentáculos: 8. Tamanho: 25.
 
+Também na missão anterior, vimos a forma como o Python nos mostraria esses dados relacionados a Ada:
+
+\`\`\`python-simplificado
+ada = {"cor": "rosa", "tentaculos": 8}
+\`\`\`
+
 É exatamente assim que o Python pensa. Cada uma dessas informações rotuladas é um <destaque>atributo</destaque> – a forma como um objeto guarda seus dados.
 
-{{ada-card-rotulado}}
 
-<br>
-
-<conceito note="adapt. Phillips, 2015; Weisfeld, 2019"><strong>Atributo</strong>: dado rotulado que pertence a um objeto e representa seu estado em um momento específico.</conceito>
 
 {{duvida-atributo-variavel}}
+
+<conceito note="adapt. Phillips, 2015; Weisfeld, 2019"><strong>Atributo</strong>: dado rotulado que pertence a um objeto e representa seu estado em um momento específico.</conceito>
 
 ---
 
@@ -100,7 +108,8 @@ O estado de Ada mudou – só o dela. Caju continua amarela. Muriel continua cia
         "Quase – mas não exatamente. Uma variável é um nome que aponta para qualquer valor, em qualquer lugar do código. Um atributo é um dado que pertence a um objeto específico: ele vive dentro do objeto e só faz sentido junto a ele. Todo atributo se comporta como uma variável, mas uma variável solta não é um atributo.",
     },
     "duvida-quais-atributos": {
-      pergunta: "O que define quais características e ações farão parte de um objeto?",
+      pergunta:
+        "O que define quais características e ações farão parte de um objeto?",
       resposta:
         "Essa decisão cabe ao modelador – ou seja, à pessoa que está criando aquele objeto. Ela decide o que é importante registrar e o que pode ser ignorado. Você verá isso em detalhes nas missões seguintes.",
     },

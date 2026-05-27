@@ -146,23 +146,31 @@ O aluno personaliza os atributos de Ada e vê o card atualizar em tempo real.
 
 ### Otto abre o caderno
 
-Na missão anterior, Otto descobriu que todo objeto tem três marcas: identidade, características e ações.
+Na missão anterior, Otto descobriu que todo objeto tem três marcas: <destaque-reto>identidade, características e ações</destaque-reto>.
 
-Ada é rosa. Tem 8 tentáculos. Mede 25 cm.
+Nesta missão, daremos enfoque especial às <destaque-marker>características</destaque-marker> de Ada: ela é rosa, tem 8 tentáculos e mede 25 cm.
 
-Mas como o Python guarda isso? Se Otto precisasse descrever Ada *para um computador*, o que escreveria?
-
-Ele abre o caderno de campo e começa a registrar – cada informação com um rótulo e um valor. Cor: rosa. Tentáculos: 8. Tamanho: 25.
-
-É exatamente assim que o Python pensa. Cada uma dessas informações rotuladas é um <destaque>atributo</destaque> – a forma como um objeto guarda seus dados.
+Vamos adicionar essas informações ao nosso caderno de campo? Ficaria assim:
 
 {{ada-card-rotulado}}
 
 > [svg: AdaCard com atributos em grid de duas colunas. Abaixo da última linha, duas setas apontando para baixo com labels "rótulo" (coluna esquerda, cor accent) e "valor" (coluna direita, cor secundária).]
 
+Mas como o Python guarda isso? Se Otto precisasse descrever Ada *para um computador*, o que escreveria?
+
+Ele abre o caderno de campo e começa a registrar – cada informação com um rótulo e um valor. Cor: rosa. Tentáculos: 8. Tamanho: 25.
+
+Também na missão anterior, vimos a forma como o Python nos mostraria esses dados relacionados a Ada:
+
+```python-simplificado
+ada = {"cor": "rosa", "tentaculos": 8}
+```
+
+É exatamente assim que o Python pensa. Cada uma dessas informações rotuladas é um <destaque>atributo</destaque> – a forma como um objeto guarda seus dados.
+
 {{duvida-atributo-variavel}}
 
-<conceito note="adapt. Phillips, 2015; Weisfeld, 2013"><strong>Atributo</strong>: dado rotulado que pertence a um objeto e representa seu estado em um momento específico.</conceito>
+<conceito note="adapt. Phillips, 2015; Weisfeld, 2019"><strong>Atributo</strong>: dado rotulado que pertence a um objeto e representa seu estado em um momento específico.</conceito>
 
 > [svg: Otto segurando um caderno aberto. Na página do caderno: lista de pares nome–valor (cor: rosa, num_tentaculos: 8, tamanho_cm: 25, especie: Octopus vulgaris). Ada ao lado, com cada característica destacada visualmente conforme listada.]
 
