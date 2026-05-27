@@ -16,23 +16,19 @@ Vamos adicionar essas informações ao nosso caderno de campo? Ficaria assim:
 
 {{ada-card-rotulado}}
 
-Mas como o Python guarda isso? Se Otto precisasse descrever Ada *para um computador*, o que escreveria?
-
-Ele abre o caderno de campo e começa a registrar – cada informação com um rótulo e um valor. Cor: rosa. Tentáculos: 8. Tamanho: 25.
-
-Também na missão anterior, vimos a forma como o Python nos mostraria esses dados relacionados a Ada:
+Mas como o Python guarda isso? Se Otto precisasse descrever Ada *para um computador*, o que escreveria? Na missão anterior, vimos a forma como o Python guarda esses dados relacionados a Ada:
 
 \`\`\`python-simplificado
 ada = {"cor": "rosa", "tentaculos": 8}
 \`\`\`
 
-É exatamente assim que o Python pensa. Cada uma dessas informações rotuladas é um <destaque>atributo</destaque> – a forma como um objeto guarda seus dados.
+Esse bloco completo é o objeto, que possui rótulo 'ada'. Dentro dele, há rótulos menores – 'cor' e 'tentaculos' – que guardam as características de Ada. O Python tem um nome específico para essas duplas de rótulos menores + os valores que os acompanham: são os <destaque>atributos</destaque> do objeto 'ada'.
 
+
+<conceito note="adapt. Phillips, 2015; Weisfeld, 2019"><strong>Atributo</strong>: dado rotulado que pertence a um objeto e representa seu estado em um momento específico.</conceito>
 
 
 {{duvida-atributo-variavel}}
-
-<conceito note="adapt. Phillips, 2015; Weisfeld, 2019"><strong>Atributo</strong>: dado rotulado que pertence a um objeto e representa seu estado em um momento específico.</conceito>
 
 ---
 
