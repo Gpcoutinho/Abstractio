@@ -1,12 +1,14 @@
 import React from "react";
 
-export type CorPolvo = "Rosa" | "Azul" | "Verde";
+export type CorPolvo = "Rosa" | "Azul" | "Verde" | "Amarela" | "Ciano";
 export type AcaoPolvo = "nadar" | "pirueta" | "acenar" | "tinta" | "camuflar" | null;
 
 export const COR_MAP: Record<CorPolvo, { body: string; light: string }> = {
-  Rosa:  { body: "#db2777", light: "#f472b6" },
-  Azul:  { body: "#2c6ea8", light: "#5090d0" },
-  Verde: { body: "#1e8858", light: "#3aaa78" },
+  Rosa:    { body: "#db2777", light: "#f472b6" },
+  Azul:    { body: "#2c6ea8", light: "#5090d0" },
+  Verde:   { body: "#1e8858", light: "#3aaa78" },
+  Amarela: { body: "#ca8a04", light: "#fbbf24" },
+  Ciano:   { body: "#0891b2", light: "#22d3ee" },
 };
 
 const TENTACULOS_DATA = [

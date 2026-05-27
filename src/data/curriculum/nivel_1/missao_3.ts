@@ -39,10 +39,11 @@ objeto.atributo
 Veja como fica com Ada:
 
 \`\`\`python
-print(ada.nome)            # Ada
-print(ada.cor)             # rosa
-print(ada.num_tentaculos)  # 8
-print(ada.tamanho_cm)      # 25
+# print() — comando para exibir um valor na tela
+print(ada.nome)            # exibido na tela: "Ada"
+print(ada.cor)             # exibido na tela: "rosa"
+print(ada.num_tentaculos)  # exibido na tela: 8
+print(ada.tamanho_cm)      # exibido na tela: 25
 \`\`\`
 
 Cada linha pede um atributo diferente pelo nome. O Python vai até o objeto, encontra o dado e devolve o valor.
@@ -58,9 +59,10 @@ No oceano há outros polvos. Ada não é a única.
 Otto avista Caju – amarela, curiosa, menor que Ada. E mais adiante, Muriel – ciano, veloz, difícil de fotografar. Os três são polvos: mesma espécie, mesmo conjunto de atributos. Mas cada um carrega seus próprios valores.
 
 \`\`\`python
-print(ada.cor)    # rosa
-print(caju.cor)   # amarela
-print(muriel.cor) # ciano
+# print() — comando para exibir um valor na tela
+print(ada.cor)    # impresso na tela: "rosa"
+print(caju.cor)   # impresso na tela: "amarela"
+print(muriel.cor) # impresso na tela: "ciano"
 \`\`\`
 
 Mudar a cor de Ada não afeta Caju. Mudar Caju não afeta Muriel. Ou seja: os atributos de um objeto existem de forma isolada – o que acontece com um não contamina os outros.
@@ -72,13 +74,15 @@ Mudar a cor de Ada não afeta Caju. Mudar Caju não afeta Muriel. Ou seja: os at
 O estado de um objeto pode evoluir. Otto observa Ada se camuflando e atualiza o caderno:
 
 \`\`\`python
+# atribuindo um novo valor ao atributo cor de ada
 ada.cor = "transparente"
 \`\`\`
 
 Agora:
 
 \`\`\`python
-print(ada.cor)  # transparente
+# print() — comando para exibir um valor na tela
+print(ada.cor)  # impresso na tela: "transparente"
 \`\`\`
 
 O estado de Ada mudou – só o dela. Caju continua amarela. Muriel continua ciano. A atribuição age sobre um objeto específico, nunca sobre todos ao mesmo tempo.
