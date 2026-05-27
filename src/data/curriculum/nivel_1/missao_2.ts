@@ -34,8 +34,9 @@ Se você pedir para o Python te mostrar a estrutura interna da "caixa-preta" que
 
 \`\`\`python-simplificado
 ada = {
+    "nome": "Ada",
     "cor": "rosa",
-    "tentaculos": 8
+    "num_tentaculos": 8
 }
 \`\`\`
 
@@ -48,8 +49,8 @@ Mas o que torna Ada *ela mesma* – e não qualquer outro polvo?
 Vejamos a seguir o que acontece quando dois objetos carregam exatamente os mesmos dados:
 
 \`\`\`python-simplificado
-ada   = {"cor": "rosa", "tentaculos": 8}
-outra = {"cor": "rosa", "tentaculos": 8}
+ada   = {"nome": "Ada", "cor": "rosa", "num_tentaculos": 8}
+outra = {"nome": "Ada", "cor": "rosa", "num_tentaculos": 8}
 \`\`\`
 
 O que será que aconteceria se perguntássemos ao Python qual é o endereço de memória de cada um? Será que, tendo as mesmas características, o Python englobaria os dois em um só? Ou criaria duas variáveis com endereços diferentes? Veredito: se temos dois objetos distintos, então cada um recebe um endereço único na memória. Veja:
@@ -137,75 +138,75 @@ Isso você descobre na **Missão 5**.
   extra_exercises: [
     {
       id: '1-2-e1',
-      question: 'A missão descreve um objeto como uma "caixa preta". Isso significa que:',
+      question: 'Dois objetos criados a partir da mesma classe:',
       options: [
-        'O objeto não pode ser usado sem conhecer todos os seus detalhes internos',
-        'O objeto não possui características visíveis',
-        'É possível observar e interagir com um objeto mesmo sem conhecer como ele funciona por dentro',
-        'O objeto esconde dados que nunca podem ser acessados',
+        'Sempre têm os mesmos valores de atributos',
+        'Têm seus próprios valores, independentes dos outros',
+        'Compartilham atributos numéricos, mas não textuais',
+        'São idênticos até que um deles seja alterado manualmente',
       ],
-      correct: 2,
-      explanation: 'É possível trabalhar com um objeto — observá-lo e interagir com ele — sem saber exatamente o que acontece por dentro. O que importa são as características que ele expõe e as ações que sabe executar.',
+      correct: 1,
+      explanation: 'Cada objeto é independente. `rex = Cachorro("Rex")` e `buddy = Cachorro("Buddy")` são objetos distintos com seus próprios valores. Alterar `rex.nome` não afeta `buddy.nome`.',
     },
     {
       id: '1-2-e2',
-      question: 'Quais são os três elementos que todo objeto possui, independentemente do que ele representa?',
+      question: 'Em Python, qual linha cria um objeto a partir da classe `Carro`?',
       options: [
-        'Tipo, valor e referência',
-        'Identidade, características e ações',
-        'Nome, tamanho e posição na memória',
-        'Classe, método e atributo',
+        '`meu_carro = Carro("vermelho")`',
+        '`Carro = meu_carro("vermelho")`',
+        '`object Carro("vermelho")`',
+        '`new Carro("vermelho")`',
       ],
-      correct: 1,
-      explanation: 'Todo objeto pode ser descrito pelos mesmos três elementos: Identidade (o que o torna único), Características (os dados que carrega) e Ações (o que sabe fazer). Isso vale para qualquer objeto — do mundo natural ou do código.',
+      correct: 0,
+      explanation: 'Em Python, criamos objetos chamando a classe como se fosse uma função: `objeto = NomeDaClasse(argumentos)`. Não usamos `new` (como no Java) nem `object`. O resultado é uma instância da classe.',
     },
     {
       id: '1-2-e3',
-      question: 'Dois objetos criados com a mesma estrutura existem de forma:',
+      question: 'O que é uma "instância" de uma classe?',
       options: [
-        'Compartilhada — alterações em um refletem no outro',
-        'Dependente — o segundo sempre acompanha as mudanças do primeiro',
-        'Independente — cada um carrega seus próprios dados',
-        'Sincronizada — os dados são mantidos iguais automaticamente',
+        'O nome dado ao arquivo onde a classe está definida',
+        'Um método especial que inicializa a classe',
+        'Uma cópia da classe sem modificações',
+        'Um objeto concreto criado a partir da classe',
       ],
-      correct: 2,
-      explanation: 'Cada objeto existe de forma independente. Mudar um dado em um objeto não afeta os outros — mesmo que tenham sido criados a partir da mesma estrutura.',
+      correct: 3,
+      explanation: 'Instância e objeto são termos intercambiáveis. Quando fazemos `ada = Polvo()`, `ada` é uma instância (objeto concreto) da classe `Polvo`. A classe é o molde; a instância é o produto fabricado com esse molde.',
     },
     {
       id: '1-2-e4',
-      question: 'Em Python, `==` e `is` comparam coisas diferentes. `is` verifica:',
+      question: 'Num sistema com classes `Gato`, `Cachorro` e `Passaro`, quantos objetos podemos ter ao mesmo tempo?',
       options: [
-        'Se os objetos têm os mesmos valores de características',
-        'Se os objetos são do mesmo tipo',
-        'Se os dois nomes se referem à mesma entidade na memória',
-        'Se os objetos foram criados na mesma linha de código',
+        'Apenas um objeto por classe',
+        'No máximo três objetos no total',
+        'Qualquer quantidade de objetos de qualquer dessas classes',
+        'Apenas objetos da última classe definida no código',
       ],
       correct: 2,
-      explanation: '`==` compara conteúdo — "têm os mesmos dados?". `is` compara identidade — "são a mesma entidade?". Dois objetos com dados idênticos têm `==` True, mas `is` False: são entidades distintas.',
+      explanation: 'Não há limite para o número de objetos. Podemos ter `felix = Gato()`, `tom = Gato()`, `rex = Cachorro()`, `tweety = Passaro()` — todos coexistindo no mesmo programa.',
     },
     {
       id: '1-2-e5',
-      question: 'Dois objetos com dados exatamente iguais possuem o mesmo endereço de memória?',
+      question: '`ada = Polvo("rosa", 8)` e `ana = Polvo("azul", 6)`. Qual afirmação é verdadeira?',
       options: [
-        'Não — cada objeto é uma entidade distinta com seu próprio endereço',
-        'Sim — Python reutiliza o mesmo espaço para evitar duplicatas',
-        'Depende do tipo de dado armazenado',
-        'Sim — objetos com dados idênticos são tratados como um só',
+        '`ada` e `ana` são objetos independentes com atributos distintos',
+        '`ada` e `ana` compartilham os mesmos atributos por serem da mesma classe',
+        'Não é possível criar dois objetos com o mesmo tipo simultaneamente',
+        '`ana` é uma cópia de `ada` com valores modificados',
       ],
       correct: 0,
-      explanation: 'Mesmo com dados idênticos, dois objetos distintos ocupam endereços de memória diferentes. A identidade é o que torna cada objeto único — não os dados que ele carrega.',
+      explanation: 'Cada objeto tem sua própria "cópia" dos atributos. `ada.cor` é `"rosa"` e `ana.cor` é `"azul"`. Alterar `ada.num_tentaculos = 10` não afeta `ana.num_tentaculos`. Eles são completamente independentes.',
     },
     {
       id: '1-2-e6',
-      question: 'Um celular (modelo, bateria; ligar, tirar foto) e uma conta bancária (saldo, titular; depositar, sacar) seguem o mesmo princípio de objeto porque:',
+      question: 'Dois objetos `a = Gato("Mimi")` e `b = Gato("Mimi")` têm os mesmos valores. Eles são o mesmo objeto?',
       options: [
-        'São programados na mesma linguagem de programação',
-        'Têm o mesmo número de características e ações',
-        'Ambos possuem características próprias e ações que sabem executar',
-        'Pertencem ao mesmo sistema de software',
+        'Sim. Objetos com os mesmos dados são considerados idênticos em Python',
+        'Sim. Python reutiliza o mesmo espaço na memória para evitar duplicatas',
+        'Não. Cada objeto é uma entidade distinta na memória, mesmo com dados iguais',
+        'Depende — só são diferentes se criados em linhas de código distintas',
       ],
       correct: 2,
-      explanation: 'O princípio de objeto é universal. Qualquer entidade com características próprias e ações que sabe executar é um objeto. O contexto muda; o princípio é o mesmo.',
+      explanation: 'Identidade significa que cada objeto é uma entidade distinta na memória. Mesmo que `a` e `b` tenham os mesmos dados, são dois objetos diferentes. Em Python, `a is b` retorna `False` — eles ocupam lugares distintos na memória.',
     },
   ],
   resumo: [

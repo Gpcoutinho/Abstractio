@@ -54,8 +54,8 @@ Incluir mini-seção mostrando que dois objetos com características idênticas 
 Rótulo: **Python simplificado** (usa dict como proxy – Polvo ainda não existe nesta missão).
 
 ```python
-ada   = {"cor": "rosa", "tentaculos": 8}
-outra = {"cor": "rosa", "tentaculos": 8}
+ada   = {"cor": "rosa", "num_tentaculos": 8}
+outra = {"cor": "rosa", "num_tentaculos": 8}
 
 print(id(ada))    # 4371856896
 print(id(outra))  # 4371857024
@@ -143,7 +143,7 @@ Se você pedir para o Python te mostrar a estrutura interna da "caixa-preta" que
 ```python-simplificado
 ada = {
     "cor": "rosa",
-    "tentaculos": 8
+    "num_tentaculos": 8
 }
 ```
 
@@ -158,8 +158,8 @@ Mas o que torna Ada *ela mesma* – e não qualquer outro polvo?
 Vejamos a seguir o que acontece quando dois objetos carregam exatamente os mesmos dados:
 
 ```python-simplificado
-ada   = {"cor": "rosa", "tentaculos": 8}
-outra = {"cor": "rosa", "tentaculos": 8}
+ada   = {"cor": "rosa", "num_tentaculos": 8}
+outra = {"cor": "rosa", "num_tentaculos": 8}
 ```
 
 O que será que aconteceria se perguntássemos ao Python qual é o endereço de memória de cada um? Será que, tendo as mesmas características, o Python englobaria os dois em um só? Ou criaria duas variáveis com endereços diferentes? Veredito: se temos dois objetos distintos, então cada um recebe um endereço único na memória. Veja:
@@ -322,7 +322,7 @@ Isso você descobre na **Missão 5**.
 - [ ] Não é possível criar dois objetos com o mesmo tipo simultaneamente
 - [ ] `ana` é uma cópia de `ada` com valores modificados
 
-**Explicação:** Cada objeto tem sua própria "cópia" dos atributos. `ada.cor` é `"rosa"` e `ana.cor` é `"azul"`. Alterar `ada.tentaculos = 10` não afeta `ana.tentaculos`. Eles são completamente independentes.
+**Explicação:** Cada objeto tem sua própria "cópia" dos atributos. `ada.cor` é `"rosa"` e `ana.cor` é `"azul"`. Alterar `ada.num_tentaculos = 10` não afeta `ana.num_tentaculos`. Eles são completamente independentes.
 
 ---
 
