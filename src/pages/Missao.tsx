@@ -34,7 +34,7 @@ import interativoHtml from "../assets/interativos/nivel_1_missao_7.html?raw";
 import ProgressBar from '../components/ProgressBar';
 import ConceitoBox from '../components/ConceitoBox';
 import OQueVaiEncontrar from '../components/missoes/nivel_1/missao_0/OQueVaiEncontrar';
-import BauDeConchas from '../components/BauDeConchas';
+import ExerciciosExtras from '../components/ExerciciosExtras';
 import { TreasureChest } from '@phosphor-icons/react';
 import ReferenciasBlock from '../components/ReferenciasBlock';
 import AdaCard from '../components/missoes/nivel_1/AdaCard';
@@ -530,24 +530,21 @@ const Missao: React.FC = () => {
           ) : null}
         </div>
 
-        {/* Baú de Conchas */}
+        {/* Exercícios Extras */}
         {hasExtras && (
           <div className="mt-8 bg-bgSecondary border border-borderDark rounded-xl p-5 flex items-center justify-between gap-4">
             <div>
-              <p className="text-sm font-semibold text-textPrimary">Baú de Conchas</p>
+              <p className="text-sm font-semibold text-textPrimary">Exercícios Extras</p>
               <p className="text-xs text-textSecondary mt-0.5">
-                {jaConcluida
-                  ? 'Responda exercícios · ganhe mais conchas · evolua suas conquistas'
-                  : 'Disponível após concluir a missão'}
+                Responda exercícios · ganhe mais conchas · evolua suas conquistas
               </p>
             </div>
             <button
               onClick={() => setShowBau(true)}
-              disabled={!jaConcluida}
-              className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-accent text-accent text-sm font-semibold hover:bg-accent/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+              className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-accent text-accent text-sm font-semibold hover:bg-accent/10 transition-colors"
             >
               <TreasureChest className="w-4 h-4 shrink-0" weight="bold" />
-              Abrir Baú
+              Exercícios Extras
             </button>
           </div>
         )}
@@ -629,7 +626,7 @@ const Missao: React.FC = () => {
                   className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-colors"
                 >
                   <TreasureChest className="w-4 h-4 shrink-0" weight="bold" />
-                  Abrir Baú de Conchas
+                  Exercícios Extras
                 </button>
               )}
               {proximaMissao ? (
@@ -653,7 +650,7 @@ const Missao: React.FC = () => {
         </div>
       )}
 
-      {/* Modal Baú de Conchas */}
+      {/* Modal Exercícios Extras */}
       {showBau && hasExtras && (
         <div
           className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-8 bg-bgPrimary/80 backdrop-blur-sm animate-fade-in"
@@ -665,8 +662,8 @@ const Missao: React.FC = () => {
           >
             <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-borderDark/30 shrink-0">
               <div>
-                <h2 className="text-lg font-bold text-textPrimary">Baú de Conchas</h2>
-                <p className="text-xs text-textSecondary">exercícios extras</p>
+                <h2 className="text-lg font-bold text-textPrimary">Exercícios Extras</h2>
+                <p className="text-xs text-textSecondary">{missao.title}</p>
               </div>
               <button
                 onClick={() => setShowBau(false)}
@@ -677,7 +674,7 @@ const Missao: React.FC = () => {
               </button>
             </div>
             <div className="overflow-y-auto px-6 py-5">
-              <BauDeConchas
+              <ExerciciosExtras
                 missaoId={missao.id}
                 extras={missao.extra_exercises!}
                 proximaMissao={proximaMissao}

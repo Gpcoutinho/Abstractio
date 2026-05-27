@@ -32,7 +32,7 @@ const NAV_ITEMS: NavItem[] = [
   { to: "/", label: "Home", Icon: HomeIcon, exact: true },
   { to: "/trilha", label: "Trilha", Icon: MapIcon, exact: false },
   { to: "/conquistas", label: "Conquistas", Icon: TrophyIcon, exact: false },
-  { to: "/bau", label: "Baú de Conchas", Icon: TreasureChest, exact: false },
+  { to: "/exercicios-extras", label: "Exercícios Extras", Icon: TreasureChest, exact: false },
 ];
 
 const Sidebar: React.FC = () => {

@@ -23,7 +23,7 @@ function tierMeta(tier: Exclude<TierLevel, 'none'>) {
   return TIER_META.find(t => t.label === ({ bronze: 'Bronze', silver: 'Prata', gold: 'Ouro' }[tier]))!;
 }
 
-const BauDeConchas: React.FC<Props> = ({ missaoId, extras, proximaMissao }) => {
+const ExerciciosExtras: React.FC<Props> = ({ missaoId, extras, proximaMissao }) => {
   const { getExtrasDone, completarExtraExercise, penalizarExtraErro } = useProgress();
   const extrasDone = getExtrasDone(missaoId);
   const doneCount = extrasDone.length;
@@ -72,7 +72,6 @@ const BauDeConchas: React.FC<Props> = ({ missaoId, extras, proximaMissao }) => {
     setRespondida(false);
   };
 
-  // --- Indicador de progresso ---
   const renderProgress = () => (
     <div className="bg-bgPrimary border border-borderDark rounded-xl p-4 mb-6">
       <div className="flex items-center justify-between mb-4">
@@ -107,7 +106,6 @@ const BauDeConchas: React.FC<Props> = ({ missaoId, extras, proximaMissao }) => {
     </div>
   );
 
-  // --- Modal de tier desbloqueado ---
   const renderTierModal = () => {
     if (!tierUnlocked) return null;
     const meta = tierMeta(tierUnlocked);
@@ -144,7 +142,7 @@ const BauDeConchas: React.FC<Props> = ({ missaoId, extras, proximaMissao }) => {
       {allDone ? (
         <div className="text-center py-10">
           <p className="text-5xl mb-3">🏆</p>
-          <h3 className="text-xl font-bold text-textPrimary mb-2">Baú esvaziado!</h3>
+          <h3 className="text-xl font-bold text-textPrimary mb-2">Tudo concluído!</h3>
           <p className="text-textSecondary text-sm mb-8">
             Você completou todos os exercícios extras desta missão.
           </p>
@@ -162,7 +160,7 @@ const BauDeConchas: React.FC<Props> = ({ missaoId, extras, proximaMissao }) => {
         <section className="bg-bgSecondary border border-borderDark rounded-xl p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-sm font-semibold text-textSecondary uppercase tracking-widest">
-              Extra {currentIdx + 1} de {extras.length}
+              Exercício {currentIdx + 1} de {extras.length}
             </h2>
             <span className="text-xs text-textSecondary inline-flex items-center gap-1">
               <ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} />
@@ -261,4 +259,4 @@ const BauDeConchas: React.FC<Props> = ({ missaoId, extras, proximaMissao }) => {
   );
 };
 
-export default BauDeConchas;
+export default ExerciciosExtras;
