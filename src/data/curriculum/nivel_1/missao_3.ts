@@ -1,4 +1,4 @@
-﻿import type { Missao } from '../types';
+import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "1-3",
@@ -8,39 +8,58 @@ const missao: Missao = {
   theory: `
 ## Otto abre o caderno
 
-Na missão anterior, Otto encontrou Ada no oceano. Ela existe, é única, tem identidade própria.
+Na missão anterior, Otto descobriu que todo objeto tem três marcas: identidade, características e ações.
 
-Agora Otto tira o caderno de campo e começa a registrar tudo o que observa: cor, tamanho, número de tentáculos, espécie...
+Ada é rosa. Tem 8 tentáculos. Mede 25 cm.
 
-Cada informação registrada é um **atributo** — um dado que pertence especificamente a Ada.
+Mas como o Python guarda isso? Se Otto precisasse descrever Ada *para um computador*, o que escreveria?
 
-> **Atributo** = uma informação que pertence a um objeto. Cada objeto guarda os seus próprios valores.
+Ele abre o caderno de campo e começa a registrar – cada informação com um nome e um valor. Cor: rosa. Tentáculos: 8. Tamanho: 25.
 
-<ficha-interativo></ficha-interativo>
+É exatamente assim que o Python pensa. Cada uma dessas informações nomeadas é um <destaque>atributo</destaque> – a forma como um objeto guarda seus dados.
+
+{{duvida-atributo-variavel}}
+
+<conceito note="adapt. Phillips, 2015; Weisfeld, 2019"><strong>Atributo</strong>: dado nomeado que pertence a um objeto e representa seu estado em um momento específico.</conceito>
 
 ---
 
-## O ponto — como acessar um atributo
+## O ponto
 
 Em Python, o ponto (\`.\`) é a forma de acessar um atributo de um objeto. É como Otto apontando para Ada e dizendo: *"me dê sua cor"*.
 
-<ficha-acesso></ficha-acesso>
+A estrutura é sempre a mesma:
 
-A estrutura é sempre: \`objeto.atributo\`.
+\`\`\`pseudocodigo
+objeto.atributo
+\`\`\`
+
+Veja como fica com Ada:
+
+\`\`\`python
+print(ada.nome)            # Ada
+print(ada.cor)             # rosa
+print(ada.num_tentaculos)  # 8
+print(ada.tamanho_cm)      # 25
+\`\`\`
+
+Cada linha pede um atributo diferente pelo nome. O Python vai até o objeto, encontra o dado e devolve o valor.
 
 ---
 
-## Cada polvo guarda os seus
+## Cada objeto guarda os seus
 
-No oceano há outros polvos. Cada um carrega seus próprios atributos — completamente independentes entre si.
+No oceano há outros polvos. Ada não é a única.
+
+Otto avista Caju – amarela, curiosa, menor que Ada. E mais adiante, Muriel – ciano, veloz, difícil de fotografar. Os três são polvos: mesma espécie, mesmo conjunto de atributos. Mas cada um carrega seus próprios valores.
 
 \`\`\`python
-print(ada.cor)     # rosa
-print(ana.cor)     # azul
-print(douglas.cor) # verde
+print(ada.cor)    # rosa
+print(caju.cor)   # amarela
+print(muriel.cor) # ciano
 \`\`\`
 
-Mudar a cor de Ada não afeta Ana. Mudar Ana não afeta Douglas. Cada objeto é uma entidade separada com seus próprios dados.
+Mudar a cor de Ada não afeta Caju. Mudar Caju não afeta Muriel. Ou seja: os atributos de um objeto existem de forma isolada – o que acontece com um não contamina os outros.
 
 ---
 
@@ -50,27 +69,44 @@ O estado de um objeto pode evoluir. Otto observa Ada se camuflando e atualiza o 
 
 \`\`\`python
 ada.cor = "transparente"
+\`\`\`
+
+Agora:
+
+\`\`\`python
 print(ada.cor)  # transparente
 \`\`\`
 
-Só \`ada.cor\` mudou. Ana e Douglas continuam com as suas.
+O estado de Ada mudou – só o dela. Caju continua amarela. Muriel continua ciano. A atribuição age sobre um objeto específico, nunca sobre todos ao mesmo tempo.
 `,
+  duvidas: {
+    "duvida-atributo-variavel": {
+      pergunta: "Atributo é a mesma coisa que variável?",
+      resposta: "Quase – mas não exatamente. Uma variável é um nome que aponta para qualquer valor, em qualquer lugar do código. Um atributo é um dado que pertence a um objeto específico: ele vive dentro do objeto e só faz sentido junto a ele. Todo atributo se comporta como uma variável, mas uma variável solta não é um atributo.",
+    },
+  },
+  resumo: [
+    "**Atributo** – dado nomeado que pertence a um objeto e guarda seu estado",
+    "**Notação ponto** – `objeto.atributo` – como acessar um atributo em Python",
+    "**Independência** – cada objeto guarda seus próprios valores; mudar um não afeta os outros",
+    "**Mutação** – o valor de um atributo pode ser alterado; isso muda o estado do objeto",
+  ],
   exercise: {
-    question: "Otto lê `ada.cor` e vê `\"rosa\"`. Em seguida escreve `ana.cor = \"verde\"`. O que acontece com `ada.cor`?",
+    question: "Otto lê `ada.cor` e vê `\"rosa\"`. Em seguida escreve `caju.cor = \"transparente\"`. O que acontece com `ada.cor`?",
     options: [
-      "Muda para \"verde\" — objetos do mesmo tipo compartilham atributos.",
-      "Continua \"rosa\" — cada objeto guarda seus próprios atributos.",
-      "Fica indefinido — só um polvo pode ter cor definida por vez.",
-      "Gera um erro — não é possível alterar atributos de objetos separados."
+      "Muda para `\"transparente\"` – objetos do mesmo tipo compartilham atributos.",
+      "Continua `\"rosa\"` – cada objeto guarda seus próprios atributos.",
+      "Fica indefinido – só um polvo pode ter cor definida por vez.",
+      "Gera um erro – não é possível alterar atributos de objetos separados.",
     ],
     correct: 1,
-    explanation: "Atributos pertencem a cada objeto individualmente. Mudar `ana.cor` não afeta `ada.cor` — são dados completamente independentes.",
+    explanation: "Atributos pertencem a cada objeto individualmente. Mudar `caju.cor` não afeta `ada.cor` – são dados completamente independentes.",
     wrong_explanations: [
-      "Não. Atributos são independentes por objeto. Mudar `ana.cor` só afeta Ana — Ada mantém seus próprios dados intactos.",
+      "Não. Atributos são independentes por objeto. Mudar `caju.cor` só afeta Caju – Ada mantém seus próprios dados intactos.",
       "",
-      "Não. Vários objetos podem ter o mesmo atributo definido ao mesmo tempo. Ada e Ana são entidades independentes, cada uma com sua própria `cor`.",
-      "Não. Alterar o atributo de um objeto nunca afeta o de outro. `ana.cor = \"verde\"` é válido e só modifica Ana."
-    ]
+      "Não. Vários objetos podem ter o mesmo atributo definido ao mesmo tempo. Ada e Caju são entidades independentes, cada uma com sua própria `cor`.",
+      "Não. Alterar o atributo de um objeto nunca afeta o de outro. `caju.cor = \"transparente\"` é válido e só modifica Caju.",
+    ],
   },
   extra_exercises: [
     {
@@ -83,19 +119,19 @@ Só \`ada.cor\` mudou. Ana e Douglas continuam com as suas.
         '`get(ada, nome)`',
       ],
       correct: 0,
-      explanation: 'Em Python, atributos são acessados com a notação ponto: `objeto.atributo`. Para ler o nome de `ada`, escrevemos `ada.nome`. Essa "notação ponto" é usada em toda linguagem orientada a objetos.',
+      explanation: 'Em Python, atributos são acessados com a notação ponto: `objeto.atributo`. Para ler o nome de `ada`, escrevemos `ada.nome`.',
     },
     {
       id: '1-3-e2',
-      question: 'O que o `self` representa dentro dos métodos de uma classe?',
+      question: 'Caju tem `cor = "amarela"` e Muriel tem `cor = "ciano"`. O que isso demonstra sobre atributos?',
       options: [
-        'A classe em si, como um todo',
-        'O próprio objeto que está sendo criado ou manipulado naquele momento',
-        'O valor do primeiro atributo da classe',
-        'Um parâmetro opcional de identificação',
+        'Objetos do mesmo tipo não podem ter o mesmo atributo.',
+        'O último valor atribuído substitui os anteriores em todos os objetos.',
+        'Cada objeto guarda seus próprios valores – mesma estrutura, dados independentes.',
+        'Atributos só existem enquanto o objeto está sendo criado.',
       ],
-      correct: 1,
-      explanation: '`self` é uma referência ao objeto atual. Quando escrevemos `self.cor = "rosa"`, estamos dizendo: "guarda `"rosa"` no atributo `cor` deste objeto específico". Sem `self`, não saberíamos em qual objeto estamos atuando.',
+      correct: 2,
+      explanation: 'Caju e Muriel são polvos – têm os mesmos atributos (inclusive `cor`). Mas cada uma carrega seu próprio valor. Mudar `caju.cor` não afeta `muriel.cor` e vice-versa.',
     },
     {
       id: '1-3-e3',
@@ -107,46 +143,69 @@ Só \`ada.cor\` mudou. Ana e Douglas continuam com as suas.
         '`moto.velocidade = 120`',
       ],
       correct: 3,
-      explanation: 'A notação ponto funciona tanto para leitura (`moto.velocidade`) quanto para atribuição (`moto.velocidade = 120`). É como preencher um campo de um formulário que pertence especificamente àquele objeto.',
+      explanation: 'A notação ponto funciona tanto para leitura (`moto.velocidade`) quanto para atribuição (`moto.velocidade = 120`). É como atualizar um campo que pertence especificamente àquele objeto.',
     },
     {
       id: '1-3-e4',
-      question: 'Onde atributos de instância costumam ser definidos, por boas práticas?',
+      question: 'Otto escreve `ada.cor = "transparente"`. O que aconteceu com Ada?',
       options: [
-        'Dentro do método `__init__`, usando `self.atributo = valor`',
-        'Fora da classe, como variáveis globais',
-        'Em um arquivo separado de configuração',
-        'Diretamente na linha `class NomeDaClasse:`',
+        'Ada foi substituída por um novo objeto com cor transparente.',
+        'O estado de Ada mudou – o atributo `cor` agora guarda um novo valor.',
+        'Todos os polvos ficaram transparentes.',
+        'O atributo `cor` foi apagado de Ada.',
       ],
-      correct: 0,
-      explanation: 'Por convenção e boa prática, atributos de instância são definidos no `__init__`. Assim, todo objeto criado começa com seus atributos já inicializados — como preencher a certidão de nascimento no momento em que o objeto "nasce".',
+      correct: 1,
+      explanation: 'Atribuir um novo valor a `ada.cor` muda o estado de Ada naquele momento. O objeto continua o mesmo – o que mudou foi o dado guardado naquele atributo.',
     },
     {
       id: '1-3-e5',
-      question: 'Qual afirmação sobre atributos de objetos Python está INCORRETA?',
+      question: 'Qual afirmação sobre atributos está INCORRETA?',
       options: [
         'Um atributo pode guardar qualquer tipo de dado: número, texto, lista, etc.',
-        'É possível adicionar novos atributos a um objeto fora da classe',
-        'Dois objetos da mesma classe compartilham os valores dos seus atributos automaticamente',
-        'Atributos são acessados usando a notação ponto',
+        'Dois objetos da mesma espécie compartilham os valores dos seus atributos automaticamente.',
+        'Atributos são acessados usando a notação ponto.',
+        'O valor de um atributo pode mudar após o objeto ser criado.',
       ],
-      correct: 2,
-      explanation: 'Atributos de instância são independentes para cada objeto. `rex.nome` e `buddy.nome` são campos distintos — alterar um não afeta o outro. As outras afirmativas são verdadeiras: Python permite qualquer tipo de dado e é possível adicionar atributos dinamicamente.',
+      correct: 1,
+      explanation: 'Atributos de cada objeto são independentes. `ada.cor` e `caju.cor` são campos distintos – alterar um não afeta o outro. As outras afirmativas são verdadeiras.',
     },
     {
       id: '1-3-e6',
-      question: 'Dado `class Carro:\n    def __init__(self, cor):\n        self.cor = cor`. Após `c = Carro("vermelho")`, `c.cor` vale:',
+      question: 'Otto lê `ada.num_tentaculos` e obtém `8`. Em seguida lê `caju.num_tentaculos` e obtém `8` também. Isso significa que Ada e Caju são o mesmo objeto?',
       options: [
-        '`None`',
-        '`Carro`',
-        '`"vermelho"`',
-        '`"cor"`',
+        'Sim – dois objetos com os mesmos valores são idênticos.',
+        'Sim – atributos iguais indicam que compartilham memória.',
+        'Não – objetos diferentes podem ter os mesmos valores sem serem o mesmo objeto.',
+        'Não – isso indica um erro no código.',
       ],
       correct: 2,
-      explanation: 'Quando executamos `c = Carro("vermelho")`, o `__init__` é chamado com `cor = "vermelho"`. A linha `self.cor = cor` armazena `"vermelho"` no atributo `cor` do objeto `c`. Por isso, `c.cor` retorna `"vermelho"`.',
+      explanation: 'Dois objetos distintos podem ter valores idênticos nos atributos e ainda assim serem entidades completamente separadas. Como vimos na missão anterior: `==` compara dados, `is` compara identidade.',
     },
   ],
-  has_minigame: false
+  has_minigame: false,
+  references: [
+    {
+      author: "Phillips, D.",
+      year: 2015,
+      title: "Python 3 Object-Oriented Programming",
+      location: "Cap. 1, p. 6",
+      note: "Atributo como dado individual do objeto; instâncias do mesmo tipo têm o mesmo atributo, cada uma com seu próprio valor.",
+    },
+    {
+      author: "Weisfeld, M.",
+      year: 2019,
+      title: "The Object-Oriented Thought Process",
+      location: "Cap. 1, p. 10",
+      note: "Atributos como representação do estado do objeto.",
+    },
+    {
+      author: "Kölling, M.; Quig, B.; Patterson, A.; Rosenberg, J.",
+      year: 2003,
+      title: "The BlueJ System and Its Pedagogy",
+      location: "Journal of Computer Science Education, Vol. 13, No. 4",
+      note: "Princípio Objects First: objetos do mesmo tipo têm os mesmos atributos, mas valores independentes.",
+    },
+  ],
 };
 
 export default missao;
