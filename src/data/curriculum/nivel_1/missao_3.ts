@@ -14,13 +14,15 @@ Ada é rosa. Tem 8 tentáculos. Mede 25 cm.
 
 Mas como o Python guarda isso? Se Otto precisasse descrever Ada *para um computador*, o que escreveria?
 
-Ele abre o caderno de campo e começa a registrar – cada informação com um nome e um valor. Cor: rosa. Tentáculos: 8. Tamanho: 25.
+Ele abre o caderno de campo e começa a registrar – cada informação com um rótulo e um valor. Cor: rosa. Tentáculos: 8. Tamanho: 25.
 
-É exatamente assim que o Python pensa. Cada uma dessas informações nomeadas é um <destaque>atributo</destaque> – a forma como um objeto guarda seus dados.
+É exatamente assim que o Python pensa. Cada uma dessas informações rotuladas é um <destaque>atributo</destaque> – a forma como um objeto guarda seus dados.
+
+{{ada-card-rotulado}}
 
 <br>
 
-<conceito note="adapt. Phillips, 2015; Weisfeld, 2019"><strong>Atributo</strong>: dado nomeado que pertence a um objeto e representa seu estado em um momento específico.</conceito>
+<conceito note="adapt. Phillips, 2015; Weisfeld, 2019"><strong>Atributo</strong>: dado rotulado que pertence a um objeto e representa seu estado em um momento específico.</conceito>
 
 {{duvida-atributo-variavel}}
 
@@ -104,7 +106,7 @@ O estado de Ada mudou – só o dela. Caju continua amarela. Muriel continua cia
     },
   },
   resumo: [
-    "**Atributo** – dado nomeado que pertence a um objeto e guarda seu estado",
+    "**Atributo** – dado rotulado que pertence a um objeto e guarda seu estado",
     "**Notação ponto** – `objeto.atributo` – como acessar um atributo em Python",
     "**Independência** – cada objeto guarda seus próprios valores; mudar um não afeta os outros",
     "**Mutação** – o valor de um atributo pode ser alterado; isso muda o estado do objeto",
