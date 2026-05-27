@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-type AttrKey = 'nome' | 'cor' | 'tentaculos';
+type AttrKey = 'nome' | 'cor' | 'num_tentaculos';
 
 const RETORNO: Record<AttrKey, string> = {
   nome:       '"Ada"',
   cor:        '"rosa"',
-  tentaculos: '8',
+  num_tentaculos: '8',
 };
 
 const FichaAcesso: React.FC = () => {
@@ -36,7 +36,7 @@ const FichaAcesso: React.FC = () => {
               <option value=""        className="bg-bgSecondary text-textSecondary">___</option>
               <option value="nome"       className="bg-bgSecondary text-textPrimary">nome</option>
               <option value="cor"        className="bg-bgSecondary text-textPrimary">cor</option>
-              <option value="tentaculos" className="bg-bgSecondary text-textPrimary">tentaculos</option>
+              <option value="num_tentaculos" className="bg-bgSecondary text-textPrimary">num_tentaculos</option>
             </select>
             <span className="text-textSecondary">)</span>
           </div>

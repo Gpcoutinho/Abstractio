@@ -4,7 +4,8 @@ import PolvinhoSVG from '../PolvinhoSVG';
 const ATTRS = [
   { label: 'nome',       value: '"Ada"'  },
   { label: 'cor',        value: '"rosa"' },
-  { label: 'tentaculos', value: '8'      },
+  { label: 'num_tentaculos', value: '8'      },
+  { label: 'tamanho_cm',    value: '25'     },
 ] as const;
 
 /*
@@ -44,8 +45,8 @@ const AdaCardRotulado: React.FC = () => (
           {ATTRS.map(({ label, value }) => (
             <div
               key={label}
-              className="grid font-mono text-xs"
-              style={{ gridTemplateColumns: '6rem 1fr' }}
+              className="grid gap-2 font-mono text-xs"
+              style={{ gridTemplateColumns: 'auto 1fr' }}
             >
               <span className="text-textSecondary">{label}:</span>
               <span className="text-textPrimary">{value}</span>
