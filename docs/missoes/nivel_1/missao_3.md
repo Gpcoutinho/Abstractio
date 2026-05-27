@@ -148,13 +148,13 @@ O aluno personaliza os atributos de Ada e vê o card atualizar em tempo real.
 
 Na missão anterior, Otto descobriu que todo objeto tem três marcas: <destaque-reto>identidade, características e ações</destaque-reto>.
 
-Nesta missão, daremos enfoque especial às <destaque-marker>características</destaque-marker> de Ada: ela é rosa, tem 8 tentáculos e mede 25 cm.
+Nesta missão, daremos enfoque especial às <destaque-marker>características</destaque-marker> de Ada que foram apresentadas anteriormente: ela é rosa, tem 8 tentáculos. Também vamos adicionar mais uma: ela mede 25 cm.
 
 Vamos adicionar essas informações ao nosso caderno de campo? Ficaria assim:
 
 {{ada-card-rotulado}}
 
-> [svg: AdaCard com atributos em grid de duas colunas. Abaixo da última linha, duas setas apontando para baixo com labels "rótulo" (coluna esquerda, cor accent) e "valor" (coluna direita, cor secundária).]
+> [svg: AdaCard com atributos em grid de duas colunas — sem setas.]
 
 Mas como o Python guarda isso? Se Otto precisasse descrever Ada *para um computador*, o que escreveria? Na missão anterior, vimos a forma como o Python guarda esses dados relacionados a Ada:
 

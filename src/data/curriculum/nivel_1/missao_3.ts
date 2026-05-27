@@ -10,7 +10,7 @@ const missao: Missao = {
 
 Na missão anterior, Otto descobriu que todo objeto tem três marcas: <destaque-reto>identidade, características e ações</destaque-reto>.
 
-Nesta missão, daremos enfoque especial às <destaque-marker>características</destaque-marker> de Ada: ela é rosa, tem 8 tentáculos e mede 25 cm.
+Nesta missão, daremos enfoque especial às <destaque-marker>características</destaque-marker> de Ada que foram apresentadas anteriormente: ela é rosa, tem 8 tentáculos. Também vamos adicionar mais uma: ela mede 25 cm.
 
 Vamos adicionar essas informações ao nosso caderno de campo? Ficaria assim:
 
