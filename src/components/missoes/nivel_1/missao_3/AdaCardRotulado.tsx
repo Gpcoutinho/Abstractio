@@ -24,7 +24,7 @@ const ATTRS = [
 
 const AdaCardRotulado: React.FC = () => (
   <div className="not-prose my-6 flex flex-col items-center">
-    <div className="relative w-52" style={{ paddingBottom: '56px' }}>
+    <div className="relative w-52">
 
       {/* Card */}
       <div className="w-52 rounded-xl border border-borderDark bg-bgSecondary overflow-hidden">
@@ -53,64 +53,6 @@ const AdaCardRotulado: React.FC = () => (
           ))}
         </div>
       </div>
-
-      {/*
-        SVG de anotação — irmão do card, pintado por cima.
-        y=0  → borda inferior do card
-        y<0  → dentro do card (coluna de atributos)
-        y>0  → abaixo do card (área de paddingBottom)
-      */}
-      <svg
-        className="absolute bottom-0 left-0 pointer-events-none"
-        width="208"
-        height="56"
-        style={{ overflow: 'visible' }}
-        aria-hidden="true"
-      >
-        {/* ── Seta: rótulos (coluna esquerda) ── */}
-        {/* começa em ~x=46 (centro da col. rótulo) e desce com leve diagonal para esquerda */}
-        <line
-          x1="46" y1="-20"
-          x2="30" y2="36"
-          stroke="#a78bfa" strokeOpacity="0.55" strokeWidth="1.2"
-        />
-        <polyline
-          points="24,30 30,37 36,30"
-          fill="none"
-          stroke="#a78bfa" strokeOpacity="0.55" strokeWidth="1.2"
-          strokeLinejoin="round"
-        />
-        <text
-          x="28" y="50"
-          fontSize="9" fontFamily="monospace"
-          fill="#a78bfa" fillOpacity="0.65"
-          fontStyle="italic" textAnchor="middle"
-        >
-          rótulos
-        </text>
-
-        {/* ── Seta: valores (coluna direita) ── */}
-        {/* começa em ~x=148 (centro da col. valor) e desce com leve diagonal para direita */}
-        <line
-          x1="148" y1="-20"
-          x2="166" y2="36"
-          stroke="#94a3b8" strokeOpacity="0.45" strokeWidth="1.2"
-        />
-        <polyline
-          points="160,30 166,37 172,30"
-          fill="none"
-          stroke="#94a3b8" strokeOpacity="0.45" strokeWidth="1.2"
-          strokeLinejoin="round"
-        />
-        <text
-          x="168" y="50"
-          fontSize="9" fontFamily="monospace"
-          fill="#94a3b8" fillOpacity="0.55"
-          fontStyle="italic" textAnchor="middle"
-        >
-          valores
-        </text>
-      </svg>
 
     </div>
   </div>
