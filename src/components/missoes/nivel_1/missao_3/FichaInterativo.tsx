@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 
-type AttrKey = 'nome' | 'cor' | 'num_tentaculos' | 'tamanho_cm' | 'especie';
+const NOMES    = ['Ada', 'Caju', 'Muriel'] as const;
+const CORES    = ['rosa', 'amarela', 'ciano'] as const;
+const TENTACULOS = [6, 8, 10] as const;
 
-const ATRIBUTOS: { key: AttrKey; value: string }[] = [
-  { key: 'nome',           value: '"Ada"'             },
-  { key: 'cor',            value: '"rosa"'             },
-  { key: 'num_tentaculos', value: '8'                  },
-  { key: 'tamanho_cm',     value: '25'                 },
-  { key: 'especie',        value: '"Octopus vulgaris"' },
-];
+type NomeOpcao       = typeof NOMES[number];
+type CorOpcao        = typeof CORES[number];
+type TentaculosOpcao = typeof TENTACULOS[number];
+
+const COR_SVG: Record<CorOpcao, { body: string; light: string }> = {
+  rosa:    { body: '#db2777', light: '#f472b6' },
+  amarela: { body: '#ca8a04', light: '#fbbf24' },
+  ciano:   { body: '#0891b2', light: '#22d3ee' },
+};
 
 const TENTACULOS_DATA = [
   { d: 'M31,66 Q18,86 24,104',   dur: '2.2s', vals: '-5,31,66;5,31,66;-5,31,66'    },
@@ -21,105 +25,92 @@ const TENTACULOS_DATA = [
   { d: 'M99,66 Q112,86 106,104', dur: '2.2s', vals: '5,99,66;-5,99,66;5,99,66'     },
 ];
 
-const BODY  = '#db2777';
-const LIGHT = '#f472b6';
-
 const FichaInterativo: React.FC = () => {
-  const [selected, setSelected] = useState<AttrKey | null>(null);
+  const [nome,      setNome]      = useState<NomeOpcao>('Ada');
+  const [cor,       setCor]       = useState<CorOpcao>('rosa');
+  const [tentaculos, setTentaculos] = useState<TentaculosOpcao>(8);
 
-  const btnClass = (key: AttrKey) =>
-    `w-full text-left px-3 py-2 rounded-lg border text-sm font-mono transition-colors cursor-pointer ${
-      selected === key
-        ? 'bg-accent/15 border-accent text-accent'
-        : 'border-borderDark text-textSecondary hover:border-accent/40 hover:text-textPrimary'
-    }`;
+  const { body, light } = COR_SVG[cor];
+  const activeTentaculos = tentaculos === 6 ? TENTACULOS_DATA.slice(1, 7) : TENTACULOS_DATA;
 
-  const tentacleStroke = selected === 'num_tentaculos' ? LIGHT : BODY;
+  const selectClass =
+    'bg-bgPrimary border border-accent/40 text-accent rounded px-2 py-0.5 ' +
+    'text-xs font-mono outline-none cursor-pointer hover:border-accent transition-colors';
 
   return (
-    <div className="not-prose my-6 rounded-xl border border-borderDark bg-bgSecondary overflow-hidden">
-      <div className="flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-borderDark">
+    <div className="not-prose my-6 w-52 mx-auto rounded-xl border border-borderDark bg-bgSecondary overflow-hidden">
 
-        {/* Attribute list */}
-        <div className="p-5 md:w-52 space-y-2">
-          <p className="text-[10px] font-bold text-accent uppercase tracking-widest mb-3">Atributos de Ada</p>
-          {ATRIBUTOS.map(a => (
-            <button
-              key={a.key}
-              onClick={() => setSelected(a.key === selected ? null : a.key)}
-              className={btnClass(a.key)}
-            >
-              {a.key}
-            </button>
-          ))}
-        </div>
-
-        {/* Ada SVG */}
-        <div className="flex-1 flex flex-col items-center justify-center py-10 gap-1">
-          <svg viewBox="0 0 130 140" width="140" xmlns="http://www.w3.org/2000/svg" style={{ overflow: 'visible' }}>
-
-            {/* Nome tag */}
-            {selected === 'nome' && (
-              <g>
-                <rect x="20" y="3" width="90" height="24" rx="4" fill="#2d0a1a" stroke={BODY} strokeWidth="1" />
-                <text x="65" y="19" textAnchor="middle" fill={LIGHT} fontSize="13" fontFamily="monospace">Ada</text>
-              </g>
-            )}
-
-            {/* Cor ring */}
-            {selected === 'cor' && (
-              <ellipse cx="65" cy="50" rx="33" ry="31" fill="none" stroke={LIGHT} strokeWidth="2" strokeDasharray="5,3" opacity="0.85">
-                <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="1s" repeatCount="indefinite" />
-              </ellipse>
-            )}
-
-            {/* Tentáculos */}
-            {TENTACULOS_DATA.map((t, i) => (
-              <path key={i} d={t.d} stroke={tentacleStroke} strokeWidth="4.5" fill="none" strokeLinecap="round">
-                <animateTransform attributeName="transform" type="rotate" values={t.vals} dur={t.dur} repeatCount="indefinite" />
-              </path>
-            ))}
-
-            {/* Contador de tentáculos */}
-            {selected === 'num_tentaculos' && (
-              <text x="65" y="124" textAnchor="middle" fill={LIGHT} fontSize="12" fontFamily="monospace">× 8 tentáculos</text>
-            )}
-
-            {/* Corpo */}
-            <ellipse cx="65" cy="42" rx="22" ry="20" fill={LIGHT} />
-            <ellipse cx="65" cy="56" rx="26" ry="22" fill={BODY} />
-
-            {/* Olhos */}
-            <circle cx="55" cy="42" r="5" fill="white" />
-            <circle cx="75" cy="42" r="5" fill="white" />
-            <circle cx="55" cy="43" r="2.8" fill="#1a0a30" />
-            <circle cx="75" cy="43" r="2.8" fill="#1a0a30" />
-            <circle cx="53.5" cy="41.5" r="1" fill="white" opacity="0.8" />
-            <circle cx="73.5" cy="41.5" r="1" fill="white" opacity="0.8" />
-            <path d="M59,53 Q65,59 71,53" stroke={LIGHT} strokeWidth="1.5" fill="none" strokeLinecap="round" />
-
-            {/* Tamanho */}
-            {selected === 'tamanho_cm' && (
-              <g>
-                <line x1="116" y1="24" x2="116" y2="114" stroke={LIGHT} strokeWidth="1.5" strokeDasharray="3,2" />
-                <line x1="112" y1="24" x2="120" y2="24" stroke={LIGHT} strokeWidth="1.5" />
-                <line x1="112" y1="114" x2="120" y2="114" stroke={LIGHT} strokeWidth="1.5" />
-                <text x="124" y="70" fill={LIGHT} fontSize="11" fontFamily="monospace" textAnchor="start">25</text>
-                <text x="124" y="82" fill={LIGHT} fontSize="11" fontFamily="monospace" textAnchor="start">cm</text>
-              </g>
-            )}
-
-            {/* Espécie */}
-            {selected === 'especie' && (
-              <text x="65" y="131" textAnchor="middle" fill={LIGHT} fontSize="11" fontFamily="monospace" fontStyle="italic">
-                Octopus vulgaris
-              </text>
-            )}
-          </svg>
-          <p className="text-xs text-textSecondary font-mono">ada</p>
-        </div>
-
+      {/* Header */}
+      <div className="px-4 py-2.5 border-b border-borderDark text-center">
+        <span className="text-xs font-bold text-textPrimary tracking-wide">{nome}</span>
       </div>
+
+      {/* Polvo */}
+      <div className="flex justify-center py-6">
+        <svg viewBox="0 0 130 130" width="110" xmlns="http://www.w3.org/2000/svg" style={{ overflow: 'visible' }}>
+          {activeTentaculos.map((t, i) => (
+            <path key={i} d={t.d} stroke={body} strokeWidth="4.5" fill="none" strokeLinecap="round">
+              <animateTransform attributeName="transform" type="rotate"
+                values={t.vals} dur={t.dur} repeatCount="indefinite" />
+            </path>
+          ))}
+          {/* Corpo */}
+          <ellipse cx="65" cy="42" rx="22" ry="20" fill={light} />
+          <ellipse cx="65" cy="56" rx="26" ry="22" fill={body} />
+          {/* Bochechas */}
+          <ellipse cx="50" cy="54" rx="6" ry="4" fill={light} opacity="0.3" />
+          <ellipse cx="80" cy="54" rx="6" ry="4" fill={light} opacity="0.3" />
+          {/* Olhos */}
+          <circle cx="55" cy="42" r="5" fill="white" />
+          <circle cx="75" cy="42" r="5" fill="white" />
+          <circle cx="55" cy="43" r="2.8" fill="#1a0a30" />
+          <circle cx="75" cy="43" r="2.8" fill="#1a0a30" />
+          <circle cx="53.5" cy="41.5" r="1" fill="white" opacity="0.8" />
+          <circle cx="73.5" cy="41.5" r="1" fill="white" opacity="0.8" />
+          {/* Cílios */}
+          <g transform="translate(47,41) rotate(-60)"><path d="M0,0 C0.4,-1.5 0.5,-3.2 0,-5" stroke="#1a0a30" strokeWidth="1.1" fill="none" strokeLinecap="round" /></g>
+          <g transform="translate(47,42) rotate(-85)"><path d="M0,0 C0.4,-1.5 0.5,-3.2 0,-5" stroke="#1a0a30" strokeWidth="1.1" fill="none" strokeLinecap="round" /></g>
+          <g transform="translate(47,43) rotate(-110)"><path d="M0,0 C0.4,-1.5 0.5,-3.2 0,-5" stroke="#1a0a30" strokeWidth="1.1" fill="none" strokeLinecap="round" /></g>
+          <g transform="translate(83,41) rotate(60)"><path d="M0,0 C-0.4,-1.5 -0.5,-3.2 0,-5" stroke="#1a0a30" strokeWidth="1.1" fill="none" strokeLinecap="round" /></g>
+          <g transform="translate(83,42) rotate(85)"><path d="M0,0 C-0.4,-1.5 -0.5,-3.2 0,-5" stroke="#1a0a30" strokeWidth="1.1" fill="none" strokeLinecap="round" /></g>
+          <g transform="translate(83,43) rotate(110)"><path d="M0,0 C-0.4,-1.5 -0.5,-3.2 0,-5" stroke="#1a0a30" strokeWidth="1.1" fill="none" strokeLinecap="round" /></g>
+          {/* Sorriso */}
+          <path d="M59,53 Q65,59 71,53" stroke={light} strokeWidth="1.5" fill="none" strokeLinecap="round" />
+        </svg>
+      </div>
+
+      {/* Atributos editáveis */}
+      <div className="px-4 pt-3 pb-4 border-t border-borderDark space-y-2.5">
+        <div className="flex items-center justify-between font-mono text-xs">
+          <span className="text-textSecondary">nome:</span>
+          <select value={nome} onChange={e => setNome(e.target.value as NomeOpcao)} className={selectClass}>
+            {NOMES.map(n => (
+              <option key={n} value={n} className="bg-bgSecondary">{`"${n}"`}</option>
+            ))}
+          </select>
+        </div>
+        <div className="flex items-center justify-between font-mono text-xs">
+          <span className="text-textSecondary">cor:</span>
+          <select value={cor} onChange={e => setCor(e.target.value as CorOpcao)} className={selectClass}>
+            {CORES.map(c => (
+              <option key={c} value={c} className="bg-bgSecondary">{`"${c}"`}</option>
+            ))}
+          </select>
+        </div>
+        <div className="flex items-center justify-between font-mono text-xs">
+          <span className="text-textSecondary">qte_tentaculos:</span>
+          <select
+            value={tentaculos}
+            onChange={e => setTentaculos(Number(e.target.value) as TentaculosOpcao)}
+            className={selectClass}
+          >
+            {TENTACULOS.map(t => (
+              <option key={t} value={t} className="bg-bgSecondary">{t}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
     </div>
   );
 };
