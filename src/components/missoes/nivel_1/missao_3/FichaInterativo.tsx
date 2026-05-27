@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
 import PolvinhoSVG, { type CorPolvo } from '../PolvinhoSVG';
 
-const NOMES    = ['Ada', 'Caju', 'Muriel'] as const;
-const CORES    = ['rosa', 'amarela', 'ciano'] as const;
+const CORES      = ['rosa', 'azul', 'verde'] as const;
 const TENTACULOS = [6, 8, 10] as const;
 
-type NomeOpcao       = typeof NOMES[number];
 type CorOpcao        = typeof CORES[number];
 type TentaculosOpcao = typeof TENTACULOS[number];
 
 const COR_POLVO: Record<CorOpcao, CorPolvo> = {
-  rosa:    'Rosa',
-  amarela: 'Amarela',
-  ciano:   'Ciano',
+  rosa:  'Rosa',
+  azul:  'Azul',
+  verde: 'Verde',
 };
 
 const FichaInterativo: React.FC = () => {
-  const [nome,       setNome]       = useState<NomeOpcao>('Ada');
   const [cor,        setCor]        = useState<CorOpcao>('rosa');
   const [tentaculos, setTentaculos] = useState<TentaculosOpcao>(8);
 
@@ -29,7 +26,7 @@ const FichaInterativo: React.FC = () => {
 
       {/* Header */}
       <div className="px-4 py-2.5 border-b border-borderDark text-center">
-        <span className="text-xs font-bold text-textPrimary tracking-wide">{nome}</span>
+        <span className="text-xs font-bold text-textPrimary tracking-wide">Ada</span>
       </div>
 
       {/* Polvo */}
@@ -46,11 +43,7 @@ const FichaInterativo: React.FC = () => {
       <div className="px-4 pt-3 pb-4 border-t border-borderDark space-y-2.5">
         <div className="flex items-center justify-between font-mono text-xs">
           <span className="text-textSecondary">nome:</span>
-          <select value={nome} onChange={e => setNome(e.target.value as NomeOpcao)} className={selectClass}>
-            {NOMES.map(n => (
-              <option key={n} value={n} className="bg-bgSecondary">{`"${n}"`}</option>
-            ))}
-          </select>
+          <span className="text-textPrimary">"Ada"</span>
         </div>
         <div className="flex items-center justify-between font-mono text-xs">
           <span className="text-textSecondary">cor:</span>
