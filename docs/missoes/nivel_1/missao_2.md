@@ -1,4 +1,4 @@
-﻿<!-- NOTAS DE DESENVOLVIMENTO – não são conteúdo da missão -->
+<!-- NOTAS DE DESENVOLVIMENTO – não são conteúdo da missão -->
 
 ## [notas] Referências e decisões para esta missão
 
@@ -69,6 +69,8 @@ print(ada is outra)  # False – entidades distintas
 ---
 
 ### Dúvidas previstas
+- `{{duvida-entidade-definicao}}` – "O que significa 'entidade'?" → ativa nesta missão
+  - Resposta: 'Entidade' é um termo central em POO e nos diagramas UML. Significa algo que existe de forma independente, com identidade própria, distinguível de tudo o mais. Ada é uma entidade: ela existe e é única.
 - `{{duvida-objeto-unico}}` – O que define quais características e ações farão parte de um objeto? → removida desta missão; reservada para outra
 
 ---
@@ -118,7 +120,7 @@ Otto está em expedição pelo oceano quando avista um polvo que não conhecia..
 
 Ela tem uma cor, um tamanho e um número de tentáculos. E sabe fazer coisas – nada, se camufla, solta tinta.
 
-Para Otto, Ada é uma <destaque>caixa preta</destaque>: ele consegue observá-la e interagir com ela mesmo sem conhecer todos os seus detalhes.
+Para Otto, Ada é uma "caixa preta": ele consegue observá-la e interagir com ela mesmo sem conhecer todos os seus detalhes.
 
 Isso é um <destaque>objeto</destaque>: uma <destaque-reto>entidade</destaque-reto> (algo que existe de forma independente) com características próprias e ações que sabe executar.
 
@@ -136,7 +138,7 @@ No oceano de Otto há outros polvos. Cada um é uma entidade separada – mesma 
 
 Ada é rosa com 8 tentáculos. Mas no oceano há outros polvos – cada um com sua própria cor e seus próprios dados.
 
-Abaixo você pode ver a estrutura essencial de um objeto no universo da POO – o seu nome de referência e as chaves contendo suas características. Guarde esse formato:
+Se você pedir para o Python te mostrar a estrutura interna da "caixa-preta" que é o objeto, ele vai te mostrar algo parecido com isso:
 
 ```python-simplificado
 ada = {
@@ -144,6 +146,8 @@ ada = {
     "tentaculos": 8
 }
 ```
+
+Ou seja, ele vai te mostrar a estrutura essencial de um objeto no universo da POO – o seu "nome" (que chamamos de "rótulo") ('ada') e as chaves contendo suas características. Guarde esse formato: rótulo + chaves + características.
 
 Mudar algo em Ada não muda os outros. Cada objeto guarda seus próprios dados de forma independente – ou seja, se Ada mudar de cor agora, os outros polvos continuam exatamente como estavam.
 
@@ -172,7 +176,7 @@ print(ada == outra)  # True  – mesmas características
 print(ada is outra)  # False – entidades distintas
 ```
 
-`==` compara os dados – ou seja, pergunta "têm o mesmo conteúdo?". `is` compara a identidade – isto é, pergunta "são a mesma coisa?". Mesmo com dados idênticos, Ada e `outra` são entidades distintas. Ada é Ada.
+`==` compara os dados – ou seja, pergunta "têm o mesmo conteúdo?". `is` compara a identidade – isto é, pergunta "são a mesma coisa?". Mesmo com dados idênticos, `ada` e `outra` são entidades distintas. Ada é Ada.
 
 ---
 
@@ -247,3 +251,88 @@ Isso você descobre na **Missão 5**.
 - [ ] O segundo polvo perde todas as características – qualquer mudança afeta todos os objetos.
 
 **Explicação:** Cada objeto existe de forma independente. Mudar Ada não afeta o outro polvo – cada um carrega seus próprios dados.
+
+**Explicações incorretas:**
+
+- Não. Cada objeto é independente – tem seus próprios dados. Mudar Ada não afeta o outro polvo em nada.
+- *(correta – sem explicação de erro)*
+- Não. Vários objetos do mesmo tipo podem existir ao mesmo tempo. São entidades separadas e independentes.
+- Não. Mudar uma característica de Ada só afeta Ada. O outro polvo é uma entidade independente com seus próprios dados intactos.
+
+## Baú de Conchas (exercícios extras)
+
+### 1-2-e1
+
+**Pergunta:** Dois objetos criados a partir da mesma classe:
+
+- [ ] Sempre têm os mesmos valores de atributos
+- [x] Têm seus próprios valores, independentes dos outros ← correta
+- [ ] Compartilham atributos numéricos, mas não textuais
+- [ ] São idênticos até que um deles seja alterado manualmente
+
+**Explicação:** Cada objeto é independente. `rex = Cachorro("Rex")` e `buddy = Cachorro("Buddy")` são objetos distintos com seus próprios valores. Alterar `rex.nome` não afeta `buddy.nome`.
+
+---
+
+### 1-2-e2
+
+**Pergunta:** Em Python, qual linha cria um objeto a partir da classe `Carro`?
+
+- [x] `meu_carro = Carro("vermelho")` ← correta
+- [ ] `Carro = meu_carro("vermelho")`
+- [ ] `object Carro("vermelho")`
+- [ ] `new Carro("vermelho")`
+
+**Explicação:** Em Python, criamos objetos chamando a classe como se fosse uma função: `objeto = NomeDaClasse(argumentos)`. Não usamos `new` (como no Java) nem `object`. O resultado é uma instância da classe.
+
+---
+
+### 1-2-e3
+
+**Pergunta:** O que é uma "instância" de uma classe?
+
+- [ ] O nome dado ao arquivo onde a classe está definida
+- [ ] Um método especial que inicializa a classe
+- [ ] Uma cópia da classe sem modificações
+- [x] Um objeto concreto criado a partir da classe ← correta
+
+**Explicação:** Instância e objeto são termos intercambiáveis. Quando fazemos `ada = Polvo()`, `ada` é uma instância (objeto concreto) da classe `Polvo`. A classe é o molde; a instância é o produto fabricado com esse molde.
+
+---
+
+### 1-2-e4
+
+**Pergunta:** Num sistema com classes `Gato`, `Cachorro` e `Passaro`, quantos objetos podemos ter ao mesmo tempo?
+
+- [ ] Apenas um objeto por classe
+- [ ] No máximo três objetos no total
+- [x] Qualquer quantidade de objetos de qualquer dessas classes ← correta
+- [ ] Apenas objetos da última classe definida no código
+
+**Explicação:** Não há limite para o número de objetos. Podemos ter `felix = Gato()`, `tom = Gato()`, `rex = Cachorro()`, `tweety = Passaro()` – todos coexistindo no mesmo programa.
+
+---
+
+### 1-2-e5
+
+**Pergunta:** `ada = Polvo("rosa", 8)` e `ana = Polvo("azul", 6)`. Qual afirmação é verdadeira?
+
+- [x] `ada` e `ana` são objetos independentes com atributos distintos ← correta
+- [ ] `ada` e `ana` compartilham os mesmos atributos por serem da mesma classe
+- [ ] Não é possível criar dois objetos com o mesmo tipo simultaneamente
+- [ ] `ana` é uma cópia de `ada` com valores modificados
+
+**Explicação:** Cada objeto tem sua própria "cópia" dos atributos. `ada.cor` é `"rosa"` e `ana.cor` é `"azul"`. Alterar `ada.tentaculos = 10` não afeta `ana.tentaculos`. Eles são completamente independentes.
+
+---
+
+### 1-2-e6
+
+**Pergunta:** Dois objetos `a = Gato("Mimi")` e `b = Gato("Mimi")` têm os mesmos valores. Eles são o mesmo objeto?
+
+- [ ] Sim. Objetos com os mesmos dados são considerados idênticos em Python
+- [ ] Sim. Python reutiliza o mesmo espaço na memória para evitar duplicatas
+- [x] Não. Cada objeto é uma entidade distinta na memória, mesmo com dados iguais ← correta
+- [ ] Depende — só são diferentes se criados em linhas de código distintas
+
+**Explicação:** Identidade significa que cada objeto é uma entidade distinta na memória. Mesmo que `a` e `b` tenham os mesmos dados, são dois objetos diferentes. Em Python, `a is b` retorna `False` – eles ocupam lugares distintos na memória.

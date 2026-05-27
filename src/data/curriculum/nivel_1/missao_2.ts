@@ -14,7 +14,7 @@ Otto está em expedição pelo oceano quando avista um polvo que não conhecia..
 
 Ela tem uma cor, um tamanho e um número de tentáculos. E sabe fazer coisas – nada, se camufla, solta tinta.
 
-Para Otto, Ada é uma "caixa preta": ele consegue observá-la e interagir com ela mesmo sem conhecer todos os seus detalhes.
+Para Otto, Ada é uma "caixa-preta": ele consegue observá-la e interagir com ela mesmo sem conhecer todos os seus detalhes.
 
 Isso é um <destaque>objeto</destaque>: uma <destaque-reto>entidade</destaque-reto> (algo que existe de forma independente) com características próprias e ações que sabe executar.
 
@@ -30,7 +30,7 @@ No oceano de Otto há outros polvos. Cada um é uma entidade separada – mesma 
 
 Ada é rosa com 8 tentáculos. Mas no oceano há outros polvos – cada um com sua própria cor e seus próprios dados.
 
-Abaixo você pode ver a estrutura essencial de um objeto no universo da POO – o seu nome de referência e as chaves contendo suas características. Guarde esse formato:
+Se você pedir para o Python te mostrar a estrutura interna da "caixa-preta" que é o objeto, ele vai te mostrar algo parecido com isso:
 
 \`\`\`python-simplificado
 ada = {
@@ -38,6 +38,8 @@ ada = {
     "tentaculos": 8
 }
 \`\`\`
+
+Ou seja, ele vai te mostrar a estrutura essencial de um objeto no universo da POO – o seu "nome" (que chamamos de "rótulo") ('ada') e as chaves contendo suas características. Guarde esse formato: rótulo + chaves + características.
 
 Mudar algo em Ada não muda os outros. Cada objeto guarda seus próprios dados de forma independente – ou seja, se Ada mudar de cor agora, os outros polvos continuam exatamente como estavam.
 
