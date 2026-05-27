@@ -16,7 +16,9 @@ Vamos adicionar essas informações ao nosso caderno de campo? Ficaria assim:
 
 {{ada-card-rotulado}}
 
-Mas como o Python guarda isso? Se Otto precisasse descrever Ada *para um computador*, o que escreveria? Na missão anterior, vimos a forma como o Python guarda esses dados relacionados a Ada:
+Mas como o Python guarda isso? Se Otto precisasse descrever Ada *para um computador*, o que escreveria? 
+
+Na missão anterior, vimos a forma como o Python guarda esses dados relacionados a Ada:
 
 \`\`\`python-simplificado
 ada = {"cor": "rosa", "num_tentaculos": 8}
@@ -24,7 +26,7 @@ ada = {"cor": "rosa", "num_tentaculos": 8}
 
 Agora que já sabemos a estrutura que o Python entende, vamos aprender a nomear suas partes da maneira correta.
 
-Esse bloco completo ada = {"cor": "rosa", "num_tentaculos": 8} é o <destaque-reto>objeto</destaque-reto>, que possui rótulo 'ada'. Dentro dele, há rótulos menores – 'cor' e 'num_tentaculos' – que guardam as <destaque-marker>características</destaque-marker> de Ada (rosa, 8 tentáculos). Na POO, esses dados rotulados que pertencem a um objeto têm um nome específico: são os <destaque>atributos</destaque> de 'ada'.
+Cada um desses campos – 'nome', 'cor', 'num_tentaculos' e 'tamanho_cm' – tem um nome específico na POO: são os <destaque>atributos</destaque> de 'ada'. Cada atributo é um dado rotulado que pertence a esse objeto e guarda uma de suas características.
 
 
 <conceito note="adapt. Phillips, 2015; Weisfeld, 2019"><strong>Atributo</strong>: dado rotulado que pertence a um objeto e representa seu estado em um momento específico.</conceito>
