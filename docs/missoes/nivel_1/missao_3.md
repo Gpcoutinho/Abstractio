@@ -168,6 +168,17 @@ ada = {
 }
 ```
 
+Atualizando com a nova característica:
+
+```python-simplificado
+ada = {
+    "nome": "Ada",
+    "cor": "rosa",
+    "num_tentaculos": 8,
+    "tamanho_cm": 25     <-- nova característica adicionada
+}
+```
+
 Agora que já sabemos a estrutura que o Python entende, vamos aprender a nomear suas partes da maneira correta.
 
 Cada um desses campos – 'nome', 'cor', 'num_tentaculos' e 'tamanho_cm' – tem um nome específico na POO: são os <destaque>atributos</destaque> de 'ada'. Cada atributo é um dado rotulado que pertence a esse objeto e guarda uma de suas características.
