@@ -1,4 +1,4 @@
-﻿import type { Missao } from '../types';
+import type { Missao } from "../types";
 
 const missao: Missao = {
   id: "1-3",
@@ -6,41 +6,104 @@ const missao: Missao = {
   icon: "PiTag",
   emblem: "Pintor(a) de Tentáculos",
   theory: `
-## Otto abre o caderno
+## O que Ada carrega
 
-Na missão anterior, Otto encontrou Ada no oceano. Ela existe, é única, tem identidade própria.
+Na missão anterior, Otto descobriu que todo objeto tem três marcas: <destaque-reto>identidade, características e ações</destaque-reto>.
 
-Agora Otto tira o caderno de campo e começa a registrar tudo o que observa: cor, tamanho, número de tentáculos, espécie...
+Nesta missão, daremos enfoque especial às <destaque-marker>características</destaque-marker> de Ada que foram apresentadas anteriormente: ela é rosa, tem 8 tentáculos. Também vamos adicionar mais uma: ela mede 25 cm.
 
-Cada informação registrada é um **atributo** — um dado que pertence especificamente a Ada.
+Vamos adicionar essas informações ao nosso caderno de campo? Ficaria assim:
 
-> **Atributo** = uma informação que pertence a um objeto. Cada objeto guarda os seus próprios valores.
+{{ada-card-rotulado}}
 
-<ficha-interativo></ficha-interativo>
+Mas como o Python guarda isso? Se Otto precisasse descrever Ada *para um computador*, o que escreveria? 
+
+Na missão anterior, vimos a forma como o Python guarda esses dados relacionados a Ada:
+
+\`\`\`python-simplificado
+ada = {
+    "nome": "Ada",
+    "cor": "rosa",
+    "num_tentaculos": 8
+}
+\`\`\`
+
+Atualizando com a nova característica:
+
+\`\`\`python-simplificado
+ada = {
+    "nome": "Ada",
+    "cor": "rosa",
+    "num_tentaculos": 8,
+    "tamanho_cm": 25     <-- nova característica adicionada
+}
+\`\`\`
+
+Note que \`"rosa"\` é um texto e \`8\` é um número inteiro – cada atributo pode guardar um tipo diferente de dado.
+
+Agora que já sabemos a estrutura que o Python entende, vamos aprender a nomear suas partes da maneira correta.
+
+Cada um desses campos – 'nome', 'cor', 'num_tentaculos' e 'tamanho_cm' – tem um nome específico na POO: são os <destaque>atributos</destaque> de 'ada'. Cada atributo é um dado rotulado que pertence a esse objeto e guarda uma de suas características.
+
+
+<conceito note="adapt. Phillips, 2015; Weisfeld, 2019"><strong>Atributo</strong>: dado rotulado que pertence a um objeto e representa seu estado em um momento específico.</conceito>
+
+Ou seja: no momento atual, o objeto 'ada' possui o atributo 'cor' com o valor 'rosa' e o atributo 'num_tentaculos' com o valor '8'. Esses atributos são como campos que guardam informações sobre Ada – eles descrevem seu estado atual.
+
+E por que estamos insistindo nessa palavra "atual"? Porque os atributos de um objeto podem mudar ao longo do tempo. Ada pode se camuflar e ficar transparente, ou crescer e passar a medir 30 cm. O que define Ada não é o valor específico de seus atributos, mas sim o fato de que ela tem esses atributos – e que eles podem evoluir.
+
+{{duvida-atributo-variavel}}
 
 ---
 
-## O ponto — como acessar um atributo
+## O ponto: acessando um atributo
 
-Em Python, o ponto (\`.\`) é a forma de acessar um atributo de um objeto. É como Otto apontando para Ada e dizendo: *"me dê sua cor"*.
+Em Python, o ponto (\`.\`) é a forma de acessar um atributo de um objeto. É como Otto apontando para Ada e dizendo: *"me diga sua cor"*.
+
+A estrutura é sempre a mesma:
+
+\`\`\`pseudocodigo
+objeto.atributo
+\`\`\`
+
+Veja como fica com Ada:
+
+\`\`\`python
+# print() — comando para exibir um valor na tela
+print(ada.nome)            # exibido na tela: "Ada"
+print(ada.cor)             # exibido na tela: "rosa"
+print(ada.num_tentaculos)  # exibido na tela: 8
+print(ada.tamanho_cm)      # exibido na tela: 25
+\`\`\`
+
+Cada linha pede um atributo diferente pelo nome. O Python vai até o objeto, encontra o dado e devolve o valor.
 
 <ficha-acesso></ficha-acesso>
 
-A estrutura é sempre: \`objeto.atributo\`.
+Em Python, é possível indicar o tipo esperado de cada atributo – você verá isso com detalhes quando chegarmos às classes.
 
 ---
 
-## Cada polvo guarda os seus
+## Cada objeto guarda os seus
 
-No oceano há outros polvos. Cada um carrega seus próprios atributos — completamente independentes entre si.
+No oceano há outros polvos. Ada não é a única.
+
+Otto avista Caju – amarela, curiosa, menor que Ada. E mais adiante, Muriel – ciano, veloz, difícil de fotografar. Os três são polvos: mesma espécie, mesmo conjunto de atributos. Mas cada um carrega seus próprios valores.
+
+{{tres-polvos-acesso}}
+
+Ou seja, para acessar a cor de Caju, Otto escreve \`caju.cor\`. Para acessar a cor de Muriel, escreve \`muriel.cor\`. O ponto é o que conecta o nome do objeto ao nome do atributo. Ele é como um caminho que leva até o dado específico daquele objeto.
+
+Se quiséssemos imprimir na tela usando Python, seria exatamente assim:
+
 
 \`\`\`python
-print(ada.cor)     # rosa
-print(ana.cor)     # azul
-print(douglas.cor) # verde
+# print() — comando para exibir um valor na tela
+print(ada.cor)    # impresso na tela: "rosa"
+print(caju.cor)   # impresso na tela: "amarela"
+print(muriel.cor) # impresso na tela: "ciano"
 \`\`\`
 
-Mudar a cor de Ada não afeta Ana. Mudar Ana não afeta Douglas. Cada objeto é uma entidade separada com seus próprios dados.
 
 ---
 
@@ -48,105 +111,175 @@ Mudar a cor de Ada não afeta Ana. Mudar Ana não afeta Douglas. Cada objeto é 
 
 O estado de um objeto pode evoluir. Otto observa Ada se camuflando e atualiza o caderno:
 
+{{animacao-camuflagem}}
+
+O estado de Ada mudou – só o dela. Caju continua amarela. Muriel continua ciano. A <destaque>atribuição</destaque> – ato de dar um novo valor a um atributo – age sobre um objeto específico, nunca sobre todos ao mesmo tempo.
+
+<conceito note="adapt. Weisfeld, 2019"><strong>Atribuição</strong>: operação que define ou modifica o valor de um atributo em um objeto específico.</conceito>
+
+E no código, como funciona essa atribuição? Para mudar a cor de Ada para transparente, Otto escreve:
+
 \`\`\`python
+# atribuindo um novo valor ao atributo cor de ada
 ada.cor = "transparente"
-print(ada.cor)  # transparente
 \`\`\`
 
-Só \`ada.cor\` mudou. Ana e Douglas continuam com as suas.
+Ou seja, para atribuir um novo valor a um atributo, usamos a mesma notação ponto (\`.\`), mas com o sinal de igual (\`=\`) para indicar que estamos definindo um novo valor. O Python entende que queremos atualizar o atributo 'cor' do objeto 'ada' para o novo valor 'transparente'.
+
+Acessando o atributo depois da mudança:
+
+\`\`\`python
+# print() — comando para exibir um valor na tela
+print(ada.cor)  # impresso na tela: "transparente"
+\`\`\`
+
+Agora, ao acessar \`ada.cor\`, o Python devolve "transparente". O estado de Ada mudou, mas os estados de Caju e Muriel permanecem inalterados. Cada objeto é independente – mudar um não afeta os outros.
+
+{{duvida-quais-atributos}}
 `,
+  duvidas: {
+    "duvida-atributo-variavel": {
+      pergunta: "Atributo é a mesma coisa que variável?",
+      resposta:
+        "Quase – mas não exatamente. Uma variável é um nome que aponta para qualquer valor, em qualquer lugar do código. Um atributo é um dado que pertence a um objeto específico: ele vive dentro do objeto e só faz sentido junto a ele. Todo atributo se comporta como uma variável, mas uma variável solta não é um atributo.",
+    },
+    "duvida-quais-atributos": {
+      pergunta:
+        "O que define quais características e ações farão parte de um objeto?",
+      resposta:
+        "Essa decisão cabe ao modelador – ou seja, à pessoa que está criando aquele objeto. Ela decide o que é importante registrar e o que pode ser ignorado. Você verá isso em detalhes nas missões seguintes.",
+    },
+  },
+  resumo: [
+    "**Atributo** – dado rotulado que pertence a um objeto e guarda seu estado",
+    "**Notação ponto** – `objeto.atributo` – como acessar um atributo em Python",
+    "**Independência** – cada objeto guarda seus próprios valores; mudar um não afeta os outros",
+    "**Atribuição** – `objeto.atributo = valor` – operação que define ou modifica o valor de um atributo",
+    "**Mutação** – o valor de um atributo pode ser alterado; isso muda o estado do objeto",
+  ],
   exercise: {
-    question: "Otto lê `ada.cor` e vê `\"rosa\"`. Em seguida escreve `ana.cor = \"verde\"`. O que acontece com `ada.cor`?",
+    question:
+      'Otto lê `ada.cor` e vê `"rosa"`. Em seguida escreve `caju.cor = "transparente"`. O que acontece com `ada.cor`?',
     options: [
-      "Muda para \"verde\" — objetos do mesmo tipo compartilham atributos.",
-      "Continua \"rosa\" — cada objeto guarda seus próprios atributos.",
-      "Fica indefinido — só um polvo pode ter cor definida por vez.",
-      "Gera um erro — não é possível alterar atributos de objetos separados."
+      'Muda para `"transparente"` – objetos do mesmo tipo compartilham atributos.',
+      'Continua `"rosa"` – cada objeto guarda seus próprios atributos.',
+      "Fica indefinido – só um polvo pode ter cor definida por vez.",
+      "Gera um erro – não é possível alterar atributos de objetos separados.",
     ],
     correct: 1,
-    explanation: "Atributos pertencem a cada objeto individualmente. Mudar `ana.cor` não afeta `ada.cor` — são dados completamente independentes.",
+    explanation:
+      "Atributos pertencem a cada objeto individualmente. Mudar `caju.cor` não afeta `ada.cor` – são dados completamente independentes.",
     wrong_explanations: [
-      "Não. Atributos são independentes por objeto. Mudar `ana.cor` só afeta Ana — Ada mantém seus próprios dados intactos.",
+      "Não. Atributos são independentes por objeto. Mudar `caju.cor` só afeta Caju – Ada mantém seus próprios dados intactos.",
       "",
-      "Não. Vários objetos podem ter o mesmo atributo definido ao mesmo tempo. Ada e Ana são entidades independentes, cada uma com sua própria `cor`.",
-      "Não. Alterar o atributo de um objeto nunca afeta o de outro. `ana.cor = \"verde\"` é válido e só modifica Ana."
-    ]
+      "Não. Vários objetos podem ter o mesmo atributo definido ao mesmo tempo. Ada e Caju são entidades independentes, cada uma com sua própria `cor`.",
+      'Não. Alterar o atributo de um objeto nunca afeta o de outro. `caju.cor = "transparente"` é válido e só modifica Caju.',
+    ],
   },
   extra_exercises: [
     {
-      id: '1-3-e1',
-      question: 'Na POO, um atributo é:',
-      options: [
-        'Uma ação que o objeto sabe executar',
-        'Uma informação que pertence especificamente a um objeto',
-        'Uma função externa que acessa os dados do objeto',
-        'O tipo de dado que o objeto representa',
-      ],
-      correct: 1,
-      explanation: 'Atributo é um dado que pertence ao objeto — uma característica sua. Cor, tamanho, nome: cada informação registrada sobre um objeto é um atributo.',
+      id: "1-3-e1",
+      question:
+        "Para acessar o atributo `nome` do objeto `ada`, qual é a sintaxe correta em Python?",
+      options: ["`ada.nome`", "`nome.ada`", "`ada[nome]`", "`get(ada, nome)`"],
+      correct: 0,
+      explanation:
+        "Em Python, atributos são acessados com a notação ponto: `objeto.atributo`. Para ler o nome de `ada`, escrevemos `ada.nome`.",
     },
     {
-      id: '1-3-e2',
-      question: 'Em Python, a sintaxe `objeto.atributo` serve para:',
+      id: "1-3-e2",
+      question:
+        'Caju tem `cor = "amarela"` e Muriel tem `cor = "ciano"`. O que isso demonstra sobre atributos?',
       options: [
-        'Criar um novo objeto do tipo `atributo`',
-        'Acessar uma informação que pertence a esse objeto',
-        'Chamar uma função chamada `atributo`',
-        'Comparar dois objetos entre si',
-      ],
-      correct: 1,
-      explanation: 'O ponto é a forma de acessar um atributo de um objeto — como apontar para ele e dizer: "me dê essa informação". A estrutura é sempre `objeto.atributo`.',
-    },
-    {
-      id: '1-3-e3',
-      question: 'Três objetos possuem o atributo `cor`. Ao alterar `objeto1.cor`, o que acontece com `objeto2.cor` e `objeto3.cor`?',
-      options: [
-        'Também mudam — atributos com o mesmo nome são compartilhados',
-        '`objeto2.cor` muda, mas `objeto3.cor` não',
-        'Nada — cada objeto guarda seus próprios valores de forma independente',
-        'São apagados — só um objeto pode ter `cor` definida por vez',
+        "Objetos do mesmo tipo não podem ter o mesmo atributo.",
+        "O último valor atribuído substitui os anteriores em todos os objetos.",
+        "Cada objeto guarda seus próprios valores – mesma estrutura, dados independentes.",
+        "Atributos só existem enquanto o objeto está sendo criado.",
       ],
       correct: 2,
-      explanation: 'Atributos pertencem a cada objeto individualmente. Mudar um atributo de um objeto não afeta os demais — cada um tem os seus próprios valores.',
+      explanation:
+        "Caju e Muriel são polvos – têm os mesmos atributos (inclusive `cor`). Mas cada uma carrega seu próprio valor. Mudar `caju.cor` não afeta `muriel.cor` e vice-versa.",
     },
     {
-      id: '1-3-e4',
-      question: 'Para atualizar o atributo `velocidade` do objeto `carro` para `120`, a sintaxe correta é:',
+      id: "1-3-e3",
+      question:
+        "Qual código atribui o valor `120` ao atributo `velocidade` do objeto `moto`?",
       options: [
-        '`velocidade.carro = 120`',
-        '`set(carro, velocidade, 120)`',
-        '`carro[velocidade] = 120`',
-        '`carro.velocidade = 120`',
+        "`velocidade.moto = 120`",
+        "`moto[velocidade] = 120`",
+        "`set moto.velocidade = 120`",
+        "`moto.velocidade = 120`",
       ],
       correct: 3,
-      explanation: 'A notação ponto serve tanto para leitura (`carro.velocidade`) quanto para atribuição (`carro.velocidade = 120`). A estrutura é a mesma: `objeto.atributo = novo_valor`.',
+      explanation:
+        "A notação ponto funciona tanto para leitura (`moto.velocidade`) quanto para atribuição (`moto.velocidade = 120`). É como atualizar um campo que pertence especificamente àquele objeto.",
     },
     {
-      id: '1-3-e5',
-      question: 'Considerando um objeto `celular`, qual dos itens abaixo representa um atributo?',
+      id: "1-3-e4",
+      question:
+        'Otto escreve `ada.cor = "transparente"`. O que aconteceu com Ada?',
       options: [
-        '`ligar()` — uma ação que o celular sabe executar',
-        '`bateria` — uma informação que descreve o estado do celular',
-        '`tirar_foto()` — um comportamento do celular',
-        'O celular em si — a entidade completa',
+        "Ada foi substituída por um novo objeto com cor transparente.",
+        "O estado de Ada mudou – o atributo `cor` agora guarda um novo valor.",
+        "Todos os polvos ficaram transparentes.",
+        "O atributo `cor` foi apagado de Ada.",
       ],
       correct: 1,
-      explanation: 'Atributos são informações — dados que descrevem o estado do objeto. Ações como `ligar()` e `tirar_foto()` são outra coisa. `bateria`, `modelo`, `cor` são exemplos de atributos.',
+      explanation:
+        "Atribuir um novo valor a `ada.cor` muda o estado de Ada naquele momento. O objeto continua o mesmo – o que mudou foi o dado guardado naquele atributo.",
     },
     {
-      id: '1-3-e6',
-      question: 'O valor de um atributo pode ser alterado depois que o objeto foi criado?',
+      id: "1-3-e5",
+      question: "Qual afirmação sobre atributos está INCORRETA?",
       options: [
-        'Sim — o estado de um objeto pode evoluir ao longo do tempo',
-        'Não — atributos são fixos após a criação do objeto',
-        'Apenas atributos do tipo texto podem ser alterados',
-        'Apenas se o objeto for completamente recriado com novos valores',
+        "Um atributo pode guardar qualquer tipo de dado: número, texto, lista, etc.",
+        "Dois objetos da mesma espécie compartilham os valores dos seus atributos automaticamente.",
+        "Atributos são acessados usando a notação ponto.",
+        "O valor de um atributo pode mudar após o objeto ser criado.",
       ],
-      correct: 0,
-      explanation: 'O estado de um objeto pode evoluir. Basta usar a notação ponto: `objeto.atributo = novo_valor`. Só esse objeto é afetado — os demais continuam com os seus próprios valores.',
+      correct: 1,
+      explanation:
+        "Atributos de cada objeto são independentes. `ada.cor` e `caju.cor` são campos distintos – alterar um não afeta o outro. As outras afirmativas são verdadeiras.",
+    },
+    {
+      id: "1-3-e6",
+      question:
+        "Otto lê `ada.num_tentaculos` e obtém `8`. Em seguida lê `caju.num_tentaculos` e obtém `8` também. Isso significa que Ada e Caju são o mesmo objeto?",
+      options: [
+        "Sim – dois objetos com os mesmos valores são idênticos.",
+        "Sim – atributos iguais indicam que compartilham memória.",
+        "Não – objetos diferentes podem ter os mesmos valores sem serem o mesmo objeto.",
+        "Não – isso indica um erro no código.",
+      ],
+      correct: 2,
+      explanation:
+        "Dois objetos distintos podem ter valores idênticos nos atributos e ainda assim serem entidades completamente separadas. Como vimos na missão anterior: `==` compara dados, `is` compara identidade.",
     },
   ],
-  has_minigame: false
+  has_minigame: false,
+  references: [
+    {
+      author: "Phillips, D.",
+      year: 2015,
+      title: "Python 3 Object-Oriented Programming",
+      location: "Cap. 1, p. 6",
+      note: "Atributo como dado individual do objeto; instâncias do mesmo tipo têm o mesmo atributo, cada uma com seu próprio valor.",
+    },
+    {
+      author: "Weisfeld, M.",
+      year: 2019,
+      title: "The Object-Oriented Thought Process",
+      location: "Cap. 1, p. 10",
+      note: "Atributos como representação do estado do objeto.",
+    },
+    {
+      author: "Kölling, M.; Quig, B.; Patterson, A.; Rosenberg, J.",
+      year: 2003,
+      title: "The BlueJ System and Its Pedagogy",
+      location: "Journal of Computer Science Education, Vol. 13, No. 4",
+      note: "Princípio Objects First: objetos do mesmo tipo têm os mesmos atributos, mas valores independentes.",
+    },
+  ],
 };
 
 export default missao;

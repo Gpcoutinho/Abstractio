@@ -1,4 +1,112 @@
-﻿ Missão 1-3 — Atributos
+<!-- NOTAS DE DESENVOLVIMENTO – não são conteúdo da missão -->
+
+## [notas] Referências e decisões para esta missão
+
+### Fontes bibliográficas
+
+**Phillips – Python 3 Object-Oriented Programming, p. 6 (Cap. 1) — ALTA PRIORIDADE**
+
+"Data typically represents the individual characteristics of a certain object.
+A class can define specific sets of characteristics that are shared by all objects of
+that class. Any specific object can have different data values for the given
+characteristics. For example, our three oranges on the table could each weigh a
+different amount. The orange class could then have a weight attribute. All instances
+of the orange class have a weight attribute, but each orange has a different value
+for this attribute."
+
+→ Adaptado com polvos: Ada (rosa), Caju (amarela), Muriel (ciano) – mesma estrutura,
+  atributo `cor` em comum, valores completamente próprios.
+  Base direta para a seção "Cada objeto guarda os seus" e para o `<conceito>`.
+
+---
+
+**Weisfeld – The Object-Oriented Thought Process, p. 10 (guardados.txt, Bloco 6) — ALTA PRIORIDADE**
+
+"The data stored within an object represents the state of the object.
+In OO programming terminology, this data is called attributes."
+
+→ Atributo = estado do objeto em um dado momento. Mudar um atributo = mudar o estado.
+  Reforça a seção "Atributos podem mudar" e fundamenta o `<conceito>`.
+  Atenção: "estado" é termo técnico – reformular de forma acessível no texto.
+
+---
+
+**BlueJ – Kölling et al. (2003) — ALTA PRIORIDADE**
+
+Princípio Objects First: o aluno deve perceber sozinho que objetos do mesmo tipo têm
+os mesmos atributos, mas valores diferentes. A visualização side-by-side de dois objetos
+torna isso imediato – sem precisar de explicação.
+
+→ Justifica o SVG com Ada, Caju e Muriel lado a lado com seus cards de atributos.
+  O visual faz o trabalho antes do texto.
+
+---
+
+**Phillips – p. 10 (Cap. 1, Bloco 4) — MÉDIA PRIORIDADE**
+
+"Objects typically represent nouns in the original problem, while methods are
+normally verbs. Attributes can often be picked up as adjectives."
+
+→ Heurística linguística: atributos como adjetivos do objeto (rosa, amarela, ciano).
+  Útil como frase narrativa leve – não como regra formal.
+  Usar com cautela; não funciona para todos os casos (ex: `id`, `num_tentaculos`).
+
+---
+
+**BlueJ – Kölling et al. (2003) — MÉDIA PRIORIDADE**
+
+"Objetos são manipulados por operações (métodos) que alteram seu estado."
+
+→ Bridge natural ao final de "Atributos podem mudar": estado mudou via atribuição direta;
+  na próxima missão veremos operações que fazem isso de forma mais estruturada.
+  Usar apenas se a seção comportar sem ficar pesada.
+
+---
+
+### Personagens desta missão
+- **Ada** – rosa (`"rosa"`) — já estabelecida desde a missão 2
+- **Caju** – amarela (`"amarela"`) — personagem guardada, reaparece aqui
+- **Muriel** – ciano (`"ciano"`) — nova personagem; introduzida nesta missão
+
+---
+
+### Linha narrativa
+- Otto já conhece Ada (missão 2). Agora abre o caderno de campo e começa a registrar o que vê.
+- Gancho: retomada das "características" da missão anterior → como o Python guarda isso → atributo.
+- Três polvos na seção de independência: Ada, Caju e Muriel – mesma espécie, cores próprias.
+- Ada se camuflando na seção de mutação – atualização do caderno como metáfora de atribuição.
+- Nenhuma `class` ou `__init__` aparece nesta missão.
+
+---
+
+### Dúvidas previstas
+- `{{duvida-atributo-variavel}}` – "Atributo é a mesma coisa que variável?" → resposta: quase, mas o atributo pertence a um objeto específico e só faz sentido junto a ele; variável é um conceito mais genérico.
+
+---
+
+### Estrutura das seções
+1. Otto abre o caderno – gancho a partir das "características" da missão 2; introdução do atributo
+2. O ponto – notação `objeto.atributo` para acessar dados
+3. Cada objeto guarda os seus – independência entre instâncias (Phillips + BlueJ)
+4. Atributos podem mudar – mutação, atribuição e estado (Weisfeld)
+
+**Visuais:**
+- Seção 1: Otto com caderno aberto, pares nome–valor listados; Ada ao lado com cada característica destacada
+- Seção 3: Ada (rosa), Caju (amarela) e Muriel (ciano) com cards de atributos independentes; seta indicando que mudar Ada não afeta as outras
+
+---
+
+### Resumo (campo `resumo` no .ts)
+- **Atributo** – dado nomeado que pertence a um objeto e guarda seu estado
+- **Notação ponto** – `objeto.atributo` – como acessar um atributo em Python
+- **Independência** – cada objeto guarda seus próprios valores; mudar um não afeta os outros
+- **Mutação** – o valor de um atributo pode ser alterado; isso muda o estado do objeto
+
+<!-- FIM DAS NOTAS -->
+
+---
+
+# Missão 1-3 – Atributos
 
 **Ícone:** PiTag
 **Emblema:** Pintor(a) de Tentáculos
@@ -7,47 +115,62 @@
 
 ### Otto abre o caderno
 
-Na missão anterior, Otto encontrou Ada no oceano. Ele existe, é único, tem identidade própria.
+Na missão anterior, Otto descobriu que todo objeto tem três marcas: identidade, características e ações.
 
-Agora Otto tira o caderno de campo e começa a registrar tudo o que observa: cor, tamanho, número de tentáculos, espécie...
+Ada é rosa. Tem 8 tentáculos. Mede 25 cm.
 
-Cada informação registrada é um **atributo** — um dado que pertence especificamente a Ada.
+Mas como o Python guarda isso? Se Otto precisasse descrever Ada *para um computador*, o que escreveria?
 
-> **Atributo** = uma informação que pertence a um objeto. Cada objeto guarda os seus próprios valores.
+Ele abre o caderno de campo e começa a registrar – cada informação com um nome e um valor. Cor: rosa. Tentáculos: 8. Tamanho: 25.
 
-> [interativo: FichaInterativo — ficha de observação de Ada com atributos clicáveis. Ao clicar em cada atributo, revela o valor e a linha Python correspondente: `Ada.cor → "rosa"`. Ada aparece ao lado com a característica destacada visualmente.]
+É exatamente assim que o Python pensa. Cada uma dessas informações nomeadas é um <destaque>atributo</destaque> – a forma como um objeto guarda seus dados.
 
-<ficha-interativo></ficha-interativo>
+{{duvida-atributo-variavel}}
+
+<conceito note="adapt. Phillips, 2015; Weisfeld, 2013"><strong>Atributo</strong>: dado nomeado que pertence a um objeto e representa seu estado em um momento específico.</conceito>
+
+> [svg: Otto segurando um caderno aberto. Na página do caderno: lista de pares nome–valor (cor: rosa, num_tentaculos: 8, tamanho_cm: 25, especie: Octopus vulgaris). Ada ao lado, com cada característica destacada visualmente conforme listada.]
 
 ---
 
-### O ponto — como acessar um atributo
+### O ponto
 
 Em Python, o ponto (`.`) é a forma de acessar um atributo de um objeto. É como Otto apontando para Ada e dizendo: *"me dê sua cor"*.
 
-```python
-print(Ada.nome)             # Ada
-print(Ada.cor)              # rosa
-print(Ada.num_tentaculos)   # 8
-print(Ada.tamanho_cm)       # 25
-print(Ada.especie)          # Octopus vulgaris
+A estrutura é sempre a mesma:
+
+```pseudocodigo
+objeto.atributo
 ```
 
-A estrutura é sempre: `objeto.atributo`.
+Veja como fica com Ada:
+
+```python
+print(ada.nome)            # Ada
+print(ada.cor)             # rosa
+print(ada.num_tentaculos)  # 8
+print(ada.tamanho_cm)      # 25
+```
+
+Cada linha pede um atributo diferente pelo nome. O Python vai até o objeto, encontra o dado e devolve o valor.
 
 ---
 
-### Cada polvo guarda os seus
+### Cada objeto guarda os seus
 
-No oceano há outros polvos. Cada um carrega seus próprios atributos — completamente independentes entre si.
+No oceano há outros polvos. Ada não é a única.
+
+Otto avista Caju – amarela, curiosa, menor que Ada. E mais adiante, Muriel – ciano, veloz, difícil de fotografar. Os três são polvos: mesma espécie, mesmo conjunto de atributos. Mas cada um carrega seus próprios valores.
 
 ```python
-print(Ada.cor)    # rosa
-print(ana.cor)       # azul
-print(douglas.cor)   # verde
+print(ada.cor)    # rosa
+print(caju.cor)   # amarela
+print(muriel.cor) # ciano
 ```
 
-Mudar a cor de Ada não afeta Ana. Mudar Ana não afeta Douglas. Cada objeto é uma entidade separada com seus próprios dados.
+Mudar a cor de Ada não afeta Caju. Mudar Caju não afeta Muriel. Ou seja: os atributos de um objeto existem de forma isolada – o que acontece com um não contamina os outros.
+
+> [svg: Ada (rosa), Caju (amarela) e Muriel (ciano) lado a lado, cada uma com seu card de atributos abaixo. Uma seta saindo de ada.cor indica uma mudança de valor; os cards de Caju e Muriel permanecem inalterados.]
 
 ---
 
@@ -56,13 +179,16 @@ Mudar a cor de Ada não afeta Ana. Mudar Ana não afeta Douglas. Cada objeto é 
 O estado de um objeto pode evoluir. Otto observa Ada se camuflando e atualiza o caderno:
 
 ```python
-Ada.cor = "transparente"
-print(Ada.cor)  # transparente
+ada.cor = "transparente"
 ```
 
-Só `Ada.cor` mudou. Ana e Douglas continuam com as suas.
+Agora:
 
-> [svg: diagrama simples — `Ada.cor` com valor `"rosa"` → seta de atribuição → valor `"transparente"`. Outros polvos ao lado sem alteração.]
+```python
+print(ada.cor)  # transparente
+```
+
+O estado de Ada mudou – só o dela. Caju continua amarela. Muriel continua ciano. A atribuição age sobre um objeto específico, nunca sobre todos ao mesmo tempo.
 
 ---
 
@@ -70,13 +196,22 @@ Só `Ada.cor` mudou. Ana e Douglas continuam com as suas.
 
 - [ ] Tem mini-jogo
 
+## Resumo
+
+**Nesta missão:**
+
+- **Atributo** – dado nomeado que pertence a um objeto e guarda seu estado
+- **Notação ponto** – `objeto.atributo` – como acessar um atributo em Python
+- **Independência** – cada objeto guarda seus próprios valores; mudar um não afeta os outros
+- **Mutação** – o valor de um atributo pode ser alterado; isso muda o estado do objeto
+
 ## Exercício
 
-**Pergunta:** Otto lê `Ada.cor` e vê `"rosa"`. Em seguida escreve `ana.cor = "verde"`. O que acontece com `Ada.cor`?
+**Pergunta:** Otto lê `ada.cor` e vê `"rosa"`. Em seguida escreve `caju.cor = "transparente"`. O que acontece com `ada.cor`?
 
-- [ ] Muda para `"verde"` — objetos do mesmo tipo compartilham atributos.
-- [x] Continua `"rosa"` — cada objeto guarda seus próprios atributos. ← correta
-- [ ] Fica indefinido — só um polvo pode ter cor definida por vez.
-- [ ] Gera um erro — não é possível alterar atributos de objetos separados.
+- [ ] Muda para `"transparente"` – objetos do mesmo tipo compartilham atributos.
+- [x] Continua `"rosa"` – cada objeto guarda seus próprios atributos. ← correta
+- [ ] Fica indefinido – só um polvo pode ter cor definida por vez.
+- [ ] Gera um erro – não é possível alterar atributos de objetos separados.
 
-**Explicação:** Atributos pertencem a cada objeto individualmente. Mudar `ana.cor` não afeta `Ada.cor` — são dados completamente independentes.
+**Explicação:** Atributos pertencem a cada objeto individualmente. Mudar `caju.cor` não afeta `ada.cor` – são dados completamente independentes.
