@@ -6,6 +6,7 @@ import TresPolvosInterativo from "../components/missoes/nivel_1/missao_2/TresPol
 import FichaInterativo from "../components/missoes/nivel_1/missao_3/FichaInterativo";
 import FichaAcesso from "../components/missoes/nivel_1/missao_3/FichaAcesso";
 import AdaCardRotulado from "../components/missoes/nivel_1/missao_3/AdaCardRotulado";
+import DiagramaRotulosValores from "../components/missoes/nivel_1/missao_3/DiagramaRotulosValores";
 import PolvonilsonIntro from "../components/missoes/nivel_1/missao_0/PolvonilsonIntro";
 import CadernoAbertura from "../components/missoes/nivel_1/missao_1/CadernoAbertura";
 import DadosGlobais from "../components/missoes/nivel_1/missao_1/DadosGlobais";
@@ -318,6 +319,7 @@ const Missao: React.FC = () => {
               if (part.startsWith('{{duvida-')) { const d = missao.duvidas?.[part.slice(2, -2)]; if (d) return <DuvidaBlock key={i} pergunta={d.pergunta} resposta={d.resposta} />; }
               if (part === '{{ada-card-objeto}}') return <AdaCard key={i} nivel="objeto" />;
               if (part === '{{ada-card-rotulado}}') return <AdaCardRotulado key={i} />;
+              if (part === '{{diagrama-rotulos-valores}}') return <DiagramaRotulosValores key={i} />;
               if (part === '{{caderno-abertura}}') return <CadernoAbertura key={i} />;
               if (part === '{{dados-globais}}') return <DadosGlobais key={i} />;
               if (part === '{{caos-anotacoes}}') return <CaosAnotacoes key={i} />;
