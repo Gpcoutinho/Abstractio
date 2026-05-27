@@ -34,6 +34,7 @@ Se você pedir para o Python te mostrar a estrutura interna da "caixa-preta" que
 
 \`\`\`python-simplificado
 ada = {
+    "nome": "Ada",
     "cor": "rosa",
     "num_tentaculos": 8
 }
@@ -48,8 +49,8 @@ Mas o que torna Ada *ela mesma* – e não qualquer outro polvo?
 Vejamos a seguir o que acontece quando dois objetos carregam exatamente os mesmos dados:
 
 \`\`\`python-simplificado
-ada   = {"cor": "rosa", "num_tentaculos": 8}
-outra = {"cor": "rosa", "num_tentaculos": 8}
+ada   = {"nome": "Ada", "cor": "rosa", "num_tentaculos": 8}
+outra = {"nome": "Ada", "cor": "rosa", "num_tentaculos": 8}
 \`\`\`
 
 O que será que aconteceria se perguntássemos ao Python qual é o endereço de memória de cada um? Será que, tendo as mesmas características, o Python englobaria os dois em um só? Ou criaria duas variáveis com endereços diferentes? Veredito: se temos dois objetos distintos, então cada um recebe um endereço único na memória. Veja:

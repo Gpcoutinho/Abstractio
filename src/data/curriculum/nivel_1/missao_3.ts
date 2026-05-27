@@ -21,7 +21,11 @@ Mas como o Python guarda isso? Se Otto precisasse descrever Ada *para um computa
 Na missão anterior, vimos a forma como o Python guarda esses dados relacionados a Ada:
 
 \`\`\`python-simplificado
-ada = {"cor": "rosa", "num_tentaculos": 8}
+ada = {
+    "nome": "Ada",
+    "cor": "rosa",
+    "num_tentaculos": 8
+}
 \`\`\`
 
 Agora que já sabemos a estrutura que o Python entende, vamos aprender a nomear suas partes da maneira correta.
