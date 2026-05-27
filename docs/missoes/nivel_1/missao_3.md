@@ -144,7 +144,7 @@ O aluno personaliza os atributos de Ada e vê o card atualizar em tempo real.
 
 ## Teoria
 
-### Otto abre o caderno
+### O que Ada carrega
 
 Na missão anterior, Otto descobriu que todo objeto tem três marcas: <destaque-reto>identidade, características e ações</destaque-reto>.
 
@@ -195,7 +195,7 @@ E por que estamos insistindo nessa palavra "atual"? Porque os atributos de um ob
 
 ---
 
-### O ponto
+### O ponto: acessando um atributo
 
 Em Python, o ponto (`.`) é a forma de acessar um atributo de um objeto. É como Otto apontando para Ada e dizendo: *"me diga sua cor"*.
 
