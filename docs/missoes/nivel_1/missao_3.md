@@ -81,6 +81,7 @@ normally verbs. Attributes can often be picked up as adjectives."
 
 ### Dúvidas previstas
 - `{{duvida-atributo-variavel}}` – "Atributo é a mesma coisa que variável?" → resposta: quase, mas o atributo pertence a um objeto específico e só faz sentido junto a ele; variável é um conceito mais genérico.
+- `{{duvida-quais-atributos}}` – "O que define quais características e ações farão parte de um objeto?" → resposta: o modelador decide o que é relevante registrar. Teaser para missões seguintes (abstração, classe).
 
 ---
 
@@ -93,6 +94,36 @@ normally verbs. Attributes can often be picked up as adjectives."
 **Visuais:**
 - Seção 1: Otto com caderno aberto, pares nome–valor listados; Ada ao lado com cada característica destacada
 - Seção 3: Ada (rosa), Caju (amarela) e Muriel (ciano) com cards de atributos independentes; seta indicando que mudar Ada não afeta as outras
+
+---
+
+### Interativos (dois componentes separados)
+
+**Componente 1 – `FichaAcesso` (seção "O ponto")**
+O aluno completa a linha de código escolhendo o atributo a acessar.
+- Exibe: `print(ada.` + **dropdown** + `)`
+- Opções no dropdown: `.nome`, `.cor`, `.tentaculos`
+- À direita: painel "Retorno na tela" atualiza conforme a seleção
+  - `.nome` → `Ada`
+  - `.cor` → `rosa`
+  - `.tentaculos` → `8`
+- Tag na teoria: `{{ficha-acesso}}`
+- Componente: `src/components/missoes/nivel_1/FichaAcesso.tsx` (já registrado em Missao.tsx)
+
+**Componente 2 – `FichaInterativo` (seção "Cada objeto guarda os seus" ou mini-jogo)**
+O aluno personaliza os atributos de Ada e vê o card atualizar em tempo real.
+- Exibe o AdaCard com campos editáveis:
+  - `nome:` dropdown com 3 opções femininas
+  - `cor:` dropdown com 3 opções de cor
+  - `qte_tentaculos:` dropdown com 3 opções numéricas
+- O polvo (PolvinhoSVG) e o nome no header do card atualizam conforme as seleções
+- Tag na teoria ou mini-jogo: `{{ficha-interativo}}`
+- Componente: `src/components/missoes/nivel_1/FichaInterativo.tsx` (já registrado em Missao.tsx)
+
+**Opções de nome para os dropdowns (Componente 2):**
+- Nomes femininos: Ada, Caju, Muriel
+- Cores: rosa, amarela, ciano
+- Tentáculos: 6, 8, 10
 
 ---
 
@@ -154,6 +185,8 @@ print(ada.tamanho_cm)      # 25
 
 Cada linha pede um atributo diferente pelo nome. O Python vai até o objeto, encontra o dado e devolve o valor.
 
+<ficha-acesso></ficha-acesso>
+
 ---
 
 ### Cada objeto guarda os seus
@@ -189,6 +222,8 @@ print(ada.cor)  # transparente
 ```
 
 O estado de Ada mudou – só o dela. Caju continua amarela. Muriel continua ciano. A atribuição age sobre um objeto específico, nunca sobre todos ao mesmo tempo.
+
+<ficha-interativo></ficha-interativo>
 
 ---
 
