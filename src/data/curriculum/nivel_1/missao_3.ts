@@ -22,11 +22,16 @@ Mas como o Python guarda isso? Se Otto precisasse descrever Ada *para um computa
 ada = {"cor": "rosa", "tentaculos": 8}
 \`\`\`
 
-Esse bloco completo é o objeto, que possui rótulo 'ada'. Dentro dele, há rótulos menores – 'cor' e 'tentaculos' – que guardam as características de Ada. O Python tem um nome específico para essas duplas de rótulos menores + os valores que os acompanham: são os <destaque>atributos</destaque> do objeto 'ada'.
+Agora que já sabemos a estrutura que o Python entende, vamos aprender a nomear suas partes da maneira correta.
+
+Esse bloco completo ada = {"cor": "rosa", "tentaculos": 8} é o <destaque-reto>objeto</destaque-reto>, que possui rótulo 'ada'. Dentro dele, há rótulos menores – 'cor' e 'tentaculos' – que guardam as <destaque-marker>características</destaque-marker> de Ada (rosa, 8 tentáculos). Na POO, esses dados rotulados que pertencem a um objeto têm um nome específico: são os <destaque>atributos</destaque> de 'ada'.
 
 
 <conceito note="adapt. Phillips, 2015; Weisfeld, 2019"><strong>Atributo</strong>: dado rotulado que pertence a um objeto e representa seu estado em um momento específico.</conceito>
 
+Ou seja: no momento atual, o objeto 'ada' possui o atributo 'cor' com o valor 'rosa' e o atributo 'tentaculos' com o valor '8'. Esses atributos são como campos que guardam informações sobre Ada – eles descrevem seu estado atual.
+
+E por que estamos insistindo nessa palavra "atual"? Porque os atributos de um objeto podem mudar ao longo do tempo. Ada pode se camuflar e ficar transparente, ou crescer e passar a medir 30 cm. O que define Ada não é o valor específico de seus atributos, mas sim o fato de que ela tem esses atributos – e que eles podem evoluir.
 
 {{duvida-atributo-variavel}}
 
