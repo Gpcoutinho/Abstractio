@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from 'react';
-import { StarIcon as StarOutline, LockClosedIcon, XMarkIcon, TrophyIcon } from '@heroicons/react/24/outline';
+import { StarIcon as StarOutline, XMarkIcon, TrophyIcon } from '@heroicons/react/24/outline';
 import { StarIcon as StarSolid } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
 import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
 import MissionIcon from '../components/MissionIcon';
-import BauDeConchas from '../components/BauDeConchas';
+import ExerciciosExtras from '../components/ExerciciosExtras';
 import PageWrapper from '../components/PageWrapper';
 import Footer from '../components/Footer';
 
@@ -34,8 +34,8 @@ function getProximaMissao(nivelId: number, missaoIdx: number): string | null {
   return null;
 }
 
-const BauPage: React.FC = () => {
-  const { isMissaoConcluida, getTier, getExtrasDone } = useProgress();
+const ExerciciosExtrasPage: React.FC = () => {
+  const { getTier, getExtrasDone } = useProgress();
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const missionsWithExtras = useMemo(() =>
@@ -53,7 +53,7 @@ const BauPage: React.FC = () => {
         <PageWrapper className="flex-grow max-w-3xl pb-16">
 
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-textPrimary mb-1">Baú de Conchas</h1>
+            <h1 className="text-3xl font-bold text-textPrimary mb-1">Exercícios Extras</h1>
             <p className="text-textSecondary text-sm">Responda exercícios · ganhe mais conchas · evolua suas conquistas</p>
           </div>
 
@@ -66,50 +66,42 @@ const BauPage: React.FC = () => {
                   <h2 className="text-base font-semibold text-textSecondary uppercase tracking-widest mb-3">
                     {nivel.title}
                   </h2>
-                  <div className="space-y-2">
+                  <div className="grid grid-cols-2 gap-3">
                     {nivelMissions.map(({ missao }) => {
-                      const done = isMissaoConcluida(missao.id);
                       const tierVal = getTier(missao.id);
                       const tierCount = { none: 0, bronze: 1, silver: 2, gold: 3 }[tierVal];
                       const extrasDone = getExtrasDone(missao.id).length;
                       const extrasTotal = missao.extra_exercises!.length;
-                      const hasTierStyle = done && tierVal !== 'none';
+                      const hasTierStyle = tierVal !== 'none';
 
                       return (
                         <button
                           key={missao.id}
-                          onClick={() => done && setSelectedId(missao.id)}
-                          disabled={!done}
-                          className={`w-full flex items-center gap-4 p-4 rounded-xl text-left transition-all ${
-                            !done
-                              ? 'border border-borderDark bg-bgSecondary opacity-40 cursor-not-allowed'
-                              : tierVal === 'none'
-                              ? 'border border-borderDark bg-bgSecondary cursor-pointer hover:border-accent/50'
-                              : 'cursor-pointer hover:brightness-110'
+                          onClick={() => setSelectedId(missao.id)}
+                          className={`flex flex-col items-center text-center gap-2 p-5 rounded-xl transition-all cursor-pointer ${
+                            !hasTierStyle
+                              ? 'border border-borderDark bg-bgSecondary hover:border-accent/50'
+                              : 'hover:brightness-110'
                           }`}
                           style={hasTierStyle ? TIER_CARD_STYLE[tierVal] : undefined}
                         >
-                          <MissionIcon iconName={missao.icon} completed={done} className="w-8 h-8 shrink-0" />
+                          <MissionIcon iconName={missao.icon} completed={extrasDone > 0} className="w-10 h-10" />
 
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-semibold text-textPrimary leading-snug truncate">
-                              {missao.title}
-                            </p>
+                          <p className="text-xs font-semibold text-textPrimary leading-snug line-clamp-2">
+                            {missao.title}
+                          </p>
+
+                          <div className="flex items-center gap-0.5">
+                            {[1, 2, 3].map(n =>
+                              tierCount >= n
+                                ? <StarSolid key={n} className="w-3 h-3 text-yellow-400" />
+                                : <StarOutline key={n} className="w-3 h-3 text-borderDark" />
+                            )}
                           </div>
 
-                          <div className="flex items-center gap-3 shrink-0">
-                            <div className="flex items-center gap-0.5">
-                              {[1, 2, 3].map(n =>
-                                tierCount >= n
-                                  ? <StarSolid key={n} className="w-3.5 h-3.5 text-yellow-400" />
-                                  : <StarOutline key={n} className="w-3.5 h-3.5 text-borderDark" />
-                              )}
-                            </div>
-                            <span className="text-xs text-textSecondary tabular-nums w-8 text-right">
-                              {extrasDone}/{extrasTotal}
-                            </span>
-                            {!done && <LockClosedIcon className="w-3.5 h-3.5 text-textSecondary/50" />}
-                          </div>
+                          <span className="text-[10px] text-textSecondary tabular-nums">
+                            {extrasDone}/{extrasTotal}
+                          </span>
                         </button>
                       );
                     })}
@@ -159,7 +151,7 @@ const BauPage: React.FC = () => {
               </div>
             </div>
             <div className="overflow-y-auto px-6 py-5">
-              <BauDeConchas
+              <ExerciciosExtras
                 key={selected.missao.id}
                 missaoId={selected.missao.id}
                 extras={selected.missao.extra_exercises!}
@@ -173,4 +165,4 @@ const BauPage: React.FC = () => {
   );
 };
 
-export default BauPage;
+export default ExerciciosExtrasPage;

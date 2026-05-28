@@ -81,8 +81,7 @@ export interface ProgressContextValue {
   completarMissao: (missaoId: string, tentativas?: number) => void;
   desmarcarMissao: (missaoId: string) => void;
   registrarErroMissao: (missaoId: string) => void;
-  completarExtraExercise: (missaoId: string, extraId: string) => void;
-  penalizarExtraErro: (missaoId: string) => void;
+  completarExtraExercise: (missaoId: string, extraId: string, reward: number) => void;
   setNome: (nome: string) => void;
   setGenero: (genero: Genero) => void;
   setAvatarIdx: (idx: number) => void;
@@ -150,24 +149,17 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     });
   }, []);
 
-  const completarExtraExercise = useCallback((missaoId: string, extraId: string) => {
+  const completarExtraExercise = useCallback((missaoId: string, extraId: string, reward: number) => {
     setState(prev => {
       const jaFeitos = prev.extras_concluidos[missaoId] ?? [];
       if (jaFeitos.includes(extraId)) return prev;
       const novos = [...jaFeitos, extraId];
       return {
         ...prev,
-        conchas: prev.conchas + 3,
+        conchas: prev.conchas + reward,
         extras_concluidos: { ...prev.extras_concluidos, [missaoId]: novos },
       };
     });
-  }, []);
-
-  const penalizarExtraErro = useCallback((_missaoId: string) => {
-    setState(prev => ({
-      ...prev,
-      conchas: Math.max(0, prev.conchas - 1),
-    }));
   }, []);
 
   const setNome = useCallback((nome: string) => {
@@ -217,7 +209,7 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, []);
 
   return (
-    <ProgressContext.Provider value={{ ...state, completarMissao, desmarcarMissao, registrarErroMissao, completarExtraExercise, penalizarExtraErro, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva, comprarAcessorio, setAcessorioAtivo }}>
+    <ProgressContext.Provider value={{ ...state, completarMissao, desmarcarMissao, registrarErroMissao, completarExtraExercise, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva, comprarAcessorio, setAcessorioAtivo }}>
       {children}
     </ProgressContext.Provider>
   );
