@@ -109,6 +109,10 @@ O estado de um objeto pode evoluir. Otto observa Ada se camuflando e atualiza o 
 
 {{animacao-camuflagem}}
 
+O estado de Ada mudou – só o dela. Caju continua amarela. Muriel continua ciano. A <destaque>atribuição</destaque> – ato de dar um novo valor a um atributo – age sobre um objeto específico, nunca sobre todos ao mesmo tempo.
+
+<conceito note="adapt. Weisfeld, 2019"><strong>Atribuição</strong>: operação que define ou modifica o valor de um atributo em um objeto específico.</conceito>
+
 \`\`\`python
 # atribuindo um novo valor ao atributo cor de ada
 ada.cor = "transparente"
@@ -121,7 +125,7 @@ Agora:
 print(ada.cor)  # impresso na tela: "transparente"
 \`\`\`
 
-O estado de Ada mudou – só o dela. Caju continua amarela. Muriel continua ciano. A atribuição age sobre um objeto específico, nunca sobre todos ao mesmo tempo.
+
 
 <ficha-interativo></ficha-interativo>
 
