@@ -88,6 +88,11 @@ Otto avista Caju – amarela, curiosa, menor que Ada. E mais adiante, Muriel –
 
 {{tres-polvos-acesso}}
 
+Ou seja, para acessar a cor de Caju, Otto escreve \`caju.cor\`. Para acessar a cor de Muriel, escreve \`muriel.cor\`. O ponto é o que conecta o nome do objeto ao nome do atributo. Ele é como um caminho que leva até o dado específico daquele objeto.
+
+Se quiséssemos imprimir na tela usando Python, seria exatamente assim:
+
+
 \`\`\`python
 # print() — comando para exibir um valor na tela
 print(ada.cor)    # impresso na tela: "rosa"
@@ -95,7 +100,6 @@ print(caju.cor)   # impresso na tela: "amarela"
 print(muriel.cor) # impresso na tela: "ciano"
 \`\`\`
 
-Mudar a cor de Ada não afeta Caju. Mudar Caju não afeta Muriel. Ou seja: os atributos de um objeto existem de forma isolada – o que acontece com um não contamina os outros.
 
 ---
 

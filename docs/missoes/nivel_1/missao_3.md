@@ -110,20 +110,22 @@ O aluno completa a linha de código escolhendo o atributo a acessar.
 - Tag na teoria: `{{ficha-acesso}}`
 - Componente: `src/components/missoes/nivel_1/FichaAcesso.tsx` (já registrado em Missao.tsx)
 
-**Componente 2 – `FichaInterativo` (seção "Cada objeto guarda os seus" ou mini-jogo)**
+**Componente 2 – `TresPolvosAcesso` (seção "Cada objeto guarda os seus")**
+Seletor de polvo + card de atributos + painel de acesso integrados.
+- Seletor: botões ada / caju / muriel; ao trocar, card e dropdown resetam
+- Card: imagem proporcional ao tamanho (Ada 90px, Caju 65px, Muriel 115px) + atributos somente-leitura
+- Painel: `print( [polvo] . [dropdown de atributo] )` com retorno correspondente
+- Tag na teoria: `{{tres-polvos-acesso}}`
+- Componente: `src/components/missoes/nivel_1/missao_3/TresPolvosAcesso.tsx`
+
+**Componente 3 – `FichaInterativo` (seção "Atributos podem mudar")**
 O aluno personaliza os atributos de Ada e vê o card atualizar em tempo real.
 - Exibe o AdaCard com campos editáveis:
-  - `nome:` dropdown com 3 opções femininas
   - `cor:` dropdown com 3 opções de cor
   - `qte_tentaculos:` dropdown com 3 opções numéricas
-- O polvo (PolvinhoSVG) e o nome no header do card atualizam conforme as seleções
-- Tag na teoria ou mini-jogo: `{{ficha-interativo}}`
-- Componente: `src/components/missoes/nivel_1/FichaInterativo.tsx` (já registrado em Missao.tsx)
-
-**Opções de nome para os dropdowns (Componente 2):**
-- Nomes femininos: Ada, Caju, Muriel
-- Cores: rosa, amarela, ciano
-- Tentáculos: 6, 8, 10
+- O polvo (PolvinhoSVG) atualiza conforme as seleções
+- Tag na teoria: `<ficha-interativo></ficha-interativo>`
+- Componente: `src/components/missoes/nivel_1/missao_3/FichaInterativo.tsx`
 
 ---
 
@@ -227,16 +229,20 @@ No oceano há outros polvos. Ada não é a única.
 
 Otto avista Caju – amarela, curiosa, menor que Ada. E mais adiante, Muriel – ciano, veloz, difícil de fotografar. Os três são polvos: mesma espécie, mesmo conjunto de atributos. Mas cada um carrega seus próprios valores.
 
+> [interativo: TresPolvosAcesso — seletor de polvo (ada/caju/muriel); card com imagem proporcional ao tamanho e atributos; painel print(objeto.atributo) com retorno na tela]
+
+{{tres-polvos-acesso}}
+
+Ou seja, para acessar a cor de Caju, Otto escreve `caju.cor`. Para acessar a cor de Muriel, escreve `muriel.cor`. O ponto é o que conecta o nome do objeto ao nome do atributo. Ele é como um caminho que leva até o dado específico daquele objeto.
+
+Se quiséssemos imprimir na tela usando Python, seria exatamente assim:
+
 ```python
 # print() — comando para exibir um valor na tela
 print(ada.cor)    # impresso na tela: "rosa"
 print(caju.cor)   # impresso na tela: "amarela"
 print(muriel.cor) # impresso na tela: "ciano"
 ```
-
-Mudar a cor de Ada não afeta Caju. Mudar Caju não afeta Muriel. Ou seja: os atributos de um objeto existem de forma isolada – o que acontece com um não contamina os outros.
-
-> [svg: Ada (rosa), Caju (amarela) e Muriel (ciano) lado a lado, cada uma com seu card de atributos abaixo. Uma seta saindo de ada.cor indica uma mudança de valor; os cards de Caju e Muriel permanecem inalterados.]
 
 ---
 
@@ -259,6 +265,8 @@ print(ada.cor)  # impresso na tela: "transparente"
 O estado de Ada mudou – só o dela. Caju continua amarela. Muriel continua ciano. A atribuição age sobre um objeto específico, nunca sobre todos ao mesmo tempo.
 
 <ficha-interativo></ficha-interativo>
+
+{{duvida-quais-atributos}}
 
 ---
 
