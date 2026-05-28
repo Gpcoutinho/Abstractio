@@ -160,7 +160,7 @@ const Exercicios: React.FC<Props> = ({ missaoId, exercicios, proximaMissao }) =>
               <StarSolid key={i} className="w-3.5 h-3.5 text-yellow-400" />
             ))}
             {Array.from({ length: 3 - currentMeta.stars }).map((_, i) => (
-              <StarOutline key={i} className="w-3.5 h-3.5" style={{ color: '#0f172a' }} />
+              <StarSolid key={i} className="w-3.5 h-3.5" style={CUT_STYLE} />
             ))}
             <span style={{ color: '#0f172a', textShadow: '0 1px 1px rgba(255,255,255,0.28)' }}>
               {currentMeta.label}
