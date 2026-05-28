@@ -66,11 +66,11 @@ const oceanTheme = {
   'variable': { color: '#CBD5E1' },
 };
 
-// Mapeamento de linguagem → { lang para o highlighter, label para o badge }
-const LANG_MAP: Record<string, { lang: string; label: string }> = {
-  'python':              { lang: 'python', label: 'Python'              },
-  'python-simplificado': { lang: 'python', label: 'Python simplificado' },
-  'pseudocodigo':        { lang: 'python', label: 'Pseudocódigo'        },
+// Mapeamento de linguagem → { lang para o highlighter, label para o badge, tooltip }
+const LANG_MAP: Record<string, { lang: string; label: string; tooltip: string }> = {
+  'python':              { lang: 'python', label: 'Python',              tooltip: 'Código real e executável — pode ser copiado e rodado diretamente.'                                                              },
+  'python-simplificado': { lang: 'python', label: 'Python simplificado', tooltip: 'Usa atalhos antes da sintaxe completa ser apresentada. Facilita a leitura, mas ainda não é código válido.'                    },
+  'pseudocodigo':        { lang: 'python', label: 'Pseudocódigo',        tooltip: 'Representa a lógica sem seguir a sintaxe Python exata. Serve para entender a estrutura antes do código real.' },
 };
 
 type Props = {
@@ -90,20 +90,30 @@ const CodeBlock: React.FC<Props> = ({ className, children }) => {
   }
 
   const key = match[1];
-  const { lang, label } = LANG_MAP[key] ?? { lang: key, label: key };
+  const { lang, label, tooltip } = LANG_MAP[key] ?? { lang: key, label: key, tooltip: '' };
 
   return (
-    <div className="not-prose my-4 rounded-lg overflow-hidden border border-slate-700">
-      <div className="flex justify-end px-3 py-1.5 bg-[#1E293B] border-b border-slate-700">
+    <div className="not-prose my-4 rounded-lg border border-slate-700">
+      <div className="flex justify-end items-center px-3 py-1.5 bg-[#1E293B] border-b border-slate-700 gap-1.5 rounded-t-lg">
         <span className="text-xs font-mono text-slate-400">{label}</span>
+        {tooltip && (
+          <div className="relative group">
+            <span className="flex items-center justify-center w-3.5 h-3.5 rounded-full border border-slate-500 text-[9px] text-slate-400 cursor-default select-none leading-none">?</span>
+            <div className="absolute bottom-full right-0 mb-2 w-56 px-2.5 py-2 rounded-lg bg-slate-900 border border-slate-600 text-[11px] text-slate-300 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-150 pointer-events-none z-10 shadow-lg">
+              {tooltip}
+            </div>
+          </div>
+        )}
       </div>
-      <SyntaxHighlighter
-        language={lang}
-        style={oceanTheme}
-        customStyle={{ margin: 0, borderRadius: 0, border: 'none' }}
-      >
-        {String(children).replace(/\n$/, '')}
-      </SyntaxHighlighter>
+      <div className="rounded-b-lg overflow-hidden">
+        <SyntaxHighlighter
+          language={lang}
+          style={oceanTheme}
+          customStyle={{ margin: 0, borderRadius: 0, border: 'none' }}
+        >
+          {String(children).replace(/\n$/, '')}
+        </SyntaxHighlighter>
+      </div>
     </div>
   );
 };
