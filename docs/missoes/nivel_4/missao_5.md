@@ -1,4 +1,4 @@
-# Missão 4-5 — Generics
+﻿# Missão 4-5 — Generics
 
 **Ícone:** 🧪
 **Pontos:** 15
@@ -86,7 +86,7 @@ print(primeiro(["a", "b", "c"]))  # a
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

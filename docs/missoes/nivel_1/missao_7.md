@@ -1,4 +1,4 @@
-# Missão 1-7 — Resumo
+﻿# Missão 1-7 — Resumo
 
 **Ícone:** 📋
 **Pontos:** 15
@@ -76,7 +76,7 @@ No próximo nível, você vai descobrir os **4 Pilares da POO**:
 
 ## Mini-jogo
 
-- [x] Tem interativo
+- [x] Tem mini-jogo
 
 **Arquivo:** `interativos/nivel_1_missao_7.html`
 **Descrição:** Drag & drop — associar objetos do mundo real às suas características e comportamentos.

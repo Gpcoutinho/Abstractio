@@ -1,4 +1,4 @@
-# Missão 3-2 — Sobrescrita
+﻿# Missão 3-2 — Sobrescrita
 
 **Ícone:** ✏️
 **Pontos:** 15
@@ -53,7 +53,7 @@ class NotificacaoAuditada(Notificacao):
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

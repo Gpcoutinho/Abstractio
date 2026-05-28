@@ -1,4 +1,4 @@
-# Missão 4-6 — Design Patterns
+﻿# Missão 4-6 — Design Patterns
 
 **Ícone:** 🗺️
 **Pontos:** 15
@@ -109,7 +109,7 @@ print(db.conectar())
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

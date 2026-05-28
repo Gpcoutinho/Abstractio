@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "3-8",
@@ -83,7 +83,7 @@ print(pedido.finalizar(CartaoCredito()))
     correct: 1,
     explanation: "Correto! Contratos garantem que qualquer classe que os implemente possa ser usada de forma intercambiável, tornando o sistema extensível e previsível."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

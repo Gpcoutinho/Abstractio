@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "4-2",
@@ -70,7 +70,7 @@ Faça a pergunta: **"O que esta classe faz?"**
     correct: 1,
     explanation: "Correto! Baixa coesão se manifesta quando a classe acumula responsabilidades diferentes — o que a torna difícil de nomear, testar e manter."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

@@ -1,4 +1,4 @@
-# Missão 2-3 — Encapsulamento
+﻿# Missão 2-3 — Encapsulamento
 
 **Ícone:** 🔒
 **Pontos:** 15
@@ -52,7 +52,7 @@ def saldo(self, valor):
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

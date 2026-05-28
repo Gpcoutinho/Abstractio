@@ -1,4 +1,4 @@
-# Missão 1-6 — Construtor
+﻿# Missão 1-6 — Construtor
 
 **Ícone:** 🏗️
 **Pontos:** 15
@@ -90,7 +90,7 @@ print(caneta)  # Caneta — R$2.50 (100 em estoque)
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

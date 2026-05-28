@@ -1,10 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
+﻿import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import BoloFactory from "../components/missoes/nivel_1/missao_5/BoloFactory";
 import PolvosInterativo from "../components/missoes/nivel_1/missao_2/PolvosInterativo";
 import TresPolvosInterativo from "../components/missoes/nivel_1/missao_2/TresPolvosInterativo";
 import FichaInterativo from "../components/missoes/nivel_1/missao_3/FichaInterativo";
 import FichaAcesso from "../components/missoes/nivel_1/missao_3/FichaAcesso";
+import TresPolvosAcesso from "../components/missoes/nivel_1/missao_3/TresPolvosAcesso";
+import AnimacaoCamuflagem from "../components/missoes/nivel_1/missao_3/AnimacaoCamuflagem";
+import AdaCardRotulado from "../components/missoes/nivel_1/missao_3/AdaCardRotulado";
+import DiagramaRotulosValores from "../components/missoes/nivel_1/missao_3/DiagramaRotulosValores";
 import PolvonilsonIntro from "../components/missoes/nivel_1/missao_0/PolvonilsonIntro";
 import CadernoAbertura from "../components/missoes/nivel_1/missao_1/CadernoAbertura";
 import DadosGlobais from "../components/missoes/nivel_1/missao_1/DadosGlobais";
@@ -34,8 +38,8 @@ import interativoHtml from "../assets/interativos/nivel_1_missao_7.html?raw";
 import ProgressBar from '../components/ProgressBar';
 import ConceitoBox from '../components/ConceitoBox';
 import OQueVaiEncontrar from '../components/missoes/nivel_1/missao_0/OQueVaiEncontrar';
-import ExerciciosExtras from '../components/ExerciciosExtras';
-import { TreasureChest } from '@phosphor-icons/react';
+import BauDeConchas from '../components/ExerciciosExtras';
+import { TreasureChest, BookmarkSimple } from '@phosphor-icons/react';
 import ReferenciasBlock from '../components/ReferenciasBlock';
 import AdaCard from '../components/missoes/nivel_1/AdaCard';
 
@@ -142,9 +146,13 @@ const Missao: React.FC = () => {
   const [conchasGanhasAgora, setConchasGanhasAgora] = useState<number | null>(null);
   const [showCelebration, setShowCelebration] = useState(false);
   const [showBau, setShowBau] = useState(false);
+  const [bookmarkData, setBookmarkData] = useState<{ scrollY: number; sectionTitle: string } | null>(null);
+  const [showBookmarkBanner, setShowBookmarkBanner] = useState(false);
 
   // Estado do Header Retrátil
   const [showBar, setShowBar] = useState(true);
+
+  const theoryRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     setSelecionada(null);
@@ -153,6 +161,8 @@ const Missao: React.FC = () => {
     setConchasGanhasAgora(null);
     setShowCelebration(false);
     setShowBau(false);
+    setShowBookmarkBanner(false);
+    setBookmarkData(null);
   }, [nivelIdx, missaoIdx]);
 
   // Lógica de Scroll com Histerese (Zona Morta)
@@ -171,6 +181,43 @@ const Missao: React.FC = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const missaoId = `${nivelIdx}-${missaoIdx}`;
+
+  // Carrega bookmark salvo ao entrar na missão
+  useEffect(() => {
+    const saved = localStorage.getItem(`bookmark-${missaoId}`);
+    if (saved) {
+      try {
+        const data = JSON.parse(saved);
+        if (data.scrollY > 300) {
+          setBookmarkData(data);
+          setShowBookmarkBanner(true);
+        }
+      } catch {}
+    }
+  }, [missaoId]);
+
+  // Salva bookmark enquanto o aluno lê (debounce 800ms)
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+    const handleScroll = () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        if (!theoryRef.current) return;
+        const h2s = theoryRef.current.querySelectorAll('h2');
+        let sectionTitle = '';
+        h2s.forEach(h2 => {
+          if (h2.getBoundingClientRect().top < 150) sectionTitle = h2.textContent || '';
+        });
+        if (window.scrollY > 300) {
+          localStorage.setItem(`bookmark-${missaoId}`, JSON.stringify({ scrollY: window.scrollY, sectionTitle }));
+        }
+      }, 800);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => { window.removeEventListener('scroll', handleScroll); clearTimeout(timeout); };
+  }, [missaoId]);
 
   const nivel = niveis.find((n) => n.id === Number(nivelIdx));
   const missao = nivel?.missoes[Number(missaoIdx) - 1];
@@ -223,6 +270,8 @@ const Missao: React.FC = () => {
       completarMissao(missao.id, novasTentativas);
       setShowCelebration(true);
       celebrate();
+      localStorage.removeItem(`bookmark-${missao.id}`);
+      setShowBookmarkBanner(false);
     } else {
       registrarErroMissao(missao.id);
     }
@@ -311,17 +360,21 @@ const Missao: React.FC = () => {
 
       {/* Conteúdo da Missão */}
       <div className="max-w-3xl mx-auto pt-8 pb-16 px-5">
-        <section className="mb-8 prose prose-invert max-w-none prose-headings:text-textPrimary prose-headings:font-bold prose-p:text-textBody prose-p:leading-relaxed prose-strong:text-textPrimary prose-blockquote:border-l-accent prose-blockquote:text-textSecondary prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary prose-li:text-textBody [&_h2]:border-l-2 [&_h2]:border-accent/50 [&_h2]:pl-3">
+        <section ref={theoryRef} className="mb-8 prose prose-invert max-w-none prose-headings:text-textPrimary prose-headings:font-bold prose-p:text-textBody prose-p:leading-relaxed prose-strong:text-textPrimary prose-blockquote:border-l-accent prose-blockquote:text-textSecondary prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary prose-li:text-textBody [&_h2]:border-l-2 [&_h2]:border-accent/50 [&_h2]:pl-3">
           {missao.theory.split(/(\{\{cards?:[0-9,]+\}\}|\{\{[a-z][a-z-]*\}\})/).map((part, i) => {
             if (i % 2 === 1) {
               if (part.startsWith('{{duvida-')) { const d = missao.duvidas?.[part.slice(2, -2)]; if (d) return <DuvidaBlock key={i} pergunta={d.pergunta} resposta={d.resposta} />; }
               if (part === '{{ada-card-objeto}}') return <AdaCard key={i} nivel="objeto" />;
+              if (part === '{{ada-card-rotulado}}') return <AdaCardRotulado key={i} />;
+              if (part === '{{diagrama-rotulos-valores}}') return <DiagramaRotulosValores key={i} />;
               if (part === '{{caderno-abertura}}') return <CadernoAbertura key={i} />;
               if (part === '{{dados-globais}}') return <DadosGlobais key={i} />;
               if (part === '{{caos-anotacoes}}') return <CaosAnotacoes key={i} />;
               if (part === '{{polvonilson-intro}}') return <PolvonilsonIntro key={i} />;
               if (part === '{{slides-poo}}') return <SlidesPOO key={i} />;
               if (part === '{{o-que-vai-encontrar}}') return <OQueVaiEncontrar key={i} />;
+              if (part === '{{tres-polvos-acesso}}') return <TresPolvosAcesso key={i} />;
+              if (part === '{{animacao-camuflagem}}') return <AnimacaoCamuflagem key={i} />;
               const indices = part.match(/\d+/g)!.map(Number);
               const isRow = part.startsWith("{{cards:");
               const renderCard = (idx: number, className?: string) => {
@@ -417,18 +470,36 @@ const Missao: React.FC = () => {
           })}
         </section>
 
-        {/* Referências bibliográficas */}
-        {missao.references && missao.references.length > 0 && (
-          <ReferenciasBlock references={missao.references} />
-        )}
-
         {/* Mini-jogo */}
-        {missao.has_interativo && missao.interativo_html && interativos[missao.interativo_html] && (
+        {missao.has_minigame && missao.minigame_html && interativos[missao.minigame_html] && (
           <section className="mb-8">
             <h2 className="text-lg font-semibold text-textPrimary mb-3">Mini-jogo interativo</h2>
             <div className="rounded-lg overflow-hidden border border-borderDark">
-              <iframe srcDoc={interativos[missao.interativo_html]} title="Mini-jogo interativo" className="w-full" style={{ height: "480px", border: "none" }} sandbox="allow-scripts" />
+              <iframe srcDoc={interativos[missao.minigame_html]} title="Mini-jogo interativo" className="w-full" style={{ height: "480px", border: "none" }} sandbox="allow-scripts" />
             </div>
+          </section>
+        )}
+
+        {/* Resumo */}
+        {missao.resumo && missao.resumo.length > 0 && (
+          <hr className="border-borderDark my-10" />
+        )}
+        {missao.resumo && missao.resumo.length > 0 && (
+          <section className="mb-8 bg-bgSecondary border border-borderDark/60 rounded-xl p-6">
+            <h2 className="text-2xl font-bold text-textPrimary mb-4">Resumo</h2>
+            <ul className="space-y-2">
+              {missao.resumo.map((item, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-textBody">
+                  <span className="text-accent mt-0.5 shrink-0">·</span>
+                  <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={{
+                    p: ({ children }: { children?: React.ReactNode }) => <span>{children}</span>,
+                    strong: ({ children }: { children?: React.ReactNode }) => <strong className="text-textPrimary">{children}</strong>,
+                  }}>
+                    {item}
+                  </ReactMarkdown>
+                </li>
+              ))}
+            </ul>
           </section>
         )}
 
@@ -530,23 +601,31 @@ const Missao: React.FC = () => {
           ) : null}
         </div>
 
-        {/* Exercícios Extras */}
+        {/* Baú de Conchas */}
         {hasExtras && (
           <div className="mt-8 bg-bgSecondary border border-borderDark rounded-xl p-5 flex items-center justify-between gap-4">
             <div>
-              <p className="text-sm font-semibold text-textPrimary">Exercícios Extras</p>
+              <p className="text-sm font-semibold text-textPrimary">Baú de Conchas</p>
               <p className="text-xs text-textSecondary mt-0.5">
-                Responda exercícios · ganhe mais conchas · evolua suas conquistas
+                {jaConcluida
+                  ? 'Responda exercícios · ganhe mais conchas · evolua suas conquistas'
+                  : 'Disponível após concluir a missão'}
               </p>
             </div>
             <button
               onClick={() => setShowBau(true)}
-              className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-accent text-accent text-sm font-semibold hover:bg-accent/10 transition-colors"
+              disabled={!jaConcluida}
+              className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-accent text-accent text-sm font-semibold hover:bg-accent/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent"
             >
               <TreasureChest className="w-4 h-4 shrink-0" weight="bold" />
-              Exercícios Extras
+              Abrir Baú
             </button>
           </div>
+        )}
+
+        {/* Referências bibliográficas */}
+        {missao.references && missao.references.length > 0 && (
+          <ReferenciasBlock references={missao.references} />
         )}
 
         {/* Navegação de rodapé */}
@@ -581,6 +660,36 @@ const Missao: React.FC = () => {
           )}
         </div>
       </div>
+
+      {/* Banner de marcador de página */}
+      {showBookmarkBanner && bookmarkData && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-30 w-full max-w-sm px-4 pointer-events-none">
+          <div className="pointer-events-auto bg-bgSecondary border border-borderDark rounded-xl px-4 py-3 flex items-center gap-3 shadow-xl">
+            <BookmarkSimple className="w-4 h-4 text-accent shrink-0" weight="fill" />
+            <span className="text-sm text-textSecondary flex-1 min-w-0 truncate">
+              {bookmarkData.sectionTitle
+                ? <><span className="text-textPrimary font-medium">"{bookmarkData.sectionTitle}"</span></>
+                : 'Continuar de onde parou'}
+            </span>
+            <button
+              onClick={() => {
+                window.scrollTo({ top: bookmarkData.scrollY, behavior: 'smooth' });
+                setShowBookmarkBanner(false);
+              }}
+              className="text-accent text-xs font-semibold hover:opacity-80 transition-opacity shrink-0"
+            >
+              Continuar →
+            </button>
+            <button
+              onClick={() => setShowBookmarkBanner(false)}
+              className="text-textSecondary hover:text-textPrimary transition-colors shrink-0"
+              aria-label="Fechar"
+            >
+              <XMarkIcon className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Modal comemorativo */}
       {showCelebration && missao && (
@@ -626,7 +735,7 @@ const Missao: React.FC = () => {
                   className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-colors"
                 >
                   <TreasureChest className="w-4 h-4 shrink-0" weight="bold" />
-                  Exercícios Extras
+                  Abrir Baú de Conchas
                 </button>
               )}
               {proximaMissao ? (
@@ -650,7 +759,7 @@ const Missao: React.FC = () => {
         </div>
       )}
 
-      {/* Modal Exercícios Extras */}
+      {/* Modal Baú de Conchas */}
       {showBau && hasExtras && (
         <div
           className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-8 bg-bgPrimary/80 backdrop-blur-sm animate-fade-in"
@@ -662,8 +771,8 @@ const Missao: React.FC = () => {
           >
             <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-borderDark/30 shrink-0">
               <div>
-                <h2 className="text-lg font-bold text-textPrimary">Exercícios Extras</h2>
-                <p className="text-xs text-textSecondary">{missao.title}</p>
+                <h2 className="text-lg font-bold text-textPrimary">Baú de Conchas</h2>
+                <p className="text-xs text-textSecondary">exercícios extras</p>
               </div>
               <button
                 onClick={() => setShowBau(false)}
@@ -674,7 +783,7 @@ const Missao: React.FC = () => {
               </button>
             </div>
             <div className="overflow-y-auto px-6 py-5">
-              <ExerciciosExtras
+              <BauDeConchas
                 missaoId={missao.id}
                 extras={missao.extra_exercises!}
                 proximaMissao={proximaMissao}

@@ -1,4 +1,33 @@
- Missão 1-0 — Antes de começar
+<!-- NOTAS DE DESENVOLVIMENTO – não são conteúdo da missão -->
+
+## [notas] Referências e decisões para esta missão
+
+### Voz e tom
+Escrita em primeira pessoa pela Rebecca. Sem fontes bibliográficas – texto introdutório e pessoal.
+
+---
+
+### Linha narrativa
+- Dúvida genuína como ponto de partida: "Mas pra quê estudar isso?"
+- Paradigmas como especialidades médicas: metáfora da gripe vs. pé quebrado.
+- Apresentação do Otto como protagonista e guia da trilha.
+
+---
+
+### Componentes implementados
+- `{{polvonilson-intro}}` → `PolvonilsonIntro` – Seção "Conheça Otto"
+- `{{o-que-vai-encontrar}}` → `OQueVaiEncontrar` – Seção "O que você vai encontrar por aqui"
+
+---
+
+### Exercício
+Sem exercício principal. Baú de Conchas com 6 extras sobre paradigmas de programação.
+
+<!-- FIM DAS NOTAS -->
+
+---
+
+# Missão 1-0 — Antes de começar
 
 **Ícone:** 🌊
 **Pontos:** 0
@@ -27,13 +56,16 @@ Então qual seria esse propósito tão essencial da POO? Se eu já consigo defin
 
 Para tornar essa jornada mais leve, pedimos que você se coloque no lugar do protagonista lúdico da plataforma, Otto. Ele é um **polvo cientista** cheio de curiosidade sobre o oceano e tudo que existe nele. E é nesse contexto leve que você vai entender todos os conceitos da POO:
 
-- **Fundamentos** — Classes, Objetos…
-- **Pilares** — Abstração, Encapsulamento, Herança e Polimorfismo
-- **Mecânicas** — leis e relacionamentos
-- **Engenharias** — Coesão, Acoplamento, Princípios SOLID e Design Patterns
+{{polvonilson-intro}}
 
 ---
 
-> ⚠️ Lembrete: este não é um curso de Java ou Python, mas algumas informações sobre a linguagem serão trazidas conforme a necessidade.
+## O que você vai encontrar por aqui
+
+{{o-que-vai-encontrar}}
+
+---
 
 Vamos juntos?
+
+> ⚠️ Lembrete: este não é um curso de Java ou Python, mas algumas informações sobre as linguagens serão trazidas conforme a necessidade.

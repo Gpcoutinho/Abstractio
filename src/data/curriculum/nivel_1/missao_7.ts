@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "1-7",
@@ -166,8 +166,8 @@ No próximo nível, você vai descobrir os **4 Pilares da POO**:
       explanation: '`lido` é inicializado como `False` no construtor para todos os livros. `livro1` teve `marcar_lido()` chamado, mudando para `True`. `livro3` não — então `resumo()` retorna "na fila".',
     },
   ],
-  has_interativo: true,
-  interativo_html: "interativos/nivel_1_missao_7.html"
+  has_minigame: true,
+  minigame_html: "interativos/nivel_1_missao_7.html"
 };
 
 export default missao;

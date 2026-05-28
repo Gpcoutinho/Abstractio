@@ -1,4 +1,4 @@
-# Missão 3-7 — Agregação e Composição
+﻿# Missão 3-7 — Agregação e Composição
 
 **Ícone:** 🧱
 **Pontos:** 15
@@ -104,7 +104,7 @@ Faça a pergunta: **"a parte faz sentido existir sem o todo?"**
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

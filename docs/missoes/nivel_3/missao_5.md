@@ -1,4 +1,4 @@
-# Missão 3-5 — Interfaces
+﻿# Missão 3-5 — Interfaces
 
 **Ícone:** 🔌
 **Pontos:** 15
@@ -75,7 +75,7 @@ Se `Usuario` não implementar algum dos métodos abstratos, o Python lança um e
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

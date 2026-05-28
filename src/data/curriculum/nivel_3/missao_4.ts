@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "3-4",
@@ -100,7 +100,7 @@ print(csv.exportar(vendas))
     correct: 1,
     explanation: "Correto! Classes abstratas combinam contrato com implementação parcial compartilhada — ideal quando há comportamento comum entre as subclasses."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

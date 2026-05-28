@@ -1,4 +1,4 @@
-# Missão 3-4 — Classes Abstratas
+﻿# Missão 3-4 — Classes Abstratas
 
 **Ícone:** 🏛️
 **Pontos:** 15
@@ -90,7 +90,7 @@ print(csv.exportar(vendas))
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 
