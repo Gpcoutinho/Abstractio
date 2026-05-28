@@ -8,7 +8,7 @@ import {
   XMarkIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
-import { TreasureChest } from "@phosphor-icons/react";
+import tarefaImg from '../assets/tarefa.png';
 import { useProgress } from "../hooks/useProgress";
 import { MOLDURAS } from "../data/molduras";
 import { ACESSORIOS } from "../data/acessorios";
@@ -26,13 +26,17 @@ const AVATAR_SRCS: (string | null)[] = [
   imgKraken,
 ];
 
+const TarefaIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <img src={tarefaImg} alt="" className={`${className ?? ''} invert`} />
+);
+
 type NavItem = { to: string; label: string; Icon: React.ComponentType<{ className?: string }>; exact: boolean };
 
 const NAV_ITEMS: NavItem[] = [
   { to: "/", label: "Home", Icon: HomeIcon, exact: true },
   { to: "/trilha", label: "Trilha", Icon: MapIcon, exact: false },
   { to: "/conquistas", label: "Conquistas", Icon: TrophyIcon, exact: false },
-  { to: "/exercicios-extras", label: "Exercícios Extras", Icon: TreasureChest, exact: false },
+  { to: "/exercicios-extras", label: "Exercícios", Icon: TarefaIcon, exact: false },
 ];
 
 const Sidebar: React.FC = () => {
@@ -101,12 +105,18 @@ const Sidebar: React.FC = () => {
           >
             <XMarkIcon className="w-5 h-5 text-textPrimary" />
           </button>
-          <img
-            src="/isotipo.png"
-            alt="Isotipo"
-            className="w-10 h-10 rounded-md object-contain"
-          />
-          <img src={logotipoImg} alt="Abstractio" className="h-6 object-contain" />
+          <Link
+            to="/"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-1.5"
+          >
+            <img
+              src="/isotipo.png"
+              alt="Isotipo"
+              className="w-10 h-10 rounded-md object-contain"
+            />
+            <img src={logotipoImg} alt="Abstractio" className="h-6 object-contain" />
+          </Link>
         </div>
 
         {/* Avatar + info */}
