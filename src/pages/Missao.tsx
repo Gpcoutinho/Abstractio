@@ -38,7 +38,7 @@ import interativoHtml from "../assets/interativos/nivel_1_missao_7.html?raw";
 import ProgressBar from '../components/ProgressBar';
 import ConceitoBox from '../components/ConceitoBox';
 import OQueVaiEncontrar from '../components/missoes/nivel_1/missao_0/OQueVaiEncontrar';
-import BauDeConchas from '../components/BauDeConchas';
+import BauDeConchas from '../components/ExerciciosExtras';
 import { TreasureChest, BookmarkSimple } from '@phosphor-icons/react';
 import ReferenciasBlock from '../components/ReferenciasBlock';
 import AdaCard from '../components/missoes/nivel_1/AdaCard';
