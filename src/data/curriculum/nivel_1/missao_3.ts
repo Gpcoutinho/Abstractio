@@ -86,6 +86,8 @@ No oceano há outros polvos. Ada não é a única.
 
 Otto avista Caju – amarela, curiosa, menor que Ada. E mais adiante, Muriel – ciano, veloz, difícil de fotografar. Os três são polvos: mesma espécie, mesmo conjunto de atributos. Mas cada um carrega seus próprios valores.
 
+{{tres-polvos-acesso}}
+
 \`\`\`python
 # print() — comando para exibir um valor na tela
 print(ada.cor)    # impresso na tela: "rosa"

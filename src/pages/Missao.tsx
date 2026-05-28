@@ -5,6 +5,7 @@ import PolvosInterativo from "../components/missoes/nivel_1/missao_2/PolvosInter
 import TresPolvosInterativo from "../components/missoes/nivel_1/missao_2/TresPolvosInterativo";
 import FichaInterativo from "../components/missoes/nivel_1/missao_3/FichaInterativo";
 import FichaAcesso from "../components/missoes/nivel_1/missao_3/FichaAcesso";
+import TresPolvosAcesso from "../components/missoes/nivel_1/missao_3/TresPolvosAcesso";
 import AdaCardRotulado from "../components/missoes/nivel_1/missao_3/AdaCardRotulado";
 import DiagramaRotulosValores from "../components/missoes/nivel_1/missao_3/DiagramaRotulosValores";
 import PolvonilsonIntro from "../components/missoes/nivel_1/missao_0/PolvonilsonIntro";
@@ -326,6 +327,7 @@ const Missao: React.FC = () => {
               if (part === '{{polvonilson-intro}}') return <PolvonilsonIntro key={i} />;
               if (part === '{{slides-poo}}') return <SlidesPOO key={i} />;
               if (part === '{{o-que-vai-encontrar}}') return <OQueVaiEncontrar key={i} />;
+              if (part === '{{tres-polvos-acesso}}') return <TresPolvosAcesso key={i} />;
               const indices = part.match(/\d+/g)!.map(Number);
               const isRow = part.startsWith("{{cards:");
               const renderCard = (idx: number, className?: string) => {
