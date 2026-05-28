@@ -105,12 +105,18 @@ const Sidebar: React.FC = () => {
           >
             <XMarkIcon className="w-5 h-5 text-textPrimary" />
           </button>
-          <img
-            src="/isotipo.png"
-            alt="Isotipo"
-            className="w-10 h-10 rounded-md object-contain"
-          />
-          <img src={logotipoImg} alt="Abstractio" className="h-6 object-contain" />
+          <Link
+            to="/"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-1.5"
+          >
+            <img
+              src="/isotipo.png"
+              alt="Isotipo"
+              className="w-10 h-10 rounded-md object-contain"
+            />
+            <img src={logotipoImg} alt="Abstractio" className="h-6 object-contain" />
+          </Link>
         </div>
 
         {/* Avatar + info */}
