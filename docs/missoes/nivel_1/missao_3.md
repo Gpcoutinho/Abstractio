@@ -182,6 +182,8 @@ ada = {
 }
 ```
 
+Note que `"rosa"` é um texto e `8` é um número inteiro – cada atributo pode guardar um tipo diferente de dado.
+
 Agora que já sabemos a estrutura que o Python entende, vamos aprender a nomear suas partes da maneira correta.
 
 Cada um desses campos – 'nome', 'cor', 'num_tentaculos' e 'tamanho_cm' – tem um nome específico na POO: são os <destaque>atributos</destaque> de 'ada'. Cada atributo é um dado rotulado que pertence a esse objeto e guarda uma de suas características.
@@ -221,6 +223,8 @@ print(ada.tamanho_cm)      # impresso na tela: 25
 Cada linha pede um atributo diferente pelo nome. O Python vai até o objeto, encontra o dado e devolve o valor.
 
 <ficha-acesso></ficha-acesso>
+
+Em Python, é possível indicar o tipo esperado de cada atributo – você verá isso com detalhes quando chegarmos às classes.
 
 ---
 
