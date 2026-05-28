@@ -14,7 +14,7 @@ export function useProgress() {
   const ctx = useContext(ProgressContext);
   if (!ctx) throw new Error('useProgress deve ser usado dentro de ProgressProvider');
 
-  const { completed, niveis_concluidos, conchas, conchas_por_missao, extras_concluidos, erros_por_missao, nome, genero, avatarIdx, moldurasDesbloqueadas, molduraAtiva, acessoriosDesbloqueados, acessorioAtivo, completarMissao, desmarcarMissao, registrarErroMissao, completarExtraExercise, penalizarExtraErro, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva, comprarAcessorio, setAcessorioAtivo } = ctx;
+  const { completed, niveis_concluidos, conchas, conchas_por_missao, extras_concluidos, erros_por_missao, nome, genero, avatarIdx, moldurasDesbloqueadas, molduraAtiva, acessoriosDesbloqueados, acessorioAtivo, completarMissao, desmarcarMissao, registrarErroMissao, completarExtraExercise, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva, comprarAcessorio, setAcessorioAtivo } = ctx;
 
   const isMissaoConcluida = (missaoId: string) => completed.includes(missaoId);
   const getConchasValor = (missaoId: string): number => {
@@ -54,7 +54,6 @@ export function useProgress() {
     desmarcarMissao,
     registrarErroMissao,
     completarExtraExercise,
-    penalizarExtraErro,
     setNome,
     setGenero,
     setAvatarIdx,
