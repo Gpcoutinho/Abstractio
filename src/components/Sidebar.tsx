@@ -45,7 +45,7 @@ const Sidebar: React.FC = () => {
   return (
     <>
       {/* Mobile topbar */}
-      <div className="md:hidden fixed top-0 left-0 right-0 h-12 bg-bgSecondary border-b border-borderDark z-40 flex items-center px-4 gap-3">
+      <div className="md:hidden fixed top-0 left-0 right-0 h-12 bg-bgSecondary border-b border-borderDark z-50 flex items-center px-4 gap-3">
         <button
           type="button"
           onClick={() => setOpen(true)}

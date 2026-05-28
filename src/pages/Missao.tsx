@@ -39,7 +39,7 @@ import ProgressBar from '../components/ProgressBar';
 import ConceitoBox from '../components/ConceitoBox';
 import OQueVaiEncontrar from '../components/missoes/nivel_1/missao_0/OQueVaiEncontrar';
 import BauDeConchas from '../components/BauDeConchas';
-import { TreasureChest } from '@phosphor-icons/react';
+import { TreasureChest, BookmarkSimple } from '@phosphor-icons/react';
 import ReferenciasBlock from '../components/ReferenciasBlock';
 import AdaCard from '../components/missoes/nivel_1/AdaCard';
 
@@ -146,9 +146,13 @@ const Missao: React.FC = () => {
   const [conchasGanhasAgora, setConchasGanhasAgora] = useState<number | null>(null);
   const [showCelebration, setShowCelebration] = useState(false);
   const [showBau, setShowBau] = useState(false);
+  const [bookmarkData, setBookmarkData] = useState<{ scrollY: number; sectionTitle: string } | null>(null);
+  const [showBookmarkBanner, setShowBookmarkBanner] = useState(false);
 
   // Estado do Header Retrátil
   const [showBar, setShowBar] = useState(true);
+
+  const theoryRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     setSelecionada(null);
@@ -157,6 +161,8 @@ const Missao: React.FC = () => {
     setConchasGanhasAgora(null);
     setShowCelebration(false);
     setShowBau(false);
+    setShowBookmarkBanner(false);
+    setBookmarkData(null);
   }, [nivelIdx, missaoIdx]);
 
   // Lógica de Scroll com Histerese (Zona Morta)
@@ -175,6 +181,43 @@ const Missao: React.FC = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const missaoId = `${nivelIdx}-${missaoIdx}`;
+
+  // Carrega bookmark salvo ao entrar na missão
+  useEffect(() => {
+    const saved = localStorage.getItem(`bookmark-${missaoId}`);
+    if (saved) {
+      try {
+        const data = JSON.parse(saved);
+        if (data.scrollY > 300) {
+          setBookmarkData(data);
+          setShowBookmarkBanner(true);
+        }
+      } catch {}
+    }
+  }, [missaoId]);
+
+  // Salva bookmark enquanto o aluno lê (debounce 800ms)
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+    const handleScroll = () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        if (!theoryRef.current) return;
+        const h2s = theoryRef.current.querySelectorAll('h2');
+        let sectionTitle = '';
+        h2s.forEach(h2 => {
+          if (h2.getBoundingClientRect().top < 150) sectionTitle = h2.textContent || '';
+        });
+        if (window.scrollY > 300) {
+          localStorage.setItem(`bookmark-${missaoId}`, JSON.stringify({ scrollY: window.scrollY, sectionTitle }));
+        }
+      }, 800);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => { window.removeEventListener('scroll', handleScroll); clearTimeout(timeout); };
+  }, [missaoId]);
 
   const nivel = niveis.find((n) => n.id === Number(nivelIdx));
   const missao = nivel?.missoes[Number(missaoIdx) - 1];
@@ -227,6 +270,8 @@ const Missao: React.FC = () => {
       completarMissao(missao.id, novasTentativas);
       setShowCelebration(true);
       celebrate();
+      localStorage.removeItem(`bookmark-${missao.id}`);
+      setShowBookmarkBanner(false);
     } else {
       registrarErroMissao(missao.id);
     }
@@ -315,7 +360,7 @@ const Missao: React.FC = () => {
 
       {/* Conteúdo da Missão */}
       <div className="max-w-3xl mx-auto pt-8 pb-16 px-5">
-        <section className="mb-8 prose prose-invert max-w-none prose-headings:text-textPrimary prose-headings:font-bold prose-p:text-textBody prose-p:leading-relaxed prose-strong:text-textPrimary prose-blockquote:border-l-accent prose-blockquote:text-textSecondary prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary prose-li:text-textBody [&_h2]:border-l-2 [&_h2]:border-accent/50 [&_h2]:pl-3">
+        <section ref={theoryRef} className="mb-8 prose prose-invert max-w-none prose-headings:text-textPrimary prose-headings:font-bold prose-p:text-textBody prose-p:leading-relaxed prose-strong:text-textPrimary prose-blockquote:border-l-accent prose-blockquote:text-textSecondary prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary prose-li:text-textBody [&_h2]:border-l-2 [&_h2]:border-accent/50 [&_h2]:pl-3">
           {missao.theory.split(/(\{\{cards?:[0-9,]+\}\}|\{\{[a-z][a-z-]*\}\})/).map((part, i) => {
             if (i % 2 === 1) {
               if (part.startsWith('{{duvida-')) { const d = missao.duvidas?.[part.slice(2, -2)]; if (d) return <DuvidaBlock key={i} pergunta={d.pergunta} resposta={d.resposta} />; }
@@ -615,6 +660,36 @@ const Missao: React.FC = () => {
           )}
         </div>
       </div>
+
+      {/* Banner de marcador de página */}
+      {showBookmarkBanner && bookmarkData && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-30 w-full max-w-sm px-4 pointer-events-none">
+          <div className="pointer-events-auto bg-bgSecondary border border-borderDark rounded-xl px-4 py-3 flex items-center gap-3 shadow-xl">
+            <BookmarkSimple className="w-4 h-4 text-accent shrink-0" weight="fill" />
+            <span className="text-sm text-textSecondary flex-1 min-w-0 truncate">
+              {bookmarkData.sectionTitle
+                ? <><span className="text-textPrimary font-medium">"{bookmarkData.sectionTitle}"</span></>
+                : 'Continuar de onde parou'}
+            </span>
+            <button
+              onClick={() => {
+                window.scrollTo({ top: bookmarkData.scrollY, behavior: 'smooth' });
+                setShowBookmarkBanner(false);
+              }}
+              className="text-accent text-xs font-semibold hover:opacity-80 transition-opacity shrink-0"
+            >
+              Continuar →
+            </button>
+            <button
+              onClick={() => setShowBookmarkBanner(false)}
+              className="text-textSecondary hover:text-textPrimary transition-colors shrink-0"
+              aria-label="Fechar"
+            >
+              <XMarkIcon className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Modal comemorativo */}
       {showCelebration && missao && (
