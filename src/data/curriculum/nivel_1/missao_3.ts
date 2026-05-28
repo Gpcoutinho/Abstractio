@@ -107,6 +107,8 @@ print(muriel.cor) # impresso na tela: "ciano"
 
 O estado de um objeto pode evoluir. Otto observa Ada se camuflando e atualiza o caderno:
 
+{{animacao-camuflagem}}
+
 \`\`\`python
 # atribuindo um novo valor ao atributo cor de ada
 ada.cor = "transparente"
