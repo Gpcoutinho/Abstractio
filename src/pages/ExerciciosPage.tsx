@@ -14,16 +14,19 @@ const BG = '#1e293b';
 
 const TIER_CARD_STYLE: Partial<Record<string, React.CSSProperties>> = {
   bronze: {
-    background: `linear-gradient(rgba(124,45,18,0.07), rgba(124,45,18,0.07)) padding-box, linear-gradient(${BG}, ${BG}) padding-box, linear-gradient(135deg, #431407, #7c2d12, #b45309, #7c2d12, #3d0a00) border-box`,
+    background: `linear-gradient(rgba(124,45,18,0.12), rgba(124,45,18,0.12)) padding-box, linear-gradient(${BG}, ${BG}) padding-box, linear-gradient(135deg, #431407 0%, #7c2d12 30%, #b45309 48%, #b45309 52%, #9a3412 65%, #7c2d12 78%, #3d0a00 100%) border-box`,
     border: '1px solid transparent',
+    boxShadow: '0 0 10px rgba(124,45,18,0.5), 0 0 3px rgba(180,83,9,0.3)',
   },
   silver: {
-    background: `linear-gradient(rgba(148,163,184,0.09), rgba(148,163,184,0.09)) padding-box, linear-gradient(${BG}, ${BG}) padding-box, linear-gradient(135deg, #1e293b, #64748b, #f1f5f9, #64748b, #1e293b) border-box`,
+    background: `linear-gradient(rgba(148,163,184,0.12), rgba(148,163,184,0.12)) padding-box, linear-gradient(${BG}, ${BG}) padding-box, linear-gradient(135deg, #475569 0%, #94a3b8 30%, #f1f5f9 48%, #f1f5f9 52%, #e2e8f0 60%, #64748b 78%, #334155 100%) border-box`,
     border: '1px solid transparent',
+    boxShadow: '0 0 10px rgba(71,85,105,0.5), 0 0 3px rgba(241,245,249,0.15)',
   },
   gold: {
-    background: `linear-gradient(rgba(202,138,4,0.07), rgba(202,138,4,0.07)) padding-box, linear-gradient(${BG}, ${BG}) padding-box, linear-gradient(135deg, #713f12, #ca8a04, #fef08a, #ca8a04, #713f12) border-box`,
+    background: `linear-gradient(rgba(202,138,4,0.12), rgba(202,138,4,0.12)) padding-box, linear-gradient(${BG}, ${BG}) padding-box, linear-gradient(135deg, #713f12 0%, #ca8a04 30%, #fef08a 48%, #fef08a 52%, #facc15 60%, #a16207 78%, #713f12 100%) border-box`,
     border: '1px solid transparent',
+    boxShadow: '0 0 10px rgba(202,138,4,0.5), 0 0 3px rgba(254,240,138,0.2)',
   },
 };
 

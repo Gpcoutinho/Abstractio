@@ -22,15 +22,15 @@ const TIER_META: { threshold: number; stars: number; label: string }[] = [
 
 const TIER_BADGE_STYLE: Record<string, React.CSSProperties> = {
   bronze: {
-    background: 'linear-gradient(rgba(124,45,18,0.08), rgba(124,45,18,0.08)) padding-box, linear-gradient(135deg, #5c1a08, #9a3412, #c46a1a, #9a3412, #4a1005) border-box',
+    background: 'linear-gradient(rgba(124,45,18,0.08), rgba(124,45,18,0.08)) padding-box, linear-gradient(135deg, #431407 0%, #7c2d12 30%, #b45309 48%, #b45309 52%, #9a3412 65%, #7c2d12 78%, #3d0a00 100%) border-box',
     border: '1px solid transparent',
   },
   silver: {
-    background: 'linear-gradient(rgba(148,163,184,0.07), rgba(148,163,184,0.07)) padding-box, linear-gradient(135deg, #2d3f55, #64748b, #cbd5e1, #64748b, #2d3f55) border-box',
+    background: 'linear-gradient(rgba(148,163,184,0.07), rgba(148,163,184,0.07)) padding-box, linear-gradient(135deg, #475569 0%, #94a3b8 30%, #f1f5f9 48%, #f1f5f9 52%, #e2e8f0 60%, #64748b 78%, #334155 100%) border-box',
     border: '1px solid transparent',
   },
   gold: {
-    background: 'linear-gradient(rgba(202,138,4,0.08), rgba(202,138,4,0.08)) padding-box, linear-gradient(135deg, #713f12, #a16207, #fde68a, #a16207, #713f12) border-box',
+    background: 'linear-gradient(rgba(202,138,4,0.08), rgba(202,138,4,0.08)) padding-box, linear-gradient(135deg, #713f12 0%, #ca8a04 30%, #fef08a 48%, #fef08a 52%, #facc15 60%, #a16207 78%, #713f12 100%) border-box',
     border: '1px solid transparent',
   },
 };
@@ -157,7 +157,7 @@ const Exercicios: React.FC<Props> = ({ missaoId, exercicios, proximaMissao }) =>
             style={TIER_BADGE_STYLE[currentTierKey]}
           >
             {Array.from({ length: currentMeta.stars }).map((_, i) => (
-              <StarSolid key={i} className="w-3.5 h-3.5 text-yellow-400" />
+              <StarSolid key={i} className="w-3.5 h-3.5 text-yellow-400" style={{ filter: 'drop-shadow(0 0 0.5px rgba(0,0,0,0.9)) drop-shadow(0 0 0.5px rgba(0,0,0,0.9))' }} />
             ))}
             {Array.from({ length: 3 - currentMeta.stars }).map((_, i) => (
               <StarSolid key={i} className="w-3.5 h-3.5" style={CUT_STYLE} />
