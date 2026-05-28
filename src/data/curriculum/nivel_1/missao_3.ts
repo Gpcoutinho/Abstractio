@@ -113,21 +113,23 @@ O estado de Ada mudou – só o dela. Caju continua amarela. Muriel continua cia
 
 <conceito note="adapt. Weisfeld, 2019"><strong>Atribuição</strong>: operação que define ou modifica o valor de um atributo em um objeto específico.</conceito>
 
+E no código, como funciona essa atribuição? Para mudar a cor de Ada para transparente, Otto escreve:
+
 \`\`\`python
 # atribuindo um novo valor ao atributo cor de ada
 ada.cor = "transparente"
 \`\`\`
 
-Agora:
+Ou seja, para atribuir um novo valor a um atributo, usamos a mesma notação ponto (\`.\`), mas com o sinal de igual (\`=\`) para indicar que estamos definindo um novo valor. O Python entende que queremos atualizar o atributo 'cor' do objeto 'ada' para o novo valor 'transparente'.
+
+Acessando o atributo depois da mudança:
 
 \`\`\`python
 # print() — comando para exibir um valor na tela
 print(ada.cor)  # impresso na tela: "transparente"
 \`\`\`
 
-
-
-<ficha-interativo></ficha-interativo>
+Agora, ao acessar \`ada.cor\`, o Python devolve "transparente". O estado de Ada mudou, mas os estados de Caju e Muriel permanecem inalterados. Cada objeto é independente – mudar um não afeta os outros.
 
 {{duvida-quais-atributos}}
 `,
@@ -148,6 +150,7 @@ print(ada.cor)  # impresso na tela: "transparente"
     "**Atributo** – dado rotulado que pertence a um objeto e guarda seu estado",
     "**Notação ponto** – `objeto.atributo` – como acessar um atributo em Python",
     "**Independência** – cada objeto guarda seus próprios valores; mudar um não afeta os outros",
+    "**Atribuição** – `objeto.atributo = valor` – operação que define ou modifica o valor de um atributo",
     "**Mutação** – o valor de um atributo pode ser alterado; isso muda o estado do objeto",
   ],
   exercise: {
