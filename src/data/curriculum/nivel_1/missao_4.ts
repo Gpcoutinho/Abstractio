@@ -1,192 +1,219 @@
-﻿import type { Missao } from '../types';
-import { diagramaClasseMetodo } from '../../visuals/nivel_1';
+import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "1-4",
   title: "Métodos",
-  icon: "PiGear",
-  emblem: "Nadando Rápido",
+  icon: "PiPlay",
+  emblem: "Coreógrafo(a) de Polvos",
   theory: `
-## O que um objeto sabe *fazer*
+## Ada tem ações
 
-Você já sabe que objetos têm **atributos** (o que sabem). Agora veja o que eles sabem **fazer**.
+Na missão anterior, Otto mergulhou nas <destaque-reto>características</destaque-reto> de Ada – cor, número de tentáculos, tamanho. Aprendeu a lê-las, a atualizá-las, a entender que cada polvo guarda os seus próprios valores.
 
-Esses comportamentos são os **métodos**: funções que vivem dentro de uma classe e descrevem as ações dos objetos.
+Mas na missão 2, quando Otto descreveu os três elementos de todo objeto, havia um terceiro que ficou esperando:
 
-\`\`\`python
-class Cachorro:
-    def __init__(self, nome):
-        self.nome = nome
-
-    def latir(self):                       # método sem parâmetros extras
-        return f"{self.nome}: Au au au!"
-
-    def buscar(self, objeto):              # método com parâmetro
-        return f"{self.nome} foi buscar o {objeto}!"
-
-rex = Cachorro("Rex")
-print(rex.latir())           # Rex: Au au au!
-print(rex.buscar("graveto")) # Rex foi buscar o graveto!
-\`\`\`
-
----
-
-## O mistério do \`self\`
-
-Todo método tem \`self\` como primeiro parâmetro — mas quando você chama o método, não passa nada para ele. Por quê?
-
-Se você tem dois cachorros e chama \`rex.latir()\` e \`bolt.latir()\`, os dois usam o **mesmo método**. O \`self\` é o que diz ao método em qual objeto ele está operando:
-
-\`\`\`python
-class Cachorro:
-    def __init__(self, nome):
-        self.nome = nome
-
-    def latir(self):
-        # self.nome acessa o nome DESTE cachorro específico
-        return f"{self.nome}: Au au!"
-
-rex  = Cachorro("Rex")
-bolt = Cachorro("Bolt")
-
-# Python traduz rex.latir() para Cachorro.latir(rex)
-print(rex.latir())   # Rex: Au au!
-print(bolt.latir())  # Bolt: Au au!
-\`\`\`
-
-> **Resumindo o \`self\`:** é a referência ao objeto que chamou o método — sem ele, o método não saberia em qual objeto está operando.
-
----
-
-## Um exemplo completo
-
-\`\`\`python
-class ContaBancaria:
-    def __init__(self, titular, saldo=0):
-        self.titular = titular
-        self.saldo   = saldo
-
-    def depositar(self, valor):
-        self.saldo += valor
-        return f"Saldo: R\${self.saldo:.2f}"
-
-    def sacar(self, valor):
-        if valor > self.saldo:
-            return f"Saldo insuficiente. Você tem R\${self.saldo:.2f}"
-        self.saldo -= valor
-        return f"Saldo: R\${self.saldo:.2f}"
-
-conta = ContaBancaria("Maria", 100.0)
-print(conta.depositar(50))  # Saldo: R$150.00
-print(conta.sacar(30))      # Saldo: R$120.00
-\`\`\`
-
----
-
-## Método vs. função comum
-
-| | Função | Método |
+| Elemento | O que é | Ada |
 |---|---|---|
-| Onde fica | Fora de uma classe | Dentro de uma classe |
-| Acessa dados do objeto? | Não | Sim (via \`self\`) |
-| Como chamar | \`latir(cachorro)\` | \`cachorro.latir()\` |
+| **Identidade** | O que a torna única | Ada é uma entidade única |
+| **Características** | Os dados que carrega | cor: rosa, tentáculos: 8 |
+| **Ações** | O que ela sabe fazer | nadar, camuflar, soltar tinta... |
 
-${diagramaClasseMetodo}
+Otto estudou características a fundo. Agora é a vez das ações.
 
-> **Resumindo:** Métodos são as ações que um objeto sabe executar. Sempre têm \`self\` para saber em qual objeto estão operando — mas você não precisa passá-lo na chamada.
+Na POO, as ações que um objeto sabe executar têm um nome: <destaque>métodos</destaque>.
+
+<conceito note="adapt. Phillips, 2015; Weisfeld, 2019"><strong>Método</strong>: ação que um objeto sabe executar, com acesso direto aos seus próprios atributos.</conceito>
+
+{{ada-card-metodos}}
+
+O card de Ada agora mostra dois blocos: atributos acima, métodos abaixo. Os atributos descrevem *o que ela é*. Os métodos descrevem *o que ela faz*.
+
+---
+
+## Definindo um método em Python
+
+Otto sabe que Ada nada. Mas como o Python sabe disso? Alguém precisou ensinar Ada a nadar – e fazer isso tem uma sintaxe específica.
+
+Aqui está como um método é definido em Python:
+
+\`\`\`python-simplificado
+def nadar(self):
+    print(f"{self.nome} está nadando!")
+\`\`\`
+
+Cada parte tem um papel:
+
+| Parte | O que significa |
+|---|---|
+| \`def\` | "aqui começa a definição de um método" |
+| \`nadar\` | o nome da ação |
+| \`self\` | referência ao próprio objeto – para \`ada.nadar()\`, \`self\` é \`ada\` |
+| corpo indentado | o que acontece quando o método é chamado |
+
+O \`self\` é o ponto-chave. Ele é o que permite que o método diga \`self.nome\`, \`self.cor\`, \`self.num_tentaculos\` – acessando os atributos do objeto de dentro da ação. Sem ele, o método não saberia de qual polvo estava falando.
+
+{{duvida-self-passado}}
+
+Mas na chamada, você não passa \`self\`:
+
+\`\`\`python-simplificado
+ada.nadar()  # Ada está nadando!
+\`\`\`
+
+Ao usar \`ada.nadar()\`, Python já sabe que \`self = ada\` – e passa-o sozinho. Você nunca precisa incluí-lo na chamada.
+
+---
+
+## Tipos de método
+
+Com a sintaxe clara, Otto observa que os métodos de Ada fazem coisas diferentes. Há quatro padrões principais.
+
+{{duvida-metodo-funcao}}
+
+### Age – executa e não muda nada
+
+O mais simples: o método faz algo – imprime uma mensagem, produz um efeito – sem alterar nenhum atributo e sem devolver nada.
+
+\`\`\`python-simplificado
+def soltar_tinta(self):
+    print("Ada liberou uma nuvem de tinta!")
+\`\`\`
+
+Chamada e resultado:
+
+\`\`\`python-simplificado
+ada.soltar_tinta()  # Ada liberou uma nuvem de tinta!
+\`\`\`
+
+\`nadar()\` segue o mesmo padrão: age, não altera, não devolve.
+
+---
+
+### Modifica o estado – altera um atributo
+
+Aqui o método acessa um atributo via \`self\` e atualiza seu valor. O estado do objeto muda.
+
+\`\`\`python-simplificado
+def camuflar(self):
+    self.cor = "transparente"
+\`\`\`
+
+Otto confirma antes e depois:
+
+\`\`\`python-simplificado
+print(ada.cor)  # "rosa"
+ada.camuflar()
+print(ada.cor)  # "transparente"
+\`\`\`
+
+Sem que Otto escrevesse nada no caderno – Ada agiu por conta própria.
+
+---
+
+### Com parâmetro – precisa de informação externa
+
+Algumas ações dependem de dados que vêm de fora. Otto não diz apenas *"capture"* – ele aponta a presa. Esse dado extra entra como <destaque>parâmetro</destaque>.
+
+\`\`\`python-simplificado
+def capturar_presa(self, presa):
+    print(f"{self.nome} capturou um(a) {presa}!")
+\`\`\`
+
+Chamada:
+
+\`\`\`python-simplificado
+ada.capturar_presa("caranguejo")  # Ada capturou um(a) caranguejo!
+\`\`\`
+
+O parâmetro \`presa\` aparece após \`self\` no \`def\` e recebe o valor passado na chamada.
+
+---
+
+### Devolve um valor – \`__str__\`
+
+Alguns métodos *respondem* com uma informação. O principal exemplo em Python é o \`__str__\`: define como o objeto se apresenta quando impresso.
+
+\`\`\`python-simplificado
+def __str__(self):
+    return f"{self.nome} | cor: {self.cor} | tentáculos: {self.num_tentaculos}"
+\`\`\`
+
+A palavra \`return\` diz ao Python: *"devolva este valor para quem chamou"*. Aqui, devolve uma string com os dados de Ada.
+
+O especial de \`__str__\` é que Python o chama automaticamente quando você usa \`print()\` sobre o objeto:
+
+\`\`\`python-simplificado
+print(ada)  # Ada | cor: rosa | tentáculos: 8
+\`\`\`
+
+Não foi preciso chamar \`ada.__str__()\` – \`print(ada)\` já fez isso.
+
+{{duvida-str-quando}}
+
+---
+
+## O que vem a seguir
+
+Otto já sabe o que Ada faz e como essas ações são descritas em Python. Mas ainda há uma pergunta sem resposta: *quem ensinou Ada a nadar? Quem definiu que ela teria cor, tentáculos e saberia se camuflar?*
+
+Isso você descobre na **Missão 5**.
 `,
-  exercise: {
-    question: "Por que todo método de instância em Python deve ter `self` como primeiro parâmetro?",
-    options: [
-      "É uma convenção opcional que melhora apenas a legibilidade.",
-      "Para que o método acesse e modifique os atributos do objeto específico que o chamou.",
-      "Porque o Python exige que toda função tenha ao menos um parâmetro.",
-      "Para indicar que o método é público e acessível externamente."
-    ],
-    correct: 1,
-    explanation: "Correto! `self` é uma referência à instância. Sem ele, o método não saberia qual objeto está manipulando.",
-    wrong_explanations: [
-      "`self` não é opcional. Sem ele, o Python não passa a instância ao método automaticamente, causando `TypeError` ao tentar acessar qualquer atributo do objeto.",
-      "",
-      "Funções comuns em Python podem ter zero parâmetros. O `self` é específico de métodos de instância, para que eles saibam em qual objeto estão operando.",
-      "Visibilidade em Python é controlada por prefixos de nome (`_` ou `__`), não pelo `self`. O `self` serve para o método referenciar o objeto que o chamou."
-    ]
+  duvidas: {
+    "duvida-self-passado": {
+      pergunta: "Por que `self` aparece no `def` mas não na chamada?",
+      resposta: "Python faz isso automaticamente. Quando você escreve `ada.nadar()`, o Python já sabe que `self = ada` e passa sozinho. Você não precisa – e não deve – passá-lo na chamada.",
+    },
+    "duvida-metodo-funcao": {
+      pergunta: "Método e função são a mesma coisa?",
+      resposta: "Quase. Função existe sozinha, fora de qualquer objeto. Método vive dentro de um objeto e, graças ao `self`, já conhece os atributos desse objeto sem que ninguém os passe.",
+    },
+    "duvida-str-quando": {
+      pergunta: "Quando exatamente o Python chama `__str__`?",
+      resposta: "Toda vez que você usa `print(objeto)` ou `str(objeto)`. Python chama `__str__` automaticamente – você não precisa escrever `ada.__str__()` diretamente.",
+    },
   },
-  extra_exercises: [
+  resumo: [
+    "**Método** – ação que um objeto sabe executar, com acesso direto aos seus próprios atributos",
+    "**`def`** – palavra-chave que inicia a definição de um método em Python",
+    "**`self`** – referência ao próprio objeto dentro do método; Python passa automaticamente na chamada",
+    "**Parâmetro** – informação extra que o método precisa receber para agir",
+    "**`__str__`** – método especial que define como o objeto se apresenta quando impresso com `print()`",
+  ],
+  exercise: {
+    question: "Otto escreve `print(ada)` e vê `Ada | cor: rosa | tentáculos: 8` na tela. O que aconteceu?",
+    options: [
+      "`print()` formatou o objeto automaticamente – Python sabe como exibir qualquer objeto.",
+      "Otto precisaria ter escrito `print(ada.__str__())` – `print()` não chama métodos sozinho.",
+      "Python chamou `__str__()` automaticamente – `print(objeto)` sempre busca esse método.",
+      "O resultado veio dos atributos diretamente – `print()` lê `ada.nome`, `ada.cor` e monta a string.",
+    ],
+    correct: 2,
+    explanation: "Quando você usa `print()` sobre um objeto, Python chama `__str__()` automaticamente. É o método que define como o objeto se apresenta ao ser impresso. Se `__str__` não existir, Python exibe algo como `<__main__.Polvo object at 0x...>` – funcional, mas sem utilidade para quem lê o resultado.",
+  },
+  has_minigame: false,
+  references: [
     {
-      id: '1-4-e1',
-      question: 'Qual é a diferença entre uma função comum e um método em Python?',
-      options: [
-        'Métodos não podem receber parâmetros, ao contrário das funções',
-        'Funções sempre retornam valores; métodos nunca retornam',
-        'Não há diferença — método é apenas outro nome para função',
-        'Um método é definido dentro de uma classe e opera sobre objetos daquela classe',
-      ],
-      correct: 3,
-      explanation: 'A diferença central está no lugar onde o código vive: um método fica dentro de uma classe, tem acesso ao objeto via `self` e pode ler ou modificar seus atributos. Uma função comum não tem esse vínculo.',
+      author: "Phillips, D.",
+      year: 2015,
+      title: "Python 3 Object-Oriented Programming",
+      location: "Cap. 1, p. 7; Cap. 2, p. 30",
+      note: "Métodos como comportamentos do objeto com acesso direto aos seus dados; explicação de self e por que não é passado na chamada.",
     },
     {
-      id: '1-4-e2',
-      question: 'Como se chama o método `latir()` de um objeto chamado `rex`?',
-      options: [
-        '`rex.latir()`',
-        '`latir(rex)`',
-        '`Cachorro.latir()`',
-        '`call rex.latir`',
-      ],
-      correct: 0,
-      explanation: 'Métodos são chamados com a notação ponto: `objeto.metodo()`. O `rex.latir()` diz ao objeto `rex` para executar a ação `latir`.',
+      author: "Weisfeld, M.",
+      year: 2019,
+      title: "The Object-Oriented Thought Process",
+      location: "Cap. 1, p. 11",
+      note: "Comportamento do objeto como o que ele sabe fazer; métodos como a representação OO desse comportamento.",
     },
     {
-      id: '1-4-e3',
-      question: 'O método `depositar(self, valor)` faz `self.saldo += valor`. Isso significa que:',
-      options: [
-        'O método retorna o novo saldo sem modificar o objeto',
-        'O método modifica o atributo `saldo` do objeto que o chamou',
-        'O método cria uma nova conta com saldo maior',
-        'O método apaga o atributo `saldo` anterior',
-      ],
-      correct: 1,
-      explanation: '`self.saldo += valor` acessa e modifica diretamente o atributo `saldo` do objeto atual. Essa é uma das principais utilidades dos métodos: alterar o estado do objeto.',
-    },
-    {
-      id: '1-4-e4',
-      question: 'O método `buscar(self, objeto)` é chamado com `rex.buscar("graveto")`. Qual é o valor de `objeto` dentro do método?',
-      options: [
-        '`rex`',
-        '`"graveto"`',
-        '`self`',
-        '`Cachorro`',
-      ],
-      correct: 1,
-      explanation: '`self` é passado automaticamente pelo Python — é `rex`. `"graveto"` é o argumento para o parâmetro `objeto`. Ao executar o método, `objeto` terá o valor `"graveto"`.',
-    },
-    {
-      id: '1-4-e5',
-      question: 'No paradigma procedural, a mesma ação de um cachorro latir seria chamada como:',
-      options: [
-        '`cachorro.latir()`',
-        '`latir(cachorro)`',
-        '`Cachorro.latir()`',
-        '`def latir(cachorro):`',
-      ],
-      correct: 1,
-      explanation: 'A tabela da missão mostra: no procedural, o objeto é passado como argumento para a função — `latir(cachorro)`. Na POO, o objeto chama o método com a notação ponto — `cachorro.latir()`. Mesma ação, organização oposta.',
-    },
-    {
-      id: '1-4-e6',
-      question: 'Por que `self` não precisa ser passado explicitamente ao chamar `rex.latir()`?',
-      options: [
-        '`self` é uma variável global criada automaticamente pelo Python',
-        '`self` é ignorado quando não é passado explicitamente',
-        'Python automaticamente passa `rex` como `self` ao usar a notação ponto',
-        'Python usa o nome da variável `rex` como `self` diretamente',
-      ],
-      correct: 2,
-      explanation: 'Quando você escreve `rex.latir()`, o Python internamente faz `Cachorro.latir(rex)` — passa o objeto à esquerda do ponto como `self`. Por isso você declara `self` na definição, mas não o passa na chamada.',
+      author: "Kölling, M.; Quig, B.; Patterson, A.; Rosenberg, J.",
+      year: 2003,
+      title: "The BlueJ System and Its Pedagogy",
+      location: "Journal of Computer Science Education, Vol. 13, No. 4",
+      note: "Objetos manipulados por operações (métodos) que alteram seu estado; algumas operações retornam informações sobre o estado.",
     },
   ],
-  has_minigame: false
 };
 
 export default missao;

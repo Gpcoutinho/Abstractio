@@ -366,6 +366,7 @@ const Missao: React.FC = () => {
               if (part.startsWith('{{duvida-')) { const d = missao.duvidas?.[part.slice(2, -2)]; if (d) return <DuvidaBlock key={i} pergunta={d.pergunta} resposta={d.resposta} />; }
               if (part === '{{ada-card-objeto}}') return <AdaCard key={i} nivel="objeto" />;
               if (part === '{{ada-card-rotulado}}') return <AdaCardRotulado key={i} />;
+              if (part === '{{ada-card-metodos}}') return <AdaCard key={i} nivel="metodos" />;
               if (part === '{{diagrama-rotulos-valores}}') return <DiagramaRotulosValores key={i} />;
               if (part === '{{caderno-abertura}}') return <CadernoAbertura key={i} />;
               if (part === '{{dados-globais}}') return <DadosGlobais key={i} />;

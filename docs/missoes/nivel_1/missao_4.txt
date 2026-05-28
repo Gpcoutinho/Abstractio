@@ -1,0 +1,269 @@
+CONCEITOS DAS REFERÊNCIAS — MISSÃO 4: MÉTODOS
+Fontes: Phillips (2015), Weisfeld (3ª ed.), Kölling et al. / BlueJ (2003)
+Objetivo: decidir o que entra nas notas do missao_4.md
+======================================================================
+
+
+--- GANCHO DE ABERTURA ---
+
+Melhor gancho: retomar a animação de camuflagem do final da missão 3.
+
+Na seção "Atributos podem mudar", Otto atribuiu diretamente:
+
+  ada.cor = "transparente"
+
+Mas quem *mandou* Ada fazer isso? Otto escreveu no caderno – mas Ada
+*já sabe* como se camuflar. Essa capacidade de executar algo é diferente
+de apenas carregar um dado.
+
+A virada narrativa: o mesmo objeto que tem atributos (missão 3) também tem
+ações – e essas ações, na POO, têm um nome: métodos.
+
+Contraste direto com a missão anterior:
+  ada.cor          → lê ou muda um dado (atributo)
+  ada.camuflar()   → executa um comportamento (método)
+
+Esse contraste lado a lado é o gancho mais limpo disponível a partir do
+conteúdo já estabelecido. Não exige introdução nova – apenas a pergunta
+"e o que Ada *fez*?" no ponto exato em que a animação termina.
+
+
+======================================================================
+
+
+--- CONCEITO 1: Método = comportamento do objeto ---
+Fonte: Phillips, p. 7 (Cap. 1, Bloco 2 — ALTA PRIORIDADE)
+
+"Behaviors are actions that can occur on an object. The behaviors that can
+be performed on a specific class of objects are called methods. At the
+programming level, methods are like functions in structured programming,
+but they magically have access to all the data associated with this object.
+Like functions, methods can also accept parameters and return values."
+
+NOTA: "magically have access to all the data" é exatamente o que diferencia
+método de função comum. O método de Ada acessa `self.cor`, `self.reservatorio`
+sem precisar que ninguém passe esses dados – eles *já estão lá*.
+APLICAÇÃO DIRETA: base do <conceito> e da seção de abertura.
+ATENÇÃO: "magically" é recurso retórico de Phillips, não usar literalmente;
+reformular como "o método já conhece Ada por dentro".
+
+
+--- CONCEITO 2: Comportamento = o que o objeto sabe fazer ---
+Fonte: Weisfeld, p. 11 (guardados.txt, Bloco 6 — ALTA PRIORIDADE)
+
+"The behavior of an object is what the object can do. In procedural languages
+the behavior is defined by procedures, functions, and subroutines. In OO
+programming terminology these behaviors are contained in methods."
+
+NOTA: Definição concisa e direta. Par com o conceito de atributo (Weisfeld,
+p. 10): enquanto atributo = estado, método = comportamento. A simetria é
+pedagogicamente limpa e pode ser explorada no <conceito>.
+APLICAÇÃO DIRETA: reforça a abertura e fundamenta o <conceito> de método.
+
+
+--- CONCEITO 3: Métodos alteram e consultam o estado ---
+Fonte: BlueJ / Kölling et al. (2003) — ALTA PRIORIDADE
+
+"Objetos são manipulados por operações (métodos) que alteram seu estado.
+Algumas operações retornam informações sobre o estado."
+(paráfrase do princípio central do artigo)
+
+NOTA: Faz a ponte entre método e atributo: chamar um método pode mudar
+o valor de um atributo (estado). Ada executa `camuflar()` → `self.cor`
+vira `"transparente"` por dentro. Sem que Otto precise escrever no caderno.
+Esse é o ponto onde método supera atribuição direta na missão 3.
+APLICAÇÃO DIRETA: seção final "O método e o atributo trabalham juntos".
+
+
+--- CONCEITO 4: Métodos aceitam parâmetros e retornam valores ---
+Fonte: Phillips, p. 7 (Cap. 1, Bloco 2 — ALTA PRIORIDADE)
+
+"One action that can be associated with oranges is the pick action. [...]
+Since our fruit farmer also sells juice, we can add a squeeze method to
+Orange. When squeezed, squeeze might return the amount of juice retrieved,
+while also removing the Orange from the basket it was in."
+
+NOTA: O exemplo progressivo (ação simples → ação com retorno) é o padrão
+certo para introduzir parâmetros e retorno sem sobrecarregar. Transpondo:
+  ada.nadar()             → sem parâmetro, sem retorno visível
+  ada.capturar_presa(presa) → com parâmetro
+  ada.nivel_tinta()       → com retorno (quanto de tinta Ada ainda tem)
+
+APLICAÇÃO DIRETA: estrutura das seções 3 e 4 (parâmetros → retorno).
+
+
+--- CONCEITO 5: Métodos são verbos ---
+Fonte: Phillips, p. 10 (Cap. 1, Bloco 4 — MÉDIA PRIORIDADE)
+
+"Objects typically represent nouns in the original problem, while methods
+are normally verbs. Attributes can often be picked up as adjectives."
+
+NOTA: Complemento da heurística já usada na missão 3 (atributos = adjetivos).
+Agora fecha o trio: objeto = substantivo, atributo = adjetivo, método = verbo.
+Simples, memorizável – funciona bem em um DuvidaBlock ou frase leve no texto.
+ATENÇÃO: é heurística, não regra absoluta. Não aprofundar.
+APLICAÇÃO POSSÍVEL: seção de abertura ou DuvidaBlock lateral.
+
+
+--- CONCEITO 6: POO une dado e comportamento no mesmo lugar ---
+Fonte: Weisfeld, p. 10 (guardados.txt, Bloco 3 — MÉDIA PRIORIDADE)
+
+"The fundamental advantage of OO programming is that the data and the
+operations that manipulate the data (the code) are both encapsulated in
+the object."
+
+NOTA: Argumento de design que fecha o arco atributo + método: os dois vivem
+juntos, no mesmo objeto. É o princípio que Otto está descobrindo ao observar
+Ada – ela carrega dado e comportamento ao mesmo tempo. Conecta subtilmente
+com encapsulamento (Nível 2), mas sem abrir esse assunto.
+APLICAÇÃO POSSÍVEL: frase de encerramento da missão, como ponte para o
+resumo ou para o gancho da missão 5.
+ATENÇÃO: não entrar em acesso/ocultação (atributos privados) – isso é Nível 2.
+
+
+======================================================================
+
+
+--- NARRATIVA (narrativa_exemplos.md, Missão 1-4) ---
+
+Exemplo definido no arquivo:
+  Otto *observa* Ada executando comportamentos – ele chama os métodos e vê
+  os resultados. Ainda não sabe como esses comportamentos foram definidos.
+  Reforçar: método é o que um objeto sabe fazer, chamado de fora como
+  uma instrução.
+
+Nomes definidos: Ada.nadar(), Ada.camuflar(), Ada.soltar_tinta(), Ada.capturar_presa(presa)
+
+AVALIAÇÃO: manter o núcleo – está alinhado com a restrição pedagógica
+(sem `class`, sem `def`, Otto só chama e observa). A missão ainda não
+revela como o método é criado por dentro.
+
+SUGESTÃO DE COMPLEMENTO: adicionar um método de retorno explícito para
+cobrir a seção 4 (métodos que devolvem algo):
+  ada.nivel_tinta() → retorna int (ex: 75, representando 75% do reservatório)
+Ou: ada.esta_camuflada() → retorna bool (True/False)
+→ Ambos são naturais no universo marinho e permitem mostrar que nem todo
+  método age "por fora" – alguns respondem com uma informação.
+
+
+======================================================================
+
+
+--- COMPONENTES REUTILIZÁVEIS ---
+
+** AnimacaoCamuflagem.tsx (missao_3)**
+Caminho: src/components/missoes/nivel_1/missao_3/AnimacaoCamuflagem.tsx
+Tag atual: {{animacao-camuflagem}}
+REUSO: gancho perfeito de reabertura no início da missão 4 – o aluno vê
+Ada se camuflando e a pergunta "mas como Ada fez isso?" emerge naturalmente.
+Verificar se o componente pode ser chamado por tag em missao_4 ou se é
+exclusivo da missão 3.
+
+** AdaCard.tsx (nivel_1)**
+Caminho: src/components/missoes/nivel_1/AdaCard.tsx
+REUSO: pode aparecer como referência visual de Ada ao lado dos exemplos de
+chamada de método (mostra que Ada existe e tem dados antes de executar ação).
+
+** AdaCardRotulado.tsx (missao_3)**
+Caminho: src/components/missoes/nivel_1/missao_3/AdaCardRotulado.tsx
+Tag atual: {{ada-card-rotulado}}
+REUSO POSSÍVEL: para contextualizar atributos antes de mostrar que o método
+os altera. Exemplo: Ada tem `cor: rosa` → chama `ada.camuflar()` → cor muda.
+
+** FichaInterativo.tsx (missao_3) – SINALIZADA PARA REUSO**
+Caminho: src/components/missoes/nivel_1/missao_3/FichaInterativo.tsx
+REUSO: o componente edita atributos de Ada em tempo real (cor + tentáculos).
+Na missão 4, poderia ser usado invertido: o aluno clica num método, o
+componente executa a ação e o card de Ada atualiza automaticamente.
+Verificar com Rebecca se reutiliza diretamente ou se inspira um novo
+componente "FichaMetodo" com essa lógica.
+
+** DuvidaBlock (reutilizaveis)**
+Caminho: src/components/missoes/reutilizaveis/DuvidaBlock.tsx
+REUSO PADRÃO: usar para dúvidas previstas (ver seção abaixo).
+
+** FichaAcesso.tsx (missao_3)**
+Caminho: src/components/missoes/nivel_1/missao_3/FichaAcesso.tsx
+MODELO: o padrão dropdown → resultado pode inspirar um "FichaMetodo"
+(botões de método → painel com resultado). Não é reuso direto, mas
+o padrão visual já está testado e aprovado.
+
+
+======================================================================
+
+
+--- DÚVIDAS PREVISTAS ---
+
+{{duvida-metodo-funcao}}
+"Método e função são a mesma coisa?"
+→ Resposta: quase. Função existe sozinha, no ar. Método mora dentro de um
+  objeto e só faz sentido chamado a partir dele – e já conhece os dados
+  desse objeto sem precisar que ninguém passe.
+
+{{duvida-parenteses-metodo}}
+"Por que tem parênteses em ada.nadar() mas não em ada.cor?"
+→ Resposta: `ada.cor` é um dado – você lê diretamente. `ada.nadar()` é
+  uma instrução – os parênteses dizem ao Python "execute isso agora".
+  É a diferença entre olhar para a cor de Ada e pedir que ela nade.
+
+{{duvida-sem-class}}
+"De onde veio nadar()? Quem definiu que Ada sabe nadar?"
+→ Resposta teaser: boa pergunta – isso é exatamente o que a missão 5 vai
+  revelar. Por enquanto, apenas observe: Ada sabe nadar, e você pode
+  pedir que ela faça isso.
+
+
+======================================================================
+
+
+--- ESTRUTURA DAS SEÇÕES (SUGESTÃO) ---
+
+Seguindo o padrão Objects First (BlueJ) e o template da missão 2–3:
+observar → nomear → detalhar → conectar com o anterior.
+
+1. Ada em ação
+   Gancho: {{animacao-camuflagem}} do final da missão 3 como reabertura.
+   Otto viu Ada mudar. Mas quem agiu? → Apresentação do conceito de método.
+   <conceito> de método.
+
+2. Como chamar um método
+   Notação: ada.nadar()
+   Contraste explícito com ada.cor (atributo).
+   ada.camuflar(), ada.soltar_tinta() como exemplos adicionais.
+   Interativo sugerido: {{ficha-metodo}} – dropdown de método → resultado
+   na tela (semelhante ao FichaAcesso da missão 3).
+
+3. Métodos com parâmetros
+   ada.capturar_presa("caranguejo") → resultado depende do argumento.
+   Analogia: "chamar Ada e dizer o que você quer que ela faça".
+
+4. Métodos que respondem com um dado
+   ada.nivel_tinta() → retorna 75 (ou True/False para ada.esta_camuflada()).
+   Dois tipos de método: os que *fazem* e os que *respondem*.
+
+5. O método e o atributo trabalham juntos
+   Chamar ada.camuflar() muda ada.cor por dentro – sem Otto escrever nada.
+   Bridge para missão 5: "mas quem definiu que camuflar() faz isso?"
+   Gancho de encerramento natural para o grande reveal da classe.
+
+
+======================================================================
+
+
+--- HIERARQUIA DE PRIORIDADE PARA AS NOTAS ---
+
+ALTA PRIORIDADE (entram com certeza):
+  - Conceito 1 (Phillips) – comportamento = método, acesso "mágico" aos dados
+  - Conceito 2 (Weisfeld) – comportamento = o que o objeto sabe fazer
+  - Conceito 3 (BlueJ)   – métodos alteram e consultam estado
+  - Conceito 4 (Phillips) – parâmetros e retorno; exemplo progressivo
+
+MÉDIA PRIORIDADE (entram se a missão comportar):
+  - Conceito 5 (Phillips) – métodos = verbos; fecha o trio com atributos
+  - Conceito 6 (Weisfeld) – dado e comportamento no mesmo lugar; gancho Nível 2
+
+BAIXA PRIORIDADE / RESERVAR PARA MISSÕES FUTURAS:
+  - Encapsulamento (Phillips Bloco 3, Weisfeld Bloco 7) – não abrir ainda
+  - self / def – reservar para missão 5 (Classe)
+
+======================================================================
