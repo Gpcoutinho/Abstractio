@@ -34,8 +34,8 @@ import interativoHtml from "../assets/interativos/nivel_1_missao_7.html?raw";
 import ProgressBar from '../components/ProgressBar';
 import ConceitoBox from '../components/ConceitoBox';
 import OQueVaiEncontrar from '../components/missoes/nivel_1/missao_0/OQueVaiEncontrar';
-import ExerciciosExtras from '../components/ExerciciosExtras';
-import { TreasureChest } from '@phosphor-icons/react';
+import Exercicios from '../components/Exercicios';
+import { ListChecks } from '@phosphor-icons/react';
 import ReferenciasBlock from '../components/ReferenciasBlock';
 import AdaCard from '../components/missoes/nivel_1/AdaCard';
 
@@ -206,7 +206,7 @@ const Missao: React.FC = () => {
   const proximaLabel = nextNivel ? `Próximo nível – ${nextNivel.short}` : 'Próxima missão';
 
   const jaConcluida = isMissaoConcluida(missao.id);
-  const hasExtras = !!(missao.extra_exercises && missao.extra_exercises.length > 0);
+  const hasExtras = !!(missao.exercicios && missao.exercicios.length > 0);
   const acertou = missao.exercise ? selecionada === missao.exercise.correct : false;
 
   const conchasValor = (t: number) => t <= 0 ? 12 : t === 1 ? 8 : 4;
@@ -530,21 +530,21 @@ const Missao: React.FC = () => {
           ) : null}
         </div>
 
-        {/* Exercícios Extras */}
+        {/* Exercícios */}
         {hasExtras && (
           <div className="mt-8 bg-bgSecondary border border-borderDark rounded-xl p-5 flex items-center justify-between gap-4">
             <div>
-              <p className="text-sm font-semibold text-textPrimary">Exercícios Extras</p>
+              <p className="text-sm font-semibold text-textPrimary">Exercícios</p>
               <p className="text-xs text-textSecondary mt-0.5">
-                Responda exercícios · ganhe mais conchas · evolua suas conquistas
+                Responda mais exercícios · ganhe mais conchas · evolua suas conquistas
               </p>
             </div>
             <button
               onClick={() => setShowBau(true)}
               className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-accent text-accent text-sm font-semibold hover:bg-accent/10 transition-colors"
             >
-              <TreasureChest className="w-4 h-4 shrink-0" weight="bold" />
-              Exercícios Extras
+              <ListChecks className="w-4 h-4 shrink-0" weight="bold" />
+              Exercícios
             </button>
           </div>
         )}
@@ -625,8 +625,8 @@ const Missao: React.FC = () => {
                   }}
                   className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-colors"
                 >
-                  <TreasureChest className="w-4 h-4 shrink-0" weight="bold" />
-                  Exercícios Extras
+                  <ListChecks className="w-4 h-4 shrink-0" weight="bold" />
+                  Exercícios
                 </button>
               )}
               {proximaMissao ? (
@@ -650,7 +650,7 @@ const Missao: React.FC = () => {
         </div>
       )}
 
-      {/* Modal Exercícios Extras */}
+      {/* Modal Exercícios */}
       {showBau && hasExtras && (
         <div
           className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-8 bg-bgPrimary/80 backdrop-blur-sm animate-fade-in"
@@ -662,7 +662,7 @@ const Missao: React.FC = () => {
           >
             <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-borderDark/30 shrink-0">
               <div>
-                <h2 className="text-lg font-bold text-textPrimary">Exercícios Extras</h2>
+                <h2 className="text-lg font-bold text-textPrimary">Exercícios</h2>
                 <p className="text-xs text-textSecondary">{missao.title}</p>
               </div>
               <button
@@ -674,9 +674,9 @@ const Missao: React.FC = () => {
               </button>
             </div>
             <div className="overflow-y-auto px-6 py-5">
-              <ExerciciosExtras
+              <Exercicios
                 missaoId={missao.id}
-                extras={missao.extra_exercises!}
+                exercicios={missao.exercicios!}
                 proximaMissao={proximaMissao}
               />
             </div>

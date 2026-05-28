@@ -72,7 +72,7 @@ Só \`ada.cor\` mudou. Ana e Douglas continuam com as suas.
       "Não. Alterar o atributo de um objeto nunca afeta o de outro. `ana.cor = \"verde\"` é válido e só modifica Ana."
     ]
   },
-  extra_exercises: [
+  exercicios: [
     {
       id: '1-3-e1',
       question: 'Na POO, um atributo é:',

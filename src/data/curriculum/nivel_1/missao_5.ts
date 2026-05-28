@@ -105,7 +105,7 @@ class conta_bancaria: # evitar
       "`class` é uma palavra reservada válida do Python para declarar uma classe — o oposto de um erro de sintaxe."
     ]
   },
-  extra_exercises: [
+  exercicios: [
     {
       id: '1-5-e1',
       question: 'A partir de uma única classe, quantos objetos podemos criar?',

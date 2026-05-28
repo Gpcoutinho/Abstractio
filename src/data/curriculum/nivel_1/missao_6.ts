@@ -106,7 +106,7 @@ print(caneta)  # Caneta — R$2.50 (100 em estoque)
       "Os atributos são definidos durante a criação, dentro do `__init__`. Eles já existem com os valores corretos no instante em que o objeto fica disponível."
     ]
   },
-  extra_exercises: [
+  exercicios: [
     {
       id: '1-6-e1',
       question: 'Qual é o nome do construtor em Python?',

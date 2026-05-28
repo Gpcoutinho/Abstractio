@@ -112,7 +112,7 @@ ${diagramaClasseMetodo}
       "Visibilidade em Python é controlada por prefixos de nome (`_` ou `__`), não pelo `self`. O `self` serve para o método referenciar o objeto que o chamou."
     ]
   },
-  extra_exercises: [
+  exercicios: [
     {
       id: '1-4-e1',
       question: 'Qual é a diferença entre uma função comum e um método em Python?',

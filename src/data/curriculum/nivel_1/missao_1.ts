@@ -54,7 +54,7 @@ Vamos para a próxima etapa?`,
       "POO não é exclusiva de interfaces gráficas – ela é usada em qualquer tipo de software: sistemas web, jogos, análise de dados, etc.",
     ],
   },
-  extra_exercises: [
+  exercicios: [
     {
       id: '1-1-e1',
       question: 'Na computação, um paradigma de programação pode ser entendido como:',

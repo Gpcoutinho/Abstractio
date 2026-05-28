@@ -19,7 +19,7 @@ export interface Exercise {
   wrong_explanations?: string[];
 }
 
-export interface ExtraExercise {
+export interface Exercicio {
   id: string;
   question: string;
   options: string[];
@@ -40,7 +40,7 @@ export interface Missao {
   theory: string;
   cards?: SlideCardData[];
   exercise?: Exercise;
-  extra_exercises?: ExtraExercise[];
+  exercicios?: Exercicio[];
   has_interativo: boolean;
   interativo_html?: string;
   references?: Reference[];

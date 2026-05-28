@@ -132,7 +132,7 @@ Isso você descobre na **Missão 5**.
       "Não. Mudar uma característica de Ada só afeta Ada. O outro polvo é uma entidade independente com seus próprios dados intactos.",
     ],
   },
-  extra_exercises: [
+  exercicios: [
     {
       id: '1-2-e1',
       question: 'A missão descreve um objeto como uma "caixa preta". Isso significa que:',

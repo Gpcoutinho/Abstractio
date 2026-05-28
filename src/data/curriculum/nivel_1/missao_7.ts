@@ -92,7 +92,7 @@ No próximo nível, você vai descobrir os **4 Pilares da POO**:
       "Em Python, o objeto herda da classe (toda classe herda de `object` por padrão), não o contrário. Além disso, são os atributos que guardam dados — os métodos os utilizam."
     ]
   },
-  extra_exercises: [
+  exercicios: [
     {
       id: '1-7-e1',
       question: 'Um livro no código da missão tem `titulo`, `autor`, `paginas` e `lido`. Em POO, esses dados são:',

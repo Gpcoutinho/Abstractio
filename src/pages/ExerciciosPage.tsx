@@ -5,11 +5,12 @@ import { Link } from 'react-router-dom';
 import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
 import MissionIcon from '../components/MissionIcon';
-import ExerciciosExtras from '../components/ExerciciosExtras';
+import Exercicios from '../components/Exercicios';
 import PageWrapper from '../components/PageWrapper';
 import Footer from '../components/Footer';
 
 const BG = '#1e293b';
+
 
 const TIER_CARD_STYLE: Partial<Record<string, React.CSSProperties>> = {
   bronze: {
@@ -34,15 +35,15 @@ function getProximaMissao(nivelId: number, missaoIdx: number): string | null {
   return null;
 }
 
-const ExerciciosExtrasPage: React.FC = () => {
-  const { getTier, getExtrasDone } = useProgress();
+const ExerciciosPage: React.FC = () => {
+  const { getTier, getExerciciosDone } = useProgress();
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const missionsWithExtras = useMemo(() =>
     niveis.flatMap(nivel =>
       nivel.missoes
         .map((missao, idx) => ({ missao, nivel, missaoIdx: idx + 1 }))
-        .filter(({ missao }) => !!missao.extra_exercises?.length)
+        .filter(({ missao }) => !!missao.exercicios?.length)
     ), []);
 
   const selected = missionsWithExtras.find(m => m.missao.id === selectedId);
@@ -53,8 +54,8 @@ const ExerciciosExtrasPage: React.FC = () => {
         <PageWrapper className="flex-grow max-w-3xl pb-16">
 
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-textPrimary mb-1">Exercícios Extras</h1>
-            <p className="text-textSecondary text-sm">Responda exercícios · ganhe mais conchas · evolua suas conquistas</p>
+            <h1 className="text-3xl font-bold text-textPrimary mb-1">Exercícios</h1>
+            <p className="text-textSecondary text-sm">Responda mais exercícios · ganhe mais conchas · evolua suas conquistas</p>
           </div>
 
           <div className="space-y-10">
@@ -70,8 +71,8 @@ const ExerciciosExtrasPage: React.FC = () => {
                     {nivelMissions.map(({ missao }) => {
                       const tierVal = getTier(missao.id);
                       const tierCount = { none: 0, bronze: 1, silver: 2, gold: 3 }[tierVal];
-                      const extrasDone = getExtrasDone(missao.id).length;
-                      const extrasTotal = missao.extra_exercises!.length;
+                      const extrasDone = getExerciciosDone(missao.id).length;
+                      const extrasTotal = missao.exercicios!.length;
                       const hasTierStyle = tierVal !== 'none';
 
                       return (
@@ -151,10 +152,10 @@ const ExerciciosExtrasPage: React.FC = () => {
               </div>
             </div>
             <div className="overflow-y-auto px-6 py-5">
-              <ExerciciosExtras
+              <Exercicios
                 key={selected.missao.id}
                 missaoId={selected.missao.id}
-                extras={selected.missao.extra_exercises!}
+                exercicios={selected.missao.exercicios!}
                 proximaMissao={getProximaMissao(selected.nivel.id, selected.missaoIdx)}
               />
             </div>
@@ -165,4 +166,4 @@ const ExerciciosExtrasPage: React.FC = () => {
   );
 };
 
-export default ExerciciosExtrasPage;
+export default ExerciciosPage;
