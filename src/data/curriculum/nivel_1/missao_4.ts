@@ -18,7 +18,7 @@ Mas na missão 2, quando Otto descreveu os três elementos de todo objeto, havia
 | **Características** | Os dados que carrega | cor: rosa, tentáculos: 8 |
 | **Ações** | O que ela sabe fazer | nadar, camuflar, soltar tinta... |
 
-Otto estudou características a fundo. Agora é a vez das ações.
+Otto estudou características a fundo. Agora é a vez das <destaque-marker>ações</destaque-marker>.
 
 Na POO, as ações que um objeto sabe executar têm um nome: <destaque>métodos</destaque>.
 
