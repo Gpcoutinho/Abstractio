@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import Trilha from './pages/Trilha';
 import Missao from './pages/Missao';
 import Conquistas from './pages/Conquistas';
-import ExerciciosExtrasPage from './pages/ExerciciosExtrasPage';
+import ExerciciosPage from './pages/ExerciciosPage';
 import Perfil from './pages/Perfil';
 
 const ScrollToTop: React.FC = () => {
@@ -27,7 +27,7 @@ const App: React.FC = () => {
             <Route path="/trilha" element={<Trilha />} />
             <Route path="/missao/:nivelIdx/:missaoIdx" element={<Missao />} />
             <Route path="/conquistas" element={<Conquistas />} />
-            <Route path="/exercicios-extras" element={<ExerciciosExtrasPage />} />
+            <Route path="/exercicios" element={<ExerciciosPage />} />
             <Route path="/perfil" element={<Perfil />} />
           </Routes>
         </main>
