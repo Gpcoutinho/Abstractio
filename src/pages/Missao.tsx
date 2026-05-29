@@ -38,8 +38,8 @@ import interativoHtml from "../assets/interativos/nivel_1_missao_7.html?raw";
 import ProgressBar from '../components/ProgressBar';
 import ConceitoBox from '../components/ConceitoBox';
 import OQueVaiEncontrar from '../components/missoes/nivel_1/missao_0/OQueVaiEncontrar';
-import BauDeConchas from '../components/ExerciciosExtras';
-import { TreasureChest, BookmarkSimple } from '@phosphor-icons/react';
+import Exercicios from '../components/Exercicios';
+import { ListChecks, BookmarkSimple } from '@phosphor-icons/react';
 import ReferenciasBlock from '../components/ReferenciasBlock';
 import AdaCard from '../components/missoes/nivel_1/AdaCard';
 
@@ -253,8 +253,8 @@ const Missao: React.FC = () => {
   const proximaLabel = nextNivel ? `Próximo nível – ${nextNivel.short}` : 'Próxima missão';
 
   const jaConcluida = isMissaoConcluida(missao.id);
-  const hasExtras = !!(missao.extra_exercises && missao.extra_exercises.length > 0);
-  const acertou = missao.exercise ? selecionada === missao.exercise.correct : false;
+  const hasExtras = !!(missao.exercicios && missao.exercicios.length > 0);
+  const acertou = missao.exercicio ? selecionada === missao.exercicio.correct : false;
 
   const conchasValor = (t: number) => t <= 0 ? 12 : t === 1 ? 8 : 4;
 
@@ -263,7 +263,7 @@ const Missao: React.FC = () => {
     const novasTentativas = tentativas + 1;
     setTentativas(novasTentativas);
     setRespondida(true);
-    if (selecionada === missao.exercise!.correct) {
+    if (selecionada === missao.exercicio!.correct) {
       if (!jaGanhouConchas(missao.id)) {
         setConchasGanhasAgora(conchasValor(tentativas));
       }
@@ -505,7 +505,7 @@ const Missao: React.FC = () => {
         )}
 
         {/* Exercício */}
-        {missao.exercise && (
+        {missao.exercicio && (
           <>
             <hr className="border-borderDark my-10" />
             <section className="bg-bgSecondary border border-borderDark rounded-xl p-6">
@@ -515,10 +515,10 @@ const Missao: React.FC = () => {
                   Você já completou este exercício. Tentar novamente não gera novas conchas.
                 </p>
               )}
-              <p className="text-textPrimary mb-5">{missao.exercise.question}</p>
+              <p className="text-textPrimary mb-5">{missao.exercicio.question}</p>
               <fieldset className="space-y-3">
                 <legend className="sr-only">Opções de resposta</legend>
-                {missao.exercise.options.map((opcao, i) => {
+                {missao.exercicio.options.map((opcao, i) => {
                   let estilo = "border-borderDark";
                   if (respondida) {
                     if (i === selecionada)
@@ -548,8 +548,8 @@ const Missao: React.FC = () => {
                   </p>
                   <p className="text-textSecondary text-sm">
                     {acertou
-                      ? missao.exercise.explanation
-                      : (selecionada !== null && missao.exercise.wrong_explanations?.[selecionada]) || ''}
+                      ? missao.exercicio.explanation
+                      : (selecionada !== null && missao.exercicio.wrong_explanations?.[selecionada]) || ''}
                   </p>
                   {acertou && conchasGanhasAgora !== null && (
                     <p className="text-success text-xs font-medium mt-2 flex items-center gap-1"><ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} /> Você ganhou {conchasGanhasAgora} conchas!</p>
@@ -594,7 +594,7 @@ const Missao: React.FC = () => {
                 desmarcar
               </button>
             </>
-          ) : !missao.exercise ? (
+          ) : !missao.exercicio ? (
             <button onClick={() => completarMissao(missao.id)} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-colors">
               <CheckCircleIcon className="w-5 h-5" />
               Marcar como concluída
@@ -602,24 +602,21 @@ const Missao: React.FC = () => {
           ) : null}
         </div>
 
-        {/* Baú de Conchas */}
+        {/* Exercícios */}
         {hasExtras && (
           <div className="mt-8 bg-bgSecondary border border-borderDark rounded-xl p-5 flex items-center justify-between gap-4">
             <div>
-              <p className="text-sm font-semibold text-textPrimary">Baú de Conchas</p>
+              <p className="text-sm font-semibold text-textPrimary">Exercícios</p>
               <p className="text-xs text-textSecondary mt-0.5">
-                {jaConcluida
-                  ? 'Responda exercícios · ganhe mais conchas · evolua suas conquistas'
-                  : 'Disponível após concluir a missão'}
+                Responda mais exercícios · ganhe mais conchas · evolua suas conquistas
               </p>
             </div>
             <button
               onClick={() => setShowBau(true)}
-              disabled={!jaConcluida}
-              className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-accent text-accent text-sm font-semibold hover:bg-accent/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+              className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-accent text-accent text-sm font-semibold hover:bg-accent/10 transition-colors"
             >
-              <TreasureChest className="w-4 h-4 shrink-0" weight="bold" />
-              Abrir Baú
+              <ListChecks className="w-4 h-4 shrink-0" weight="bold" />
+              Exercícios
             </button>
           </div>
         )}
@@ -735,8 +732,8 @@ const Missao: React.FC = () => {
                   }}
                   className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-colors"
                 >
-                  <TreasureChest className="w-4 h-4 shrink-0" weight="bold" />
-                  Abrir Baú de Conchas
+                  <ListChecks className="w-4 h-4 shrink-0" weight="bold" />
+                  Exercícios
                 </button>
               )}
               {proximaMissao ? (
@@ -760,7 +757,7 @@ const Missao: React.FC = () => {
         </div>
       )}
 
-      {/* Modal Baú de Conchas */}
+      {/* Modal Exercícios */}
       {showBau && hasExtras && (
         <div
           className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-8 bg-bgPrimary/80 backdrop-blur-sm animate-fade-in"
@@ -772,8 +769,8 @@ const Missao: React.FC = () => {
           >
             <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-borderDark/30 shrink-0">
               <div>
-                <h2 className="text-lg font-bold text-textPrimary">Baú de Conchas</h2>
-                <p className="text-xs text-textSecondary">exercícios extras</p>
+                <h2 className="text-lg font-bold text-textPrimary">Exercícios</h2>
+                <p className="text-xs text-textSecondary">{missao.title}</p>
               </div>
               <button
                 onClick={() => setShowBau(false)}
@@ -784,9 +781,9 @@ const Missao: React.FC = () => {
               </button>
             </div>
             <div className="overflow-y-auto px-6 py-5">
-              <BauDeConchas
+              <Exercicios
                 missaoId={missao.id}
-                extras={missao.extra_exercises!}
+                exercicios={missao.exercicios!}
                 proximaMissao={proximaMissao}
               />
             </div>
