@@ -34,7 +34,7 @@ function getProximaMissao(nivelId: number, missaoIdx: number): string | null {
   return null;
 }
 
-const ExerciciosExtrasPage: React.FC = () => {
+const ExerciciosPage: React.FC = () => {
   const { getTier, getExtrasDone } = useProgress();
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
@@ -165,4 +165,4 @@ const ExerciciosExtrasPage: React.FC = () => {
   );
 };
 
-export default ExerciciosExtrasPage;
+export default ExerciciosPage;
