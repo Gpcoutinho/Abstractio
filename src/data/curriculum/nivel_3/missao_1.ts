@@ -32,7 +32,7 @@ Pense em objetos como pessoas em uma cidade:
 
 > Entender relações é o que separa código amador de código profissional.
 `,
-  exercise: {
+  exercicio: {
     question: "Por que é importante entender como objetos se relacionam em POO?",
     options: [
       "Porque sistemas reais são formados por objetos que colaboram — entender relações é essencial para modelar o mundo real.",

@@ -41,7 +41,7 @@ Design de software é uma habilidade que se aprofunda com prática. Os próximos
 
 > *"Qualquer tolo pode escrever código que um computador entende. Bons programadores escrevem código que humanos entendem."* — Martin Fowler
 `,
-  exercise: {
+  exercicio: {
     question: "Qual combinação representa o objetivo central do nível de arquitetura?",
     options: [
       "Máximo de classes possível + mínimo de métodos por classe.",

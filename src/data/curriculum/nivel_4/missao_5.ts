@@ -85,7 +85,7 @@ print(primeiro(["a", "b", "c"]))  # a
 | Segurança | Erros de tipo detectados antes de rodar |
 | Documentação | O tipo comunica a intenção da classe |
 `,
-  exercise: {
+  exercicio: {
     question: "Qual o principal benefício de usar Generics em vez de usar o tipo `object` (ou nenhum tipo)?",
     options: [
       "Generics permitem reutilizar a implementação para qualquer tipo com segurança — ferramentas detectam inconsistências antes de rodar o código.",

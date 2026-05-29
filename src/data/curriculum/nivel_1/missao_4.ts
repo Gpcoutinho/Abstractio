@@ -95,7 +95,7 @@ ${diagramaClasseMetodo}
 
 > **Resumindo:** Métodos são as ações que um objeto sabe executar. Sempre têm \`self\` para saber em qual objeto estão operando — mas você não precisa passá-lo na chamada.
 `,
-  exercise: {
+  exercicio: {
     question: "Por que todo método de instância em Python deve ter `self` como primeiro parâmetro?",
     options: [
       "É uma convenção opcional que melhora apenas a legibilidade.",

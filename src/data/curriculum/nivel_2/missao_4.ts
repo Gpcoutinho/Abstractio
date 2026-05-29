@@ -45,7 +45,7 @@ class AnimalDomestico(Animal):
 
 Python também suporta **herança múltipla**: \`class Anfibio(Terrestre, Aquatico): pass\`
 `,
-  exercise: {
+  exercicio: {
     question: "O que acontece quando uma subclasse define um método com o mesmo nome que a superclasse?",
     options: [
       "O método da subclasse sobrescreve (override) o da superclasse para aquela instância.",

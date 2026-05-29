@@ -49,7 +49,7 @@ for v in frota:
 
 > Próximo nível: como objetos se **relacionam** entre si — sobrescrita, contratos e associações.
 `,
-  exercise: {
+  exercicio: {
     question: "Qual pilar garante que código genérico possa operar sobre diferentes tipos de objeto sem precisar conhecê-los individualmente?",
     options: [
       "Encapsulamento, porque protege os dados de cada objeto.",

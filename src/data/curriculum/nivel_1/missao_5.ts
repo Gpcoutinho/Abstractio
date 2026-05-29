@@ -88,7 +88,7 @@ class conta_bancaria: # evitar
 
 > **Resumindo:** Uma classe é o molde que define como um tipo de objeto deve ser — com suas características e comportamentos. A partir de uma classe, você cria quantos objetos quiser.
 `,
-  exercise: {
+  exercicio: {
     question: "Escolha a alternativa que melhor define o que é uma **classe**:",
     options: [
       "Um molde que descreve as propriedades e comportamentos de um tipo de objeto.",

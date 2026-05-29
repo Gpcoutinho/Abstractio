@@ -75,7 +75,7 @@ No próximo nível, você vai descobrir os **4 Pilares da POO**:
 
 > Esses pilares são o que separa código iniciante de código profissional. Bora?
 `,
-  exercise: {
+  exercicio: {
     question: "Qual sequência representa corretamente a relação entre classe, construtor e objeto?",
     options: [
       "O objeto é criado → o construtor define a classe → a classe armazena atributos.",

@@ -51,7 +51,7 @@ def saldo(self, valor):
         self.__saldo = valor
 \`\`\`
 `,
-  exercise: {
+  exercicio: {
     question: "Qual é o principal objetivo do encapsulamento em POO?",
     options: [
       "Permitir que qualquer parte do código acesse e modifique os dados livremente.",

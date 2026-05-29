@@ -55,7 +55,7 @@ print(ada.cor)  # transparente
 
 Só \`ada.cor\` mudou. Ana e Douglas continuam com as suas.
 `,
-  exercise: {
+  exercicio: {
     question: "Otto lê `ada.cor` e vê `\"rosa\"`. Em seguida escreve `ana.cor = \"verde\"`. O que acontece com `ada.cor`?",
     options: [
       "Muda para \"verde\" — objetos do mesmo tipo compartilham atributos.",

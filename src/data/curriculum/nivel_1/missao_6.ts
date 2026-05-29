@@ -89,7 +89,7 @@ print(caneta)  # Caneta — R$2.50 (100 em estoque)
 
 > **Resumindo:** O construtor \`__init__\` é chamado automaticamente ao criar um objeto e define seus valores iniciais. O \`__str__\` define como o objeto é exibido com \`print()\`.
 `,
-  exercise: {
+  exercicio: {
     question: "O que acontece quando você executa `p = Produto('Caneta', 2.50)`?",
     options: [
       "Nada — é preciso chamar `p.init()` manualmente depois.",

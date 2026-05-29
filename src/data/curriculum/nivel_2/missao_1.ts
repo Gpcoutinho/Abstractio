@@ -47,7 +47,7 @@ Juntos, os 4 pilares produzem código que é:
 
 > As próximas 4 missões exploram cada pilar em detalhe. Ao final, você vai ver tudo se encaixar em um único exemplo poderoso.
 `,
-  exercise: {
+  exercicio: {
     question: "Qual é o principal objetivo dos 4 pilares da POO?",
     options: [
       "Tornar o código organizado, reutilizável, seguro e extensível.",

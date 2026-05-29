@@ -89,7 +89,7 @@ print(csv.exportar(vendas))
 
 > **Resumindo:** Uma classe abstrata define um contrato parcial — impõe métodos que as subclasses devem implementar, mas também pode oferecer comportamentos prontos e compartilhados.
 `,
-  exercise: {
+  exercicio: {
     question: "Qual a principal diferença entre uma interface pura e uma classe abstrata?",
     options: [
       "Interfaces definem apenas o contrato; classes abstratas podem ter métodos concretos compartilhados além dos abstratos.",

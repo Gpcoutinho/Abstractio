@@ -11,7 +11,9 @@
       "mcp__ide__getDiagnostics",
       "Bash(powershell -Command 'Get-Content '\\\\''C:\\\\Projetos\\\\Abstractio\\\\src\\\\data\\\\curriculum\\\\nivel_1$f.ts'\\\\'' | Select-Object -First 30')",
       "Bash(Remove-Item \"C:\\\\Projetos\\\\Abstractio\\\\src\\\\components\\\\BauDeConchas.tsx\")",
-      "Bash(Remove-Item \"C:\\\\Projetos\\\\Abstractio\\\\src\\\\pages\\\\BauPage.tsx\")"
+      "Bash(Remove-Item \"C:\\\\Projetos\\\\Abstractio\\\\src\\\\pages\\\\BauPage.tsx\")",
+      "Bash(xargs grep -l \"exercise:\")",
+      "Bash(xargs sed -i 's/  exercise: {/  exercicio: {/g')"
     ]
   }
 }

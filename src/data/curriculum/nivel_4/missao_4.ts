@@ -86,7 +86,7 @@ class Servico:
         self.repo = repo
 \`\`\`
 `,
-  exercise: {
+  exercicio: {
     question: "O princípio **Open/Closed** diz que classes devem ser:",
     options: [
       "Abertas para modificação e fechadas para extensão.",

@@ -74,7 +74,7 @@ Se \`Usuario\` não implementar algum dos métodos abstratos, o Python lança um
 
 > **Resumindo:** Uma interface é um contrato puro — define apenas o que deve existir, sem implementar nada. Qualquer classe que a implemente pode ser usada de forma intercambiável.
 `,
-  exercise: {
+  exercicio: {
     question: "O que caracteriza uma interface pura em Python?",
     options: [
       "Uma classe com pelo menos um método implementado e um abstrato.",

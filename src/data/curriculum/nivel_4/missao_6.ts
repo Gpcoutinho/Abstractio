@@ -108,7 +108,7 @@ db = fabrica_banco("postgres")
 print(db.conectar())
 \`\`\`
 `,
-  exercise: {
+  exercicio: {
     question: "O padrão **Strategy** é mais adequado quando:",
     options: [
       "Você precisa garantir que uma classe tenha apenas uma instância no sistema.",

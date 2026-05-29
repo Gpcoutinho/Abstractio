@@ -32,7 +32,7 @@ export interface Missao {
   emblem?: string;
   theory: string;
   cards?: SlideCardData[];
-  exercise?: Exercicio;
+  exercicio?: Exercicio;
   exercicios?: Exercicio[];
   has_interativo: boolean;
   interativo_html?: string;

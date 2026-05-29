@@ -207,7 +207,7 @@ const Missao: React.FC = () => {
 
   const jaConcluida = isMissaoConcluida(missao.id);
   const hasExtras = !!(missao.exercicios && missao.exercicios.length > 0);
-  const acertou = missao.exercise ? selecionada === missao.exercise.correct : false;
+  const acertou = missao.exercicio ? selecionada === missao.exercicio.correct : false;
 
   const conchasValor = (t: number) => t <= 0 ? 12 : t === 1 ? 8 : 4;
 
@@ -216,7 +216,7 @@ const Missao: React.FC = () => {
     const novasTentativas = tentativas + 1;
     setTentativas(novasTentativas);
     setRespondida(true);
-    if (selecionada === missao.exercise!.correct) {
+    if (selecionada === missao.exercicio!.correct) {
       if (!jaGanhouConchas(missao.id)) {
         setConchasGanhasAgora(conchasValor(tentativas));
       }
@@ -433,7 +433,7 @@ const Missao: React.FC = () => {
         )}
 
         {/* Exercício */}
-        {missao.exercise && (
+        {missao.exercicio && (
           <>
             <hr className="border-borderDark my-10" />
             <section className="bg-bgSecondary border border-borderDark rounded-xl p-6">
@@ -443,10 +443,10 @@ const Missao: React.FC = () => {
                   Você já completou este exercício. Tentar novamente não gera novas conchas.
                 </p>
               )}
-              <p className="text-textPrimary mb-5">{missao.exercise.question}</p>
+              <p className="text-textPrimary mb-5">{missao.exercicio.question}</p>
               <fieldset className="space-y-3">
                 <legend className="sr-only">Opções de resposta</legend>
-                {missao.exercise.options.map((opcao, i) => {
+                {missao.exercicio.options.map((opcao, i) => {
                   let estilo = "border-borderDark";
                   if (respondida) {
                     if (i === selecionada)
@@ -476,8 +476,8 @@ const Missao: React.FC = () => {
                   </p>
                   <p className="text-textSecondary text-sm">
                     {acertou
-                      ? missao.exercise.explanation
-                      : (selecionada !== null && missao.exercise.wrong_explanations?.[selecionada]) || ''}
+                      ? missao.exercicio.explanation
+                      : (selecionada !== null && missao.exercicio.wrong_explanations?.[selecionada]) || ''}
                   </p>
                   {acertou && conchasGanhasAgora !== null && (
                     <p className="text-success text-xs font-medium mt-2 flex items-center gap-1"><ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} /> Você ganhou {conchasGanhasAgora} conchas!</p>
@@ -522,7 +522,7 @@ const Missao: React.FC = () => {
                 desmarcar
               </button>
             </>
-          ) : !missao.exercise ? (
+          ) : !missao.exercicio ? (
             <button onClick={() => completarMissao(missao.id)} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-colors">
               <CheckCircleIcon className="w-5 h-5" />
               Marcar como concluída

@@ -72,7 +72,7 @@ print(prof.alunos[0].nome)   # Bia
 
 > **Resumindo:** Na associação, os objetos interagem mas são independentes — nenhum controla o ciclo de vida do outro. É o relacionamento mais fraco e mais comum.
 `,
-  exercise: {
+  exercicio: {
     question: "Qual característica define uma relação de **Associação** entre objetos?",
     options: [
       "Um objeto cria e destrói o outro durante seu ciclo de vida.",

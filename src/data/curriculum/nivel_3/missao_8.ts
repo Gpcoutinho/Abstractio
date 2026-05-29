@@ -72,7 +72,7 @@ print(pedido.finalizar(CartaoCredito()))
 
 > Próximo nível: **engenharia e qualidade** — como escrever código que dura.
 `,
-  exercise: {
+  exercicio: {
     question: "Qual é o principal benefício de usar contratos (interfaces/classes abstratas) em um sistema?",
     options: [
       "Aumentar o desempenho do código em tempo de execução.",

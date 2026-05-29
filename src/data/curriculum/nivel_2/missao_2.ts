@@ -57,7 +57,7 @@ for f in formas:
 - Habilita **polimorfismo**: tratar \`Circulo\` e \`Retangulo\` uniformemente como \`Forma\`
 - Separa *o quê* fazer do *como* fazer
 `,
-  exercise: {
+  exercicio: {
     question: "O que caracteriza uma **classe abstrata** em Python?",
     options: [
       "Uma classe que não pode ter nenhum método implementado.",

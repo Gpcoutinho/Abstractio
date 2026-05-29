@@ -113,7 +113,7 @@ A resposta ainda é um mistério. A caixa preta ainda está fechada.
 
 Isso você descobre na **Missão 5**.
 `,
-  exercise: {
+  exercicio: {
     question:
       "Em um sistema de loja online, um produto tem nome, preço e estoque, e pode ser vendido e ter o estoque atualizado. Ele é um objeto porque:",
     options: [

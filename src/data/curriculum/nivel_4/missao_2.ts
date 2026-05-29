@@ -59,7 +59,7 @@ Faça a pergunta: **"O que esta classe faz?"**
 | Métodos ignoram atributos da classe | Baixa |
 | Classe difícil de nomear | Baixa |
 `,
-  exercise: {
+  exercicio: {
     question: "Como identificar que uma classe tem **baixa coesão**?",
     options: [
       "A classe é difícil de nomear e seus métodos têm responsabilidades não relacionadas entre si.",

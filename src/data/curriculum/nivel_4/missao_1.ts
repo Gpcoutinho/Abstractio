@@ -31,7 +31,7 @@ Um bom arquiteto não apenas empilha tijolos — ele projeta estruturas que:
 
 > Esses princípios são o que diferencia desenvolvedores juniores de sêniores.
 `,
-  exercise: {
+  exercicio: {
     question: "O que caracteriza um sistema com boa qualidade de design em POO?",
     options: [
       "Ter o maior número possível de classes e métodos.",

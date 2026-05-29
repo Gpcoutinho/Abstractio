@@ -52,7 +52,7 @@ class NotificacaoAuditada(Notificacao):
 | \`super()\` opcional | Use para aproveitar o comportamento pai |
 | Polimorfismo | Objetos distintos se comportam diferente pelo mesmo método |
 `,
-  exercise: {
+  exercicio: {
     question: "Qual é a diferença entre sobrescrita e herança simples?",
     options: [
       "Não há diferença — sobrescrita é apenas outro nome para herança.",

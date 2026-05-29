@@ -103,7 +103,7 @@ Faça a pergunta: **"a parte faz sentido existir sem o todo?"**
 
 > **Resumindo:** Agregação e composição são graus de pertencimento. Na agregação, as partes são independentes. Na composição, as partes só existem dentro do todo.
 `,
-  exercise: {
+  exercicio: {
     question: "Em um sistema de biblioteca, livros existem antes e independente de uma coleção, e podem pertencer a várias coleções. Qual relacionamento modela isso?",
     options: [
       "Agregação, porque os livros existem independentemente e podem pertencer a mais de uma coleção.",

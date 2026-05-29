@@ -63,7 +63,7 @@ for x in todos:
 - Reduz condicionais (\`if isinstance(...)\`)
 - Facilita extensão do sistema
 `,
-  exercise: {
+  exercicio: {
     question: "O que é Duck Typing em Python?",
     options: [
       "Uma forma de herança múltipla exclusiva do Python.",

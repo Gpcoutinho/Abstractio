@@ -58,7 +58,7 @@ print(processar(5))       # Inteiro: 10
 print(processar("ola"))   # Texto: OLA
 \`\`\`
 `,
-  exercise: {
+  exercicio: {
     question: "Como Python simula sobrecarga de métodos de forma nativa?",
     options: [
       "Criando múltiplos métodos com o mesmo nome e assinaturas diferentes, como em Java.",

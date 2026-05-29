@@ -66,7 +66,7 @@ pedido.finalizar()
 
 > O objetivo é sempre: **alta coesão + baixo acoplamento**.
 `,
-  exercise: {
+  exercicio: {
     question: "O que é Injeção de Dependência e como ela reduz o acoplamento?",
     options: [
       "É uma técnica de herança que injeta métodos de uma classe em outra automaticamente.",

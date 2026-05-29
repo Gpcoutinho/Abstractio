@@ -35,7 +35,7 @@ Em vez de uma lista interminável de comandos, a POO organiza o software em torn
 Otto não vai mais anotar tudo em papéis soltos. Ele vai criar uma **ficha para Ada**: o que ela é, o que ela sabe fazer. Uma ficha por criatura – organizada, completa, reutilizável.
 
 Vamos para a próxima etapa?`,
-  exercise: {
+  exercicio: {
     question:
       "Qual das alternativas melhor define a Programação Orientada a Objetos?",
     options: [
