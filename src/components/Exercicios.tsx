@@ -52,7 +52,7 @@ const Exercicios: React.FC<Props> = ({ missaoId, exercicios, proximaMissao }) =>
   const COMPLETION_IDX = exercicios.length;
   const allDone = doneCount >= exercicios.length;
 
-  const firstIncomplete = exercicios.findIndex(ex => !feitos.includes(ex.id));
+  const firstIncomplete = exercicios.findIndex(ex => !feitos.includes(ex.id!));
   const [currentIdx, setCurrentIdx] = useState(
     firstIncomplete === -1 ? COMPLETION_IDX : firstIncomplete
   );
@@ -66,25 +66,25 @@ const Exercicios: React.FC<Props> = ({ missaoId, exercicios, proximaMissao }) =>
 
   if (!isCompletionPage && !current) return null;
 
-  const isCurrentDone = current ? feitos.includes(current.id) : false;
-  const selecionada = current ? (selecionadaMap[current.id] ?? null) : null;
-  const respondida = current ? (respondidaMap[current.id] ?? false) : false;
-  const errorCount = current ? (errorsMap[current.id] ?? 0) : 0;
+  const isCurrentDone = current ? feitos.includes(current.id!) : false;
+  const selecionada = current ? (selecionadaMap[current.id!] ?? null) : null;
+  const respondida = current ? (respondidaMap[current.id!] ?? false) : false;
+  const errorCount = current ? (errorsMap[current.id!] ?? 0) : 0;
   const reward = Math.max(0, 3 - errorCount);
   const acertou = current ? selecionada === current.correct : false;
 
   const handleSelect = (i: number) => {
     if (!current || respondida || isCurrentDone) return;
-    setSelecionadaMap(prev => ({ ...prev, [current.id]: i }));
+    setSelecionadaMap(prev => ({ ...prev, [current.id!]: i }));
   };
 
   const handleSubmit = () => {
     if (!current || selecionada === null || isCurrentDone || respondida) return;
-    setRespondidaMap(prev => ({ ...prev, [current.id]: true }));
+    setRespondidaMap(prev => ({ ...prev, [current.id!]: true }));
     if (selecionada === current.correct) {
       const prevTier = calcTier(doneCount);
       const newTier = calcTier(doneCount + 1);
-      completarExercicio(missaoId, current.id, reward);
+      completarExercicio(missaoId, current.id!, reward);
       if (newTier !== prevTier && newTier !== 'none') {
         setTierUnlocked(newTier as Exclude<TierLevel, 'none'>);
       }
@@ -92,14 +92,14 @@ const Exercicios: React.FC<Props> = ({ missaoId, exercicios, proximaMissao }) =>
         setCurrentIdx(COMPLETION_IDX);
       }
     } else {
-      setErrorsMap(prev => ({ ...prev, [current.id]: (prev[current.id] ?? 0) + 1 }));
+      setErrorsMap(prev => ({ ...prev, [current.id!]: (prev[current.id!] ?? 0) + 1 }));
     }
   };
 
   const handleRetry = () => {
     if (!current) return;
-    setRespondidaMap(prev => ({ ...prev, [current.id]: false }));
-    setSelecionadaMap(prev => ({ ...prev, [current.id]: null }));
+    setRespondidaMap(prev => ({ ...prev, [current.id!]: false }));
+    setSelecionadaMap(prev => ({ ...prev, [current.id!]: null }));
   };
 
   const goTo = (idx: number) => {
@@ -198,11 +198,11 @@ const Exercicios: React.FC<Props> = ({ missaoId, exercicios, proximaMissao }) =>
 
         <div className="flex items-center gap-1.5">
           {exercicios.map((ex, i) => {
-            const isDone = feitos.includes(ex.id);
+            const isDone = feitos.includes(ex.id!);
             const isCurrent = i === currentIdx;
             return (
               <button
-                key={ex.id}
+                key={ex.id!}
                 onClick={() => goTo(i)}
                 aria-label={`Exercício ${i + 1}`}
                 className={`rounded-full transition-all duration-150 hover:scale-125 focus:outline-none ${
