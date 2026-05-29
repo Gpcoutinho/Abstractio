@@ -49,7 +49,7 @@ const Conquistas: React.FC = () => {
                   const tierVal = getTier(missao.id);
                   const tier = tierVal !== 'none' ? tierVal : undefined;
                   const tierCount = { none: 0, bronze: 1, silver: 2, gold: 3 }[tierVal];
-                  const hasExtras = !!(missao.extra_exercises?.length);
+                  const hasExtras = !!(missao.exercicios?.length);
                   return (
                     <div key={missao.id} className="flex flex-col items-center gap-1.5 w-28">
                       {/* Label discreto acima */}
@@ -115,7 +115,7 @@ const Conquistas: React.FC = () => {
       const modalTierVal = getTier(missao.id);
       const modalTier = modalTierVal !== 'none' ? modalTierVal : undefined;
       const modalTierCount = { none: 0, bronze: 1, silver: 2, gold: 3 }[modalTierVal];
-      const modalHasExtras = !!(missao.extra_exercises?.length);
+      const modalHasExtras = !!(missao.exercicios?.length);
       return (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bgPrimary/80 backdrop-blur-sm animate-fade-in"
