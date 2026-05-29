@@ -108,15 +108,15 @@ db = fabrica_banco("postgres")
 print(db.conectar())
 \`\`\`
 `,
-  exercise: {
+  exercicio: {
     question: "O padrão **Strategy** é mais adequado quando:",
     options: [
       "Você precisa garantir que uma classe tenha apenas uma instância no sistema.",
-      "Você quer poder trocar o algoritmo ou comportamento de um objeto em tempo de execução sem alterar o código que o usa.",
       "Você precisa notificar múltiplos objetos quando o estado de outro muda.",
-      "Você quer criar objetos complexos passo a passo."
+      "Você quer poder trocar o algoritmo ou comportamento de um objeto em tempo de execução sem alterar o código que o usa.",
+      "Você quer criar objetos complexos passo a passo.",
     ],
-    correct: 1,
+    correct: 2,
     explanation: "Correto! Strategy encapsula algoritmos intercambiáveis — o objeto que os usa não precisa saber qual estratégia está ativa, apenas chamá-la."
   },
   has_minigame: false

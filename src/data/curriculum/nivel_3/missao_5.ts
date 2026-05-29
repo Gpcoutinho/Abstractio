@@ -74,15 +74,15 @@ Se \`Usuario\` não implementar algum dos métodos abstratos, o Python lança um
 
 > **Resumindo:** Uma interface é um contrato puro — define apenas o que deve existir, sem implementar nada. Qualquer classe que a implemente pode ser usada de forma intercambiável.
 `,
-  exercise: {
+  exercicio: {
     question: "O que caracteriza uma interface pura em Python?",
     options: [
       "Uma classe com pelo menos um método implementado e um abstrato.",
-      "Uma classe que herda de `ABC` e contém apenas métodos abstratos, sem nenhuma implementação.",
       "Uma classe que não pode ser herdada por outras classes.",
-      "Um módulo Python separado que define funções globais."
+      "Uma classe que herda de `ABC` e contém apenas métodos abstratos, sem nenhuma implementação.",
+      "Um módulo Python separado que define funções globais.",
     ],
-    correct: 1,
+    correct: 2,
     explanation: "Correto! Uma interface pura em Python é uma classe ABC com apenas @abstractmethod — ela define o contrato sem implementar nada."
   },
   has_minigame: false

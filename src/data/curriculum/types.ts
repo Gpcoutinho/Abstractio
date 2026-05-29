@@ -1,4 +1,4 @@
-﻿export interface Duvida {
+export interface Duvida {
   pergunta: string;
   resposta: string;
 }
@@ -11,20 +11,13 @@ export interface Reference {
   note?: string;
 }
 
-export interface Exercise {
+export interface Exercicio {
+  id?: string;
   question: string;
   options: string[];
   correct: number;
   explanation: string;
   wrong_explanations?: string[];
-}
-
-export interface ExtraExercise {
-  id: string;
-  question: string;
-  options: string[];
-  correct: number;
-  explanation: string;
 }
 
 export interface SlideCardData {
@@ -40,8 +33,8 @@ export interface Missao {
   theory: string;
   cards?: SlideCardData[];
   resumo?: string[];
-  exercise?: Exercise;
-  extra_exercises?: ExtraExercise[];
+  exercicio?: Exercicio;
+  exercicios?: Exercicio[];
   has_minigame: boolean;
   minigame_html?: string;
   references?: Reference[];

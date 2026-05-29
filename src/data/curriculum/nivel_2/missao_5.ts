@@ -63,15 +63,15 @@ for x in todos:
 - Reduz condicionais (\`if isinstance(...)\`)
 - Facilita extensão do sistema
 `,
-  exercise: {
+  exercicio: {
     question: "O que é Duck Typing em Python?",
     options: [
       "Uma forma de herança múltipla exclusiva do Python.",
-      "A capacidade de usar um objeto em qualquer contexto desde que ele possua os métodos esperados, independente de sua hierarquia de classes.",
       "Um padrão de projeto para criar objetos do tipo 'pato'.",
-      "Uma verificação estrita de tipos feita em tempo de compilação."
+      "A capacidade de usar um objeto em qualquer contexto desde que ele possua os métodos esperados, independente de sua hierarquia de classes.",
+      "Uma verificação estrita de tipos feita em tempo de compilação.",
     ],
-    correct: 1,
+    correct: 2,
     explanation: "Correto! Duck Typing permite que qualquer objeto seja usado polimorficamente desde que implemente a interface esperada, sem precisar herdar de uma classe específica."
   },
   has_minigame: false

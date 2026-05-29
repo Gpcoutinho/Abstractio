@@ -72,15 +72,15 @@ print(pedido.finalizar(CartaoCredito()))
 
 > Próximo nível: **engenharia e qualidade** — como escrever código que dura.
 `,
-  exercise: {
+  exercicio: {
     question: "Qual é o principal benefício de usar contratos (interfaces/classes abstratas) em um sistema?",
     options: [
       "Aumentar o desempenho do código em tempo de execução.",
-      "Garantir que diferentes classes implementem um conjunto comum de métodos, permitindo intercambialidade.",
       "Impedir que subclasses adicionem novos métodos além dos definidos no contrato.",
-      "Substituir completamente a necessidade de herança no sistema."
+      "Garantir que diferentes classes implementem um conjunto comum de métodos, permitindo intercambialidade.",
+      "Substituir completamente a necessidade de herança no sistema.",
     ],
-    correct: 1,
+    correct: 2,
     explanation: "Correto! Contratos garantem que qualquer classe que os implemente possa ser usada de forma intercambiável, tornando o sistema extensível e previsível."
   },
   has_minigame: false

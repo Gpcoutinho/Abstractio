@@ -31,15 +31,15 @@ Um bom arquiteto não apenas empilha tijolos — ele projeta estruturas que:
 
 > Esses princípios são o que diferencia desenvolvedores juniores de sêniores.
 `,
-  exercise: {
+  exercicio: {
     question: "O que caracteriza um sistema com boa qualidade de design em POO?",
     options: [
       "Ter o maior número possível de classes e métodos.",
-      "Ser fácil de modificar, crescer e entender sem quebrar partes não relacionadas.",
       "Usar sempre todos os 4 pilares da POO em cada classe.",
-      "Evitar o uso de herança e composição para reduzir complexidade."
+      "Evitar o uso de herança e composição para reduzir complexidade.",
+      "Ser fácil de modificar, crescer e entender sem quebrar partes não relacionadas.",
     ],
-    correct: 1,
+    correct: 3,
     explanation: "Correto! Um bom design é aquele que permite evolução sem colapso — modificável, extensível e compreensível."
   },
   has_minigame: false

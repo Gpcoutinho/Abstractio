@@ -49,15 +49,15 @@ for v in frota:
 
 > Próximo nível: como objetos se **relacionam** entre si — sobrescrita, contratos e associações.
 `,
-  exercise: {
+  exercicio: {
     question: "Qual pilar garante que código genérico possa operar sobre diferentes tipos de objeto sem precisar conhecê-los individualmente?",
     options: [
       "Encapsulamento, porque protege os dados de cada objeto.",
       "Herança, porque todos os objetos descendem de uma mesma classe.",
+      "Abstração, porque define quais métodos cada classe deve ter.",
       "Polimorfismo, porque permite tratar objetos distintos de forma uniforme.",
-      "Abstração, porque define quais métodos cada classe deve ter."
     ],
-    correct: 2,
+    correct: 3,
     explanation: "Correto! O polimorfismo é o pilar que permite escrever código genérico que funciona com diferentes tipos — sem precisar de condicionais para cada um."
   },
   has_minigame: false
