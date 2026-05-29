@@ -3,7 +3,7 @@ import type { Missao } from '../types';
 const missao: Missao = {
   id: "1-4",
   title: "Métodos",
-  icon: "PiPlay",
+  icon: "PiGear",
   emblem: "Coreógrafo(a) de Polvos",
   theory: `
 ## Ada tem ações
@@ -179,7 +179,7 @@ Isso você descobre na **Missão 5**.
     "**Parâmetro** – informação extra que o método precisa receber para agir",
     "**`__str__`** – método especial que define como o objeto se apresenta quando impresso com `print()`",
   ],
-  exercise: {
+  exercicio: {
     question: "Otto escreve `print(ada)` e vê `Ada | cor: rosa | tentáculos: 8` na tela. O que aconteceu?",
     options: [
       "`print()` formatou o objeto automaticamente – Python sabe como exibir qualquer objeto.",
