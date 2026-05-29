@@ -1,4 +1,4 @@
-export type { Nivel, Missao, Exercise } from './types';
+export type { Nivel, Missao, Exercicio } from './types';
 
 import type { Nivel } from './types';
 import nivel_1 from './nivel_1';

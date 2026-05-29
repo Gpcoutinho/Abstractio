@@ -11,20 +11,13 @@ export interface Reference {
   note?: string;
 }
 
-export interface Exercise {
+export interface Exercicio {
+  id?: string;
   question: string;
   options: string[];
   correct: number;
   explanation: string;
   wrong_explanations?: string[];
-}
-
-export interface Exercicio {
-  id: string;
-  question: string;
-  options: string[];
-  correct: number;
-  explanation: string;
 }
 
 export interface SlideCardData {
@@ -39,7 +32,7 @@ export interface Missao {
   emblem?: string;
   theory: string;
   cards?: SlideCardData[];
-  exercise?: Exercise;
+  exercise?: Exercicio;
   exercicios?: Exercicio[];
   has_interativo: boolean;
   interativo_html?: string;
