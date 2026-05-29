@@ -216,10 +216,10 @@ Isso você descobre na **Missão 5**.
 
 **e1 – id: 1-2-e1**
 A missão descreve um objeto como uma "caixa preta". Isso significa que:
-- [ ] O objeto não pode ser usado sem conhecer todos os seus detalhes internos
-- [ ] O objeto não possui características visíveis
-- [x] É possível observar e interagir com um objeto mesmo sem conhecer como ele funciona por dentro ← correta
-- [ ] O objeto esconde dados que nunca podem ser acessados
+- [ ] Um objeto só pode ser usado por quem conhece seus detalhes internos → Não. A ideia da caixa preta é o oposto — você usa um objeto sem precisar conhecer seus detalhes internos.
+- [ ] Um objeto não possui características que possam ser observadas → Não. Um objeto tem características observáveis, como cor ou saldo. O que fica oculto é como ele funciona por dentro.
+- [x] É possível usar um objeto sem saber como ele funciona por dentro ← correta
+- [ ] Os dados de um objeto ficam ocultos e nunca podem ser acessados → Não. Os dados de um objeto podem ser acessados. A caixa preta descreve que você não precisa saber o que acontece internamente para interagir com ele.
 
 Explicação: É possível trabalhar com um objeto — observá-lo e interagir com ele — sem saber exatamente o que acontece por dentro. O que importa são as características que ele expõe e as ações que sabe executar.
 
@@ -227,10 +227,10 @@ Explicação: É possível trabalhar com um objeto — observá-lo e interagir c
 
 **e2 – id: 1-2-e2**
 Quais são os três elementos que todo objeto possui, independentemente do que ele representa?
-- [ ] Tipo, valor e referência
 - [x] Identidade, características e ações ← correta
-- [ ] Nome, tamanho e posição na memória
-- [ ] Classe, método e atributo
+- [ ] Entrada, processamento e saída → Não. Esse trio descreve o fluxo de um programa, não a estrutura de um objeto.
+- [ ] Criação, estado e destruição → Não. Esses são momentos do ciclo de vida de um objeto — não os elementos que o definem.
+- [ ] Nome, tipo e valor → Não. Nome, tipo e valor descrevem uma variável — não os três elementos de um objeto.
 
 Explicação: Todo objeto pode ser descrito pelos mesmos três elementos: Identidade (o que o torna único), Características (os dados que carrega) e Ações (o que sabe fazer). Isso vale para qualquer objeto — do mundo natural ou do código.
 
@@ -238,10 +238,10 @@ Explicação: Todo objeto pode ser descrito pelos mesmos três elementos: Identi
 
 **e3 – id: 1-2-e3**
 Dois objetos criados com a mesma estrutura existem de forma:
-- [ ] Compartilhada — alterações em um refletem no outro
-- [ ] Dependente — o segundo sempre acompanha as mudanças do primeiro
-- [x] Independente — cada um carrega seus próprios dados ← correta
-- [ ] Sincronizada — os dados são mantidos iguais automaticamente
+- [ ] Compartilhada — alterações em um objeto refletem no outro → Não. "Compartilhada" implicaria que mudar um objeto alteraria os outros automaticamente — o que não acontece.
+- [ ] Dependente — um objeto sempre acompanha as mudanças do outro → Não. "Dependente" implicaria que um objeto acompanha as mudanças de outro automaticamente — o que também não acontece.
+- [x] Independente — cada objeto carrega seus próprios dados ← correta
+- [ ] Sincronizada — os dados de todos são mantidos iguais automaticamente → Não. Não há nenhum mecanismo que mantenha os dados de objetos distintos sincronizados automaticamente.
 
 Explicação: Cada objeto existe de forma independente. Mudar um dado em um objeto não afeta os outros — mesmo que tenham sido criados a partir da mesma estrutura.
 
@@ -249,10 +249,10 @@ Explicação: Cada objeto existe de forma independente. Mudar um dado em um obje
 
 **e4 – id: 1-2-e4**
 Uma biblioteca gerencia livros. Cada livro tem título e número de páginas, e pode ser emprestado ou devolvido. No contexto de POO, "ser emprestado" é um exemplo de:
-- [ ] Uma característica do livro
-- [ ] A identidade do livro
-- [x] Uma ação do objeto Livro ← correta
-- [ ] Um atributo compartilhado por todos os livros
+- [ ] Uma característica que o livro possui → Não. Características são os dados que o objeto possui — como título e número de páginas. "Ser emprestado" não é um dado.
+- [ ] A identidade que torna o livro único → Não. Identidade é o que torna cada livro único como entidade. "Ser emprestado" não define isso.
+- [x] Uma ação que o objeto Livro sabe executar ← correta
+- [ ] Um dado compartilhado por todos os livros do sistema → Não. "Ser emprestado" não é um dado registrado no livro. Pense nos dois tipos de elementos que todo objeto possui.
 
 Explicação: Ações são o que um objeto sabe fazer — não o que ele é ou o que tem. "Ser emprestado" e "ser devolvido" são comportamentos do livro, assim como nadar e se camuflar são ações de Ada.
 
@@ -260,10 +260,10 @@ Explicação: Ações são o que um objeto sabe fazer — não o que ele é ou o
 
 **e5 – id: 1-2-e5**
 Imagine dois carros idênticos, que saíram da mesma fábrica com mesmo modelo, motor e cor. No contexto de objetos, podemos afirmar que:
-- [ ] Eles são o mesmo objeto, pois possuem origem e características iguais.
-- [ ] Eles são objetos síncronos, fazendo com que suas ações aconteçam juntas.
-- [ ] Eles compartilham a mesma identidade e endereço na memória do computador.
-- [x] Eles são objetos distintos, possuindo cada um a sua própria identidade. ← correta
+- [ ] Eles são o mesmo objeto, pois têm origem e características idênticas. → Não. Ter a mesma origem ou características idênticas não torna dois objetos um só — cada um existe como entidade separada.
+- [ ] Eles são objetos síncronos, o que faz suas ações acontecerem juntas. → Não. Objetos distintos não sincronizam ações entre si. Cada um existe e age de forma independente.
+- [ ] Eles compartilham a mesma identidade e o mesmo endereço na memória. → Não. Entidades distintas nunca compartilham o mesmo endereço de memória — esse endereço é exatamente o que as diferencia.
+- [x] Eles são objetos distintos, cada um com sua própria identidade. ← correta
 
 Explicação: Mesmo com dados idênticos, dois objetos distintos ocupam endereços de memória diferentes. A identidade é o que torna cada objeto único — não os dados que ele carrega.
 
@@ -271,9 +271,9 @@ Explicação: Mesmo com dados idênticos, dois objetos distintos ocupam endereç
 
 **e6 – id: 1-2-e6**
 Um celular (modelo, bateria; ligar, tirar foto) e uma conta bancária (saldo, titular; depositar, sacar) seguem o mesmo princípio de objeto porque:
-- [ ] São programados na mesma linguagem de programação
-- [ ] Têm o mesmo número de características e ações
+- [ ] São implementados na mesma linguagem de programação → Não. A linguagem de implementação não define o que é um objeto — o princípio é independente de tecnologia.
+- [ ] Têm o mesmo número de características e ações → Não. O número de características e ações não é o que os aproxima. Pense no que qualquer objeto — independente do contexto — sempre tem.
 - [x] Ambos possuem características próprias e ações que sabem executar ← correta
-- [ ] Pertencem ao mesmo sistema de software
+- [ ] Pertencem ao mesmo sistema de software → Não. Eles podem pertencer a sistemas completamente diferentes. O que os aproxima é algo mais fundamental do que isso.
 
 Explicação: O princípio de objeto é universal. Qualquer entidade com características próprias e ações que sabe executar é um objeto. O contexto muda; o princípio é o mesmo.

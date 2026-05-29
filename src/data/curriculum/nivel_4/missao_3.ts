@@ -70,11 +70,11 @@ pedido.finalizar()
     question: "O que é Injeção de Dependência e como ela reduz o acoplamento?",
     options: [
       "É uma técnica de herança que injeta métodos de uma classe em outra automaticamente.",
-      "É passar as dependências de uma classe de fora para dentro (via construtor ou método), em vez de criá-las internamente.",
       "É um padrão que aumenta o acoplamento para garantir mais controle sobre as dependências.",
+      "É passar as dependências de uma classe de fora para dentro (via construtor ou método), em vez de criá-las internamente.",
       "É injetar código diretamente no banco de dados para reduzir chamadas externas."
     ],
-    correct: 1,
+    correct: 2,
     explanation: "Correto! Injeção de dependência desacopla a classe de suas implementações concretas — ela recebe o que precisa de fora, facilitando troca e testes."
   },
   has_interativo: false

@@ -92,12 +92,12 @@ print(csv.exportar(vendas))
   exercise: {
     question: "Qual a principal diferença entre uma interface pura e uma classe abstrata?",
     options: [
-      "Interfaces só existem em Java; Python só tem classes abstratas.",
       "Interfaces definem apenas o contrato; classes abstratas podem ter métodos concretos compartilhados além dos abstratos.",
+      "Interfaces só existem em Java; Python só tem classes abstratas.",
       "Classes abstratas não podem ser herdadas, apenas instanciadas.",
       "Interfaces permitem instanciação direta; classes abstratas não."
     ],
-    correct: 1,
+    correct: 0,
     explanation: "Correto! Classes abstratas combinam contrato com implementação parcial compartilhada — ideal quando há comportamento comum entre as subclasses."
   },
   has_interativo: false

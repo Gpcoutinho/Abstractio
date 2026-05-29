@@ -99,17 +99,17 @@ ${diagramaClasseMetodo}
     question: "Por que todo método de instância em Python deve ter `self` como primeiro parâmetro?",
     options: [
       "É uma convenção opcional que melhora apenas a legibilidade.",
-      "Para que o método acesse e modifique os atributos do objeto específico que o chamou.",
       "Porque o Python exige que toda função tenha ao menos um parâmetro.",
-      "Para indicar que o método é público e acessível externamente."
+      "Para indicar que o método é público e acessível externamente.",
+      "Para que o método acesse e modifique os atributos do objeto específico que o chamou.",
     ],
-    correct: 1,
+    correct: 3,
     explanation: "Correto! `self` é uma referência à instância. Sem ele, o método não saberia qual objeto está manipulando.",
     wrong_explanations: [
       "`self` não é opcional. Sem ele, o Python não passa a instância ao método automaticamente, causando `TypeError` ao tentar acessar qualquer atributo do objeto.",
-      "",
       "Funções comuns em Python podem ter zero parâmetros. O `self` é específico de métodos de instância, para que eles saibam em qual objeto estão operando.",
-      "Visibilidade em Python é controlada por prefixos de nome (`_` ou `__`), não pelo `self`. O `self` serve para o método referenciar o objeto que o chamou."
+      "Visibilidade em Python é controlada por prefixos de nome (`_` ou `__`), não pelo `self`. O `self` serve para o método referenciar o objeto que o chamou.",
+      "",
     ]
   },
   exercicios: [
@@ -117,24 +117,24 @@ ${diagramaClasseMetodo}
       id: '1-4-e1',
       question: 'Qual é a diferença entre uma função comum e um método em Python?',
       options: [
+        'Um método é definido dentro de uma classe e opera sobre objetos daquela classe',
         'Métodos não podem receber parâmetros, ao contrário das funções',
         'Funções sempre retornam valores; métodos nunca retornam',
         'Não há diferença — método é apenas outro nome para função',
-        'Um método é definido dentro de uma classe e opera sobre objetos daquela classe',
       ],
-      correct: 3,
+      correct: 0,
       explanation: 'A diferença central está no lugar onde o código vive: um método fica dentro de uma classe, tem acesso ao objeto via `self` e pode ler ou modificar seus atributos. Uma função comum não tem esse vínculo.',
     },
     {
       id: '1-4-e2',
       question: 'Como se chama o método `latir()` de um objeto chamado `rex`?',
       options: [
-        '`rex.latir()`',
         '`latir(rex)`',
         '`Cachorro.latir()`',
+        '`rex.latir()`',
         '`call rex.latir`',
       ],
-      correct: 0,
+      correct: 2,
       explanation: 'Métodos são chamados com a notação ponto: `objeto.metodo()`. O `rex.latir()` diz ao objeto `rex` para executar a ação `latir`.',
     },
     {
@@ -142,23 +142,23 @@ ${diagramaClasseMetodo}
       question: 'O método `depositar(self, valor)` faz `self.saldo += valor`. Isso significa que:',
       options: [
         'O método retorna o novo saldo sem modificar o objeto',
-        'O método modifica o atributo `saldo` do objeto que o chamou',
         'O método cria uma nova conta com saldo maior',
+        'O método modifica o atributo `saldo` do objeto que o chamou',
         'O método apaga o atributo `saldo` anterior',
       ],
-      correct: 1,
+      correct: 2,
       explanation: '`self.saldo += valor` acessa e modifica diretamente o atributo `saldo` do objeto atual. Essa é uma das principais utilidades dos métodos: alterar o estado do objeto.',
     },
     {
       id: '1-4-e4',
       question: 'O método `buscar(self, objeto)` é chamado com `rex.buscar("graveto")`. Qual é o valor de `objeto` dentro do método?',
       options: [
-        '`rex`',
         '`"graveto"`',
+        '`rex`',
         '`self`',
         '`Cachorro`',
       ],
-      correct: 1,
+      correct: 0,
       explanation: '`self` é passado automaticamente pelo Python — é `rex`. `"graveto"` é o argumento para o parâmetro `objeto`. Ao executar o método, `objeto` terá o valor `"graveto"`.',
     },
     {
@@ -166,11 +166,11 @@ ${diagramaClasseMetodo}
       question: 'No paradigma procedural, a mesma ação de um cachorro latir seria chamada como:',
       options: [
         '`cachorro.latir()`',
-        '`latir(cachorro)`',
         '`Cachorro.latir()`',
+        '`latir(cachorro)`',
         '`def latir(cachorro):`',
       ],
-      correct: 1,
+      correct: 2,
       explanation: 'A tabela da missão mostra: no procedural, o objeto é passado como argumento para a função — `latir(cachorro)`. Na POO, o objeto chama o método com a notação ponto — `cachorro.latir()`. Mesma ação, organização oposta.',
     },
     {
@@ -179,10 +179,10 @@ ${diagramaClasseMetodo}
       options: [
         '`self` é uma variável global criada automaticamente pelo Python',
         '`self` é ignorado quando não é passado explicitamente',
-        'Python automaticamente passa `rex` como `self` ao usar a notação ponto',
         'Python usa o nome da variável `rex` como `self` diretamente',
+        'Python automaticamente passa `rex` como `self` ao usar a notação ponto',
       ],
-      correct: 2,
+      correct: 3,
       explanation: 'Quando você escreve `rex.latir()`, o Python internamente faz `Cachorro.latir(rex)` — passa o objeto à esquerda do ponto como `self`. Por isso você declara `self` na definição, mas não o passa na chamada.',
     },
   ],

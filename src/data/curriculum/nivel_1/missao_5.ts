@@ -91,16 +91,16 @@ class conta_bancaria: # evitar
   exercise: {
     question: "Escolha a alternativa que melhor define o que é uma **classe**:",
     options: [
-      "Um objeto específico criado em tempo de execução.",
       "Um molde que descreve as propriedades e comportamentos de um tipo de objeto.",
+      "Um objeto específico criado em tempo de execução.",
       "Uma biblioteca externa usada para executar a linguagem.",
       "Um erro de sintaxe comum em Python."
     ],
-    correct: 1,
+    correct: 0,
     explanation: "Exato! Uma classe é um molde. A partir dela criamos quantos objetos (instâncias) quisermos.",
     wrong_explanations: [
-      "Isso descreve uma instância (objeto), não uma classe. A classe é o molde; o objeto é o produto concreto criado a partir dela.",
       "",
+      "Isso descreve uma instância (objeto), não uma classe. A classe é o molde; o objeto é o produto concreto criado a partir dela.",
       "Bibliotecas são coleções de código externo que você importa. Classes são estruturas da própria linguagem para definir tipos de objetos.",
       "`class` é uma palavra reservada válida do Python para declarar uma classe — o oposto de um erro de sintaxe."
     ]
@@ -111,11 +111,11 @@ class conta_bancaria: # evitar
       question: 'A partir de uma única classe, quantos objetos podemos criar?',
       options: [
         'Apenas um objeto por classe',
+        'Quantos quisermos — não há limite',
         'No máximo 10, por limitação do Python',
         'Apenas o número de atributos que a classe tem',
-        'Quantos quisermos — não há limite',
       ],
-      correct: 3,
+      correct: 1,
       explanation: 'Uma classe é um molde reutilizável. Assim como uma forma de bolo pode ser usada infinitas vezes, uma classe pode criar ilimitados objetos. Cada um tem seus próprios valores, mas todos seguem a mesma estrutura.',
     },
     {
@@ -124,22 +124,22 @@ class conta_bancaria: # evitar
       options: [
         'Cada bolo é idêntico ao molde em todos os aspectos',
         'Uma forma só pode ser usada uma vez',
-        'A partir de uma classe, criamos quantos objetos quisermos — todos seguindo a mesma estrutura',
         'A forma e o bolo são a mesma coisa em momentos diferentes',
+        'A partir de uma classe, criamos quantos objetos quisermos — todos seguindo a mesma estrutura',
       ],
-      correct: 2,
+      correct: 3,
       explanation: 'A forma não é o bolo — ela é a instrução de como criar bolos. A classe não é o objeto — é o molde que define como os objetos daquele tipo devem ser.',
     },
     {
       id: '1-5-e3',
       question: 'Qual sintaxe declara corretamente uma classe chamada `ContaBancaria` em Python?',
       options: [
-        '`def ContaBancaria():`',
         '`class ContaBancaria:`',
+        '`def ContaBancaria():`',
         '`object ContaBancaria:`',
         '`new class ContaBancaria:`',
       ],
-      correct: 1,
+      correct: 0,
       explanation: 'Classes são declaradas com `class` seguido do nome em PascalCase e dois-pontos. PascalCase: cada palavra começa com maiúscula — `ContaBancaria`, não `conta_bancaria`.',
     },
     {
@@ -147,11 +147,11 @@ class conta_bancaria: # evitar
       question: 'Segundo a tabela da missão, quais são as três partes que uma classe pode ter?',
       options: [
         'Variáveis, funções e imports',
-        'Dados, ações e herança',
         'Atributos, métodos e construtor',
+        'Dados, ações e herança',
         'Tipos, valores e referências',
       ],
-      correct: 2,
+      correct: 1,
       explanation: 'A tabela mostra: Atributo (uma característica, como `self.nome`), Método (um comportamento, como `def apresentar(self)`) e Construtor (o setup inicial, `def __init__(self, ...)`).',
     },
     {
@@ -159,23 +159,23 @@ class conta_bancaria: # evitar
       question: 'A missão descreve que o procedural foca em verbos e a POO foca em substantivos. O que isso significa na prática?',
       options: [
         'Na POO, os nomes das variáveis são mais importantes que no procedural',
-        'No procedural, o foco está nos passos de execução; na POO, na estrutura das entidades',
         'Na POO, não é possível usar verbos como nomes de métodos',
+        'No procedural, o foco está nos passos de execução; na POO, na estrutura das entidades',
         'No procedural, os dados ficam organizados em substantivos',
       ],
-      correct: 1,
+      correct: 2,
       explanation: 'A receita (procedural) é uma lista de tarefas: faça isso, depois aquilo. A classe (POO) é uma fábrica: define a estrutura de um tipo de objeto, não os passos para executar algo.',
     },
     {
       id: '1-5-e6',
       question: 'Qual é a principal vantagem de usar uma classe para representar cachorros em vez de variáveis soltas?',
       options: [
+        'Classes agrupam dados e comportamentos relacionados, tornando o código organizado e reutilizável',
         'Classes tornam o programa mais rápido por usar menos memória',
         'Classes eliminam a necessidade de funções no código',
         'Classes permitem usar nomes de variáveis maiores',
-        'Classes agrupam dados e comportamentos relacionados, tornando o código organizado e reutilizável',
       ],
-      correct: 3,
+      correct: 0,
       explanation: 'Com variáveis soltas, para 100 cachorros você teria `nome_cachorro1`, `nome_cachorro2`... um caos. Com uma classe `Cachorro`, você cria quantos objetos precisar — a lógica de como um cachorro funciona fica organizada dentro da classe.',
     },
   ],

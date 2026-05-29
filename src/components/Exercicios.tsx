@@ -326,6 +326,9 @@ const Exercicios: React.FC<Props> = ({ missaoId, exercicios, proximaMissao }) =>
             {acertou && (
               <p className="text-textSecondary text-sm">{current!.explanation}</p>
             )}
+            {!acertou && selecionada !== null && current!.wrong_explanations?.[selecionada] && (
+              <p className="text-textSecondary text-sm">{current!.wrong_explanations[selecionada]}</p>
+            )}
             {acertou ? (
               <p className="text-success text-xs font-medium mt-2 flex items-center gap-1">
                 <ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} />

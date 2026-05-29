@@ -76,11 +76,11 @@ print(prof.alunos[0].nome)   # Bia
     question: "Qual característica define uma relação de **Associação** entre objetos?",
     options: [
       "Um objeto cria e destrói o outro durante seu ciclo de vida.",
-      "Os objetos se conhecem e interagem, mas existem de forma independente.",
       "Um objeto é parte estrutural do outro e não pode existir sozinho.",
-      "Um objeto herda atributos e métodos do outro."
+      "Um objeto herda atributos e métodos do outro.",
+      "Os objetos se conhecem e interagem, mas existem de forma independente.",
     ],
-    correct: 1,
+    correct: 3,
     explanation: "Correto! Na associação, os objetos interagem mas são independentes — nenhum controla o ciclo de vida do outro."
   },
   has_interativo: false

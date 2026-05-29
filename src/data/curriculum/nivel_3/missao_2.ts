@@ -56,11 +56,11 @@ class NotificacaoAuditada(Notificacao):
     question: "Qual é a diferença entre sobrescrita e herança simples?",
     options: [
       "Não há diferença — sobrescrita é apenas outro nome para herança.",
-      "Herança passa atributos e métodos para a subclasse; sobrescrita redefine um método herdado com novo comportamento.",
       "Sobrescrita elimina todos os métodos herdados da superclasse.",
+      "Herança passa atributos e métodos para a subclasse; sobrescrita redefine um método herdado com novo comportamento.",
       "Herança só funciona com `super()`, enquanto sobrescrita não precisa."
     ],
-    correct: 1,
+    correct: 2,
     explanation: "Correto! Herança é o mecanismo de transmissão. Sobrescrita é a decisão da subclasse de redefinir um comportamento específico que herdou."
   },
   has_interativo: false

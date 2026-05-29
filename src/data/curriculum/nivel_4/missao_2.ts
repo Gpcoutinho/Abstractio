@@ -62,12 +62,12 @@ Faça a pergunta: **"O que esta classe faz?"**
   exercise: {
     question: "Como identificar que uma classe tem **baixa coesão**?",
     options: [
-      "A classe tem poucos métodos e atributos.",
       "A classe é difícil de nomear e seus métodos têm responsabilidades não relacionadas entre si.",
+      "A classe tem poucos métodos e atributos.",
       "A classe herda de mais de uma superclasse.",
       "A classe usa muitas outras classes do sistema."
     ],
-    correct: 1,
+    correct: 0,
     explanation: "Correto! Baixa coesão se manifesta quando a classe acumula responsabilidades diferentes — o que a torna difícil de nomear, testar e manter."
   },
   has_interativo: false

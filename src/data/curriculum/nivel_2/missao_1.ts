@@ -50,12 +50,12 @@ Juntos, os 4 pilares produzem código que é:
   exercise: {
     question: "Qual é o principal objetivo dos 4 pilares da POO?",
     options: [
-      "Aumentar o número de linhas de código para tornar o sistema mais robusto.",
       "Tornar o código organizado, reutilizável, seguro e extensível.",
+      "Aumentar o número de linhas de código para tornar o sistema mais robusto.",
       "Substituir completamente a programação procedural em todos os casos.",
       "Garantir que todas as classes herdem de uma única superclasse."
     ],
-    correct: 1,
+    correct: 0,
     explanation: "Correto! Os pilares são princípios que, juntos, produzem código de qualidade: organizado, reutilizável, seguro e extensível — sem precisar duplicar lógica ou quebrar tudo ao mudar uma coisa."
   },
   has_interativo: false

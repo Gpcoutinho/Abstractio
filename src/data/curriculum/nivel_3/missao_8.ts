@@ -76,11 +76,11 @@ print(pedido.finalizar(CartaoCredito()))
     question: "Qual é o principal benefício de usar contratos (interfaces/classes abstratas) em um sistema?",
     options: [
       "Aumentar o desempenho do código em tempo de execução.",
-      "Garantir que diferentes classes implementem um conjunto comum de métodos, permitindo intercambialidade.",
       "Impedir que subclasses adicionem novos métodos além dos definidos no contrato.",
+      "Garantir que diferentes classes implementem um conjunto comum de métodos, permitindo intercambialidade.",
       "Substituir completamente a necessidade de herança no sistema."
     ],
-    correct: 1,
+    correct: 2,
     explanation: "Correto! Contratos garantem que qualquer classe que os implemente possa ser usada de forma intercambiável, tornando o sistema extensível e previsível."
   },
   has_interativo: false

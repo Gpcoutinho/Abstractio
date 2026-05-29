@@ -62,11 +62,11 @@ print(processar("ola"))   # Texto: OLA
     question: "Como Python simula sobrecarga de métodos de forma nativa?",
     options: [
       "Criando múltiplos métodos com o mesmo nome e assinaturas diferentes, como em Java.",
-      "Usando parâmetros com valor padrão, `*args`, `**kwargs` ou `@singledispatch`.",
       "Python não suporta nenhuma forma de sobrecarga ou alternativa equivalente.",
-      "Usando herança múltipla para definir variações do mesmo método."
+      "Usando herança múltipla para definir variações do mesmo método.",
+      "Usando parâmetros com valor padrão, `*args`, `**kwargs` ou `@singledispatch`.",
     ],
-    correct: 1,
+    correct: 3,
     explanation: "Correto! Python usa parâmetros opcionais e empacotamento de argumentos como alternativa flexível à sobrecarga tradicional."
   },
   has_interativo: false

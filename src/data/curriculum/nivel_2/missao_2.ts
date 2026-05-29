@@ -61,11 +61,11 @@ for f in formas:
     question: "O que caracteriza uma **classe abstrata** em Python?",
     options: [
       "Uma classe que não pode ter nenhum método implementado.",
-      "Uma classe que herda de `ABC` e define métodos abstratos que as subclasses são obrigadas a implementar.",
       "Uma classe que só pode ser instanciada uma única vez.",
+      "Uma classe que herda de `ABC` e define métodos abstratos que as subclasses são obrigadas a implementar.",
       "Uma classe privada que não pode ser importada por outros módulos."
     ],
-    correct: 1,
+    correct: 2,
     explanation: "Perfeito! Classes abstratas (ABC) definem contratos. Métodos com @abstractmethod obrigam as subclasses a implementá-los."
   },
   has_interativo: false

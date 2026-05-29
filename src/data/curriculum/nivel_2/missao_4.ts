@@ -48,12 +48,12 @@ Python também suporta **herança múltipla**: \`class Anfibio(Terrestre, Aquati
   exercise: {
     question: "O que acontece quando uma subclasse define um método com o mesmo nome que a superclasse?",
     options: [
-      "Ocorre um erro de execução.",
       "O método da subclasse sobrescreve (override) o da superclasse para aquela instância.",
+      "Ocorre um erro de execução.",
       "Ambos os métodos são executados simultaneamente.",
       "O método da superclasse sempre tem prioridade."
     ],
-    correct: 1,
+    correct: 0,
     explanation: "Correto! Isso se chama override (sobrescrita). A subclasse redefine o comportamento para suas próprias instâncias."
   },
   has_interativo: false

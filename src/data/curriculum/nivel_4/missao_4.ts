@@ -90,11 +90,11 @@ class Servico:
     question: "O princípio **Open/Closed** diz que classes devem ser:",
     options: [
       "Abertas para modificação e fechadas para extensão.",
-      "Abertas para extensão (novos comportamentos via subclasses) e fechadas para modificação do código existente.",
       "Abertas apenas para herança múltipla e fechadas para composição.",
-      "Fechadas para qualquer tipo de mudança após a primeira versão."
+      "Fechadas para qualquer tipo de mudança após a primeira versão.",
+      "Abertas para extensão (novos comportamentos via subclasses) e fechadas para modificação do código existente.",
     ],
-    correct: 1,
+    correct: 3,
     explanation: "Correto! Open/Closed significa que você adiciona funcionalidade criando novas classes (extensão), sem modificar as existentes — protegendo o que já funciona."
   },
   has_interativo: false
