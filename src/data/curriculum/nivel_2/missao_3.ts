@@ -51,15 +51,15 @@ def saldo(self, valor):
         self.__saldo = valor
 \`\`\`
 `,
-  exercise: {
+  exercicio: {
     question: "Qual é o principal objetivo do encapsulamento em POO?",
     options: [
       "Permitir que qualquer parte do código acesse e modifique os dados livremente.",
-      "Esconder os detalhes internos do objeto e controlar o acesso aos seus dados.",
       "Fazer com que uma classe herde comportamentos de outra.",
-      "Substituir funções globais por métodos de classe."
+      "Substituir funções globais por métodos de classe.",
+      "Esconder os detalhes internos do objeto e controlar o acesso aos seus dados.",
     ],
-    correct: 1,
+    correct: 3,
     explanation: "Correto! Encapsulamento protege os dados internos e expõe apenas uma interface controlada e segura."
   },
   has_minigame: false
