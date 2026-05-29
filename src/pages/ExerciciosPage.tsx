@@ -5,24 +5,28 @@ import { Link } from 'react-router-dom';
 import { niveis } from '../data/curriculum';
 import { useProgress } from '../hooks/useProgress';
 import MissionIcon from '../components/MissionIcon';
-import ExerciciosExtras from '../components/ExerciciosExtras';
+import Exercicios from '../components/Exercicios';
 import PageWrapper from '../components/PageWrapper';
 import Footer from '../components/Footer';
 
 const BG = '#1e293b';
 
+
 const TIER_CARD_STYLE: Partial<Record<string, React.CSSProperties>> = {
   bronze: {
-    background: `linear-gradient(rgba(124,45,18,0.07), rgba(124,45,18,0.07)) padding-box, linear-gradient(${BG}, ${BG}) padding-box, linear-gradient(135deg, #431407, #7c2d12, #b45309, #7c2d12, #3d0a00) border-box`,
+    background: `linear-gradient(rgba(124,45,18,0.12), rgba(124,45,18,0.12)) padding-box, linear-gradient(${BG}, ${BG}) padding-box, linear-gradient(135deg, #431407 0%, #7c2d12 30%, #b45309 48%, #b45309 52%, #9a3412 65%, #7c2d12 78%, #3d0a00 100%) border-box`,
     border: '1px solid transparent',
+    boxShadow: '0 0 10px rgba(124,45,18,0.5), 0 0 3px rgba(180,83,9,0.3)',
   },
   silver: {
-    background: `linear-gradient(rgba(148,163,184,0.09), rgba(148,163,184,0.09)) padding-box, linear-gradient(${BG}, ${BG}) padding-box, linear-gradient(135deg, #1e293b, #64748b, #f1f5f9, #64748b, #1e293b) border-box`,
+    background: `linear-gradient(rgba(148,163,184,0.12), rgba(148,163,184,0.12)) padding-box, linear-gradient(${BG}, ${BG}) padding-box, linear-gradient(135deg, #475569 0%, #94a3b8 30%, #f1f5f9 48%, #f1f5f9 52%, #e2e8f0 60%, #64748b 78%, #334155 100%) border-box`,
     border: '1px solid transparent',
+    boxShadow: '0 0 10px rgba(71,85,105,0.5), 0 0 3px rgba(241,245,249,0.15)',
   },
   gold: {
-    background: `linear-gradient(rgba(202,138,4,0.07), rgba(202,138,4,0.07)) padding-box, linear-gradient(${BG}, ${BG}) padding-box, linear-gradient(135deg, #713f12, #ca8a04, #fef08a, #ca8a04, #713f12) border-box`,
+    background: `linear-gradient(rgba(202,138,4,0.12), rgba(202,138,4,0.12)) padding-box, linear-gradient(${BG}, ${BG}) padding-box, linear-gradient(135deg, #713f12 0%, #ca8a04 30%, #fef08a 48%, #fef08a 52%, #facc15 60%, #a16207 78%, #713f12 100%) border-box`,
     border: '1px solid transparent',
+    boxShadow: '0 0 10px rgba(202,138,4,0.5), 0 0 3px rgba(254,240,138,0.2)',
   },
 };
 
@@ -35,14 +39,14 @@ function getProximaMissao(nivelId: number, missaoIdx: number): string | null {
 }
 
 const ExerciciosPage: React.FC = () => {
-  const { getTier, getExtrasDone } = useProgress();
+  const { getTier, getExerciciosDone } = useProgress();
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const missionsWithExtras = useMemo(() =>
     niveis.flatMap(nivel =>
       nivel.missoes
         .map((missao, idx) => ({ missao, nivel, missaoIdx: idx + 1 }))
-        .filter(({ missao }) => !!missao.extra_exercises?.length)
+        .filter(({ missao }) => !!missao.exercicios?.length)
     ), []);
 
   const selected = missionsWithExtras.find(m => m.missao.id === selectedId);
@@ -53,8 +57,8 @@ const ExerciciosPage: React.FC = () => {
         <PageWrapper className="flex-grow max-w-3xl pb-16">
 
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-textPrimary mb-1">Exercícios Extras</h1>
-            <p className="text-textSecondary text-sm">Responda exercícios · ganhe mais conchas · evolua suas conquistas</p>
+            <h1 className="text-3xl font-bold text-textPrimary mb-1">Exercícios</h1>
+            <p className="text-textSecondary text-sm">Responda mais exercícios · ganhe mais conchas · evolua suas conquistas</p>
           </div>
 
           <div className="space-y-10">
@@ -70,8 +74,8 @@ const ExerciciosPage: React.FC = () => {
                     {nivelMissions.map(({ missao }) => {
                       const tierVal = getTier(missao.id);
                       const tierCount = { none: 0, bronze: 1, silver: 2, gold: 3 }[tierVal];
-                      const extrasDone = getExtrasDone(missao.id).length;
-                      const extrasTotal = missao.extra_exercises!.length;
+                      const extrasDone = getExerciciosDone(missao.id).length;
+                      const extrasTotal = missao.exercicios!.length;
                       const hasTierStyle = tierVal !== 'none';
 
                       return (
@@ -151,10 +155,10 @@ const ExerciciosPage: React.FC = () => {
               </div>
             </div>
             <div className="overflow-y-auto px-6 py-5">
-              <ExerciciosExtras
+              <Exercicios
                 key={selected.missao.id}
                 missaoId={selected.missao.id}
-                extras={selected.missao.extra_exercises!}
+                exercicios={selected.missao.exercicios!}
                 proximaMissao={getProximaMissao(selected.nivel.id, selected.missaoIdx)}
               />
             </div>
