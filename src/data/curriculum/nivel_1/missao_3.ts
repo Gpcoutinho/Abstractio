@@ -157,7 +157,7 @@ Agora, ao acessar \`ada.cor\`, o Python devolve "transparente". O estado de Ada 
     "**Atribuição** – `objeto.atributo = valor` – operação que define ou modifica o valor de um atributo",
     "**Mutação** – o valor de um atributo pode ser alterado; isso muda o estado do objeto",
   ],
-  exercise: {
+  exercicio: {
     question:
       'Otto lê `ada.cor` e vê `"rosa"`. Em seguida escreve `caju.cor = "transparente"`. O que acontece com `ada.cor`?',
     options: [
@@ -176,84 +176,114 @@ Agora, ao acessar \`ada.cor\`, o Python devolve "transparente". O estado de Ada 
       'Não. Alterar o atributo de um objeto nunca afeta o de outro. `caju.cor = "transparente"` é válido e só modifica Caju.',
     ],
   },
-  extra_exercises: [
+  exercicios: [
     {
-      id: "1-3-e1",
-      question:
-        "Para acessar o atributo `nome` do objeto `ada`, qual é a sintaxe correta em Python?",
-      options: ["`ada.nome`", "`nome.ada`", "`ada[nome]`", "`get(ada, nome)`"],
-      correct: 0,
-      explanation:
-        "Em Python, atributos são acessados com a notação ponto: `objeto.atributo`. Para ler o nome de `ada`, escrevemos `ada.nome`.",
-    },
-    {
-      id: "1-3-e2",
-      question:
-        'Caju tem `cor = "amarela"` e Muriel tem `cor = "ciano"`. O que isso demonstra sobre atributos?',
+      id: '1-3-e1',
+      question: 'Na POO, um atributo é:',
       options: [
-        "Objetos do mesmo tipo não podem ter o mesmo atributo.",
-        "O último valor atribuído substitui os anteriores em todos os objetos.",
-        "Cada objeto guarda seus próprios valores – mesma estrutura, dados independentes.",
-        "Atributos só existem enquanto o objeto está sendo criado.",
-      ],
-      correct: 2,
-      explanation:
-        "Caju e Muriel são polvos – têm os mesmos atributos (inclusive `cor`). Mas cada uma carrega seu próprio valor. Mudar `caju.cor` não afeta `muriel.cor` e vice-versa.",
-    },
-    {
-      id: "1-3-e3",
-      question:
-        "Qual código atribui o valor `120` ao atributo `velocidade` do objeto `moto`?",
-      options: [
-        "`velocidade.moto = 120`",
-        "`moto[velocidade] = 120`",
-        "`set moto.velocidade = 120`",
-        "`moto.velocidade = 120`",
+        'Uma ação que o objeto sabe executar',
+        'Uma função externa que acessa os dados do objeto',
+        'O tipo de dado que o objeto representa',
+        'Uma informação que pertence especificamente a um objeto',
       ],
       correct: 3,
-      explanation:
-        "A notação ponto funciona tanto para leitura (`moto.velocidade`) quanto para atribuição (`moto.velocidade = 120`). É como atualizar um campo que pertence especificamente àquele objeto.",
-    },
-    {
-      id: "1-3-e4",
-      question:
-        'Otto escreve `ada.cor = "transparente"`. O que aconteceu com Ada?',
-      options: [
-        "Ada foi substituída por um novo objeto com cor transparente.",
-        "O estado de Ada mudou – o atributo `cor` agora guarda um novo valor.",
-        "Todos os polvos ficaram transparentes.",
-        "O atributo `cor` foi apagado de Ada.",
+      explanation: 'Atributo é um dado que pertence ao objeto — uma característica sua. Cor, tamanho, nome: cada informação registrada sobre um objeto é um atributo.',
+      wrong_explanations: [
+        'Não. Ações são o que o objeto sabe fazer. Atributo é outra coisa — pense no que Otto registrou no caderno sobre Ada.',
+        'Não. Um atributo não é uma função externa. Ele pertence ao próprio objeto e descreve uma característica sua.',
+        'Não. O tipo do objeto é uma questão de implementação. Atributo é algo mais concreto — uma informação que o objeto carrega.',
+        '',
       ],
-      correct: 1,
-      explanation:
-        "Atribuir um novo valor a `ada.cor` muda o estado de Ada naquele momento. O objeto continua o mesmo – o que mudou foi o dado guardado naquele atributo.",
     },
     {
-      id: "1-3-e5",
-      question: "Qual afirmação sobre atributos está INCORRETA?",
+      id: '1-3-e2',
+      question: 'Em Python, a sintaxe `objeto.atributo` serve para:',
       options: [
-        "Um atributo pode guardar qualquer tipo de dado: número, texto, lista, etc.",
-        "Dois objetos da mesma espécie compartilham os valores dos seus atributos automaticamente.",
-        "Atributos são acessados usando a notação ponto.",
-        "O valor de um atributo pode mudar após o objeto ser criado.",
+        'Acessar uma informação que pertence a esse objeto',
+        'Criar um novo objeto do tipo `atributo`',
+        'Chamar uma função chamada `atributo`',
+        'Comparar dois objetos entre si',
       ],
-      correct: 1,
-      explanation:
-        "Atributos de cada objeto são independentes. `ada.cor` e `caju.cor` são campos distintos – alterar um não afeta o outro. As outras afirmativas são verdadeiras.",
+      correct: 0,
+      explanation: 'O ponto é a forma de acessar um atributo de um objeto — como apontar para ele e dizer: "me dê essa informação". A estrutura é sempre `objeto.atributo`.',
+      wrong_explanations: [
+        '',
+        'Não. `objeto.atributo` não cria nada — é uma forma de acessar algo que já existe dentro do objeto.',
+        'Não. Chamar uma função usaria parênteses: `objeto.atributo()`. Sem parênteses, estamos acessando um dado, não executando uma ação.',
+        'Não. Para comparar objetos usaríamos operadores como `==`. O ponto acessa uma informação de dentro do objeto.',
+      ],
     },
     {
-      id: "1-3-e6",
-      question:
-        "Otto lê `ada.num_tentaculos` e obtém `8`. Em seguida lê `caju.num_tentaculos` e obtém `8` também. Isso significa que Ada e Caju são o mesmo objeto?",
+      id: '1-3-e3',
+      question: "Ada começa com `cor = 'rosa'`. Otto observa ela se camuflando e atualiza: `ada.cor = 'transparente'`. O que essa mudança representa?",
       options: [
-        "Sim – dois objetos com os mesmos valores são idênticos.",
-        "Sim – atributos iguais indicam que compartilham memória.",
-        "Não – objetos diferentes podem ter os mesmos valores sem serem o mesmo objeto.",
-        "Não – isso indica um erro no código.",
+        'Ada virou um objeto diferente — mudar um atributo cria uma nova entidade',
+        'Ada perdeu sua identidade ao alterar a cor',
+        'O estado de Ada mudou, mas ela continua sendo a mesma entidade',
+        'Atributos não podem ser alterados depois que o objeto é criado',
       ],
       correct: 2,
-      explanation:
-        "Dois objetos distintos podem ter valores idênticos nos atributos e ainda assim serem entidades completamente separadas. Como vimos na missão anterior: `==` compara dados, `is` compara identidade.",
+      explanation: 'Mudar um atributo altera o estado do objeto, não a sua identidade. Ada continua sendo Ada — a mesma entidade. O que mudou foi apenas o valor de `cor`.',
+      wrong_explanations: [
+        'Não. Mudar um atributo não cria uma nova entidade — Ada continua ocupando o mesmo espaço na memória.',
+        'Não. Identidade não depende dos valores dos atributos. Ada é Ada independentemente da cor que tiver.',
+        '',
+        'Não. Atributos podem ser alterados a qualquer momento — a missão mostra exatamente isso acontecendo com Ada.',
+      ],
+    },
+    {
+      id: '1-3-e4',
+      question: 'Para atualizar o atributo `velocidade` do objeto `carro` para `120`, a sintaxe correta é:',
+      options: [
+        '`carro.velocidade = 120`',
+        '`velocidade.carro = 120`',
+        '`set(carro, velocidade, 120)`',
+        '`carro[velocidade] = 120`',
+      ],
+      correct: 0,
+      explanation: 'A notação ponto serve tanto para leitura (`carro.velocidade`) quanto para atribuição (`carro.velocidade = 120`). A estrutura é a mesma: `objeto.atributo = novo_valor`.',
+      wrong_explanations: [
+        '',
+        'Não. A ordem importa: primeiro vem o objeto, depois o atributo. `velocidade.carro` inverte essa lógica.',
+        'Não. Python não usa uma função `set()` para isso. A atribuição de atributos segue a notação ponto.',
+        'Não. Colchetes são usados para acessar itens de listas e dicionários, não atributos de objetos.',
+      ],
+    },
+    {
+      id: '1-3-e5',
+      question: 'Considerando um objeto `celular`, qual dos itens abaixo representa um atributo?',
+      options: [
+        '`ligar()` — uma ação que o celular sabe executar',
+        '`tirar_foto()` — um comportamento do celular',
+        '`bateria` — uma informação que descreve o estado do celular',
+        'O celular em si — a entidade completa',
+      ],
+      correct: 2,
+      explanation: 'Atributos são informações — dados que descrevem o estado do objeto. Ações como `ligar()` e `tirar_foto()` são outra coisa. `bateria`, `modelo`, `cor` são exemplos de atributos.',
+      wrong_explanations: [
+        'Não. `ligar()` tem parênteses — é uma ação que o celular executa, não uma informação que ele carrega.',
+        'Não. `tirar_foto()` também é uma ação. Atributo é um dado que descreve o estado do objeto, não algo que ele faz.',
+        '',
+        'Não. O celular inteiro é o objeto — não um dos seus atributos. Atributo é uma informação específica que ele carrega.',
+      ],
+    },
+    {
+      id: '1-3-e6',
+      question: 'O valor de um atributo pode ser alterado depois que o objeto foi criado?',
+      options: [
+        'Não — atributos são fixos após a criação do objeto',
+        'Sim, porém apenas atributos do tipo texto podem ser alterados',
+        'Sim — o estado de um objeto pode evoluir ao longo do tempo',
+        'Apenas se o objeto for completamente recriado com novos valores',
+      ],
+      correct: 2,
+      explanation: 'O estado de um objeto pode evoluir. Basta usar a notação ponto: `objeto.atributo = novo_valor`. Só esse objeto é afetado — os demais continuam com os seus próprios valores.',
+      wrong_explanations: [
+        'Não. A missão mostra Ada mudando de cor. Atributos não são fixos — o estado de um objeto pode evoluir.',
+        'Não. Qualquer tipo de atributo pode ser alterado — não só texto. Números, booleanos, qualquer valor.',
+        '',
+        'Não. Não é necessário recriar o objeto. Basta usar a notação ponto para atribuir um novo valor.',
+      ],
     },
   ],
   has_minigame: false,
