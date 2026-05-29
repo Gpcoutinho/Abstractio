@@ -1,4 +1,4 @@
-# Missão 2-4 — Herança
+﻿# Missão 2-4 — Herança
 
 **Ícone:** 🧬
 **Pontos:** 15
@@ -46,7 +46,7 @@ Python também suporta **herança múltipla**: `class Anfibio(Terrestre, Aquatic
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

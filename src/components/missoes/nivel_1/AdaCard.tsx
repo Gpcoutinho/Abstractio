@@ -48,6 +48,7 @@ const AdaCard: React.FC<{ nivel: NivelAdaCard }> = ({ nivel }) => {
         {/* Características — missão 3+ */}
         {(nivel === "atributos" || nivel === "metodos") && (
           <div className="px-4 pt-3 pb-4 border-t border-borderDark space-y-1">
+            <p className="text-[10px] uppercase tracking-wider text-textSecondary/50 mb-2">atributos</p>
             <p className="text-xs font-mono">
               <span className="text-textSecondary">nome: </span>
               <span className="text-textPrimary">"Ada"</span>
@@ -66,6 +67,7 @@ const AdaCard: React.FC<{ nivel: NivelAdaCard }> = ({ nivel }) => {
         {/* Métodos — missão 4 */}
         {nivel === "metodos" && (
           <div className="px-4 pt-3 pb-4 border-t border-borderDark space-y-1">
+            <p className="text-[10px] uppercase tracking-wider text-textSecondary/50 mb-2">métodos</p>
             <p className="text-xs font-mono text-textSecondary">nadar()</p>
             <p className="text-xs font-mono text-textSecondary">camuflar()</p>
             <p className="text-xs font-mono text-textSecondary">

@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "3-3",
@@ -69,7 +69,7 @@ print(processar("ola"))   # Texto: OLA
     correct: 3,
     explanation: "Correto! Python usa parâmetros opcionais e empacotamento de argumentos como alternativa flexível à sobrecarga tradicional."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "2-1",
@@ -58,7 +58,7 @@ Juntos, os 4 pilares produzem código que é:
     correct: 0,
     explanation: "Correto! Os pilares são princípios que, juntos, produzem código de qualidade: organizado, reutilizável, seguro e extensível — sem precisar duplicar lógica ou quebrar tudo ao mudar uma coisa."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

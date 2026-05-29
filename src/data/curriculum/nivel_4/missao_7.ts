@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "4-7",
@@ -52,7 +52,7 @@ Design de software é uma habilidade que se aprofunda com prática. Os próximos
     correct: 3,
     explanation: "Exato! Alta coesão (propósito único por classe) + baixo acoplamento (dependências via abstração) + SOLID é a fórmula do design orientado a objetos de qualidade."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

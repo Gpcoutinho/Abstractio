@@ -31,6 +31,7 @@ export interface Missao {
   icon: string;
   emblem?: string;
   theory: string;
+  resumo?: string[];
   cards?: SlideCardData[];
   exercicio?: Exercicio;
   exercicios?: Exercicio[];

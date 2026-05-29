@@ -1,4 +1,4 @@
-# Missão 2-2 — Abstração
+﻿# Missão 2-2 — Abstração
 
 **Ícone:** 🌀
 **Pontos:** 15
@@ -59,7 +59,7 @@ for f in formas:
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

@@ -1,3 +1,26 @@
+﻿<!-- NOTAS DE DESENVOLVIMENTO – não são conteúdo da missão -->
+
+## [notas] Referências e decisões para esta missão
+
+### Ponte dict → `self` (atenção pedagógica)
+
+Nas missões 2 e 3, os atributos foram apresentados via proxy dict (`{"cor": "rosa", "tentaculos": 8}`) com o rótulo "python-simplificado". O aluno aprendeu que:
+- `ada` é o rótulo do objeto
+- `"cor"` e `"tentaculos"` são os nomes dos atributos
+- `"rosa"` e `8` são os valores
+
+Nesta missão, a sintaxe real aparece pela primeira vez:
+- Definição: `self.cor = "rosa"` dentro de `__init__`
+- Acesso: `ada.cor`
+
+Essa mudança visual é significativa. **É necessário fazer a ponte explicitamente** — mostrar que `self.cor = "rosa"` é o equivalente real de `"cor": "rosa"` no dict simplificado, e que `ada.cor` é o equivalente real de acessar aquele par. Sem essa ponte, o aluno pode sentir que está recomeçando do zero.
+
+Sugestão: logo na seção que introduzir `__init__` e `self`, incluir um parágrafo ou bloco comparativo mostrando que o conceito é o mesmo — só a sintaxe mudou.
+
+<!-- FIM DAS NOTAS -->
+
+---
+
 # Missão 1-3 — Classe
 
 **Ícone:** 📐
@@ -88,7 +111,7 @@ class conta_bancaria: # evitar
 
 ## Mini-jogo
 
-- [ ] Tem interativo
+- [ ] Tem mini-jogo
 
 ## Exercício
 

@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "3-1",
@@ -43,7 +43,7 @@ Pense em objetos como pessoas em uma cidade:
     correct: 0,
     explanation: "Exato! Sistemas reais são redes de objetos colaborando. Modelar essas relações corretamente é o que torna um design robusto e manutenível."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

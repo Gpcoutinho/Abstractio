@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "4-4",
@@ -97,7 +97,7 @@ class Servico:
     correct: 3,
     explanation: "Correto! Open/Closed significa que você adiciona funcionalidade criando novas classes (extensão), sem modificar as existentes — protegendo o que já funciona."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

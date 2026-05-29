@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "4-1",
@@ -42,7 +42,7 @@ Um bom arquiteto não apenas empilha tijolos — ele projeta estruturas que:
     correct: 3,
     explanation: "Correto! Um bom design é aquele que permite evolução sem colapso — modificável, extensível e compreensível."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

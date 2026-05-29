@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "4-6",
@@ -119,7 +119,7 @@ print(db.conectar())
     correct: 2,
     explanation: "Correto! Strategy encapsula algoritmos intercambiáveis — o objeto que os usa não precisa saber qual estratégia está ativa, apenas chamá-la."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

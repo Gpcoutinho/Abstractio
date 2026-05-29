@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "3-2",
@@ -63,7 +63,7 @@ class NotificacaoAuditada(Notificacao):
     correct: 2,
     explanation: "Correto! Herança é o mecanismo de transmissão. Sobrescrita é a decisão da subclasse de redefinir um comportamento específico que herdou."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

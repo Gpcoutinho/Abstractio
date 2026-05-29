@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "2-4",
@@ -56,7 +56,7 @@ Python também suporta **herança múltipla**: \`class Anfibio(Terrestre, Aquati
     correct: 0,
     explanation: "Correto! Isso se chama override (sobrescrita). A subclasse redefine o comportamento para suas próprias instâncias."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

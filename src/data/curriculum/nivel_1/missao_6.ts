@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "1-6",
@@ -180,7 +180,7 @@ print(caneta)  # Caneta — R$2.50 (100 em estoque)
       explanation: 'Sem `__str__`, Python mostra o endereço de memória do objeto — informação técnica, não legível. O `__str__` define uma representação útil, exibida quando você usa `print()` no objeto.',
     },
   ],
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

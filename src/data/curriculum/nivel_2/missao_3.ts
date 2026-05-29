@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "2-3",
@@ -62,7 +62,7 @@ def saldo(self, valor):
     correct: 3,
     explanation: "Correto! Encapsulamento protege os dados internos e expõe apenas uma interface controlada e segura."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;

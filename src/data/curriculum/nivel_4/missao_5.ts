@@ -1,4 +1,4 @@
-import type { Missao } from '../types';
+﻿import type { Missao } from '../types';
 
 const missao: Missao = {
   id: "4-5",
@@ -96,7 +96,7 @@ print(primeiro(["a", "b", "c"]))  # a
     correct: 0,
     explanation: "Correto! Generics combinam reuso (mesma implementação para qualquer tipo) com segurança (erros detectados estaticamente pelo type checker)."
   },
-  has_interativo: false
+  has_minigame: false
 };
 
 export default missao;
