@@ -41,15 +41,15 @@ Design de software é uma habilidade que se aprofunda com prática. Os próximos
 
 > *"Qualquer tolo pode escrever código que um computador entende. Bons programadores escrevem código que humanos entendem."* — Martin Fowler
 `,
-  exercise: {
+  exercicio: {
     question: "Qual combinação representa o objetivo central do nível de arquitetura?",
     options: [
       "Máximo de classes possível + mínimo de métodos por classe.",
-      "Alta coesão + baixo acoplamento + princípios SOLID.",
       "Usar todos os design patterns disponíveis em cada projeto.",
-      "Evitar generics e abstrações para manter o código simples."
+      "Evitar generics e abstrações para manter o código simples.",
+      "Alta coesão + baixo acoplamento + princípios SOLID.",
     ],
-    correct: 1,
+    correct: 3,
     explanation: "Exato! Alta coesão (propósito único por classe) + baixo acoplamento (dependências via abstração) + SOLID é a fórmula do design orientado a objetos de qualidade."
   },
   has_minigame: false
