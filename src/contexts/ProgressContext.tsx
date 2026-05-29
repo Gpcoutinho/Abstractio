@@ -12,7 +12,7 @@ interface ProgressState {
   niveis_concluidos: number[];
   conchas: number;
   conchas_por_missao: Record<string, number>;
-  extras_concluidos: Record<string, string[]>;
+  exercicios_concluidos: Record<string, string[]>;
   erros_por_missao: Record<string, number>;
   nome: string;
   genero: Genero;
@@ -28,7 +28,7 @@ const DEFAULT_STATE: ProgressState = {
   niveis_concluidos: [],
   conchas: 0,
   conchas_por_missao: {},
-  extras_concluidos: {},
+  exercicios_concluidos: {},
   erros_por_missao: {},
   nome: '',
   genero: '',
@@ -42,7 +42,14 @@ const DEFAULT_STATE: ProgressState = {
 function loadFromStorage(): ProgressState {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return { ...DEFAULT_STATE, ...JSON.parse(raw) };
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed.extras_concluidos && !parsed.exercicios_concluidos) {
+        parsed.exercicios_concluidos = parsed.extras_concluidos;
+        delete parsed.extras_concluidos;
+      }
+      return { ...DEFAULT_STATE, ...parsed };
+    }
   } catch {
     // ignore parse errors
   }
@@ -69,7 +76,7 @@ export interface ProgressContextValue {
   niveis_concluidos: number[];
   conchas: number;
   conchas_por_missao: Record<string, number>;
-  extras_concluidos: Record<string, string[]>;
+  exercicios_concluidos: Record<string, string[]>;
   erros_por_missao: Record<string, number>;
   nome: string;
   genero: Genero;
@@ -81,7 +88,7 @@ export interface ProgressContextValue {
   completarMissao: (missaoId: string, tentativas?: number) => void;
   desmarcarMissao: (missaoId: string) => void;
   registrarErroMissao: (missaoId: string) => void;
-  completarExtraExercise: (missaoId: string, extraId: string, reward: number) => void;
+  completarExercicio: (missaoId: string, exercicioId: string, reward: number) => void;
   setNome: (nome: string) => void;
   setGenero: (genero: Genero) => void;
   setAvatarIdx: (idx: number) => void;
@@ -149,15 +156,15 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     });
   }, []);
 
-  const completarExtraExercise = useCallback((missaoId: string, extraId: string, reward: number) => {
+  const completarExercicio = useCallback((missaoId: string, exercicioId: string, reward: number) => {
     setState(prev => {
-      const jaFeitos = prev.extras_concluidos[missaoId] ?? [];
-      if (jaFeitos.includes(extraId)) return prev;
-      const novos = [...jaFeitos, extraId];
+      const jaFeitos = prev.exercicios_concluidos[missaoId] ?? [];
+      if (jaFeitos.includes(exercicioId)) return prev;
+      const novos = [...jaFeitos, exercicioId];
       return {
         ...prev,
         conchas: prev.conchas + reward,
-        extras_concluidos: { ...prev.extras_concluidos, [missaoId]: novos },
+        exercicios_concluidos: { ...prev.exercicios_concluidos, [missaoId]: novos },
       };
     });
   }, []);
@@ -209,7 +216,7 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, []);
 
   return (
-    <ProgressContext.Provider value={{ ...state, completarMissao, desmarcarMissao, registrarErroMissao, completarExtraExercise, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva, comprarAcessorio, setAcessorioAtivo }}>
+    <ProgressContext.Provider value={{ ...state, completarMissao, desmarcarMissao, registrarErroMissao, completarExercicio, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva, comprarAcessorio, setAcessorioAtivo }}>
       {children}
     </ProgressContext.Provider>
   );

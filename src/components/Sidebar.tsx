@@ -8,7 +8,7 @@ import {
   XMarkIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
-import tarefaImg from '../assets/tarefa.png';
+import { ListChecks } from "@phosphor-icons/react";
 import { useProgress } from "../hooks/useProgress";
 import { MOLDURAS } from "../data/molduras";
 import { ACESSORIOS } from "../data/acessorios";
@@ -26,17 +26,13 @@ const AVATAR_SRCS: (string | null)[] = [
   imgKraken,
 ];
 
-const TarefaIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <img src={tarefaImg} alt="" className={`${className ?? ''} invert`} />
-);
-
 type NavItem = { to: string; label: string; Icon: React.ComponentType<{ className?: string }>; exact: boolean };
 
 const NAV_ITEMS: NavItem[] = [
   { to: "/", label: "Home", Icon: HomeIcon, exact: true },
   { to: "/trilha", label: "Trilha", Icon: MapIcon, exact: false },
   { to: "/conquistas", label: "Conquistas", Icon: TrophyIcon, exact: false },
-  { to: "/exercicios-extras", label: "Exercícios", Icon: TarefaIcon, exact: false },
+  { to: "/exercicios", label: "Exercícios", Icon: ListChecks, exact: false },
 ];
 
 const Sidebar: React.FC = () => {
