@@ -80,3 +80,71 @@ Só `Ada.cor` mudou. Ana e Douglas continuam com as suas.
 - [ ] Gera um erro — não é possível alterar atributos de objetos separados.
 
 **Explicação:** Atributos pertencem a cada objeto individualmente. Mudar `ana.cor` não afeta `Ada.cor` — são dados completamente independentes.
+
+---
+
+## Exercícios extras
+
+**e1 – id: 1-3-e1**
+Na POO, um atributo é:
+- [ ] Uma ação que o objeto sabe executar
+- [x] Uma informação que pertence especificamente a um objeto ← correta
+- [ ] Uma função externa que acessa os dados do objeto
+- [ ] O tipo de dado que o objeto representa
+
+Explicação: Atributo é um dado que pertence ao objeto — uma característica sua. Cor, tamanho, nome: cada informação registrada sobre um objeto é um atributo.
+
+---
+
+**e2 – id: 1-3-e2**
+Em Python, a sintaxe `objeto.atributo` serve para:
+- [ ] Criar um novo objeto do tipo `atributo`
+- [x] Acessar uma informação que pertence a esse objeto ← correta
+- [ ] Chamar uma função chamada `atributo`
+- [ ] Comparar dois objetos entre si
+
+Explicação: O ponto é a forma de acessar um atributo de um objeto — como apontar para ele e dizer: "me dê essa informação". A estrutura é sempre `objeto.atributo`.
+
+---
+
+**e3 – id: 1-3-e3**
+Ada começa com `cor = 'rosa'`. Otto observa ela se camuflando e atualiza: `ada.cor = 'transparente'`. O que essa mudança representa?
+- [ ] Ada virou um objeto diferente — mudar um atributo cria uma nova entidade
+- [x] O estado de Ada mudou, mas ela continua sendo a mesma entidade ← correta
+- [ ] Ada perdeu sua identidade ao alterar a cor
+- [ ] Atributos não podem ser alterados depois que o objeto é criado
+
+Explicação: Mudar um atributo altera o estado do objeto, não a sua identidade. Ada continua sendo Ada — a mesma entidade. O que mudou foi apenas o valor de `cor`.
+
+---
+
+**e4 – id: 1-3-e4**
+Para atualizar o atributo `velocidade` do objeto `carro` para `120`, a sintaxe correta é:
+- [ ] `velocidade.carro = 120`
+- [ ] `set(carro, velocidade, 120)`
+- [ ] `carro[velocidade] = 120`
+- [x] `carro.velocidade = 120` ← correta
+
+Explicação: A notação ponto serve tanto para leitura (`carro.velocidade`) quanto para atribuição (`carro.velocidade = 120`). A estrutura é a mesma: `objeto.atributo = novo_valor`.
+
+---
+
+**e5 – id: 1-3-e5**
+Considerando um objeto `celular`, qual dos itens abaixo representa um atributo?
+- [ ] `ligar()` — uma ação que o celular sabe executar
+- [x] `bateria` — uma informação que descreve o estado do celular ← correta
+- [ ] `tirar_foto()` — um comportamento do celular
+- [ ] O celular em si — a entidade completa
+
+Explicação: Atributos são informações — dados que descrevem o estado do objeto. Ações como `ligar()` e `tirar_foto()` são outra coisa. `bateria`, `modelo`, `cor` são exemplos de atributos.
+
+---
+
+**e6 – id: 1-3-e6**
+O valor de um atributo pode ser alterado depois que o objeto foi criado?
+- [x] Sim — o estado de um objeto pode evoluir ao longo do tempo ← correta
+- [ ] Não — atributos são fixos após a criação do objeto
+- [ ] Sim, porém apenas atributos do tipo texto podem ser alterados
+- [ ] Apenas se o objeto for completamente recriado com novos valores
+
+Explicação: O estado de um objeto pode evoluir. Basta usar a notação ponto: `objeto.atributo = novo_valor`. Só esse objeto é afetado — os demais continuam com os seus próprios valores.

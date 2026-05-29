@@ -99,15 +99,15 @@ Só \`ada.cor\` mudou. Ana e Douglas continuam com as suas.
     },
     {
       id: '1-3-e3',
-      question: 'Três objetos possuem o atributo `cor`. Ao alterar `objeto1.cor`, o que acontece com `objeto2.cor` e `objeto3.cor`?',
+      question: 'Ada começa com `cor = \'rosa\'`. Otto observa ela se camuflando e atualiza: `ada.cor = \'transparente\'`. O que essa mudança representa?',
       options: [
-        'Também mudam — atributos com o mesmo nome são compartilhados',
-        '`objeto2.cor` muda, mas `objeto3.cor` não',
-        'Nada — cada objeto guarda seus próprios valores de forma independente',
-        'São apagados — só um objeto pode ter `cor` definida por vez',
+        'Ada virou um objeto diferente — mudar um atributo cria uma nova entidade',
+        'O estado de Ada mudou, mas ela continua sendo a mesma entidade',
+        'Ada perdeu sua identidade ao alterar a cor',
+        'Atributos não podem ser alterados depois que o objeto é criado',
       ],
-      correct: 2,
-      explanation: 'Atributos pertencem a cada objeto individualmente. Mudar um atributo de um objeto não afeta os demais — cada um tem os seus próprios valores.',
+      correct: 1,
+      explanation: 'Mudar um atributo altera o estado do objeto, não a sua identidade. Ada continua sendo Ada — a mesma entidade. O que mudou foi apenas o valor de `cor`.',
     },
     {
       id: '1-3-e4',
@@ -139,7 +139,7 @@ Só \`ada.cor\` mudou. Ana e Douglas continuam com as suas.
       options: [
         'Sim — o estado de um objeto pode evoluir ao longo do tempo',
         'Não — atributos são fixos após a criação do objeto',
-        'Apenas atributos do tipo texto podem ser alterados',
+        'Sim, porém apenas atributos do tipo texto podem ser alterados',
         'Apenas se o objeto for completamente recriado com novos valores',
       ],
       correct: 0,
