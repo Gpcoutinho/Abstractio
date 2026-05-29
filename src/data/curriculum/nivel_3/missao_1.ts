@@ -32,15 +32,15 @@ Pense em objetos como pessoas em uma cidade:
 
 > Entender relações é o que separa código amador de código profissional.
 `,
-  exercise: {
+  exercicio: {
     question: "Por que é importante entender como objetos se relacionam em POO?",
     options: [
-      "Porque objetos isolados são mais eficientes computacionalmente.",
       "Porque sistemas reais são formados por objetos que colaboram — entender relações é essencial para modelar o mundo real.",
+      "Porque objetos isolados são mais eficientes computacionalmente.",
       "Porque o Python exige que todos os objetos estejam conectados entre si.",
-      "Porque relações entre objetos substituem a necessidade de herança."
+      "Porque relações entre objetos substituem a necessidade de herança.",
     ],
-    correct: 1,
+    correct: 0,
     explanation: "Exato! Sistemas reais são redes de objetos colaborando. Modelar essas relações corretamente é o que torna um design robusto e manutenível."
   },
   has_minigame: false
