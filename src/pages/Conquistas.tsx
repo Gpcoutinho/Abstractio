@@ -51,7 +51,7 @@ const Conquistas: React.FC = () => {
                   const tierCount = { none: 0, bronze: 1, silver: 2, gold: 3 }[tierVal];
                   const hasExtras = !!(missao.exercicios?.length);
                   return (
-                    <div key={missao.id} className="flex flex-col items-center gap-1.5 w-28">
+                    <div key={missao.id} className="flex flex-col items-center gap-1.5 w-36">
                       {/* Label discreto acima */}
                       <div className="text-center px-1">
                         <p className="text-xs text-textSecondary/50 uppercase tracking-wider leading-none mb-0.5">
@@ -73,7 +73,7 @@ const Conquistas: React.FC = () => {
                           tier={tier}
                           className={earned ? '' : 'opacity-35 grayscale'}
                         >
-                          <MissionIcon iconName={missao.icon} completed={earned} className="w-9 h-9" />
+                          <MissionIcon iconName={missao.icon} completed={earned} className="w-12 h-12" />
                         </HexBadge>
                       </button>
 
@@ -82,8 +82,8 @@ const Conquistas: React.FC = () => {
                         <div className="flex items-center gap-0.5">
                           {[1, 2, 3].map(n =>
                             tierCount >= n
-                              ? <StarSolid key={n} className="w-3.5 h-3.5 text-yellow-400" />
-                              : <StarOutline key={n} className="w-3.5 h-3.5 text-borderDark" />
+                              ? <StarSolid key={n} className="w-4 h-4 text-yellow-400" />
+                              : <StarOutline key={n} className="w-4 h-4 text-borderDark" />
                           )}
                         </div>
                       )}
