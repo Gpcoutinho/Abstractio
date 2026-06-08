@@ -54,10 +54,10 @@ const Conquistas: React.FC = () => {
                     <div key={missao.id} className="flex flex-col items-center gap-1.5 w-36">
                       {/* Label discreto acima */}
                       <div className="text-center px-1">
-                        <p className="text-xs text-textSecondary/50 uppercase tracking-wider leading-none mb-0.5">
+                        <p className="text-xs text-textSecondary uppercase tracking-wider leading-none mb-0.5">
                           Missão {missaoIdx}
                         </p>
-                        <p className="text-sm text-textSecondary/70 leading-tight line-clamp-1">
+                        <p className="text-sm text-textPrimary leading-tight line-clamp-1">
                           {missao.title}
                         </p>
                       </div>
