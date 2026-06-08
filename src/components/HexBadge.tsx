@@ -56,9 +56,9 @@ function emblemFontSize(text: string, large: boolean): string {
     if (len <= 28) return 'text-[10px]';
     return 'text-[9px]';
   }
-  if (len <= 20) return 'text-[9px]';
-  if (len <= 28) return 'text-[8px]';
-  return 'text-[7px]';
+  if (len <= 20) return 'text-[11px]';
+  if (len <= 28) return 'text-[10px]';
+  return 'text-[9px]';
 }
 
 interface HexBadgeProps {
