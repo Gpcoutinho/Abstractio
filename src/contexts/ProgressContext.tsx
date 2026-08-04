@@ -17,10 +17,10 @@ interface ProgressState {
   nome: string;
   genero: Genero;
   avatarIdx: number;
-  moldurasDesbloqueadas: string[];
-  molduraAtiva: string;
-  acessoriosDesbloqueados: string[];
-  acessorioAtivo: string;
+  moldurasDesbloqueadas: number[];
+  molduraAtiva: number | null;
+  acessoriosDesbloqueados: number[];
+  acessorioAtivo: number | null;
 }
 
 const DEFAULT_STATE: ProgressState = {
@@ -33,11 +33,48 @@ const DEFAULT_STATE: ProgressState = {
   nome: '',
   genero: '',
   avatarIdx: 0,
-  moldurasDesbloqueadas: ['none'],
-  molduraAtiva: 'none',
-  acessoriosDesbloqueados: ['none'],
-  acessorioAtivo: 'none',
+  moldurasDesbloqueadas: [],
+  molduraAtiva: null,
+  acessoriosDesbloqueados: [],
+  acessorioAtivo: null,
 };
+
+// Ids legados (string) usados antes da migração para os ids numéricos de shop_items.
+const LEGACY_MOLDURA_IDS: Record<string, number | null> = {
+  none: null,
+  bolhas: 1,
+  mare: 2,
+  kraken: 3,
+  coral: 4,
+  aurora: 5,
+};
+
+const LEGACY_ACESSORIO_IDS: Record<string, number | null> = {
+  none: null,
+  pirata: 6,
+  cowboy: 7,
+  ninja: 8,
+  natal: 9,
+};
+
+function migrateLegacyIds(parsed: Record<string, unknown>): void {
+  if (Array.isArray(parsed.moldurasDesbloqueadas) && parsed.moldurasDesbloqueadas.every(id => typeof id === 'string')) {
+    parsed.moldurasDesbloqueadas = (parsed.moldurasDesbloqueadas as string[])
+      .map(id => LEGACY_MOLDURA_IDS[id])
+      .filter((id): id is number => id !== null && id !== undefined);
+  }
+  if (typeof parsed.molduraAtiva === 'string') {
+    parsed.molduraAtiva = LEGACY_MOLDURA_IDS[parsed.molduraAtiva] ?? null;
+  }
+  if (Array.isArray(parsed.acessoriosDesbloqueados) && parsed.acessoriosDesbloqueados.every(id => typeof id === 'string')) {
+    parsed.acessoriosDesbloqueados = (parsed.acessoriosDesbloqueados as string[])
+      .map(id => LEGACY_ACESSORIO_IDS[id])
+      .filter((id): id is number => id !== null && id !== undefined);
+  }
+  if (typeof parsed.acessorioAtivo === 'string') {
+    parsed.acessorioAtivo = LEGACY_ACESSORIO_IDS[parsed.acessorioAtivo] ?? null;
+  }
+}
 
 function loadFromStorage(): ProgressState {
   try {
@@ -48,6 +85,7 @@ function loadFromStorage(): ProgressState {
         parsed.exercicios_concluidos = parsed.extras_concluidos;
         delete parsed.extras_concluidos;
       }
+      migrateLegacyIds(parsed);
       return { ...DEFAULT_STATE, ...parsed };
     }
   } catch {
@@ -81,10 +119,10 @@ export interface ProgressContextValue {
   nome: string;
   genero: Genero;
   avatarIdx: number;
-  moldurasDesbloqueadas: string[];
-  molduraAtiva: string;
-  acessoriosDesbloqueados: string[];
-  acessorioAtivo: string;
+  moldurasDesbloqueadas: number[];
+  molduraAtiva: number | null;
+  acessoriosDesbloqueados: number[];
+  acessorioAtivo: number | null;
   completarMissao: (missaoId: string, tentativas?: number) => void;
   desmarcarMissao: (missaoId: string) => void;
   registrarErroMissao: (missaoId: string) => void;
@@ -92,10 +130,11 @@ export interface ProgressContextValue {
   setNome: (nome: string) => void;
   setGenero: (genero: Genero) => void;
   setAvatarIdx: (idx: number) => void;
-  comprarMoldura: (molduraId: string) => void;
-  setMolduraAtiva: (molduraId: string) => void;
-  comprarAcessorio: (acessorioId: string) => void;
-  setAcessorioAtivo: (acessorioId: string) => void;
+  comprarMoldura: (molduraId: number) => void;
+  setMolduraAtiva: (molduraId: number | null) => void;
+  comprarAcessorio: (acessorioId: number) => void;
+  setAcessorioAtivo: (acessorioId: number | null) => void;
+  hidratarEquipados: (activeFrame: number | null, activeAccessory: number | null) => void;
 }
 
 export const ProgressContext = createContext<ProgressContextValue | undefined>(undefined);
@@ -181,7 +220,7 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setState(prev => ({ ...prev, avatarIdx }));
   }, []);
 
-  const comprarMoldura = useCallback((molduraId: string) => {
+  const comprarMoldura = useCallback((molduraId: number) => {
     setState(prev => {
       if (prev.moldurasDesbloqueadas.includes(molduraId)) return prev;
       const moldura = MOLDURAS.find(m => m.id === molduraId);
@@ -194,11 +233,11 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     });
   }, []);
 
-  const setMolduraAtiva = useCallback((molduraId: string) => {
+  const setMolduraAtiva = useCallback((molduraId: number | null) => {
     setState(prev => ({ ...prev, molduraAtiva: molduraId }));
   }, []);
 
-  const comprarAcessorio = useCallback((acessorioId: string) => {
+  const comprarAcessorio = useCallback((acessorioId: number) => {
     setState(prev => {
       if (prev.acessoriosDesbloqueados.includes(acessorioId)) return prev;
       const acessorio = ACESSORIOS.find(a => a.id === acessorioId);
@@ -211,12 +250,28 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     });
   }, []);
 
-  const setAcessorioAtivo = useCallback((acessorioId: string) => {
+  const setAcessorioAtivo = useCallback((acessorioId: number | null) => {
     setState(prev => ({ ...prev, acessorioAtivo: acessorioId }));
   }, []);
 
+  // Hidrata moldura/acessório equipados a partir do perfil vindo do backend (GET /api/v1/user),
+  // chamado uma vez no boot da sessão pelo SessionContext. Ver CLAUDE.md prompt 1, item 9.
+  const hidratarEquipados = useCallback((activeFrame: number | null, activeAccessory: number | null) => {
+    setState(prev => ({
+      ...prev,
+      molduraAtiva: activeFrame,
+      acessorioAtivo: activeAccessory,
+      moldurasDesbloqueadas: activeFrame !== null && !prev.moldurasDesbloqueadas.includes(activeFrame)
+        ? [...prev.moldurasDesbloqueadas, activeFrame]
+        : prev.moldurasDesbloqueadas,
+      acessoriosDesbloqueados: activeAccessory !== null && !prev.acessoriosDesbloqueados.includes(activeAccessory)
+        ? [...prev.acessoriosDesbloqueados, activeAccessory]
+        : prev.acessoriosDesbloqueados,
+    }));
+  }, []);
+
   return (
-    <ProgressContext.Provider value={{ ...state, completarMissao, desmarcarMissao, registrarErroMissao, completarExercicio, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva, comprarAcessorio, setAcessorioAtivo }}>
+    <ProgressContext.Provider value={{ ...state, completarMissao, desmarcarMissao, registrarErroMissao, completarExercicio, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva, comprarAcessorio, setAcessorioAtivo, hidratarEquipados }}>
       {children}
     </ProgressContext.Provider>
   );

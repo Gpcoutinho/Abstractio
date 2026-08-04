@@ -3,8 +3,6 @@ import { ProgressContext, calcTier } from '../contexts/ProgressContext';
 import type { TierLevel } from '../contexts/ProgressContext';
 import { niveis } from '../data/curriculum';
 
-const NIVEL_NOMES = ['Polvinho', 'Explorador', 'Mestre dos Mares', 'Kraken'];
-
 const totalMissoes = niveis.reduce(
   (acc, nivel) => acc + nivel.missoes.length,
   0,
@@ -14,7 +12,7 @@ export function useProgress() {
   const ctx = useContext(ProgressContext);
   if (!ctx) throw new Error('useProgress deve ser usado dentro de ProgressProvider');
 
-  const { completed, niveis_concluidos, conchas, conchas_por_missao, exercicios_concluidos, erros_por_missao, nome, genero, avatarIdx, moldurasDesbloqueadas, molduraAtiva, acessoriosDesbloqueados, acessorioAtivo, completarMissao, desmarcarMissao, registrarErroMissao, completarExercicio, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva, comprarAcessorio, setAcessorioAtivo } = ctx;
+  const { completed, niveis_concluidos, conchas, conchas_por_missao, exercicios_concluidos, erros_por_missao, nome, genero, avatarIdx, moldurasDesbloqueadas, molduraAtiva, acessoriosDesbloqueados, acessorioAtivo, completarMissao, desmarcarMissao, registrarErroMissao, completarExercicio, setNome, setGenero, setAvatarIdx, comprarMoldura, setMolduraAtiva, comprarAcessorio, setAcessorioAtivo, hidratarEquipados } = ctx;
 
   const isMissaoConcluida = (missaoId: string) => completed.includes(missaoId);
   const getConchasValor = (missaoId: string): number => {
@@ -26,15 +24,9 @@ export function useProgress() {
   const getExerciciosDone = (missaoId: string): string[] => exercicios_concluidos[missaoId] ?? [];
   const getTier = (missaoId: string): TierLevel => calcTier(getExerciciosDone(missaoId).length);
 
-  const nivelNomeIdx = Math.min(niveis_concluidos.length, NIVEL_NOMES.length - 1);
-  const nivelNome = NIVEL_NOMES[nivelNomeIdx];
-  const nivelDisplay = `Nível ${nivelNomeIdx + 1} — ${nivelNome}`;
-
   const progressoGeral = totalMissoes > 0
     ? Math.round((completed.length / totalMissoes) * 100)
     : 0;
-
-  const nomeDisplay = nome.trim() || 'Otto';
 
   return {
     completed,
@@ -43,7 +35,6 @@ export function useProgress() {
     conchas_por_missao,
     exercicios_concluidos,
     nome,
-    nomeDisplay,
     genero,
     avatarIdx,
     moldurasDesbloqueadas,
@@ -61,14 +52,13 @@ export function useProgress() {
     setMolduraAtiva,
     comprarAcessorio,
     setAcessorioAtivo,
+    hidratarEquipados,
     isMissaoConcluida,
     isNivelConcluido,
     jaGanhouConchas,
     getConchasValor,
     getExerciciosDone,
     getTier,
-    nivelNome,
-    nivelDisplay,
     progressoGeral,
   };
 }

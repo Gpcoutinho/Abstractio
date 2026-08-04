@@ -5,7 +5,9 @@ import { niveis } from '../data/curriculum';
 import { MOLDURAS } from '../data/molduras';
 import { ACESSORIOS } from '../data/acessorios';
 import { useProgress } from '../hooks/useProgress';
+import { useSession } from '../hooks/useSession';
 import type { Genero } from '../contexts/ProgressContext';
+import { ApiError, updateActiveAvatarItem } from '../lib/api';
 import ShellIcon from '../components/ShellIcon';
 import AvatarFrame from '../components/AvatarFrame';
 import Footer from '../components/Footer';
@@ -37,12 +39,41 @@ const GENERO_OPTIONS: { value: Genero; label: string }[] = [
 type LojaTab = 'molduras' | 'acessorios' | 'cores';
 
 const Perfil: React.FC = () => {
-  const { nome, genero, conchas, completed, nivelDisplay, avatarIdx, setNome, setGenero, setAvatarIdx, niveis_concluidos, moldurasDesbloqueadas, molduraAtiva, comprarMoldura, setMolduraAtiva, acessoriosDesbloqueados, acessorioAtivo, comprarAcessorio, setAcessorioAtivo } = useProgress();
-  const molduraAtivaData = MOLDURAS.find(m => m.id === molduraAtiva) ?? MOLDURAS[0];
+  const { nome, genero, conchas, completed, avatarIdx, setNome, setGenero, setAvatarIdx, niveis_concluidos, moldurasDesbloqueadas, molduraAtiva, comprarMoldura, setMolduraAtiva, acessoriosDesbloqueados, acessorioAtivo, comprarAcessorio, setAcessorioAtivo } = useProgress();
+  const { profile } = useSession();
+  const molduraAtivaData = MOLDURAS.find(m => m.id === molduraAtiva) ?? null;
   const [nomeInput, setNomeInput] = useState(nome);
   const [salvo, setSalvo] = useState(false);
   const [lojaTab, setLojaTab] = useState<LojaTab>('molduras');
   const lojaRef = useRef<HTMLElement>(null);
+  const [removendo, setRemovendo] = useState<'frame' | 'accessory' | null>(null);
+  const [removerErro, setRemoverErro] = useState('');
+
+  const handleRemoverMoldura = async () => {
+    setRemoverErro('');
+    setRemovendo('frame');
+    try {
+      await updateActiveAvatarItem('frame', null);
+      setMolduraAtiva(null);
+    } catch (err) {
+      setRemoverErro(err instanceof ApiError ? err.message : 'Não foi possível remover a moldura.');
+    } finally {
+      setRemovendo(null);
+    }
+  };
+
+  const handleRemoverAcessorio = async () => {
+    setRemoverErro('');
+    setRemovendo('accessory');
+    try {
+      await updateActiveAvatarItem('accessory', null);
+      setAcessorioAtivo(null);
+    } catch (err) {
+      setRemoverErro(err instanceof ApiError ? err.message : 'Não foi possível remover o acessório.');
+    } finally {
+      setRemovendo(null);
+    }
+  };
 
   useEffect(() => {
     if (window.location.hash === '#loja') {
@@ -81,8 +112,10 @@ const Perfil: React.FC = () => {
               <p className="text-xs text-textSecondary mt-1">de {totalMissoes} missões</p>
             </div>
             <div>
-              <p className="text-2xl font-bold text-textPrimary">{nivelDisplay.split(' — ')[1]}</p>
-              <p className="text-xs text-textSecondary mt-1">{nivelDisplay.split(' — ')[0]}</p>
+              <p className="text-2xl font-bold text-textPrimary">{profile?.rank.patent ?? '—'}</p>
+              <p className="text-xs text-textSecondary mt-1">
+                {profile ? `Nível ${profile.rank.level}` : ''}
+              </p>
             </div>
           </div>
         </section>
@@ -127,7 +160,7 @@ const Perfil: React.FC = () => {
               const selecionado = avatarIdx === i;
 
               return (
-                <AvatarFrame key={i} moldura={selecionado ? molduraAtivaData : MOLDURAS[0]}>
+                <AvatarFrame key={i} moldura={selecionado ? molduraAtivaData : null}>
                   <button
                     onClick={() => desbloqueado && setAvatarIdx(i)}
                     disabled={!desbloqueado}
@@ -191,8 +224,27 @@ const Perfil: React.FC = () => {
 
           {/* Conteúdo da tab */}
           <div className="p-6">
+            {removerErro && <p className="text-xs text-red-400 mb-4">{removerErro}</p>}
+
             {lojaTab === 'molduras' && (
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-28 h-28 rounded-full overflow-hidden bg-bgPrimary border border-dashed border-borderDark flex items-center justify-center">
+                    <img
+                      src={AVATARES[avatarIdx]?.src ?? AVATARES[0].src}
+                      alt="Sem moldura"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <p className="text-xs font-medium text-textPrimary text-center leading-tight">Nenhuma</p>
+                  <button
+                    onClick={handleRemoverMoldura}
+                    disabled={molduraAtiva === null || removendo !== null}
+                    className={`text-xs px-3 py-1 rounded-full transition-colors ${molduraAtiva === null ? 'bg-accent/20 text-accent font-semibold' : 'text-textSecondary hover:text-textPrimary disabled:opacity-40'}`}
+                  >
+                    {molduraAtiva === null ? 'Ativa' : removendo === 'frame' ? 'Removendo...' : 'Remover'}
+                  </button>
+                </div>
                 {MOLDURAS.map(moldura => {
                   const owned = moldurasDesbloqueadas.includes(moldura.id);
                   const ativa = molduraAtiva === moldura.id;
@@ -231,6 +283,23 @@ const Perfil: React.FC = () => {
 
             {lojaTab === 'acessorios' && (
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-28 h-28 rounded-full overflow-hidden bg-bgPrimary border border-dashed border-borderDark flex items-center justify-center">
+                    <img
+                      src={AVATARES[avatarIdx]?.src ?? AVATARES[0].src}
+                      alt="Sem acessório"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <p className="text-xs font-medium text-textPrimary text-center leading-tight">Nenhum</p>
+                  <button
+                    onClick={handleRemoverAcessorio}
+                    disabled={acessorioAtivo === null || removendo !== null}
+                    className={`text-xs px-3 py-1 rounded-full transition-colors ${acessorioAtivo === null ? 'bg-accent/20 text-accent font-semibold' : 'text-textSecondary hover:text-textPrimary disabled:opacity-40'}`}
+                  >
+                    {acessorioAtivo === null ? 'Ativo' : removendo === 'accessory' ? 'Removendo...' : 'Remover'}
+                  </button>
+                </div>
                 {ACESSORIOS.map(acessorio => {
                   const owned = acessoriosDesbloqueados.includes(acessorio.id);
                   const ativo = acessorioAtivo === acessorio.id;

@@ -1,5 +1,6 @@
 export interface Moldura {
-  id: string;
+  id: number;
+  code: string;
   nome: string;
   descricao: string;
   custo: number;
@@ -8,16 +9,11 @@ export interface Moldura {
   animClass?: string;
 }
 
+// ids batem com shop_items (itemType: 'frame') no backend.
 export const MOLDURAS: Moldura[] = [
   {
-    id: 'none',
-    nome: 'Nenhuma',
-    descricao: 'Sem moldura',
-    custo: 0,
-    background: 'transparent',
-  },
-  {
-    id: 'bolhas',
+    id: 1,
+    code: 'bolhas',
     nome: 'Bolhas',
     descricao: 'Leve como as bolhas do oceano',
     custo: 50,
@@ -25,7 +21,8 @@ export const MOLDURAS: Moldura[] = [
     animClass: 'animate-frame-shimmer-slow',
   },
   {
-    id: 'mare',
+    id: 2,
+    code: 'mare',
     nome: 'Maré Alta',
     descricao: 'Das profundezas às águas rasas',
     custo: 50,
@@ -34,7 +31,8 @@ export const MOLDURAS: Moldura[] = [
     animClass: 'animate-frame-wave',
   },
   {
-    id: 'kraken',
+    id: 3,
+    code: 'kraken',
     nome: 'Kraken',
     descricao: 'Das profundezas do abismo',
     custo: 50,
@@ -42,7 +40,8 @@ export const MOLDURAS: Moldura[] = [
     animClass: 'animate-frame-pulse',
   },
   {
-    id: 'coral',
+    id: 4,
+    code: 'coral',
     nome: 'Coral',
     descricao: 'Cores vibrantes do recife',
     custo: 50,
@@ -50,7 +49,8 @@ export const MOLDURAS: Moldura[] = [
     animClass: 'animate-frame-shimmer-fast',
   },
   {
-    id: 'aurora',
+    id: 5,
+    code: 'aurora',
     nome: 'Aurora Boreal',
     descricao: 'Um espetáculo de luz e cor',
     custo: 50,

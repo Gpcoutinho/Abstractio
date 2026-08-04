@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logotipoImg from '../assets/logotipo-removebg.png';
 import { Link, NavLink } from "react-router-dom";
 import {
@@ -7,9 +7,12 @@ import {
   TrophyIcon,
   XMarkIcon,
   UserCircleIcon,
+  ArrowRightStartOnRectangleIcon,
 } from "@heroicons/react/24/outline";
 import { ListChecks } from "@phosphor-icons/react";
 import { useProgress } from "../hooks/useProgress";
+import { useSession } from "../hooks/useSession";
+import { useAuth } from "../hooks/useAuth";
 import { MOLDURAS } from "../data/molduras";
 import { ACESSORIOS } from "../data/acessorios";
 import AvatarFrame from "./AvatarFrame";
@@ -37,9 +40,34 @@ const NAV_ITEMS: NavItem[] = [
 
 const Sidebar: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const { conchas, nivelDisplay, nomeDisplay, avatarIdx, molduraAtiva, acessorioAtivo } = useProgress();
-  const avatarSrc = AVATAR_SRCS[avatarIdx] ?? AVATAR_SRCS[0];
-  const moldura = MOLDURAS.find(m => m.id === molduraAtiva) ?? MOLDURAS[0];
+  const { conchas, molduraAtiva, acessorioAtivo, hidratarEquipados } = useProgress();
+  const { profile, loading: sessionLoading } = useSession();
+  const { signOut } = useAuth();
+  const [saindo, setSaindo] = useState(false);
+
+  const handleSair = async () => {
+    setSaindo(true);
+    try {
+      await signOut();
+    } finally {
+      setSaindo(false);
+    }
+  };
+
+  // Hidrata moldura/acessório equipados a partir do servidor uma única vez por sessão —
+  // refetches subsequentes (ex: visibilitychange) não devem sobrescrever o que o usuário
+  // equipou localmente em /perfil, já que ainda não existe endpoint de loja para persistir isso.
+  const hidratadoRef = useRef(false);
+  useEffect(() => {
+    if (profile && !hidratadoRef.current) {
+      hidratarEquipados(profile.activeFrame, profile.activeAccessory);
+      hidratadoRef.current = true;
+    }
+    if (!profile) hidratadoRef.current = false;
+  }, [profile, hidratarEquipados]);
+
+  const avatarSrc = profile ? AVATAR_SRCS[profile.avatarIdx] ?? AVATAR_SRCS[0] : null;
+  const moldura = MOLDURAS.find(m => m.id === molduraAtiva) ?? null;
   const acessorioSrc = ACESSORIOS.find(a => a.id === acessorioAtivo)?.src ?? '';
 
   return (
@@ -117,48 +145,59 @@ const Sidebar: React.FC = () => {
 
         {/* Avatar + info */}
         <div className="flex flex-col items-center px-5 py-6 border-b border-borderDark flex-shrink-0">
-          <AvatarFrame moldura={moldura}>
-            <Link
-              to="/perfil"
-              onClick={() => setOpen(false)}
-              className="relative w-32 h-32 rounded-full ring-2 ring-accent/40 overflow-hidden hover:ring-accent transition-all shadow-lg bg-bgPrimary block"
-              title="Perfil"
-            >
-              {avatarSrc ? (
-                <img
-                  src={avatarSrc}
-                  alt="Avatar"
-                  className="w-full h-full object-cover block"
-                />
-              ) : (
-                <div className="w-full h-full bg-bgPrimary flex items-center justify-center">
-                  <UserCircleIcon className="w-8 h-8 text-textSecondary" />
-                </div>
-              )}
-              {acessorioSrc && (
-                <img
-                  src={acessorioSrc}
-                  alt="Acessório"
-                  className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-                />
-              )}
-            </Link>
-          </AvatarFrame>
-          <p className="mt-3 text-sm font-medium text-textPrimary leading-tight text-center">
-            {nomeDisplay}
-          </p>
-          <p className="text-xs text-textSecondary leading-tight text-center">
-            {nivelDisplay}
-          </p>
-          <Link
-            to="/perfil#loja"
-            onClick={() => setOpen(false)}
-            className="mt-1 text-sm text-accent font-semibold flex items-center gap-1 hover:opacity-70 transition-opacity"
-            title="Ir para a loja de conchas"
-          >
-            <ShellIcon className="w-4 h-4" style={{ color: '#06B6D4' }} />
-            {conchas}
-          </Link>
+          {sessionLoading || !profile ? (
+            <>
+              <div className="w-32 h-32 rounded-full bg-bgPrimary animate-pulse" />
+              <div className="mt-3 h-4 w-20 rounded bg-bgPrimary animate-pulse" />
+              <div className="mt-2 h-3 w-28 rounded bg-bgPrimary animate-pulse" />
+              <div className="mt-2 h-4 w-12 rounded bg-bgPrimary animate-pulse" />
+            </>
+          ) : (
+            <>
+              <AvatarFrame moldura={moldura}>
+                <Link
+                  to="/perfil"
+                  onClick={() => setOpen(false)}
+                  className="relative w-32 h-32 rounded-full ring-2 ring-accent/40 overflow-hidden hover:ring-accent transition-all shadow-lg bg-bgPrimary block"
+                  title="Perfil"
+                >
+                  {avatarSrc ? (
+                    <img
+                      src={avatarSrc}
+                      alt="Avatar"
+                      className="w-full h-full object-cover block"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-bgPrimary flex items-center justify-center">
+                      <UserCircleIcon className="w-8 h-8 text-textSecondary" />
+                    </div>
+                  )}
+                  {acessorioSrc && (
+                    <img
+                      src={acessorioSrc}
+                      alt="Acessório"
+                      className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                    />
+                  )}
+                </Link>
+              </AvatarFrame>
+              <p className="mt-3 text-sm font-medium text-textPrimary leading-tight text-center">
+                {profile.name}
+              </p>
+              <p className="text-xs text-textSecondary leading-tight text-center">
+                {`Nível ${profile.rank.level} — ${profile.rank.patent}`}
+              </p>
+              <Link
+                to="/perfil#loja"
+                onClick={() => setOpen(false)}
+                className="mt-1 text-sm text-accent font-semibold flex items-center gap-1 hover:opacity-70 transition-opacity"
+                title="Ir para a loja de conchas"
+              >
+                <ShellIcon className="w-4 h-4" style={{ color: '#06B6D4' }} />
+                {conchas}
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Nav */}
@@ -185,6 +224,19 @@ const Sidebar: React.FC = () => {
             ))}
           </ul>
         </nav>
+
+        {/* Sair */}
+        <div className="px-3 py-4 border-t border-borderDark flex-shrink-0">
+          <button
+            type="button"
+            onClick={handleSair}
+            disabled={saindo}
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-textPrimary hover:bg-bgPrimary/50 hover:text-red-400 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            <ArrowRightStartOnRectangleIcon className="w-5 h-5 flex-shrink-0" />
+            <span className="font-medium">{saindo ? "Saindo..." : "Sair"}</span>
+          </button>
+        </div>
       </aside>
     </>
   );
