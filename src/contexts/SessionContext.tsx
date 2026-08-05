@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
 import { ApiError, getUserBalance, getUserProfile } from '../lib/api';
-import type { UserBalance, UserProfile } from '../lib/api.types';
+import type { ActiveAvatarState, UserBalance, UserProfile } from '../lib/api.types';
 import { useAuth } from '../hooks/useAuth';
 
 interface SessionContextValue {
@@ -10,6 +10,9 @@ interface SessionContextValue {
   profileMissing: boolean;
   error: ApiError | null;
   refetch: () => Promise<void>;
+  applyProfile: (patch: Partial<UserProfile>) => void;
+  applyBalance: (raw: number) => void;
+  applyActiveAvatar: (state: ActiveAvatarState) => void;
 }
 
 export const SessionContext = createContext<SessionContextValue | undefined>(undefined);
@@ -69,8 +72,38 @@ export const SessionProvider: React.FC<{ children: React.ReactNode }> = ({ child
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
   }, [firebaseUser, fetchSession]);
 
+  // Mutadores locais: os endpoints de PATCH/POST já devolvem o estado novo,
+  // então aplicamos direto em vez de refazer GET /user + GET /user/balance.
+  const applyProfile = useCallback((patch: Partial<UserProfile>) => {
+    setProfile(prev => (prev ? { ...prev, ...patch } : prev));
+  }, []);
+
+  const applyBalance = useCallback((raw: number) => {
+    setBalance(prev => ({
+      raw: String(raw),
+      formatted: raw.toLocaleString('pt-BR'),
+      currency: prev?.currency ?? 'shells',
+    }));
+  }, []);
+
+  const applyActiveAvatar = useCallback((state: ActiveAvatarState) => {
+    setProfile(prev =>
+      prev
+        ? {
+            ...prev,
+            avatarIdx: state.avatarIdx,
+            activeFrame: state.activeFrame,
+            activeAccessory: state.activeAccessory,
+            activeColor: state.activeColor,
+          }
+        : prev,
+    );
+  }, []);
+
   return (
-    <SessionContext.Provider value={{ profile, balance, loading, profileMissing, error, refetch: fetchSession }}>
+    <SessionContext.Provider
+      value={{ profile, balance, loading, profileMissing, error, refetch: fetchSession, applyProfile, applyBalance, applyActiveAvatar }}
+    >
       {children}
     </SessionContext.Provider>
   );

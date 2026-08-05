@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import logotipoImg from '../assets/logotipo-removebg.png';
 import { Link, NavLink } from "react-router-dom";
 import {
@@ -10,7 +10,6 @@ import {
   ArrowRightStartOnRectangleIcon,
 } from "@heroicons/react/24/outline";
 import { ListChecks } from "@phosphor-icons/react";
-import { useProgress } from "../hooks/useProgress";
 import { useSession } from "../hooks/useSession";
 import { useAuth } from "../hooks/useAuth";
 import { MOLDURAS } from "../data/molduras";
@@ -40,8 +39,7 @@ const NAV_ITEMS: NavItem[] = [
 
 const Sidebar: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const { conchas, molduraAtiva, acessorioAtivo, hidratarEquipados } = useProgress();
-  const { profile, loading: sessionLoading } = useSession();
+  const { profile, balance, loading: sessionLoading } = useSession();
   const { signOut } = useAuth();
   const [saindo, setSaindo] = useState(false);
 
@@ -54,21 +52,9 @@ const Sidebar: React.FC = () => {
     }
   };
 
-  // Hidrata moldura/acessório equipados a partir do servidor uma única vez por sessão —
-  // refetches subsequentes (ex: visibilitychange) não devem sobrescrever o que o usuário
-  // equipou localmente em /perfil, já que ainda não existe endpoint de loja para persistir isso.
-  const hidratadoRef = useRef(false);
-  useEffect(() => {
-    if (profile && !hidratadoRef.current) {
-      hidratarEquipados(profile.activeFrame, profile.activeAccessory);
-      hidratadoRef.current = true;
-    }
-    if (!profile) hidratadoRef.current = false;
-  }, [profile, hidratarEquipados]);
-
   const avatarSrc = profile ? AVATAR_SRCS[profile.avatarIdx] ?? AVATAR_SRCS[0] : null;
-  const moldura = MOLDURAS.find(m => m.id === molduraAtiva) ?? null;
-  const acessorioSrc = ACESSORIOS.find(a => a.id === acessorioAtivo)?.src ?? '';
+  const moldura = MOLDURAS.find(m => m.id === profile?.activeFrame) ?? null;
+  const acessorioSrc = ACESSORIOS.find(a => a.id === profile?.activeAccessory)?.src ?? '';
 
   return (
     <>
@@ -194,7 +180,7 @@ const Sidebar: React.FC = () => {
                 title="Ir para a loja de conchas"
               >
                 <ShellIcon className="w-4 h-4" style={{ color: '#06B6D4' }} />
-                {conchas}
+                {balance?.formatted ?? '—'}
               </Link>
             </>
           )}

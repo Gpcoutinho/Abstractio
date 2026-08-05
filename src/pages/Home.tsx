@@ -4,6 +4,7 @@ import { MapIcon, TrophyIcon, LockClosedIcon } from '@heroicons/react/24/outline
 import HeroCarousel from '../components/HeroCarousel';
 import Footer from '../components/Footer';
 import { useProgress } from '../hooks/useProgress';
+import { useSession } from '../hooks/useSession';
 
 const FEATURE_CARDS = [
   {
@@ -37,7 +38,8 @@ const FEATURE_CARDS = [
 ];
 
 const Home: React.FC = () => {
-  const { progressoGeral, conchas } = useProgress();
+  const { progressoGeral } = useProgress();
+  const { balance } = useSession();
 
   return (
     <>
@@ -50,7 +52,7 @@ const Home: React.FC = () => {
               <h2 className="text-3xl font-bold text-textPrimary mb-2">Minha trilha</h2>
               <p className="text-textSecondary mb-10">
                 {progressoGeral > 0
-                  ? `${progressoGeral}% concluído · ${conchas} conchas`
+                  ? `${progressoGeral}% concluído · ${balance?.formatted ?? '—'} conchas`
                   : 'Escolha por onde começar.'}
               </p>
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">

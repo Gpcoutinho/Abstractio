@@ -54,6 +54,48 @@ export interface ShopItem {
   priceShells: number;
 }
 
+// Body é .strict() no backend: todos os campos são opcionais, mas pelo menos um é obrigatório
+// (objeto vazio dá 400). Diferente de CreateUserPayload, gender aqui NÃO aceita null.
+export interface UpdateUserPayload {
+  name?: string;
+  gender?: Gender;
+  avatarIdx?: number;
+  birthDate?: string; // YYYY-MM-DD
+}
+
+export interface UpdatedUser {
+  name: string;
+  gender: Gender | null;
+  avatarIdx: number;
+  birthDate: string | null;
+}
+
+export interface InventoryItem {
+  id: number;
+  itemType: ShopItemType;
+  code: string;
+  name: string;
+  active: boolean;
+}
+
+export interface Inventory {
+  items: InventoryItem[];
+}
+
+export interface PurchaseResult {
+  inventoryId: number;
+  item: ShopItem;
+  shellBalance: number;
+  acquiredAt: string;
+}
+
+export interface ActiveAvatarState {
+  avatarIdx: number;
+  activeFrame: number | null;
+  activeAccessory: number | null;
+  activeColor: number | null;
+}
+
 export interface Pagination {
   limit: number;
   offset: number;

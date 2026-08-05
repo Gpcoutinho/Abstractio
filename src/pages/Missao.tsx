@@ -27,6 +27,7 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { niveis } from "../data/curriculum";
 import { useProgress } from "../hooks/useProgress";
+import { useSession } from "../hooks/useSession";
 import { useCelebration } from "../hooks/useCelebration";
 import { resolveEmblem } from "../utils/emblem";
 import PageWrapper from "../components/PageWrapper";
@@ -137,7 +138,9 @@ const Missao: React.FC = () => {
     nivelIdx: string;
     missaoIdx: string;
   }>();
-  const { completarMissao, desmarcarMissao, registrarErroMissao, isMissaoConcluida, completed, jaGanhouConchas, genero } = useProgress();
+  const { completarMissao, desmarcarMissao, registrarErroMissao, isMissaoConcluida, completed, jaGanhouConchas } = useProgress();
+  const { profile } = useSession();
+  const genero = profile?.gender ?? null;
   const { celebrate } = useCelebration();
 
   const [selecionada, setSelecionada] = useState<number | null>(null);

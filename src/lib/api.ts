@@ -1,14 +1,19 @@
 import { signOut } from 'firebase/auth';
 import { auth } from './firebase';
 import type {
+  ActiveAvatarState,
   ApiErrorBody,
   ApiErrorCode,
   AvatarSlot,
   CreatedUser,
   CreateUserPayload,
+  Inventory,
   Paginated,
+  PurchaseResult,
   ShopItem,
   ShopItemType,
+  UpdatedUser,
+  UpdateUserPayload,
   UserBalance,
   UserProfile,
 } from './api.types';
@@ -27,6 +32,19 @@ export class ApiError extends Error {
     this.code = code;
     this.details = details;
   }
+}
+
+// Mensagem pronta pra exibir na UI. validation_error é bug de front (payload fora do
+// schema .strict()) — nunca deveria acontecer, então loga os details e mostra algo genérico.
+export function getApiErrorMessage(err: unknown, context: string): string {
+  if (err instanceof ApiError) {
+    if (err.code === 'validation_error') {
+      console.error(`[${context}] validation_error`, err.details);
+      return 'Não foi possível salvar. Tente novamente.';
+    }
+    return err.message;
+  }
+  return 'Falha de conexão. Tente novamente.';
 }
 
 interface ApiFetchOptions {
@@ -98,11 +116,28 @@ export function getUserBalance(): Promise<UserBalance> {
   return apiFetch<UserBalance>('/user/balance');
 }
 
-export function getShopItems(category?: ShopItemType): Promise<Paginated<ShopItem>> {
-  return apiFetch<Paginated<ShopItem>>('/shop/items', { query: { category } });
+// Body é .strict() e exige pelo menos um campo — objeto vazio dá 400 no backend.
+export function updateUserProfile(payload: UpdateUserPayload): Promise<UpdatedUser> {
+  if (Object.keys(payload).length === 0) {
+    throw new ApiError(0, 'validation_error', 'updateUserProfile chamado com payload vazio.');
+  }
+  return apiFetch<UpdatedUser>('/user', { method: 'PATCH', body: payload });
 }
 
-// id: null desequipa o item ativo daquele slot.
-export function updateActiveAvatarItem(slot: AvatarSlot, id: number | null): Promise<void> {
-  return apiFetch<void>('/user/avatar/active', { method: 'PATCH', body: { slot, id } });
+// limit tem default baixo (5) no backend — sempre passar explícito.
+export function getShopItems(category: ShopItemType, limit = 5, offset = 0): Promise<Paginated<ShopItem>> {
+  return apiFetch<Paginated<ShopItem>>('/shop/items', { query: { category, limit, offset } });
+}
+
+export function getUserInventory(): Promise<Inventory> {
+  return apiFetch<Inventory>('/user/inventory');
+}
+
+export function purchaseShopItem(itemId: number): Promise<PurchaseResult> {
+  return apiFetch<PurchaseResult>('/user/inventory', { method: 'POST', body: { itemId } });
+}
+
+// itemId: null desequipa o item ativo daquele slot.
+export function updateActiveAvatarItem(slot: AvatarSlot, itemId: number | null): Promise<ActiveAvatarState> {
+  return apiFetch<ActiveAvatarState>('/user/avatar/active', { method: 'PATCH', body: { slot, itemId } });
 }

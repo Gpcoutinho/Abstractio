@@ -1,13 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TrophyIcon, LockClosedIcon } from '@heroicons/react/24/outline';
 import { niveis } from '../data/curriculum';
-import { MOLDURAS } from '../data/molduras';
-import { ACESSORIOS } from '../data/acessorios';
+import { MOLDURAS, MOLDURA_FALLBACK } from '../data/molduras';
+import { ACESSORIOS, ACESSORIO_FALLBACK } from '../data/acessorios';
+import { CORES, COR_FALLBACK } from '../data/cores';
 import { useProgress } from '../hooks/useProgress';
 import { useSession } from '../hooks/useSession';
-import type { Genero } from '../contexts/ProgressContext';
-import { ApiError, updateActiveAvatarItem } from '../lib/api';
+import { useLoja } from '../hooks/useLoja';
+import type { LojaTab } from '../hooks/useLoja';
+import { getApiErrorMessage, updateUserProfile } from '../lib/api';
+import type { Gender, ShopItem } from '../lib/api.types';
 import ShellIcon from '../components/ShellIcon';
 import AvatarFrame from '../components/AvatarFrame';
 import Footer from '../components/Footer';
@@ -21,59 +24,113 @@ import imgOcultoMestreDosMaras from '../assets/avatares/avataroculto-mestredosma
 import imgOcultoKraken from '../assets/avatares/avataroculto-kraken.png';
 
 const AVATARES = [
-  { src: imgPolvinho,      hiddenSrc: imgPolvinho,          label: 'Polvinho',         nivelMin: 0 },
-  { src: imgExplorador,    hiddenSrc: imgOcultoExplorador,  label: 'Explorador',        nivelMin: 1 },
-  { src: imgMestreDosMaras, hiddenSrc: imgOcultoMestreDosMaras, label: 'Mestre dos Mares', nivelMin: 2 },
-  { src: imgKraken,        hiddenSrc: imgOcultoKraken,      label: 'Kraken',            nivelMin: 3 },
+  { src: imgPolvinho, hiddenSrc: imgPolvinho, label: 'Polvinho' },
+  { src: imgExplorador, hiddenSrc: imgOcultoExplorador, label: 'Explorador' },
+  { src: imgMestreDosMaras, hiddenSrc: imgOcultoMestreDosMaras, label: 'Mestre dos Mares' },
+  { src: imgKraken, hiddenSrc: imgOcultoKraken, label: 'Kraken' },
 ];
 
 const totalMissoes = niveis.reduce((acc, n) => acc + n.missoes.length, 0);
 
-const GENERO_OPTIONS: { value: Genero; label: string }[] = [
-  { value: '', label: 'Prefiro não informar' },
-  { value: 'feminino', label: 'Feminino' },
-  { value: 'masculino', label: 'Masculino' },
-  { value: 'outro', label: 'Outro' },
+const GENERO_OPTIONS: { value: Gender; label: string }[] = [
+  { value: 'female', label: 'Feminino' },
+  { value: 'male', label: 'Masculino' },
+  { value: 'other', label: 'Outro' },
 ];
 
-type LojaTab = 'molduras' | 'acessorios' | 'cores';
+const SLOT_LABEL_NENHUM: Record<LojaTab, string> = {
+  molduras: 'Nenhuma',
+  acessorios: 'Nenhum',
+  cores: 'Nenhuma',
+};
+
+// Cartão de item da Loja de Conchas: mesma estrutura para molduras, acessórios e cores —
+// só o preview visual muda por aba.
+const LojaCard: React.FC<{
+  label: string;
+  preview: React.ReactNode;
+  ativo: boolean;
+  possuido: boolean;
+  preco: number;
+  podeComprar: boolean;
+  processando: boolean;
+  onEquipar: () => void;
+  onComprar: () => void;
+}> = ({ label, preview, ativo, possuido, preco, podeComprar, processando, onEquipar, onComprar }) => (
+  <div className="flex flex-col items-center gap-2">
+    {preview}
+    <p className="text-xs font-medium text-textPrimary text-center leading-tight">{label}</p>
+    {possuido ? (
+      <button
+        onClick={onEquipar}
+        disabled={ativo || processando}
+        className={`text-xs px-3 py-1 rounded-full transition-colors ${ativo ? 'bg-accent/20 text-accent font-semibold' : 'text-textSecondary hover:text-textPrimary disabled:opacity-40'}`}
+      >
+        {ativo ? 'Ativa' : processando ? 'Aguarde...' : 'Equipar'}
+      </button>
+    ) : (
+      <button
+        onClick={onComprar}
+        disabled={!podeComprar || processando}
+        className={`inline-flex items-center gap-1 text-xs px-3 py-1 rounded-full transition-colors ${podeComprar ? 'bg-accent/10 text-accent hover:bg-accent/20' : 'text-textSecondary/40 cursor-not-allowed'}`}
+      >
+        {processando ? 'Aguarde...' : <>{preco}<ShellIcon className="w-3 h-3" /></>}
+      </button>
+    )}
+  </div>
+);
+
+const LojaCardSkeleton: React.FC = () => (
+  <div className="flex flex-col items-center gap-2">
+    <div className="w-28 h-28 rounded-full bg-bgPrimary animate-pulse" />
+    <div className="h-3 w-16 rounded bg-bgPrimary animate-pulse" />
+    <div className="h-5 w-12 rounded-full bg-bgPrimary animate-pulse" />
+  </div>
+);
 
 const Perfil: React.FC = () => {
-  const { nome, genero, conchas, completed, avatarIdx, setNome, setGenero, setAvatarIdx, niveis_concluidos, moldurasDesbloqueadas, molduraAtiva, comprarMoldura, setMolduraAtiva, acessoriosDesbloqueados, acessorioAtivo, comprarAcessorio, setAcessorioAtivo } = useProgress();
-  const { profile } = useSession();
-  const molduraAtivaData = MOLDURAS.find(m => m.id === molduraAtiva) ?? null;
-  const [nomeInput, setNomeInput] = useState(nome);
-  const [salvo, setSalvo] = useState(false);
-  const [lojaTab, setLojaTab] = useState<LojaTab>('molduras');
+  const { completed } = useProgress();
+  const { profile, balance, applyProfile, applyBalance, applyActiveAvatar } = useSession();
+  const loja = useLoja(applyBalance, applyActiveAvatar);
   const lojaRef = useRef<HTMLElement>(null);
-  const [removendo, setRemovendo] = useState<'frame' | 'accessory' | null>(null);
-  const [removerErro, setRemoverErro] = useState('');
 
-  const handleRemoverMoldura = async () => {
-    setRemoverErro('');
-    setRemovendo('frame');
+  // Avatar
+  const avatarsUnlocked = profile?.avatarsUnlocked ?? 0;
+  const avatarIdxAtivo = profile?.avatarIdx ?? 0;
+  const avatarSrc = AVATARES[avatarIdxAtivo]?.src ?? AVATARES[0].src;
+  const molduraAtivaData = MOLDURAS.find(m => m.id === profile?.activeFrame) ?? null;
+  const [avatarSalvando, setAvatarSalvando] = useState<number | null>(null);
+  const [avatarErro, setAvatarErro] = useState('');
+
+  const handleSelecionarAvatar = async (idx: number) => {
+    if (idx === avatarIdxAtivo || avatarSalvando !== null) return;
+    setAvatarErro('');
+    setAvatarSalvando(idx);
     try {
-      await updateActiveAvatarItem('frame', null);
-      setMolduraAtiva(null);
+      const updated = await updateUserProfile({ avatarIdx: idx });
+      applyProfile({ avatarIdx: updated.avatarIdx });
     } catch (err) {
-      setRemoverErro(err instanceof ApiError ? err.message : 'Não foi possível remover a moldura.');
+      setAvatarErro(getApiErrorMessage(err, 'perfil'));
     } finally {
-      setRemovendo(null);
+      setAvatarSalvando(null);
     }
   };
 
-  const handleRemoverAcessorio = async () => {
-    setRemoverErro('');
-    setRemovendo('accessory');
-    try {
-      await updateActiveAvatarItem('accessory', null);
-      setAcessorioAtivo(null);
-    } catch (err) {
-      setRemoverErro(err instanceof ApiError ? err.message : 'Não foi possível remover o acessório.');
-    } finally {
-      setRemovendo(null);
+  // Seus dados
+  const [nomeInput, setNomeInput] = useState('');
+  const [generoInput, setGeneroInput] = useState<Gender | ''>('');
+  const [dadosSalvo, setDadosSalvo] = useState(false);
+  const [dadosSalvando, setDadosSalvando] = useState(false);
+  const [dadosErro, setDadosErro] = useState('');
+  const dadosHidratadosRef = useRef(false);
+
+  useEffect(() => {
+    if (profile && !dadosHidratadosRef.current) {
+      setNomeInput(profile.name);
+      setGeneroInput(profile.gender ?? '');
+      dadosHidratadosRef.current = true;
     }
-  };
+  }, [profile]);
 
   useEffect(() => {
     if (window.location.hash === '#loja') {
@@ -83,13 +140,176 @@ const Perfil: React.FC = () => {
     }
   }, []);
 
-  const handleSalvarNome = () => {
-    setNome(nomeInput.trim());
-    setSalvo(true);
-    setTimeout(() => setSalvo(false), 2000);
+  const nomeAlterado = !!profile && nomeInput.trim().length > 0 && nomeInput.trim() !== profile.name;
+  const generoAlterado = !!profile && generoInput !== '' && generoInput !== profile.gender;
+  const podeSalvarDados = nomeAlterado || generoAlterado;
+
+  const handleSalvarDados = async () => {
+    if (!podeSalvarDados) return;
+    setDadosErro('');
+    setDadosSalvando(true);
+    try {
+      const payload: { name?: string; gender?: Gender } = {};
+      if (nomeAlterado) payload.name = nomeInput.trim();
+      if (generoAlterado && generoInput) payload.gender = generoInput;
+      const updated = await updateUserProfile(payload);
+      applyProfile({ name: updated.name, gender: updated.gender });
+      setDadosSalvo(true);
+      setTimeout(() => setDadosSalvo(false), 2000);
+    } catch (err) {
+      setDadosErro(getApiErrorMessage(err, 'perfil'));
+    } finally {
+      setDadosSalvando(false);
+    }
   };
 
   const emblemasConcluidos = completed.length;
+  const saldo = Number(balance?.raw ?? 0);
+
+  const renderLojaTab = () => {
+    if (loja.loading) {
+      return (
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <LojaCardSkeleton key={i} />
+          ))}
+        </div>
+      );
+    }
+
+    if (loja.tab === 'molduras') {
+      return (
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <LojaCard
+            label={SLOT_LABEL_NENHUM.molduras}
+            preview={
+              <div className="w-28 h-28 rounded-full overflow-hidden bg-bgPrimary border border-dashed border-borderDark flex items-center justify-center">
+                <img src={avatarSrc} alt="Sem moldura" className="w-full h-full object-cover" />
+              </div>
+            }
+            ativo={profile ? profile.activeFrame === null : false}
+            possuido
+            preco={0}
+            podeComprar
+            processando={loja.acaoEmAndamento === 'nenhuma'}
+            onEquipar={() => loja.equipar('frame', null)}
+            onComprar={() => {}}
+          />
+          {loja.items.map((item: ShopItem) => {
+            const visual = MOLDURAS.find(m => m.code === item.code) ?? { id: item.id, code: item.code, nome: item.name, ...MOLDURA_FALLBACK };
+            const possuido = loja.inventory.some(inv => inv.id === item.id);
+            const ativo = profile?.activeFrame === item.id;
+            return (
+              <LojaCard
+                key={item.id}
+                label={item.name}
+                preview={
+                  <AvatarFrame moldura={visual}>
+                    <div className="w-28 h-28 rounded-full overflow-hidden bg-bgPrimary">
+                      <img src={avatarSrc} alt={item.name} className="w-full h-full object-cover" />
+                    </div>
+                  </AvatarFrame>
+                }
+                ativo={ativo}
+                possuido={possuido}
+                preco={item.priceShells}
+                podeComprar={saldo >= item.priceShells}
+                processando={loja.acaoEmAndamento === item.id}
+                onEquipar={() => loja.equipar('frame', item.id)}
+                onComprar={() => loja.comprar(item)}
+              />
+            );
+          })}
+        </div>
+      );
+    }
+
+    if (loja.tab === 'acessorios') {
+      return (
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <LojaCard
+            label={SLOT_LABEL_NENHUM.acessorios}
+            preview={
+              <div className="w-28 h-28 rounded-full overflow-hidden bg-bgPrimary border border-dashed border-borderDark flex items-center justify-center">
+                <img src={avatarSrc} alt="Sem acessório" className="w-full h-full object-cover" />
+              </div>
+            }
+            ativo={profile ? profile.activeAccessory === null : false}
+            possuido
+            preco={0}
+            podeComprar
+            processando={loja.acaoEmAndamento === 'nenhuma'}
+            onEquipar={() => loja.equipar('accessory', null)}
+            onComprar={() => {}}
+          />
+          {loja.items.map((item: ShopItem) => {
+            const visual = ACESSORIOS.find(a => a.code === item.code) ?? { id: item.id, code: item.code, nome: item.name, ...ACESSORIO_FALLBACK };
+            const possuido = loja.inventory.some(inv => inv.id === item.id);
+            const ativo = profile?.activeAccessory === item.id;
+            return (
+              <LojaCard
+                key={item.id}
+                label={item.name}
+                preview={
+                  <div className="relative w-28 h-28 rounded-full overflow-hidden bg-bgPrimary">
+                    <img src={avatarSrc} alt={item.name} className="w-full h-full object-cover" />
+                    {visual.src && (
+                      <img src={visual.src} alt={item.name} className="absolute inset-0 w-full h-full object-cover" />
+                    )}
+                  </div>
+                }
+                ativo={ativo}
+                possuido={possuido}
+                preco={item.priceShells}
+                podeComprar={saldo >= item.priceShells}
+                processando={loja.acaoEmAndamento === item.id}
+                onEquipar={() => loja.equipar('accessory', item.id)}
+                onComprar={() => loja.comprar(item)}
+              />
+            );
+          })}
+        </div>
+      );
+    }
+
+    // cores
+    return (
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <LojaCard
+          label={SLOT_LABEL_NENHUM.cores}
+          preview={
+            <div className="w-28 h-28 rounded-full bg-bgPrimary border border-dashed border-borderDark" />
+          }
+          ativo={profile ? profile.activeColor === null : false}
+          possuido
+          preco={0}
+          podeComprar
+          processando={loja.acaoEmAndamento === 'nenhuma'}
+          onEquipar={() => loja.equipar('color', null)}
+          onComprar={() => {}}
+        />
+        {loja.items.map((item: ShopItem) => {
+          const visual = CORES.find(c => c.code === item.code) ?? { code: item.code, nome: item.name, ...COR_FALLBACK };
+          const possuido = loja.inventory.some(inv => inv.id === item.id);
+          const ativo = profile?.activeColor === item.id;
+          return (
+            <LojaCard
+              key={item.id}
+              label={item.name}
+              preview={<div className="w-28 h-28 rounded-full" style={{ backgroundColor: visual.cor }} />}
+              ativo={ativo}
+              possuido={possuido}
+              preco={item.priceShells}
+              podeComprar={saldo >= item.priceShells}
+              processando={loja.acaoEmAndamento === item.id}
+              onEquipar={() => loja.equipar('color', item.id)}
+              onComprar={() => loja.comprar(item)}
+            />
+          );
+        })}
+      </div>
+    );
+  };
 
   return (
     <>
@@ -104,12 +324,12 @@ const Perfil: React.FC = () => {
           </h2>
           <div className="grid grid-cols-3 gap-4 text-center">
             <div>
-              <p className="text-2xl font-bold text-accent">{conchas}</p>
+              <p className="text-2xl font-bold text-accent">{balance?.formatted ?? '—'}</p>
               <p className="text-xs text-textSecondary mt-1">conchas</p>
             </div>
             <div>
-              <p className="text-2xl font-bold text-textPrimary">{completed.length}</p>
-              <p className="text-xs text-textSecondary mt-1">de {totalMissoes} missões</p>
+              <p className="text-2xl font-bold text-textPrimary">{profile?.missionsCompleted ?? '—'}</p>
+              <p className="text-xs text-textSecondary mt-1">de {profile?.totalMissions ?? '—'} missões</p>
             </div>
             <div>
               <p className="text-2xl font-bold text-textPrimary">{profile?.rank.patent ?? '—'}</p>
@@ -120,7 +340,7 @@ const Perfil: React.FC = () => {
           </div>
         </section>
 
-        {/* Emblemas */}
+        {/* Emblemas — TODO: backend ainda não expõe endpoint de emblemas/conquistas; mock em cima do progresso local */}
         <section className="bg-bgSecondary border border-borderDark rounded-xl p-6 mb-6">
           <div className="flex items-center justify-between mb-2">
             <h2 className="text-sm font-semibold text-textSecondary uppercase tracking-widest">
@@ -154,17 +374,18 @@ const Perfil: React.FC = () => {
           <h2 className="text-sm font-semibold text-textSecondary uppercase tracking-widest mb-4">
             Avatar
           </h2>
+          {avatarErro && <p className="text-xs text-red-400 mb-3">{avatarErro}</p>}
           <div className="flex gap-4 flex-wrap">
             {AVATARES.map((avatar, i) => {
-              const desbloqueado = niveis_concluidos.length >= avatar.nivelMin;
-              const selecionado = avatarIdx === i;
+              const desbloqueado = i < avatarsUnlocked;
+              const selecionado = avatarIdxAtivo === i;
 
               return (
                 <AvatarFrame key={i} moldura={selecionado ? molduraAtivaData : null}>
                   <button
-                    onClick={() => desbloqueado && setAvatarIdx(i)}
-                    disabled={!desbloqueado}
-                    title={desbloqueado ? avatar.label : `Conclua o Nível ${avatar.nivelMin} para desbloquear`}
+                    onClick={() => desbloqueado && handleSelecionarAvatar(i)}
+                    disabled={!desbloqueado || avatarSalvando !== null}
+                    title={desbloqueado ? avatar.label : 'Continue avançando para desbloquear'}
                     className={`relative w-32 h-32 rounded-full border-2 overflow-hidden transition-all focus:outline-none bg-bgPrimary flex items-center justify-center
                       ${selecionado ? 'border-accent scale-105' : 'border-borderDark'}
                       ${desbloqueado ? 'hover:border-accent cursor-pointer' : 'cursor-not-allowed'}
@@ -182,6 +403,11 @@ const Perfil: React.FC = () => {
                     )}
                     {selecionado && desbloqueado && (
                       <div className="absolute inset-0 ring-4 ring-accent ring-inset rounded-full pointer-events-none" />
+                    )}
+                    {avatarSalvando === i && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                        <span className="text-xs text-white">Salvando...</span>
+                      </div>
                     )}
                   </button>
                 </AvatarFrame>
@@ -204,11 +430,11 @@ const Perfil: React.FC = () => {
             <div className="flex gap-1 border-b border-borderDark">
               {(['molduras', 'acessorios', 'cores'] as LojaTab[]).map(tab => {
                 const labels: Record<LojaTab, string> = { molduras: 'Molduras', acessorios: 'Acessórios', cores: 'Cores' };
-                const ativa = lojaTab === tab;
+                const ativa = loja.tab === tab;
                 return (
                   <button
                     key={tab}
-                    onClick={() => setLojaTab(tab)}
+                    onClick={() => loja.setTab(tab)}
                     className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 -mb-px ${
                       ativa
                         ? 'border-accent text-accent'
@@ -224,126 +450,8 @@ const Perfil: React.FC = () => {
 
           {/* Conteúdo da tab */}
           <div className="p-6">
-            {removerErro && <p className="text-xs text-red-400 mb-4">{removerErro}</p>}
-
-            {lojaTab === 'molduras' && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                <div className="flex flex-col items-center gap-2">
-                  <div className="w-28 h-28 rounded-full overflow-hidden bg-bgPrimary border border-dashed border-borderDark flex items-center justify-center">
-                    <img
-                      src={AVATARES[avatarIdx]?.src ?? AVATARES[0].src}
-                      alt="Sem moldura"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <p className="text-xs font-medium text-textPrimary text-center leading-tight">Nenhuma</p>
-                  <button
-                    onClick={handleRemoverMoldura}
-                    disabled={molduraAtiva === null || removendo !== null}
-                    className={`text-xs px-3 py-1 rounded-full transition-colors ${molduraAtiva === null ? 'bg-accent/20 text-accent font-semibold' : 'text-textSecondary hover:text-textPrimary disabled:opacity-40'}`}
-                  >
-                    {molduraAtiva === null ? 'Ativa' : removendo === 'frame' ? 'Removendo...' : 'Remover'}
-                  </button>
-                </div>
-                {MOLDURAS.map(moldura => {
-                  const owned = moldurasDesbloqueadas.includes(moldura.id);
-                  const ativa = molduraAtiva === moldura.id;
-                  const podaComprar = !owned && conchas >= moldura.custo;
-                  const avatarSrc = AVATARES[avatarIdx]?.src ?? AVATARES[0].src;
-                  return (
-                    <div key={moldura.id} className="flex flex-col items-center gap-2">
-                      <AvatarFrame moldura={moldura}>
-                        <div className="w-28 h-28 rounded-full overflow-hidden bg-bgPrimary">
-                          <img src={avatarSrc} alt={moldura.nome} className="w-full h-full object-cover" />
-                        </div>
-                      </AvatarFrame>
-                      <p className="text-xs font-medium text-textPrimary text-center leading-tight">{moldura.nome}</p>
-                      {moldura.custo === 0 || owned ? (
-                        <button
-                          onClick={() => setMolduraAtiva(moldura.id)}
-                          className={`text-xs px-3 py-1 rounded-full transition-colors ${ativa ? 'bg-accent/20 text-accent font-semibold' : 'text-textSecondary hover:text-textPrimary'}`}
-                        >
-                          {ativa ? 'Ativa' : 'Usar'}
-                        </button>
-                      ) : (
-                        <button
-                          onClick={() => comprarMoldura(moldura.id)}
-                          disabled={!podaComprar}
-                          className={`inline-flex items-center gap-1 text-xs px-3 py-1 rounded-full transition-colors ${podaComprar ? 'bg-accent/10 text-accent hover:bg-accent/20' : 'text-textSecondary/40 cursor-not-allowed'}`}
-                        >
-                          {moldura.custo}
-                          <ShellIcon className="w-3 h-3" />
-                        </button>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-
-            {lojaTab === 'acessorios' && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                <div className="flex flex-col items-center gap-2">
-                  <div className="w-28 h-28 rounded-full overflow-hidden bg-bgPrimary border border-dashed border-borderDark flex items-center justify-center">
-                    <img
-                      src={AVATARES[avatarIdx]?.src ?? AVATARES[0].src}
-                      alt="Sem acessório"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <p className="text-xs font-medium text-textPrimary text-center leading-tight">Nenhum</p>
-                  <button
-                    onClick={handleRemoverAcessorio}
-                    disabled={acessorioAtivo === null || removendo !== null}
-                    className={`text-xs px-3 py-1 rounded-full transition-colors ${acessorioAtivo === null ? 'bg-accent/20 text-accent font-semibold' : 'text-textSecondary hover:text-textPrimary disabled:opacity-40'}`}
-                  >
-                    {acessorioAtivo === null ? 'Ativo' : removendo === 'accessory' ? 'Removendo...' : 'Remover'}
-                  </button>
-                </div>
-                {ACESSORIOS.map(acessorio => {
-                  const owned = acessoriosDesbloqueados.includes(acessorio.id);
-                  const ativo = acessorioAtivo === acessorio.id;
-                  const podeComprar = !owned && conchas >= acessorio.custo;
-                  const avatarSrc = AVATARES[avatarIdx]?.src ?? AVATARES[0].src;
-                  return (
-                    <div key={acessorio.id} className="flex flex-col items-center gap-2">
-                      <div className="relative w-28 h-28 rounded-full overflow-hidden bg-bgPrimary">
-                        <img src={avatarSrc} alt={acessorio.nome} className="w-full h-full object-cover" />
-                        {acessorio.src && (
-                          <img src={acessorio.src} alt={acessorio.nome} className="absolute inset-0 w-full h-full object-cover" />
-                        )}
-                      </div>
-                      <p className="text-xs font-medium text-textPrimary text-center leading-tight">{acessorio.nome}</p>
-                      {acessorio.custo === 0 || owned ? (
-                        <button
-                          onClick={() => setAcessorioAtivo(acessorio.id)}
-                          className={`text-xs px-3 py-1 rounded-full transition-colors ${ativo ? 'bg-accent/20 text-accent font-semibold' : 'text-textSecondary hover:text-textPrimary'}`}
-                        >
-                          {ativo ? 'Ativo' : 'Usar'}
-                        </button>
-                      ) : (
-                        <button
-                          onClick={() => comprarAcessorio(acessorio.id)}
-                          disabled={!podeComprar}
-                          className={`inline-flex items-center gap-1 text-xs px-3 py-1 rounded-full transition-colors ${podeComprar ? 'bg-accent/10 text-accent hover:bg-accent/20' : 'text-textSecondary/40 cursor-not-allowed'}`}
-                        >
-                          {acessorio.custo}
-                          <ShellIcon className="w-3 h-3" />
-                        </button>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-
-            {lojaTab === 'cores' && (
-              <div className="flex flex-col items-center justify-center py-10 gap-3 text-center">
-                <p className="text-3xl">🎨</p>
-                <p className="text-sm font-medium text-textPrimary">Em breve</p>
-                <p className="text-xs text-textSecondary">Cores de avatar chegam em uma próxima atualização.</p>
-              </div>
-            )}
+            {loja.erro && <p className="text-xs text-red-400 mb-4">{loja.erro}</p>}
+            {renderLojaTab()}
           </div>
         </section>
 
@@ -352,6 +460,8 @@ const Perfil: React.FC = () => {
           <h2 className="text-sm font-semibold text-textSecondary uppercase tracking-widest">
             Seus dados
           </h2>
+
+          {dadosErro && <p className="text-xs text-red-400">{dadosErro}</p>}
 
           {/* Nome */}
           <div>
@@ -363,19 +473,11 @@ const Perfil: React.FC = () => {
                 id="nome"
                 type="text"
                 value={nomeInput}
-                onChange={e => { setNomeInput(e.target.value); setSalvo(false); }}
-                onKeyDown={e => e.key === 'Enter' && handleSalvarNome()}
+                onChange={e => { setNomeInput(e.target.value); setDadosSalvo(false); }}
                 placeholder="Como quer ser chamado?"
                 maxLength={30}
                 className="flex-1 bg-bgPrimary border border-borderDark rounded-lg px-4 py-2 text-textPrimary placeholder-textSecondary text-sm focus:outline-none focus:border-accent transition-colors"
               />
-              <button
-                onClick={handleSalvarNome}
-                disabled={nomeInput.trim() === nome}
-                className="px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-secondary transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-              >
-                {salvo ? 'Salvo ✓' : 'Salvar'}
-              </button>
             </div>
           </div>
 
@@ -386,10 +488,11 @@ const Perfil: React.FC = () => {
             </label>
             <select
               id="genero"
-              value={genero}
-              onChange={e => setGenero(e.target.value as Genero)}
+              value={generoInput}
+              onChange={e => { setGeneroInput(e.target.value as Gender); setDadosSalvo(false); }}
               className="w-full bg-bgPrimary border border-borderDark rounded-lg px-4 py-2 text-textPrimary text-sm focus:outline-none focus:border-accent transition-colors"
             >
+              {generoInput === '' && <option value="" disabled>Selecione</option>}
               {GENERO_OPTIONS.map(opt => (
                 <option key={opt.value} value={opt.value}>{opt.label}</option>
               ))}
@@ -398,6 +501,14 @@ const Perfil: React.FC = () => {
               Personaliza os títulos dos emblemas nas conquistas.
             </p>
           </div>
+
+          <button
+            onClick={handleSalvarDados}
+            disabled={!podeSalvarDados || dadosSalvando}
+            className="px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-secondary transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            {dadosSalvando ? 'Salvando...' : dadosSalvo ? 'Salvo ✓' : 'Salvar'}
+          </button>
         </section>
 
       </PageWrapper>

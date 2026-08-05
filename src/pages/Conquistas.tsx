@@ -5,6 +5,7 @@ import { StarIcon as StarSolid } from '@heroicons/react/24/solid';
 import { niveis } from '../data/curriculum';
 import type { Missao, Nivel } from '../data/curriculum/types';
 import { useProgress } from '../hooks/useProgress';
+import { useSession } from '../hooks/useSession';
 import { resolveEmblem } from '../utils/emblem';
 import Footer from '../components/Footer';
 import MissionIcon from '../components/MissionIcon';
@@ -19,7 +20,9 @@ type SelectedEmblem = {
 };
 
 const Conquistas: React.FC = () => {
-  const { completed, conchas, conchas_por_missao, genero, getTier } = useProgress();
+  const { completed, conchas_por_missao, getTier } = useProgress();
+  const { profile, balance } = useSession();
+  const genero = profile?.gender ?? null;
   const totalMissoes = niveis.reduce((acc, n) => acc + n.missoes.length, 0);
   const [selected, setSelected] = useState<SelectedEmblem | null>(null);
 
@@ -32,7 +35,7 @@ const Conquistas: React.FC = () => {
         <div className="mb-10">
           <h1 className="text-3xl font-bold text-textPrimary mb-1">Conquistas</h1>
           <p className="text-textSecondary">
-            {completed.length} de {totalMissoes} emblemas · {conchas} conchas
+            {completed.length} de {totalMissoes} emblemas · {balance?.formatted ?? '—'} conchas
           </p>
         </div>
 
