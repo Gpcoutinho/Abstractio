@@ -59,6 +59,18 @@ npm run dev
 
 Acesse `http://localhost:5173`.
 
+### Mock do backend (Tentacle)
+
+O frontend consome o backend `tentacle` (`/api/v1`). Para rodar localmente sem banco de dados real, use o mock server incluído na pasta `mock/`:
+
+```bash
+cd mock
+npm install
+node server.js
+```
+
+O mock sobe em `http://localhost:3000`, simula um usuário logado (`dummy-user-1`, começando com 0 conchas e inventário vazio) e responde às mesmas rotas `/api/v1` do backend real, mantendo o estado em memória enquanto o processo estiver rodando.
+
 ### Outros scripts
 
 ```bash
@@ -78,6 +90,15 @@ src/
   data/curriculum/  # Conteúdo das missões, tipado em TypeScript
   assets/        # Mini-jogos interativos e demais assets
 ```
+
+## 🏗️ Arquitetura do Ecossistema
+
+O ecossistema do Abstractio é composto por duas aplicações independentes:
+
+1. **Abstractio (Este repositório):** Frontend SPA (Single Page Application) responsável pela interface, navegação, execução dos minijogos e experiência do aluno.
+2. **[Tentacle 🐙](https://github.com/seu-usuario/tentacle):** API RESTful em Node.js, Express, TypeScript e PostgreSQL. Gerencia usuários, persistência de progresso, livro-razão (*ledger*) das conchas, inventário e conteúdo das missões.
+
+> **Comunicação & Autenticação:** O frontend consome a API sob a rota `/api/v1`.
 
 ## Autores
 
