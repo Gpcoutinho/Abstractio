@@ -1,6 +1,6 @@
 ﻿# Abstractio — Estrutura e Definição do App
 
-Documento de especificação do produto. Define escopo, progressão, regras de conteúdo e padrões visuais. Paralelo ao `CLAUDE.md` (que foca na implementação técnica).
+Documento de especificação do produto. Define escopo, progressão, regras de conteúdo e padrões visuais.
 
 ---
 
