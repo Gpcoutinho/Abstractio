@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import BoloFactory from "../components/missoes/nivel_1/missao_5/BoloFactory";
 import PolvosInterativo from "../components/missoes/nivel_1/missao_2/PolvosInterativo";
@@ -15,7 +15,6 @@ import DadosGlobais from "../components/missoes/nivel_1/missao_1/DadosGlobais";
 import CaosAnotacoes from "../components/missoes/nivel_1/missao_1/CaosAnotacoes";
 import DuvidaBlock from "../components/missoes/reutilizaveis/DuvidaBlock";
 import SlidesPOO from "../components/missoes/nivel_1/missao_1/SlidesPOO";
-import SlideCard from "../components/SlideCard";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -25,7 +24,7 @@ import {
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import { niveis } from "../data/curriculum";
+import { useTrilha } from "../hooks/useTrilha";
 import { useProgress } from "../hooks/useProgress";
 import { useSession } from "../hooks/useSession";
 import { useCelebration } from "../hooks/useCelebration";
@@ -43,6 +42,8 @@ import Exercicios from '../components/Exercicios';
 import { ListChecks, BookmarkSimple } from '@phosphor-icons/react';
 import ReferenciasBlock from '../components/ReferenciasBlock';
 import AdaCard from '../components/missoes/nivel_1/AdaCard';
+import { ApiError, getApiErrorMessage, getBookmark, getMissionDetail, getMissionProgress, putBookmark, deleteBookmark, submitAnswer } from '../lib/api';
+import type { MissionDetail, MissionProgress } from '../lib/api.types';
 
 const interativos: Record<string, string> = {
   "interativos/nivel_1_missao_7.html": interativoHtml,
@@ -52,120 +53,83 @@ const interativos: Record<string, string> = {
 const Limite_para_esconder = 200; //px
 const Limite_para_mostrar = 50;  //px
 
-interface LinkedSlideRowProps {
-  cards: { title?: string; className?: string; slides: React.ReactNode[] }[];
-}
-
-const LinkedSlideRow: React.FC<LinkedSlideRowProps> = ({ cards }) => {
-  const [current, setCurrent] = useState(0);
-  const rowRef = useRef<HTMLDivElement>(null);
-  const maxSlides = Math.max(...cards.map((c) => c.slides.length));
-  const isFirst = current === 0;
-  const isLast = current === maxSlides - 1;
-
-  const navigate = (next: number) => {
-    setCurrent(next);
-    requestAnimationFrame(() => {
-      rowRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
-  };
-
-  return (
-    <div ref={rowRef} className="not-prose my-6">
-      <div className="flex flex-col md:flex-row items-stretch gap-4">
-        {cards.map((card, pos) => (
-          <React.Fragment key={pos}>
-            {pos > 0 && (
-              <div className="flex items-center justify-center shrink-0">
-                <span className="text-2xl font-bold text-borderDark select-none">✕</span>
-              </div>
-            )}
-            <SlideCard
-              title={card.title}
-              className="flex-1 min-w-0 my-0"
-              slides={card.slides}
-              externalCurrent={Math.min(current, card.slides.length - 1)}
-              hideNav
-            />
-          </React.Fragment>
-        ))}
-      </div>
-      <div className="flex items-center justify-between px-2 pt-3">
-        <div className="flex-1">
-          {!isFirst && (
-            <button
-              onClick={() => navigate(current - 1)}
-              className="text-sm text-textSecondary hover:text-textPrimary transition-colors"
-            >
-              ← Anterior
-            </button>
-          )}
-        </div>
-        <div className="flex items-center gap-1.5">
-          {Array.from({ length: maxSlides }).map((_, i) => (
-            <span
-              key={i}
-              className={`block w-2 h-2 rounded-full transition-colors ${
-                i === current ? 'bg-accent' : 'bg-borderDark'
-              }`}
-            />
-          ))}
-        </div>
-        <div className="flex-1 flex justify-end">
-          {isLast ? (
-            <button
-              onClick={() => navigate(0)}
-              className="text-sm text-accent hover:text-secondary transition-colors"
-            >
-              Voltar ao início
-            </button>
-          ) : (
-            <button
-              onClick={() => navigate(current + 1)}
-              className="text-sm text-accent hover:text-secondary transition-colors"
-            >
-              Próximo →
-            </button>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
+const TheorySkeleton: React.FC = () => (
+  <div className="space-y-3 animate-pulse" aria-hidden="true">
+    <div className="h-6 w-1/2 rounded bg-bgSecondary" />
+    <div className="h-4 w-full rounded bg-bgSecondary" />
+    <div className="h-4 w-full rounded bg-bgSecondary" />
+    <div className="h-4 w-2/3 rounded bg-bgSecondary" />
+    <div className="h-4 w-full rounded bg-bgSecondary mt-6" />
+    <div className="h-4 w-5/6 rounded bg-bgSecondary" />
+  </div>
+);
 
 const Missao: React.FC = () => {
   const { nivelIdx, missaoIdx } = useParams<{
     nivelIdx: string;
     missaoIdx: string;
   }>();
-  const { completarMissao, desmarcarMissao, registrarErroMissao, isMissaoConcluida, completed, jaGanhouConchas } = useProgress();
+  const { niveis, loading: trilhaLoading } = useTrilha();
+  const {
+    completarMissao,
+    desmarcarMissao,
+    aplicarSubmissao,
+    hydrateMissionProgress,
+    isMissaoConcluida,
+    completed,
+    getConchasValor,
+    getExtrasTotal,
+  } = useProgress();
   const { profile } = useSession();
   const genero = profile?.gender ?? null;
   const { celebrate } = useCelebration();
 
-  const [selecionada, setSelecionada] = useState<number | null>(null);
+  // Conteúdo da missão (teoria, perguntas) — vem de GET /missions/:slug, sem gabarito.
+  const [missionDetail, setMissionDetail] = useState<MissionDetail | null>(null);
+  const [missionProgress, setMissionProgress] = useState<MissionProgress | null>(null);
+  const [contentLoading, setContentLoading] = useState(true);
+  const [contentError, setContentError] = useState<ApiError | null>(null);
+
+  const [selectedOptionId, setSelectedOptionId] = useState<number | null>(null);
   const [respondida, setRespondida] = useState(false);
-  const [tentativas, setTentativas] = useState(0);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [explanation, setExplanation] = useState<string | null>(null);
   const [conchasGanhasAgora, setConchasGanhasAgora] = useState<number | null>(null);
   const [showCelebration, setShowCelebration] = useState(false);
   const [showBau, setShowBau] = useState(false);
   const [bookmarkData, setBookmarkData] = useState<{ scrollY: number; sectionTitle: string } | null>(null);
   const [showBookmarkBanner, setShowBookmarkBanner] = useState(false);
+  const [desmarcando, setDesmarcando] = useState(false);
+  const [completando, setCompletando] = useState(false);
 
   // Estado do Header Retrátil
   const [showBar, setShowBar] = useState(true);
 
   const theoryRef = useRef<HTMLElement>(null);
+  const idempotencyKeysRef = useRef<Map<string, string>>(new Map());
+
+  function getSubmissionKey(questionSlug: string): string {
+    const existing = idempotencyKeysRef.current.get(questionSlug);
+    if (existing) return existing;
+    const key = crypto.randomUUID();
+    idempotencyKeysRef.current.set(questionSlug, key);
+    return key;
+  }
 
   useEffect(() => {
-    setSelecionada(null);
+    setSelectedOptionId(null);
     setRespondida(false);
-    setTentativas(0);
+    setSubmitError(null);
+    setIsCorrect(false);
+    setExplanation(null);
     setConchasGanhasAgora(null);
     setShowCelebration(false);
     setShowBau(false);
     setShowBookmarkBanner(false);
     setBookmarkData(null);
+    idempotencyKeysRef.current.clear();
   }, [nivelIdx, missaoIdx]);
 
   // Lógica de Scroll com Histerese (Zona Morta)
@@ -185,24 +149,60 @@ const Missao: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const missaoId = `${nivelIdx}-${missaoIdx}`;
+  const nivel = niveis.find((n) => n.id === Number(nivelIdx));
+  const missao = nivel?.missoes[Number(missaoIdx) - 1];
+  const missaoId = missao?.id;
+
+  // Carrega teoria + perguntas + progresso da missão da API.
+  useEffect(() => {
+    if (!missaoId) return;
+    let cancelled = false;
+    setContentLoading(true);
+    setContentError(null);
+    (async () => {
+      try {
+        const [detail, progress] = await Promise.all([
+          getMissionDetail(missaoId),
+          getMissionProgress(missaoId),
+        ]);
+        if (cancelled) return;
+        setMissionDetail(detail);
+        setMissionProgress(progress);
+        hydrateMissionProgress(missaoId, progress);
+      } catch (err) {
+        if (!cancelled) {
+          setContentError(err instanceof ApiError ? err : new ApiError(0, 'internal_error', 'Falha de rede ao carregar a missão.'));
+        }
+      } finally {
+        if (!cancelled) setContentLoading(false);
+      }
+    })();
+    return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [missaoId]);
 
   // Carrega bookmark salvo ao entrar na missão
   useEffect(() => {
-    const saved = localStorage.getItem(`bookmark-${missaoId}`);
-    if (saved) {
+    if (!missaoId) return;
+    let cancelled = false;
+    (async () => {
       try {
-        const data = JSON.parse(saved);
-        if (data.scrollY > 300) {
-          setBookmarkData(data);
+        const bookmark = await getBookmark(missaoId);
+        if (cancelled || !bookmark) return;
+        if (bookmark.scrollY > 300) {
+          setBookmarkData(bookmark);
           setShowBookmarkBanner(true);
         }
-      } catch {}
-    }
+      } catch {
+        // bookmark é cosmético — falha silenciosa
+      }
+    })();
+    return () => { cancelled = true; };
   }, [missaoId]);
 
   // Salva bookmark enquanto o aluno lê (debounce 800ms)
   useEffect(() => {
+    if (!missaoId) return;
     let timeout: ReturnType<typeof setTimeout>;
     const handleScroll = () => {
       clearTimeout(timeout);
@@ -214,7 +214,7 @@ const Missao: React.FC = () => {
           if (h2.getBoundingClientRect().top < 150) sectionTitle = h2.textContent || '';
         });
         if (window.scrollY > 300) {
-          localStorage.setItem(`bookmark-${missaoId}`, JSON.stringify({ scrollY: window.scrollY, sectionTitle }));
+          putBookmark(missaoId, { scrollY: Math.round(window.scrollY), sectionTitle }).catch(() => {});
         }
       }, 800);
     };
@@ -222,16 +222,21 @@ const Missao: React.FC = () => {
     return () => { window.removeEventListener('scroll', handleScroll); clearTimeout(timeout); };
   }, [missaoId]);
 
-  const nivel = niveis.find((n) => n.id === Number(nivelIdx));
-  const missao = nivel?.missoes[Number(missaoIdx) - 1];
-
-  if (!nivel || !missao) {
+  if (!trilhaLoading && (!nivel || !missao)) {
     return (
       <PageWrapper className="max-w-3xl pb-12">
         <p className="text-textSecondary">Missão não encontrada.</p>
         <Link to="/trilha" className="text-accent hover:underline mt-4 inline-block">
           ← Voltar à trilha
         </Link>
+      </PageWrapper>
+    );
+  }
+
+  if (!nivel || !missao) {
+    return (
+      <PageWrapper className="max-w-3xl pb-12">
+        <TheorySkeleton />
       </PageWrapper>
     );
   }
@@ -256,27 +261,66 @@ const Missao: React.FC = () => {
   const proximaLabel = nextNivel ? `Próximo nível – ${nextNivel.short}` : 'Próxima missão';
 
   const jaConcluida = isMissaoConcluida(missao.id);
-  const hasExtras = !!(missao.exercicios && missao.exercicios.length > 0);
-  const acertou = missao.exercicio ? selecionada === missao.exercicio.correct : false;
+  const hasExtras = getExtrasTotal(missao.id) > 0;
+  const mainQuestion = missionDetail?.questions.find(q => q.kind === 'main') ?? null;
+  const mainProgress = missionProgress?.questions.find(q => q.kind === 'main') ?? null;
+  const jaRespondidaCorreta = mainProgress?.answeredCorrectly ?? false;
 
-  const conchasValor = (t: number) => t <= 0 ? 12 : t === 1 ? 8 : 4;
+  const handleSubmit = async () => {
+    if (selectedOptionId === null || !mainQuestion || submitting) return;
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const key = getSubmissionKey(mainQuestion.slug);
+      const result = await submitAnswer(missao.id, mainQuestion.slug, selectedOptionId, key);
+      setRespondida(true);
+      setIsCorrect(result.isCorrect);
+      setExplanation(result.isCorrect ? result.explanation : result.wrongExplanation);
+      aplicarSubmissao(missao.id, mainQuestion.slug, 'main', result);
 
-  const handleSubmit = () => {
-    if (selecionada === null) return;
-    const novasTentativas = tentativas + 1;
-    setTentativas(novasTentativas);
-    setRespondida(true);
-    if (selecionada === missao.exercicio!.correct) {
-      if (!jaGanhouConchas(missao.id)) {
-        setConchasGanhasAgora(conchasValor(tentativas));
+      if (result.isCorrect) {
+        setConchasGanhasAgora(result.earnedShells);
+        await completarMissao(missao.id);
+        setShowCelebration(true);
+        celebrate();
+        deleteBookmark(missao.id).catch(() => {});
+        setShowBookmarkBanner(false);
       }
-      completarMissao(missao.id, novasTentativas);
-      setShowCelebration(true);
-      celebrate();
-      localStorage.removeItem(`bookmark-${missao.id}`);
-      setShowBookmarkBanner(false);
-    } else {
-      registrarErroMissao(missao.id);
+    } catch (err) {
+      if (err instanceof ApiError && err.code === 'conflict') {
+        // Já respondida corretamente antes (ex: reenvio depois de reload) — refaz o
+        // fetch de progresso pra refletir o estado real em vez de tentar adivinhar.
+        try {
+          const progress = await getMissionProgress(missao.id);
+          setMissionProgress(progress);
+          hydrateMissionProgress(missao.id, progress);
+          if (!jaConcluida) await completarMissao(missao.id);
+        } catch {
+          // se nem isso funcionar, deixa a mensagem de erro genérica abaixo
+        }
+      } else {
+        setSubmitError(getApiErrorMessage(err, 'Missao.handleSubmit'));
+      }
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleDesmarcar = async () => {
+    setDesmarcando(true);
+    try {
+      await desmarcarMissao(missao.id);
+    } finally {
+      setDesmarcando(false);
+    }
+  };
+
+  const handleCompletarSemPergunta = async () => {
+    setCompletando(true);
+    try {
+      await completarMissao(missao.id);
+    } finally {
+      setCompletando(false);
     }
   };
 
@@ -363,119 +407,86 @@ const Missao: React.FC = () => {
 
       {/* Conteúdo da Missão */}
       <div className="max-w-3xl mx-auto pt-8 pb-16 px-5">
-        <section ref={theoryRef} className="mb-8 prose prose-invert max-w-none prose-headings:text-textPrimary prose-headings:font-bold prose-p:text-textBody prose-p:leading-relaxed prose-strong:text-textPrimary prose-blockquote:border-l-accent prose-blockquote:text-textSecondary prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary prose-li:text-textBody [&_h2]:border-l-2 [&_h2]:border-accent/50 [&_h2]:pl-3">
-          {missao.theory.split(/(\{\{cards?:[0-9,]+\}\}|\{\{[a-z][a-z-]*\}\})/).map((part, i) => {
-            if (i % 2 === 1) {
-              if (part.startsWith('{{duvida-')) { const d = missao.duvidas?.[part.slice(2, -2)]; if (d) return <DuvidaBlock key={i} pergunta={d.pergunta} resposta={d.resposta} />; }
-              if (part === '{{ada-card-objeto}}') return <AdaCard key={i} nivel="objeto" />;
-              if (part === '{{ada-card-rotulado}}') return <AdaCardRotulado key={i} />;
-              if (part === '{{ada-card-metodos}}') return <AdaCard key={i} nivel="metodos" />;
-              if (part === '{{diagrama-rotulos-valores}}') return <DiagramaRotulosValores key={i} />;
-              if (part === '{{caderno-abertura}}') return <CadernoAbertura key={i} />;
-              if (part === '{{dados-globais}}') return <DadosGlobais key={i} />;
-              if (part === '{{caos-anotacoes}}') return <CaosAnotacoes key={i} />;
-              if (part === '{{polvonilson-intro}}') return <PolvonilsonIntro key={i} />;
-              if (part === '{{slides-poo}}') return <SlidesPOO key={i} />;
-              if (part === '{{o-que-vai-encontrar}}') return <OQueVaiEncontrar key={i} />;
-              if (part === '{{tres-polvos-acesso}}') return <TresPolvosAcesso key={i} />;
-              if (part === '{{animacao-camuflagem}}') return <AnimacaoCamuflagem key={i} />;
-              const indices = part.match(/\d+/g)!.map(Number);
-              const isRow = part.startsWith("{{cards:");
-              const renderCard = (idx: number, className?: string) => {
-                const card = missao.cards?.[idx];
-                if (!card) return null;
-                return (
-                  <SlideCard
-                    key={`card-${idx}`}
-                    title={card.title}
-                    className={className}
-                    slides={card.slides.map((s, j) => (
-                      <ReactMarkdown key={j} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={{
-                        p: ({ children }: { children?: React.ReactNode }) => <p className="text-textBody leading-relaxed m-0">{children}</p>,
-                        strong: ({ children }: { children?: React.ReactNode }) => <strong className="text-textPrimary">{children}</strong>,
-                        table: ({ children }: { children?: React.ReactNode }) => (
-                          <div className="overflow-x-auto my-4">
-                            <table className="min-w-full">{children}</table>
-                          </div>
-                        ),
-                      }}>
-                        {s}
-                      </ReactMarkdown>
-                    ))}
-                  />
-                );
-              };
-              if (isRow) {
-                const rowCards = indices.map((idx) => {
-                  const card = missao.cards?.[idx];
-                  if (!card) return null;
-                  return {
-                    title: card.title,
-                    slides: card.slides.map((s, j) => (
-                      <ReactMarkdown key={j} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={{
-                        p: ({ children }: { children?: React.ReactNode }) => <p className="text-textBody leading-relaxed m-0">{children}</p>,
-                        strong: ({ children }: { children?: React.ReactNode }) => <strong className="text-textPrimary">{children}</strong>,
-                        table: ({ children }: { children?: React.ReactNode }) => (
-                          <div className="overflow-x-auto my-4">
-                            <table className="min-w-full">{children}</table>
-                          </div>
-                        ),
-                      }}>
-                        {s}
-                      </ReactMarkdown>
-                    )),
-                  };
-                }).filter(Boolean) as { title?: string; slides: React.ReactNode[] }[];
-                return <LinkedSlideRow key={i} cards={rowCards} />;
+        {contentError && (
+          <div className="mb-8 p-4 rounded-lg border border-danger bg-danger/10 text-sm text-danger">
+            Não foi possível carregar esta missão. {getApiErrorMessage(contentError, 'Missao.content')}
+          </div>
+        )}
+
+        {contentLoading && !contentError && (
+          <section className="mb-8">
+            <TheorySkeleton />
+          </section>
+        )}
+
+        {missionDetail && (
+          <section ref={theoryRef} className="mb-8 prose prose-invert max-w-none prose-headings:text-textPrimary prose-headings:font-bold prose-p:text-textBody prose-p:leading-relaxed prose-strong:text-textPrimary prose-blockquote:border-l-accent prose-blockquote:text-textSecondary prose-table:text-sm prose-th:text-textPrimary prose-td:text-textSecondary prose-li:text-textBody [&_h2]:border-l-2 [&_h2]:border-accent/50 [&_h2]:pl-3">
+            {missionDetail.theory.split(/(\{\{cards?:[0-9,]+\}\}|\{\{[a-z][a-z-]*\}\})/).map((part, i) => {
+              if (i % 2 === 1) {
+                if (part.startsWith('{{duvida-')) { const d = missionDetail.faqs?.[part.slice(2, -2)]; if (d) return <DuvidaBlock key={i} pergunta={d.pergunta} resposta={d.resposta} />; }
+                if (part === '{{ada-card-objeto}}') return <AdaCard key={i} nivel="objeto" />;
+                if (part === '{{ada-card-rotulado}}') return <AdaCardRotulado key={i} />;
+                if (part === '{{ada-card-metodos}}') return <AdaCard key={i} nivel="metodos" />;
+                if (part === '{{diagrama-rotulos-valores}}') return <DiagramaRotulosValores key={i} />;
+                if (part === '{{caderno-abertura}}') return <CadernoAbertura key={i} />;
+                if (part === '{{dados-globais}}') return <DadosGlobais key={i} />;
+                if (part === '{{caos-anotacoes}}') return <CaosAnotacoes key={i} />;
+                if (part === '{{polvonilson-intro}}') return <PolvonilsonIntro key={i} />;
+                if (part === '{{slides-poo}}') return <SlidesPOO key={i} />;
+                if (part === '{{o-que-vai-encontrar}}') return <OQueVaiEncontrar key={i} />;
+                if (part === '{{tres-polvos-acesso}}') return <TresPolvosAcesso key={i} />;
+                if (part === '{{animacao-camuflagem}}') return <AnimacaoCamuflagem key={i} />;
+                // Placeholders {{cards:N,M}} / {{card:N}} — não usados hoje em nenhuma missão
+                // (a API não expõe `cards`, é apresentação pura), mas o resolvedor fica pronto.
+                return null;
               }
-              return renderCard(indices[0]);
-            }
-            return (
-              <ReactMarkdown key={i} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={{
-                "polvonilson-intro": () => <PolvonilsonIntro />,
-                "caderno-abertura": () => <CadernoAbertura />,
-                "conceito": ({ children, note }: { children?: React.ReactNode; note?: string }) => <ConceitoBox note={note}>{children}</ConceitoBox>,
-                "destaque": ({ children }: { children?: React.ReactNode }) => <span className="underline decoration-wavy decoration-pink-400 decoration-2 underline-offset-4">{children}</span>,
-                "destaque-reto": ({ children }: { children?: React.ReactNode }) => <span className="underline decoration-[#c4b5fd] decoration-2 underline-offset-4">{children}</span>,
-                "destaque-marker": ({ children }: { children?: React.ReactNode }) => <span className="bg-yellow-200 text-gray-900 px-0.5 rounded-sm">{children}</span>,
-                "slides-poo": () => <SlidesPOO />,
-                "bolo-factory": () => <BoloFactory />,
-                "polvos-interativo": () => <PolvosInterativo />,
-                "tres-polvos-interativo": () => <TresPolvosInterativo />,
-                "ficha-interativo": () => <FichaInterativo />,
-                "ficha-acesso": () => <FichaAcesso />,
-                p: ({ node, children, ...props }: any) => {
-                  const hasBlock = node?.children?.some(
-                    (c: any) => c.type === 'element' && !['a','strong','em','code','span','br','destaque','destaque-reto','destaque-marker'].includes(c.tagName)
-                  );
-                  return hasBlock ? <>{children}</> : <p {...props}>{children}</p>;
-                },
-                code: CodeBlock,
-                pre: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-                table: ({ children }: { children?: React.ReactNode }) => (
-                  <div className="overflow-x-auto my-4">
-                    <table className="min-w-full border-collapse border border-slate-700 rounded-lg overflow-hidden">{children}</table>
-                  </div>
-                ),
-                th: ({ children }: { children?: React.ReactNode }) => (
-                  <th className="bg-slate-800 text-textPrimary font-semibold text-left px-4 py-2.5 border-b-2 border-slate-600 text-sm">
-                    {children}
-                  </th>
-                ),
-                td: ({ children }: { children?: React.ReactNode }) => (
-                  <td className="text-textSecondary px-4 py-2.5 border-b border-slate-700/60 text-sm">
-                    {children}
-                  </td>
-                ),
-              } as React.ComponentProps<typeof ReactMarkdown>['components']}>
-                {part}
-              </ReactMarkdown>
-            );
-          })}
-        </section>
+              return (
+                <ReactMarkdown key={i} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={{
+                  "polvonilson-intro": () => <PolvonilsonIntro />,
+                  "caderno-abertura": () => <CadernoAbertura />,
+                  "conceito": ({ children, note }: { children?: React.ReactNode; note?: string }) => <ConceitoBox note={note}>{children}</ConceitoBox>,
+                  "destaque": ({ children }: { children?: React.ReactNode }) => <span className="underline decoration-wavy decoration-pink-400 decoration-2 underline-offset-4">{children}</span>,
+                  "destaque-reto": ({ children }: { children?: React.ReactNode }) => <span className="underline decoration-[#c4b5fd] decoration-2 underline-offset-4">{children}</span>,
+                  "destaque-marker": ({ children }: { children?: React.ReactNode }) => <span className="bg-yellow-200 text-gray-900 px-0.5 rounded-sm">{children}</span>,
+                  "slides-poo": () => <SlidesPOO />,
+                  "bolo-factory": () => <BoloFactory />,
+                  "polvos-interativo": () => <PolvosInterativo />,
+                  "tres-polvos-interativo": () => <TresPolvosInterativo />,
+                  "ficha-interativo": () => <FichaInterativo />,
+                  "ficha-acesso": () => <FichaAcesso />,
+                  p: ({ node, children, ...props }: any) => {
+                    const hasBlock = node?.children?.some(
+                      (c: any) => c.type === 'element' && !['a','strong','em','code','span','br','destaque','destaque-reto','destaque-marker'].includes(c.tagName)
+                    );
+                    return hasBlock ? <>{children}</> : <p {...props}>{children}</p>;
+                  },
+                  code: CodeBlock,
+                  pre: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+                  table: ({ children }: { children?: React.ReactNode }) => (
+                    <div className="overflow-x-auto my-4">
+                      <table className="min-w-full border-collapse border border-slate-700 rounded-lg overflow-hidden">{children}</table>
+                    </div>
+                  ),
+                  th: ({ children }: { children?: React.ReactNode }) => (
+                    <th className="bg-slate-800 text-textPrimary font-semibold text-left px-4 py-2.5 border-b-2 border-slate-600 text-sm">
+                      {children}
+                    </th>
+                  ),
+                  td: ({ children }: { children?: React.ReactNode }) => (
+                    <td className="text-textSecondary px-4 py-2.5 border-b border-slate-700/60 text-sm">
+                      {children}
+                    </td>
+                  ),
+                } as React.ComponentProps<typeof ReactMarkdown>['components']}>
+                  {part}
+                </ReactMarkdown>
+              );
+            })}
+          </section>
+        )}
 
         {/* Mini-jogo */}
-        {missao.has_minigame && missao.minigame_html && interativos[missao.minigame_html] && (
+        {missao.hasMinigame && missao.minigame_html && interativos[missao.minigame_html] && (
           <section className="mb-8">
             <h2 className="text-lg font-semibold text-textPrimary mb-3">Mini-jogo interativo</h2>
             <div className="rounded-lg overflow-hidden border border-borderDark">
@@ -485,14 +496,14 @@ const Missao: React.FC = () => {
         )}
 
         {/* Resumo */}
-        {missao.resumo && missao.resumo.length > 0 && (
+        {missionDetail?.summary && missionDetail.summary.length > 0 && (
           <hr className="border-borderDark my-10" />
         )}
-        {missao.resumo && missao.resumo.length > 0 && (
+        {missionDetail?.summary && missionDetail.summary.length > 0 && (
           <section className="mb-8 bg-bgSecondary border border-borderDark/60 rounded-xl p-6">
             <h2 className="text-2xl font-bold text-textPrimary mb-4">Resumo</h2>
             <ul className="space-y-2">
-              {missao.resumo.map((item, i) => (
+              {missionDetail.summary.map((item, i) => (
                 <li key={i} className="flex items-start gap-2 text-sm text-textBody">
                   <span className="text-accent mt-0.5 shrink-0">·</span>
                   <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={{
@@ -508,80 +519,83 @@ const Missao: React.FC = () => {
         )}
 
         {/* Exercício */}
-        {missao.exercicio && (
+        {mainQuestion && (
           <>
             <hr className="border-borderDark my-10" />
             <section className="bg-bgSecondary border border-borderDark rounded-xl p-6">
               <h2 className="text-2xl font-bold text-textPrimary mb-4">Exercício</h2>
-              {jaGanhouConchas(missao.id) && !respondida && (
-                <p className="text-xs text-textSecondary bg-bgPrimary border border-borderDark rounded-lg px-3 py-2 mb-4">
-                  Você já completou este exercício. Tentar novamente não gera novas conchas.
-                </p>
-              )}
-              <p className="text-textPrimary mb-5">{missao.exercicio.question}</p>
-              <fieldset className="space-y-3">
-                <legend className="sr-only">Opções de resposta</legend>
-                {missao.exercicio.options.map((opcao, i) => {
-                  let estilo = "border-borderDark";
-                  if (respondida) {
-                    if (i === selecionada)
-                      estilo = acertou
-                        ? "border-success bg-success/10"
-                        : "border-danger bg-danger/10";
-                  } else if (i === selecionada) {
-                    estilo = "border-accent bg-accent/10";
-                  }
 
-                  return (
-                    <label key={i} className={`flex items-start gap-3 p-4 rounded-lg border cursor-pointer transition-colors ${estilo} ${respondida ? "cursor-default" : "hover:border-accent/50"}`}>
-                      <input type="radio" name="exercicio" value={i} checked={selecionada === i} disabled={respondida} onChange={() => setSelecionada(i)} className="mt-0.5 accent-accent" />
-                      <span className="text-textPrimary text-sm">{opcao}</span>
-                    </label>
-                  );
-                })}
-              </fieldset>
-              {respondida && (
-                <div
-                  className={`mt-5 p-4 rounded-lg border ${acertou ? "bg-success/10 border-success" : "bg-danger/10 border-danger"}`}
-                >
-                  <p
-                    className={`font-semibold mb-1 ${acertou ? "text-success" : "text-danger"}`}
-                  >
-                    {acertou ? "✓ Correto!" : "✗ Não foi dessa vez."}
-                  </p>
-                  <p className="text-textSecondary text-sm">
-                    {acertou
-                      ? missao.exercicio.explanation
-                      : (selecionada !== null && missao.exercicio.wrong_explanations?.[selecionada]) || ''}
-                  </p>
-                  {acertou && conchasGanhasAgora !== null && (
-                    <p className="text-success text-xs font-medium mt-2 flex items-center gap-1"><ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} /> Você ganhou {conchasGanhasAgora} conchas!</p>
+              {jaRespondidaCorreta && !respondida ? (
+                <p className="text-success text-sm flex items-center gap-2">
+                  <CheckCircleIcon className="w-5 h-5 shrink-0" /> Você já acertou esta pergunta.
+                </p>
+              ) : (
+                <>
+                  <p className="text-textPrimary mb-5">{mainQuestion.prompt}</p>
+                  <fieldset className="space-y-3">
+                    <legend className="sr-only">Opções de resposta</legend>
+                    {mainQuestion.options.map((opcao) => {
+                      let estilo = "border-borderDark";
+                      if (respondida) {
+                        if (opcao.id === selectedOptionId)
+                          estilo = isCorrect
+                            ? "border-success bg-success/10"
+                            : "border-danger bg-danger/10";
+                      } else if (opcao.id === selectedOptionId) {
+                        estilo = "border-accent bg-accent/10";
+                      }
+
+                      return (
+                        <label key={opcao.id} className={`flex items-start gap-3 p-4 rounded-lg border cursor-pointer transition-colors ${estilo} ${respondida ? "cursor-default" : "hover:border-accent/50"}`}>
+                          <input type="radio" name="exercicio" value={opcao.id} checked={selectedOptionId === opcao.id} disabled={respondida || submitting} onChange={() => setSelectedOptionId(opcao.id)} className="mt-0.5 accent-accent" />
+                          <span className="text-textPrimary text-sm">{opcao.label}</span>
+                        </label>
+                      );
+                    })}
+                  </fieldset>
+
+                  {submitError && (
+                    <p className="mt-4 text-sm text-danger">{submitError} — tente responder de novo.</p>
                   )}
-                  {!acertou && !jaGanhouConchas(missao.id) && (
-                    <p className="text-danger/70 text-xs mt-2 flex items-center gap-1"><ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} /> Próxima tentativa vale {tentativas === 1 ? 8 : 4} conchas</p>
+
+                  {respondida && (
+                    <div
+                      className={`mt-5 p-4 rounded-lg border ${isCorrect ? "bg-success/10 border-success" : "bg-danger/10 border-danger"}`}
+                    >
+                      <p
+                        className={`font-semibold mb-1 ${isCorrect ? "text-success" : "text-danger"}`}
+                      >
+                        {isCorrect ? "✓ Correto!" : "✗ Não foi dessa vez."}
+                      </p>
+                      <p className="text-textSecondary text-sm">
+                        {explanation ?? ''}
+                      </p>
+                      {isCorrect && conchasGanhasAgora !== null && (
+                        <p className="text-success text-xs font-medium mt-2 flex items-center gap-1"><ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} /> Você ganhou {conchasGanhasAgora} conchas!</p>
+                      )}
+                      {!isCorrect && (
+                        <p className="text-danger/70 text-xs mt-2 flex items-center gap-1"><ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} /> Próxima tentativa vale {getConchasValor(missao.id)} conchas</p>
+                      )}
+                    </div>
                   )}
-                </div>
+
+                  <div className="mt-5 flex items-center gap-3">
+                    {!respondida && (
+                      <button onClick={handleSubmit} disabled={selectedOptionId === null || submitting} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+                        {submitting ? 'Enviando...' : 'Responder'}
+                      </button>
+                    )}
+                    {!respondida && (
+                      <span className="text-xs text-textSecondary inline-flex items-center gap-1"><ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} /> Vale {getConchasValor(missao.id)} conchas</span>
+                    )}
+                    {respondida && !isCorrect && (
+                      <button onClick={() => { setSelectedOptionId(null); setRespondida(false); setSubmitError(null); }} className="px-5 py-2 rounded-lg border border-borderDark text-textSecondary hover:border-accent hover:text-textPrimary transition-colors text-sm">
+                        Tentar novamente
+                      </button>
+                    )}
+                  </div>
+                </>
               )}
-              <div className="mt-5 flex items-center gap-3">
-                {!respondida && (
-                  <button onClick={handleSubmit} disabled={selecionada === null} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
-                    Responder
-                  </button>
-                )}
-                {!respondida && !jaGanhouConchas(missao.id) && (
-                  <span className="text-xs text-textSecondary inline-flex items-center gap-1"><ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} /> Vale {conchasValor(tentativas)} conchas</span>
-                )}
-                {respondida && !acertou && (
-                  <button onClick={() => { setSelecionada(null); setRespondida(false); }} className="px-5 py-2 rounded-lg border border-borderDark text-textSecondary hover:border-accent hover:text-textPrimary transition-colors text-sm">
-                    Tentar novamente
-                  </button>
-                )}
-                {respondida && acertou && (
-                  <button onClick={() => { setSelecionada(null); setRespondida(false); setTentativas(0); setConchasGanhasAgora(null); }} className="text-xs text-textSecondary hover:text-textPrimary transition-colors">
-                    Refazer
-                  </button>
-                )}
-              </div>
             </section>
           </>
         )}
@@ -593,14 +607,14 @@ const Missao: React.FC = () => {
               <div className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-success/15 border border-success text-success font-semibold">
                 <CheckCircleIcon className="w-5 h-5" /> Concluída
               </div>
-              <button onClick={() => desmarcarMissao(missao.id)} className="text-sm text-textSecondary hover:text-danger transition-colors">
+              <button onClick={handleDesmarcar} disabled={desmarcando} className="text-sm text-textSecondary hover:text-danger transition-colors disabled:opacity-40">
                 desmarcar
               </button>
             </>
-          ) : !missao.exercicio ? (
-            <button onClick={() => completarMissao(missao.id)} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-colors">
+          ) : !mainQuestion && !contentLoading ? (
+            <button onClick={handleCompletarSemPergunta} disabled={completando} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-colors disabled:opacity-40">
               <CheckCircleIcon className="w-5 h-5" />
-              Marcar como concluída
+              {completando ? 'Marcando...' : 'Marcar como concluída'}
             </button>
           ) : null}
         </div>
@@ -625,8 +639,8 @@ const Missao: React.FC = () => {
         )}
 
         {/* Referências bibliográficas */}
-        {missao.references && missao.references.length > 0 && (
-          <ReferenciasBlock references={missao.references} />
+        {missionDetail?.bibliography && missionDetail.bibliography.length > 0 && (
+          <ReferenciasBlock references={missionDetail.bibliography} />
         )}
 
         {/* Navegação de rodapé */}
@@ -706,7 +720,7 @@ const Missao: React.FC = () => {
             <p className="text-textSecondary text-sm mb-5">{missao.title}</p>
 
             <div className="flex justify-center mb-5">
-              <HexBadge earned={true} emblem={resolveEmblem(missao.emblem, genero)} interactive={false} className="w-28">
+              <HexBadge earned={true} emblem={resolveEmblem(missao.emblem ?? undefined, genero)} interactive={false} className="w-28">
                 <MissionIcon iconName={missao.icon} completed={true} className="w-10 h-10" />
               </HexBadge>
             </div>
@@ -786,7 +800,6 @@ const Missao: React.FC = () => {
             <div className="overflow-y-auto px-6 py-5">
               <Exercicios
                 missaoId={missao.id}
-                exercicios={missao.exercicios!}
                 proximaMissao={proximaMissao}
               />
             </div>

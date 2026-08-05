@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Routes, Route, Outlet, useLocation } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { SessionProvider } from './contexts/SessionContext';
+import { TrilhaProvider } from './contexts/TrilhaContext';
 import { ProgressProvider } from './contexts/ProgressContext';
 import RequireAuth from './components/RequireAuth';
 import Sidebar from './components/Sidebar';
@@ -36,25 +37,27 @@ const App: React.FC = () => {
   return (
     <AuthProvider>
       <SessionProvider>
-        <ProgressProvider>
-          <ScrollToTop />
-          <Routes>
-            {/* Rotas públicas — sem sidebar, sem guard */}
-            <Route path="/login" element={<Login />} />
-            <Route path="/cadastro" element={<Cadastro />} />
-            <Route path="/completar-cadastro" element={<CompletarCadastro />} />
+        <TrilhaProvider>
+          <ProgressProvider>
+            <ScrollToTop />
+            <Routes>
+              {/* Rotas públicas — sem sidebar, sem guard */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/cadastro" element={<Cadastro />} />
+              <Route path="/completar-cadastro" element={<CompletarCadastro />} />
 
-            {/* Rotas protegidas — exigem sessão completa */}
-            <Route element={<ProtectedLayout />}>
-              <Route path="/" element={<Home />} />
-              <Route path="/trilha" element={<Trilha />} />
-              <Route path="/missao/:nivelIdx/:missaoIdx" element={<Missao />} />
-              <Route path="/conquistas" element={<Conquistas />} />
-              <Route path="/exercicios" element={<ExerciciosPage />} />
-              <Route path="/perfil" element={<Perfil />} />
-            </Route>
-          </Routes>
-        </ProgressProvider>
+              {/* Rotas protegidas — exigem sessão completa */}
+              <Route element={<ProtectedLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/trilha" element={<Trilha />} />
+                <Route path="/missao/:nivelIdx/:missaoIdx" element={<Missao />} />
+                <Route path="/conquistas" element={<Conquistas />} />
+                <Route path="/exercicios" element={<ExerciciosPage />} />
+                <Route path="/perfil" element={<Perfil />} />
+              </Route>
+            </Routes>
+          </ProgressProvider>
+        </TrilhaProvider>
       </SessionProvider>
     </AuthProvider>
   );

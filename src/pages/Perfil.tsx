@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TrophyIcon, LockClosedIcon } from '@heroicons/react/24/outline';
-import { niveis } from '../data/curriculum';
 import { MOLDURAS, MOLDURA_FALLBACK } from '../data/molduras';
 import { ACESSORIOS, ACESSORIO_FALLBACK } from '../data/acessorios';
 import { CORES, COR_FALLBACK } from '../data/cores';
@@ -29,8 +28,6 @@ const AVATARES = [
   { src: imgMestreDosMaras, hiddenSrc: imgOcultoMestreDosMaras, label: 'Mestre dos Mares' },
   { src: imgKraken, hiddenSrc: imgOcultoKraken, label: 'Kraken' },
 ];
-
-const totalMissoes = niveis.reduce((acc, n) => acc + n.missoes.length, 0);
 
 const GENERO_OPTIONS: { value: Gender; label: string }[] = [
   { value: 'female', label: 'Feminino' },
@@ -89,7 +86,7 @@ const LojaCardSkeleton: React.FC = () => (
 );
 
 const Perfil: React.FC = () => {
-  const { completed } = useProgress();
+  const { completed, totalMissoes } = useProgress();
   const { profile, balance, applyProfile, applyBalance, applyActiveAvatar } = useSession();
   const loja = useLoja(applyBalance, applyActiveAvatar);
   const lojaRef = useRef<HTMLElement>(null);
@@ -324,7 +321,7 @@ const Perfil: React.FC = () => {
           </h2>
           <div className="grid grid-cols-3 gap-4 text-center">
             <div>
-              <p className="text-2xl font-bold text-accent">{balance?.formatted ?? '—'}</p>
+              <p className="text-2xl font-bold text-accent">{balance?.raw ?? '—'}</p>
               <p className="text-xs text-textSecondary mt-1">conchas</p>
             </div>
             <div>
@@ -340,7 +337,8 @@ const Perfil: React.FC = () => {
           </div>
         </section>
 
-        {/* Emblemas — TODO: backend ainda não expõe endpoint de emblemas/conquistas; mock em cima do progresso local */}
+        {/* Emblemas — derivado do progresso da API (não existe endpoint dedicado de
+            emblemas; a decisão foi calcular no front, uma emblema por missão concluída). */}
         <section className="bg-bgSecondary border border-borderDark rounded-xl p-6 mb-6">
           <div className="flex items-center justify-between mb-2">
             <h2 className="text-sm font-semibold text-textSecondary uppercase tracking-widest">
@@ -354,13 +352,13 @@ const Perfil: React.FC = () => {
             <TrophyIcon className="w-8 h-8 text-accent flex-shrink-0" />
             <div>
               <p className="text-textPrimary font-semibold">
-                {emblemasConcluidos} de {totalMissoes} emblemas conquistados
+                {emblemasConcluidos} de {totalMissoes || '—'} emblemas conquistados
               </p>
               <div className="w-full h-1.5 bg-bgPrimary rounded-full mt-2 overflow-hidden">
                 <div
                   className="h-full rounded-full"
                   style={{
-                    width: `${Math.round((emblemasConcluidos / totalMissoes) * 100)}%`,
+                    width: `${totalMissoes > 0 ? Math.round((emblemasConcluidos / totalMissoes) * 100) : 0}%`,
                     background: 'linear-gradient(90deg, #4F33A9, #8A4FFF)',
                   }}
                 />

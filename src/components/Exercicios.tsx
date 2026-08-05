@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRightIcon, StarIcon as StarOutline } from '@heroicons/react/24/outline';
 import { StarIcon as StarSolid } from '@heroicons/react/24/solid';
-import type { Exercicio } from '../data/curriculum/types';
 import { useProgress } from '../hooks/useProgress';
 import type { TierLevel } from '../hooks/useProgress';
 import { calcTier } from '../contexts/ProgressContext';
 import ShellIcon from './ShellIcon';
+import { ApiError, getApiErrorMessage, getMissionDetail, getMissionProgress, submitAnswer } from '../lib/api';
+import type { MissionQuestion } from '../lib/api.types';
 
 interface Props {
   missaoId: string;
-  exercicios: Exercicio[];
   proximaMissao: string | null;
 }
 
@@ -44,62 +44,134 @@ function tierMeta(tier: Exclude<TierLevel, 'none'>) {
   return TIER_META.find(t => t.label === ({ bronze: 'Bronze', silver: 'Prata', gold: 'Ouro' }[tier]))!;
 }
 
-const Exercicios: React.FC<Props> = ({ missaoId, exercicios, proximaMissao }) => {
-  const { getExerciciosDone, completarExercicio } = useProgress();
-  const feitos = getExerciciosDone(missaoId);
-  const doneCount = feitos.length;
+interface SubmitFeedback {
+  isCorrect: boolean;
+  explanation: string | null;
+  earnedShells: number;
+}
 
-  const COMPLETION_IDX = exercicios.length;
-  const allDone = doneCount >= exercicios.length;
+const Exercicios: React.FC<Props> = ({ missaoId, proximaMissao }) => {
+  const { getExerciciosDone, aplicarSubmissao, hydrateMissionProgress } = useProgress();
 
-  const firstIncomplete = exercicios.findIndex(ex => !feitos.includes(ex.id!));
-  const [currentIdx, setCurrentIdx] = useState(
-    firstIncomplete === -1 ? COMPLETION_IDX : firstIncomplete
-  );
-  const [errorsMap, setErrorsMap] = useState<Record<string, number>>({});
+  const [extraQuestions, setExtraQuestions] = useState<MissionQuestion[] | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<ApiError | null>(null);
+  const [attemptsByQuestion, setAttemptsByQuestion] = useState<Record<string, number>>({});
+
+  const [currentIdx, setCurrentIdx] = useState(0);
   const [selecionadaMap, setSelecionadaMap] = useState<Record<string, number | null>>({});
   const [respondidaMap, setRespondidaMap] = useState<Record<string, boolean>>({});
+  const [feedbackMap, setFeedbackMap] = useState<Record<string, SubmitFeedback>>({});
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [tierUnlocked, setTierUnlocked] = useState<Exclude<TierLevel, 'none'> | null>(null);
+
+  const idempotencyKeysRef = useRef<Map<string, string>>(new Map());
+  function getSubmissionKey(questionSlug: string): string {
+    const existing = idempotencyKeysRef.current.get(questionSlug);
+    if (existing) return existing;
+    const key = crypto.randomUUID();
+    idempotencyKeysRef.current.set(questionSlug, key);
+    return key;
+  }
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    setLoadError(null);
+    (async () => {
+      try {
+        const [detail, progress] = await Promise.all([
+          getMissionDetail(missaoId),
+          getMissionProgress(missaoId),
+        ]);
+        if (cancelled) return;
+        const extras = detail.questions.filter(q => q.kind === 'extra');
+        setExtraQuestions(extras);
+        hydrateMissionProgress(missaoId, progress);
+
+        const attempts: Record<string, number> = {};
+        for (const q of progress.questions) {
+          if (q.kind === 'extra') attempts[q.questionSlug] = q.attemptCount;
+        }
+        setAttemptsByQuestion(attempts);
+
+        const feitos = progress.questions.filter(q => q.kind === 'extra' && q.answeredCorrectly).map(q => q.questionSlug);
+        const firstIncomplete = extras.findIndex(ex => !feitos.includes(ex.slug));
+        setCurrentIdx(firstIncomplete === -1 ? extras.length : firstIncomplete);
+      } catch (err) {
+        if (!cancelled) setLoadError(err instanceof ApiError ? err : new ApiError(0, 'internal_error', 'Falha de rede ao carregar os exercícios.'));
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [missaoId, hydrateMissionProgress]);
+
+  const feitos = getExerciciosDone(missaoId);
+  const doneCount = feitos.length;
+  const exercicios = extraQuestions ?? [];
+
+  const COMPLETION_IDX = exercicios.length;
+  const allDone = exercicios.length > 0 && doneCount >= exercicios.length;
 
   const isCompletionPage = currentIdx === COMPLETION_IDX;
   const current = exercicios[currentIdx];
 
-  if (!isCompletionPage && !current) return null;
+  const isCurrentDone = current ? feitos.includes(current.slug) : false;
+  const selecionada = current ? (selecionadaMap[current.slug] ?? null) : null;
+  const respondida = current ? (respondidaMap[current.slug] ?? false) : false;
+  const feedback = current ? feedbackMap[current.slug] : undefined;
+  const acertou = feedback?.isCorrect ?? false;
+  const attemptCount = current ? (attemptsByQuestion[current.slug] ?? 0) : 0;
+  const reward = current ? Math.max(0, current.maxRewardShells - attemptCount) : 0;
 
-  const isCurrentDone = current ? feitos.includes(current.id!) : false;
-  const selecionada = current ? (selecionadaMap[current.id!] ?? null) : null;
-  const respondida = current ? (respondidaMap[current.id!] ?? false) : false;
-  const errorCount = current ? (errorsMap[current.id!] ?? 0) : 0;
-  const reward = Math.max(0, 3 - errorCount);
-  const acertou = current ? selecionada === current.correct : false;
-
-  const handleSelect = (i: number) => {
+  const handleSelect = (optionId: number) => {
     if (!current || respondida || isCurrentDone) return;
-    setSelecionadaMap(prev => ({ ...prev, [current.id!]: i }));
+    setSelecionadaMap(prev => ({ ...prev, [current.slug]: optionId }));
   };
 
-  const handleSubmit = () => {
-    if (!current || selecionada === null || isCurrentDone || respondida) return;
-    setRespondidaMap(prev => ({ ...prev, [current.id!]: true }));
-    if (selecionada === current.correct) {
-      const prevTier = calcTier(doneCount);
-      const newTier = calcTier(doneCount + 1);
-      completarExercicio(missaoId, current.id!, reward);
-      if (newTier !== prevTier && newTier !== 'none') {
-        setTierUnlocked(newTier as Exclude<TierLevel, 'none'>);
+  const handleSubmit = async () => {
+    if (!current || selecionada === null || isCurrentDone || respondida || submitting) return;
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const key = getSubmissionKey(current.slug);
+      const result = await submitAnswer(missaoId, current.slug, selecionada, key);
+      setRespondidaMap(prev => ({ ...prev, [current.slug]: true }));
+      setFeedbackMap(prev => ({
+        ...prev,
+        [current.slug]: {
+          isCorrect: result.isCorrect,
+          explanation: result.isCorrect ? result.explanation : result.wrongExplanation,
+          earnedShells: result.earnedShells,
+        },
+      }));
+      setAttemptsByQuestion(prev => ({ ...prev, [current.slug]: result.attemptNumber }));
+      aplicarSubmissao(missaoId, current.slug, 'extra', result);
+
+      if (result.isCorrect) {
+        const prevTier = calcTier(doneCount);
+        const newTier = calcTier(doneCount + 1);
+        if (newTier !== prevTier && newTier !== 'none') {
+          setTierUnlocked(newTier as Exclude<TierLevel, 'none'>);
+        }
+        if (doneCount + 1 >= exercicios.length) {
+          setCurrentIdx(COMPLETION_IDX);
+        }
       }
-      if (doneCount + 1 >= exercicios.length) {
-        setCurrentIdx(COMPLETION_IDX);
-      }
-    } else {
-      setErrorsMap(prev => ({ ...prev, [current.id!]: (prev[current.id!] ?? 0) + 1 }));
+    } catch (err) {
+      setSubmitError(getApiErrorMessage(err, 'Exercicios.handleSubmit'));
+    } finally {
+      setSubmitting(false);
     }
   };
 
   const handleRetry = () => {
     if (!current) return;
-    setRespondidaMap(prev => ({ ...prev, [current.id!]: false }));
-    setSelecionadaMap(prev => ({ ...prev, [current.id!]: null }));
+    setRespondidaMap(prev => ({ ...prev, [current.slug]: false }));
+    setSelecionadaMap(prev => ({ ...prev, [current.slug]: null }));
+    setSubmitError(null);
   };
 
   const goTo = (idx: number) => {
@@ -198,11 +270,11 @@ const Exercicios: React.FC<Props> = ({ missaoId, exercicios, proximaMissao }) =>
 
         <div className="flex items-center gap-1.5">
           {exercicios.map((ex, i) => {
-            const isDone = feitos.includes(ex.id!);
+            const isDone = feitos.includes(ex.slug);
             const isCurrent = i === currentIdx;
             return (
               <button
-                key={ex.id!}
+                key={ex.slug}
                 onClick={() => goTo(i)}
                 aria-label={`Exercício ${i + 1}`}
                 className={`rounded-full transition-all duration-150 hover:scale-125 focus:outline-none ${
@@ -228,6 +300,27 @@ const Exercicios: React.FC<Props> = ({ missaoId, exercicios, proximaMissao }) =>
       </div>
     );
   };
+
+  if (loading) {
+    return (
+      <div className="space-y-3 animate-pulse" aria-hidden="true">
+        <div className="h-4 w-24 rounded bg-bgPrimary" />
+        <div className="h-4 w-full rounded bg-bgPrimary" />
+        <div className="h-10 w-full rounded bg-bgPrimary" />
+        <div className="h-10 w-full rounded bg-bgPrimary" />
+      </div>
+    );
+  }
+
+  if (loadError) {
+    return (
+      <p className="text-sm text-danger">
+        Não foi possível carregar os exercícios. {getApiErrorMessage(loadError, 'Exercicios.load')}
+      </p>
+    );
+  }
+
+  if (!isCompletionPage && !current) return null;
 
   if (isCompletionPage) {
     return (
@@ -275,64 +368,64 @@ const Exercicios: React.FC<Props> = ({ missaoId, exercicios, proximaMissao }) =>
         {renderTierBadge()}
         {renderNav()}
 
-        <p className="text-textPrimary mb-5">{current!.question}</p>
+        <p className="text-textPrimary mb-5">{current!.prompt}</p>
 
         <fieldset className="space-y-3">
           <legend className="sr-only">Opções de resposta</legend>
-          {current!.options.map((opcao, i) => {
+          {current!.options.map((opcao) => {
             let estilo = 'border-borderDark';
             if (isCurrentDone) {
-              estilo = i === current!.correct ? 'border-success bg-success/10' : 'border-borderDark opacity-50';
+              estilo = 'border-success bg-success/10 opacity-50';
             } else if (respondida) {
-              if (i === selecionada) {
+              if (opcao.id === selecionada) {
                 estilo = acertou ? 'border-success bg-success/10' : 'border-danger bg-danger/10';
               }
-            } else if (i === selecionada) {
+            } else if (opcao.id === selecionada) {
               estilo = 'border-accent bg-accent/10';
             }
-            const disabled = respondida || isCurrentDone;
+            const disabled = respondida || isCurrentDone || submitting;
             return (
               <label
-                key={i}
+                key={opcao.id}
                 className={`flex items-start gap-3 p-4 rounded-lg border transition-colors ${estilo} ${disabled ? 'cursor-default' : 'cursor-pointer hover:border-accent/50'}`}
               >
                 <input
                   type="radio"
-                  name={`extra-${current!.id}`}
-                  value={i}
-                  checked={selecionada === i}
+                  name={`extra-${current!.slug}`}
+                  value={opcao.id}
+                  checked={selecionada === opcao.id}
                   disabled={disabled}
-                  onChange={() => handleSelect(i)}
+                  onChange={() => handleSelect(opcao.id)}
                   className="mt-0.5 accent-accent"
                 />
-                <span className="text-textPrimary text-sm">{opcao}</span>
+                <span className="text-textPrimary text-sm">{opcao.label}</span>
               </label>
             );
           })}
         </fieldset>
 
+        {submitError && (
+          <p className="mt-4 text-sm text-danger">{submitError} — tente responder de novo.</p>
+        )}
+
         {isCurrentDone && (
           <div className="mt-5 p-4 rounded-lg border bg-success/10 border-success">
             <p className="font-semibold text-success mb-1">✓ Concluído</p>
-            <p className="text-textSecondary text-sm">{current!.explanation}</p>
           </div>
         )}
 
-        {!isCurrentDone && respondida && (
+        {!isCurrentDone && respondida && feedback && (
           <div className={`mt-5 p-4 rounded-lg border ${acertou ? 'bg-success/10 border-success' : 'bg-danger/10 border-danger'}`}>
             <p className={`font-semibold mb-1 ${acertou ? 'text-success' : 'text-danger'}`}>
               {acertou ? '✓ Correto!' : '✗ Não foi dessa vez.'}
             </p>
-            {acertou && (
-              <p className="text-textSecondary text-sm">{current!.explanation}</p>
-            )}
-            {!acertou && selecionada !== null && current!.wrong_explanations?.[selecionada] && (
-              <p className="text-textSecondary text-sm">{current!.wrong_explanations[selecionada]}</p>
+            {feedback.explanation && (
+              <p className="text-textSecondary text-sm">{feedback.explanation}</p>
             )}
             {acertou ? (
               <p className="text-success text-xs font-medium mt-2 flex items-center gap-1">
                 <ShellIcon className="w-3.5 h-3.5 shrink-0" style={{ color: '#06B6D4' }} />
-                +{reward} concha{reward !== 1 ? 's' : ''}!
+                +{feedback.earnedShells} concha{feedback.earnedShells !== 1 ? 's' : ''}!
               </p>
             ) : reward > 0 ? (
               <p className="text-textSecondary text-xs mt-2 flex items-center gap-1">
@@ -352,10 +445,10 @@ const Exercicios: React.FC<Props> = ({ missaoId, exercicios, proximaMissao }) =>
             {!respondida && (
               <button
                 onClick={handleSubmit}
-                disabled={selecionada === null}
+                disabled={selecionada === null || submitting}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                Responder
+                {submitting ? 'Enviando...' : 'Responder'}
               </button>
             )}
             {respondida && !acertou && (

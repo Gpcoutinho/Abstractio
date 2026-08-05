@@ -78,11 +78,13 @@ export const SessionProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setProfile(prev => (prev ? { ...prev, ...patch } : prev));
   }, []);
 
+  // Reproduz o formato que o backend já devolve em GET /user/balance — "N conchas"
+  // (singular "1 concha") — pra não divergir do que aparece logo após o boot.
   const applyBalance = useCallback((raw: number) => {
     setBalance(prev => ({
       raw: String(raw),
-      formatted: raw.toLocaleString('pt-BR'),
-      currency: prev?.currency ?? 'shells',
+      formatted: `${raw.toLocaleString('pt-BR')} ${raw === 1 ? 'concha' : 'conchas'}`,
+      currency: prev?.currency ?? 'conchas',
     }));
   }, []);
 
