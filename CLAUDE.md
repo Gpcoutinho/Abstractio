@@ -58,12 +58,8 @@ src/
     useProgress.ts        ← Hook único para consumir o contexto
   data/
     curriculum/
-      types.ts            ← Tipos TypeScript: Nivel, Missao, Exercise, Reference
-      index.ts            ← Exporta array `niveis` com os 4 níveis
-      nivel_1/            ← Missões do Nível 1 (missao_0.ts … missao_7.ts + index.ts)
-      nivel_2/            ← Missões do Nível 2
-      nivel_3/            ← Missões do Nível 3
-      nivel_4/            ← Missões do Nível 4
+      types.ts            ← Tipos TypeScript: Duvida, Reference (reaproveitados por api.types.ts)
+      presentation.ts      ← Único conteúdo local por missão: icon + minigame_html, indexado por slug
   assets/
     interativos/
       nivel_1_missao_7.html  ← Mini-jogo (HTML autossuficiente)
@@ -118,60 +114,19 @@ Persistido em **localStorage**. Sem sync com backend.
 
 ## Conteúdo das Missões
 
-**Fonte de verdade criativa:** `docs/missoes/nivel_N/missao_N.md` — arquivos markdown editáveis usados para redigir e revisar o conteúdo de cada missão.
+**Fonte de verdade:** backend `tentacle` (`src/db/seed-data.json`, servido via `GET /api/v1/missions/:slug`). Teoria, resumo, referências bibliográficas, dúvidas frequentes, emblema e as perguntas (com gabarito) não vivem mais neste repositório — o front busca tudo isso da API a cada acesso à missão e não guarda cópia local, nem no bundle.
 
-**Fonte de verdade do app:** `src/data/curriculum/nivel_N/missao_N.ts` — importados estaticamente, sem fetch.
+**O que ainda vive aqui:** `src/data/curriculum/presentation.ts` — só `icon` (nome do ícone Phosphor) e `minigame_html` (caminho do asset do mini-jogo) por missão, indexados por slug. Isso não é conteúdo editorial, é decisão de apresentação exclusiva do front; a API não expõe esses campos por design.
 
 ### Fluxo de edição de conteúdo
 
-1. Rebecca edita o `.md` correspondente
-2. Pede para "repassar" para o `.ts`
-3. Ler o `.md`, extrair teoria/exercício/metadados e sobrescrever o `.ts` mantendo a estrutura TypeScript intacta
-4. Nunca editar o `.ts` diretamente para conteúdo — sempre partir do `.md`
+O fluxo antigo `docs/missoes/*.md` → `src/data/curriculum/nivel_N/missao_N.ts` descrito aqui **não existe mais** — os arquivos `.ts` por missão foram removidos (migração de progresso e conteúdo para o backend). Editar teoria, exercícios, resumo, referências ou dúvidas agora é uma mudança no repositório `tentacle`, não no Abstractio. Este trecho precisa ser reescrito com o fluxo real assim que o processo de edição de conteúdo no `tentacle` for definido.
 
-### Mapeamento de campos `.md` → `.ts`
+As convenções de tags (`<destaque>`, `<conceito>`, `<destaque-marker>` etc.) e os placeholders de componente (`{{duvida-*}}`, `{{ada-card-objeto}}` etc.) descritos mais abaixo continuam válidos — a *string* da teoria não mudou, só a fonte de onde ela vem.
 
-| Campo no `.md` | Campo no `.ts` |
-|---|---|
-| `# Missão N-N — Título` | `title` |
-| `**Ícone:**` | `icon` |
-| Seção `## Teoria` | `theory` (template literal) |
-| `[x] Tem mini-jogo` | `has_minigame: true` |
-| `**Arquivo:**` | `minigame_html` |
-| `**Pergunta:**` | `exercise.question` |
-| Opção com `[x]` | `exercise.correct` (índice 0-based) |
-| Textos das opções | `exercise.options` |
-| `**Explicação:**` | `exercise.explanation` |
-| Seção `### Fontes bibliográficas` (nas notas) | `references[]` — cada fonte vira um objeto `{ author, year, title, location, note }` |
+## Slides de Conteúdo
 
-Fonte: módulos TypeScript em `src/data/curriculum/nivel_N/missao_N.ts` — importados estaticamente, sem fetch.
-
-```typescript
-// Exemplo: src/data/curriculum/nivel_1/missao_1.ts
-const missao: Missao = {
-  id: "1-1",
-  title: "...",
-  icon: "🧩",
-  theory: `...`,
-  exercise: {
-    question: "...",
-    options: ["...", "..."],
-    correct: 1,
-    explanation: "..."
-  },
-  has_minigame: true,
-  minigame_html: "interativos/nivel_1_missao_1.html"
-};
-```
-
-## Slides de Conteúdo (SlideCard / LinkedSlideRow)
-
-Dentro da teoria, blocos de slides são declarados com `{{card:N}}` (slide único) ou `{{cards:N,M}}` (dois cards lado a lado, sincronizados).
-
-- `SlideCard` — card com navegação interna; suporta `externalCurrent` + `hideNav` para modo controlado
-- `LinkedSlideRow` — renderizado automaticamente para `{{cards:N,M}}`; compartilha um único controle de navegação entre os cards, com dots indicadores e recentramento automático via `scrollIntoView`
-
-Os slides de cada card ficam em `missao.cards[N].slides[]` como strings HTML ou ReactNode.
+Os placeholders `{{card:N}}` / `{{cards:N,M}}` e o campo `cards` (que os alimentava) foram removidos — nenhuma missão os usava. Se voltarem a ser necessários, o resolvedor de placeholders em `Missao.tsx` precisa ser refeito (hoje ele reconhece a sintaxe mas ignora, retornando `null`), e a API precisaria passar a expor esse campo.
 
 ## Mini-Jogos (Interativos)
 
@@ -338,19 +293,19 @@ class Polvo:
 Componente: `src/components/missoes/reutilizaveis/DuvidaBlock.tsx`
 Props: `pergunta: string`, `resposta: string`
 
-Usado para antecipar dúvidas comuns ao longo da leitura da teoria. Cada dúvida é declarada diretamente no campo `duvidas` do arquivo `.ts` da missão — **não é necessário registrar nada em `Missao.tsx`**:
+Usado para antecipar dúvidas comuns ao longo da leitura da teoria. Cada dúvida vem no campo `faqs` do `GET /api/v1/missions/:slug` (shape `Record<string, { pergunta, resposta }>`) — **não é necessário registrar nada em `Missao.tsx`** além do que já existe:
 
-```typescript
-// Em missao_N.ts:
-duvidas: {
+```jsonc
+// Em faqs, na resposta de GET /api/v1/missions/:slug:
+"faqs": {
   "duvida-entidade-definicao": {
-    pergunta: "O que significa 'entidade'?",
-    resposta: "Significa algo que existe de forma independente, com identidade própria.",
-  },
-},
+    "pergunta": "O que significa 'entidade'?",
+    "resposta": "Significa algo que existe de forma independente, com identidade própria."
+  }
+}
 ```
 
-`Missao.tsx` resolve o placeholder dinamicamente: qualquer `{{duvida-*}}` encontrado na teoria busca a chave correspondente em `missao.duvidas` e renderiza o `DuvidaBlock` automaticamente.
+`Missao.tsx` resolve o placeholder dinamicamente: qualquer `{{duvida-*}}` encontrado na teoria busca a chave correspondente em `missionDetail.faqs` e renderiza o `DuvidaBlock` automaticamente.
 
 Convenção de nomenclatura do placeholder: `{{duvida-[conceito]-[descritor]}}` — ex: `{{duvida-objeto-unico}}`, `{{duvida-classe-instancia}}`.
 
@@ -374,7 +329,7 @@ SVGs, animações, imagens e mini-jogos são documentados nos `.md` com blockquo
 > [animação: descrição]
 ```
 
-Essas linhas descrevem o visual existente (ou desejado) naquele ponto da teoria. Não são conteúdo textual da missão — são referências de implementação para alinhar o `.md` com o `.ts`.
+Essas linhas descrevem o visual existente (ou desejado) naquele ponto da teoria. Não são conteúdo textual da missão — são referências de implementação para quem for aplicar a teoria no destino atual (`tentacle`).
 
 ## Perguntas para a Rebecca
 
