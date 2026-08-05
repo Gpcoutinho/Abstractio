@@ -1,5 +1,12 @@
 {
   "name": "abstractio",
+  "description": "App educacional gamificado para ensinar Programação Orientada a Objetos (POO) em Python.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gpcoutinho/Abstractio.git"
+  },
+  "author": "Rebecca Nery, Gabriel Coutinho",
+  "license": "UNLICENSED",
   "private": true,
   "version": "0.0.0",
   "type": "module",

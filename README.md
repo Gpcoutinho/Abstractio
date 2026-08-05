@@ -1,73 +1,88 @@
-# React + TypeScript + Vite
+<div align="center">
+  <img src="public/isotipo.png" alt="Abstractio" width="96" />
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+  # Abstractio
 
-Currently, two official plugins are available:
+  App educacional gamificado para ensinar **Programação Orientada a Objetos (POO) em Python**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+  ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white&labelColor=20232a)
+  ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white&labelColor=20232a)
+  ![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white&labelColor=20232a)
+  ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white&labelColor=20232a)
+  ![License](https://img.shields.io/badge/license-restrita-red)
+</div>
 
-## React Compiler
+---
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+## Sobre o projeto
 
-## Expanding the ESLint configuration
+**Abstractio** transforma o ensino de POO em uma trilha de missões gamificadas: teoria em linguagem acessível, mini-jogos interativos, exercícios e um sistema de progressão com pontuação, níveis e conquistas — pensado para tornar conceitos abstratos (classes, objetos, herança, encapsulamento) mais concretos para quem está aprendendo a programar.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+<!-- TODO: adicionar screenshot ou GIF do app aqui -->
+<!-- ![preview](docs/preview.png) -->
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Funcionalidades
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- 🗺️ **Trilha de missões** organizada em níveis, com mapa de progresso visual
+- 📖 **Teoria interativa** com slides, blocos de código com syntax highlight e caixas de conceito
+- 🎮 **Mini-jogos** (drag & drop) integrados ao conteúdo
+- ✅ **Exercícios** de fixação com feedback explicativo
+- 🏆 **Sistema de conquistas** e pontuação, com progresso salvo localmente
+- 📱 Layout responsivo (sidebar fixa no desktop, gaveta no mobile)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Stack
+
+| Categoria | Tecnologia |
+|---|---|
+| Build | Vite |
+| Framework | React 19 + TypeScript |
+| Roteamento | React Router v7 |
+| Estilos | Tailwind CSS |
+| Ícones | Heroicons, Phosphor Icons |
+| Markdown | react-markdown + remark-gfm + rehype-raw |
+| Syntax highlight | react-syntax-highlighter |
+| Estado | React Context + localStorage (sem backend) |
+
+## Como rodar localmente
+
+```bash
+# clonar o repositório
+git clone https://github.com/Gpcoutinho/Abstractio.git
+cd Abstractio
+
+# instalar dependências
+npm install
+
+# rodar em modo desenvolvimento
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Acesse `http://localhost:5173`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Outros scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build     # build de produção (pasta dist/)
+npm run lint      # checagem de lint
+npm run preview   # preview do build de produção
 ```
+
+## Estrutura do projeto
+
+```
+src/
+  pages/        # Telas principais (Home, Trilha, Missão, Conquistas)
+  components/    # Componentes reutilizáveis (Sidebar, cards, avatar, etc.)
+  contexts/      # Estado global de progresso (React Context)
+  hooks/         # Hooks customizados
+  data/curriculum/  # Conteúdo das missões, tipado em TypeScript
+  assets/        # Mini-jogos interativos e demais assets
+```
+
+## Autores
+
+Desenvolvido por [Rebecca Nery](https://github.com/RebeccaNery) e [Gabriel Coutinho](https://github.com/Gpcoutinho).
+
+## ⚖️ Licença e Direitos Autorais
+
+O código-fonte do **Abstractio** está disponível publicamente neste repositório de forma **estritamente educacional e para demonstração de portfólio**. A cópia, reprodução, distribuição, uso comercial ou criação de trabalhos derivados a partir deste código, design ou interface são **proibidas** sem a autorização expressa dos autores. © 2026 Rebecca Nery e Gabriel. Todos os direitos reservados. Consulte o arquivo `LICENSE` para mais detalhes.
