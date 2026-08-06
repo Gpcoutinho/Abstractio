@@ -1,25 +1,29 @@
 <div align="center">
   <img src="public/isotipo.png" alt="Abstractio" width="96" />
 
-  # Abstractio
+# Abstractio
 
-  App educacional gamificado para ensinar **Programação Orientada a Objetos (POO) em Python**.
+App educacional gamificado para ensinar **Programação Orientada a Objetos (POO) em Python**.
 
-  ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white&labelColor=20232a)
-  ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white&labelColor=20232a)
-  ![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white&labelColor=20232a)
-  ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white&labelColor=20232a)
-  ![License](https://img.shields.io/badge/license-restrita-red)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white&labelColor=20232a)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white&labelColor=20232a)
+![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white&labelColor=20232a)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white&labelColor=20232a)
+![License](https://img.shields.io/badge/license-restrita-red)
+
 </div>
 
 ---
 
+## Demonstração
+
+[![Assista à demonstração no YouTube](https://img.youtube.com/vi/KrnQ5QxBK-s/maxresdefault.jpg)](https://youtu.be/KrnQ5QxBK-s)
+
+▶️ Clique na imagem acima para assistir ao vídeo completo no YouTube.
+
 ## Sobre o projeto
 
-**Abstractio** transforma o ensino de POO em uma trilha de missões gamificadas: teoria em linguagem acessível, mini-jogos interativos, exercícios e um sistema de progressão com pontuação, níveis e conquistas — pensado para tornar conceitos abstratos (classes, objetos, herança, encapsulamento) mais concretos para quem está aprendendo a programar.
-
-<!-- TODO: adicionar screenshot ou GIF do app aqui -->
-<!-- ![preview](docs/preview.png) -->
+**Abstractio** transforma o ensino de POO em uma trilha de missões gamificadas: teoria em linguagem acessível, mini-jogos interativos, exercícios e um sistema de progressão com pontuação, níveis e conquistas, pensado para tornar conceitos abstratos (classes, objetos, herança, encapsulamento) mais concretos para quem está aprendendo a programar.
 
 ## Funcionalidades
 
@@ -32,16 +36,16 @@
 
 ## Stack
 
-| Categoria | Tecnologia |
-|---|---|
-| Build | Vite |
-| Framework | React 19 + TypeScript |
-| Roteamento | React Router v7 |
-| Estilos | Tailwind CSS |
-| Ícones | Heroicons, Phosphor Icons |
-| Markdown | react-markdown + remark-gfm + rehype-raw |
-| Syntax highlight | react-syntax-highlighter |
-| Estado | React Context + localStorage (sem backend) |
+| Categoria        | Tecnologia                                 |
+| ---------------- | ------------------------------------------ |
+| Build            | Vite                                       |
+| Framework        | React 19 + TypeScript                      |
+| Roteamento       | React Router v7                            |
+| Estilos          | Tailwind CSS                               |
+| Ícones           | Heroicons, Phosphor Icons                  |
+| Markdown         | react-markdown + remark-gfm + rehype-raw   |
+| Syntax highlight | react-syntax-highlighter                   |
+| Estado           | React Context + localStorage (sem backend) |
 
 ## Como rodar localmente
 
