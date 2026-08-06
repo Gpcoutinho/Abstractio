@@ -1,0 +1,17 @@
+{
+  "progress": {
+    "missionId": 2,
+    "missionSlug": "1-1",
+    "completed": false,
+    "shellsEarned": 0,
+    "questions": [
+      { "questionId": 1, "questionSlug": "1-1-main", "kind": "main", "attemptCount": 0, "answeredCorrectly": false, "earnedShells": 0 },
+      { "questionId": 2, "questionSlug": "1-1-e1", "kind": "extra", "attemptCount": 0, "answeredCorrectly": false, "earnedShells": 0 },
+      { "questionId": 3, "questionSlug": "1-1-e2", "kind": "extra", "attemptCount": 0, "answeredCorrectly": false, "earnedShells": 0 },
+      { "questionId": 4, "questionSlug": "1-1-e3", "kind": "extra", "attemptCount": 0, "answeredCorrectly": false, "earnedShells": 0 },
+      { "questionId": 5, "questionSlug": "1-1-e4", "kind": "extra", "attemptCount": 0, "answeredCorrectly": false, "earnedShells": 0 },
+      { "questionId": 6, "questionSlug": "1-1-e5", "kind": "extra", "attemptCount": 0, "answeredCorrectly": false, "earnedShells": 0 },
+      { "questionId": 7, "questionSlug": "1-1-e6", "kind": "extra", "attemptCount": 0, "answeredCorrectly": false, "earnedShells": 0 }
+    ]
+  }
+}

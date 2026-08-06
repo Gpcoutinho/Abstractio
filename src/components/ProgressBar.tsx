@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import type { Nivel } from '../data/curriculum/types';
+import type { NivelView } from '../hooks/useTrilha';
 import MissionIcon from './MissionIcon';
 import './ProgressBar.css';
 
 interface ProgressBarProps {
-  curriculum: Nivel[];
+  curriculum: NivelView[];
   completedMissions: string[];
   currentMissionId?: string;
 }

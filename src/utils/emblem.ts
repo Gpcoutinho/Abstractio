@@ -1,12 +1,12 @@
-import type { Genero } from '../contexts/ProgressContext';
+import type { Gender } from '../lib/api.types';
 
 // Padrão "não-espaço/não-paren" para combinar tokens de palavras com acentos
 const W = '[^\\s/()]+';
 
-export function resolveEmblem(emblem: string | undefined, genero: Genero): string | undefined {
+export function resolveEmblem(emblem: string | undefined, genero: Gender | null): string | undefined {
   if (!emblem) return emblem;
 
-  if (genero === 'feminino') {
+  if (genero === 'female') {
     return emblem
       // O(A) — conteúdo maiúsculo em parens = substituição total da palavra anterior
       .replace(new RegExp(`${W}\\(([A-ZÁÉÍÓÚÃÕÂÊÎÔÛÇ]+)\\)`, 'g'), '$1')
@@ -16,7 +16,7 @@ export function resolveEmblem(emblem: string | undefined, genero: Genero): strin
       .replace(new RegExp(`${W}\\/(${W})`, 'g'), '$1');
   }
 
-  // masculino, outro, '' → forma masculina (padrão)
+  // male, other, null → forma masculina (padrão)
   return emblem
     .replace(/\([^)]+\)/g, '')
     .replace(new RegExp(`(${W})\\/${W}`, 'g'), '$1')

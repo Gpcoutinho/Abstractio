@@ -1,0 +1,78 @@
+{
+  "trail": {
+    "id": 1,
+    "slug": "poo",
+    "title": "Trilha POO",
+    "subtitle": "Programação Orientada a Objetos em Python",
+    "shortTitle": "POO",
+    "orderIndex": 1,
+    "totalMissions": 29,
+    "levels": [
+      {
+        "id": 1,
+        "slug": "fundamentos",
+        "title": "Nível 1 — Fundamentos: O despertar do Polvinho",
+        "shortTitle": "Fundamentos",
+        "orderIndex": 1,
+        "missions": [
+          { "id": 1, "slug": "1-0", "title": "Antes de começar", "emblem": "Molhando os tentáculos", "hasMinigame": false, "orderIndex": 0, "rewardShells": 0 },
+          { "id": 2, "slug": "1-1", "title": "O que é POO?", "emblem": "O grande oceano", "hasMinigame": false, "orderIndex": 1, "rewardShells": 12 },
+          { "id": 3, "slug": "1-2", "title": "Objeto", "emblem": "Criatura Marinha", "hasMinigame": false, "orderIndex": 2, "rewardShells": 12 },
+          { "id": 4, "slug": "1-3", "title": "Atributos", "emblem": "Pintor(a) de Tentáculos", "hasMinigame": false, "orderIndex": 3, "rewardShells": 12 },
+          { "id": 5, "slug": "1-4", "title": "Métodos", "emblem": "Coreógrafo(a) de Polvos", "hasMinigame": false, "orderIndex": 4, "rewardShells": 12 },
+          { "id": 6, "slug": "1-5", "title": "Classe", "emblem": "Modelador Mágico", "hasMinigame": false, "orderIndex": 5, "rewardShells": 12 },
+          { "id": 7, "slug": "1-6", "title": "Construtor", "emblem": "O Nascimento", "hasMinigame": false, "orderIndex": 6, "rewardShells": 12 },
+          { "id": 8, "slug": "1-7", "title": "Resumo", "emblem": "Polvo Graduado", "hasMinigame": true, "orderIndex": 7, "rewardShells": 12 }
+        ]
+      },
+      {
+        "id": 2,
+        "slug": "pilares",
+        "title": "Nível 2 — Pilares: As leis do oceano",
+        "shortTitle": "Pilares",
+        "orderIndex": 2,
+        "missions": [
+          { "id": 9, "slug": "2-1", "title": "Introdução ao nível", "emblem": "Preparando o Submarino", "hasMinigame": false, "orderIndex": 0, "rewardShells": 12 },
+          { "id": 10, "slug": "2-2", "title": "Abstração", "emblem": "Rei/Rainha da Abstração", "hasMinigame": false, "orderIndex": 1, "rewardShells": 12 },
+          { "id": 11, "slug": "2-3", "title": "Encapsulamento", "emblem": "Encapsulador(a) de Pérolas", "hasMinigame": false, "orderIndex": 2, "rewardShells": 12 },
+          { "id": 12, "slug": "2-4", "title": "Herança", "emblem": "Lorde dos Cefalópodes", "hasMinigame": false, "orderIndex": 3, "rewardShells": 12 },
+          { "id": 13, "slug": "2-5", "title": "Polimorfismo", "emblem": "Metamorfo(a) das Marés", "hasMinigame": false, "orderIndex": 4, "rewardShells": 12 },
+          { "id": 14, "slug": "2-6", "title": "Resumo", "emblem": "Guardião/Guardiã dos Pilares", "hasMinigame": false, "orderIndex": 5, "rewardShells": 12 }
+        ]
+      },
+      {
+        "id": 3,
+        "slug": "relacoes",
+        "title": "Nível 3 — Relações: A sociedade dos objetos",
+        "shortTitle": "Relações",
+        "orderIndex": 3,
+        "missions": [
+          { "id": 15, "slug": "3-1", "title": "Introdução ao nível", "emblem": "O Canto das Baleias", "hasMinigame": false, "orderIndex": 0, "rewardShells": 12 },
+          { "id": 16, "slug": "3-2", "title": "Sobrescrita", "emblem": "Sobrescritor(a) de Ondas", "hasMinigame": false, "orderIndex": 1, "rewardShells": 12 },
+          { "id": 17, "slug": "3-3", "title": "Sobrecarga", "emblem": "Titã da Sobrecarga", "hasMinigame": false, "orderIndex": 2, "rewardShells": 12 },
+          { "id": 18, "slug": "3-4", "title": "Classes Abstratas", "emblem": "Fantasma do Abismo", "hasMinigame": false, "orderIndex": 3, "rewardShells": 12 },
+          { "id": 19, "slug": "3-5", "title": "Interfaces", "emblem": "Embaixador(a) dos Corais", "hasMinigame": false, "orderIndex": 4, "rewardShells": 12 },
+          { "id": 20, "slug": "3-6", "title": "Associação", "emblem": "O Elo Marinho", "hasMinigame": false, "orderIndex": 5, "rewardShells": 12 },
+          { "id": 21, "slug": "3-7", "title": "Agregação e Composição", "emblem": "Arquiteto(a) do Ecossistema", "hasMinigame": false, "orderIndex": 6, "rewardShells": 12 },
+          { "id": 22, "slug": "3-8", "title": "Resumo", "emblem": "Mestre dos Mares", "hasMinigame": false, "orderIndex": 7, "rewardShells": 12 }
+        ]
+      },
+      {
+        "id": 4,
+        "slug": "arquitetura",
+        "title": "Nível 4 — Arquitetura: a engenharia submarina",
+        "shortTitle": "Arquitetura",
+        "orderIndex": 4,
+        "missions": [
+          { "id": 23, "slug": "4-1", "title": "Introdução ao nível", "emblem": "O Despertar do Kraken", "hasMinigame": false, "orderIndex": 0, "rewardShells": 12 },
+          { "id": 24, "slug": "4-2", "title": "Coesão", "emblem": "O Foco do Leviatã", "hasMinigame": false, "orderIndex": 1, "rewardShells": 12 },
+          { "id": 25, "slug": "4-3", "title": "Acoplamento", "emblem": "Desacorrentador(a) de Tentáculos", "hasMinigame": false, "orderIndex": 2, "rewardShells": 12 },
+          { "id": 26, "slug": "4-4", "title": "SOLID", "emblem": "O Códice S.O.L.I.D.o", "hasMinigame": false, "orderIndex": 3, "rewardShells": 12 },
+          { "id": 27, "slug": "4-5", "title": "Generics", "emblem": "Devorador(a) de Tipos", "hasMinigame": false, "orderIndex": 4, "rewardShells": 12 },
+          { "id": 28, "slug": "4-6", "title": "Design Patterns", "emblem": "Engenheiro(a) das Fossas Marianas", "hasMinigame": false, "orderIndex": 5, "rewardShells": 12 },
+          { "id": 29, "slug": "4-7", "title": "Resumo", "emblem": "O(A) Kraken do Código", "hasMinigame": false, "orderIndex": 6, "rewardShells": 12 }
+        ]
+      }
+    ]
+  }
+}

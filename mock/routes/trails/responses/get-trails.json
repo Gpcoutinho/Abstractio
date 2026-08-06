@@ -1,0 +1,12 @@
+{
+  "trails": [
+    {
+      "id": 1,
+      "slug": "poo",
+      "title": "Trilha POO",
+      "subtitle": "Programação Orientada a Objetos em Python",
+      "shortTitle": "POO",
+      "orderIndex": 1
+    }
+  ]
+}
