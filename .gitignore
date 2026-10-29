@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Variáveis de ambiente (nunca commitar chaves reais)
+.env
+.env.local
+.env.*.local
+
 # Arquivos temporários de referência (nunca commitar)
 src/assets/temporarios/
 

@@ -1,0 +1,7 @@
+[
+  { "id": 1, "itemType": "frame", "code": "bolhas", "name": "Bolhas", "priceShells": 50 },
+  { "id": 2, "itemType": "frame", "code": "mare", "name": "Maré Alta", "priceShells": 50 },
+  { "id": 3, "itemType": "frame", "code": "kraken", "name": "Kraken", "priceShells": 50 },
+  { "id": 4, "itemType": "frame", "code": "coral", "name": "Coral", "priceShells": 50 },
+  { "id": 5, "itemType": "frame", "code": "aurora", "name": "Aurora Boreal", "priceShells": 50 }
+]

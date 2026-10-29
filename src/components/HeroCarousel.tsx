@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import Mascote from './Mascote';
 import { useProgress } from '../hooks/useProgress';
+import { useSession } from '../hooks/useSession';
 
 const STEPS = [
   { num: '01', title: 'Leia a teoria', desc: 'Cada missão começa com uma explicação clara do conceito.' },
@@ -12,7 +13,9 @@ const STEPS = [
 
 const HeroCarousel: React.FC = () => {
   const [current, setCurrent] = useState(0);
-  const { nivelDisplay, progressoGeral } = useProgress();
+  const { progressoGeral } = useProgress();
+  const { profile } = useSession();
+  const nivelDisplay = profile ? `Nível ${profile.rank.level} — ${profile.rank.patent}` : '';
 
   const prev = () => setCurrent(c => (c === 0 ? 1 : 0));
   const next = () => setCurrent(c => (c === 1 ? 0 : 1));

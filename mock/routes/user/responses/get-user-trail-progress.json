@@ -1,0 +1,81 @@
+{
+  "progress": {
+    "trailId": 1,
+    "trailTitle": "Trilha POO",
+    "missionsCompleted": 0,
+    "completedMissionIds": [],
+    "totalMissions": 29,
+    "percent": 0,
+    "levels": [
+      {
+        "levelId": 1,
+        "shortTitle": "Fundamentos",
+        "orderIndex": 1,
+        "missionsCompleted": 0,
+        "totalMissions": 8,
+        "percent": 0,
+        "missions": [
+          { "missionId": 1, "missionSlug": "1-0", "missionTitle": "Antes de começar", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 },
+          { "missionId": 2, "missionSlug": "1-1", "missionTitle": "O que é POO?", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 6 },
+          { "missionId": 3, "missionSlug": "1-2", "missionTitle": "Objeto", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 6 },
+          { "missionId": 4, "missionSlug": "1-3", "missionTitle": "Atributos", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 6 },
+          { "missionId": 5, "missionSlug": "1-4", "missionTitle": "Métodos", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 6 },
+          { "missionId": 6, "missionSlug": "1-5", "missionTitle": "Classe", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 6 },
+          { "missionId": 7, "missionSlug": "1-6", "missionTitle": "Construtor", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 6 },
+          { "missionId": 8, "missionSlug": "1-7", "missionTitle": "Resumo", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 6 }
+        ]
+      },
+      {
+        "levelId": 2,
+        "shortTitle": "Pilares",
+        "orderIndex": 2,
+        "missionsCompleted": 0,
+        "totalMissions": 6,
+        "percent": 0,
+        "missions": [
+          { "missionId": 9, "missionSlug": "2-1", "missionTitle": "Introdução ao nível", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 },
+          { "missionId": 10, "missionSlug": "2-2", "missionTitle": "Abstração", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 },
+          { "missionId": 11, "missionSlug": "2-3", "missionTitle": "Encapsulamento", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 },
+          { "missionId": 12, "missionSlug": "2-4", "missionTitle": "Herança", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 },
+          { "missionId": 13, "missionSlug": "2-5", "missionTitle": "Polimorfismo", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 },
+          { "missionId": 14, "missionSlug": "2-6", "missionTitle": "Resumo", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 }
+        ]
+      },
+      {
+        "levelId": 3,
+        "shortTitle": "Relações",
+        "orderIndex": 3,
+        "missionsCompleted": 0,
+        "totalMissions": 8,
+        "percent": 0,
+        "missions": [
+          { "missionId": 15, "missionSlug": "3-1", "missionTitle": "Introdução ao nível", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 },
+          { "missionId": 16, "missionSlug": "3-2", "missionTitle": "Sobrescrita", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 },
+          { "missionId": 17, "missionSlug": "3-3", "missionTitle": "Sobrecarga", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 },
+          { "missionId": 18, "missionSlug": "3-4", "missionTitle": "Classes Abstratas", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 },
+          { "missionId": 19, "missionSlug": "3-5", "missionTitle": "Interfaces", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 },
+          { "missionId": 20, "missionSlug": "3-6", "missionTitle": "Associação", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 },
+          { "missionId": 21, "missionSlug": "3-7", "missionTitle": "Agregação e Composição", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 },
+          { "missionId": 22, "missionSlug": "3-8", "missionTitle": "Resumo", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 }
+        ]
+      },
+      {
+        "levelId": 4,
+        "shortTitle": "Arquitetura",
+        "orderIndex": 4,
+        "missionsCompleted": 0,
+        "totalMissions": 7,
+        "percent": 0,
+        "missions": [
+          { "missionId": 23, "missionSlug": "4-1", "missionTitle": "Introdução ao nível", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 },
+          { "missionId": 24, "missionSlug": "4-2", "missionTitle": "Coesão", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 },
+          { "missionId": 25, "missionSlug": "4-3", "missionTitle": "Acoplamento", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 },
+          { "missionId": 26, "missionSlug": "4-4", "missionTitle": "SOLID", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 },
+          { "missionId": 27, "missionSlug": "4-5", "missionTitle": "Generics", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 },
+          { "missionId": 28, "missionSlug": "4-6", "missionTitle": "Design Patterns", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 },
+          { "missionId": 29, "missionSlug": "4-7", "missionTitle": "Resumo", "completed": false, "shellsEarned": 0, "extrasCompleted": 0, "totalExtras": 0 }
+        ]
+      }
+    ]
+  }
+}

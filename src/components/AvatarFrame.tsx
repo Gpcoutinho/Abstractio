@@ -2,13 +2,13 @@ import React from 'react';
 import type { Moldura } from '../data/molduras';
 
 interface AvatarFrameProps {
-  moldura: Moldura;
+  moldura: Moldura | null;
   children: React.ReactNode;
   className?: string;
 }
 
 const AvatarFrame: React.FC<AvatarFrameProps> = ({ moldura, children, className }) => {
-  const hasFrame = moldura.id !== 'none';
+  const hasFrame = moldura !== null;
 
   return (
     <div

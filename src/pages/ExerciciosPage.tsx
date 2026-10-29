@@ -2,7 +2,8 @@ import React, { useState, useMemo } from 'react';
 import { StarIcon as StarOutline, XMarkIcon, TrophyIcon } from '@heroicons/react/24/outline';
 import { StarIcon as StarSolid } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
-import { niveis } from '../data/curriculum';
+import { useTrilha } from '../hooks/useTrilha';
+import type { MissaoView, NivelView } from '../hooks/useTrilha';
 import { useProgress } from '../hooks/useProgress';
 import MissionIcon from '../components/MissionIcon';
 import Exercicios from '../components/Exercicios';
@@ -30,26 +31,45 @@ const TIER_CARD_STYLE: Partial<Record<string, React.CSSProperties>> = {
   },
 };
 
-function getProximaMissao(nivelId: number, missaoIdx: number): string | null {
-  const nivel = niveis.find(n => n.id === nivelId)!;
-  if (missaoIdx < nivel.missoes.length) return `/missao/${nivelId}/${missaoIdx + 1}`;
-  const proximoNivel = niveis.find(n => n.id === nivelId + 1);
-  if (proximoNivel) return `/missao/${proximoNivel.id}/1`;
-  return null;
-}
-
 const ExerciciosPage: React.FC = () => {
-  const { getTier, getExerciciosDone } = useProgress();
+  const { niveis, loading } = useTrilha();
+  const { getTier, getExtrasDoneCount, getExtrasTotal } = useProgress();
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const missionsWithExtras = useMemo(() =>
     niveis.flatMap(nivel =>
       nivel.missoes
         .map((missao, idx) => ({ missao, nivel, missaoIdx: idx + 1 }))
-        .filter(({ missao }) => !!missao.exercicios?.length)
-    ), []);
+        .filter(({ missao }) => getExtrasTotal(missao.id) > 0)
+    ), [niveis, getExtrasTotal]);
 
   const selected = missionsWithExtras.find(m => m.missao.id === selectedId);
+
+  const getProximaMissao = (nivel: NivelView, missaoIdx: number): string | null => {
+    if (missaoIdx < nivel.missoes.length) return `/missao/${nivel.id}/${missaoIdx + 1}`;
+    const proximoNivel = niveis.find(n => n.id === nivel.id + 1);
+    if (proximoNivel) return `/missao/${proximoNivel.id}/1`;
+    return null;
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <PageWrapper className="flex-grow max-w-3xl pb-16">
+          <div className="space-y-3 animate-pulse mt-10" aria-hidden="true">
+            <div className="h-8 w-1/2 rounded bg-bgSecondary" />
+            <div className="h-4 w-2/3 rounded bg-bgSecondary" />
+            <div className="grid grid-cols-2 gap-3 mt-6">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <div key={i} className="h-32 rounded-xl bg-bgSecondary" />
+              ))}
+            </div>
+          </div>
+        </PageWrapper>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -71,11 +91,11 @@ const ExerciciosPage: React.FC = () => {
                     {nivel.title}
                   </h2>
                   <div className="grid grid-cols-2 gap-3">
-                    {nivelMissions.map(({ missao }) => {
+                    {nivelMissions.map(({ missao }: { missao: MissaoView }) => {
                       const tierVal = getTier(missao.id);
                       const tierCount = { none: 0, bronze: 1, silver: 2, gold: 3 }[tierVal];
-                      const extrasDone = getExerciciosDone(missao.id).length;
-                      const extrasTotal = missao.exercicios!.length;
+                      const extrasDone = getExtrasDoneCount(missao.id);
+                      const extrasTotal = getExtrasTotal(missao.id);
                       const hasTierStyle = tierVal !== 'none';
 
                       return (
@@ -158,8 +178,7 @@ const ExerciciosPage: React.FC = () => {
               <Exercicios
                 key={selected.missao.id}
                 missaoId={selected.missao.id}
-                exercicios={selected.missao.exercicios!}
-                proximaMissao={getProximaMissao(selected.nivel.id, selected.missaoIdx)}
+                proximaMissao={getProximaMissao(selected.nivel, selected.missaoIdx)}
               />
             </div>
           </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircleIcon as CheckCircleSolid } from '@heroicons/react/24/solid';
-import { niveis } from '../data/curriculum';
+import { useTrilha } from '../hooks/useTrilha';
 import { useProgress } from '../hooks/useProgress';
 import Footer from '../components/Footer';
 import MissionIcon from '../components/MissionIcon';
@@ -9,10 +9,27 @@ import PageWrapper from '../components/PageWrapper';
 import ShellIcon from '../components/ShellIcon';
 import ProgressBar from '../components/ProgressBar';
 import { CircleIcon } from '@phosphor-icons/react/dist/icons/Circle';
-const totalMissoes = niveis.reduce((acc, n) => acc + n.missoes.length, 0);
 
 const Trilha: React.FC = () => {
+  const { niveis, totalMissoes, loading } = useTrilha();
   const { completed, conchas_por_missao, getConchasValor } = useProgress();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col bg-bgPrimary">
+        <PageWrapper className="flex-grow w-full max-w-3xl mx-auto px-5 pb-16">
+          <div className="space-y-3 animate-pulse mt-10" aria-hidden="true">
+            <div className="h-8 w-1/2 rounded bg-bgSecondary" />
+            <div className="h-4 w-2/3 rounded bg-bgSecondary" />
+            <div className="h-20 w-full rounded bg-bgSecondary mt-6" />
+            <div className="h-20 w-full rounded bg-bgSecondary" />
+            <div className="h-20 w-full rounded bg-bgSecondary" />
+          </div>
+        </PageWrapper>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <>
