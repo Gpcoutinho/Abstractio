@@ -25,9 +25,12 @@ export const SessionProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [profileMissing, setProfileMissing] = useState(false);
   const [error, setError] = useState<ApiError | null>(null);
 
-  const fetchSession = useCallback(async () => {
-    setLoading(true);
-    setError(null);
+  const fetchSession = useCallback(async (isBackground = false) => {
+    if (!isBackground) {
+      setLoading(true);
+      setError(null);
+    }
+
     try {
       const [profileResult, balanceResult] = await Promise.all([getUserProfile(), getUserBalance()]);
       setProfile(profileResult);
@@ -39,12 +42,19 @@ export const SessionProvider: React.FC<{ children: React.ReactNode }> = ({ child
         setBalance(null);
         setProfileMissing(true);
       } else if (err instanceof ApiError) {
-        setError(err);
+        // Evita sobrescrever a tela com tela cheia de erros caso falhe uma checagem rápida de aba
+        if (!isBackground){
+          setError(err);
+        }
       } else {
-        setError(new ApiError(0, 'internal_error', 'Falha de rede ao carregar a sessão.'));
+        if (!isBackground){
+          setError(new ApiError(0, 'internal_error', 'Falha de rede ao carregar a sessão.'));
+        }
       }
     } finally {
-      setLoading(false);
+      if (!isBackground){
+        setLoading(false);
+      }
     }
   }, []);
 
@@ -66,7 +76,7 @@ export const SessionProvider: React.FC<{ children: React.ReactNode }> = ({ child
   useEffect(() => {
     if (!firebaseUser) return;
     const handleVisibilityChange = () => {
-      if (document.visibilityState === 'visible') fetchSession();
+      if (document.visibilityState === 'visible') fetchSession(true);
     };
     document.addEventListener('visibilitychange', handleVisibilityChange);
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
